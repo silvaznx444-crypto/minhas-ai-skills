@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**33 de 124** cores recebidas.
+**37 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -16,12 +16,12 @@
 | ✅ | Camiseta Fred Perry Importada | Azul escuro |
 | ✅ | Camiseta Hugo Boss Signature Stripe | Branca |
 | ✅ | Camiseta Hugo Boss Signature Stripe | Preta |
-| ⏳ | Camiseta Emporio Armani EA7 Monogram | Preta |
+| ✅ | Camiseta Emporio Armani EA7 Monogram | Preta |
 | ⏳ | Camiseta Fred Perry Signature Stripe | Preta |
 | ⏳ | Camiseta Fred Perry Signature Stripe | Branca |
-| ⏳ | Camiseta Acostamento Denim Premium | Preta |
+| ✅ | Camiseta Acostamento Denim Premium | Preta |
 | ⏳ | Camiseta Diesel For Successful Living | Preta |
-| ⏳ | Camiseta Armani Exchange A|X | Preta |
+| ✅ | Camiseta Armani Exchange A|X | Preta |
 | ✅ | Polo Tommy Hilfiger | Preta |
 | ✅ | Polo Tommy Hilfiger | Azul-marinho |
 | ✅ | Camiseta Lacoste French Heritage | Branca |
@@ -70,7 +70,7 @@
 | ✅ | Bermuda Sarja Ralph Lauren — Masculina | Marrom |
 | ✅ | Bermuda Sarja Ralph Lauren — Masculina | Vermelho |
 | ✅ | Bermuda Sarja Ralph Lauren — Masculina | Branco |
-| ⏳ | Bermuda Sarja Abercrombie & Fitch — Laranja | Laranja |
+| ✅ | Bermuda Sarja Abercrombie & Fitch — Laranja | Laranja |
 | ⏳ | Camiseta Lacoste Paris — Verde Escuro | Verde-escuro |
 | ⏳ | Camiseta Diesel D-Corp 1978 — Verde Militar | Verde-militar |
 | ✅ | Camiseta Tommy Hilfiger Resort New York | Verde-escuro |

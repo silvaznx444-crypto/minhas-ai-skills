@@ -96,3 +96,24 @@ body.product-page #productDetail .product-gallery-main {border:none!important}
 .ui-clean .cart-drawer .cart-summary{border-top-color:#ddd6ca!important}
 /* Evita salto de layout (CLS): reserva a altura da vitrine enquanto o catálogo carrega (conteúdo final é sempre maior). */
 .products-page .products-page-main{min-height:100vh}
+
+/* ===== Hero no celular (≤700px): formato retrato, modelo em destaque, nome da marca atrás do modelo.
+   O desktop não muda. Antes: proporção 16:9 herdada do computador (banner com ~219px de altura). ===== */
+@media (max-width:700px){
+  .campaign-stage{aspect-ratio:auto;height:clamp(420px,calc(100svh - var(--header-h,72px) - var(--promo-h,31px) - 190px),620px)}
+  .campaign-model{height:100%;max-width:96%;top:51%}
+  .campaign-word{z-index:0;mix-blend-mode:normal;color:#1d1a16;top:33%;left:50%;font-size:clamp(54px,18.5vw,100px);letter-spacing:-.045em}
+  .campaign-slide--stacked .campaign-word{top:31%;font-size:clamp(48px,16vw,86px);line-height:.86}
+  .ui-clean .campaign-control.campaign-side{top:auto;bottom:14px;width:40px;height:40px;transform:none!important;border-radius:999px;background:rgba(242,241,237,.82)!important}
+  .campaign-side--prev{left:14px}
+  .campaign-side--next{right:14px}
+  .campaign-toolbar{padding:10px 20px 16px;gap:8px}
+  .campaign-control{width:40px;height:40px}
+  /* Links à esquerda: o canto direito fica livre para o botão flutuante do WhatsApp. */
+  .campaign-toolbar .vj-campaign__actions{justify-content:flex-start;gap:26px}
+}
+
+/* Miniaturas com 3D: mostrar só o 3D (antes ele ficava sobreposto à foto real, misturando as duas).
+   No computador, a foto real aparece ao passar o mouse — o mesmo comportamento da imagem principal. */
+body.product-page .product-thumbs button.has-model .thumb-photo{opacity:0;transition:opacity .25s ease}
+@media(hover:hover) and (pointer:fine){body.product-page .product-thumbs button.has-model:hover .thumb-photo{opacity:1}}

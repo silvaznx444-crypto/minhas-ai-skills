@@ -11,7 +11,7 @@ F = lambda t: f'<mark class="legal-pending">[PREENCHER: {html.escape(t)}]</mark>
 EMAIL = '<a href="mailto:grifhiiconceito@gmail.com">grifhiiconceito@gmail.com</a>'
 ENDERECO = '10 R da Aroeira, S/N, Quadra 10, Lote 17, Jardim Primavera, Santa Helena de Goiás — GO, CEP 75920-000'
 EMPRESA = f'''<p><strong>Fornecedor e controlador dos dados:</strong> GRIFHII CONCEITO, nome comercial de <strong>64.979.097 KELLSON REGYS ANDRADE DA COSTA</strong> (empresário individual, microempresa), CNPJ <strong>64.979.097/0001-09</strong>, com sede em {ENDERECO}.</p>
-<p><strong>Canais de atendimento:</strong> WhatsApp <a href="https://wa.me/5564981025225" target="_blank" rel="noopener">(64) 98102-5225</a> · e-mail {EMAIL} · Instagram <a href="https://www.instagram.com/grifhii/" target="_blank" rel="noopener">@grifhii</a>.</p>'''
+<p><strong>Canais de atendimento:</strong> WhatsApp <a href="https://wa.me/5564981025225" target="_blank" rel="noopener">(64) 98102-5225</a> · e-mail {EMAIL} · Instagram <a href="https://www.instagram.com/grifhii.reserva/" target="_blank" rel="noopener">@grifhii.reserva</a>.</p>'''
 
 PAGES = {
 'privacidade': ('Política de Privacidade', 'Como a GRIFHII CONCEITO trata dados pessoais na loja online: finalidades, bases legais, fornecedores, cookies, prazos e direitos previstos na LGPD.', f'''

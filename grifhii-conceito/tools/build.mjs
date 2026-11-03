@@ -104,7 +104,7 @@ index = index.replace(/\n?<script id="grifhii-zip-viewer-warning">[\s\S]*?<\/scr
 const org = {
   '@context': 'https://schema.org', '@type': 'OnlineStore', '@id': `${BASE}/#loja`,
   name: 'GRIFHII CONCEITO', url: `${BASE}/`, logo: abs('assets/logo-grifhii.jpg'),
-  sameAs: ['https://www.instagram.com/grifhii/', 'https://www.facebook.com/profile.php?id=61592017326782'],
+  sameAs: ['https://www.instagram.com/grifhii.reserva/', 'https://www.facebook.com/profile.php?id=61592017326782'],
   address: {'@type': 'PostalAddress', addressLocality: 'Santa Helena de Goiás', addressRegion: 'GO', addressCountry: 'BR'},
   contactPoint: {'@type': 'ContactPoint', telephone: '+55-64-98102-5225', contactType: 'customer service', availableLanguage: 'pt-BR'},
 };

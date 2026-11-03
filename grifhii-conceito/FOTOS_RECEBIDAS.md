@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**13 de 124** cores recebidas.
+**16 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -54,11 +54,11 @@
 | ⏳ | Short Tommy Hilfiger Colorblock | Azul-marinho |
 | ⏳ | Short Tommy Hilfiger Monograma TH | Branco |
 | ⏳ | Short Diesel com Vivo Vermelho | Azul-gelo |
-| ⏳ | Bermuda Vilebrequin Tartarugas — Estampas | Azul-marinho/Bege |
-| ⏳ | Bermuda Vilebrequin Tartarugas — Estampas | Amarelo/Azul |
+| ✅ | Bermuda Vilebrequin Tartarugas — Estampas | Azul-marinho/Bege |
+| ✅ | Bermuda Vilebrequin Tartarugas — Estampas | Amarelo/Azul |
 | ⏳ | Bermuda Vilebrequin Tartarugas — Estampas | Azul mesclado |
 | ⏳ | Bermuda Vilebrequin Tartarugas — Estampas | Laranja multicolorida |
-| ⏳ | Bermuda Vilebrequin Tartarugas — Estampas | Laranja/Preto |
+| ✅ | Bermuda Vilebrequin Tartarugas — Estampas | Laranja/Preto |
 | ⏳ | Bermuda Vilebrequin Tartarugas — Estampas | Branca/Azul/Verde |
 | ⏳ | Boné Ayrton Senna Automobilismo | Azul |
 | ⏳ | Boné Ayrton Senna Automobilismo | Preto |

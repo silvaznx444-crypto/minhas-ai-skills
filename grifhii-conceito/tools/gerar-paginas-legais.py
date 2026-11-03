@@ -8,15 +8,17 @@ OUT = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else 'site/legal')
 ATUALIZADO = '03/11/2026'
 F = lambda t: f'<mark class="legal-pending">[PREENCHER: {html.escape(t)}]</mark>'
 
-EMPRESA = f'''<p><strong>Fornecedor e controlador dos dados:</strong> GRIFHII CONCEITO — razão social {F("razão social")}, CNPJ {F("CNPJ")}, endereço {F("endereço completo com CEP")}, Santa Helena de Goiás — GO.</p>
-<p><strong>Canais de atendimento:</strong> WhatsApp <a href="https://wa.me/5564981025225" target="_blank" rel="noopener">(64) 98102-5225</a> · e-mail {F("e-mail de atendimento")} · Instagram <a href="https://www.instagram.com/grifhii/" target="_blank" rel="noopener">@grifhii</a>.</p>'''
+EMAIL = '<a href="mailto:grifhiiconceito@gmail.com">grifhiiconceito@gmail.com</a>'
+ENDERECO = '10 R da Aroeira, S/N, Quadra 10, Lote 17, Jardim Primavera, Santa Helena de Goiás — GO, CEP 75920-000'
+EMPRESA = f'''<p><strong>Fornecedor e controlador dos dados:</strong> GRIFHII CONCEITO, nome comercial de <strong>64.979.097 KELLSON REGYS ANDRADE DA COSTA</strong> (empresário individual, microempresa), CNPJ <strong>64.979.097/0001-09</strong>, com sede em {ENDERECO}.</p>
+<p><strong>Canais de atendimento:</strong> WhatsApp <a href="https://wa.me/5564981025225" target="_blank" rel="noopener">(64) 98102-5225</a> · e-mail {EMAIL} · Instagram <a href="https://www.instagram.com/grifhii/" target="_blank" rel="noopener">@grifhii</a>.</p>'''
 
 PAGES = {
 'privacidade': ('Política de Privacidade', 'Como a GRIFHII CONCEITO trata dados pessoais na loja online: finalidades, bases legais, fornecedores, cookies, prazos e direitos previstos na LGPD.', f'''
 <p class="legal-meta">Última atualização: {ATUALIZADO}. Versão sujeita a revisão jurídica antes da abertura das vendas.</p>
 <h2>1. Quem é o controlador</h2>
 {EMPRESA}
-<p><strong>Encarregado (DPO) ou canal de privacidade:</strong> {F("nome do encarregado ou canal dedicado, ex.: privacidade@dominio")}.</p>
+<p><strong>Canal de privacidade (LGPD):</strong> {EMAIL}. Como agente de tratamento de pequeno porte, a loja mantém este canal de comunicação com os titulares (Resolução CD/ANPD nº 2/2022).</p>
 <h2>2. Quais dados tratamos e por quê</h2>
 <table class="legal-table"><thead><tr><th>Situação</th><th>Dados</th><th>Finalidade</th><th>Base legal (LGPD, art. 7º)</th></tr></thead><tbody>
 <tr><td>Navegação no site</td><td>Itens da sacola guardados no seu próprio navegador (armazenamento local); endereço IP e dados técnicos recebidos pela hospedagem</td><td>Manter a sacola, entregar as páginas com segurança e prevenir abusos</td><td>Execução de contrato / procedimentos preliminares (V) e legítimo interesse (IX)</td></tr>
@@ -32,7 +34,7 @@ PAGES = {
 <li><strong>Provedor de pagamento</strong> configurado na Shopify: {F("ex.: Shopify Payments / Mercado Pago / Pagar.me — informar o ativo")}.</li>
 <li><strong>Cloudflare</strong> — hospedagem e segurança do site (Cloudflare Pages).</li>
 <li><strong>Google</strong> — fontes tipográficas (Google Fonts) e ícones das marcas exibidos no menu; o navegador solicita esses arquivos aos servidores do Google, que recebem o endereço IP.</li>
-<li><strong>Meta (WhatsApp)</strong> — quando você fala com a loja pelo WhatsApp ou aceita receber mensagens sobre o pedido{F("se usar provedor intermediário (BSP), informar o nome")}.</li>
+<li><strong>Meta (WhatsApp)</strong> — quando você fala com a loja pelo WhatsApp ou aceita receber mensagens sobre o pedido (WhatsApp Business Platform, da própria Meta).</li>
 <li><strong>Correios / transportadora</strong> — nome, endereço e telefone para a entrega.</li>
 <li><strong>Contabilidade e autoridades</strong> — quando exigido por lei.</li>
 </ul>
@@ -78,7 +80,7 @@ PAGES = {
 'trocas-e-devolucoes': ('Trocas e Devoluções', 'Como solicitar troca, devolução, arrependimento em 7 dias e reembolso nas compras da GRIFHII CONCEITO.', f'''
 <p class="legal-meta">Última atualização: {ATUALIZADO}. Versão sujeita a revisão jurídica antes da abertura das vendas.</p>
 <h2>1. Arrependimento (compras online)</h2>
-<p>Você pode desistir da compra em até <strong>7 dias corridos</strong> após receber o pedido (CDC, art. 49). Basta avisar pelo WhatsApp <a href="https://wa.me/5564981025225" target="_blank" rel="noopener">(64) 98102-5225</a> ou e-mail {F("e-mail de atendimento")}, informando o número do pedido. A GRIFHII confirma o recebimento do pedido de arrependimento e informa como devolver; o custo da devolução nesse caso é da loja.</p>
+<p>Você pode desistir da compra em até <strong>7 dias corridos</strong> após receber o pedido (CDC, art. 49). Basta avisar pelo WhatsApp <a href="https://wa.me/5564981025225" target="_blank" rel="noopener">(64) 98102-5225</a> ou pelo e-mail {EMAIL}, informando o número do pedido. A GRIFHII confirma o recebimento do pedido de arrependimento e informa como devolver; o custo da devolução nesse caso é da loja.</p>
 <h2>2. Troca por tamanho ou cor</h2>
 <p>Trocas por tamanho ou cor podem ser solicitadas em até {F("prazo de troca definido pela loja, ex.: 30 dias")} após o recebimento, com a peça sem uso, com etiquetas e na embalagem original, sujeitas à disponibilidade. Custos de reenvio na troca por preferência: {F("definir quem paga")}.</p>
 <h2>3. Produto com defeito</h2>
@@ -86,7 +88,7 @@ PAGES = {
 <h2>4. Reembolso</h2>
 <p>O reembolso é feito pelo mesmo meio de pagamento: Pix em até {F("prazo, ex.: 5 dias úteis")} após o recebimento da peça devolvida; no cartão, o estorno é solicitado à operadora no mesmo prazo e aparece conforme o ciclo da fatura.</p>
 <h2>5. Como enviar</h2>
-<p>Após a confirmação, a loja informa o endereço ou código de postagem. Peças retiradas na loja podem ser devolvidas presencialmente em {F("endereço e horário da loja")}.</p>
+<p>Após a confirmação, a loja informa o endereço ou código de postagem. Peças retiradas na loja podem ser devolvidas presencialmente em {ENDERECO}, no horário {F("horário de atendimento")}.</p>
 '''),
 'entrega': ('Política de Entrega', 'Modalidades de entrega e retirada, custos de frete, prazos e rastreio das compras na GRIFHII CONCEITO.', f'''
 <p class="legal-meta">Última atualização: {ATUALIZADO}. Versão sujeita a revisão jurídica antes da abertura das vendas.</p>
@@ -95,7 +97,7 @@ PAGES = {
 <h2>2. Modalidades</h2>
 <ul>
 <li><strong>Envio pelos Correios</strong> para todo o Brasil — {F("serviços (PAC/SEDEX), tabela ou cálculo usado na Shopify")}.</li>
-<li><strong>Retirada na loja</strong> em Santa Helena de Goiás — GO, sem custo — {F("endereço e horário de retirada")}.</li>
+<li><strong>Retirada na loja</strong>, sem custo, em {ENDERECO} — horário: {F("horário de retirada")}.</li>
 </ul>
 <h2>3. Prazos</h2>
 <p>Postagem em até {F("prazo de postagem, ex.: 2 dias úteis")} após a confirmação do pagamento. O prazo de transporte é o informado no checkout para o CEP de destino.</p>

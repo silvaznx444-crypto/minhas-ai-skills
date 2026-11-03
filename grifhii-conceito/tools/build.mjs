@@ -140,6 +140,7 @@ const categoryLabel = {camisetas: 'Camisetas', polos: 'Polos', camisas: 'Camisas
 const productUrls = [];
 for (const p of catalog.products) {
   if (!/^[a-z0-9-]{1,120}$/.test(p.slug || '')) { warnings.push(`slug ignorado: ${p.slug}`); continue; }
+  if (/\bteste\b/i.test(`${p.name} ${p.slug}`)) { warnings.push(`produto de TESTE publicado na Shopify (sem página pública): ${p.name} — despublique no Admin`); continue; }
   const file = `peca-${p.slug}.html`;
   const brand = brandLabel(p.brand);
   const colors = [...new Set((p.variants || []).map(v => v.color).filter(Boolean))];

@@ -1,4 +1,4 @@
-/* GRIFHII V10 — loja autenticada pelo proprietário no ChatGPT em 22/10/2026.
+/* GRIFHII V10 — loja grifhiiconceito.myshopify.com (token público configurado em 03/11/2026).
  * DOMÍNIO VERIFICADO: grifhiiconceito.myshopify.com.
  * Somente token PÚBLICO da Storefront API; nunca adicionar token Admin/API privado.
  * O snapshot da loja permite formar checkout por permalink oficial.
@@ -12,10 +12,13 @@ if (GRIFHII_TEST_8_LOCAL) {
   try { GRIFHII_TEST_8_TOKEN = sessionStorage.getItem('grifhii-test8-public-token') || ''; }
   catch (_) { /* Armazenamento desabilitado: mantém vendas bloqueadas. */ }
 }
+// Token PÚBLICO da Storefront API (canal Headless). É público por definição: só lê catálogo e cria carrinhos.
+// NUNCA colocar aqui token privado/Admin (shpat_...). Para trocar: Shopify Admin → Headless → Storefront API.
+const GRIFHII_PUBLIC_STOREFRONT_TOKEN = '986de9735662204ef096d8c9a9d019f7';
 window.GRIFHII_SHOPIFY_CONFIG = Object.freeze({
   shopDomain:'grifhiiconceito.myshopify.com',
   apiVersion:'2026-10',
-  publicStorefrontToken:GRIFHII_TEST_8_TOKEN, // Somente token PUBLICO temporario no localhost.
+  publicStorefrontToken:GRIFHII_TEST_8_TOKEN || GRIFHII_PUBLIC_STOREFRONT_TOKEN, // token de teste local tem prioridade.
   allowTokenlessCatalog:true, // Consulta pública; fallback seguro em caso de bloqueio.
   salesEnabled:false, // SEM vendas reais, inclusive no modo de teste.
   uiTestMode:Boolean(GRIFHII_TEST_8_LOCAL && GRIFHII_TEST_8_TOKEN), // Permite somente testar interface local.

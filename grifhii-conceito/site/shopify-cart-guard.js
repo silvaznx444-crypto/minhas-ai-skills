@@ -33,7 +33,10 @@
         throw new Error('Duas peças diferentes usam a mesma variante da Shopify. Revise o catálogo antes de pagar.');
       }
       used.set(variant.shopifyVariantId,variant.id);
-      return {variantId:variant.id,shopifyVariantId:variant.shopifyVariantId,
+      if (Number(item.unitPriceCents) !== variant.shopifyPriceCents) {
+        throw new Error(`O preço de ${product.name} foi atualizado. Remova a peça e adicione novamente para conferir o valor.`);
+      }
+      return {variantId:variant.id,shopifyVariantId:variant.shopifyVariantId,unitPriceCents:variant.shopifyPriceCents,
         sku:variant.sku || null,name:product.name,size:variant.size,color:variant.color,
         quantity:qty,testOnly:false,pricePending:false};
     });

@@ -1,6 +1,4 @@
 (() => {
-  const meta = document.querySelector('meta[name="grifhii-api-url"]');
-  const API = meta?.content?.trim() || 'http://127.0.0.1:3333';
   const $ = selector => document.querySelector(selector);
   const esc = value => String(value ?? '').replace(/[&<>'"]/g, c => ({
     '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'
@@ -8,13 +6,8 @@
   const money = cents => new Intl.NumberFormat('pt-BR', {
     style:'currency', currency:'BRL'
   }).format((cents || 0) / 100);
-  const api = path => window.GRIFHII_LOCAL_API && String(path).startsWith('/products') ? window.GRIFHII_LOCAL_API(path) : fetch(`${API}${path}`, {
-    headers:{ 'Content-Type':'application/json' }
-  }).then(async response => {
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.error || 'Não foi possível carregar os produtos.');
-    return data;
-  });
+  // Catálogo somente via GRIFHII_LOCAL_API (curadoria + Shopify). Sem API própria em produção.
+  const api = path => window.GRIFHII_LOCAL_API && String(path).startsWith('/products') ? window.GRIFHII_LOCAL_API(path) : Promise.reject(new Error('Não foi possível carregar os produtos.'));
 
   const normalize = value => String(value || '').toLowerCase()
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '');

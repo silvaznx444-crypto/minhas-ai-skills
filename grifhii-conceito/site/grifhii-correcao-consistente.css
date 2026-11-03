@@ -80,3 +80,17 @@ body.product-page #productDetail .product-gallery-main>img {
   box-shadow:none!important;
 }
 body.product-page #productDetail .product-gallery-main {border:none!important}
+
+/* V10 final — avisos de frete e opt-in de WhatsApp na sacola (texto discreto, mesma paleta). */
+.cart-drawer .gh-cart-terms{margin:10px 0 8px;font-size:11.5px;line-height:1.55;color:#6a6258}
+.cart-drawer .gh-cart-terms a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.cart-drawer .gh-cart-optin{display:flex;gap:9px;align-items:flex-start;margin:0 0 14px;font-size:11.5px;line-height:1.5;color:#4c4740;cursor:pointer}
+.cart-drawer .gh-cart-optin input{margin-top:2px;width:15px;height:15px;flex:0 0 auto;accent-color:#9a8050}
+.footer-legal{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:6px 16px;margin-top:8px;font-size:10.5px;letter-spacing:.06em}
+.footer-legal a{color:inherit;opacity:.72;text-decoration:none}
+.footer-legal a:hover,.footer-legal a:focus-visible{opacity:1;text-decoration:underline}
+/* Correção de contraste: a sacola clara herdava cores do tema escuro antigo (−/+/× e Subtotal ficavam ilegíveis). */
+.ui-clean .cart-drawer .cart-line-controls button{color:#24211d!important;border-color:rgba(36,33,29,.28)!important}
+.ui-clean .cart-drawer .cart-summary>div{color:#6a6258!important}
+.ui-clean .cart-drawer .cart-summary strong{color:#24211d!important}
+.ui-clean .cart-drawer .cart-summary{border-top-color:#ddd6ca!important}

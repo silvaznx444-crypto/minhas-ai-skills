@@ -20,6 +20,8 @@ window.GRIFHII_SHOPIFY_CONFIG = Object.freeze({
   salesEnabled:false, // SEM vendas reais, inclusive no modo de teste.
   uiTestMode:Boolean(GRIFHII_TEST_8_LOCAL && GRIFHII_TEST_8_TOKEN), // Permite somente testar interface local.
   cartTestMode:true,
-  cartPermalinkFallback:true, // Checkout oficial por link Shopify, sem expor token Admin.
+  cartPermalinkFallback:false, // Desativado: checkout somente após confirmação da Storefront API (variante, estoque e preço).
+  // Domínios extras aceitos para o checkoutUrl (ex.: domínio próprio conectado na Shopify). Vazio = só o .myshopify.com.
+  checkoutHosts:Object.freeze([]),
   variantMap:Object.freeze({})
 });

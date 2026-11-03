@@ -1,6 +1,4 @@
 (() => {
-  const meta = document.querySelector('meta[name="grifhii-api-url"]');
-  const API = meta?.content?.trim() || 'http://127.0.0.1:3333';
   const params = new URLSearchParams(location.search);
   // Compatibilidade entre links antigos Shopify e URLs atuais da curadoria.
   // Só aceita um vínculo de produto quando o handle aponta para UM slug local.
@@ -20,11 +18,8 @@
   const money = cents => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format((cents || 0) / 100);
   const esc = value => String(value ?? '').replace(/[&<>'"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[c]));
   const normalize = value => String(value ?? '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  const api = (path, options = {}) => window.GRIFHII_LOCAL_API && String(path).startsWith('/products') ? window.GRIFHII_LOCAL_API(path) : fetch(`${API}${path}`, { ...options, headers: { 'Content-Type':'application/json', ...(options.headers || {}) } }).then(async response => {
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.error || 'Não foi possível carregar este produto.');
-    return data;
-  });
+  // Catálogo somente via GRIFHII_LOCAL_API (curadoria + Shopify). Sem API própria em produção.
+  const api = path => window.GRIFHII_LOCAL_API && String(path).startsWith('/products') ? window.GRIFHII_LOCAL_API(path) : Promise.reject(new Error('Não foi possível carregar este produto.'));
 
   function getProductImages(product) {
     const values = [

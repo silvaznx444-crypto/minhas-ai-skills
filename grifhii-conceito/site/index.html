@@ -13,7 +13,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <meta name="grifhii-api-url" content="http://127.0.0.1:3333">
   <link rel="preload" as="image" href="assets/hero-model-lacoste-transparent-v1.webp" fetchpriority="high">
   <link rel="stylesheet" href="style.css?rev=20261101-auditada-3d-v2">
   <link rel="stylesheet" href="hero-journey.css?rev=20261101-auditada-3d-v2">
@@ -34,12 +33,12 @@
     <div class="promo-roleta-track">
       <span>GRIFHII CONCEITO</span><i aria-hidden="true">·</i>
       <span>COMPRE PELO SITE OFICIAL</span><i aria-hidden="true">·</i>
-      <span>PRODUTOS ORIGINAIS</span><i aria-hidden="true">·</i>
-      <span>COMPRA SEGURA</span><i aria-hidden="true">·</i>
+      <span>MARCAS SELECIONADAS</span><i aria-hidden="true">·</i>
+      <span>CHECKOUT OFICIAL SHOPIFY</span><i aria-hidden="true">·</i>
       <span>GRIFHII CONCEITO</span><i aria-hidden="true">·</i>
       <span>COMPRE PELO SITE OFICIAL</span><i aria-hidden="true">·</i>
-      <span>PRODUTOS ORIGINAIS</span><i aria-hidden="true">·</i>
-      <span>COMPRA SEGURA</span><i aria-hidden="true">·</i>
+      <span>MARCAS SELECIONADAS</span><i aria-hidden="true">·</i>
+      <span>CHECKOUT OFICIAL SHOPIFY</span><i aria-hidden="true">·</i>
     </div>
   </div>
   <header class="site-header" id="header">
@@ -351,46 +350,11 @@
     <div class="cart-drawer-head"><div><span class="section-kicker">COMPRA</span><h2 id="cartTitle">Seu carrinho.</h2></div><button class="drawer-close" id="cartClose" type="button" aria-label="Fechar carrinho">×</button></div>
     <div class="cart-items" id="cartItems"></div>
     <div class="cart-empty" id="cartEmpty">Seu carrinho está vazio.</div>
-    <div class="cart-summary" id="cartSummary" hidden><div><span>Subtotal</span><strong id="cartSubtotal">R$ 0,00</strong></div><p class="gh-cart-notice" id="gh-cart-notice" role="status" hidden></p><button class="button button-light" id="checkoutStart" type="button">Finalizar compra</button></div><button id="trackingOpen" type="button" hidden>Acompanhar meu pedido</button>
+    <div class="cart-summary" id="cartSummary" hidden><div><span>Subtotal</span><strong id="cartSubtotal">R$ 0,00</strong></div><p class="gh-cart-notice" id="gh-cart-notice" role="status" hidden></p><p class="gh-cart-terms">Frete, prazo e total são calculados no checkout da Shopify, antes do pagamento. Veja a <a href="legal/entrega.html">política de entrega</a> e as <a href="legal/trocas-e-devolucoes.html">trocas e devoluções</a>.</p><label class="gh-cart-optin"><input type="checkbox" id="whatsappOptIn"> <span>Quero receber no WhatsApp mensagens sobre este pedido (confirmação e envio).</span></label><button class="button button-light" id="checkoutStart" type="button">Finalizar compra</button></div><button id="trackingOpen" type="button" hidden>Acompanhar meu pedido</button>
   </aside>
   <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
-  <section class="checkout-panel" id="checkoutPanel" hidden inert aria-hidden="true" aria-labelledby="checkoutTitle">
-    <div class="checkout-shell">
-      <div class="checkout-head"><div><span class="section-kicker">FINALIZAÇÃO</span><h2 id="checkoutTitle">Concluir pedido.</h2></div><button class="drawer-close" id="checkoutClose" type="button" aria-label="Fechar checkout">×</button></div>
-      <div class="checkout-steps" aria-label="Etapas do checkout"><span class="is-active" data-step-indicator="1">01 Dados</span><span data-step-indicator="2">02 Entrega</span><span data-step-indicator="3">03 Pagamento</span><span data-step-indicator="4">04 Confirmação</span></div>
-      <form id="checkoutForm" novalidate>
-        <div class="checkout-step is-active" data-step="1">
-          <div class="checkout-grid"><label>Nome<input name="name" required autocomplete="name"></label><label>E-mail<input name="email" type="email" required autocomplete="email"></label><label>WhatsApp<input name="phone" required autocomplete="tel"></label><label>CPF <small>(obrigatório para concluir o pedido)</small><input name="cpf" inputmode="numeric" autocomplete="off"></label></div>
-          <button class="button button-light checkout-next" type="button" data-next="2" id="customerNext" disabled>Continuar</button>
-        </div>
-        <div class="checkout-step" data-step="2">
-          <div class="fulfillment-options" aria-label="Escolha a forma de recebimento">
-            <label class="fulfillment-choice is-selected"><input type="radio" name="fulfillmentMethod" value="entrega" checked><span><strong>Receber em casa</strong><small>Calcule o frete informando seu CEP.</small></span></label>
-            <label class="fulfillment-choice"><input type="radio" name="fulfillmentMethod" value="retirada_no_local"><span><strong>Retirar na loja</strong><small>Ideal para quem está em Santa Helena de Goiás — GO. Se você estiver em outra cidade, escolha o envio.</small></span></label>
-          </div>
-          <div id="deliveryFields">
-            <div class="checkout-grid"><label>CEP<input name="cep" inputmode="numeric" autocomplete="postal-code"></label><label>Rua<input name="street" autocomplete="street-address"></label><label>Número<input name="number"></label><label>Complemento<input name="complement"></label><label>Bairro<input name="neighborhood" autocomplete="address-level3"></label><label>Cidade<input name="city" autocomplete="address-level2"></label><label>UF<input name="state" maxlength="2" autocomplete="address-level1"></label></div>
-            <div class="shipping-options" id="shippingOptions"><p>Informe o endereço para calcular o frete.</p></div>
-          </div>
-          <div class="pickup-summary" id="pickupSummary" hidden><strong>Retirada na loja — frete R$ 0,00</strong><p>Seu pedido ficará disponível para retirada em Santa Helena de Goiás — GO. Você será avisado por WhatsApp quando estiver pronto.</p><p class="pickup-store-address">Endereço da loja: <span id="pickupStoreAddress">Confirme o endereço completo de retirada com a loja pelo WhatsApp.</span></p></div>
-          <div class="checkout-actions"><button class="button button-outline checkout-prev" type="button" data-prev="1">Voltar</button><button class="button button-light checkout-next" type="button" data-next="3" id="shippingNext" disabled>Continuar</button></div>
-        </div>
-        <div class="checkout-step" data-step="3">
-          <div class="payment-options"><label class="payment-option"><input type="radio" name="paymentMethod" value="pix" checked><span><strong>Pix</strong><small>QR Code e copia-e-cola</small></span></label><label class="payment-option"><input type="radio" name="paymentMethod" value="card"><span><strong>Cartão de crédito</strong><small>Pagamento seguro no checkout da Shopify</small></span></label></div>
-          <div class="card-fields" id="cardFields" hidden>
-            <p class="payment-hosted-notice"><strong>Pagamento seguro hospedado pela Shopify.</strong><br>Número do cartão, validade e CVV não são digitados nem armazenados pela GRIFHII.</p>
-            <label>Parcelamento máximo<select name="installments"><option value="1">1x</option><option value="2">até 2x</option><option value="3">até 3x</option><option value="4">até 4x</option><option value="5">até 5x</option><option value="6">até 6x</option><option value="7">até 7x</option><option value="8">até 8x</option><option value="9">até 9x</option><option value="10">até 10x</option><option value="11">até 11x</option><option value="12" selected>até 12x</option></select></label>
-          </div>
-          <label class="consent"><input type="checkbox" name="consent" required> <span>Concordo com a <a href="legal/privacidade.html">política de privacidade</a>, os <a href="legal/termos.html">termos de uso</a> e a <a href="legal/trocas-e-devolucoes.html">política de troca e devolução</a>.</span></label>
-          <div class="checkout-actions"><button class="button button-outline checkout-prev" type="button" data-prev="2">Voltar</button><button class="button button-light" type="submit" id="paymentSubmit" disabled>Gerar pagamento</button></div>
-        </div>
-        <div class="checkout-step" data-step="4"><div class="checkout-result" id="checkoutResult"></div><button class="button button-light" type="button" id="closeAfterOrder">Voltar para a loja</button></div>
-      </form>
-      <div class="checkout-feedback" id="checkoutFeedback" role="status" aria-live="polite"></div>
-    </div>
-  </section>
   <section class="tracking-panel" id="trackingPanel" hidden aria-labelledby="trackingTitle">
-    <div class="tracking-shell"><button type="button" id="trackingBack" class="tracking-back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg><span>Voltar à loja</span></button><span id="rastreio" class="visually-hidden" aria-hidden="true"></span><div class="checkout-head"><div><span class="section-kicker">PEDIDO</span><h2 id="trackingTitle">Acompanhar meu pedido</h2></div><button class="drawer-close" id="trackingClose" type="button" aria-label="Fechar acompanhamento">×</button></div><form id="trackingForm" class="tracking-form"><label>Código de rastreio<input name="trackingCode" autocomplete="off" placeholder="Ex.: BR123456789" ></label><label>ID do pedido<input name="orderId" autocomplete="off"></label><label>Token do pedido<input name="token" autocomplete="off"></label><button class="button button-light" type="submit">Consultar</button></form><p class="tracking-hint">Para compras na Shopify, utilize o link de acompanhamento enviado por e-mail. A consulta abaixo é apenas para pedidos antigos registrados em nosso sistema.</p><div id="trackingResult" class="tracking-result"></div></div>
+    <div class="tracking-shell"><button type="button" id="trackingBack" class="tracking-back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg><span>Voltar à loja</span></button><span id="rastreio" class="visually-hidden" aria-hidden="true"></span><div class="checkout-head"><div><span class="section-kicker">PEDIDO</span><h2 id="trackingTitle">Acompanhar meu pedido</h2></div><button class="drawer-close" id="trackingClose" type="button" aria-label="Fechar acompanhamento">×</button></div><form id="trackingForm" class="tracking-form"><label>Código de rastreio<input name="trackingCode" autocomplete="off" placeholder="Ex.: AA123456789BR" maxlength="13" autocapitalize="characters"></label><button class="button button-light" type="submit">Consultar</button></form><p class="tracking-hint">Para compras no site, o acompanhamento do pedido também está no e-mail de confirmação enviado pela Shopify. Envios pelos Correios podem ser consultados com o código de rastreio.</p><div id="trackingResult" class="tracking-result"></div></div>
   </section>
   <footer class="footer">
     <div class="footer-top">
@@ -406,7 +370,7 @@
         <p>Instagram</p><a href="https://www.instagram.com/grifhii/" target="_blank" rel="noopener">@grifhii</a><p>Facebook</p><a href="https://www.facebook.com/profile.php?id=61592017326782" target="_blank" rel="noopener">GRIFHII</a>
       </div>
     </div>
-    <div class="footer-bottom">© 2026 GRIFHII CONCEITO. Todos os direitos reservados.</div>
+    <div class="footer-bottom">© 2026 GRIFHII CONCEITO. Todos os direitos reservados.<nav class="footer-legal" aria-label="Políticas da loja"><a href="legal/privacidade.html">Privacidade</a><a href="legal/termos.html">Termos</a><a href="legal/trocas-e-devolucoes.html">Trocas e devoluções</a><a href="legal/entrega.html">Entrega</a></nav></div>
   </footer>
   <a class="whatsapp-float" href="https://wa.me/5564981025225?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20GRIFHII%20CONCEITO." target="_blank" rel="noopener" aria-label="Falar com a GRIFHII pelo WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 11.5a8 8 0 0 1-11.8 7.1L4 20l1.4-4.2A8 8 0 1 1 20 11.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.6 7.7c-.4.3-.6.8-.6 1.3 0 2.3 3 5.5 5.5 5.7.7.1 1.3-.3 1.6-.9l-1.8-1-.8.7c-1.1-.5-1.9-1.3-2.4-2.4l.7-.8-1-1.9c-.4-.7-.8-.9-1.2-.7Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></a>
   <script src="site-ui.js?rev=20261101-auditada-3d-v2"></script>
@@ -440,6 +404,5 @@
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',show,{once:true}); else show();
 })();
 </script>
-<script src="grifhii-menu-marcas.js?rev=20261101-auditada-3d-v2" defer></script>
 </body>
 </html>

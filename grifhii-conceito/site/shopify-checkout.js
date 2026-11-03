@@ -67,13 +67,28 @@
     return `https://${host}/cart/${joined}`;
   }
 
+  const cents = money => (money?.currencyCode === 'BRL' && Number.isFinite(Number(money.amount)) && Number(money.amount) >= 0)
+    ? Math.round(Number(money.amount) * 100) : null;
+
+  // Proteção contra open redirect: só aceita checkout HTTPS no domínio da loja ou em domínios declarados no config.
+  function safeCheckoutUrl(raw) {
+    let url;
+    try { url = new URL(String(raw || '')); } catch (_) { throw new Error('A Shopify retornou uma URL de checkout inválida.'); }
+    const allowed = new Set([shopDomain(), ...((configured().checkoutHosts || []).map(h => clean(h).toLowerCase()))]);
+    if (url.protocol !== 'https:' || url.username || url.password || url.port || !allowed.has(url.hostname.toLowerCase())) {
+      throw new Error('A URL de checkout recebida não pertence à loja GRIFHII. A compra foi interrompida por segurança.');
+    }
+    if (!/^\/(cart\/c\/|checkouts\/)/.test(url.pathname)) throw new Error('A Shopify retornou um caminho de checkout inesperado.');
+    return url.href;
+  }
+
   function transportError(message) {
     const err = new Error(message);
     err.grifhiiNetworkFailure = true; // fallback apenas quando a rede/API nao respondeu corretamente
     return err;
   }
 
-  async function createApiCheckout(items) {
+  async function createApiCheckout(items, extraAttributes) {
     const host = shopDomain();
     const token = clean(configured().publicStorefrontToken);
     if (!token && configured().allowTokenlessCatalog !== true) {
@@ -84,25 +99,41 @@
     const lines = cartLines(items).map(({merchandiseId, quantity}) => ({merchandiseId, quantity}));
     const query = `mutation CheckoutGrifhii($input: CartInput) {
       cartCreate(input: $input) {
-        cart { checkoutUrl lines(first: 100) { edges { node { quantity merchandise { ... on ProductVariant { id availableForSale } } } } } }
+        cart { checkoutUrl cost { subtotalAmount { amount currencyCode } }
+          lines(first: 100) { edges { node { quantity cost { amountPerQuantity { amount currencyCode } }
+            merchandise { ... on ProductVariant { id availableForSale } } } } } }
         userErrors { field message }
       }
     }`;
+    // Preço exibido ao cliente por variante (centavos). Se a Shopify devolver outro valor, o cliente revisa antes de pagar.
+    const expectedPrice = new Map();
+    for (const item of items) {
+      const id = resolveVariant(item);
+      const cents = Number(item.unitPriceCents);
+      if (Number.isSafeInteger(cents) && cents >= 0) expectedPrice.set(`gid://shopify/ProductVariant/${id}`, cents);
+    }
+    const attributes = [{key: 'Origem', value: 'GRIFHII CONCEITO V10'}];
+    for (const [key, value] of Object.entries(extraAttributes || {})) {
+      if (/^[a-z_]{1,40}$/.test(key) && typeof value === 'string' && value.length <= 120) attributes.push({key, value});
+    }
     let response;
     const headers = {'Content-Type': 'application/json'};
     if (token) headers['X-Shopify-Storefront-Access-Token'] = token;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
     try {
       response = await fetch(`https://${host}/api/${apiVersion}/graphql.json`, {
-        method: 'POST',
+        method: 'POST', mode: 'cors', credentials: 'omit', signal: controller.signal,
         headers,
         body: JSON.stringify({query, variables: {input: {
-          lines, buyerIdentity: {countryCode: 'BR'},
-          attributes: [{key: 'Origem', value: 'GRIFHII CONCEITO V10'}]
+          lines, buyerIdentity: {countryCode: 'BR'}, attributes
         }}})
       });
-    } catch (_) {
-      throw transportError('Não foi possível conectar à Shopify. Verifique a conexão e o domínio da loja.');
-    }
+    } catch (err) {
+      throw transportError(err?.name === 'AbortError'
+        ? 'A Shopify demorou para responder. Tente novamente em instantes.'
+        : 'Não foi possível conectar à Shopify. Verifique sua conexão.');
+    } finally { clearTimeout(timer); }
     if (!response.ok) throw transportError(`A Shopify não concluiu a solicitação (HTTP ${response.status}). Verifique o domínio e o token público.`);
     let payload;
     try { payload = await response.json(); }
@@ -118,37 +149,33 @@
     if (linesReturned.length !== expected.size || linesReturned.some(({node}) =>
       !node?.merchandise?.availableForSale || !expected.has(node?.merchandise?.id) || expected.get(node.merchandise.id) !== node.quantity
     )) throw new Error('Uma peça está indisponível ou teve a quantidade alterada na Shopify. Atualize seu carrinho.');
-    const url = new URL(cart.checkoutUrl || '');
-    if (url.protocol !== 'https:') throw new Error('A Shopify retornou uma URL de checkout inválida.');
+    for (const {node} of linesReturned) {
+      const want = expectedPrice.get(node.merchandise.id);
+      const got = cents(node.cost?.amountPerQuantity);
+      if (got === null) throw new Error('A Shopify não confirmou o preço de uma peça. Tente novamente.');
+      if (want !== undefined && want !== got) {
+        throw new Error('O preço de uma peça foi atualizado na Shopify. Abra a peça novamente para conferir o valor antes de pagar.');
+      }
+    }
+    return safeCheckoutUrl(cart.checkoutUrl);
     return url.href;
   }
 
-  async function checkout(items) {
+  async function checkout(items, extraAttributes) {
     if (configured().salesEnabled !== true || configured().cartTestMode === true) {
       throw new Error('Checkout de produção desativado. Confirme catálogo, frete e pagamentos e saia do modo teste antes de liberar.');
     }
     shopDomain();
     const token = clean(configured().publicStorefrontToken);
-    if (!token && configured().allowTokenlessCatalog !== true && configured().cartPermalinkFallback !== true) throw new Error('A loja não tem um método de checkout configurado.');
+    if (!token && configured().allowTokenlessCatalog !== true) throw new Error('A loja não tem um método de checkout configurado.');
     if (items.some(item => item.testOnly === true || item.pricePending)) {
       throw new Error('O carrinho contém itens de demonstração. Esvazie e adicione novamente os produtos vinculados à Shopify.');
     }
-    let url;
-    if (token || configured().allowTokenlessCatalog === true) {
-      try { url = await createApiCheckout(items); }
-      catch (err) {
-        // Nunca ignora erros de validacao, de estoque ou de divergencia das variantes.
-        if (!err.grifhiiNetworkFailure || configured().cartPermalinkFallback !== true) throw err;
-        url = buildCheckoutUrl(items);
-      }
-    } else {
-      url = buildCheckoutUrl(items);
-    }
-    // O checkout hospedado pela Shopify confirma precos e estoque reais.
-
+    // Sem fallback por permalink: se a Storefront API não confirmar variantes, estoque e preço, a compra não segue.
+    const url = await createApiCheckout(items, extraAttributes);
     window.location.assign(url);
     return url;
   }
 
-  window.GRIFHII_SHOPIFY = Object.freeze({ checkout, buildCheckoutUrl, cartLines, createApiCheckout });
+  window.GRIFHII_SHOPIFY = Object.freeze({ checkout, buildCheckoutUrl, cartLines, createApiCheckout, safeCheckoutUrl });
 })();

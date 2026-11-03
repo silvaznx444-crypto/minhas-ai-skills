@@ -1,0 +1,18 @@
+/* GRIFHII V10 final — complementos das páginas legais (mesma paleta off-white/dourado). */
+.legal-content ul{margin:10px 0 14px;padding-left:18px;color:#666;font-size:13px;line-height:1.7}
+.legal-content li{margin:4px 0}
+.legal-content a{color:#7d6844;text-decoration:underline;text-underline-offset:2px}
+.legal-content code{font-size:12px;background:#ebe7df;padding:1px 5px;border-radius:3px}
+.legal-meta{font-size:11.5px!important;letter-spacing:.04em;color:#8a8175!important}
+.legal-breadcrumb{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a8175;margin-bottom:14px}
+.legal-breadcrumb a{color:inherit;text-decoration:none}
+.legal-table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:12.5px;line-height:1.55;color:#4c4740}
+.legal-table th,.legal-table td{border-top:1px solid #ddd6ca;padding:10px 8px;text-align:left;vertical-align:top}
+.legal-table th{font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6a6258}
+.legal-pending{background:#f1e6cc;color:#5b4a26;padding:0 4px;border-radius:2px}
+.legal-nav{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:38px;padding-top:18px;border-top:1px solid #ddd6ca;font-size:12px}
+@media(max-width:640px){
+  .legal-table thead{display:none}
+  .legal-table tr{display:block;border-top:1px solid #ddd6ca;padding:8px 0}
+  .legal-table td{display:block;border:0;padding:3px 0}
+}

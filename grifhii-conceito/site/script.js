@@ -45,7 +45,7 @@ document.querySelectorAll("[data-quick-filter]").forEach(link => {
   function loadCart() { try { return JSON.parse(localStorage.getItem(cartKey) || '[]'); } catch { return []; } }
   function syncCartFromStorage() { state.cart = loadCart(); return state.cart; }
   function saveCart() { localStorage.setItem(cartKey, JSON.stringify(state.cart)); updateCartUI(); window.dispatchEvent(new CustomEvent('grifhii:cart-changed')); }
-  // Somente o catálogo local/Shopify; não existe API própria em produção (antes: 127.0.0.1:3333).
+  // Somente o catálogo local/Shopify; não existe API própria em produção (a API local de desenvolvimento foi removida).
   function api(path) { if (String(path).startsWith('/products') && window.GRIFHII_LOCAL_API) return window.GRIFHII_LOCAL_API(path); return Promise.reject(new Error('Serviço indisponível.')); }
 
   function productCard(product) {
@@ -515,7 +515,7 @@ document.querySelectorAll("[data-quick-filter]").forEach(link => {
   }
 
   /* V10 final: o checkout próprio (CPF, endereço, frete e "Gerar pagamento") dependia de uma API local
-     (127.0.0.1:3333) que não existe em produção. A compra é concluída somente no checkout oficial da Shopify.
+     de desenvolvimento que não existe em produção. A compra é concluída somente no checkout oficial da Shopify.
      Rastreio e contato funcionam sem servidor próprio e sem enviar dados a terceiros além do WhatsApp/Correios. */
   const STORE_WHATSAPP = '5564981025225';
   const CORREIOS_TRACKING_URL = 'https://rastreamento.correios.com.br/app/index.php';

@@ -1,0 +1,20 @@
+name = "grifhii-whatsapp-pedido-pago"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+SHOP_DOMAIN = "grifhiiconceito.myshopify.com"
+WHATSAPP_TEMPLATE = "pedido_pago_envio"
+WHATSAPP_TEMPLATE_LANG = "pt_BR"
+# Confirme a versão vigente em developers.facebook.com/docs/graph-api/changelog antes de publicar.
+GRAPH_API_VERSION = "PREENCHER"
+WHATSAPP_PHONE_NUMBER_ID = "PREENCHER"
+
+# Crie com: npx wrangler kv namespace create PEDIDOS  e cole o id abaixo.
+[[kv_namespaces]]
+binding = "PEDIDOS"
+id = "PREENCHER"
+
+# Segredos (NUNCA neste arquivo):
+#   npx wrangler secret put SHOPIFY_WEBHOOK_SECRET
+#   npx wrangler secret put WHATSAPP_TOKEN

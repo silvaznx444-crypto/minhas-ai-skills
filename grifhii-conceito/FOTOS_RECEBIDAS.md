@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**37 de 124** cores recebidas.
+**42 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -37,13 +37,13 @@
 | ⏳ | Camisa Social Ralph Lauren Xadrez Manga Longa | Laranja xadrez |
 | ⏳ | Camisa Social Ralph Lauren Xadrez Manga Longa | Verde xadrez |
 | ⏳ | Camisa Social Ralph Lauren Xadrez Manga Longa | Vermelho xadrez |
-| ⏳ | Boné Polo Ralph Lauren Clássico Bordado | Azul-escuro |
-| ⏳ | Boné Polo Ralph Lauren Clássico Bordado | Azul-marinho |
-| ⏳ | Boné Polo Ralph Lauren Clássico Bordado | Cinza |
-| ⏳ | Boné Polo Ralph Lauren Clássico Bordado | Marrom/Oliva |
+| ✅ | Boné Polo Ralph Lauren Clássico Bordado | Azul-escuro |
+| ✅ | Boné Polo Ralph Lauren Clássico Bordado | Azul-marinho |
+| ✅ | Boné Polo Ralph Lauren Clássico Bordado | Cinza |
+| ✅ | Boné Polo Ralph Lauren Clássico Bordado | Marrom/Oliva |
 | ⏳ | Boné Polo Ralph Lauren Clássico Bordado | Preto |
 | ⏳ | Boné Polo Ralph Lauren Clássico Bordado | Rosa |
-| ⏳ | Boné Polo Ralph Lauren Clássico Bordado | Roxo/Lilás |
+| ✅ | Boné Polo Ralph Lauren Clássico Bordado | Roxo/Lilás |
 | ⏳ | Short Lacoste Sport com Crocodilo Bordado | Preto |
 | ⏳ | Short Lacoste Sport com Crocodilo Bordado | Azul-marinho |
 | ⏳ | Short Lacoste Sport com Crocodilo Bordado | Ciano |

@@ -6,3 +6,10 @@
 - **Camisa Ralph Lauren Preta:** existe nas DUAS (manga curta e manga longa), confirmado pelo proprietário. Usar a mesma foto nas duas. (03/11/2026)
 - **Camiseta Acostamento preta com lobo artístico:** corresponde ao produto da Shopify "Camiseta Acostamento Horse Art – Preta" (Preto / M), que ainda não existe no site. Adicionar como peça nova na atualização final (confirmar com o proprietário). (03/11/2026)
 - **Camiseta Colcci Back To The Old Days:** no site está "Azul-marinho"; na Shopify o produto é "– Preta" (Preto / M). Aguardando o proprietário confirmar a cor real para ligar a peça. (03/11/2026)
+
+## Regra geral para a atualização final (pedido do proprietário, 03/11/2026)
+- **Não trocar às cegas.** Para cada peça, comparar a foto atual do site com a foto nova:
+  - Se a foto atual já está **bem enquadrada, nítida e tem imagem 3D da mesma cor**, **manter** a atual (e o 3D).
+  - Usar a foto nova só quando ela for **melhor** (resolução, nitidez, enquadramento) ou quando a cor **não tem foto**.
+  - Nunca remover um 3D que já corresponde à cor certa.
+- Mostrar ao proprietário a lista "manter / trocar" com antes × depois antes de publicar.

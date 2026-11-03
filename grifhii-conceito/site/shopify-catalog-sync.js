@@ -296,7 +296,9 @@
   }
   function newPublishedProducts(live, originals) {
     if(!Array.isArray(live)) return [];
-    return live.filter(p=>isNewShopifyProduct(p, originals))
+    // Produtos de teste publicados por engano na Shopify nunca aparecem na vitrine.
+    return live.filter(p=>!/\bteste\b/i.test(`${p.title||''} ${p.handle||''}`))
+      .filter(p=>isNewShopifyProduct(p, originals))
       .map(remoteProduct).filter(Boolean);
   }
   function filterNew(path, items) {

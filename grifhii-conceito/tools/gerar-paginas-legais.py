@@ -31,7 +31,7 @@ PAGES = {
 <h2>3. Com quem compartilhamos</h2>
 <ul>
 <li><strong>Shopify</strong> — plataforma de catálogo, carrinho, checkout e pedidos (Shopify International Ltd. e afiliadas).</li>
-<li><strong>Provedor de pagamento</strong> configurado na Shopify: {F("ex.: Shopify Payments / Mercado Pago / Pagar.me — informar o ativo")}.</li>
+<li><strong>Provedor de pagamento</strong> configurado na Shopify: Mercado Pago.</li>
 <li><strong>Cloudflare</strong> — hospedagem e segurança do site (Cloudflare Pages).</li>
 <li><strong>Google</strong> — fontes tipográficas (Google Fonts) e ícones das marcas exibidos no menu; o navegador solicita esses arquivos aos servidores do Google, que recebem o endereço IP.</li>
 <li><strong>Meta (WhatsApp)</strong> — quando você fala com a loja pelo WhatsApp ou aceita receber mensagens sobre o pedido (WhatsApp Business Platform, da própria Meta).</li>
@@ -65,7 +65,7 @@ PAGES = {
 <h2>3. Preços e despesas adicionais</h2>
 <p>Os preços estão em reais (R$). Antes do pagamento, o checkout da Shopify exibe o valor das peças, o frete ou a opção de retirada, eventuais descontos e o <strong>valor total</strong>. Nenhuma cobrança adicional é feita sem a sua concordância expressa. Em caso de erro evidente de preço, a loja entrará em contato antes do envio e você poderá cancelar com reembolso integral.</p>
 <h2>4. Pagamento</h2>
-<p>O pagamento é feito somente no checkout oficial da Shopify, pelas formas habilitadas ({F("ex.: Pix e cartão de crédito — confirmar")}). A GRIFHII não solicita dados de cartão por WhatsApp, e-mail ou formulário próprio.</p>
+<p>O pagamento é feito somente no checkout oficial da Shopify, pelas formas habilitadas (Pix e cartão de crédito, processados pelo Mercado Pago; parcelamento conforme exibido no checkout). A GRIFHII não solicita dados de cartão por WhatsApp, e-mail ou formulário próprio.</p>
 <h2>5. Entrega</h2>
 <p>Prazos, modalidades e custos estão na <a href="entrega.html">Política de Entrega</a> e aparecem no checkout antes do pagamento.</p>
 <h2>6. Direito de arrependimento</h2>
@@ -88,7 +88,7 @@ PAGES = {
 <h2>4. Reembolso</h2>
 <p>O reembolso é feito pelo mesmo meio de pagamento: Pix em até {F("prazo, ex.: 5 dias úteis")} após o recebimento da peça devolvida; no cartão, o estorno é solicitado à operadora no mesmo prazo e aparece conforme o ciclo da fatura.</p>
 <h2>5. Como enviar</h2>
-<p>Após a confirmação, a loja informa o endereço ou código de postagem. Peças retiradas na loja podem ser devolvidas presencialmente em {ENDERECO}, das 9h às 18h30 ({F("dias da semana, ex.: segunda a sábado")}).</p>
+<p>Após a confirmação, a loja informa o endereço ou código de postagem. Peças retiradas na loja podem ser devolvidas presencialmente em {ENDERECO}, das 9h às 18h30 (de segunda a sábado).</p>
 '''),
 'entrega': ('Política de Entrega', 'Modalidades de entrega e retirada, custos de frete, prazos e rastreio das compras na GRIFHII CONCEITO.', f'''
 <p class="legal-meta">Última atualização: {ATUALIZADO}. Versão sujeita a revisão jurídica antes da abertura das vendas.</p>
@@ -96,8 +96,8 @@ PAGES = {
 <p>O valor do frete, o prazo estimado e o total do pedido são calculados e exibidos no checkout da Shopify <strong>antes</strong> do pagamento. A GRIFHII não cobra frete separado depois da compra.</p>
 <h2>2. Modalidades</h2>
 <ul>
-<li><strong>Envio pelos Correios</strong> para todo o Brasil — {F("serviços (PAC/SEDEX), tabela ou cálculo usado na Shopify")}.</li>
-<li><strong>Retirada na loja</strong>, sem custo, em {ENDERECO} — das 9h às 18h30 ({F("dias da semana, ex.: segunda a sábado")}).</li>
+<li><strong>Envio pelos Correios</strong> para todo o Brasil — PAC e SEDEX, com valor por faixa de peso do pedido, exibido no checkout antes do pagamento. <strong>Frete grátis para pedidos a partir de R$ 500,00</strong>, na modalidade indicada no checkout.</li>
+<li><strong>Retirada na loja</strong>, sem custo, em {ENDERECO} — das 9h às 18h30 (de segunda a sábado).</li>
 </ul>
 <h2>3. Prazos</h2>
 <p>Postagem em até {F("prazo de postagem, ex.: 2 dias úteis")} após a confirmação do pagamento. O prazo de transporte é o informado no checkout para o CEP de destino.</p>

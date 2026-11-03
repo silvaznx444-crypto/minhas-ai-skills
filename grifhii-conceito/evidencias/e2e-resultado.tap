@@ -1,0 +1,35 @@
+ok 1 - páginas principais sem erro de JS/CSP e sem rolagem horizontal — desktop
+ok 2 - páginas principais sem erro de JS/CSP e sem rolagem horizontal — iPhone SE
+ok 3 - páginas principais sem erro de JS/CSP e sem rolagem horizontal — mobile 375
+ok 4 - menu: acordeão de marcas abre e leva à marca com filtros apenas das categorias existentes
+ok 5 - carrossel principal avança e pausa
+ok 6 - cards do catálogo levam ao produto correto
+ok 7 - página estática de produto: HTML inicial rastreável + dados estruturados válidos
+ok 8 - vendas desligadas (config real): não adiciona e não chama checkout
+ok 9 - adiciona a variante exata (cor + tamanho) com o ID Shopify correspondente
+ok 10 - sacola: + / − / remover, subtotal, persistência após recarregar e sincronização entre abas
+ok 11 - checkout: envia variante/quantidade corretas, opt-in e redireciona ao checkout oficial
+ok 12 - checkout: clique duplo cria apenas UM carrinho
+ok 13 - checkout bloqueado: URL de checkout externa (open redirect)
+ok 14 - checkout bloqueado: URL http sem TLS
+ok 15 - checkout bloqueado: preço alterado na Shopify
+ok 16 - checkout bloqueado: variante indisponível
+ok 17 - checkout bloqueado: quantidade reduzida pela Shopify
+ok 18 - checkout bloqueado: resposta parcial (linha faltando)
+ok 19 - checkout bloqueado: userErrors da Shopify
+ok 20 - checkout bloqueado: erro HTTP 500 (sem fallback por permalink)
+ok 21 - checkout bloqueado: sem conexão
+ok 22 - checkout bloqueado: timeout da Shopify (15 s)
+ok 23 - checkout bloqueado: carrinho adulterado (ID de outra peça)
+ok 24 - checkout bloqueado: preço adulterado no navegador
+ok 25 - checkout bloqueado: quantidade adulterada acima do estoque
+ok 26 - checkout com 2 peças diferentes envia as duas linhas
+ok 27 - contato monta mensagem no WhatsApp sem enviar dados a servidor
+ok 28 - rastreio valida código dos Correios e não injeta HTML
+ok 29 - parâmetros de URL maliciosos não executam script
+ok 30 - teclado: menu abre com Enter, foca o painel e fecha com Esc
+ok 31 - imagens: nenhuma imagem quebrada nas páginas principais
+# tests 31
+# pass 31
+# fail 0
+# duration_ms 98444.399662

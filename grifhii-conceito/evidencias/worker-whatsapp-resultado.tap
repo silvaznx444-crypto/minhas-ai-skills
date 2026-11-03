@@ -1,0 +1,15 @@
+ok 1 - rejeita assinatura inválida
+ok 2 - rejeita loja diferente
+ok 3 - envia template com nome e número do pedido, sem dados sensíveis
+ok 4 - deduplica reenvio do mesmo pedido
+ok 5 - não envia sem opt-in
+ok 6 - não envia pedido não pago
+ok 7 - falha temporária (500) devolve 503 para a Shopify reenviar e libera a trava
+ok 8 - erro permanente (400) é registrado e não gera reenvio infinito
+ok 9 - pedido em processamento concorrente responde 409
+ok 10 - normaliza telefones brasileiros
+ok 11 - verifyShopifyHmac recusa base64 quebrado
+ok 12 - optedIn aceita atributos de carrinho
+# tests 12
+# pass 12
+# fail 0

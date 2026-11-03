@@ -2,3 +2,4 @@ dist/
 build-report.json
 node_modules/
 *.zip
+entregas/

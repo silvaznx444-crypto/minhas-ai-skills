@@ -1,0 +1,18 @@
+{
+  "name": "grifhii-conceito",
+  "private": true,
+  "type": "module",
+  "description": "GRIFHII CONCEITO — loja headless Shopify (fonte em site/, build público em dist/).",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "build:producao": "node tools/build.mjs --mode=producao",
+    "legal": "python3 tools/gerar-paginas-legais.py site/legal",
+    "test:whatsapp": "node --test integracoes/whatsapp-pedido-pago/test/worker.test.mjs",
+    "test:e2e": "node tools/build.mjs --offline && node --test --test-concurrency=1 tests/e2e.test.mjs",
+    "test": "npm run test:whatsapp && npm run test:e2e",
+    "servir:dist": "node tests/servidor-dist.mjs dist 5800"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

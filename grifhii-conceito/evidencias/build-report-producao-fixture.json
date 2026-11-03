@@ -1,0 +1,15 @@
+{
+  "mode": "producao",
+  "siteUrl": "https://exemplo-teste.invalid",
+  "catalogLive": false,
+  "products": 73,
+  "productPages": 73,
+  "files": 381,
+  "megabytes": 28.52,
+  "largestFileMB": 0.32,
+  "warnings": [
+    "Shopify não respondeu no build (rede desativada no build): dados estruturados SEM preço/estoque (nunca usar snapshot como dado ao vivo).",
+    "salesEnabled:false — vitrine publicada SEM vendas (checkout bloqueado)."
+  ],
+  "errors": []
+}

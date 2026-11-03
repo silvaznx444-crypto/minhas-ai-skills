@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**4 de 124** cores recebidas.
+**9 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -9,11 +9,11 @@
 | ✅ | Camiseta Emporio Armani Importada | Preta Lisa |
 | ✅ | Camiseta Emporio Armani Importada | Preta com Listra Branca |
 | ⏳ | Camiseta Colcci Algodão Menegotti | Preta |
-| ⏳ | Camiseta Armani Exchange A|X Importada | Preta |
-| ⏳ | Camiseta Armani Exchange A|X Importada | Azul-marinho |
-| ⏳ | Camiseta Fred Perry Importada | Preta |
-| ⏳ | Camiseta Fred Perry Importada | Branca |
-| ⏳ | Camiseta Fred Perry Importada | Azul escuro |
+| ✅ | Camiseta Armani Exchange A|X Importada | Preta |
+| ✅ | Camiseta Armani Exchange A|X Importada | Azul-marinho |
+| ✅ | Camiseta Fred Perry Importada | Preta |
+| ✅ | Camiseta Fred Perry Importada | Branca |
+| ✅ | Camiseta Fred Perry Importada | Azul escuro |
 | ⏳ | Camiseta Hugo Boss Signature Stripe | Branca |
 | ⏳ | Camiseta Hugo Boss Signature Stripe | Preta |
 | ⏳ | Camiseta Emporio Armani EA7 Monogram | Preta |

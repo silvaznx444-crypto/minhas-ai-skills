@@ -90,7 +90,7 @@
         data-carousel-action="prev" data-carousel-id="${id}" aria-label="Imagem anterior de ${esc(product.name)}">‹</button>
       <button class="products-page-carousel-arrow products-page-carousel-next" type="button"
         data-carousel-action="next" data-carousel-id="${id}" aria-label="Próxima imagem de ${esc(product.name)}">›</button>
-      <div class="products-page-carousel-dots" role="tablist" aria-label="Imagens de ${esc(product.name)}">
+      <div class="products-page-carousel-dots" role="group" aria-label="Imagens de ${esc(product.name)}">
         ${images.map((_, index) => `<button type="button" class="${index === 0 ? 'is-active' : ''}"
           data-carousel-dot="${id}" data-slide-index="${index}" aria-label="Ver imagem ${index + 1}"></button>`).join('')}
       </div>` : '';

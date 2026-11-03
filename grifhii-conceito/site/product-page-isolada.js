@@ -327,7 +327,7 @@
           <a class="button button-outline product-whatsapp-button" href="https://wa.me/5564981025225?text=${whatsappText}" target="_blank" rel="noopener">Comprar pelo WhatsApp</a>
           <p class="product-feedback" id="productFeedback" role="status" aria-live="polite"></p>
           ${description ? `<p class="product-description grif-description-after-options">${esc(description)}</p>` : ''}
-          <div class="product-delivery-check"><div class="product-option-head"><span>ENTREGA</span><small>Consulte o prazo</small></div><div class="product-cep-row"><input id="productCep" inputmode="numeric" maxlength="9" placeholder="Digite seu CEP" aria-label="CEP para consultar entrega"><button type="button" id="checkCep">Consultar</button></div><p id="cepFeedback" class="product-mini-feedback">Informe o CEP para simular a consulta de entrega.</p></div>
+          <div class="product-delivery-check"><div class="product-option-head"><span>ENTREGA</span><small>Consulte o prazo</small></div><div class="product-cep-row"><input id="productCep" inputmode="numeric" maxlength="9" placeholder="Digite seu CEP" aria-label="CEP para consultar entrega"><button type="button" id="checkCep">Consultar</button></div><p id="cepFeedback" class="product-mini-feedback">Frete e prazo para o seu CEP aparecem no checkout da Shopify, antes do pagamento.</p></div>
           ${accordionMarkup(profile, description)}
         </section>
       </div>
@@ -548,21 +548,14 @@
       const value = String(document.getElementById('productCep')?.value || '').replace(/\D/g, '');
       const feedback = document.getElementById('cepFeedback');
       if (!feedback) return;
-      feedback.textContent = value.length === 8 ? 'CEP recebido. O prazo e o frete finais serão confirmados no checkout.' : 'Digite um CEP válido com 8 números.';
+      feedback.textContent = value.length === 8 ? 'CEP anotado. O valor do frete e o prazo para este CEP são calculados no checkout da Shopify, antes do pagamento.' : 'Digite um CEP válido com 8 números.';
       feedback.classList.toggle('error', value.length !== 8);
     });
     addButton.addEventListener('click', () => { if (validateChoice()) addToCart(product, selectedVariant, quantity); });
-    buyButton.addEventListener('click', async () => {
-      if (!validateChoice() || !selectedVariant?.shopifyLinked || !selectedVariant?.shopifyAvailable ||
-          window.GRIFHII_SHOPIFY_CONFIG?.salesEnabled !== true) return;
-      buyButton.disabled=true;
-      try {
-        await window.GRIFHII_SHOPIFY.checkout([{
-          shopifyVariantId:selectedVariant.shopifyVariantId,quantity,
-          sku:selectedVariant.sku,name:product.name
-        }]);
-      } catch(error) {setFeedback(error?.message || 'Não foi possível abrir o checkout Shopify.',true);}
-      finally {renderSelection();}
+    // "Comprar agora" usa o MESMO fluxo validado da sacola (revalidação de variante/preço, aviso de frete e opt-in).
+    buyButton.addEventListener('click', () => {
+      if (!validateChoice()) return;
+      if (addToCart(product, selectedVariant, quantity)) location.href = 'index.html?cart=open#inicio';
     });
     mainGallery.addEventListener('click', () => { if(detailModel?.classList.contains('is-available') && !canHover.matches){detailPinnedPhoto=!detailPinnedPhoto;setDetailState();} });
     mainGallery.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){e.preventDefault(); if(detailModel?.classList.contains('is-available')){detailPinnedPhoto=!detailPinnedPhoto;setDetailState();}} });

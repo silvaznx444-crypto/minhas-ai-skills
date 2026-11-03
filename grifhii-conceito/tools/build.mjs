@@ -16,11 +16,11 @@ import {fileURLToPath} from 'node:url';
 import {loadCatalog} from './catalogo-node.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SITE = path.join(ROOT, 'site');
 const args = Object.fromEntries(process.argv.slice(2).map(a => {
   const [k, ...v] = a.replace(/^--/, '').split('=');
   return [k, v.length ? v.join('=') : true];
 }));
+const SITE = path.resolve(ROOT, typeof args['site-dir'] === 'string' ? args['site-dir'] : 'site');
 const MODE = args.mode === 'producao' ? 'producao' : 'homologacao';
 const OUT = path.resolve(ROOT, args.out || 'dist');
 const OFFLINE = Boolean(args.offline);
@@ -241,6 +241,28 @@ ${MODE === 'producao' ? '' : '  X-Robots-Tag: noindex, nofollow\n'}
   Cache-Control: public, max-age=0, must-revalidate
 `);
 write('_redirects', `/marca.html /produtos?marca=todas 301\n/conceito.html / 301\n`);
+
+/* ---------- 6b. CSS: um único arquivo por combinação de folhas (mesma ordem => mesmo resultado visual) ---------- */
+const {createHash} = await import('node:crypto');
+const bundles = new Map();
+for (const f of walk(OUT).filter(f => f.endsWith('.html'))) {
+  let html = read(f);
+  const links = [...html.matchAll(/[ \t]*<link rel="stylesheet" href="((?!https?:)[^"?]+\.css)(?:\?[^"]*)?">\n?/g)];
+  if (links.length < 2) continue;
+  const dir = path.posix.dirname(f);
+  const files = links.map(m => path.posix.normalize(path.posix.join(dir, m[1])));
+  const key = files.join('|');
+  if (!bundles.has(key)) {
+    const css = files.map(p => `/* ${p} */\n${read(p)}`).join('\n');
+    const name = `estilos-${createHash('sha256').update(css).digest('hex').slice(0, 10)}.css`;
+    write(name, css);
+    bundles.set(key, name);
+  }
+  const rel = path.posix.relative(dir, bundles.get(key)) || bundles.get(key);
+  html = html.replace(links[0][0], `<link rel="stylesheet" href="${rel}">\n`);
+  for (const m of links.slice(1)) html = html.replace(m[0], '');
+  write(f, html);
+}
 
 /* ---------- 7. Validações do dist ---------- */
 const distFiles = walk(OUT);

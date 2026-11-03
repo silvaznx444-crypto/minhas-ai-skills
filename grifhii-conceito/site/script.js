@@ -463,8 +463,8 @@ document.querySelectorAll("[data-quick-filter]").forEach(link => {
     saveCart();
   }
 
-  function openCart(){ syncCartFromStorage(); updateCartUI(); const d=$('cartDrawer'), b=$('drawerBackdrop'), t=$('cartTrigger'); if(!d) return; d.classList.add('is-open'); d.setAttribute('aria-hidden','false'); t?.setAttribute('aria-expanded','true'); b.hidden=false; document.body.style.overflow='hidden'; }
-  function closeCart(){ const d=$('cartDrawer'), b=$('drawerBackdrop'), t=$('cartTrigger'); d?.classList.remove('is-open'); d?.setAttribute('aria-hidden','true'); t?.setAttribute('aria-expanded','false'); if(b) b.hidden=true; if($('trackingPanel') && !$('trackingPanel').hidden) return; document.body.style.overflow=''; }
+  function openCart(){ syncCartFromStorage(); updateCartUI(); const d=$('cartDrawer'), b=$('drawerBackdrop'), t=$('cartTrigger'); if(!d) return; d.classList.add('is-open'); d.setAttribute('aria-hidden','false'); d.inert=false; t?.setAttribute('aria-expanded','true'); b.hidden=false; document.body.style.overflow='hidden'; }
+  function closeCart(){ const d=$('cartDrawer'), b=$('drawerBackdrop'), t=$('cartTrigger'); d?.classList.remove('is-open'); d?.setAttribute('aria-hidden','true'); if(d) d.inert=true; t?.setAttribute('aria-expanded','false'); if(b) b.hidden=true; if($('trackingPanel') && !$('trackingPanel').hidden) return; document.body.style.overflow=''; }
   function openPanel(id){ if(id==='trackingPanel' && window.GRIFHII_TRACKING) return window.GRIFHII_TRACKING.open(); const el=$(id); if(!el) return; el.hidden=false; document.body.style.overflow='hidden'; }
   function closePanel(id){ if(id==='trackingPanel' && window.GRIFHII_TRACKING) return window.GRIFHII_TRACKING.close(); const el=$(id); if(el) el.hidden=true; if($('cartDrawer')?.classList.contains('is-open')) return; document.body.style.overflow=''; }
 
@@ -524,6 +524,8 @@ document.querySelectorAll("[data-quick-filter]").forEach(link => {
   $('trackingOpen')?.addEventListener('click',()=>{closeCart();openPanel('trackingPanel');}); $('trackingSectionOpen')?.addEventListener('click',()=>{openPanel('trackingPanel');});
   $('checkoutStart')?.addEventListener('click',()=>{closeCart();startShopifyCheckout();}); $('trackingClose')?.addEventListener('click',()=>closePanel('trackingPanel'));
 
+  // Limpa o erro ao digitar; sem isso o navegador bloqueia novos envios após um código inválido.
+  $('trackingForm')?.elements.trackingCode?.addEventListener('input',e=>e.target.setCustomValidity(''));
   $('trackingForm')?.addEventListener('submit',e=>{
     e.preventDefault();
     const form=e.currentTarget;

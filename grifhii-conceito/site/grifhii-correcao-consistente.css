@@ -94,3 +94,5 @@ body.product-page #productDetail .product-gallery-main {border:none!important}
 .ui-clean .cart-drawer .cart-summary>div{color:#6a6258!important}
 .ui-clean .cart-drawer .cart-summary strong{color:#24211d!important}
 .ui-clean .cart-drawer .cart-summary{border-top-color:#ddd6ca!important}
+/* Evita salto de layout (CLS): reserva a altura da vitrine enquanto o catálogo carrega (conteúdo final é sempre maior). */
+.products-page .products-page-main{min-height:100vh}

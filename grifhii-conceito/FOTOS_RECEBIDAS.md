@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**22 de 124** cores recebidas.
+**28 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -60,16 +60,16 @@
 | ✅ | Bermuda Vilebrequin Tartarugas — Estampas | Laranja multicolorida |
 | ✅ | Bermuda Vilebrequin Tartarugas — Estampas | Laranja/Preto |
 | ✅ | Bermuda Vilebrequin Tartarugas — Estampas | Branca/Azul/Verde |
-| ⏳ | Boné Ayrton Senna Automobilismo | Azul |
-| ⏳ | Boné Ayrton Senna Automobilismo | Preto |
+| ✅ | Boné Ayrton Senna Automobilismo | Azul |
+| ✅ | Boné Ayrton Senna Automobilismo | Preto |
 | ⏳ | Boné Tommy Hilfiger Logo Bordado | Azul-marinho |
 | ⏳ | Boné Tommy Hilfiger Logo Bordado | Off-white |
 | ⏳ | Calça Jeans Polo Ralph Lauren — Azul Escuro | Azul-escuro |
 | ⏳ | Calça Jeans Calvin Klein Jeans Skinny — Azul Médio | Azul-médio |
-| ⏳ | Bermuda Sarja Ralph Lauren — Masculina | Preto |
-| ⏳ | Bermuda Sarja Ralph Lauren — Masculina | Marrom |
-| ⏳ | Bermuda Sarja Ralph Lauren — Masculina | Vermelho |
-| ⏳ | Bermuda Sarja Ralph Lauren — Masculina | Branco |
+| ✅ | Bermuda Sarja Ralph Lauren — Masculina | Preto |
+| ✅ | Bermuda Sarja Ralph Lauren — Masculina | Marrom |
+| ✅ | Bermuda Sarja Ralph Lauren — Masculina | Vermelho |
+| ✅ | Bermuda Sarja Ralph Lauren — Masculina | Branco |
 | ⏳ | Bermuda Sarja Abercrombie & Fitch — Laranja | Laranja |
 | ⏳ | Camiseta Lacoste Paris — Verde Escuro | Verde-escuro |
 | ⏳ | Camiseta Diesel D-Corp 1978 — Verde Militar | Verde-militar |

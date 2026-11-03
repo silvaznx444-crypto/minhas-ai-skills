@@ -1,0 +1,57 @@
+/* GRIFHII CONCEITO | revisão de catálogo auditada 01/11/2026
+   Regra visual aplicada APÓS todas as folhas antigas. NÃO altera estoque, links nem preço. */
+:root{--grifhii-fundo-unico:#f2f1ed}
+html:has(body.products-page){background:var(--grifhii-fundo-unico)!important}
+body.products-page,
+body.products-page .products-page-main,
+body.products-page .products-catalog,
+body.products-page .products-results,
+body.products-page .products-page-grid,
+body.products-page .products-page-card,
+body.products-page .products-page-card-copy,
+body.products-page .products-page-card-carousel,
+body.products-page .products-page-card-media,
+body.products-page .products-page-carousel-track,
+body.products-page .products-page-carousel-slide,
+body.products-page .grif-model-layer{
+  background-color:var(--grifhii-fundo-unico)!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+body.products-page .products-page-card-carousel,
+body.products-page .products-page-card-media,
+body.products-page .grif-model-layer{
+  border:0!important;outline:0!important;border-radius:0!important;
+}
+body.products-page .products-page-carousel-slide img,
+body.products-page .grif-model-layer img{
+  background:transparent!important;border:0!important;outline:0!important;
+  object-fit:contain!important;
+}
+/* Remove o efeito de placa retangular clara dos renders cujo fundo é quase branco. */
+body.products-page .grif-model-layer img{
+  mix-blend-mode:multiply!important;
+  width:94%!important;height:94%!important;
+}
+body.products-page .grif-model-card:not(.is-photo-visible) .grif-model-layer{
+  opacity:1!important;visibility:visible!important;
+}
+body.products-page .grif-model-card:not(.is-photo-visible) .products-page-carousel-track{
+  opacity:0!important;
+}
+body.products-page .grif-model-card.is-photo-visible .grif-model-layer{opacity:0!important;visibility:hidden!important}
+body.products-page .grif-model-card.is-photo-visible .products-page-carousel-track{opacity:1!important}
+/* Botões de categorias são criados SOMENTE a partir das peças filtradas pela marca. */
+body.products-page #productsFilters{display:flex!important;flex-direction:column!important;gap:4px!important}
+body.products-page #productsFilters>button[hidden]{display:none!important}
+body.products-page .products-filters button:not(.is-active){background:transparent!important}
+body.products-page .products-filters button.is-active{
+  background:#26221c!important;color:#f2f1ed!important;border-color:#26221c!important;
+}
+/* Imagens de produtos transparentes não devem criar novo fundo retangular. */
+body.products-page .products-page-card-media>span{
+  background:rgba(242,241,237,.88)!important;
+}
+@media(max-width:880px){body.products-page #productsFilters{
+  flex-direction:row!important;flex-wrap:wrap!important;align-items:flex-start!important
+}}

@@ -1,0 +1,20 @@
+GRIFHII CONCEITO — ETAPA 16 — CHECKOUT OFICIAL EM TESTE SEGURO
+
+1. Extraia o ZIP inteiro em uma NOVA pasta.
+2. Feche CMDs da GRIFHII antigos.
+3. Execute INICIAR_GRIFHII_LOCAL.bat (Python instalado).
+4. Cole APENAS o token PUBLICO Storefront usado na etapa 14.
+5. Na loja, adicione uma peça REAL com estoque na Shopify.
+   A camiseta TESTE GRIFHII está com estoque ZERO e não serve para o checkout.
+6. Abra a sacola na pagina inicial e clique Testar finalização (sem pagamento).
+7. Confira o resultado: unidades, subtotal e URL oficial do checkout.
+   Nada abre automaticamente. Só abra a URL se quiser inspecionar o checkout.
+   NAO finalize pedido e NAO pague nesta etapa.
+
+LIMITES:
+- Vendas publicas: DESATIVADAS (salesEnabled=false).
+- Teste permitido somente em localhost e com token PUBLICO da Storefront API.
+- Frete variável por CEP não foi confirmado: validar na Etapa 17.
+- Não use token Admin API neste site.
+- Checkout real abre apenas por ação explicita no modo teste.
+- Nao foi implementado checkout no dominio publicado. Etapa 16 valida a preparacao.

@@ -1,0 +1,14 @@
+GRIFHII CONCEITO — revisão visual e de catálogo (01/11/2026)
+
+Use INICIAR_GRIFHII_LOCAL.bat, com a pasta inteira extraída. Não abra dentro do WinRAR.
+
+ALTERAÇÕES:
+- Filtros aparecem apenas para categorias com produtos na marca selecionada.
+- Menu Marcas passa a expandir a lista de marcas que estão no catálogo.
+- Produtos, marcas e página da peça usam o mesmo fundo #f2f1ed, tipografia Manrope, dourado e acabamento da home.
+- Primeiro slide prioriza o render 3D associado à imagem real da MESMA cor.
+- Em cards com render, o 3D aparece por padrão e passa para a fotografia ao hover.
+- Versões de foto sem render comprovado continuam com a foto correspondente. Nunca trocamos cores por suposição.
+- Banner interativo, estoque e bloqueio de checkout preservados.
+
+IMPORTANTE: apenas código e arquivos foram auditados. A navegação do navegador desta infraestrutura bloqueou o localhost. Faça a conferência visual na sua máquina antes de publicar no Cloudflare.

@@ -1,0 +1,13 @@
+GRIFHII V10 — ETAPA 15 — IMAGENS 3D POR VARIANTE
+
+1. Extraia o ZIP inteiro (não abra o HTML no WinRAR).
+2. Execute INICIAR_GRIFHII_LOCAL.bat. O navegador abrirá a tela de configurar token público em uma porta livre.
+3. Cole o MESMO token público usado no Teste 14 (não use Admin). Clique para abrir a vitrine.
+4. Abra a nova camiseta de teste na loja, com a mesma foto usada nos dois campos: NÃO deve aparecer falso modelo 3D.
+5. Em uma variante de teste com foto e render DIFERENTES, o render aparece primeiro; no hover aparece a foto.
+6. Nas variantes antigas sem novo metafield, continuam os modelos locais aprovados.
+7. Ao mudar de COR na pagina do produto, o modelo deve acompanhar a variante exata.
+8. Sem token público, a sincronização pode usar o snapshot; os produtos novos dependem da Storefront API.
+9. O carrinho, o checkout e os pagamentos reais permanecem bloqueados.
+
+Não cole tokens privados do Shopify Admin no site.

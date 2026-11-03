@@ -1,0 +1,31 @@
+GRIFHII V10 — correções verificadas em 01/11/2026
+
+ABRIR:
+1. Extraia todo o ZIP para uma pasta nova. Não misture com outras versões.
+2. Execute INICIAR_GRIFHII_LOCAL.bat (o site deve estar em localhost:5608).
+3. Se a porta estiver ocupada, encerre o processo antigo antes de iniciar.
+4. Não clique em arquivos HTML dentro do WinRAR.
+
+ALTERAÇÕES:
+- Filtros na página produtos gerados exclusivamente com categorias presentes na marca selecionada.
+  Exemplo: Lacoste = Todos, Camisetas e Bermudas (sem Camisas, Conjuntos ou Moletons).
+- O menu da página de escolha de cor/tamanho é controlado pelo mesmo site-ui.js da home,
+  mantendo o acordeão de marcas com ícones, sem a implementação de menu concorrente.
+- Fundo dos cards, galeria e render 3D ajustado ao tom #F2F1ED da loja; removidas placas brancas.
+- Imagem em volume mostra primeiro quando há render compatível com a fotografia e a cor;
+  a foto real aparece ao passar o mouse ou ao usar o controle.
+- A página de compra continua com cor, tamanho, quantidade, foto de proporção controlada.
+- O checkout permanece bloqueado. Não foram modificados preços, variantes ou estoque na Shopify.
+
+LIMITAÇÃO:
+Algumas combinações ainda não possuem modelo 3D específico nos arquivos da loja.
+Elas continuam exibindo sua fotografia real, sem empregar um render de outra cor.
+
+TESTES REALIZADOS:
+- Validação do catálogo: 73 produtos.
+- Filtros dinâmicos conferidos em navegador para Lacoste, Fred Perry, Ralph Lauren,
+  Tommy Hilfiger, Vilebrequin e On.
+- Página de produto com botão Marcas expandindo mesmo acordeão da home, opções de
+  tamanho/cor e imagem com largura controlada.
+- Sintaxe dos JavaScripts e integridade do ZIP verificadas.
+

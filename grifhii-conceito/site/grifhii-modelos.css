@@ -1,0 +1,62 @@
+/* GRIFHII — volume ilustrativo + fotografia real. Estética V10 preservada. */
+.grif-model-card{position:relative;isolation:isolate}
+.grif-model-card .products-page-carousel-track{opacity:0;transition:opacity .55s cubic-bezier(.51,0,0,.98)}
+.grif-model-card.is-photo-visible .products-page-carousel-track{opacity:1}
+.grif-model-layer{position:absolute;inset:0;z-index:3;pointer-events:none;display:grid;place-items:center;background:#f2f1ed;opacity:1;transition:opacity .55s cubic-bezier(.51,0,0,.98), transform .7s cubic-bezier(.51,0,0,.98)}
+.grif-model-layer img{display:block;width:92%;height:92%;object-fit:contain;filter:none;transform:translateZ(0);transition:transform .9s cubic-bezier(.51,0,0,.98)}
+.grif-model-card:not(.is-photo-visible) .grif-model-layer img{transform:translate3d(0,0,0) scale(1.015)}
+.grif-model-card.is-photo-visible .grif-model-layer{opacity:0;transform:translateY(2px) scale(.987)}
+.grif-model-card .products-page-carousel-arrow,.grif-model-card .products-page-carousel-dots{opacity:0;pointer-events:none;transition:opacity .3s}
+.grif-model-card.is-photo-visible .products-page-carousel-arrow,.grif-model-card.is-photo-visible .products-page-carousel-dots{opacity:1;pointer-events:auto}
+.grif-model-toggle{position:absolute;z-index:12;bottom:12px;right:12px;max-width:calc(100% - 24px);min-height:37px;padding:0 15px;border-radius:999px;border:1px solid rgba(30,29,25,.16);background:rgba(250,248,244,.95);color:#25221e;font:600 10px/1.25 'Manrope',sans-serif;letter-spacing:.01em;cursor:pointer;transition:background .2s,transform .2s}
+.grif-model-toggle:hover,.grif-model-toggle:focus-visible{background:#fff;transform:translateY(-1px);outline-offset:3px}
+.grif-model-toggle[hidden]{display:none!important}
+.grif-product-card-brand{display:block;margin:0 0 6px;font:600 9px/1.5 'Manrope',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#937a50}
+.grif-model-card .products-page-card-media>span:last-child{background:rgba(245,242,235,.75);color:#514536}
+/* Product detail: image and illustration remain separate; no deformation from mesh effects. */
+.product-gallery-main .grif-detail-model{position:absolute;inset:0;z-index:2;pointer-events:none;display:grid;place-items:center;background:#f2f1ed;opacity:0;visibility:hidden;transition:opacity .55s cubic-bezier(.51,0,0,.98)}
+.product-gallery-main .grif-detail-model.is-available{opacity:1;visibility:visible}
+.product-gallery-main.is-photo-visible .grif-detail-model{opacity:0;visibility:hidden}
+.product-gallery-main .grif-detail-model img{width:94%;height:94%;max-height:none;object-fit:contain;display:block;transform:scale(1);transition:transform .85s cubic-bezier(.51,0,0,.98)}
+.product-gallery-main.is-photo-visible .grif-detail-model img{transform:scale(.988)}
+.grif-detail-toggle{display:block;min-height:40px;margin:11px 0 5px auto;padding:0 20px;border:1px solid rgba(37,34,30,.17);background:transparent;color:#2b2823;border-radius:999px;font:600 11px/1 'Manrope',sans-serif;cursor:pointer}
+.grif-detail-toggle[hidden]{display:none}
+.product-gallery-main .product-gallery-index{z-index:4}
+.product-related-card .grif-related-model{position:absolute;inset:0 0 78px;z-index:2;display:grid;place-items:center;background:#f2f1ed;opacity:1;transition:opacity .5s ease;pointer-events:none}
+.product-related-card .grif-related-model img{width:92%;height:92%;object-fit:contain}
+@media(hover:hover) and (pointer:fine){.product-related-card:hover .grif-related-model{opacity:0}}
+@media(prefers-reduced-motion:reduce){.grif-model-layer,.grif-model-layer img,.grif-model-card .products-page-carousel-track,.product-gallery-main .grif-detail-model,.grif-model-toggle{transition:none!important}}
+@media(max-width:680px){.grif-model-toggle{min-height:42px;bottom:10px;right:10px}.grif-detail-toggle{min-height:44px}.grif-model-layer img{width:95%;height:95%}}
+
+/* Aprimoramentos de comportamento sem mudar a direção de arte V10 */
+.grif-model-layer[hidden]{display:none!important}
+.grif-model-toggle[hidden]{display:none!important}
+.grif-model-toggle{border-radius:999px;backdrop-filter:blur(5px)}
+.product-preview-toggle{border-radius:999px!important}
+.grif-model-card .products-page-card-media{isolation:isolate}
+.grif-model-card .grif-model-layer{border-radius:inherit}
+.grif-model-card:focus-within .grif-model-layer{transition-duration:.25s}
+@media(hover:none){.grif-model-toggle{min-height:44px}}
+
+
+/* Catálogo revisto: todos os controles e slides pertencem apenas ao cartão correspondente. */
+.catalog-page,.catalog-page .catalog-product-card,.catalog-product-media,.catalog-product-carousel,
+.products-page-grid .products-page-card,.products-page-card-carousel{min-width:0;max-width:100%;box-sizing:border-box}
+.catalog-page .catalog-product-card,.products-page-grid .products-page-card{overflow:hidden}
+.catalog-page .catalog-product-media,.catalog-product-carousel,.products-page-card-carousel{isolation:isolate;overflow:hidden;contain:paint}
+.catalog-home-track,.catalog-home-slide,.catalog-product-media-link{max-width:100%;overflow:hidden}
+.catalog-home-slide img{max-width:100%;}
+.catalog-home-arrow,.catalog-home-dots,.product-preview-toggle{z-index:8}
+.catalog-volume{inset:0;overflow:hidden;contain:paint;}
+.catalog-volume img{max-width:100%;max-height:100%;}
+.catalog-product-card .catalog-home-arrow,.catalog-product-card .catalog-home-dots{transition:opacity .3s ease}
+/* O modelo ilustra a peça sem ocupar menos de metade do cartão nem invadir seu quadro. */
+.ui-clean #produtos .catalog-volume img{width:92%!important;height:92%!important;object-fit:contain!important;}
+.product-gallery-main .grif-detail-model,.grif-model-layer{overflow:hidden;contain:paint;}
+@media(max-width:680px){
+ .catalog-page{gap:10px;padding:10px;}
+ .catalog-page .catalog-product-copy{min-width:0;overflow-wrap:anywhere;}
+ .catalog-home-dots{bottom:8px;max-width:calc(100% - 18px);overflow:hidden;}
+ .catalog-home-arrow{width:31px;height:31px;}
+ .ui-clean #produtos .catalog-volume img{width:96%!important;height:96%!important;}
+}

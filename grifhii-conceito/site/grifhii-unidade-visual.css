@@ -1,0 +1,53 @@
+/* GRIFHII V10 | identidade visual unificada a partir da home real. */
+:root{--grifhii-bg:#f2f1ed;--grifhii-photo-bg:#ebe9e3;--grifhii-ink:#26221c;--grifhii-gold:#967b48;--grifhii-border:rgba(38,34,28,.15)}
+body.ui-clean,body.products-page,body.product-page{background:var(--grifhii-bg)!important;color:var(--grifhii-ink);font-family:'Manrope',Arial,sans-serif}
+body.ui-clean :is(.products-page-main,.products-catalog-hero,.products-catalog,.products-results,.products-category-rail,.products-page-grid,.products-page-card,.products-page-card-copy,.product-detail,.product-detail-shell,.product-detail-copy){background:transparent!important}
+body.ui-clean :is(.products-page-main,.products-catalog-hero,.products-catalog,.product-detail){background-color:var(--grifhii-bg)!important}
+/* Mesma escala, contraste e hierarquia tipográfica das seções da home. */
+body.ui-clean .products-catalog-hero{min-height:0!important;padding-block:clamp(54px,7vw,90px) clamp(35px,5vw,58px)!important}
+body.ui-clean .products-catalog-hero h1{font-family:'Manrope',Arial,sans-serif!important;font-size:clamp(39px,6.3vw,84px)!important;letter-spacing:-.065em!important;line-height:1.03!important;font-weight:700!important;max-width:1100px}
+body.ui-clean .products-catalog-hero p{font:400 clamp(12px,1.3vw,14px)/1.8 'Manrope',sans-serif;color:#6b665e}
+body.ui-clean .products-catalog{padding-bottom:clamp(60px,8vw,110px)!important}
+body.ui-clean .products-results-title,body.ui-clean .products-category-label{font:700 9px/1.5 'Manrope',sans-serif;letter-spacing:.16em;color:#70685e}
+body.ui-clean .products-filters button{font:600 11px/1.35 'Manrope',sans-serif!important;letter-spacing:.015em!important;text-transform:none!important;border-radius:999px!important;min-height:43px;justify-content:space-between;padding:8px 16px!important;background:transparent!important;color:var(--grifhii-ink)!important;border:1px solid var(--grifhii-border)!important}
+body.ui-clean .products-filters button.is-active{background:var(--grifhii-ink)!important;border-color:var(--grifhii-ink)!important;color:var(--grifhii-bg)!important}
+body.ui-clean .products-filters button:not(.is-active):hover{background:#e7e2d9!important}
+body.ui-clean #productsFilters button[hidden]{display:none!important}
+body.ui-clean .products-category-rail{min-height:0!important;padding-bottom:20px}
+body.ui-clean .products-category-note{position:static!important;margin-top:35px;padding-top:22px}
+/* Cartões: sem placa branca ou fundos desalinhados com a home. */
+body.ui-clean .products-page-card,body.ui-clean .products-page-card-copy,body.ui-clean .catalog-product-card,body.ui-clean .catalog-product-copy{background:transparent!important;box-shadow:none!important}
+body.ui-clean .products-page-card-carousel{background:var(--grifhii-bg)!important;border:0!important;border-radius:2px!important;box-shadow:none!important;overflow:hidden}
+body.ui-clean .products-page-card-media,body.ui-clean .products-page-carousel-track,body.ui-clean .products-page-carousel-slide,body.ui-clean .products-page-card-carousel .grif-model-layer{background:var(--grifhii-bg)!important}
+body.ui-clean .products-page-carousel-slide img{object-fit:contain!important}
+body.ui-clean .grif-model-layer img{mix-blend-mode:multiply;object-fit:contain!important;width:94%!important;height:94%!important;max-width:100%!important;max-height:100%!important}
+body.ui-clean .products-page-card-copy h2{font:700 clamp(13px,1.3vw,16px)/1.45 'Manrope',sans-serif!important;letter-spacing:-.025em!important}
+body.ui-clean .products-page-price{margin-top:9px;font-size:12px}
+body.ui-clean .products-page-price strong{font-weight:600!important}
+body.ui-clean .products-page-card-media>span{background:rgba(242,241,237,.84)!important;color:#776b59!important}
+body.ui-clean .products-page-view{border-radius:999px!important;min-height:43px!important;text-transform:none!important;letter-spacing:.015em!important;font:600 11px/1.4 'Manrope',sans-serif!important}
+/* Na home, remova as placas claras individuais das apresentações 3D. */
+body.ui-clean #produtos :is(.catalog-product-media,.catalog-product-carousel,.catalog-volume,.catalog-home-track,.catalog-home-slide){background:var(--grifhii-bg)!important}
+body.ui-clean #produtos .catalog-volume img{mix-blend-mode:multiply;object-fit:contain!important}
+body.ui-clean #produtos .catalog-product-copy{background:transparent!important}
+/* Página da peça: compartilha cores, tipografia, bordas e botões da home. */
+body.product-page .product-detail,body.product-page .product-gallery,body.product-page .product-detail-copy{background:var(--grifhii-bg)!important}
+body.product-page .product-gallery-main,body.product-page .grif-detail-model,body.product-page .product-thumbs button,body.product-page .product-related-card>a>img,body.product-page .grif-related-model{background:var(--grifhii-bg)!important}
+body.product-page .grif-detail-model img,body.product-page .thumb-model,body.product-page .grif-related-model img{mix-blend-mode:multiply;object-fit:contain!important}
+body.product-page .product-detail-copy h1{font:700 clamp(27px,3.1vw,43px)/1.14 'Manrope',sans-serif!important;letter-spacing:-.045em!important}
+body.product-page :is(.product-option-head span,.product-stock-status,.product-breadcrumb,.product-back,.grif-choice-intro){font-family:'Manrope',sans-serif}
+body.product-page .product-variants button{border-radius:999px}
+body.product-page .product-variants button.is-selected{background:var(--grifhii-ink)!important;color:var(--grifhii-bg)!important}
+body.product-page .product-gallery-main{border:1px solid var(--grifhii-border)!important;box-shadow:none!important}
+body.product-page .product-cep-row input{background:transparent!important}
+/* Menu de marcas expansível no mesmo menu de todas as páginas. */
+.site-menu-brands{border-bottom:1px solid var(--grifhii-border);color:var(--grifhii-ink)}
+.site-menu-brands>summary{display:flex;align-items:center;justify-content:space-between;min-height:62px;font:700 20px/1.25 'Manrope',sans-serif;letter-spacing:-.03em;cursor:pointer;list-style:none}
+.site-menu-brands>summary::-webkit-details-marker{display:none}
+.site-menu-brands>summary::after{content:'+';font-size:23px;font-weight:400}
+.site-menu-brands[open]>summary::after{content:'−'}
+.site-menu-brands-list{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;max-height:min(48vh,390px);overflow:auto;padding:4px 0 17px}
+.site-menu-brands-list a{display:block;min-height:35px;padding:8px 0!important;border:0!important;font:600 10px/1.5 'Manrope',sans-serif!important;letter-spacing:.01em!important;text-transform:none!important}
+@media(max-width:880px){body.ui-clean .products-catalog-layout{grid-template-columns:1fr!important}body.ui-clean .products-category-rail{position:static!important;border-right:0!important;border-bottom:1px solid var(--grifhii-border)!important;padding:0 0 20px!important}body.ui-clean .products-filters{flex-direction:row!important;gap:7px!important}body.ui-clean .products-filters button{width:auto!important}body.ui-clean .products-category-note{display:none}}
+@media(max-width:640px){body.ui-clean .products-catalog-hero{padding:50px 18px 30px!important}body.ui-clean .products-catalog{padding-left:18px!important;padding-right:18px!important}body.ui-clean .products-page-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:24px 12px!important}body.ui-clean .products-page-card-carousel{aspect-ratio:4/5!important}body.ui-clean .products-page-card-copy{display:block!important}body.ui-clean .products-page-view{margin-top:14px!important;width:auto!important}body.ui-clean .products-category-rail{min-height:0!important}body.ui-clean .products-catalog-hero h1{font-size:clamp(36px,9vw,52px)!important}body.product-page .product-gallery-main{height:285px!important;max-height:285px!important}}
+@media(prefers-reduced-motion:reduce){body.ui-clean .products-page-card *{transition:none!important}}

@@ -1,0 +1,111 @@
+/* GRIFHII — abertura editorial e sequência de marcas com rolagem nativa. */
+.vj-hero {
+  --vj-top: calc(var(--header-h, 88px) + var(--promo-h, 34px));
+  --vj-paper: #e9e2d6;
+  --vj-ink: #26221c;
+  position: relative; isolation: isolate; width: 100%;
+  margin-top: var(--vj-top); color: var(--vj-ink); background: var(--vj-paper);
+  font-family: 'Manrope',sans-serif; scroll-margin-top: var(--vj-top);
+}
+.vj-hero,.vj-hero * { box-sizing: border-box; }
+.vj-viewport { position: relative; width: 100%; outline-offset: -3px; }
+.vj-viewport:focus-visible { outline: 2px solid #9c814e; }
+.vj-track{display:flex;flex-direction:column;}
+.vj-scene { position: relative; flex: 0 0 auto; width: 100%; min-width: 0; overflow: hidden; isolation: isolate; scroll-margin-top: var(--vj-top); }
+
+/* Desktop conserva a imagem completa; no celular a palavra é uma camada independente. */
+.vj-opening { display: block; width: 100%; height: auto; min-height: 0; background: #f2f1ed; }
+.vj-campaign__visual { display: block; position: relative; isolation: isolate; width: 100%; overflow: hidden; background: #f2f1ed; }
+.vj-campaign__picture { display: block; width: 100%; }
+.vj-opening__image { display: block; width: 100%; height: auto; max-width: none; object-fit: contain; object-position: center; }
+.vj-campaign__word { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.vj-campaign__actions { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 10px 6.5% 12px; background: #f2f1ed; color: #26221c; }
+.vj-campaign__actions a { display: inline-flex; align-items: center; justify-content: space-between; gap: 15px; min-height: 44px; font: 600 10px/1.4 'Manrope',sans-serif; text-decoration: none; }
+.vj-campaign__actions span { font-size: 19px; font-weight: 400; }
+.vj-campaign__actions a:first-child { text-decoration: underline; text-underline-offset: 6px; }
+.vj-campaign__visual:focus-visible,.vj-campaign__actions a:focus-visible { outline: 2px solid #78664c; outline-offset: -4px; }
+
+/* Produto central sobre o nome da marca, com espaço próprio para o texto. */
+.vj-brand { height: clamp(580px,calc(100svh - var(--vj-top)),880px); background: var(--vj-bg); color: var(--vj-ink); }
+.vj-scene__meta { position: absolute; z-index: 5; top: 26px; left: 6.5%; right: 6.5%; display: flex; justify-content: space-between; gap: 14px; font: 600 9px/1.5 'Manrope',sans-serif; letter-spacing: .16em; opacity: .7; }
+.vj-brand__watermark { position: absolute; z-index: 1; left: 50%; top: 41%; width: 100%; transform: translate3d(-50%,calc(-50% + var(--vj-type-shift,0px)),0); text-align: center; white-space: nowrap; color: inherit; font: 600 clamp(100px,17vw,300px)/.8 'Bodoni Moda','Cormorant Garamond',serif; letter-spacing: -.075em; opacity: .15; pointer-events: none; }
+.vj-brand__watermark span { display: block; margin-top: .18em; font-size: .62em; letter-spacing: .01em; }
+.vj-brand--lacoste .vj-brand__watermark { font-family: 'Manrope',sans-serif; font-weight: 700; font-size: clamp(99px,18vw,310px); letter-spacing: -.095em; }
+.vj-brand__visual { position: absolute; z-index: 3; top: 44%; left: 50%; width: min(48vw,720px); height: calc(100% - 120px); max-height: 700px; min-width: 0; min-height: 0; transform: translate3d(-50%,calc(-50% + var(--vj-parallax,0px)),0); display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.vj-brand__garment { position: relative; z-index: 2; display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: contain; filter: drop-shadow(0 18px 18px rgba(0,0,0,.11)); animation: vj-idle 7s ease-in-out infinite alternate; }
+.vj-brand__halo { position: absolute; bottom: 6%; left: 24%; width: 52%; height: 9%; border-radius: 50%; background: radial-gradient(ellipse,rgba(0,0,0,.18),transparent 72%); opacity: .65; }
+@keyframes vj-idle { from { transform: translate3d(0,3px,0) rotate(-.4deg); } to { transform: translate3d(0,-4px,0) rotate(.4deg); } }
+.vj-brand__info { position: absolute; z-index: 5; left: 6.5%; bottom: 8%; width: min(27%,360px); }
+.vj-brand__kicker { font: 600 9px/1.5 'Manrope',sans-serif; letter-spacing: .18em; opacity: .75; }
+.vj-brand__info h2 { margin: 12px 0; color: inherit; font: 500 clamp(38px,4vw,66px)/1 'Bodoni Moda','Cormorant Garamond',serif; letter-spacing: -.055em; }
+.vj-brand__info p { margin: 0 0 19px; max-width: 290px; font: 400 12px/1.7 'Manrope',sans-serif; opacity: .8; }
+.vj-brand__link { display: inline-flex; min-height: 44px; align-items: center; justify-content: space-between; gap: 22px; padding: 0 20px; border-radius: 99px; border: 1px solid var(--vj-ink); color: var(--vj-bg); background: var(--vj-ink); font: 600 10px/1.4 'Manrope',sans-serif; text-decoration: none; transition: transform .25s ease; }
+.vj-brand__link span { font-size: 18px; font-weight: 400; }
+.vj-brand__link:hover { transform: translate3d(0,-2px,0); }
+.vj-brand__link:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+.vj-brand__variants { position: absolute; z-index: 5; right: 7%; bottom: 8%; display: flex; align-items: center; gap: 30px; font: 500 10px/1.4 'Manrope',sans-serif; }
+.vj-brand__variants > div { display: flex; align-items: center; gap: 10px; min-height: 32px; }
+.vj-brand__variants small { font: 600 8px/1.5 'Manrope',sans-serif; letter-spacing: .16em; opacity: .65; }
+.vj-brand__variants strong { display: grid; place-items: center; min-width: 32px; height: 32px; border: 1px solid currentColor; border-radius: 50%; font-size: 11px; }
+.vj-color-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--dot); box-shadow: 0 0 0 3px var(--vj-bg),0 0 0 4px currentColor; }
+
+/* Campanha final inteira na proporção original, de ponta a ponta. */
+.vj-banner--closing { display: block; background: #ded7ca; }
+.vj-banner__image { display: block; width: 100%; height: auto; aspect-ratio: 1836/900; object-fit: contain; margin: 0; padding: 0; border: 0; border-radius: 0; }
+.vj-banner__caption { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 25px 6.5% 30px; }
+.vj-banner__caption h2 { margin: 0; color: #26221c; font: 500 clamp(30px,3.8vw,58px)/1.1 'Bodoni Moda','Cormorant Garamond',serif; letter-spacing: -.045em; }
+.vj-banner__caption a { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: space-between; gap: 24px; min-height: 44px; border-bottom: 1px solid #78664c; font: 600 11px/1.4 'Manrope',sans-serif; }
+.vj-banner__caption a span { font-size: 21px; font-weight: 400; }
+
+.vj-nav { position: fixed; z-index: 25; top: 50%; right: 18px; transform: translateY(-50%); display: flex; align-items: center; flex-direction: column; gap: 5px; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease,visibility .2s; }
+.vj-hero.is-in-view .vj-nav { opacity: 1; visibility: visible; pointer-events: auto; }
+.vj-nav__arrow { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(38,34,28,.16); border-radius: 50%; background: rgba(248,245,238,.85); color: #26221c; font: 400 21px/1 'Manrope',sans-serif; cursor: pointer; }
+.vj-nav__arrow:disabled { opacity: .35; cursor: default; }
+.vj-nav__steps { display: flex; flex-direction: column; }
+.vj-nav__steps button { display: grid; place-items: center; width: 44px; height: 32px; padding: 0; border: 0; background: none; cursor: pointer; }
+.vj-nav__steps span { width: 2px; height: 14px; background: #7a6b54; opacity: .4; transition: transform .25s ease,opacity .25s ease; }
+.vj-nav__steps .is-current span { transform: scaleY(1.7); opacity: 1; }
+.vj-nav button:focus-visible { outline: 2px solid #78664c; outline-offset: 3px; }
+
+@media (max-width: 1000px) {
+  .vj-brand__info { width: 30%; left: 5%; }
+  .vj-brand__visual { width: 56%; }
+  .vj-brand__variants { right: 5%; gap: 20px; }
+  .vj-nav { display: none; }
+}
+@media (max-width: 620px) {
+  .vj-hero { --vj-top: calc(var(--header-h,72px) + var(--promo-h,31px)); }
+  .vj-campaign__visual { height: clamp(250px,76vw,340px); }
+  .vj-campaign__picture { height: 100%; }
+  .vj-opening__image { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+  .vj-campaign__word { z-index: 2; top: 44.5%; left: 44%; width: max-content; max-width: none; height: auto; margin: 0; padding: 0; overflow: visible; clip: auto; transform: translate(-50%,-50%); color: #fff; mix-blend-mode: difference; font: 700 clamp(50px,17.5vw,78px)/1 Arial,Helvetica,sans-serif; letter-spacing: -.035em; pointer-events: none; }
+  .vj-campaign__actions { gap: 16px; padding: 6px 22px 9px; }
+  .vj-campaign__actions a { gap: 10px; font-size: 9px; }
+
+  .vj-brand { display: grid; height: auto; min-height: 0; grid-template-columns: minmax(0,1fr); grid-template-rows: auto auto auto auto; padding: 18px 24px 29px; }
+  .vj-scene__meta { position: relative; top: auto; left: auto; right: auto; grid-row: 1; font-size: 7px; letter-spacing: .08em; }
+  .vj-brand__watermark { top: clamp(155px,25svh,230px); width: 100%; font-size: clamp(72px,19vw,118px); opacity: .17; }
+  .vj-brand--lacoste .vj-brand__watermark { font-size: clamp(65px,18vw,112px); }
+  .vj-brand__visual { position: relative; grid-row: 2; top: auto; left: auto; width: 100%; height: clamp(260px,46svh,390px); max-height: none; transform: translate3d(0,var(--vj-parallax,0px),0); margin: 5px 0 2px; }
+  .vj-brand__info { position: relative; grid-row: 3; left: auto; bottom: auto; width: 100%; max-width: none; text-align: center; }
+  .vj-brand__kicker { font-size: 7px; letter-spacing: .17em; }
+  .vj-brand__info h2 { margin: 8px 0 10px; font-size: clamp(36px,10vw,52px); }
+  .vj-brand__info p { max-width: 275px; margin: 0 auto 15px; font-size: 10px; line-height: 1.6; }
+  .vj-brand__link { min-height: 44px; font-size: 9px; }
+  .vj-brand__variants { position: relative; grid-row: 4; left: auto; right: auto; bottom: auto; justify-content: center; gap: 26px; margin-top: 20px; font-size: 9px; }
+  .vj-brand__variants small { font-size: 7px; }
+  .vj-brand__variants strong { min-width: 28px; height: 28px; font-size: 10px; }
+  .vj-banner__caption { align-items: center; padding: 18px 24px 23px; gap: 16px; }
+  .vj-banner__caption h2 { max-width: 180px; font-size: clamp(25px,6.7vw,38px); }
+  .vj-banner__caption a { font-size: 9px; gap: 12px; }
+}
+@media (max-width: 360px) {
+  .vj-brand { padding-inline: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  .vj-nav,.vj-nav__steps span,.vj-brand__link { transition: none; }
+  .vj-brand__garment { animation: none; }
+  .vj-brand__visual { --vj-parallax: 0px !important; }
+  .vj-brand__watermark { --vj-type-shift: 0px !important; }
+}

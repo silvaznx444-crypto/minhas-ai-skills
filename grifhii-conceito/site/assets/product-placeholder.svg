@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#171717"/>
+      <stop offset=".55" stop-color="#252525"/>
+      <stop offset="1" stop-color="#0b0b0b"/>
+    </linearGradient>
+    <radialGradient id="r" cx="65%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#b59a62" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#b59a62" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#g)"/>
+  <rect width="1200" height="900" fill="url(#r)"/>
+  <g fill="none" stroke="#b59a62" stroke-opacity=".22">
+    <rect x="55" y="55" width="1090" height="790"/>
+    <rect x="78" y="78" width="1044" height="744"/>
+  </g>
+  <text x="600" y="425" text-anchor="middle" fill="#eee" font-family="Arial, sans-serif" font-size="28" letter-spacing="8">IMAGEM REAL DA PEÇA</text>
+  <text x="600" y="470" text-anchor="middle" fill="#b59a62" font-family="Arial, sans-serif" font-size="12" letter-spacing="5">AGUARDANDO CATÁLOGO GRIFHII</text>
+</svg>

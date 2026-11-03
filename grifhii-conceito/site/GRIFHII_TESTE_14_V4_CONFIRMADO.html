@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GRIFHII • Teste 14 V4 • verificador isolado</title>
+<style>
+:root{color:#24211c;background:#f2f1ed;font-family:Manrope,Arial,sans-serif}*{box-sizing:border-box}body{margin:0;padding:28px 18px}
+main{width:min(840px,100%);margin:auto}h1{font-size:clamp(26px,5vw,42px);letter-spacing:-.055em;line-height:1.12;margin:18px 0 10px}p{line-height:1.6;color:#58534c}
+.version{border:1px solid #b6a37d;display:inline-block;padding:8px 13px;color:#655333;border-radius:30px;font-size:12px;font-weight:700;letter-spacing:.04em}
+section{border-top:1px solid #d5d1c9;padding:22px 0}label{display:block;margin-bottom:8px;font-weight:650}input{background:#fff;width:100%;max-width:560px;border:1px solid #bdb8b0;border-radius:7px;padding:12px;font-size:15px}
+button{background:#28251f;color:#fff;border:1px solid #28251f;border-radius:26px;padding:12px 20px;margin:15px 9px 0 0;font-weight:650;cursor:pointer}
+button.alt{color:#28251f;background:transparent}button:disabled{opacity:.55;cursor:not-allowed}
+pre{padding:17px;background:#e9e6df;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5;font-size:13px;border-radius:7px;min-height:115px}
+.info{font-size:12px;color:#68635a}#images{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:20px}figure{margin:0}figure img{max-width:100%;width:100%;aspect-ratio:1;object-fit:contain}figcaption{font-size:12px;margin-top:7px;color:#70675d}
+code{background:#e4e0d7;padding:2px 4px} .warn{color:#7d3e2a}
+</style></head>
+<body><main>
+<div class="version">VERSÃO 4 CONFIRMADA • NOVO SERVIDOR • SEM CACHE</div>
+<h1>GRIFHII — Teste 14</h1>
+<p>Confere o campo <code>grifhii.imagem_3d</code> na Storefront API. Este verificador é independente do restante do site. Não altera produtos, pedidos ou pagamentos.</p>
+<section><label for="token">Token PÚBLICO da Storefront API</label><input id="token" type="password" autocomplete="off" placeholder="Cole seu token público"><div>
+<button id="consultar">Consultar imagem na Shopify</button><button class="alt" id="copiar" disabled>Copiar diagnóstico</button></div>
+<p class="info" id="origem"></p></section>
+<section><strong>Diagnóstico</strong><pre id="diagnostico">Aguardando o teste.</pre><div id="images"></div></section>
+<section><details><summary>Ver a consulta GraphQL que será enviada</summary><pre id="graphql"></pre></details><p class="info">O token nunca é incluído no diagnóstico. Para publicar a loja, ainda é necessário validar frete e checkout.</p></section>
+</main>
+<script>
+(()=>{'use strict';
+  const el=id=>document.getElementById(id);
+  const BUILD='GRIFHII-TESTE14-V4-SERVIDOR-ISOLADO-20261102';
+  const API='https://grifhiiconceito.myshopify.com/api/2026-10/graphql.json';
+  const HANDLE='teste-grifhii-camiseta-nova';
+  const QUERY=String.raw`query GrifhiiImagemV4($handle: String!) @inContext(country: BR) {
+  product(handle: $handle) {
+    handle
+    title
+    featuredImage { url }
+    variants(first: 10) {
+      nodes {
+        title
+        image { url }
+        metafield(namespace: "grifhii", key: "imagem_3d") {
+          type
+          reference {
+            __typename
+            ... on MediaImage {
+              image { url }
+            }
+          }
+        }
+      }
+    }
+  }
+}`;
+  let diagnostic='';
+  el('origem').textContent='Arquivo ativo: '+location.pathname+' • Origem: '+location.origin+' • Build: '+BUILD;
+  el('graphql').textContent=QUERY;
+  function fingerprint(t){let h=2166136261;for(let i=0;i<t.length;i++){h=Math.imul(h ^ t.charCodeAt(i),16777619)}return (h>>>0).toString(16).padStart(8,'0')}
+  function syntaxCheck(t){let level=0,quoted=false,escaped=false;
+    for(const c of t){if(quoted){if(escaped)escaped=false;else if(c==='\\')escaped=true;else if(c==='"')quoted=false;continue}
+      if(c==='"'){quoted=true;continue}if(c==='{')level++;if(c==='}'){level--;if(level<0)throw Error('Chave GraphQL excedente')}}
+    if(level!==0||quoted)throw Error('Chaves/aspas GraphQL desbalanceadas');
+  }
+  syntaxCheck(QUERY);
+  const fp=fingerprint(QUERY);
+  const header=()=>`${BUILD}\nArquivo aberto: ${location.pathname}\nConsulta: ${QUERY.length} caracteres / hash ${fp}\n`;
+  async function consultar(){
+    const token=el('token').value.trim();if(!token){el('diagnostico').textContent='Cole o token público.';return}
+    if(!['localhost','127.0.0.1'].includes(location.hostname)){
+      el('diagnostico').textContent='Abra usando INICIAR_GRIFHII_LOCAL.bat, não diretamente no WinRAR.';return}
+    el('consultar').disabled=true;el('copiar').disabled=true;el('images').replaceChildren();
+    try{
+      const response=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json','X-Shopify-Storefront-Access-Token':token},body:JSON.stringify({query:QUERY,variables:{handle:HANDLE}})});
+      const payload=await response.json();
+      if(payload.errors?.length)throw Error(`Shopify HTTP ${response.status}: `+payload.errors.map(e=>e.message).join(' | ').slice(0,700));
+      if(!response.ok)throw Error('HTTP '+response.status);
+      const product=payload.data?.product;
+      if(!product)throw Error('Produto não visível na Storefront API');
+      const variants=product.variants?.nodes||[];
+      const variant=variants.find(v=>String(v.title).toLowerCase().includes('preto') && /(^|\s|\/)g($|\s|\/)/i.test(v.title))||variants[0];
+      if(!variant)throw Error('Variante não encontrada');
+      const photo=variant.image?.url||product.featuredImage?.url||'';
+      const field=variant.metafield||null;
+      const model=field?.reference?.image?.url||'';
+      const repeated=Boolean(model&&photo&&new URL(model).pathname===new URL(photo).pathname);
+      const state=!field?'METACAMPO NÃO ENCONTRADO':!model?'METACAMPO SEM IMAGEM':repeated?'ARQUIVO REPETIDO (FOTO REAL = CAMPO 3D)':'IMAGEM DO METACAMPO ENCONTRADA';
+      diagnostic=header()+`HTTP: ${response.status}\nProduto: ${product.title}\nVariante: ${variant.title}\nMetacampo: ${field?'ENCONTRADO':'AUSENTE'}\nImagem do metacampo: ${model?'SIM':'NÃO'}\nImagem diferente da fotografia: ${model&&!repeated?'SIM':'NÃO'}\nRESULTADO: ${state}\nToken e identificadores: OMITIDOS\nPedidos/pagamentos: NENHUM`;
+      el('diagnostico').textContent=diagnostic;
+      for(const [name,url] of [['Fotografia real',photo],['Metacampo 3D',model]]){
+        if(!/^https:\/\//.test(url))continue;
+        const fig=document.createElement('figure'),img=document.createElement('img'),caption=document.createElement('figcaption');
+        img.src=url;img.alt=name;caption.textContent=name;fig.append(img,caption);el('images').append(fig);
+      }
+    }catch(e){diagnostic=header()+'RESULTADO: FALHA\n'+String(e?.message||e)+'\nToken: OMITIDO';el('diagnostico').textContent=diagnostic;}
+    finally{el('consultar').disabled=false;el('copiar').disabled=false}
+  }
+  el('consultar').addEventListener('click',consultar);
+  el('copiar').addEventListener('click',async()=>{if(!diagnostic)return;try{await navigator.clipboard.writeText(diagnostic)}catch(e){const t=document.createElement('textarea');t.value=diagnostic;document.body.append(t);t.select();document.execCommand('copy');t.remove();}el('copiar').textContent='Copiado!'});
+})();
+</script></body></html>

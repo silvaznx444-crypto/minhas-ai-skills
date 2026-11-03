@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GRIFHII — Configurar teste visual Etapa 16</title>
+<style>
+:root{color-scheme:light;font-family:Arial,Helvetica,sans-serif;color:#1c1b19;background:#f7f4ee}*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px}
+main{width:min(100%,550px);background:#fffdfa;border:1px solid #ddd6c9;padding:clamp(25px,6vw,54px)}
+small{display:block;font-size:11px;letter-spacing:.24em;color:#786d5d;margin-bottom:30px}h1{font-size:clamp(25px,4vw,39px);font-weight:500;line-height:1.12;margin:0 0 16px;letter-spacing:-.045em}p{font-size:14px;line-height:1.7;color:#5b554e;margin:0 0 18px}label{font-size:12px;font-weight:bold;display:block;margin-bottom:10px}
+input{width:100%;padding:14px 15px;border:1px solid #c9c1b6;border-radius:0;background:#fff;color:#1a1916;font:14px Arial}
+button{display:block;width:100%;margin-top:14px;padding:15px 20px;border:1px solid #23211f;background:#23211f;color:#fff;letter-spacing:.05em;font-size:12px;cursor:pointer}
+a{display:inline-block;margin-top:22px;color:#4b4640;font-size:13px;text-underline-offset:4px}#state{margin-top:16px;min-height:20px;color:#4c664c;font-size:12px}strong{color:#302b24}
+</style></head><body><main><small>GRIFHII CONCEITO · ETAPA 15</small>
+<h1>Teste da vitrine com imagens 3D.</h1>
+<p>O site usa a <strong>Storefront API pública</strong> da Shopify para consultar produtos e o campo <code>grifhii.imagem_3d</code>. A configuração é temporária e usada apenas nesta aba de testes local.</p>
+<form id="setup"><label for="token">Token PÚBLICO da Storefront API</label><input id="token" type="password" autocomplete="off" spellcheck="false" placeholder="Cole o mesmo token usado no Teste 14" required>
+<button type="submit">Salvar nesta aba e abrir a vitrine</button></form><p id="state" role="status"></p>
+<p><strong>Segurança:</strong> não cole token da Admin API, senha ou chave privada. O token público é guardado somente em <code>sessionStorage</code> no navegador, nunca no ZIP.</p>
+<a href="produtos.html">Abrir vitrine sem token (3D novos podem não carregar)</a>
+<div><a href="GRIFHII_TESTE_14_V4_CONFIRMADO.html">Ver diagnóstico anterior do metacampo</a></div>
+</main><script>
+(function(){
+ var saved='';
+ try{saved=sessionStorage.getItem('grifhii-test8-public-token')||'';}catch(e){}
+ document.getElementById('state').textContent=saved?'Token público já configurado nesta aba. Pode abrir a vitrine.':'';
+ document.getElementById('setup').addEventListener('submit',function(event){
+  event.preventDefault();
+  if(!['localhost','127.0.0.1'].includes(location.hostname)){
+    document.getElementById('state').textContent='Por segurança, abra a loja usando INICIAR_GRIFHII_LOCAL.bat.';return;
+  }
+  var value=document.getElementById('token').value.trim();
+  if(!value){document.getElementById('state').textContent='Cole o token público.';return;}
+  try{sessionStorage.setItem('grifhii-test8-public-token',value);}
+  catch(e){document.getElementById('state').textContent='Navegador bloqueou o armazenamento temporário.';return;}
+  location.assign('produtos.html');
+ });
+})();
+</script></body></html>

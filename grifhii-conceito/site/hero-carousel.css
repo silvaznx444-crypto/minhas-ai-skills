@@ -1,0 +1,41 @@
+/* Campanha principal: o fundo permanece fixo durante toda a troca. */
+.campaign-carousel{--campaign-dir:1;--campaign-duration:900ms;--campaign-ease:cubic-bezier(.51,0,0,.98);background:#f2f1ed;color:#26221c}
+.campaign-stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;isolation:isolate;background:#f2f1ed;touch-action:pan-y;outline-offset:-3px}
+.campaign-slide{position:absolute;inset:0;display:block;color:inherit;background:#f2f1ed;opacity:0;visibility:hidden;pointer-events:none;transform:translate3d(calc(var(--campaign-dir)*10%),0,0);transition:transform var(--campaign-duration) var(--campaign-ease),opacity var(--campaign-duration) var(--campaign-ease),visibility 0s var(--campaign-duration)}
+.campaign-slide.is-active{opacity:1;visibility:visible;pointer-events:auto;transform:translate3d(0,0,0);transition-delay:0s}
+.campaign-slide.is-exiting{visibility:visible;opacity:0;pointer-events:none;transform:translate3d(calc(var(--campaign-dir)*-10%),0,0)}
+.campaign-model{position:absolute;z-index:1;top:50%;left:50%;display:block;height:96%;width:auto;max-width:85%;object-fit:contain;transform:translate3d(calc(-50% + var(--campaign-dir)*24px),-50%,0);transition:transform var(--campaign-duration) var(--campaign-ease)}
+.campaign-word{position:absolute;z-index:2;top:44.5%;left:50%;width:max-content;max-width:none;display:block;margin:0;white-space:nowrap;text-align:center;pointer-events:none;color:#fff;mix-blend-mode:difference;font:700 clamp(80px,14vw,240px)/.9 Arial,Helvetica,sans-serif;letter-spacing:-.04em;transform:translate3d(calc(-50% + var(--campaign-dir)*42px),-50%,0);transition:transform var(--campaign-duration) var(--campaign-ease)}
+.campaign-slide--stacked .campaign-word{font-size:clamp(60px,8.6vw,148px);line-height:.89;letter-spacing:-.045em}
+.campaign-word>span{display:block}
+.campaign-slide.is-active .campaign-model,.campaign-slide.is-active .campaign-word{transform:translate3d(-50%,-50%,0)}
+.campaign-slide.is-exiting .campaign-model{transform:translate3d(calc(-50% + var(--campaign-dir)*-16px),-50%,0)}
+.campaign-slide.is-exiting .campaign-word{transform:translate3d(calc(-50% + var(--campaign-dir)*-28px),-50%,0)}
+.campaign-carousel.is-transitioning .campaign-slide,.campaign-carousel.is-transitioning .campaign-model,.campaign-carousel.is-transitioning .campaign-word{will-change:transform,opacity}
+.campaign-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:6px 6.5% 12px;background:#f2f1ed}
+.campaign-toolbar .vj-campaign__actions{padding:0;gap:28px}
+.campaign-controls{display:flex;align-items:center;gap:2px;flex:0 0 auto}
+.campaign-control{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid rgba(38,34,28,.15);border-radius:4px;background:transparent;color:#26221c;cursor:pointer}
+.campaign-control svg{display:block;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}
+.campaign-counter{min-width:54px;text-align:center;font:500 10px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.campaign-control .campaign-play-icon{display:none}
+.campaign-carousel.is-paused .campaign-pause-icon{display:none}
+.campaign-carousel.is-paused .campaign-play-icon{display:block}
+.campaign-control:disabled{opacity:.4;cursor:default}
+.campaign-control:hover:not(:disabled){background:rgba(38,34,28,.045)}
+.campaign-control:focus-visible,.campaign-stage:focus-visible,.campaign-slide:focus-visible{outline:2px solid #78664c;outline-offset:-3px}
+.ui-clean .campaign-control.campaign-side{position:absolute;z-index:8;top:50%;transform:translateY(-50%)!important;background:rgba(242,241,237,.88)!important;box-shadow:none!important}
+.campaign-side--prev{left:22px}
+.campaign-side--next{right:22px}
+@media(max-width:700px){
+ .campaign-stage{aspect-ratio:16/9;height:auto}
+ .campaign-side--prev{left:8px}
+ .campaign-side--next{right:8px}
+ .campaign-model{height:94%;max-width:90%}
+ .campaign-word{left:44%;font-size:clamp(50px,17.5vw,88px);letter-spacing:-.035em}
+ .campaign-slide--stacked .campaign-word{font-size:clamp(40px,12vw,68px);line-height:.88}
+ .campaign-toolbar{flex-wrap:wrap;justify-content:center;padding:6px 22px 12px;gap:5px}
+ .campaign-controls{order:-1}
+ .campaign-toolbar .vj-campaign__actions{width:100%;justify-content:space-between;gap:14px}
+}
+@media(prefers-reduced-motion:reduce){.campaign-slide,.campaign-word,.campaign-model{transition:none!important}}

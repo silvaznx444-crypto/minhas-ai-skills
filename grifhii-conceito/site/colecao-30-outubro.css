@@ -1,0 +1,4 @@
+/* Imagens transparentes fornecidas em 30/10. Preserva o fundo e o enquadramento da peça. */
+.ui-clean :is(.products-page-card-carousel,.catalog-product-media,.product-gallery-main):has(img[src*="assets/colecao-30-outubro/"]){background:transparent!important;}
+.ui-clean :is(.products-page-card-media,.catalog-home-slide,.product-related-card) img[src*="assets/colecao-30-outubro/"]{object-fit:contain!important;box-sizing:border-box;padding:clamp(10px,2vw,24px);background:transparent!important;}
+.ui-clean .product-gallery-main img[src*="assets/colecao-30-outubro/"]{object-fit:contain!important;background:transparent!important;}

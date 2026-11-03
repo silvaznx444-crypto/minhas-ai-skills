@@ -1,0 +1,39 @@
+GRIFHII CONCEITO V10 — ETAPA 11 (01/11/2026)
+
+O visual aprovado do site foi mantido. A unica alteracao de logica na loja
+foi a leitura opcional de quantidade do estoque da Shopify.
+
+ARQUIVOS MODIFICADOS EM RELACAO A V10 AUDITADA:
+- shopify-catalog-sync.js: consulta quantityAvailable somente quando a Shopify
+  autoriza. Se nao autoriza, volta automaticamente a consulta anterior e limita
+  cada variante a uma unidade por seguranca.
+- INICIAR_GRIFHII_LOCAL.bat: nova porta 5639 e abre o teste da Etapa 11.
+
+ARQUIVO NOVO:
+- GRIFHII_ETAPA_11_TESTE_AUTOMATICO.html: testa o carrinho sem abrir checkout.
+
+COMO EXECUTAR
+1. Extraia todo o ZIP em uma pasta NOVA, sem misturar com versoes anteriores.
+2. Execute INICIAR_GRIFHII_LOCAL.bat (ou python -m http.server 5639).
+3. Abra http://localhost:5639/GRIFHII_ETAPA_11_TESTE_AUTOMATICO.html
+4. Cole seu token PUBLICO da Storefront API, sem envia-lo pelo chat.
+5. Clique em Conectar Shopify e Executar 5 verificacoes automaticas.
+6. Copie o diagnostico final para a conversa.
+
+TESTES AUTOMATICOS
+- cria um carrinho temporario de 1 unidade
+- adiciona outra variante
+- altera a quantidade se houver estoque numerico verificado de ao menos 2
+- remove a primeira variante
+- esvazia o carrinho
+O testador preserva/restaura os itens locais que ja existiam antes do teste.
+Ele nao abre o checkout, nao cria pedido, nao altera estoque e nao paga nada.
+
+AVISO
+Se a Shopify nao liberar a leitura de quantidade, o teste de alteracao
+fica marcado NAO CONCLUIDO. Isso nao e uma aprovacao falsa.
+Os testes visuais em navegador e as chamadas reais com seu token precisam
+ser executados no seu computador. A sintaxe e as regras de fallback foram
+verificadas neste pacote.
+
+SHOPIFY: salesEnabled false; checkout bloqueado; nenhuma chave privada incluida.

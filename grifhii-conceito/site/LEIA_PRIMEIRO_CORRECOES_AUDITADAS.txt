@@ -1,0 +1,16 @@
+GRIFHII V10 — CATÁLOGO CORRIGIDO — 01/11/2026
+
+1. Feche qualquer janela antiga da GRIFHII no Chrome.
+2. Extraia o ZIP completo em uma pasta NOVA. Nao misture com arquivos antigos.
+3. Abra INICIAR_GRIFHII_LOCAL.bat. Nesta revisão a porta é 5627.
+4. Para conferir filtros da Lacoste, abra:
+   http://localhost:5627/produtos.html?marca=lacoste
+   Resultado correto: somente Todos, Camisetas, Bermudas.
+5. Os produtos devem estar sobre o MESMO fundo bege da página, sem placas brancas.
+6. Os 3D existentes são apresentados por padrão; hover mostra foto real.
+7. Produtos sem um render 3D correspondente mantêm a fotografia real. Nunca inventar imagem.
+8. Se houver divergência, verifique o rodapé deste arquivo e a versão no HTML:
+   grifhii-build = 20261101-auditada-3d-v2
+
+Nenhum produto, SKU, valor ou estoque foi alterado na Shopify.
+Checkout real continua desabilitado.

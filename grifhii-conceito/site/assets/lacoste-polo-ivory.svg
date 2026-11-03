@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" role="img" aria-label="Polo masculina marfim premium">
+<defs>
+  <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".28" stop-color="#f3f1e8"/><stop offset=".72" stop-color="#c7c5ba"/><stop offset="1" stop-color="#f3f1e8"/></linearGradient>
+  <linearGradient id="fold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".28" stop-color="#fff" stop-opacity="0"/><stop offset=".72" stop-color="#000" stop-opacity=".16"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+  
+  <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+</defs>
+<ellipse cx="450" cy="1018" rx="235" ry="42" fill="#000" opacity=".18" filter="url(#soft)"/>
+<g>
+  <path d="M305 187 C350 165 390 151 450 151 C510 151 550 165 595 187 L740 266 L675 430 L615 394 L650 940 C590 985 310 985 250 940 L285 394 L225 430 L160 266 Z" fill="url(#body)"/>
+  <path d="M160 266 L278 207 L310 345 L225 430 Z" fill="#c7c5ba" opacity=".92"/>
+  <path d="M740 266 L622 207 L590 345 L675 430 Z" fill="#c7c5ba" opacity=".92"/>
+  <path d="M350 172 L450 278 L550 172 L520 138 C495 161 473 172 450 172 C427 172 405 161 380 138 Z" fill="#ffffff" stroke="#c7c5ba" stroke-width="12"/>
+  <path d="M450 278 L450 438" stroke="#c7c5ba" stroke-width="18" stroke-linecap="round" opacity=".8"/>
+  <circle cx="450" cy="326" r="9" fill="#234d36"/><circle cx="450" cy="372" r="9" fill="#234d36"/>
+  <path d="M295 258 C350 280 376 305 404 345" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="12"/>
+  <path d="M605 258 C550 280 524 305 496 345" fill="none" stroke="#000" stroke-opacity=".10" stroke-width="12"/>
+  <path d="M290 512 C390 470 510 470 610 512 M276 700 C386 670 514 670 624 700" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="8"/>
+  <path d="M250 940 C330 908 570 908 650 940" fill="none" stroke="#c7c5ba" stroke-opacity=".65" stroke-width="14"/>
+  <path d="M250 205 C310 160 590 160 650 205 L615 940 C560 975 340 975 285 940 Z" fill="url(#fold)" opacity=".52"/>
+  <g transform="translate(550 430)"><path d="M0 20 C18 6 48 8 65 25 C43 23 31 34 17 43 C5 40 -2 32 0 20Z" fill="#234d36" opacity=".82"/><circle cx="59" cy="25" r="3" fill="#fff" opacity=".65"/></g>
+</g>
+</svg>

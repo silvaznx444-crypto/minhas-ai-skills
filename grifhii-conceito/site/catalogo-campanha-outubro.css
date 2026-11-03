@@ -1,0 +1,12 @@
+/* GRIFHII v10 / NOVOS PRODUTOS — somente interação editorial em cards.
+   Nenhuma alteração de tipografia, cores globais, hero, carrinho ou checkout. */
+@media (hover:hover) and (pointer:fine){
+  .grif-editorial-preview .products-page-card-media{position:relative;isolation:isolate;}
+  .grif-editorial-preview .grif-editorial-volume{position:absolute;inset:0;z-index:2;display:grid;place-items:center;pointer-events:none;opacity:1;transition:opacity .48s ease,transform .75s cubic-bezier(.22,.75,.2,1);}
+  .grif-editorial-preview .grif-editorial-volume img{display:block;width:89%;height:89%;object-fit:contain;filter:drop-shadow(0 16px 15px rgba(25,25,25,.12));transform:perspective(800px) rotateY(-3deg) rotateX(2deg);transition:transform .7s cubic-bezier(.22,.75,.2,1);}
+  .grif-editorial-preview:hover .grif-editorial-volume,.grif-editorial-preview:focus-within .grif-editorial-volume{opacity:0;transform:scale(.985);}
+  .grif-editorial-preview .products-page-carousel-track{opacity:0;transition:opacity .48s ease;}
+  .grif-editorial-preview:hover .products-page-carousel-track,.grif-editorial-preview:focus-within .products-page-carousel-track{opacity:1;}
+}
+@media (hover:none),(pointer:coarse){.grif-editorial-volume{display:none!important;}}
+@media (prefers-reduced-motion:reduce){.grif-editorial-volume,.grif-editorial-preview .products-page-carousel-track{transition:none!important;}}

@@ -1,0 +1,82 @@
+/* GRIFHII 01/11 — correção centralizada: componentes realmente iguais à home.
+   Não reescrever regras editoriais; unificar apenas catálogo, filtros, mídia e menu. */
+:root { --grifhii-canvas:#f2f1ed; --grifhii-text:#26221c; --grifhii-divider:rgba(38,34,28,.16) }
+body.ui-clean, body.products-page, body.product-page {background-color:var(--grifhii-canvas)!important;color:var(--grifhii-text)}
+/* 1. Só existem filtros de categorias com peças nessa marca. */
+#productsFilters>button[hidden], #productsFilters>button[aria-hidden="true"] {display:none!important}
+.products-page #productsFilters {align-content:start}
+.products-page .products-category-rail {min-height:0!important}
+.products-page #productsFilters>button {font:600 11px/1.3 'Manrope',sans-serif!important;letter-spacing:.005em}
+/* 2. Foto recortada/3D PNG transparente não pode aparecer em uma placa branca. */
+body.ui-clean #produtos .catalog-product-card,
+body.ui-clean #produtos .catalog-product-media,
+body.ui-clean #produtos .catalog-product-media-link,
+body.ui-clean #produtos .catalog-home-track,
+body.ui-clean #produtos .catalog-home-slide,
+body.ui-clean #produtos .catalog-volume,
+body.ui-clean #produtos .catalog-product-copy,
+body.products-page .products-page-card,
+body.products-page .products-page-card-carousel,
+body.products-page .products-page-card-media,
+body.products-page .products-page-carousel-track,
+body.products-page .products-page-carousel-slide,
+body.products-page .grif-model-layer,
+body.product-page .product-gallery-main,
+body.product-page .grif-detail-model,
+body.product-page .product-thumbs button,
+body.product-page .product-related-card,
+body.product-page .grif-related-model {background-color:var(--grifhii-canvas)!important;background-image:none!important;box-shadow:none!important}
+body.ui-clean #produtos .catalog-product-media,
+body.products-page .products-page-card-carousel,
+body.product-page #productDetail .product-gallery-main {border:0!important}
+body.ui-clean #produtos .catalog-product-media::before,
+body.ui-clean #produtos .catalog-product-media::after {content:none!important;display:none!important}
+body.ui-clean #produtos .catalog-volume img,
+body.products-page .grif-model-layer img,
+body.product-page #productDetail .grif-detail-model img {object-fit:contain!important;mix-blend-mode:multiply;filter:none!important}
+/* Default 3D => hover foto real, retorno automático ao retirar o mouse. */
+body.products-page .grif-model-card:not(.is-photo-visible) .grif-model-layer{opacity:1!important;visibility:visible!important}
+body.products-page .grif-model-card:not(.is-photo-visible) .products-page-carousel-track{opacity:0!important}
+body.products-page .grif-model-card.is-photo-visible .grif-model-layer{opacity:0!important}
+body.products-page .grif-model-card.is-photo-visible .products-page-carousel-track{opacity:1!important}
+body.ui-clean #produtos .has-product-preview:not(.is-photo-visible) .catalog-volume{opacity:1!important;visibility:visible!important}
+body.ui-clean #produtos .has-product-preview.is-photo-visible .catalog-volume{opacity:0!important}
+/* 3. Menu da peça: reproduz o painel e o acordeão da home, sem segundo controlador. */
+body.product-page .site-menu{position:fixed;inset:0;z-index:10040}
+body.product-page .site-menu-panel{
+  left:0;top:0;bottom:0;width:min(410px,88vw);
+  padding:calc(var(--header-h,88px) + 24px) 34px 28px!important;
+  background:#f8f7f3!important;color:#26221c!important;
+  display:flex;flex-direction:column;overflow-y:auto;
+  box-shadow:24px 0 70px rgba(0,0,0,.17)!important;
+  animation:grifMenuSlide .42s cubic-bezier(.22,.75,.2,1) both;
+}
+@keyframes grifMenuSlide{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+body.product-page .site-menu-head{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding-bottom:22px;border-bottom:1px solid rgba(16,16,16,.12);
+  font:800 11px/1.4 'Manrope',sans-serif!important;letter-spacing:.16em;
+}
+body.product-page .site-menu-nav{display:flex;flex-direction:column;margin-top:28px}
+body.product-page .site-menu-nav>a{position:relative;display:block;min-height:62px;padding:20px 4px;border-bottom:1px solid rgba(16,16,16,.1);font:700 clamp(18px,2.5vw,23px)/1.2 'Manrope',sans-serif!important;letter-spacing:-.025em}
+body.product-page .site-menu-nav>a.is-featured{color:#967b48}
+body.product-page .site-menu-brand-accordion{border-bottom:1px solid rgba(16,16,16,.1)}
+body.product-page .site-menu-brand-full{display:flex!important;align-items:center;justify-content:space-between;width:100%;min-height:62px;padding:0 4px!important;border:0;background:transparent;color:#26221c;cursor:pointer;text-align:left}
+body.product-page .site-menu-brand-full>span:first-child{font:700 clamp(18px,2.5vw,23px)/1.2 'Manrope',sans-serif;letter-spacing:-.025em}
+body.product-page .site-menu-brand-full>span:last-child{font:500 21px/1 'Manrope',sans-serif}
+body.product-page .site-menu-brand-submenu{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;overflow:auto;max-height:min(48vh,430px);padding:4px 0 18px 12px}
+body.product-page .site-menu-brand-submenu[hidden]{display:none!important}
+body.product-page .site-menu-brand-submenu a{font:700 10px/1.4 'Manrope',sans-serif!important;color:#4c4740;border:0!important;min-height:42px;display:flex;align-items:center;gap:9px}
+body.product-page .site-menu-footer{margin-top:auto;font:600 8px/1.6 'Manrope',sans-serif;letter-spacing:.18em;color:#8b877f}
+body.product-page .product-detail-copy h1{font-family:'Manrope',sans-serif!important;font-weight:700!important}
+@media(max-width:640px){body.product-page .site-menu-panel{width:min(360px,92vw);padding:calc(var(--header-h,68px) + 20px) 25px 28px!important}body.product-page .site-menu-brand-submenu{grid-template-columns:1fr}}
+/* Evita que seletores antigos com ID reintroduzam fundo diferente na galeria. */
+body.product-page #productDetail .product-gallery-main,
+body.product-page #productDetail .grif-detail-model,
+body.product-page #productDetail .product-thumbs button,
+body.product-page #productDetail .product-gallery-main>img {
+  background-color:var(--grifhii-canvas)!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+body.product-page #productDetail .product-gallery-main {border:none!important}

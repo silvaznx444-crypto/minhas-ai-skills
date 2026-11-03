@@ -1,0 +1,11 @@
+GRIFHII V10 — IDENTIDADE VISUAL E VARIANTES 3D
+
+A pagina peca.html agora usa os mesmos tipos da vitrine: Manrope para interface e Cormorant Garamond para marca. Layout isolado mantido para evitar fotografia gigante.
+
+Auditoria: 248 variantes; 156 vinculadas a um arquivo 3D por foto; 54 usam render transparente próprio; 38 variantes ainda não têm um arquivo 3D específico (23 fotografias distintas).
+
+IMPORTANTE: as 38 variantes pendentes mostram a foto REAL correspondente, não a imagem 3D de outra cor. Não inserir render de outra cor só para preencher lacuna. Algumas dessas peças não têm fotografia real cadastrada, somente um aviso de conferência.
+
+Os seletores de cor e tamanho e a proteção de vendas/checkout continuam intocados.
+
+INSTRUÇÕES: extraia o ZIP inteiro em uma pasta nova, execute INICIAR_GRIFHII_LOCAL.bat, e teste peca.html a partir do catálogo. O ZIP não foi publicado em produção.

@@ -1,0 +1,22 @@
+GRIFHII TESTE 14 - VERSAO 4 (02/11/2026)
+========================================
+
+1. Extraia TODO o ZIP em uma pasta NOVA. Nao abra arquivos dentro do WinRAR.
+2. Clique duas vezes em INICIAR_GRIFHII_LOCAL.bat.
+3. O Chrome abre automaticamente o Teste 14 em uma PORTA LIVRE aleatoria.
+4. Confira o topo: "VERSAO 4 CONFIRMADA - NOVO SERVIDOR - SEM CACHE".
+5. Cole o token PUBLICO da Storefront API e clique em Consultar imagem na Shopify.
+6. Use Copiar diagnostico para enviar o resultado.
+
+Por que uma porta nova?
+Antes, a pasta usava sempre localhost:5648. Se outra versao antiga ja
+estivesse ocupando essa porta, o navegador podia abrir o teste ERRADO.
+Agora o servidor seleciona automaticamente uma porta livre e desabilita o cache.
+Todos os antigos nomes de HTML do Teste 14 foram substituidos pela V4.
+
+AVISO: o metacampo grifhii.imagem_3d foi confirmado na Shopify pela API Admin.
+A imagem vinculada ainda e igual a foto original do produto. Isso nao bloqueia
+a leitura, mas e preciso outro arquivo PNG para demonstrar a transicao 3D/real.
+
+Este teste nao cria pedidos nem pagamentos. Checkout permanece bloqueado.
+O restante do catalogo e os arquivos 3D originais foram preservados.

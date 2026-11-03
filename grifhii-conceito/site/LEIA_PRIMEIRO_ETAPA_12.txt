@@ -1,0 +1,35 @@
+GRIFHII V10 — ETAPA 12: TESTE DE VITRINE DINÂMICA
+
+Objetivo: testar cadastro de produto novo na Shopify -> aparição automática na vitrine GRIFHII.
+
+1) Extraia TODO este ZIP em uma nova pasta.
+2) Execute INICIAR_GRIFHII_LOCAL.bat (usa porta 5648).
+3) Abra http://localhost:5648/GRIFHII_ETAPA_12_TESTE_VITRINE_DINAMICA.html
+4) Cole apenas o token PÚBLICO da Storefront API; ele fica na sessão local.
+5) Clique em Consultar Shopify. Enquanto o produto de teste estiver em RASCUNHO,
+   a mensagem 'não visível' é o resultado esperado.
+6) No Shopify Admin, confira:
+     - TESTE GRIFHII — Camiseta Nova
+     - Fornecedor / Marca: informe a marca correta (ex.: Lacoste, se esse for o teste)
+     - Tipo de produto: Camisetas
+     - Cor: Preto / Tamanho: G
+     - Estoque disponível: 0 e 'continuar vendendo sem estoque' DESMARCADO
+     - A foto corresponde à peça (não use foto de outra marca na vitrine real).
+7) Depois de validar, defina status ATIVO e publique apenas no canal HEADLESS
+   da loja correspondente (e mercado Brasil). Não ative checkout.
+8) Volte ao Teste 12, clique em Consultar Shopify e então Abra o catálogo GRIFHII.
+   A contagem deve passar de 73 para 74 e o novo produto deve ser encontrado.
+   Para abrir diretamente: http://localhost:5648/peca.html?slug=shopify-teste-grifhii-camiseta-nova
+9) Clique em Copiar diagnóstico e envie ao desenvolvedor.
+
+IMPORTANTE
+- Esta etapa NÃO cria um produto na Shopify; apenas o consome quando publicado.
+- O catálogo original, suas imagens 3D e seus mapeamentos foram mantidos inalterados.
+- Produtos novos sem render 3D aparecem com a foto fornecida na Shopify.
+- Shopify continua sendo a fonte de preços, estoque e variantes do novo produto.
+- No localhost o token público é inserido na página de teste; não há token
+  privado ou Admin API embutido no ZIP.
+- Para publicar essa funcionalidade no Cloudflare futuramente, será necessário
+  configurar o token PÚBLICO da Storefront no frontend de produção e validar
+  antes todos os fluxos. NÃO publique este pacote como loja de produção.
+- Checkout real e pagamentos continuam BLOQUEADOS.

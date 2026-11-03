@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**51 de 124** cores recebidas.
+**55 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -27,9 +27,9 @@
 | ✅ | Camiseta Lacoste French Heritage | Branca |
 | ✅ | Camiseta Lacoste French Heritage | Verde |
 | ✅ | Camiseta Lacoste French Heritage | Preta |
-| ⏳ | Camisa Social Ralph Lauren Manga Longa Custom Fit | Azul-marinho |
-| ⏳ | Camisa Social Ralph Lauren Manga Longa Custom Fit | Verde |
-| ⏳ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Vermelho bordô |
+| ✅ | Camisa Social Ralph Lauren Manga Longa Custom Fit | Azul-marinho |
+| ✅ | Camisa Social Ralph Lauren Manga Longa Custom Fit | Verde |
+| ✅ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Vermelho bordô |
 | ✅ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Cinza |
 | ✅ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Azul-claro |
 | ✅ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Off-white |
@@ -64,7 +64,7 @@
 | ✅ | Boné Ayrton Senna Automobilismo | Preto |
 | ✅ | Boné Tommy Hilfiger Logo Bordado | Azul-marinho |
 | ✅ | Boné Tommy Hilfiger Logo Bordado | Off-white |
-| ⏳ | Calça Jeans Polo Ralph Lauren — Azul Escuro | Azul-escuro |
+| ✅ | Calça Jeans Polo Ralph Lauren — Azul Escuro | Azul-escuro |
 | ✅ | Calça Jeans Calvin Klein Jeans Skinny — Azul Médio | Azul-médio |
 | ✅ | Bermuda Sarja Ralph Lauren — Masculina | Preto |
 | ✅ | Bermuda Sarja Ralph Lauren — Masculina | Marrom |

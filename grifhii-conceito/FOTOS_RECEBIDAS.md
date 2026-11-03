@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**42 de 124** cores recebidas.
+**47 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -41,8 +41,8 @@
 | ✅ | Boné Polo Ralph Lauren Clássico Bordado | Azul-marinho |
 | ✅ | Boné Polo Ralph Lauren Clássico Bordado | Cinza |
 | ✅ | Boné Polo Ralph Lauren Clássico Bordado | Marrom/Oliva |
-| ⏳ | Boné Polo Ralph Lauren Clássico Bordado | Preto |
-| ⏳ | Boné Polo Ralph Lauren Clássico Bordado | Rosa |
+| ✅ | Boné Polo Ralph Lauren Clássico Bordado | Preto |
+| ✅ | Boné Polo Ralph Lauren Clássico Bordado | Rosa |
 | ✅ | Boné Polo Ralph Lauren Clássico Bordado | Roxo/Lilás |
 | ⏳ | Short Lacoste Sport com Crocodilo Bordado | Preto |
 | ⏳ | Short Lacoste Sport com Crocodilo Bordado | Azul-marinho |
@@ -62,10 +62,10 @@
 | ✅ | Bermuda Vilebrequin Tartarugas — Estampas | Branca/Azul/Verde |
 | ✅ | Boné Ayrton Senna Automobilismo | Azul |
 | ✅ | Boné Ayrton Senna Automobilismo | Preto |
-| ⏳ | Boné Tommy Hilfiger Logo Bordado | Azul-marinho |
-| ⏳ | Boné Tommy Hilfiger Logo Bordado | Off-white |
+| ✅ | Boné Tommy Hilfiger Logo Bordado | Azul-marinho |
+| ✅ | Boné Tommy Hilfiger Logo Bordado | Off-white |
 | ⏳ | Calça Jeans Polo Ralph Lauren — Azul Escuro | Azul-escuro |
-| ⏳ | Calça Jeans Calvin Klein Jeans Skinny — Azul Médio | Azul-médio |
+| ✅ | Calça Jeans Calvin Klein Jeans Skinny — Azul Médio | Azul-médio |
 | ✅ | Bermuda Sarja Ralph Lauren — Masculina | Preto |
 | ✅ | Bermuda Sarja Ralph Lauren — Masculina | Marrom |
 | ✅ | Bermuda Sarja Ralph Lauren — Masculina | Vermelho |

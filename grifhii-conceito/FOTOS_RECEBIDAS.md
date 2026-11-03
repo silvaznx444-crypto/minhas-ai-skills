@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**64 de 124** cores recebidas.
+**69 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -8,7 +8,7 @@
 | ✅ | Camiseta Lacoste Signature Script | Preta |
 | ✅ | Camiseta Emporio Armani Importada | Preta Lisa |
 | ✅ | Camiseta Emporio Armani Importada | Preta com Listra Branca |
-| ⏳ | Camiseta Colcci Algodão Menegotti | Preta |
+| ✅ | Camiseta Colcci Algodão Menegotti | Preta |
 | ✅ | Camiseta Armani Exchange A|X Importada | Preta |
 | ✅ | Camiseta Armani Exchange A|X Importada | Azul-marinho |
 | ✅ | Camiseta Fred Perry Importada | Preta |
@@ -72,7 +72,7 @@
 | ✅ | Bermuda Sarja Ralph Lauren — Masculina | Branco |
 | ✅ | Bermuda Sarja Abercrombie & Fitch — Laranja | Laranja |
 | ⏳ | Camiseta Lacoste Paris — Verde Escuro | Verde-escuro |
-| ⏳ | Camiseta Diesel D-Corp 1978 — Verde Militar | Verde-militar |
+| ✅ | Camiseta Diesel D-Corp 1978 — Verde Militar | Verde-militar |
 | ✅ | Camiseta Tommy Hilfiger Resort New York | Verde-escuro |
 | ✅ | Camiseta Tommy Hilfiger Resort New York | Azul-marinho |
 | ✅ | Camiseta Tommy Hilfiger Resort New York | Bege |
@@ -80,7 +80,7 @@
 | ✅ | Camiseta Zara Basic Regular Fit | Azul-claro |
 | ✅ | Camiseta Calvin Klein Jeans — Azul | Azul |
 | ⏳ | Camiseta Diesel Industry — Branca | Branco |
-| ⏳ | Camiseta Diesel Big Logo — Branca e Preta | Branco com preto |
+| ✅ | Camiseta Diesel Big Logo — Branca e Preta | Branco com preto |
 | ⏳ | Camiseta Lacoste Golf 1933 — Branca | Branco |
 | ⏳ | Camiseta Tommy Hilfiger Crest — Branca | Branco |
 | ⏳ | Camiseta Tommy Hilfiger Tricolor — Branca | Branco |
@@ -101,8 +101,8 @@
 | ⏳ | Camiseta Lacoste Tennis Club Typography — Preta | Preta |
 | ⏳ | Camiseta Lacoste Paris Heritage — Preta | Preta |
 | ✅ | Camiseta Armani Exchange A|X Line — Preta | Preta |
-| ⏳ | Camiseta Colcci Brasilidade Tropical — Azul-marinho | Azul-marinho |
-| ⏳ | Camiseta Colcci Back To The Old Days — Azul-marinho | Azul-marinho |
+| ✅ | Camiseta Colcci Brasilidade Tropical — Azul-marinho | Azul-marinho |
+| ✅ | Camiseta Colcci Back To The Old Days — Azul-marinho | Azul-marinho |
 | ⏳ | Camiseta Ellus Logo Colors — Off-white | Off-white |
 | ⏳ | Camiseta On Performance Poliamida — Moda Fit | Cinza-claro |
 | ⏳ | Camiseta On Performance Poliamida — Moda Fit | Branca |

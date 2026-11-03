@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**55 de 124** cores recebidas.
+**60 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -34,9 +34,9 @@
 | ✅ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Azul-claro |
 | ✅ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Off-white |
 | ✅ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Branca |
-| ⏳ | Camisa Social Ralph Lauren Xadrez Manga Longa | Laranja xadrez |
-| ⏳ | Camisa Social Ralph Lauren Xadrez Manga Longa | Verde xadrez |
-| ⏳ | Camisa Social Ralph Lauren Xadrez Manga Longa | Vermelho xadrez |
+| ✅ | Camisa Social Ralph Lauren Xadrez Manga Longa | Laranja xadrez |
+| ✅ | Camisa Social Ralph Lauren Xadrez Manga Longa | Verde xadrez |
+| ✅ | Camisa Social Ralph Lauren Xadrez Manga Longa | Vermelho xadrez |
 | ✅ | Boné Polo Ralph Lauren Clássico Bordado | Azul-escuro |
 | ✅ | Boné Polo Ralph Lauren Clássico Bordado | Azul-marinho |
 | ✅ | Boné Polo Ralph Lauren Clássico Bordado | Cinza |
@@ -90,10 +90,10 @@
 | ⏳ | Camiseta Lacoste Sport Heritage Tennis 1933 — Branca | Branco |
 | ⏳ | Camiseta Lacoste Classic Crocodile — Branca | Branco |
 | ⏳ | Camiseta Lacoste Sport Club — Branca | Branco |
-| ⏳ | Camiseta Abercrombie & Fitch Heritage 1892 — Cinza | Cinza com laranja |
+| ✅ | Camiseta Abercrombie & Fitch Heritage 1892 — Cinza | Cinza com laranja |
 | ⏳ | Camiseta Acostamento Rock’n Roll 1993 — Azul-marinho | Azul-marinho |
 | ⏳ | Camiseta Acostamento Classic — Azul-marinho | Azul-marinho |
-| ⏳ | Camiseta Acostamento Graphic Horse — Azul-escuro | Azul-escuro |
+| ✅ | Camiseta Acostamento Graphic Horse — Azul-escuro | Azul-escuro |
 | ⏳ | Camiseta Tommy Hilfiger Classic — Azul-marinho | Azul-marinho |
 | ⏳ | Camiseta Fred Perry Classic Laurel — Azul-marinho | Azul-marinho |
 | ⏳ | Camiseta Lacoste Sport Graphic Crocodile — Azul-marinho | Azul-marinho |

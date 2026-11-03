@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**28 de 124** cores recebidas.
+**33 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -73,11 +73,11 @@
 | ⏳ | Bermuda Sarja Abercrombie & Fitch — Laranja | Laranja |
 | ⏳ | Camiseta Lacoste Paris — Verde Escuro | Verde-escuro |
 | ⏳ | Camiseta Diesel D-Corp 1978 — Verde Militar | Verde-militar |
-| ⏳ | Camiseta Tommy Hilfiger Resort New York | Verde-escuro |
-| ⏳ | Camiseta Tommy Hilfiger Resort New York | Azul-marinho |
-| ⏳ | Camiseta Tommy Hilfiger Resort New York | Bege |
-| ⏳ | Camiseta Zara Basic Regular Fit | Branco |
-| ⏳ | Camiseta Zara Basic Regular Fit | Azul-claro |
+| ✅ | Camiseta Tommy Hilfiger Resort New York | Verde-escuro |
+| ✅ | Camiseta Tommy Hilfiger Resort New York | Azul-marinho |
+| ✅ | Camiseta Tommy Hilfiger Resort New York | Bege |
+| ✅ | Camiseta Zara Basic Regular Fit | Branco |
+| ✅ | Camiseta Zara Basic Regular Fit | Azul-claro |
 | ⏳ | Camiseta Calvin Klein Jeans — Azul | Azul |
 | ⏳ | Camiseta Diesel Industry — Branca | Branco |
 | ⏳ | Camiseta Diesel Big Logo — Branca e Preta | Branco com preto |

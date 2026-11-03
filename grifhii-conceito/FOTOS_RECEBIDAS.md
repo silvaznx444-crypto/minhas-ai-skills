@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**69 de 124** cores recebidas.
+**74 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -81,29 +81,29 @@
 | ✅ | Camiseta Calvin Klein Jeans — Azul | Azul |
 | ⏳ | Camiseta Diesel Industry — Branca | Branco |
 | ✅ | Camiseta Diesel Big Logo — Branca e Preta | Branco com preto |
-| ⏳ | Camiseta Lacoste Golf 1933 — Branca | Branco |
+| ✅ | Camiseta Lacoste Golf 1933 — Branca | Branco |
 | ⏳ | Camiseta Tommy Hilfiger Crest — Branca | Branco |
 | ⏳ | Camiseta Tommy Hilfiger Tricolor — Branca | Branco |
 | ⏳ | Camiseta Tommy Hilfiger Heritage | Azul |
 | ⏳ | Camiseta Tommy Hilfiger Heritage | Bege |
 | ⏳ | Camiseta Tommy Hilfiger New York City — Bege | Bege |
 | ⏳ | Camiseta Lacoste Sport Heritage Tennis 1933 — Branca | Branco |
-| ⏳ | Camiseta Lacoste Classic Crocodile — Branca | Branco |
+| ✅ | Camiseta Lacoste Classic Crocodile — Branca | Branco |
 | ⏳ | Camiseta Lacoste Sport Club — Branca | Branco |
 | ✅ | Camiseta Abercrombie & Fitch Heritage 1892 — Cinza | Cinza com laranja |
 | ✅ | Camiseta Acostamento Rock’n Roll 1993 — Azul-marinho | Azul-marinho |
 | ✅ | Camiseta Acostamento Classic — Azul-marinho | Azul-marinho |
 | ✅ | Camiseta Acostamento Graphic Horse — Azul-escuro | Azul-escuro |
 | ⏳ | Camiseta Tommy Hilfiger Classic — Azul-marinho | Azul-marinho |
-| ⏳ | Camiseta Fred Perry Classic Laurel — Azul-marinho | Azul-marinho |
-| ⏳ | Camiseta Lacoste Sport Graphic Crocodile — Azul-marinho | Azul-marinho |
+| ✅ | Camiseta Fred Perry Classic Laurel — Azul-marinho | Azul-marinho |
+| ✅ | Camiseta Lacoste Sport Graphic Crocodile — Azul-marinho | Azul-marinho |
 | ⏳ | Camiseta Lacoste Tennis Club — Azul-marinho | Azul-marinho |
 | ⏳ | Camiseta Lacoste Tennis Club Typography — Preta | Preta |
 | ⏳ | Camiseta Lacoste Paris Heritage — Preta | Preta |
 | ✅ | Camiseta Armani Exchange A|X Line — Preta | Preta |
 | ✅ | Camiseta Colcci Brasilidade Tropical — Azul-marinho | Azul-marinho |
 | ✅ | Camiseta Colcci Back To The Old Days — Azul-marinho | Azul-marinho |
-| ⏳ | Camiseta Ellus Logo Colors — Off-white | Off-white |
+| ✅ | Camiseta Ellus Logo Colors — Off-white | Off-white |
 | ⏳ | Camiseta On Performance Poliamida — Moda Fit | Cinza-claro |
 | ⏳ | Camiseta On Performance Poliamida — Moda Fit | Branca |
 | ⏳ | Camiseta On Performance Poliamida — Moda Fit | Azul-bebê claro |

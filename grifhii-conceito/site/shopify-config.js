@@ -20,9 +20,9 @@ window.GRIFHII_SHOPIFY_CONFIG = Object.freeze({
   apiVersion:'2026-10',
   publicStorefrontToken:GRIFHII_TEST_8_TOKEN || GRIFHII_PUBLIC_STOREFRONT_TOKEN, // token de teste local tem prioridade.
   allowTokenlessCatalog:true, // Consulta pública; fallback seguro em caso de bloqueio.
-  salesEnabled:false, // SEM vendas reais, inclusive no modo de teste.
+  salesEnabled:true, // Vendas LIGADAS em 03/11/2026 para a compra de teste (pedido do proprietário).
   uiTestMode:Boolean(GRIFHII_TEST_8_LOCAL && GRIFHII_TEST_8_TOKEN), // Permite somente testar interface local.
-  cartTestMode:true,
+  cartTestMode:false,
   cartPermalinkFallback:false, // Desativado: checkout somente após confirmação da Storefront API (variante, estoque e preço).
   // Domínios extras aceitos para o checkoutUrl (ex.: domínio próprio conectado na Shopify). Vazio = só o .myshopify.com.
   checkoutHosts:Object.freeze([]),

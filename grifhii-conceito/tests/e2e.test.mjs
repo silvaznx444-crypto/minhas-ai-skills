@@ -84,6 +84,14 @@ async function enableSalesForTest(page) {
       .replace('salesEnabled:false', 'salesEnabled:true').replace('cartTestMode:true', 'cartTestMode:false')});
   });
 }
+/** Força a trava de vendas (salesEnabled:false) — a trava precisa funcionar sempre que o proprietário desligar as vendas. */
+async function disableSalesForTest(page) {
+  await page.route('**/shopify-config.js*', async route => {
+    const original = fs.readFileSync(path.join(DIST, 'shopify-config.js'), 'utf8');
+    await route.fulfill({status: 200, contentType: 'text/javascript', body: original
+      .replace(/salesEnabled:true/, 'salesEnabled:false').replace(/cartTestMode:false/, 'cartTestMode:true')});
+  });
+}
 
 async function newPage({viewport = {width: 1366, height: 900}} = {}) {
   const ctx = await browser.newContext({viewport});
@@ -197,8 +205,9 @@ test('página estática de produto: HTML inicial rastreável + dados estruturado
 });
 
 /* ================= SACOLA ================= */
-test('vendas desligadas (config real): não adiciona e não chama checkout', async () => {
+test('vendas desligadas (trava): não adiciona e não chama checkout', async () => {
   const {ctx, page} = await newPage();
+  await disableSalesForTest(page);
   const log = [];
   await mockShopify(page, {cart: okCart(), log});
   await page.goto(`${BASE}peca-lacoste-signature-script`);

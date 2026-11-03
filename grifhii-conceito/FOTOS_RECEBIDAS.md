@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**60 de 124** cores recebidas.
+**64 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -78,7 +78,7 @@
 | ✅ | Camiseta Tommy Hilfiger Resort New York | Bege |
 | ✅ | Camiseta Zara Basic Regular Fit | Branco |
 | ✅ | Camiseta Zara Basic Regular Fit | Azul-claro |
-| ⏳ | Camiseta Calvin Klein Jeans — Azul | Azul |
+| ✅ | Camiseta Calvin Klein Jeans — Azul | Azul |
 | ⏳ | Camiseta Diesel Industry — Branca | Branco |
 | ⏳ | Camiseta Diesel Big Logo — Branca e Preta | Branco com preto |
 | ⏳ | Camiseta Lacoste Golf 1933 — Branca | Branco |
@@ -91,8 +91,8 @@
 | ⏳ | Camiseta Lacoste Classic Crocodile — Branca | Branco |
 | ⏳ | Camiseta Lacoste Sport Club — Branca | Branco |
 | ✅ | Camiseta Abercrombie & Fitch Heritage 1892 — Cinza | Cinza com laranja |
-| ⏳ | Camiseta Acostamento Rock’n Roll 1993 — Azul-marinho | Azul-marinho |
-| ⏳ | Camiseta Acostamento Classic — Azul-marinho | Azul-marinho |
+| ✅ | Camiseta Acostamento Rock’n Roll 1993 — Azul-marinho | Azul-marinho |
+| ✅ | Camiseta Acostamento Classic — Azul-marinho | Azul-marinho |
 | ✅ | Camiseta Acostamento Graphic Horse — Azul-escuro | Azul-escuro |
 | ⏳ | Camiseta Tommy Hilfiger Classic — Azul-marinho | Azul-marinho |
 | ⏳ | Camiseta Fred Perry Classic Laurel — Azul-marinho | Azul-marinho |
@@ -100,7 +100,7 @@
 | ⏳ | Camiseta Lacoste Tennis Club — Azul-marinho | Azul-marinho |
 | ⏳ | Camiseta Lacoste Tennis Club Typography — Preta | Preta |
 | ⏳ | Camiseta Lacoste Paris Heritage — Preta | Preta |
-| ⏳ | Camiseta Armani Exchange A|X Line — Preta | Preta |
+| ✅ | Camiseta Armani Exchange A|X Line — Preta | Preta |
 | ⏳ | Camiseta Colcci Brasilidade Tropical — Azul-marinho | Azul-marinho |
 | ⏳ | Camiseta Colcci Back To The Old Days — Azul-marinho | Azul-marinho |
 | ⏳ | Camiseta Ellus Logo Colors — Off-white | Off-white |

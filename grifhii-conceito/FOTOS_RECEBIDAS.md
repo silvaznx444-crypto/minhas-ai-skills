@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**9 de 124** cores recebidas.
+**13 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -14,16 +14,16 @@
 | ✅ | Camiseta Fred Perry Importada | Preta |
 | ✅ | Camiseta Fred Perry Importada | Branca |
 | ✅ | Camiseta Fred Perry Importada | Azul escuro |
-| ⏳ | Camiseta Hugo Boss Signature Stripe | Branca |
-| ⏳ | Camiseta Hugo Boss Signature Stripe | Preta |
+| ✅ | Camiseta Hugo Boss Signature Stripe | Branca |
+| ✅ | Camiseta Hugo Boss Signature Stripe | Preta |
 | ⏳ | Camiseta Emporio Armani EA7 Monogram | Preta |
 | ⏳ | Camiseta Fred Perry Signature Stripe | Preta |
 | ⏳ | Camiseta Fred Perry Signature Stripe | Branca |
 | ⏳ | Camiseta Acostamento Denim Premium | Preta |
 | ⏳ | Camiseta Diesel For Successful Living | Preta |
 | ⏳ | Camiseta Armani Exchange A|X | Preta |
-| ⏳ | Polo Tommy Hilfiger | Preta |
-| ⏳ | Polo Tommy Hilfiger | Azul-marinho |
+| ✅ | Polo Tommy Hilfiger | Preta |
+| ✅ | Polo Tommy Hilfiger | Azul-marinho |
 | ⏳ | Camiseta Lacoste French Heritage | Branca |
 | ⏳ | Camiseta Lacoste French Heritage | Verde |
 | ⏳ | Camiseta Lacoste French Heritage | Preta |

@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**47 de 124** cores recebidas.
+**51 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -30,10 +30,10 @@
 | ⏳ | Camisa Social Ralph Lauren Manga Longa Custom Fit | Azul-marinho |
 | ⏳ | Camisa Social Ralph Lauren Manga Longa Custom Fit | Verde |
 | ⏳ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Vermelho bordô |
-| ⏳ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Cinza |
-| ⏳ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Azul-claro |
-| ⏳ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Off-white |
-| ⏳ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Branca |
+| ✅ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Cinza |
+| ✅ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Azul-claro |
+| ✅ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Off-white |
+| ✅ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Branca |
 | ⏳ | Camisa Social Ralph Lauren Xadrez Manga Longa | Laranja xadrez |
 | ⏳ | Camisa Social Ralph Lauren Xadrez Manga Longa | Verde xadrez |
 | ⏳ | Camisa Social Ralph Lauren Xadrez Manga Longa | Vermelho xadrez |

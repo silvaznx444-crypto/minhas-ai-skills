@@ -88,7 +88,7 @@ PAGES = {
 <h2>4. Reembolso</h2>
 <p>O reembolso é feito pelo mesmo meio de pagamento: Pix em até {F("prazo, ex.: 5 dias úteis")} após o recebimento da peça devolvida; no cartão, o estorno é solicitado à operadora no mesmo prazo e aparece conforme o ciclo da fatura.</p>
 <h2>5. Como enviar</h2>
-<p>Após a confirmação, a loja informa o endereço ou código de postagem. Peças retiradas na loja podem ser devolvidas presencialmente em {ENDERECO}, no horário {F("horário de atendimento")}.</p>
+<p>Após a confirmação, a loja informa o endereço ou código de postagem. Peças retiradas na loja podem ser devolvidas presencialmente em {ENDERECO}, das 9h às 18h30 ({F("dias da semana, ex.: segunda a sábado")}).</p>
 '''),
 'entrega': ('Política de Entrega', 'Modalidades de entrega e retirada, custos de frete, prazos e rastreio das compras na GRIFHII CONCEITO.', f'''
 <p class="legal-meta">Última atualização: {ATUALIZADO}. Versão sujeita a revisão jurídica antes da abertura das vendas.</p>
@@ -97,7 +97,7 @@ PAGES = {
 <h2>2. Modalidades</h2>
 <ul>
 <li><strong>Envio pelos Correios</strong> para todo o Brasil — {F("serviços (PAC/SEDEX), tabela ou cálculo usado na Shopify")}.</li>
-<li><strong>Retirada na loja</strong>, sem custo, em {ENDERECO} — horário: {F("horário de retirada")}.</li>
+<li><strong>Retirada na loja</strong>, sem custo, em {ENDERECO} — das 9h às 18h30 ({F("dias da semana, ex.: segunda a sábado")}).</li>
 </ul>
 <h2>3. Prazos</h2>
 <p>Postagem em até {F("prazo de postagem, ex.: 2 dias úteis")} após a confirmação do pagamento. O prazo de transporte é o informado no checkout para o CEP de destino.</p>

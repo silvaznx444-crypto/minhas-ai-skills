@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**19 de 124** cores recebidas.
+**22 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -24,9 +24,9 @@
 | ⏳ | Camiseta Armani Exchange A|X | Preta |
 | ✅ | Polo Tommy Hilfiger | Preta |
 | ✅ | Polo Tommy Hilfiger | Azul-marinho |
-| ⏳ | Camiseta Lacoste French Heritage | Branca |
-| ⏳ | Camiseta Lacoste French Heritage | Verde |
-| ⏳ | Camiseta Lacoste French Heritage | Preta |
+| ✅ | Camiseta Lacoste French Heritage | Branca |
+| ✅ | Camiseta Lacoste French Heritage | Verde |
+| ✅ | Camiseta Lacoste French Heritage | Preta |
 | ⏳ | Camisa Social Ralph Lauren Manga Longa Custom Fit | Azul-marinho |
 | ⏳ | Camisa Social Ralph Lauren Manga Longa Custom Fit | Verde |
 | ⏳ | Camisa Social Ralph Lauren Manga Curta Custom Fit | Vermelho bordô |

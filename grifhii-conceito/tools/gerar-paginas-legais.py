@@ -45,8 +45,8 @@ PAGES = {
 <p><strong>Estatística e marketing:</strong> o site <em>não</em> utiliza, nesta versão, Google Analytics, pixels de anúncios ou outros rastreadores. Se forem ativados no futuro, só carregarão depois do seu consentimento, com opção de recusar, e esta política será atualizada.</p>
 <h2>6. Por quanto tempo guardamos</h2>
 <ul>
-<li>Dados de pedidos e documentos fiscais: pelo prazo exigido pela legislação fiscal e de defesa do consumidor ({F("confirmar com a contabilidade, em regra 5 anos")}).</li>
-<li>Conversas de atendimento: {F("prazo definido pela loja")}, ou até você pedir a exclusão, quando não houver obrigação de guarda.</li>
+<li>Dados de pedidos e documentos fiscais: pelo prazo exigido pela legislação fiscal e de defesa do consumidor, inclusive após o fim do relacionamento.</li>
+<li>Conversas de atendimento: pelo tempo necessário para concluir o atendimento, a entrega, as trocas e a garantia do pedido, ou até você pedir a exclusão, quando não houver obrigação legal de guarda.</li>
 <li>Sacola no navegador: até você finalizar a compra, remover os itens ou limpar os dados do navegador.</li>
 </ul>
 <h2>7. Seus direitos (LGPD, art. 18)</h2>
@@ -82,11 +82,11 @@ PAGES = {
 <h2>1. Arrependimento (compras online)</h2>
 <p>Você pode desistir da compra em até <strong>7 dias corridos</strong> após receber o pedido (CDC, art. 49). Basta avisar pelo WhatsApp <a href="https://wa.me/5564981025225" target="_blank" rel="noopener">(64) 98102-5225</a> ou pelo e-mail {EMAIL}, informando o número do pedido. A GRIFHII confirma o recebimento do pedido de arrependimento e informa como devolver; o custo da devolução nesse caso é da loja.</p>
 <h2>2. Troca por tamanho ou cor</h2>
-<p>Trocas por tamanho ou cor podem ser solicitadas em até {F("prazo de troca definido pela loja, ex.: 30 dias")} após o recebimento, com a peça sem uso, com etiquetas e na embalagem original, sujeitas à disponibilidade. Custos de reenvio na troca por preferência: {F("definir quem paga")}.</p>
+<p>Trocas por tamanho ou cor podem ser solicitadas em até 30 dias após o recebimento, com a peça sem uso, com etiquetas e na embalagem original, sujeitas à disponibilidade. Custos de reenvio na troca por preferência: por conta do cliente (em defeito ou arrependimento, a loja paga).</p>
 <h2>3. Produto com defeito</h2>
 <p>Defeitos aparentes podem ser reclamados em até 90 dias (CDC, art. 26). A loja terá até 30 dias para resolver; se não resolver, você pode escolher a troca, a devolução do valor ou o abatimento do preço (CDC, art. 18). Nesse caso o frete é por conta da loja.</p>
 <h2>4. Reembolso</h2>
-<p>O reembolso é feito pelo mesmo meio de pagamento: Pix em até {F("prazo, ex.: 5 dias úteis")} após o recebimento da peça devolvida; no cartão, o estorno é solicitado à operadora no mesmo prazo e aparece conforme o ciclo da fatura.</p>
+<p>O reembolso é feito pelo mesmo meio de pagamento: Pix em até 5 dias úteis após o recebimento da peça devolvida; no cartão, o estorno é solicitado à operadora no mesmo prazo e aparece conforme o ciclo da fatura.</p>
 <h2>5. Como enviar</h2>
 <p>Após a confirmação, a loja informa o endereço ou código de postagem. Peças retiradas na loja podem ser devolvidas presencialmente em {ENDERECO}, das 9h às 18h30 (de segunda a sábado).</p>
 '''),
@@ -100,7 +100,7 @@ PAGES = {
 <li><strong>Retirada na loja</strong>, sem custo, em {ENDERECO} — das 9h às 18h30 (de segunda a sábado).</li>
 </ul>
 <h2>3. Prazos</h2>
-<p>Postagem em até {F("prazo de postagem, ex.: 2 dias úteis")} após a confirmação do pagamento. O prazo de transporte é o informado no checkout para o CEP de destino.</p>
+<p>Postagem em até 2 dias úteis após a confirmação do pagamento. O prazo de transporte é o informado no checkout para o CEP de destino.</p>
 <h2>4. Mensagem sobre o envio</h2>
 <p>Se você marcar a opção na sacola, após a confirmação do pagamento a loja envia uma mensagem no WhatsApp para confirmar o endereço, combinar detalhes da postagem ou retirada e informar o código de rastreio. Essa mensagem nunca pede dados de cartão nem pagamento adicional.</p>
 <h2>5. Rastreio</h2>

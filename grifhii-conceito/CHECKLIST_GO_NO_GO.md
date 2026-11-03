@@ -9,14 +9,14 @@ Situação em 03/11/2026: **NO-GO** — o código está pronto; faltam itens que
 | 2 | Peça certa ao clicar; imagem não ocupa a tela | sim | ✅ GO (E2E 6) | — |
 | 3 | Fotos/3D correspondem à variante | sim | ⚠️ 1 pendência: Classic Crocodile e Sport Club com a mesma foto | Proprietário (passo 2.6) |
 | 4 | Catálogo, preços e estoque iguais aos da Shopify **ao vivo** | sim | ⚠️ conferido em 03/11: 216 de 249 variantes OK; 33 sem vínculo/esgotadas e 8 produtos da Shopify fora do site (`CONFERENCIA_CATALOGO_SHOPIFY.md`) | Proprietário decide; Claude ajusta o mapeamento |
-| 5 | Produtos publicados no canal Headless + mercado Brasil | sim | ⚠️ 74 publicados; **despublicar “TESTE GRIFHII — Camiseta Nova”** | Proprietário (passo 2.4) |
+| 5 | Produtos publicados no canal Headless + mercado Brasil | sim | ✅ 73 publicados; produto de teste excluído (conferido ao vivo) e bloqueado no site | — |
 | 6 | Sacola não duplica nem aceita adulteração | sim | ✅ GO (E2E 10, 12, 23–25) | — |
 | 7 | Checkout oficial seguro (sem open redirect, preço/estoque revalidados, sem fallback inseguro) | sim | ✅ GO (E2E 11–22) | — |
-| 8 | Método de pagamento ativo (Pix/cartão) e **compra de teste aprovada** | sim | ⛔ NO-GO — a Shopify informa **nenhuma bandeira de cartão aceita** | Proprietário (passos 3 e 9) |
-| 9 | Frete calculado no checkout antes do pagamento; retirada local | sim | ⛔ NO-GO — depende da configuração da Shopify | Proprietário (passo 4) |
-| 10 | Telefone obrigatório no checkout | sim (p/ WhatsApp) | ⛔ não confirmado | Proprietário (passo 4.6) |
-| 11 | Políticas completas (sem `[PREENCHER]`) e revisadas por jurídico | sim | ⚠️ dados do CNPJ e e-mail preenchidos; faltam 11 itens comerciais (prazos, pagamento, frete, horário) | Proprietário + advogado(a) (passo 1) |
-| 12 | Políticas também cadastradas na Shopify | sim | ⛔ só Privacidade existe; faltam Reembolso, Termos e Frete | Proprietário (passo 1.4) |
+| 8 | Método de pagamento ativo (Pix/cartão) e **compra de teste aprovada** | sim | ⚠️ Mercado Pago (Pix + cartão) configurado pelo proprietário; falta a compra de teste | Proprietário (passos 3 e 9) |
+| 9 | Frete calculado no checkout antes do pagamento; retirada local | sim | ⚠️ PAC/SEDEX por peso, grátis ≥ R$ 500 e retirada configurados; conferir no checkout de teste | Proprietário (passo 4) |
+| 10 | Telefone obrigatório no checkout | sim (p/ WhatsApp) | ⚠️ informado pelo proprietário; confirmar na compra de teste | Proprietário (passo 4.6) |
+| 11 | Políticas completas (sem `[PREENCHER]`) e revisadas por jurídico | sim | ⚠️ completas (0 pendências); falta a revisão jurídica recomendada | Advogado(a) |
+| 12 | Políticas também cadastradas na Shopify | sim | ⛔ colar os textos de `POLITICAS_PARA_COLAR_NA_SHOPIFY.txt` (faltam Reembolso, Termos e Frete) | Proprietário |
 | 13 | Sem 404, sem erros de console próprios, sem scripts de teste/segredos no build | sim | ✅ GO (build + E2E 1–3) | — |
 | 14 | Headers de segurança/CSP | sim | ✅ GO (E2E sob `_headers` real) | — |
 | 15 | Domínio final definido e build de produção gerado com ele | sim | ⛔ NO-GO | Proprietário (passos 5–6) |

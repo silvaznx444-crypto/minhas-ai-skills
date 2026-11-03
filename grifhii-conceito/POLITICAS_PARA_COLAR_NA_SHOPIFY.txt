@@ -1,0 +1,167 @@
+POLÍTICAS PARA COLAR NA SHOPIFY
+
+Onde colar: Shopify Admin → Configurações → Políticas. Copie cada bloco (entre as linhas ======) para o campo indicado e clique em Salvar.
+São os mesmos textos do site. Recomendado: revisão por um(a) advogado(a) antes de abrir as vendas.
+
+
+====================================================
+CAMPO: POLÍTICA DE PRIVACIDADE
+====================================================
+
+Última atualização: 03/11/2026. Versão sujeita a revisão jurídica antes da abertura das vendas.
+
+1. Quem é o controlador
+
+Fornecedor e controlador dos dados: GRIFHII CONCEITO, nome comercial de 64.979.097 KELLSON REGYS ANDRADE DA COSTA (empresário individual, microempresa), CNPJ 64.979.097/0001-09, com sede em 10 R da Aroeira, S/N, Quadra 10, Lote 17, Jardim Primavera, Santa Helena de Goiás — GO, CEP 75920-000.
+
+Canais de atendimento: WhatsApp (64) 98102-5225 · e-mail grifhiiconceito@gmail.com · Instagram @grifhii.
+
+Canal de privacidade (LGPD): grifhiiconceito@gmail.com. Como agente de tratamento de pequeno porte, a loja mantém este canal de comunicação com os titulares (Resolução CD/ANPD nº 2/2022).
+
+2. Quais dados tratamos e por quê
+• Situação: Navegação no site — Dados: Itens da sacola guardados no seu próprio navegador (armazenamento local); endereço IP e dados técnicos recebidos pela hospedagem — Finalidade: Manter a sacola, entregar as páginas com segurança e prevenir abusos — Base legal (LGPD, art. 7º): Execução de contrato / procedimentos preliminares (V) e legítimo interesse (IX)
+• Situação: Compra — Dados: Nome, CPF quando exigido, e-mail, telefone, endereço de entrega e cobrança, itens, valores e status do pagamento — informados no checkout da Shopify — Finalidade: Processar o pedido, emitir documento fiscal, entregar, atender trocas e devoluções — Base legal (LGPD, art. 7º): Execução de contrato (V) e cumprimento de obrigação legal/regulatória (II)
+• Situação: Pagamento — Dados: Dados de pagamento informados diretamente ao checkout da Shopify e ao provedor de pagamento — Finalidade: Cobrança e prevenção a fraudes — Base legal (LGPD, art. 7º): Execução de contrato (V) e proteção do crédito (X)
+• Situação: WhatsApp sobre o pedido (opcional) — Dados: Nome, telefone e número do pedido — Finalidade: Combinar envio, informar rastreio e prestar atendimento — Base legal (LGPD, art. 7º): Execução de contrato (V); a mensagem automática só é enviada a quem marcar a opção na sacola
+• Situação: Contato pelo site — Dados: Nome, telefone, e-mail e mensagem — o formulário apenas prepara a mensagem no seu WhatsApp; nada é enviado a servidor da GRIFHII — Finalidade: Responder ao seu pedido de contato — Base legal (LGPD, art. 7º): Procedimentos preliminares (V) / legítimo interesse (IX)
+
+A GRIFHII não recebe nem armazena número de cartão, validade ou código de segurança. Esses dados são digitados somente no checkout hospedado pela Shopify.
+
+3. Com quem compartilhamos
+• Shopify — plataforma de catálogo, carrinho, checkout e pedidos (Shopify International Ltd. e afiliadas).
+• Provedor de pagamento configurado na Shopify: Mercado Pago.
+• Cloudflare — hospedagem e segurança do site (Cloudflare Pages).
+• Google — fontes tipográficas (Google Fonts) e ícones das marcas exibidos no menu; o navegador solicita esses arquivos aos servidores do Google, que recebem o endereço IP.
+• Meta (WhatsApp) — quando você fala com a loja pelo WhatsApp ou aceita receber mensagens sobre o pedido (WhatsApp Business Platform, da própria Meta).
+• Correios / transportadora — nome, endereço e telefone para a entrega.
+• Contabilidade e autoridades — quando exigido por lei.
+
+4. Transferência internacional
+
+Shopify, Cloudflare, Google e Meta podem processar dados fora do Brasil. Essas transferências ocorrem para a execução do contrato com você e com base nas garantias contratuais oferecidas por esses fornecedores (LGPD, art. 33).
+
+5. Cookies e armazenamento no navegador
+
+Estritamente necessários: a sacola é guardada no armazenamento local do seu navegador (chave grifhii-cart-v1) e pode ser apagada a qualquer momento limpando os dados do site. O checkout da Shopify usa cookies próprios necessários à compra.
+
+Estatística e marketing: o site não utiliza, nesta versão, Google Analytics, pixels de anúncios ou outros rastreadores. Se forem ativados no futuro, só carregarão depois do seu consentimento, com opção de recusar, e esta política será atualizada.
+
+6. Por quanto tempo guardamos
+• Dados de pedidos e documentos fiscais: pelo prazo exigido pela legislação fiscal e de defesa do consumidor, inclusive após o fim do relacionamento.
+• Conversas de atendimento: pelo tempo necessário para concluir o atendimento, a entrega, as trocas e a garantia do pedido, ou até você pedir a exclusão, quando não houver obrigação legal de guarda.
+• Sacola no navegador: até você finalizar a compra, remover os itens ou limpar os dados do navegador.
+
+7. Seus direitos (LGPD, art. 18)
+
+Você pode solicitar confirmação de tratamento, acesso, correção, anonimização, bloqueio ou eliminação de dados desnecessários, portabilidade, informação sobre compartilhamentos, revogação de consentimento e revisão de decisões automatizadas. Envie o pedido pelo canal de privacidade acima; responderemos em até 15 dias. Você também pode peticionar à Autoridade Nacional de Proteção de Dados (ANPD).
+
+8. Segurança
+
+O site é servido exclusivamente por HTTPS, não guarda chaves privadas no navegador e entrega a compra ao checkout oficial da Shopify. Nenhum sistema é totalmente imune a incidentes; caso ocorra um incidente relevante, os titulares e a ANPD serão comunicados conforme a lei.
+
+9. Alterações
+
+Esta política pode ser atualizada. A data no topo indica a versão vigente.
+
+
+====================================================
+CAMPO: POLÍTICA DE REEMBOLSO
+====================================================
+
+Última atualização: 03/11/2026. Versão sujeita a revisão jurídica antes da abertura das vendas.
+
+1. Arrependimento (compras online)
+
+Você pode desistir da compra em até 7 dias corridos após receber o pedido (CDC, art. 49). Basta avisar pelo WhatsApp (64) 98102-5225 ou pelo e-mail grifhiiconceito@gmail.com, informando o número do pedido. A GRIFHII confirma o recebimento do pedido de arrependimento e informa como devolver; o custo da devolução nesse caso é da loja.
+
+2. Troca por tamanho ou cor
+
+Trocas por tamanho ou cor podem ser solicitadas em até 30 dias após o recebimento, com a peça sem uso, com etiquetas e na embalagem original, sujeitas à disponibilidade. Custos de reenvio na troca por preferência: por conta do cliente (em defeito ou arrependimento, a loja paga).
+
+3. Produto com defeito
+
+Defeitos aparentes podem ser reclamados em até 90 dias (CDC, art. 26). A loja terá até 30 dias para resolver; se não resolver, você pode escolher a troca, a devolução do valor ou o abatimento do preço (CDC, art. 18). Nesse caso o frete é por conta da loja.
+
+4. Reembolso
+
+O reembolso é feito pelo mesmo meio de pagamento: Pix em até 5 dias úteis após o recebimento da peça devolvida; no cartão, o estorno é solicitado à operadora no mesmo prazo e aparece conforme o ciclo da fatura.
+
+5. Como enviar
+
+Após a confirmação, a loja informa o endereço ou código de postagem. Peças retiradas na loja podem ser devolvidas presencialmente em 10 R da Aroeira, S/N, Quadra 10, Lote 17, Jardim Primavera, Santa Helena de Goiás — GO, CEP 75920-000, das 9h às 18h30 (de segunda a sábado).
+
+
+====================================================
+CAMPO: TERMOS DE SERVIÇO
+====================================================
+
+Última atualização: 03/11/2026. Versão sujeita a revisão jurídica antes da abertura das vendas.
+
+1. Identificação do fornecedor
+
+Fornecedor e controlador dos dados: GRIFHII CONCEITO, nome comercial de 64.979.097 KELLSON REGYS ANDRADE DA COSTA (empresário individual, microempresa), CNPJ 64.979.097/0001-09, com sede em 10 R da Aroeira, S/N, Quadra 10, Lote 17, Jardim Primavera, Santa Helena de Goiás — GO, CEP 75920-000.
+
+Canais de atendimento: WhatsApp (64) 98102-5225 · e-mail grifhiiconceito@gmail.com · Instagram @grifhii.
+
+2. Produtos, fotos e disponibilidade
+
+Cada peça é apresentada com fotografia real e, quando disponível, imagem em volume (3D) da mesma cor. Cores podem variar levemente conforme a tela. Estoque, cores e tamanhos são confirmados pela Shopify no momento da finalização; se uma peça ficar indisponível, o checkout não é concluído para ela.
+
+3. Preços e despesas adicionais
+
+Os preços estão em reais (R$). Antes do pagamento, o checkout da Shopify exibe o valor das peças, o frete ou a opção de retirada, eventuais descontos e o valor total. Nenhuma cobrança adicional é feita sem a sua concordância expressa. Em caso de erro evidente de preço, a loja entrará em contato antes do envio e você poderá cancelar com reembolso integral.
+
+4. Pagamento
+
+O pagamento é feito somente no checkout oficial da Shopify, pelas formas habilitadas (Pix e cartão de crédito, processados pelo Mercado Pago; parcelamento conforme exibido no checkout). A GRIFHII não solicita dados de cartão por WhatsApp, e-mail ou formulário próprio.
+
+5. Entrega
+
+Prazos, modalidades e custos estão na Política de Entrega e aparecem no checkout antes do pagamento.
+
+6. Direito de arrependimento
+
+Em compras pela internet, você pode desistir em até 7 dias corridos contados do recebimento, sem precisar justificar (CDC, art. 49), com devolução integral dos valores pagos, inclusive o frete de envio. Veja Trocas e Devoluções.
+
+7. Confirmação do pedido
+
+Após a compra, a Shopify envia a confirmação por e-mail com o resumo do pedido. Se você marcar a opção na sacola, também receberá uma mensagem no WhatsApp sobre o envio.
+
+8. Uso do site
+
+É proibido usar o site para fraude, tentar alterar preços, quantidades ou identificadores de produtos, ou interferir em sua segurança. Marcas citadas pertencem aos respectivos titulares.
+
+9. Atendimento e foro
+
+Dúvidas e reclamações: pelos canais acima, com resposta em até 5 dias úteis. Fica eleito o foro do domicílio do consumidor.
+
+
+====================================================
+CAMPO: POLÍTICA DE FRETE
+====================================================
+
+Última atualização: 03/11/2026. Versão sujeita a revisão jurídica antes da abertura das vendas.
+
+1. Custo do frete aparece antes do pagamento
+
+O valor do frete, o prazo estimado e o total do pedido são calculados e exibidos no checkout da Shopify antes do pagamento. A GRIFHII não cobra frete separado depois da compra.
+
+2. Modalidades
+• Envio pelos Correios para todo o Brasil — PAC e SEDEX, com valor por faixa de peso do pedido, exibido no checkout antes do pagamento. Frete grátis para pedidos a partir de R$ 500,00, na modalidade indicada no checkout.
+• Retirada na loja, sem custo, em 10 R da Aroeira, S/N, Quadra 10, Lote 17, Jardim Primavera, Santa Helena de Goiás — GO, CEP 75920-000 — das 9h às 18h30 (de segunda a sábado).
+
+3. Prazos
+
+Postagem em até 2 dias úteis após a confirmação do pagamento. O prazo de transporte é o informado no checkout para o CEP de destino.
+
+4. Mensagem sobre o envio
+
+Se você marcar a opção na sacola, após a confirmação do pagamento a loja envia uma mensagem no WhatsApp para confirmar o endereço, combinar detalhes da postagem ou retirada e informar o código de rastreio. Essa mensagem nunca pede dados de cartão nem pagamento adicional.
+
+5. Rastreio
+
+O código de rastreio é enviado por e-mail e/ou WhatsApp. A consulta pode ser feita em “Acompanhar meu pedido”, no menu do site, ou no site dos Correios.
+
+6. Endereço e tentativas de entrega
+
+Confira o endereço no checkout. Se o pedido voltar por endereço incorreto ou ausência após as tentativas da transportadora, a loja entrará em contato para combinar o reenvio.

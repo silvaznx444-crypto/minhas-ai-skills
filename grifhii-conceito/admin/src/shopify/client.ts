@@ -44,6 +44,7 @@ export async function adminGraphql<T = Record<string, unknown>>(env: Env, query:
   const sleep = opts.sleep ?? defaultSleep;
   const maxAttempts = opts.maxAttempts ?? 4;
   const url = shopEndpoint(env);
+  const isMutation = /^\s*mutation\b/.test(query);
   let lastErr: ShopifyError | null = null;
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     const controller = new AbortController();
@@ -72,7 +73,10 @@ export async function adminGraphql<T = Record<string, unknown>>(env: Env, query:
     } catch (e) {
       const err = e instanceof ShopifyError ? e : new ShopifyError('transient', (e as Error)?.name === 'AbortError' ? 'Tempo esgotado na Shopify' : 'Falha de rede com a Shopify');
       lastErr = err;
-      if (err.kind !== 'transient' || attempt === maxAttempts) throw err;
+      // Mutação NÃO é repetida às cegas após timeout/5xx (a Shopify pode já ter gravado): o jornal confere o estado e decide.
+      // Só repete quando a Shopify comprovadamente não executou (THROTTLED/429).
+      const safeToRepeat = !isMutation || err.message === 'THROTTLED' || err.message === 'Shopify HTTP 429';
+      if (err.kind !== 'transient' || attempt === maxAttempts || !safeToRepeat) throw err;
       const base = (err.details as { waitMs?: number } | undefined)?.waitMs ?? 500 * 2 ** (attempt - 1);
       await sleep(Math.min(base + Math.floor(Math.random() * 250), 10_000)); // backoff exponencial + jitter
     } finally { clearTimeout(timer); }

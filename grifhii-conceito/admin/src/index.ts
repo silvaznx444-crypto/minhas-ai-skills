@@ -11,6 +11,7 @@ import { getCapabilities } from './shopify/capabilities.ts';
 import { AddColor, CreateProduct, ProductGid, SetInventory, UpdatePrice } from './products/schemas.ts';
 import { enqueue, retryOperation, runDue, runOperation, setInventory, type Deps } from './products/operations.ts';
 import { stageImage } from './media/service.ts';
+import { reconcile } from './products/reconcile.ts';
 import { handleWebhook } from './webhooks/handler.ts';
 
 const BASE = '/api/admin/v1/';
@@ -201,6 +202,11 @@ export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, d
       requirePermission(p, 'sync:retry');
       await retryOperation(env, match[1], p.userId);
       return startOp(env, ctx, match[1], deps);
+    }
+
+    if (path === 'sync/reconcile' && m === 'POST') {
+      requirePermission(p, 'sync:retry');
+      return json({ report: await reconcile(env, p.userId, deps.gql) });
     }
 
     // ---------------- Auditoria

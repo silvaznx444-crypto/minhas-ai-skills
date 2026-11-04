@@ -1,0 +1,27 @@
+# GRIFHII — API do painel administrativo (Cloudflare Worker).
+# Segredos NUNCA aqui: use `npx wrangler secret put NOME` (ver docs/DEPLOYMENT.md).
+name = "grifhii-admin-api"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Rota do painel no domínio da loja (ajuste ao domínio final). O painel e a API ficam na MESMA origem.
+# routes = [{ pattern = "admin.SEU-DOMINIO.com.br/api/admin/*", zone_name = "SEU-DOMINIO.com.br" }]
+
+[vars]
+ADMIN_ORIGIN = "https://admin.SEU-DOMINIO.com.br"
+WEBAUTHN_RP_ID = "admin.SEU-DOMINIO.com.br"
+SHOPIFY_SHOP_DOMAIN = "grifhiiconceito.myshopify.com"
+SHOPIFY_API_VERSION = "2026-10"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "grifhii-admin"
+database_id = "PREENCHER-com-o-id-do-wrangler-d1-create"
+migrations_dir = "migrations"
+
+[triggers]
+crons = ["* * * * *"]   # retoma operações pendentes a cada minuto
+
+[observability]
+enabled = true

@@ -71,6 +71,7 @@ export class FakeShopify {
   calls: { op: string; vars: any }[] = [];
   staged: { url: string; form: FormData }[] = [];
   seq = 1000;
+  metaobjects: Record<string, string> = { 'gid://shopify/Metaobject/77': 'Preto' };
   failNext = new Map<string, 'timeout' | 'throttle' | 'http500' | 'timeout_after_apply' | 'userError'>();
   mediaStatus: 'READY' | 'PROCESSING' | 'FAILED' = 'READY';
   caps = { missing: [] as string[], compareField: 'changeFromQuantity' };
@@ -80,7 +81,7 @@ export class FakeShopify {
 
   fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
     const url = String(input);
-    if (url.startsWith('https://shopify-staged-uploads') || url.startsWith('https://evil')) { this.staged.push({ url, form: init!.body as FormData }); return new Response('', { status: 204 }); }
+    if (url.startsWith('https://shopify-staged-uploads') || url.startsWith('https://evil')) { this.staged.push({ url, form: init!.body as FormData }); return new Response(null, { status: 204 }); }
     if (!url.endsWith('/admin/api/2026-10/graphql.json')) throw new Error('URL Shopify inesperada: ' + url);
     const { query, variables } = JSON.parse(String(init!.body));
     const op = /(?:query|mutation)\s+(\w+)/.exec(query)![1];
@@ -142,9 +143,10 @@ export class FakeShopify {
         const p = prod(v.productId)!; const created: V[] = [];
         if (v.strategy === 'REMOVE_STANDALONE_VARIANT' && p.variants.nodes.length === 1) p.variants.nodes = [];
         for (const nv of v.variants) {
-          const color = nv.optionValues[0].name ?? `linked:${nv.optionValues[0].linkedMetafieldValue}`; const size = nv.optionValues[1].name;
+          const linked = nv.optionValues[0].linkedMetafieldValue; const color = linked ? (this.metaobjects[linked] ?? 'Desconhecida') : nv.optionValues[0].name; const size = nv.optionValues[1].name;
           if (this.combos(p).includes(`${color}/${size}`)) return { productVariantsBulkCreate: { productVariants: null, userErrors: [{ field: ['variants'], message: `Variant ${color}/${size} already exists`, code: 'VARIANT_ALREADY_EXISTS' }] } };
           const nvv = this.addVariant(p, color, size, nv.price, null, undefined, nv.inventoryItem?.tracked ?? false);
+          if (linked) p.options[0].optionValues.find(o => o.name === color)!.linkedMetafieldValue = linked;
           nvv.sku = nv.inventoryItem?.sku ?? null; nvv.compareAtPrice = nv.compareAtPrice ?? null;
           for (const iq of nv.inventoryQuantities ?? []) this.levels.set(`${nvv.inventoryItem.id}|${iq.locationId}`, iq.availableQuantity);
           created.push(nvv);
@@ -174,6 +176,7 @@ export class FakeShopify {
       case 'GhPublish': { const p = prod(v.id)!; p.published = v.input.map((i: any) => i.publicationId); return { publishablePublish: { userErrors: [] } }; }
       case 'GhUnpublish': { const p = prod(v.id)!; p.published = []; return { publishableUnpublish: { userErrors: [] } }; }
       case 'GhStaged': return { stagedUploadsCreate: { stagedTargets: [{ url: this.stagedTarget, resourceUrl: this.stagedTarget + '/file-123', parameters: [{ name: 'key', value: 'tmp/file' }] }], userErrors: [] } };
+      case 'GhReconcile': return { products: { pageInfo: { hasNextPage: false, endCursor: null }, nodes: [...this.products.values()].map(p => ({ ...p, totalInventory: 0 })) } };
       case 'GhLocations': return { locations: { nodes: [{ id: 'gid://shopify/Location/1', name: 'Loja Santa Helena', isActive: true }] } };
       case 'GhPublications': return { publications: { nodes: [{ id: 'gid://shopify/Publication/9', name: 'Headless' }] } };
       default: throw new Error('operação simulada desconhecida: ' + op);

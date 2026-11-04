@@ -249,6 +249,16 @@ async function publish(c: Ctx, productId: string, on: boolean) {
   assertNoUserErrors((d.publishablePublish ?? d.publishableUnpublish)!.userErrors, on ? 'Publicar' : 'Ocultar');
 }
 
+/** Cor vinculada a metaobjeto: a Shopify usa o nome do metaobjeto (ex.: "Preto"), não o digitado. Troca pelo nome real. */
+function resolveLinked<T extends { color: string; linked?: string }>(p: Product, lines: T[]): T[] {
+  const opt = p.options.find(o => /^(cor|color)$/i.test(o.name));
+  return lines.map(l => {
+    if (!l.linked) return l;
+    const v = (opt?.optionValues as { name: string; linkedMetafieldValue?: string | null }[] | undefined)?.find(x => x.linkedMetafieldValue === l.linked);
+    return v ? { ...l, color: v.name } : l;
+  });
+}
+
 function verifyCombos(p: Product, lines: { color: string; size: string }[]) {
   const have = new Set(p.variants.nodes.map(variantCombo));
   const missing = lines.filter(l => !have.has(comboKey(l.color, l.size)));
@@ -320,18 +330,20 @@ const STEPS: Record<OpKind, (c: Ctx) => Promise<void>> = {
     const lines = p.color.sizes.map(s => ({ color: p.color.name, linked: p.color.linkedMetafieldValue, ...s }));
     const priceCents = p.price ?? Math.round(Number(product.variants.nodes[0]?.price ?? '0') * 100);
     if (!c.state.variantsDone) {
-      await createMissingVariants(c, product, lines, priceCents, undefined, 'DEFAULT');
+      await createMissingVariants(c, product, resolveLinked(product, lines), priceCents, undefined, 'DEFAULT');
       product = await fetchProduct(c, product.id);
-      verifyCombos(product, lines);
+      verifyCombos(product, resolveLinked(product, lines));
       c.state.variantsDone = true; await c.save('variants_created');
     }
+    const real = resolveLinked(product, lines);
+    if (real[0]?.color !== p.color.name) p.media = p.media.map(m => norm(m.color) === norm(p.color.name) ? { ...m, color: real[0].color } : m);
     // Garantia: nenhuma variante anterior pode ter sumido.
     const now = new Set(product.variants.nodes.map(v => v.id));
     const lost = (c.state.before as string[]).filter(id => !now.has(id));
     if (lost.length) throw new ShopifyError('permanent', `ATENÇÃO: ${lost.length} variante(s) anterior(es) não aparecem mais. Verifique na Shopify.`);
-    await ensureQuantities(c, product, new Map(lines.map(l => [comboKey(l.color, l.size), l.quantity])));
+    await ensureQuantities(c, product, new Map(real.map(l => [comboKey(l.color, l.size), l.quantity])));
     product = await attachMedia(c, product, p.media);
-    c.state.summary = { productId: product.id, color: p.color.name, added: lines.length };
+    c.state.summary = { productId: product.id, color: real[0].color, added: lines.length };
     await upsertCache(c, product);
   },
 

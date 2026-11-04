@@ -131,6 +131,18 @@
     const sku=norm(v.sku);if(sku) skuCounts.set(sku,(skuCounts.get(sku)||0)+1);
   }
   function candidateHandle(product){return handles().targets?.[product.slug] || product.slug;}
+  // Nome comparável: "&amp;", "&" e pontuação não contam ("Abercrombie &amp; Fitch" == "Abercrombie & Fitch").
+  const titleKey=v=>norm(String(v||'').replace(/&amp;/gi,' ').replace(/&/g,' ')).replace(/\bamp\b/g,' ').replace(/\s+/g,' ').trim();
+  const titleTargetFor=product=>titleKey(handles().titleTargets?.[product?.slug]||'');
+  const titleMatches=(target,remoteTitle)=>{const t=titleKey(remoteTitle);return Boolean(target)&&(t===target||t.startsWith(target+' '));};
+  /** Produto Shopify de uma peça do site: pelo handle auditado; se não houver, pelo nome cadastrado (precisa ser único). */
+  function remoteFor(product,published){
+    const target=candidateHandle(product);
+    let within=published.filter(p=>p.handle===target);
+    const byTitle=titleTargetFor(product);
+    if(!within.length && byTitle) within=published.filter(p=>titleMatches(byTitle,p.title));
+    return within.length===1?within[0]:null;
+  }
   function selectedColor(product, color){
     const v=normColor(color);
     return handles().colorEquivalents?.[candidateHandle(product)]?.[v] || v;
@@ -142,10 +154,8 @@
     if ((review.rejectedVariantIds || []).includes(localId)) return null;
     // A colecao 30/10 exige autorizacao visual individual, nao por produto completo.
     if (product.shopifyLinkPending && !review.approvedVariantMap?.[localId]) return null;
-    const target=candidateHandle(product);
-    const within=published.filter(p=>p.handle===target);
-    if(within.length!==1) return null;
-    const p=within[0];
+    const p=remoteFor(product,published);
+    if(!p) return null;
     if(p.variants?.pageInfo?.hasNextPage) return null;
     const rows=p.variants?.nodes||[];
     const manual=cfg().variantMap||{};
@@ -193,9 +203,8 @@
   // (o que a curadoria escondeu continua escondido), não repetem cor+tamanho do site e têm foto própria.
   function newRemoteVariants(product,published,current){
     if(!snapshotDomainMatches()) return [];
-    const within=published.filter(p=>p.handle===candidateHandle(product));
-    if(within.length!==1) return [];
-    const p=within[0];
+    const p=remoteFor(product,published);
+    if(!p) return [];
     if(p.variants?.pageInfo?.hasNextPage) return [];
     const used=new Set(current.map(v=>v.shopifyVariantId).filter(Boolean));
     const combos=new Set((product.variants||[]).map(v=>`${selectedColor(product,v.color)}|${normSize(v.size)}`));
@@ -266,7 +275,8 @@
     if (!remote?.handle || !remote?.id) return false;
     if (snapshotDomainMatches() && snapshot()?.products?.has(remote.handle)) return false;
     return !localItems.some(item => candidateHandle(item) === remote.handle ||
-      item.slug === remote.handle || item.shopifyProductId === remote.id);
+      item.slug === remote.handle || item.shopifyProductId === remote.id ||
+      titleMatches(titleTargetFor(item), remote.title));
   }
   function categoryFromShopify(remote) {
     const name=norm([remote.productType,remote.title].filter(Boolean).join(' '));

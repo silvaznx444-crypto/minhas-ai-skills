@@ -103,5 +103,10 @@ const colorEquivalents = {
    'cinza claro':'grisalho','azul bebe claro':'azul','cinza escuro':'cinza'
  }
 };
-window.GRIFHII_SHOPIFY_HANDLE_MAP=Object.freeze({targets:Object.freeze(targets),colorEquivalents:Object.freeze(colorEquivalents)});
+// Peças cujo endereço (handle) na Shopify ainda não é conhecido: vínculo pelo NOME do produto,
+// só quando houver exatamente um produto publicado com esse nome (ou nome + complemento, ex.: cor).
+const titleTargets = {
+ 'camiseta-abercrombie-fitch-new-york':'Camiseta Abercrombie & Fitch New York',
+};
+window.GRIFHII_SHOPIFY_HANDLE_MAP=Object.freeze({targets:Object.freeze(targets),colorEquivalents:Object.freeze(colorEquivalents),titleTargets:Object.freeze(titleTargets)});
 })();

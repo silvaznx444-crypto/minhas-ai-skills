@@ -426,7 +426,7 @@ const cdn = n => `https://cdn.shopify.com/s/files/1/teste/${n}.jpg`;
 const remoteVariant = (id, color, size, img, price = '139.90') => ({id: `gid://shopify/ProductVariant/${id}`, sku: null, title: `${color} / ${size}`,
   availableForSale: true, quantityAvailable: 3, image: img ? {url: img} : null, price: {amount: price, currencyCode: 'BRL'},
   selectedOptions: [{name: 'Cor', value: color}, {name: 'Tamanho', value: size}]});
-const PAINEL_NOVA = {id: 'gid://shopify/Product/990000000001', handle: 'camiseta-abercrombie-fitch-new-york', title: 'Camiseta Abercrombie Fitch New York',
+const PAINEL_NOVA = {id: 'gid://shopify/Product/990000000001', handle: 'camiseta-abercrombie-fitch-hawaii-surf', title: 'Camiseta Abercrombie Fitch Hawaii Surf',
   description: 'Camiseta cadastrada pelo painel.', vendor: 'Abercrombie & Fitch', productType: 'Camisetas', availableForSale: true,
   images: {nodes: [{url: cdn('ny-vermelha'), altText: null}]},
   variants: {pageInfo: {hasNextPage: false}, nodes: [remoteVariant('990000000011', 'Vermelha', 'M', cdn('ny-vermelha')), remoteVariant('990000000012', 'Vermelha', 'G', cdn('ny-vermelha'))]}};
@@ -445,12 +445,12 @@ test('painel → site: peça NOVA publicada aparece no catálogo, abre a página
   await mockShopify(page, {cart: okCart(), nodes: [...NODES, PAINEL_NOVA]});
   await page.goto(`${BASE}produtos`);
   await page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
-  await page.getByText('Camiseta Abercrombie Fitch New York').first().waitFor({timeout: 15000});
-  const href = await page.$eval('a[href*="shopify-camiseta-abercrombie-fitch-new-york"]', a => a.getAttribute('href'));
+  await page.getByText('Camiseta Abercrombie Fitch Hawaii Surf').first().waitFor({timeout: 15000});
+  const href = await page.$eval('a[href*="shopify-camiseta-abercrombie-fitch-hawaii-surf"]', a => a.getAttribute('href'));
   await page.goto(new URL(href, BASE).href);
   await page.waitForSelector('#addProduct');
   await page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
-  assert.equal((await page.textContent('h1')).trim(), 'Camiseta Abercrombie Fitch New York');
+  assert.equal((await page.textContent('h1')).trim(), 'Camiseta Abercrombie Fitch Hawaii Surf');
   await page.click('[data-color="Vermelha"]'); await page.click('[data-size="G"]'); await page.click('#addProduct');
   const cart = await page.evaluate(() => JSON.parse(localStorage.getItem('grifhii-cart-v1') || '[]'));
   assert.equal(cart.length, 1); assert.equal(cart[0].shopifyVariantId, 'gid://shopify/ProductVariant/990000000012');
@@ -482,6 +482,78 @@ test('painel → site: sem a Shopify ao vivo, nada novo é inventado (só a cura
   await mockShopify(page, {catalogStatus: 503, nodes: [...NODES, PAINEL_NOVA]});
   await page.goto(`${BASE}produtos`);
   await page.waitForTimeout(2500);
-  assert.equal(await page.locator('text=Camiseta Abercrombie Fitch New York').count(), 0);
+  assert.equal(await page.locator('text=Camiseta Abercrombie Fitch Hawaii Surf').count(), 0);
+  await ctx.close();
+});
+
+/* ================= AJUSTES 04/11: POPEYE PRETA/VERDE, FITCH NEW YORK, 1892 ================= */
+const POPEYE_PRETO = {'M': '67918319845478', 'G': '67918319878246', 'GG': '67918319911014', 'G1': '67918319943782'};
+function nodesAoVivo04Nov({fitchPublicada = true} = {}) {
+  const out = NODES.map(n => n.handle !== 'camiseta-abercrombie-amp-fitch-popeye-graphic' ? n : {...n, variants: {...n.variants, nodes: [...n.variants.nodes,
+    ...Object.entries(POPEYE_PRETO).map(([s, id]) => remoteVariant(id, 'Preto', s, null))]}});
+  if (fitchPublicada) out.push({id: 'gid://shopify/Product/990000000777', handle: 'handle-desconhecido-fitch-ny', title: 'Camiseta Abercrombie &amp; Fitch New York',
+    description: '', vendor: 'Abercombrie', productType: 'Camisa', availableForSale: true, images: {nodes: [{url: cdn('fitch-ny-shopify'), altText: null}]},
+    variants: {pageInfo: {hasNextPage: false}, nodes: ['M', 'G', 'GG', 'G1'].map((s, i) => remoteVariant(`99000000078${i}`, 'Vermelho', s, cdn('fitch-ny-shopify')))}});
+  return out;
+}
+
+test('Popeye: só Preta e Verde-escuro (Azul-marinho removida), foto real + 3D, Preta/G vai com o ID Preto da Shopify', async () => {
+  const {ctx, page} = await newPage();
+  await enableSalesForTest(page);
+  await mockShopify(page, {cart: okCart(), nodes: nodesAoVivo04Nov()});
+  const cart = await addFromProductPage(page, 'camiseta-abercrombie-popeye', {color: 'Preta', size: 'G'});
+  const colors = [...new Set(await page.$$eval('[data-color]', b => b.map(x => x.getAttribute('data-color'))))];
+  assert.deepEqual(colors.sort(), ['Preta', 'Verde-escuro']);
+  assert.equal(cart.length, 1); assert.equal(cart[0].shopifyVariantId, `gid://shopify/ProductVariant/${POPEYE_PRETO.G}`);
+  const m = await page.evaluate(() => {
+    const p = window.GRIFHII_CURADORIA.find(x => x.slug === 'camiseta-abercrombie-popeye');
+    return p.images.map(i => [i, window.GRIFHII_3D.modelForPhoto(p, i)]);
+  });
+  assert.deepEqual(m, [
+    ['assets/fotos-reais/camiseta-abercrombie-popeye-preta-real.webp', 'assets/modelos-3d/camiseta-abercrombie-popeye-preta-3d.webp'],
+    ['assets/fotos-reais/camiseta-abercrombie-popeye-verde-escuro-real.webp', 'assets/colecao-30-outubro/camiseta-abercrombie-popeye-verde-escuro.webp']]);
+  assert.deepEqual(page.errors, []);
+  await ctx.close();
+});
+
+test('Fitch New York: vinculada pelo NOME quando publicada (sem duplicar), compra com o ID certo; sem publicação não vende', async () => {
+  const {ctx, page} = await newPage();
+  await enableSalesForTest(page);
+  await mockShopify(page, {cart: okCart(), nodes: nodesAoVivo04Nov()});
+  const cart = await addFromProductPage(page, 'camiseta-abercrombie-fitch-new-york', {color: 'Vermelha', size: 'GG'});
+  assert.equal(cart.length, 1); assert.equal(cart[0].shopifyVariantId, 'gid://shopify/ProductVariant/990000000782');
+  assert.equal(await page.evaluate(() => window.GRIFHII_3D.forPhoto('assets/fotos-reais/camiseta-abercrombie-fitch-new-york-vermelha-real.webp')),
+    'assets/modelos-3d/camiseta-abercrombie-fitch-new-york-vermelha-3d.webp');
+  await page.goto(`${BASE}produtos`);
+  await page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
+  await page.waitForTimeout(800);
+  assert.equal(await page.locator('a[href*="shopify-handle-desconhecido-fitch-ny"]').count(), 0, 'não aparece duplicada como peça dinâmica');
+  assert.ok(await page.locator('a[href*="camiseta-abercrombie-fitch-new-york"]').count() >= 1, 'aparece no catálogo');
+  await ctx.close();
+
+  const b = await newPage();
+  await enableSalesForTest(b.page);
+  const log = [];
+  await mockShopify(b.page, {cart: okCart(), log, nodes: nodesAoVivo04Nov({fitchPublicada: false})});
+  await b.page.goto(`${BASE}peca-camiseta-abercrombie-fitch-new-york`);
+  await b.page.waitForSelector('#addProduct');
+  await b.page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
+  await b.page.reload(); await b.page.waitForSelector('#addProduct');
+  await b.page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
+  assert.equal((await b.page.textContent('h1')).trim(), 'Camiseta Abercrombie & Fitch New York', 'a peça aparece no site');
+  assert.ok(await b.page.isDisabled('#addProduct'), 'sem publicação na Shopify o botão de compra fica desativado');
+  const c2 = await b.page.evaluate(() => JSON.parse(localStorage.getItem('grifhii-cart-v1') || '[]'));
+  assert.equal(c2.length, 0, 'sem publicação na Shopify não entra na sacola');
+  assert.equal(log.length, 0);
+  await b.ctx.close();
+});
+
+test('1892 Verde: foto real nova com o 3D anterior vinculado', async () => {
+  const {ctx, page} = await newPage();
+  await mockShopify(page);
+  await page.goto(`${BASE}peca-camiseta-abercrombie-graphic-1892-verde`);
+  await page.waitForSelector('#addProduct');
+  const r = await page.evaluate(() => { const p = window.GRIFHII_CURADORIA.find(x => x.slug === 'camiseta-abercrombie-graphic-1892-verde'); return [p.images[0], window.GRIFHII_3D.modelForPhoto(p, p.images[0])]; });
+  assert.deepEqual(r, ['assets/fotos-reais/camiseta-abercrombie-graphic-1892-verde-real.webp', 'assets/colecao-30-outubro/camiseta-abercrombie-graphic-1892-verde-verde.webp']);
   await ctx.close();
 });

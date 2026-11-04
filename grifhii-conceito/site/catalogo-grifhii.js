@@ -2049,7 +2049,7 @@
       "name": "Camiseta Diesel D-Corp 1978 — Verde Militar",
       "brand": "DIESEL",
       "category": "camisetas",
-      "description": "Autenticidade, personalidade e estilo urbano. Na frente, faixa gráfica com fotografias e assinatura Diesel vermelha; nas costas, estampa Diesel D-Corp Since 1978 em vermelho e cinza. Camiseta verde-militar de gola redonda e mangas curtas. Tamanhos G, GG e G1.",
+      "description": "Autenticidade, personalidade e estilo urbano. Na frente, faixa gráfica com fotografias e assinatura Diesel vermelha; nas costas, estampa Diesel D-Corp Since 1978 em vermelho e cinza. Camiseta verde-militar de gola redonda e mangas curtas. Tamanhos M e G.",
       "priceCents": 13990,
       "promoPriceCents": null,
       "images": [
@@ -2058,35 +2058,23 @@
       ],
       "variants": [
         {
+          "id": "preview-diesel-d-corp-1978-verde-m",
+          "size": "M",
+          "color": "Verde-militar",
+          "availableStock": 0,
+          "sku": "GRIF-26OCT-DIESEL-D-CORP-1978-VERDE-VERDEMIL-M",
+          "image": "assets/colecao-20-outubro/diesel-d-corp-1978-verde-01.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real recebida e usada no catálogo.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
           "id": "preview-diesel-d-corp-1978-verde-1",
           "size": "G",
           "color": "Verde-militar",
           "availableStock": 0,
           "sku": "GRIF-26OCT-DIESEL-D-CORP-1978-VERDE-VERDEMIL-G",
-          "image": "assets/colecao-20-outubro/diesel-d-corp-1978-verde-01.webp",
-          "photoStatus": "recebida",
-          "photoNote": "Fotografia real recebida e usada no catálogo.",
-          "stockConfirmed": false,
-          "catalogVisible": true
-        },
-        {
-          "id": "preview-diesel-d-corp-1978-verde-2",
-          "size": "GG",
-          "color": "Verde-militar",
-          "availableStock": 0,
-          "sku": "GRIF-26OCT-DIESEL-D-CORP-1978-VERDE-VERDEMIL-GG",
-          "image": "assets/colecao-20-outubro/diesel-d-corp-1978-verde-01.webp",
-          "photoStatus": "recebida",
-          "photoNote": "Fotografia real recebida e usada no catálogo.",
-          "stockConfirmed": false,
-          "catalogVisible": true
-        },
-        {
-          "id": "preview-diesel-d-corp-1978-verde-3",
-          "size": "G1",
-          "color": "Verde-militar",
-          "availableStock": 0,
-          "sku": "GRIF-26OCT-DIESEL-D-CORP-1978-VERDE-VERDEMIL-G1",
           "image": "assets/colecao-20-outubro/diesel-d-corp-1978-verde-01.webp",
           "photoStatus": "recebida",
           "photoNote": "Fotografia real recebida e usada no catálogo.",

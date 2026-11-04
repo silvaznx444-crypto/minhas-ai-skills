@@ -37,5 +37,11 @@ export const MIGRATIONS: { name: string; statements: string[] }[] = [
       "CREATE TABLE device_links (\n  id          TEXT PRIMARY KEY,\n  token_hash  TEXT NOT NULL UNIQUE,\n  user_id     TEXT NOT NULL REFERENCES users(id),\n  expires_at  INTEGER NOT NULL,\n  used_at     INTEGER,\n  created_at  INTEGER NOT NULL\n)",
       "CREATE INDEX device_links_user ON device_links(user_id)"
     ]
+  },
+  {
+    "name": "0003_site_categories.sql",
+    "statements": [
+      "INSERT OR IGNORE INTO categories (slug,label,shopify_product_type,sort_order,created_at) VALUES\n  ('calcas','Calças','Calças',8,0),\n  ('conjuntos','Conjuntos','Conjuntos',9,0),\n  ('moletons','Moletons','Moletons',10,0),\n  ('esportivo','Esportivo','Esportivo',11,0),\n  ('calcados','Calçados','Calçados',12,0),\n  ('cintos','Cintos','Cintos',13,0),\n  ('acessorios','Acessórios','Acessórios',14,0)"
+    ]
   }
 ];

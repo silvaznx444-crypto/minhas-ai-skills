@@ -582,3 +582,50 @@ test('menu Marcas: abre a sanfona (nunca vai direto para Produtos), mesmo com in
     await ctx.close();
   }
 });
+
+/* ================= CONTRATO PAINEL → SHOPIFY → SITE ================= */
+test('contrato: peça cadastrada NO PAINEL aparece no site na marca e categoria certas, com foto e 3D (3D fora da galeria) e vende', async () => {
+  // 1) Painel (o mesmo código do Worker) cadastra na Shopify simulada.
+  const H = await import('../admin/tests/helpers.ts');
+  const A = await import('../admin/src/index.ts');
+  const env = H.makeEnv(); await H.configureStore(env);
+  const fake = new H.FakeShopify(); const owner = await H.makeUser(env, 'OWNER');
+  const staged = (role, sha, color) => ({resourceUrl: 'https://shopify-staged-uploads.storage.googleapis.com/tmp/' + sha, role, color, sha256: sha.repeat(64).slice(0, 64), width: 1152, height: 1536, bytes: 1000});
+  const res = await A.handleApi(H.req('products', {method: 'POST', user: owner, headers: {'Idempotency-Key': crypto.randomUUID()}, body: {
+    title: 'Boné Abercrombie Contrato Painel', brand: 'Abercrombie', category: 'bones', price: '89,90', publish: true,
+    colors: [{name: 'Verde', sizes: [{size: 'Único', quantity: 2}]}],
+    media: [staged('photo', 'a', 'Verde'), staged('render3d', 'b', 'Verde')]}}), env, H.ctx(), {gql: {fetchImpl: fake.fetch, sleep: async () => {}}});
+  const body = await res.json();
+  assert.equal(body.status, 'succeeded', JSON.stringify(body));
+  const nodes = fake.storefrontNodes();
+  assert.equal(nodes.length, 1, 'publicado no canal do site');
+
+  // 2) Site lê a mesma peça pela Storefront (simulada a partir do que o painel gravou).
+  const {ctx, page} = await newPage();
+  await enableSalesForTest(page);
+  await mockShopify(page, {cart: okCart(), nodes: [...NODES, ...nodes]});
+  await page.goto(`${BASE}produtos?marca=abercrombie-fitch`);
+  await page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
+  await page.getByText('Boné Abercrombie Contrato Painel').first().waitFor({timeout: 15000});
+  const r = await page.evaluate(async handle => {
+    const p = await window.GRIFHII_LOCAL_API(`/products/shopify-${handle}`);
+    const acc = await window.GRIFHII_LOCAL_API('/products?category=acessorios&limit=100');
+    return {brand: p.brand, category: p.category, images: p.images, model: window.GRIFHII_3D.modelForPhoto(p, p.images[0], p.variants[0]),
+      inAcc: acc.data.some(x => x.slug === p.slug), price: p.priceCents, size: p.variants[0].size, stock: p.variants[0].availableStock};
+  }, nodes[0].handle);
+  assert.equal(r.brand, 'ABERCROMBIE & FITCH', '"Abercrombie" vira a marca oficial do site');
+  assert.equal(r.category, 'acessorios'); assert.ok(r.inAcc, 'aparece em Acessórios');
+  assert.equal(r.images.length, 1, `só a foto real na galeria (3D fora): ${r.images}`);
+  assert.ok(r.model && r.model !== r.images[0], '3D vinculado à foto da cor');
+  assert.equal(r.price, 8990); assert.equal(r.size, 'Único'); assert.equal(r.stock, 2);
+  // 3) Compra: vai para a sacola com o ID da variante criada pelo painel.
+  await page.goto(`${BASE}peca.html?slug=shopify-${nodes[0].handle}`);
+  await page.waitForSelector('#addProduct');
+  await page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
+  await page.click('[data-color="Verde"]').catch(() => {});
+  await page.click('#addProduct');
+  const cart = await page.evaluate(() => JSON.parse(localStorage.getItem('grifhii-cart-v1') || '[]'));
+  assert.equal(cart.length, 1); assert.equal(cart[0].shopifyVariantId, nodes[0].variants.nodes[0].id);
+  assert.deepEqual(page.errors, []);
+  await ctx.close();
+});

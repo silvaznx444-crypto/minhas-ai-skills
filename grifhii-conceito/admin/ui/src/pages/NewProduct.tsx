@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { api, money, newKey, numId, SIZES, validMoney } from '../lib.ts';
 import { Button, ErrorNotice, useLoad, useSession } from '../ui.tsx';
+import { isSiteBrand, SITE_BRANDS, SITE_CATEGORY_NOTE } from '../site.ts';
 import { forApi, MediaPicker, type StagedMedia } from './Media.tsx';
 
 interface ColorLine { name: string; sizes: Record<string, number>; }
@@ -70,10 +71,17 @@ export function NewProduct() {
     {step === 0 && <div className="card stack">
       <label className="field">Nome do produto<input className="input" value={d.title} onChange={e => set({ title: e.target.value })} maxLength={120} placeholder="Camiseta Abercrombie Fitch New York" /></label>
       <div className="grid cols-2">
-        <label className="field">Marca<input className="input" value={d.brand} onChange={e => set({ brand: e.target.value })} maxLength={60} /></label>
+        <label className="field">Marca<select className="input" value={isSiteBrand(d.brand) ? SITE_BRANDS.find(b => b.toLowerCase() === d.brand.trim().toLowerCase()) : d.brand ? '__outra' : ''}
+          onChange={e => set({ brand: e.target.value === '__outra' ? ' ' : e.target.value })}>
+          <option value="">Escolha a marca…</option>
+          {SITE_BRANDS.map(b => <option key={b} value={b}>{b}</option>)}
+          <option value="__outra">Outra marca…</option></select></label>
         <label className="field">Categoria<select className="input" value={d.category} onChange={e => set({ category: e.target.value })}>
-          {(cats.data?.categories ?? [{ slug: 'camisetas', label: 'Camisetas' }]).map((c: any) => <option key={c.slug} value={c.slug}>{c.label}</option>)}</select></label>
+          {(cats.data?.categories ?? [{ slug: 'camisetas', label: 'Camisetas' }]).map((c: any) => <option key={c.slug} value={c.slug}>{c.label}</option>)}</select>
+          {SITE_CATEGORY_NOTE[d.category] && <span className="muted" style={{ fontSize: 12 }}>No site, aparece em {SITE_CATEGORY_NOTE[d.category]}.</span>}</label>
       </div>
+      {d.brand && !isSiteBrand(d.brand) && <label className="field">Nome da outra marca<input className="input" value={d.brand.trim()} onChange={e => set({ brand: e.target.value || ' ' })} maxLength={60} placeholder="Ex.: Nike" />
+        <span className="muted" style={{ fontSize: 12 }}>Marca fora da lista do site: a peça aparece em Produtos e na categoria, mas ainda não terá página própria de marca.</span></label>}
       <div className="grid cols-2">
         <label className="field">Preço de venda (R$)<input className="input" inputMode="decimal" value={d.price} onChange={e => set({ price: e.target.value })} placeholder="139,90" /></label>
         <label className="field">Preço “de” (opcional)<input className="input" inputMode="decimal" value={d.compareAtPrice} onChange={e => set({ compareAtPrice: e.target.value })} placeholder="199,90" /></label>

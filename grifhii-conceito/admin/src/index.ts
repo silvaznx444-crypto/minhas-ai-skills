@@ -8,7 +8,7 @@ import { requirePermission, requireRecentAuth, type Principal } from './auth/rba
 import { purgeRateLimits, rateLimit } from './auth/ratelimit.ts';
 import { adminGraphql, ShopifyError, type GqlOptions } from './shopify/client.ts';
 import { getCapabilities } from './shopify/capabilities.ts';
-import { AddColor, CreateProduct, ProductGid, SetInventory, UpdatePrice } from './products/schemas.ts';
+import { AddColor, AddMedia, CreateProduct, ProductGid, SetInventory, UpdatePrice } from './products/schemas.ts';
 import { enqueue, getProductInventory, retryOperation, runDue, runOperation, setInventory, type Deps } from './products/operations.ts';
 import { stageImage } from './media/service.ts';
 import { reconcile } from './products/reconcile.ts';
@@ -160,6 +160,12 @@ export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, d
       const body = parse(AddColor, { ...(await readJson(req, 128 * 1024) as object), productId: productGid(match[1]) });
       if (body.price !== undefined) requirePermission(p, 'prices:write');
       const { id } = await enqueue(env, p.userId, 'product.add_color', idemKey(req), body, body.productId);
+      return startOp(env, ctx, id, deps);
+    }
+    if ((match = /^products\/(\d{1,20})\/media$/.exec(path)) && m === 'POST') {
+      requirePermission(p, 'media:write');
+      const body = parse(AddMedia, { ...(await readJson(req, 128 * 1024) as object), productId: productGid(match[1]) });
+      const { id } = await enqueue(env, p.userId, 'media.attach', idemKey(req), body, body.productId);
       return startOp(env, ctx, id, deps);
     }
     if ((match = /^products\/(\d{1,20})\/price$/.exec(path)) && m === 'PUT') {

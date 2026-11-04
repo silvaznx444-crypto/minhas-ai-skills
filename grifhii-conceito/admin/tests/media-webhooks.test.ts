@@ -156,3 +156,55 @@ test('respostas da API não devolvem o token Admin da Shopify', async () => {
     assert.ok(!t.includes(env.SHOPIFY_ADMIN_TOKEN!), path);
   }
 });
+
+/* ---------- Fotos/3D em cor que JÁ existe (adicionar ou trocar) ---------- */
+const stagedMedia = (role: string, sha: string, color: string) => ({ resourceUrl: 'https://shopify-staged-uploads.storage.googleapis.com/tmp/' + sha, role, color, sha256: sha.repeat(64).slice(0, 64), width: 1152, height: 1536, bytes: 1000 });
+async function pecaComDuasCores(env: any, fake: FakeShopify, o: any) {
+  const r = await call(env, req('products', { method: 'POST', user: o, headers: { 'Idempotency-Key': crypto.randomUUID() }, body: {
+    title: 'Camiseta Duas Cores', brand: 'Lacoste', category: 'camisetas', price: '139,90', publish: false,
+    colors: [{ name: 'Preta', sizes: [{ size: 'M', quantity: 1 }, { size: 'G', quantity: 1 }] }, { name: 'Branca', sizes: [{ size: 'M', quantity: 1 }] }],
+    media: [stagedMedia('photo', 'a', 'Preta'), stagedMedia('photo', 'b', 'Branca')] } }), fake);
+  assert.equal((await r.json() as any).status, 'succeeded');
+  return [...fake.products.values()][0];
+}
+const mediaReq = (o: any, id: string, media: unknown[]) => req(`products/${id.split('/').pop()}/media`, { method: 'POST', user: o, headers: { 'Idempotency-Key': crypto.randomUUID() }, body: { media } });
+
+test('fotos/3D em cor existente: troca a foto SÓ da cor escolhida e grava o 3D nas variantes dela', async () => {
+  const env = makeEnv(); await configureStore(env); const fake = new FakeShopify(); const o = await makeUser(env, 'OWNER');
+  const p = await pecaComDuasCores(env, fake, o);
+  const branca = p.variants.nodes.find(v => v.selectedOptions.some(x => x.value === 'Branca'))!;
+  const brancaAntes = branca.media.nodes[0].id;
+  const r = await call(env, mediaReq(o, p.id, [stagedMedia('photo', 'c', 'Preta'), stagedMedia('render3d', 'd', 'Preta')]), fake);
+  const b = await r.json() as any;
+  assert.equal(b.status, 'succeeded', JSON.stringify(b));
+  assert.deepEqual(b.summary, { productId: p.id, photos: 1, models3d: 1 });
+  const novaFoto = p.media.nodes.find(m => (m.alt ?? '').includes('[gh:photo:cccc'))!.id;
+  const pretas = p.variants.nodes.filter(v => v.selectedOptions.some(x => x.value === 'Preta'));
+  assert.ok(pretas.every(v => v.media.nodes[0].id === novaFoto), 'foto nova nas variantes pretas');
+  assert.equal(branca.media.nodes[0].id, brancaAntes, 'cor Branca não foi tocada');
+  const mf3d = fake.metafields.filter(m => m.key === 'imagem_3d');
+  assert.deepEqual(mf3d.map(m => m.ownerId).sort(), pretas.map(v => v.id).sort(), '3D só nas variantes pretas');
+  const atividade = await env.DB.prepare("SELECT result FROM audit_logs WHERE action = 'media.attach' ORDER BY at").all();
+  assert.deepEqual(atividade.results.map((x: any) => x.result), ['attempt', 'success']);
+});
+
+test('fotos/3D: cor inexistente é recusada com orientação; sem permissão de imagens → 403', async () => {
+  const env = makeEnv(); await configureStore(env); const fake = new FakeShopify(); const o = await makeUser(env, 'OWNER');
+  const p = await pecaComDuasCores(env, fake, o);
+  const r = await call(env, mediaReq(o, p.id, [stagedMedia('photo', 'e', 'Verde')]), fake);
+  const b = await r.json() as any;
+  assert.equal(b.status, 'needs_attention'); assert.match(b.error, /não tem a cor: Verde.*Adicionar nova cor/);
+  const e = await makeUser(env, 'EMPLOYEE', ['products:read', 'products:write']);
+  assert.equal((await call(env, mediaReq(e, p.id, [stagedMedia('photo', 'f', 'Preta')]), fake)).status, 403);
+  assert.equal((await call(env, mediaReq(o, p.id, []), fake)).status, 422, 'precisa de ao menos uma imagem');
+  const ssrf = { ...stagedMedia('photo', 'g', 'Preta'), resourceUrl: 'http://169.254.169.254/latest' };
+  assert.equal((await call(env, mediaReq(o, p.id, [ssrf]), fake)).status, 422, 'origem externa recusada');
+});
+
+test('categorias do painel = categorias do site (11), cada uma com o tipo que o site reconhece', async () => {
+  const env = makeEnv(); const o = await makeUser(env, 'OWNER');
+  const r = await call(env, req('categories', { user: o }), new FakeShopify());
+  const cats = (await r.json() as any).categories.map((c: any) => c.slug);
+  for (const s of ['camisetas', 'polos', 'bermudas', 'calcas', 'conjuntos', 'moletons', 'esportivo', 'calcados', 'cintos', 'acessorios', 'camisas-sociais'])
+    assert.ok(cats.includes(s), `falta ${s}`);
+});

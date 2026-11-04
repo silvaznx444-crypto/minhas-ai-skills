@@ -71,6 +71,13 @@ export const AddColor = z.object({
 }).strict();
 export type AddColorT = z.infer<typeof AddColor>;
 
+/** Fotos reais e/ou imagens 3D para cores que JÁ existem na peça (adicionar ou trocar). */
+export const AddMedia = z.object({
+  productId: ProductGid,
+  media: z.array(StagedMedia).min(1).max(10),
+}).strict();
+export type AddMediaT = z.infer<typeof AddMedia>;
+
 export const UpdatePrice = z.object({
   productId: ProductGid,
   variantIds: z.array(VariantGid).min(1).max(100),

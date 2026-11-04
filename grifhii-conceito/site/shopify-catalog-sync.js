@@ -278,12 +278,21 @@
       item.slug === remote.handle || item.shopifyProductId === remote.id ||
       titleMatches(titleTargetFor(item), remote.title));
   }
+  // Marca da Shopify → marca oficial do site (aceita apelidos como "Abercrombie" ou "A&F"),
+  // para a peça aparecer na página da marca. Marca desconhecida fica como foi cadastrada.
+  function canonicalBrand(vendor){
+    const v=clean(vendor);
+    if(!v) return 'GRIFHII';
+    const b=window.GRIFHII_PRODUCTS?.getBrand?.(v);
+    return b?.apiBrand || b?.label || v;
+  }
   function categoryFromShopify(remote) {
     const name=norm([remote.productType,remote.title].filter(Boolean).join(' '));
     // O tipo informado pelo lojista tem prioridade. Nunca inventar uma nova categoria.
     const type=norm(remote.productType || '');
     const input=type || name;
     if (/bone|chapeu|acessor|carteira|bolsa/.test(input)) return 'acessorios';
+    if (/esportiv|fitness|dry fit|performance/.test(type)) return 'esportivo';
     if (/tenis|calcado|sapato/.test(input)) return 'calcados';
     if (/cinto/.test(input)) return 'cintos';
     if (/moletom/.test(input)) return 'moletons';
@@ -322,7 +331,12 @@
   function remoteProduct(remote){
     const items=remote.variants?.nodes||[];
     if(remote.variants?.pageInfo?.hasNextPage || !items.length) return null;
-    const urls=uniqueStrings([...(remote.images?.nodes||[]).map(i=>i?.url),
+    // A imagem 3D também é mídia do produto na Shopify: ela NÃO entra na galeria de fotos
+    // (é exibida só como 3D da variante). Identificada pelo metacampo da variante ou pela marca do painel no texto alternativo.
+    const base=u=>String(u||'').split('?')[0];
+    const models=new Set(items.map(v=>base(v.metafield?.reference?.image?.url)).filter(Boolean));
+    const isModel=img=>models.has(base(img?.url)) || /\[gh:render3d:/.test(String(img?.altText||''));
+    const urls=uniqueStrings([...(remote.images?.nodes||[]).filter(i=>!isModel(i)).map(i=>i?.url),
       ...items.map(v=>v.image?.url)]);
     if(!urls.length) return null; // peça sem foto não aparece na vitrine
     const slug=`shopify-${remote.handle}`;
@@ -332,7 +346,7 @@
     const prices=variants.map(v=>v.shopifyPriceCents).filter(Number.isFinite);
     return {
       id:`shopify-product-${numeric(remote.id)||remote.handle}`,slug,name:remote.title,
-      brand:clean(remote.vendor)||'GRIFHII',category:categoryFromShopify(remote),
+      brand:canonicalBrand(remote.vendor),category:categoryFromShopify(remote),
       description:clean(remote.description),images:urls,variants,
       priceCents:prices.length?Math.min(...prices):0,promoPriceCents:null,
       shopifyProductId:remote.id,shopifyHandle:remote.handle,

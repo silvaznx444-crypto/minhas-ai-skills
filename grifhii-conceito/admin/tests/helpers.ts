@@ -116,6 +116,22 @@ export class FakeShopify {
     return v;
   }
   combos(p: P) { return p.variants.nodes.map(v => v.selectedOptions.map(o => o.value).join('/')); }
+  /** Como a Storefront API (canal do site) mostraria os produtos ATIVOS e publicados — para o teste de contrato com o site.
+   *  Igual à Shopify real: TODA mídia do produto (inclusive a 3D) aparece em product.images. */
+  storefrontNodes(locationId = 'gid://shopify/Location/1') {
+    const url = (mid: string) => `https://cdn.shopify.com/s/files/1/teste/${mid.split('/').pop()}.jpg`;
+    return [...this.products.values()].filter(p => p.status === 'ACTIVE' && p.published.length).map(p => ({
+      id: p.id, handle: p.handle, title: p.title, description: '', vendor: p.vendor, productType: p.productType, availableForSale: true,
+      images: { nodes: p.media.nodes.map(m => ({ url: url(m.id), altText: m.alt })) },
+      variants: { pageInfo: { hasNextPage: false }, nodes: p.variants.nodes.map(v => {
+        const q = this.levels.get(`${v.inventoryItem.id}|${locationId}`) ?? 0;
+        const mf = this.metafields.find(f => f.ownerId === v.id && f.namespace === 'grifhii' && f.key === 'imagem_3d');
+        return { id: v.id, sku: v.sku, title: v.selectedOptions.map(o => o.value).join(' / '), availableForSale: q > 0, quantityAvailable: q,
+          image: v.media.nodes[0] ? { url: url(v.media.nodes[0].id) } : null, price: { amount: v.price, currencyCode: 'BRL' },
+          selectedOptions: v.selectedOptions, metafield: mf ? { reference: { image: { url: url(mf.value) } } } : null };
+      }) },
+    }));
+  }
 
   handle(op: string, v: any): any {
     const prod = (id: string) => this.products.get(id) ?? null;
@@ -170,7 +186,7 @@ export class FakeShopify {
         for (const q of v.input.quantities) this.levels.set(`${q.inventoryItemId}|${q.locationId}`, q.quantity);
         return { inventorySetQuantities: { inventoryAdjustmentGroup: { changes: [] }, userErrors: [] } };
       }
-      case 'GhProductMedia': { const p = prod(v.p.id)!; for (const m of v.media) p.media.nodes.push({ id: this.nextId('MediaImage'), status: this.mediaStatus, mediaContentType: 'IMAGE', alt: m.alt, preview: null }); this.touch(p); return { productUpdate: { product: p, userErrors: [] } }; }
+      case 'GhProductMedia': { const p = prod(v.p.id)!; for (const m of v.media) p.media.nodes.push({ id: this.nextId('MediaImage'), status: this.mediaStatus, mediaContentType: 'IMAGE', alt: m.alt, preview: null, src: m.originalSource } as any); this.touch(p); return { productUpdate: { product: p, userErrors: [] } }; }
       case 'GhMetafieldsSet': { this.metafields.push(...v.m); return { metafieldsSet: { metafields: [], userErrors: [] } }; }
       case 'GhStatus': { const p = prod(v.p.id)!; p.status = v.p.status; this.touch(p); return { productUpdate: { product: p, userErrors: [] } }; }
       case 'GhPublish': { const p = prod(v.id)!; p.published = v.input.map((i: any) => i.publicationId); return { publishablePublish: { userErrors: [] } }; }

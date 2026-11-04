@@ -3,9 +3,9 @@ import qrcode from 'qrcode-generator';
 import { api, fmtDate, numId, withStepUp } from '../lib.ts';
 import { Button, ErrorNotice, Loading, StatusBadge, useLoad, useSession, useToast } from '../ui.tsx';
 
-const OPS: Record<string, string> = { 'product.create': 'Novo produto', 'product.add_color': 'Nova cor', 'product.update_price': 'Preço', 'product.publish': 'Publicar', 'product.unpublish': 'Ocultar' };
+const OPS: Record<string, string> = { 'product.create': 'Novo produto', 'product.add_color': 'Nova cor', 'media.attach': 'Fotos/3D', 'product.update_price': 'Preço', 'product.publish': 'Publicar', 'product.unpublish': 'Ocultar' };
 const ACTIONS: Record<string, string> = { 'auth.login': 'Entrou no painel', 'auth.logout': 'Saiu', 'auth.reauth': 'Confirmou identidade', 'auth.setup': 'Configuração inicial',
-  'product.create': 'Produto criado', 'product.add_color': 'Cor adicionada', 'product.update_price': 'Preço alterado', 'product.publish': 'Produto publicado', 'product.unpublish': 'Produto ocultado',
+  'product.create': 'Produto criado', 'product.add_color': 'Cor adicionada', 'media.attach': 'Fotos/3D atualizados', 'product.update_price': 'Preço alterado', 'product.publish': 'Produto publicado', 'product.unpublish': 'Produto ocultado',
   'inventory.set': 'Estoque alterado', 'media.upload': 'Imagem enviada', 'settings.update': 'Configurações alteradas', 'users.invite': 'Convite criado', 'users.update': 'Usuário alterado',
   'sync.reconcile': 'Reconciliação', 'operation.retry': 'Nova tentativa', 'categories.create': 'Categoria criada' };
 

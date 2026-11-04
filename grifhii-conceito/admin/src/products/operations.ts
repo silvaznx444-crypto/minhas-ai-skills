@@ -4,9 +4,9 @@ import { AppError, errors } from '../lib/http.ts';
 import { sha256Hex } from '../lib/crypto.ts';
 import { adminGraphql, assertNoUserErrors, ShopifyError, type GqlOptions, type UserError } from '../shopify/client.ts';
 import { requireWritable, type Capabilities } from '../shopify/capabilities.ts';
-import { centsToDecimal, type AddColorT, type CreateProductT, type StagedMediaT, type UpdatePriceT } from './schemas.ts';
+import { centsToDecimal, type AddColorT, type AddMediaT, type CreateProductT, type StagedMediaT, type UpdatePriceT } from './schemas.ts';
 
-export type OpKind = 'product.create' | 'product.add_color' | 'product.update_price' | 'product.publish' | 'product.unpublish';
+export type OpKind = 'product.create' | 'product.add_color' | 'media.attach' | 'product.update_price' | 'product.publish' | 'product.unpublish';
 export interface OpRow { id: string; user_id: string; kind: OpKind; payload: string; status: string; step: string; state: string; attempts: number; shopify_product_id: string | null; last_error: string | null; }
 export interface Deps { gql?: GqlOptions; nowMs?: () => number; mediaPollMs?: number; deployHook?: (env: Env) => Promise<void>; }
 const MAX_ATTEMPTS = 8;
@@ -347,6 +347,16 @@ const STEPS: Record<OpKind, (c: Ctx) => Promise<void>> = {
     await upsertCache(c, product);
   },
 
+  async 'media.attach'(c) {
+    const p = JSON.parse(c.op.payload) as AddMediaT;
+    let product = await fetchProduct(c, p.productId);
+    const colors = new Set(product.variants.nodes.map(v => variantCombo(v).split('|')[0]));
+    const unknown = [...new Set(p.media.map(m => m.color))].filter(col => !colors.has(norm(col)));
+    if (unknown.length) throw new ShopifyError('permanent', `Esta peça não tem a cor: ${unknown.join(', ')}. Para uma cor nova, use "Adicionar nova cor".`);
+    product = await attachMedia(c, product, p.media);
+    await upsertCache(c, product);
+    c.state.summary = { productId: product.id, photos: p.media.filter(m => m.role === 'photo').length, models3d: p.media.filter(m => m.role === 'render3d').length };
+  },
   async 'product.update_price'(c) {
     const p = JSON.parse(c.op.payload) as UpdatePriceT;
     const product = await fetchProduct(c, p.productId);

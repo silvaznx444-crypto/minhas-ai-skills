@@ -50,6 +50,7 @@ export function ProductDetail({ id }: { id: string }) {
     </section>
 
     {can('prices:write') && <PriceEditor product={p} onDone={() => { prod.reload(); toast('Preço confirmado na Shopify.'); }} />}
+    {can('media:write') && <ColorMedia product={p} onDone={() => { prod.reload(); toast('Fotos/3D confirmados na Shopify. O site atualiza em instantes.'); }} />}
     {can('products:write') && <AddColor product={p} onDone={() => { prod.reload(); inv.reload(); toast('Nova cor confirmada na Shopify.'); }} />}
 
     {can('products:publish') && <section className="card row between">
@@ -140,5 +141,28 @@ function AddColor({ product, onDone }: { product: any; onDone: () => void }) {
           setOpen(false); setName(''); setSizes({}); setMedia([]); onDone();
         } catch (e) { setError(e); }
       }}>Adicionar cor</Button></div>
+  </section>;
+}
+
+/** Fotos reais e imagem 3D de uma cor que JÁ existe (adicionar ou trocar). A foto nova substitui a da cor no site. */
+function ColorMedia({ product, onDone }: { product: any; onDone: () => void }) {
+  const colorOpt = product.options.find((o: any) => /^(cor|color)$/i.test(o.name));
+  const colors: string[] = colorOpt?.optionValues.map((v: any) => v.name) ?? [];
+  const [open, setOpen] = useState(false); const [color, setColor] = useState(''); const [media, setMedia] = useState<StagedMedia[]>([]);
+  const [error, setError] = useState<unknown>(null);
+  if (!colors.length) return null;
+  if (!open) return <button className="btn ghost" onClick={() => setOpen(true)}>Trocar ou adicionar fotos / 3D de uma cor</button>;
+  return <section className="card stack">
+    <h2>Fotos e 3D</h2>
+    <p className="muted" style={{ fontSize: 14, margin: 0 }}>Escolha a cor. A <strong>foto real</strong> nova passa a ser a foto dessa cor no site; a <strong>imagem 3D</strong> aparece no lugar do 3D atual.</p>
+    <div className="chips">{colors.map(c => <button key={c} type="button" className="chip" aria-pressed={c === color} onClick={() => { setColor(c); setMedia([]); }}>{c}</button>)}</div>
+    {color && <MediaPicker color={color} items={media} onChange={setMedia} />}
+    <ErrorNotice error={error} />
+    <div className="row"><button className="btn ghost" onClick={() => { setOpen(false); setColor(''); setMedia([]); }}>Cancelar</button>
+      <Button disabled={!color || !media.length} busyText="Enviando para a Shopify…" onClick={async () => {
+        setError(null);
+        try { await runOp(`products/${numId(product.id)}/media`, { media: forApi(media) }); setOpen(false); setColor(''); setMedia([]); onDone(); }
+        catch (e) { setError(e); }
+      }}>Salvar fotos/3D</Button></div>
   </section>;
 }

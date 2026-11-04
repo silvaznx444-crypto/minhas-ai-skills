@@ -60,7 +60,9 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
     await step('cadastro completo: 4 tamanhos + foto real enviada → publicado e confirmado', async () => {
       await page.goto(BASE + '/#/novo');
       await page.getByLabel('Nome do produto').fill('Camiseta Abercrombie Fitch New York');
-      await page.getByLabel('Marca').fill('Abercrombie & Fitch');
+      await page.getByLabel('Marca').selectOption('Abercrombie & Fitch');
+      await page.getByLabel('Categoria').selectOption('bones'); await page.getByText('No site, aparece em Acessórios.').waitFor();
+      await page.getByLabel('Categoria').selectOption('camisetas');
       await page.getByLabel('Preço de venda (R$)').fill('139,90');
       await shot('06-novo-1');
       await page.getByRole('button', { name: 'Continuar' }).click();
@@ -98,6 +100,17 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
       await page.getByText('Nova cor confirmada na Shopify.').waitFor({ timeout: 20000 }); await shot('12-nova-cor');
       const p = (await state()).products.find(x => x.title.includes('Resort'));
       assert.deepEqual(p.combos.sort(), ['Azul-marinho/G', 'Azul-marinho/M', 'Preta/M', 'Verde/G']);
+    });
+    await step('fotos/3D: troca a foto de uma cor que já existe (Azul-marinho) e a Shopify confirma', async () => {
+      await page.goto(BASE + '/#/produtos'); await page.getByText('Camiseta Tommy Hilfiger Resort').click();
+      await page.getByRole('button', { name: 'Trocar ou adicionar fotos / 3D de uma cor' }).click();
+      await page.getByRole('button', { name: 'Azul-marinho', exact: true }).click();
+      await page.locator('input[type=file]').setInputFiles(PHOTO);
+      await page.locator('.media-tile img').waitFor();
+      await page.getByRole('button', { name: 'Salvar fotos/3D' }).click();
+      await page.getByText(/Fotos\/3D confirmados na Shopify/).waitFor({ timeout: 20000 }); await noHScroll(); await shot('12b-fotos-cor');
+      const s = await state(); const p = s.products.find(x => x.title.includes('Resort'));
+      assert.ok(p.media >= 1, 'foto registrada na Shopify');
     });
     await step('atividades registram as ações', async () => {
       await page.goto(BASE + '/#/atividades');

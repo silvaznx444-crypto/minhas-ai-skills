@@ -38,6 +38,15 @@ const shopifyToApp = (e: unknown) => {
   return new AppError(422, 'shopify_error', e.message.slice(0, 300));
 };
 
+/** Confere ANTES de mexer na Shopify se a loja está configurada (evita produto criado pela metade). */
+async function requireStoreConfigured(env: Env, needPublication: boolean) {
+  const rows = (await env.DB.prepare("SELECT key, value FROM application_settings WHERE key IN ('shopify_location_id','shopify_publication_ids')").all<{ key: string; value: string }>()).results;
+  const val = (k: string) => { try { return JSON.parse(rows.find(r => r.key === k)?.value ?? 'null'); } catch { return null; } };
+  const loc = val('shopify_location_id'); const pubs = val('shopify_publication_ids');
+  const missing = [!(typeof loc === 'string' && loc) && 'o local de estoque', needPublication && !(Array.isArray(pubs) && pubs.length) && 'o canal onde publicar (Grifhii Conceito)'].filter(Boolean);
+  if (missing.length) throw new AppError(409, 'store_not_configured', `Antes de cadastrar, escolha em Configurações ${missing.join(' e ')} e toque em Salvar. Nada foi enviado à Shopify.`);
+}
+
 /** Executa a operação dentro do tempo da requisição; se não terminar, o cron continua do último passo salvo. */
 async function startOp(env: Env, ctx: ExecutionContext, id: string, deps: Deps) {
   const op = await runOperation(env, id, deps);
@@ -150,6 +159,7 @@ export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, d
       await rateLimit(env.DB, 'publish:user', p.userId);
       const body = parse(CreateProduct, await readJson(req, 256 * 1024));
       if (body.publish) requirePermission(p, 'products:publish');
+      await requireStoreConfigured(env, body.publish);
       const cat = await env.DB.prepare('SELECT shopify_product_type FROM categories WHERE slug = ?').bind(body.category).first<{ shopify_product_type: string }>();
       if (!cat) throw errors.invalid([{ path: 'category', message: 'Categoria inexistente' }]);
       const { id } = await enqueue(env, p.userId, 'product.create', idemKey(req), { ...body, productType: cat.shopify_product_type });
@@ -159,6 +169,7 @@ export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, d
       requirePermission(p, 'products:write');
       const body = parse(AddColor, { ...(await readJson(req, 128 * 1024) as object), productId: productGid(match[1]) });
       if (body.price !== undefined) requirePermission(p, 'prices:write');
+      await requireStoreConfigured(env, false);
       const { id } = await enqueue(env, p.userId, 'product.add_color', idemKey(req), body, body.productId);
       return startOp(env, ctx, id, deps);
     }

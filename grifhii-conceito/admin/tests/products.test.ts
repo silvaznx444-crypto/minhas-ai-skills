@@ -172,13 +172,20 @@ test('API da loja sem uma mutação necessária → gravações bloqueadas com e
   assert.equal(fake.products.size, 0);
 });
 
-test('publicar sem canal configurado → requer atenção (não finge publicação)', async () => {
+test('loja sem local de estoque/canal: recusa ANTES de tocar a Shopify (nada criado pela metade) e explica o que fazer', async () => {
   const env = makeEnv(); const fake = new FakeShopify(); const owner = await makeUser(env, 'OWNER');
+  let r = await call(env, post('products', owner, NEW_YORK), fake);
+  let b = await r.json() as any;
+  assert.equal(r.status, 409); assert.equal(b.error.code, 'store_not_configured');
+  assert.match(b.error.message, /local de estoque e o canal onde publicar.*Nada foi enviado/);
   await env.DB.prepare("INSERT INTO application_settings (key,value,updated_at) VALUES ('shopify_location_id', ?, 0)").bind(JSON.stringify('gid://shopify/Location/1')).run();
-  const b = await (await call(env, post('products', owner, NEW_YORK), fake)).json() as any;
-  assert.equal(b.status, 'needs_attention'); assert.match(b.error, /canal de vendas/);
-  const p = [...fake.products.values()][0];
-  assert.deepEqual(p.published, []);
+  r = await call(env, post('products', owner, NEW_YORK), fake); b = await r.json() as any;
+  assert.equal(r.status, 409); assert.match(b.error.message, /canal onde publicar/); assert.doesNotMatch(b.error.message, /local de estoque/);
+  // rascunho (sem publicar) não exige canal
+  r = await call(env, post('products', owner, { ...NEW_YORK, publish: false }), fake);
+  assert.equal(((await r.json()) as any).status, 'succeeded');
+  assert.equal(fake.calls.filter(c => c.op === 'GhProductCreate').length, 1, 'só o rascunho chegou à Shopify');
+  assert.equal(fake.calls.filter(c => c.op === 'GhPublish').length, 0);
 });
 
 test('validação no servidor: preço inválido, estoque negativo, tamanho inexistente, cor duplicada, HTML no nome', async () => {

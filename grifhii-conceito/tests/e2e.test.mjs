@@ -713,3 +713,14 @@ test('Fred Perry: as 3 peças viraram 1 (6 cores, tamanhos em ordem) e os endere
   assert.match(redirects, /\/peca-camiseta-fred-perry-classic-laurel-azul-marinho \/peca-camiseta-fred-perry-punhos-listrados 301/);
   await ctx.close();
 });
+
+test('Boné Ralph Lauren: cor Bege (nova) vincula sozinha pelo nome quando aparecer na Shopify', async () => {
+  const {ctx, page} = await newPage();
+  await enableSalesForTest(page);
+  const nodes = NODES.map(n => n.handle !== 'bone-ralph-lauren' ? n : {...n, variants: {...n.variants, nodes: [...n.variants.nodes,
+    {...remoteVariant('990000000555', 'Bege', 'Único', null, '89.90'), selectedOptions: [{name: 'Cor', value: 'Bege'}]}]}});
+  await mockShopify(page, {cart: okCart(), nodes});
+  const cart = await addFromProductPage(page, 'ralph-lauren-bone-polo-ralph-lauren-classico-bordado', {color: 'Bege', size: null});
+  assert.equal(cart.length, 1); assert.equal(cart[0].shopifyVariantId, 'gid://shopify/ProductVariant/990000000555');
+  await ctx.close();
+});

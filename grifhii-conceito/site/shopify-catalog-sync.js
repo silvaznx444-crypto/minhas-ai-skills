@@ -153,7 +153,8 @@
     const localId=clean(variant.id);
     if ((review.rejectedVariantIds || []).includes(localId)) return null;
     // A colecao 30/10 exige autorizacao visual individual, nao por produto completo.
-    if (product.shopifyLinkPending && !review.approvedVariantMap?.[localId]) return null;
+    // allowNameMatch: cor nova aprovada pelo lojista para vincular pela cor/tamanho (sem ID fixo), quando houver uma única correspondência.
+    if (product.shopifyLinkPending && !variant.allowNameMatch && !review.approvedVariantMap?.[localId]) return null;
     // Uma cor pode vir de OUTRO produto da Shopify (ex.: peças iguais cadastradas separadas): variante com shopifySourceHandle.
     const own=clean(variant.shopifySourceHandle);
     const sameHandle=own?published.filter(x=>x.handle===own):null;

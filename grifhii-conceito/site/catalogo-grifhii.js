@@ -809,7 +809,8 @@
         "assets/catalogo-novos/ralph-lauren-bone-polo-ralph-lauren-classico-bordado-rosa-unico.webp",
         "assets/catalogo-novos/ralph-lauren-bone-polo-ralph-lauren-classico-bordado-roxo-lilas-unico.webp",
         "assets/fotos-reais-04-11-2026/bone-azul-claro.webp",
-        "assets/fotos-reais-04-11-2026/bone-ciano.webp"
+        "assets/fotos-reais-04-11-2026/bone-ciano.webp",
+        "assets/fotos-reais-05-11-2026/bone-ralph-lauren-bege-real.webp"
       ],
       "variants": [
         {
@@ -917,6 +918,19 @@
           "image": "assets/fotos-reais-04-11-2026/bone-ciano.webp",
           "photoStatus": "recebida",
           "photoNote": "Foto real enviada pelo lojista. Variante cadastrada na Shopify em 04/11/2026; 1 unidade disponível em estoque. Publicação no canal Headless deve ser verificada."
+        },
+        {
+          "id": "local-bone-ralph-bege",
+          "size": "Único",
+          "color": "Bege",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/bone-ralph-lauren-bege-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "allowNameMatch": true
         }
       ],
       "photoReviewRequired": true,
@@ -1714,7 +1728,10 @@
       "priceCents": 13990,
       "promoPriceCents": null,
       "images": [
-        "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-01.webp"
+        "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-01.webp",
+        "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-marrom-real.webp",
+        "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-vermelho-real.webp",
+        "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-branco-real.webp"
       ],
       "variants": [
         {
@@ -1771,9 +1788,9 @@
           "color": "Marrom",
           "availableStock": 0,
           "sku": "GRIF-26OCT-RALPH-LAUREN-BERMUDA-SARJA-MARROM-M",
-          "image": "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-foto-pendente-marrom.svg",
-          "photoStatus": "pendente",
-          "photoNote": "Variação informada pelo lojista; foto específica da cor pendente.",
+          "image": "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-marrom-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
           "stockConfirmed": false,
           "catalogVisible": true
         },
@@ -1783,9 +1800,9 @@
           "color": "Marrom",
           "availableStock": 0,
           "sku": "GRIF-26OCT-RALPH-LAUREN-BERMUDA-SARJA-MARROM-G",
-          "image": "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-foto-pendente-marrom.svg",
-          "photoStatus": "pendente",
-          "photoNote": "Variação informada pelo lojista; foto específica da cor pendente.",
+          "image": "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-marrom-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
           "stockConfirmed": false,
           "catalogVisible": true
         },
@@ -1795,9 +1812,9 @@
           "color": "Marrom",
           "availableStock": 0,
           "sku": "GRIF-26OCT-RALPH-LAUREN-BERMUDA-SARJA-MARROM-GG",
-          "image": "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-foto-pendente-marrom.svg",
-          "photoStatus": "pendente",
-          "photoNote": "Variação informada pelo lojista; foto específica da cor pendente.",
+          "image": "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-marrom-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
           "stockConfirmed": false,
           "catalogVisible": true
         },
@@ -1807,9 +1824,9 @@
           "color": "Marrom",
           "availableStock": 0,
           "sku": "GRIF-26OCT-RALPH-LAUREN-BERMUDA-SARJA-MARROM-G1",
-          "image": "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-foto-pendente-marrom.svg",
-          "photoStatus": "pendente",
-          "photoNote": "Variação informada pelo lojista; foto específica da cor pendente.",
+          "image": "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-marrom-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
           "stockConfirmed": false,
           "catalogVisible": true
         },
@@ -1819,9 +1836,9 @@
           "color": "Vermelho",
           "availableStock": 0,
           "sku": "GRIF-26OCT-RALPH-LAUREN-BERMUDA-SARJA-VERMELHO-M",
-          "image": "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-foto-pendente-vermelho.svg",
-          "photoStatus": "pendente",
-          "photoNote": "Variação informada pelo lojista; foto específica da cor pendente.",
+          "image": "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-vermelho-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
           "stockConfirmed": false,
           "catalogVisible": true
         },
@@ -1831,9 +1848,9 @@
           "color": "Vermelho",
           "availableStock": 0,
           "sku": "GRIF-26OCT-RALPH-LAUREN-BERMUDA-SARJA-VERMELHO-G",
-          "image": "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-foto-pendente-vermelho.svg",
-          "photoStatus": "pendente",
-          "photoNote": "Variação informada pelo lojista; foto específica da cor pendente.",
+          "image": "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-vermelho-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
           "stockConfirmed": false,
           "catalogVisible": true
         },
@@ -1843,9 +1860,9 @@
           "color": "Vermelho",
           "availableStock": 0,
           "sku": "GRIF-26OCT-RALPH-LAUREN-BERMUDA-SARJA-VERMELHO-GG",
-          "image": "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-foto-pendente-vermelho.svg",
-          "photoStatus": "pendente",
-          "photoNote": "Variação informada pelo lojista; foto específica da cor pendente.",
+          "image": "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-vermelho-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
           "stockConfirmed": false,
           "catalogVisible": true
         },
@@ -1855,9 +1872,9 @@
           "color": "Vermelho",
           "availableStock": 0,
           "sku": "GRIF-26OCT-RALPH-LAUREN-BERMUDA-SARJA-VERMELHO-G1",
-          "image": "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-foto-pendente-vermelho.svg",
-          "photoStatus": "pendente",
-          "photoNote": "Variação informada pelo lojista; foto específica da cor pendente.",
+          "image": "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-vermelho-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
           "stockConfirmed": false,
           "catalogVisible": true
         },
@@ -1867,9 +1884,9 @@
           "color": "Branco",
           "availableStock": 0,
           "sku": "GRIF-26OCT-RALPH-LAUREN-BERMUDA-SARJA-BRANCO-M",
-          "image": "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-foto-pendente-branco.svg",
-          "photoStatus": "pendente",
-          "photoNote": "Variação informada pelo lojista; foto específica da cor pendente.",
+          "image": "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-branco-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
           "stockConfirmed": false,
           "catalogVisible": true
         },
@@ -1879,9 +1896,9 @@
           "color": "Branco",
           "availableStock": 0,
           "sku": "GRIF-26OCT-RALPH-LAUREN-BERMUDA-SARJA-BRANCO-G",
-          "image": "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-foto-pendente-branco.svg",
-          "photoStatus": "pendente",
-          "photoNote": "Variação informada pelo lojista; foto específica da cor pendente.",
+          "image": "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-branco-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
           "stockConfirmed": false,
           "catalogVisible": true
         },
@@ -1891,9 +1908,9 @@
           "color": "Branco",
           "availableStock": 0,
           "sku": "GRIF-26OCT-RALPH-LAUREN-BERMUDA-SARJA-BRANCO-GG",
-          "image": "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-foto-pendente-branco.svg",
-          "photoStatus": "pendente",
-          "photoNote": "Variação informada pelo lojista; foto específica da cor pendente.",
+          "image": "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-branco-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
           "stockConfirmed": false,
           "catalogVisible": true
         },
@@ -1903,9 +1920,9 @@
           "color": "Branco",
           "availableStock": 0,
           "sku": "GRIF-26OCT-RALPH-LAUREN-BERMUDA-SARJA-BRANCO-G1",
-          "image": "assets/colecao-20-outubro/ralph-lauren-bermuda-sarja-foto-pendente-branco.svg",
-          "photoStatus": "pendente",
-          "photoNote": "Variação informada pelo lojista; foto específica da cor pendente.",
+          "image": "assets/fotos-reais-05-11-2026/bermuda-sarja-ralph-lauren-branco-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
           "stockConfirmed": false,
           "catalogVisible": true
         }

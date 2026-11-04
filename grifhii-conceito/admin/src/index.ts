@@ -9,12 +9,20 @@ import { purgeRateLimits, rateLimit } from './auth/ratelimit.ts';
 import { adminGraphql, ShopifyError, type GqlOptions } from './shopify/client.ts';
 import { getCapabilities } from './shopify/capabilities.ts';
 import { AddColor, CreateProduct, ProductGid, SetInventory, UpdatePrice } from './products/schemas.ts';
-import { enqueue, retryOperation, runDue, runOperation, setInventory, type Deps } from './products/operations.ts';
+import { enqueue, getProductInventory, retryOperation, runDue, runOperation, setInventory, type Deps } from './products/operations.ts';
 import { stageImage } from './media/service.ts';
 import { reconcile } from './products/reconcile.ts';
 import { handleWebhook } from './webhooks/handler.ts';
 
 const BASE = '/api/admin/v1/';
+/** Cabeçalhos da interface: CSP estrita (sem scripts inline/externos), sem framing, sem cache, sem indexação. */
+export const PANEL_HEADERS: Record<string, string> = {
+  'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://cdn.shopify.com; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'; object-src 'none'",
+  'X-Frame-Options': 'DENY', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer',
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'Cache-Control': 'no-store',
+  'Permissions-Policy': 'camera=(self), microphone=(), geolocation=(), payment=(), usb=()',
+  'Cross-Origin-Opener-Policy': 'same-origin', 'X-Robots-Tag': 'noindex, nofollow, noarchive',
+};
 const parse = <T>(schema: z.ZodType<T>, v: unknown): T => {
   const r = schema.safeParse(v);
   if (!r.success) throw errors.invalid(r.error.issues.map(i => ({ path: i.path.join('.'), message: i.message })));
@@ -33,7 +41,8 @@ const shopifyToApp = (e: unknown) => {
 /** Executa a operação dentro do tempo da requisição; se não terminar, o cron continua do último passo salvo. */
 async function startOp(env: Env, ctx: ExecutionContext, id: string, deps: Deps) {
   const op = await runOperation(env, id, deps);
-  return json({ operationId: id, status: op?.status, step: op?.step, error: op?.status === 'needs_attention' ? op.last_error : null }, 202);
+  return json({ operationId: id, status: op?.status, step: op?.step, error: op?.status === 'needs_attention' ? op.last_error : null,
+    summary: op?.status === 'succeeded' ? (JSON.parse(String(op.state ?? '{}')).summary ?? null) : null }, 202);
 }
 
 export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, deps: Deps = {}): Promise<Response> {
@@ -168,6 +177,12 @@ export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, d
     }
 
     // ---------------- Estoque
+    if (path === 'inventory' && m === 'GET') {
+      requirePermission(p, 'inventory:read');
+      const n = url.searchParams.get('productId') || '';
+      if (!/^\d{1,20}$/.test(n)) throw errors.invalid([{ path: 'productId', message: 'Produto inválido' }]);
+      return json(await getProductInventory(env, productGid(n), deps));
+    }
     if (path === 'inventory' && m === 'PUT') {
       requirePermission(p, 'inventory:write');
       const body = parse(SetInventory, await readJson(req));
@@ -229,6 +244,14 @@ const prodDeps: Deps = {
 
 export default {
   async fetch(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    // A interface do painel (arquivos estáticos) é servida pelo próprio Worker: mesma origem da API.
+    if (!new URL(req.url).pathname.startsWith('/api/')) {
+      if (!env.ASSETS) return new Response('Not found', { status: 404 });
+      const res = await env.ASSETS.fetch(req);
+      const h = new Headers(res.headers);
+      for (const [k, v] of Object.entries(PANEL_HEADERS)) h.set(k, v);
+      return new Response(res.body, { status: res.status, headers: h });
+    }
     try { return await handleApi(req, env, ctx, prodDeps); }
     catch (e) { return errorResponse(e); }
   },

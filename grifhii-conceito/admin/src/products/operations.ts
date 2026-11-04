@@ -398,3 +398,18 @@ export async function setInventory(env: Env, userId: string, input: { inventoryI
   await audit(env.DB, { userId, action: 'inventory.set', target: input.inventoryItemId, result: 'success', details: { from: current, to: input.quantity, reason: input.reason } });
   return { previous: current, quantity: input.quantity };
 }
+
+/** Leitura do estoque de UMA peça direto da Shopify (o painel nunca confia no cache para estoque). */
+export async function getProductInventory(env: Env, productId: string, deps: Deps = {}) {
+  const locRow = await env.DB.prepare("SELECT value FROM application_settings WHERE key = 'shopify_location_id'").first<{ value: string }>();
+  if (!locRow) throw new AppError(409, 'location_missing', 'Escolha o local de estoque em Configurações.');
+  const loc = JSON.parse(locRow.value) as string;
+  const d = await adminGraphql<{ product: Product | null }>(env, Q_PRODUCT, { id: productId }, deps.gql);
+  if (!d.product) throw errors.notFound();
+  const items = d.product.variants.nodes.map(v => v.inventoryItem.id);
+  const lv = items.length ? await adminGraphql<{ nodes: ({ id: string; inventoryLevel: { quantities: { quantity: number }[] } | null } | null)[] }>(env, Q_LEVELS, { ids: items, loc }, deps.gql) : { nodes: [] };
+  const q = new Map(lv.nodes.filter(Boolean).map(n => [n!.id, n!.inventoryLevel ? n!.inventoryLevel.quantities[0]?.quantity ?? 0 : null]));
+  return { productId, title: (d.product as unknown as { title: string }).title, variants: d.product.variants.nodes.map(v => ({
+    id: v.id, sku: v.sku, price: v.price, options: v.selectedOptions, inventoryItemId: v.inventoryItem.id,
+    available: q.get(v.inventoryItem.id) ?? null, stockedAtLocation: q.get(v.inventoryItem.id) !== null })) };
+}

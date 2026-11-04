@@ -1,15 +1,21 @@
 # GRIFHII Admin — Relatório de testes
 
-Execução: 04/11/2026, Node 22.23.4, `npm test` → **50 testes, 50 aprovados, 0 falhas**.
+Execução: 04/11/2026, Node 22.23.4, `npm test` → **50 testes, 50 aprovados, 0 falhas**; `npm run test:e2e` (navegador) → **11 etapas, 11 aprovadas**.
 Banco: SQLite com as **mesmas migrações** do D1. Shopify: **simulada** (comportamento das mutações reproduzido, incluindo variante provisória, conflitos, throttling, timeouts e mídia em processamento). Nenhum teste tocou a loja real.
 
 Também executado: `tsc --noEmit` (sem erros), `wrangler deploy --dry-run` (empacota: 1,6 MB), `wrangler d1 migrations apply --local` (17 tabelas), `npm audit` (0 vulnerabilidades).
+
+## Teste de ponta a ponta no navegador (painel)
+
+Chromium emulando **iPhone 13**, com **autenticador WebAuthn virtual** (a passkey é gerada e verificada de verdade pela biblioteca do servidor), o mesmo código da API, D1 em SQLite e Shopify simulada. Etapas aprovadas: tela de login sem sessão · configuração inicial com passkey + 10 códigos de recuperação · escolha de local de estoque e canal (com reconfirmação) · reconciliação somente leitura · cadastro completo (4 tamanhos + foto real) publicado e confirmado · estoque M 1 → 3 confirmado · nova cor Preta sem alterar as antigas · atividades registradas · sair e entrar de novo com a passkey · API sem sessão = 401, cookie HttpOnly, nada no localStorage · desktop sem erros de JavaScript nem de CSP.
 
 ## Defeitos encontrados pelos testes e corrigidos
 
 1. **Possível produto duplicado:** o cliente repetia mutações após timeout. Agora só repete quando a Shopify comprovadamente não executou (THROTTLED/429).
 2. **Cor vinculada a metaobjeto:** a conferência esperava o nome digitado; agora usa o nome real da Shopify.
 3. **Variante provisória:** na 1ª execução poderia ser removida sem recriação; corrigido com criação completa + normalização.
+4. **Mensagem enganosa no painel (achado pelo teste no navegador):** produto publicado aparecia como “rascunho” porque a resposta imediata não trazia o resumo. A API agora devolve o resumo; teste de regressão adicionado.
+5. **Layout:** cartões da visão geral desalinhados no celular; corrigido.
 
 ## Cobertura por área
 
@@ -27,9 +33,9 @@ Também executado: `tsc --noEmit` (sem erros), `wrangler deploy --dry-run` (empa
 
 | Critério | Status |
 |---|---|
-| Login seguro do proprietário | Implementado · testado com autenticador simulado · **pendente: teste com passkey real no iPhone** |
+| Login seguro do proprietário | Implementado · testado no navegador com autenticador WebAuthn virtual · **pendente: teste com Face ID real no iPhone** |
 | Não autorizados bloqueados pelo servidor | Implementado · testado localmente |
-| Painel funciona no celular | **Pendente — interface do painel ainda não construída** |
+| Painel funciona no celular | Implementado · testado em iPhone 13 emulado (11/11) · **pendente: uso no aparelho real após o deploy** |
 | Cadastro de produto / variantes / estoque por variante | Implementado · testado com mocks · **pendente: validar na Shopify** |
 | Imagens vinculadas (foto e 3D) | Implementado · testado com mocks · **pendente: validar na Shopify** |
 | Produto aparece no site após publicação | Depende do site já existente (Storefront ao vivo) · **pendente: validar publicado** |

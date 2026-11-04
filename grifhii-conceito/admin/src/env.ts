@@ -12,6 +12,8 @@ export interface D1StatementLike {
 
 export interface Env {
   DB: D1Like;
+  /** Arquivos estáticos do painel (Workers Static Assets). */
+  ASSETS?: { fetch(req: Request): Promise<Response> };
   /** Origem exata do painel, ex.: https://admin.seudominio.com.br (CSRF/CORS/WebAuthn). */
   ADMIN_ORIGIN: string;
   /** RP ID do WebAuthn: domínio do painel sem esquema, ex.: admin.seudominio.com.br */

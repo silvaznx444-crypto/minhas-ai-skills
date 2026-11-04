@@ -231,7 +231,7 @@ export async function handleAuth(req: Request, env: Env, path: string): Promise<
       .bind(id, await pepperedHash(env.SESSION_PEPPER, token), body.role, JSON.stringify([...new Set(body.permissions)]), body.displayName,
         p.userId, Date.now() + 24 * 3600 * 1000, Date.now()).run();
     await audit(env.DB, { userId: p.userId, action: 'users.invite', target: id, result: 'success', details: { role: body.role, permissions: body.permissions } });
-    return json({ inviteId: id, inviteUrl: `${env.ADMIN_ORIGIN}/admin/#/convite/${token}`, expiresInHours: 24 }, 201);
+    return json({ inviteId: id, inviteUrl: `${env.ADMIN_ORIGIN}/#/convite/${token}`, expiresInHours: 24 }, 201);
   }
   if (path === 'auth/users' && m === 'GET') {
     requirePermission(p, 'users:manage');

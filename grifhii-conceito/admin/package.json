@@ -4,12 +4,14 @@
   "type": "module",
   "description": "GRIFHII CONCEITO — painel administrativo (Cloudflare Worker + D1 + Shopify Admin API).",
   "scripts": {
-    "test": "node --test --test-concurrency=1 tests/",
+    "test": "node --test --test-concurrency=1 \"tests/*.test.ts\"",
     "typecheck": "tsc --noEmit",
     "dev": "wrangler dev",
     "migrate:local": "wrangler d1 migrations apply grifhii-admin --local",
     "migrate:remote": "wrangler d1 migrations apply grifhii-admin --remote",
-    "deploy": "wrangler deploy"
+    "deploy": "npm run build:ui && wrangler deploy",
+    "build:ui": "cd ui && npm ci && npm run build",
+    "test:e2e": "node tests/e2e/painel.e2e.cjs"
   },
   "dependencies": {
     "@simplewebauthn/server": "14.0.3",

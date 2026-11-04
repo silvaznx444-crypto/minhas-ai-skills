@@ -49,18 +49,18 @@ npx wrangler secret put ADMIN_SETUP_TOKEN
 ## 4. Domínio do painel
 
 1. Edite `wrangler.toml`: `ADMIN_ORIGIN = "https://admin.SEU-DOMINIO.com.br"` e `WEBAUTHN_RP_ID = "admin.SEU-DOMINIO.com.br"`; descomente `routes` com o seu domínio.
-2. Publique a API:
+2. Publique API **e** interface juntas (o mesmo Worker serve o painel em `/` e a API em `/api/`, mesma origem — sem CORS):
 
 ```bash
-npx wrangler deploy
+npm run deploy
 ```
 
-3. Publique a interface do painel em `admin.SEU-DOMINIO.com.br` (Cloudflare Pages, mesma origem da API).
+   (`npm run deploy` gera a interface em `ui/dist` e depois executa `wrangler deploy`. Nenhum segredo vai para a interface: ela só chama `/api/` com o cookie de sessão.)
 4. Recomendado: **Zero Trust → Access → Aplicativos** → proteger `admin.SEU-DOMINIO.com.br` liberando apenas o seu e-mail (camada extra).
 
 ## 5. Primeiro acesso (proprietário)
 
-1. Abra `https://admin.SEU-DOMINIO.com.br/admin/` no iPhone → “Configurar painel” → cole o `ADMIN_SETUP_TOKEN` → crie a passkey (Face ID).
+1. Abra `https://admin.SEU-DOMINIO.com.br/` no iPhone → “Configurar painel” → cole o `ADMIN_SETUP_TOKEN` → crie a passkey (Face ID).
 2. **Guarde os 10 códigos de recuperação** fora do celular (papel ou gerenciador de senhas).
 3. Apague o token de configuração:
 

@@ -27,6 +27,8 @@ test('CENÁRIO A: produto novo com M, G, GG, G1 → 4 variantes, preço, estoque
   const r = await call(env, post('products', owner, NEW_YORK), fake);
   const b = await r.json() as any;
   assert.equal(r.status, 202); assert.equal(b.status, 'succeeded', JSON.stringify(b));
+  assert.equal(b.summary.published, true, 'a resposta informa a publicação (o painel mostra "publicado", não "rascunho")');
+  assert.match(b.summary.productId, /^gid:\/\/shopify\/Product\//);
   assert.equal(fake.products.size, 1);
   const p = [...fake.products.values()][0];
   assert.deepEqual(fake.combos(p).sort(), ['Vermelha/G', 'Vermelha/G1', 'Vermelha/GG', 'Vermelha/M']);

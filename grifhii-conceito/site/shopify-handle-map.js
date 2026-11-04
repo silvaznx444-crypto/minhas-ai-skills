@@ -6,6 +6,7 @@
 (() => {
 'use strict';
 const targets = {
+ 'bermuda-diesel-tactel-premium':'bermuda-diesel-masculina-premium', // 05/11: cadastrada na Shopify como "Bermuda Diesel Masculina – Premium"
  'vilebrequin-bermuda-tartarugas-grandes':'bermuda-vilebrequin-estampa-tartaruga', // auditoria 04/11: mesmas 5 variantes na Shopify
  'vilebrequin-bermuda-tartarugas-pequenas':'bermuda-vilebrequin-tartarugas-pequenas', // auditoria 04/11
  'camiseta-abercrombie-fitch-new-york-vermelha':'camiseta-abercrombie-fitch-new-york-vermelha',
@@ -110,7 +111,6 @@ const colorEquivalents = {
 };
 // Peças ainda sem endereço conhecido na Shopify: vínculo pelo NOME (precisa ser único entre os publicados).
 const titleTargets = {
- 'bermuda-diesel-tactel-premium':'Bermuda Diesel Tactel Premium',
 };
 window.GRIFHII_SHOPIFY_HANDLE_MAP=Object.freeze({targets:Object.freeze(targets),colorEquivalents:Object.freeze(colorEquivalents),titleTargets:Object.freeze(titleTargets)});
 })();

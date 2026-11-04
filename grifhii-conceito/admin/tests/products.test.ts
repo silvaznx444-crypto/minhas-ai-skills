@@ -159,7 +159,7 @@ test('estoque: corrida entre leitura e gravação é barrada pela comparação d
   const p = fake.seedProduct('Short', { Azul: { M: 1 } });
   const item = p.variants.nodes[0].inventoryItem.id;
   const orig = fake.handle.bind(fake);
-  fake.handle = (op: string, v: any) => { const r = orig(op, v); if (op === 'GhLevels') fake.levels.set(`${item}|gid://shopify/Location/1`, 7); return r; };
+  fake.handle = (op: string, v: any, q?: string) => { const r = orig(op, v, q); if (op === 'GhLevels') fake.levels.set(`${item}|gid://shopify/Location/1`, 7); return r; };
   const r = await call(env, req('inventory', { method: 'PUT', user: owner, body: { inventoryItemId: item, quantity: 3, expectedCurrent: 1 } }), fake);
   assert.equal(r.status, 409); assert.equal(fake.levels.get(`${item}|gid://shopify/Location/1`), 7);
 });
@@ -217,4 +217,36 @@ test('reconciliação inicial: somente leitura, aponta duplicados e não altera 
   assert.equal(r.status, 200); assert.equal(b.report.shopifyProducts, 2); assert.equal(b.report.possibleDuplicateProducts.length, 1);
   assert.equal(JSON.stringify([...fake.products.values()]), before, 'nada alterado na Shopify');
   assert.ok(fake.calls.every(c => !/^Gh(ProductCreate|Variants|InvSet|Publish|Status|ProductMedia|Metafields)/.test(c.op)), 'nenhuma mutação');
+});
+
+test('estoque exige @idempotent (Shopify 2026-10): cadastro parado nesse passo é retomado com "Tentar novamente" sem duplicar nada', async () => {
+  const { env, fake, owner } = await setup();
+  // Como na loja real: as variantes nascem sem estoque e o painel lança o estoque num passo seguinte.
+  const orig = fake.handle.bind(fake);
+  fake.handle = (op: string, v: any, q?: string) => { const r = orig(op, v, q); if (op === 'GhVariantsCreate') for (const k of fake.levels.keys()) fake.levels.set(k, 0); return r; };
+  fake.failNext.set('GhInvSet', 'userError'); // 1ª gravação de estoque recusada (como aconteceu na loja)
+  const b = await (await call(env, post('products', owner, NEW_YORK), fake)).json() as any;
+  assert.equal(b.status, 'needs_attention');
+  const r = await call(env, req(`operations/${b.operationId}/retry`, { method: 'POST', user: owner, body: {} }), fake);
+  assert.ok([200, 202].includes(r.status), `retry ${r.status}`);
+  if ((await r.clone().json() as any).status !== 'succeeded') { await env.DB.prepare('UPDATE operations SET next_attempt_at = 0').run(); await runDue(env, deps(fake)); }
+  const op = await env.DB.prepare('SELECT status FROM operations WHERE id = ?').bind(b.operationId).first<{ status: string }>();
+  assert.equal(op!.status, 'succeeded');
+  assert.equal(fake.products.size, 1, 'um produto só');
+  assert.equal(fake.calls.filter(c => c.op === 'GhProductCreate').length, 1);
+  const p = [...fake.products.values()][0];
+  assert.deepEqual(levelsOf(fake, p), [1, 1, 1, 1]);
+  assert.ok(fake.calls.filter(c => c.op === 'GhInvSet').every(c => typeof c.vars.idempotencyKey === 'string' && c.vars.idempotencyKey.length > 10));
+});
+
+test('estoque manual: 1→3, 3→1, 1→3 são três alterações aplicadas (chave nova a cada vez)', async () => {
+  const { env, fake, owner } = await setup();
+  const p = fake.seedProduct('Short', { Azul: { M: 1 } });
+  const item = p.variants.nodes[0].inventoryItem.id; const lvl = () => fake.levels.get(`${item}|gid://shopify/Location/1`);
+  for (const [from, to] of [[1, 3], [3, 1], [1, 3]]) {
+    const r = await call(env, req('inventory', { method: 'PUT', user: owner, body: { inventoryItemId: item, quantity: to, expectedCurrent: from } }), fake);
+    assert.equal(r.status, 200, `${from}→${to}`); assert.equal(lvl(), to);
+  }
+  const keys = fake.calls.filter(c => c.op === 'GhInvSet').map(c => c.vars.idempotencyKey);
+  assert.equal(new Set(keys).size, 3);
 });

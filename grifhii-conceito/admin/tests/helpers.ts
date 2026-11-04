@@ -70,6 +70,7 @@ export class FakeShopify {
   metafields: { ownerId: string; namespace: string; key: string; value: string }[] = [];
   calls: { op: string; vars: any }[] = [];
   staged: { url: string; form: FormData }[] = [];
+  idemKeys = new Set<string>();
   seq = 1000;
   metaobjects: Record<string, string> = { 'gid://shopify/Metaobject/77': 'Preto' };
   failNext = new Map<string, 'timeout' | 'throttle' | 'http500' | 'timeout_after_apply' | 'userError'>();
@@ -93,9 +94,11 @@ export class FakeShopify {
       if (fail === 'throttle') return Response.json({ errors: [{ message: 'Throttled', extensions: { code: 'THROTTLED' } }], extensions: { cost: { throttleStatus: { currentlyAvailable: 0, restoreRate: 1000 } } } });
       if (fail === 'http500') return new Response('err', { status: 500 });
       if (fail === 'userError') return Response.json({ data: { [this.rootField(op)]: { userErrors: [{ field: ['x'], message: 'Rejeitado pela Shopify (simulado)' }] } } });
-      if (fail === 'timeout_after_apply') { this.handle(op, variables); throw Object.assign(new Error('aborted'), { name: 'AbortError' }); }
+      if (fail === 'timeout_after_apply') { this.handle(op, variables, query); throw Object.assign(new Error('aborted'), { name: 'AbortError' }); }
     }
-    return Response.json({ data: this.handle(op, variables), extensions: { cost: { throttleStatus: { currentlyAvailable: 1000, restoreRate: 100 } } } });
+    const data = this.handle(op, variables, query);
+    if (data?.__gqlErrors) return Response.json({ errors: data.__gqlErrors });
+    return Response.json({ data, extensions: { cost: { throttleStatus: { currentlyAvailable: 1000, restoreRate: 100 } } } });
   };
   rootField(op: string) { return ({ GhProductCreate: 'productCreate', GhVariantsCreate: 'productVariantsBulkCreate', GhVariantsUpdate: 'productVariantsBulkUpdate', GhInvSet: 'inventorySetQuantities', GhProductMedia: 'productUpdate', GhMetafieldsSet: 'metafieldsSet', GhPublish: 'publishablePublish', GhUnpublish: 'publishableUnpublish', GhStatus: 'productUpdate', GhStaged: 'stagedUploadsCreate' } as Record<string, string>)[op]; }
 
@@ -133,7 +136,7 @@ export class FakeShopify {
     }));
   }
 
-  handle(op: string, v: any): any {
+  handle(op: string, v: any, query = ''): any {
     const prod = (id: string) => this.products.get(id) ?? null;
     switch (op) {
       case 'GhCapabilities': {
@@ -179,6 +182,11 @@ export class FakeShopify {
       }
       case 'GhLevels': return { nodes: v.ids.map((id: string) => { const q = this.levels.get(`${id}|${v.loc}`); return { id, inventoryLevel: q === undefined ? null : { quantities: [{ name: 'available', quantity: q }] } }; }) };
       case 'GhInvSet': {
+        // Como a Shopify 2026-10: estoque sem @idempotent é recusado (erro GraphQL, nada aplicado).
+        if (!/@idempotent\(key:\s*\$idempotencyKey\)/.test(query) || typeof v.idempotencyKey !== 'string' || !v.idempotencyKey)
+          return { __gqlErrors: [{ message: 'The @idempotent directive is required for this mutation but was not provided.' }] } as any;
+        if (this.idemKeys.has(v.idempotencyKey)) return { inventorySetQuantities: { inventoryAdjustmentGroup: { changes: [] }, userErrors: [] } };
+        this.idemKeys.add(v.idempotencyKey);
         for (const q of v.input.quantities) {
           const key = `${q.inventoryItemId}|${q.locationId}`; const cur = this.levels.get(key) ?? 0; const cmp = q[this.caps.compareField];
           if (cmp !== undefined && cmp !== cur) return { inventorySetQuantities: { inventoryAdjustmentGroup: null, userErrors: [{ field: ['input'], message: 'The compare quantity is stale', code: 'COMPARE_QUANTITY_STALE' }] } };

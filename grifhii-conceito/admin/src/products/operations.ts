@@ -32,8 +32,9 @@ const M_METAFIELDS_SET = `mutation GhMetafieldsSet($m: [MetafieldsSetInput!]!) {
 const M_PUBLISH = `mutation GhPublish($id: ID!, $input: [PublicationInput!]!) { publishablePublish(id: $id, input: $input) { userErrors { field message } } }`;
 const M_UNPUBLISH = `mutation GhUnpublish($id: ID!, $input: [PublicationInput!]!) { publishableUnpublish(id: $id, input: $input) { userErrors { field message } } }`;
 const M_STATUS = `mutation GhStatus($p: ProductUpdateInput!) { productUpdate(product: $p) { product { id status } userErrors { field message } } }`;
-const M_INV_SET = (field: 'changeFromQuantity' | 'compareQuantity') => `mutation GhInvSet($input: InventorySetQuantitiesInput!) {
-  inventorySetQuantities(input: $input) { inventoryAdjustmentGroup { changes { name delta quantityAfterChange } } userErrors { field message code } } }
+// A Shopify exige @idempotent nas mutações de estoque: a mesma chave nunca é aplicada duas vezes.
+const M_INV_SET = (field: 'changeFromQuantity' | 'compareQuantity') => `mutation GhInvSet($input: InventorySetQuantitiesInput!, $idempotencyKey: String!) {
+  inventorySetQuantities(input: $input) @idempotent(key: $idempotencyKey) { inventoryAdjustmentGroup { changes { name delta quantityAfterChange } } userErrors { field message code } } }
   # compare field: ${field}`;
 
 type Variant = { id: string; sku: string | null; price: string; selectedOptions: { name: string; value: string }[]; inventoryItem: { id: string; tracked?: boolean } };
@@ -191,7 +192,9 @@ async function ensureQuantities(c: Ctx, product: Product, wanted: Map<string, nu
     .map(x => ({ inventoryItemId: x.v.inventoryItem.id, locationId: loc, quantity: x.want, [c.caps.inventoryCompareField!]: x.cur ?? 0 }));
   if (!quantities.length) return;
   const d = await gql<{ inventorySetQuantities: { userErrors: UserError[] } }>(c, M_INV_SET(c.caps.inventoryCompareField!),
-    { input: { name: 'available', reason: 'correction', referenceDocumentUri: `gid://grifhii-admin/Operation/${c.op.id}`, quantities } });
+    // Chave fixa por operação + conteúdo: uma nova tentativa do MESMO cadastro nunca lança o estoque em dobro.
+    { input: { name: 'available', reason: 'correction', referenceDocumentUri: `gid://grifhii-admin/Operation/${c.op.id}`, quantities },
+      idempotencyKey: `gh-${c.op.id}-inv-${(await sha256Hex(JSON.stringify(quantities))).slice(0, 16)}` });
   assertNoUserErrors(d.inventorySetQuantities.userErrors, 'Estoque');
 }
 
@@ -399,7 +402,9 @@ export async function setInventory(env: Env, userId: string, input: { inventoryI
   }
   const d = await adminGraphql<{ inventorySetQuantities: { userErrors: UserError[] } }>(env, M_INV_SET(caps.inventoryCompareField!), {
     input: { name: 'available', reason: input.reason, referenceDocumentUri: `gid://grifhii-admin/User/${userId}`,
-      quantities: [{ inventoryItemId: input.inventoryItemId, locationId: loc, quantity: input.quantity, [caps.inventoryCompareField!]: input.expectedCurrent }] } }, deps.gql);
+      quantities: [{ inventoryItemId: input.inventoryItemId, locationId: loc, quantity: input.quantity, [caps.inventoryCompareField!]: input.expectedCurrent }] },
+    // Chave nova a cada alteração manual (1→3, 3→1, 1→3 são alterações diferentes); a conferência do valor atual evita dupla aplicação.
+    idempotencyKey: `gh-inv-${crypto.randomUUID()}` }, deps.gql);
   const errs = d.inventorySetQuantities.userErrors;
   if (errs?.length && errs.some(e => /compare|change_?from|stale/i.test(`${e.code} ${e.message}`))) {
     throw errors.conflict('O estoque foi alterado em outro lugar. Atualize as informações antes de continuar.');

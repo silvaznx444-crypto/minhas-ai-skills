@@ -250,3 +250,18 @@ test('estoque manual: 1→3, 3→1, 1→3 são três alterações aplicadas (cha
   const keys = fake.calls.filter(c => c.op === 'GhInvSet').map(c => c.vars.idempotencyKey);
   assert.equal(new Set(keys).size, 3);
 });
+
+test('"Ver no site": endereço do site salvo pelo dono (só https, só domínio) e link da peça no detalhe', async () => {
+  const { env, fake, owner } = await setup();
+  const p = fake.seedProduct('Camiseta Nova', { Azul: { M: 1 } });
+  let d = await (await call(env, req(`products/${p.id.split('/').pop()}`, { user: owner }), fake)).json() as any;
+  assert.equal(d.siteUrl, null, 'sem endereço configurado, sem link');
+  for (const bad of ['http://grifhii.netlify.app', 'https://grifhii.netlify.app/peca.html', 'javascript:alert(1)', 'https://evil.com/<script>'])
+    assert.equal((await call(env, req('settings', { method: 'PUT', user: owner, body: { public_site_url: bad } }), fake)).status, 422, bad);
+  const ok = await call(env, req('settings', { method: 'PUT', user: owner, body: { public_site_url: 'https://Aesthetic-Bunny-26e0a2.netlify.app/' } }), fake);
+  assert.equal(ok.status, 200);
+  d = await (await call(env, req(`products/${p.id.split('/').pop()}`, { user: owner }), fake)).json() as any;
+  assert.equal(d.siteUrl, `https://aesthetic-bunny-26e0a2.netlify.app/peca.html?slug=shopify-${p.handle}`);
+  const emp = await makeUser(env, 'EMPLOYEE', ['products:read']);
+  assert.equal((await call(env, req('settings', { method: 'PUT', user: emp, body: { public_site_url: 'https://x.netlify.app' } }), fake)).status, 403, 'só o dono altera');
+});

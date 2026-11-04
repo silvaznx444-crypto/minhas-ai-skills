@@ -55,9 +55,13 @@ test('atualização: banco que já tinha só a 1ª migração (com dados) recebe
   for (const s of first.statements) db.raw.exec(s);
   db.raw.prepare('INSERT INTO _gh_schema VALUES (?, ?)').run(first.name, 1);
   db.raw.prepare("INSERT INTO users (id,display_name,role,status,webauthn_user_id,created_at,updated_at) VALUES ('u1','Dono','OWNER','active','w',1,1)").run();
+  db.raw.prepare("INSERT INTO application_settings (key,value,updated_by,updated_at) VALUES ('shopify_location_id','\"gid://shopify/Location/1\"','u1',1)").run();
   _resetMigrated();
   const env = makeEnv(); (env as any).DB = db;
   await ensureMigrated(env);
   assert.ok(tables(db).includes('table:device_links'));
   assert.equal((db.raw.prepare('SELECT COUNT(*) n FROM users').get() as any).n, 1, 'dono preservado');
+  assert.equal((db.raw.prepare("SELECT value FROM application_settings WHERE key='shopify_location_id'").get() as any).value, '"gid://shopify/Location/1"', 'configuração preservada');
+  db.raw.prepare("INSERT INTO application_settings (key,value,updated_at) VALUES ('public_site_url','\"https://x.netlify.app\"',1)").run();
+  assert.throws(() => db.raw.prepare("INSERT INTO application_settings (key,value,updated_at) VALUES ('chave_invalida','1',1)").run(), 'lista de chaves continua fechada');
 });

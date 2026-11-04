@@ -43,5 +43,14 @@ export const MIGRATIONS: { name: string; statements: string[] }[] = [
     "statements": [
       "INSERT OR IGNORE INTO categories (slug,label,shopify_product_type,sort_order,created_at) VALUES\n  ('calcas','Calças','Calças',8,0),\n  ('conjuntos','Conjuntos','Conjuntos',9,0),\n  ('moletons','Moletons','Moletons',10,0),\n  ('esportivo','Esportivo','Esportivo',11,0),\n  ('calcados','Calçados','Calçados',12,0),\n  ('cintos','Cintos','Cintos',13,0),\n  ('acessorios','Acessórios','Acessórios',14,0)"
     ]
+  },
+  {
+    "name": "0004_public_site_url.sql",
+    "statements": [
+      "CREATE TABLE application_settings_new (\n  key         TEXT PRIMARY KEY CHECK (key IN ('shopify_location_id','shopify_publication_ids','api_capabilities','catalog_deploy_hook_enabled','public_site_url')),\n  value       TEXT NOT NULL,\n  updated_by  TEXT REFERENCES users(id),\n  updated_at  INTEGER NOT NULL\n)",
+      "INSERT INTO application_settings_new (key, value, updated_by, updated_at) SELECT key, value, updated_by, updated_at FROM application_settings",
+      "DROP TABLE application_settings",
+      "ALTER TABLE application_settings_new RENAME TO application_settings"
+    ]
   }
 ];

@@ -629,3 +629,14 @@ test('contrato: peça cadastrada NO PAINEL aparece no site na marca e categoria 
   assert.deepEqual(page.errors, []);
   await ctx.close();
 });
+
+test('"Ver no site" do painel (shopify-<handle>) abre também peças da curadoria', async () => {
+  const {ctx, page} = await newPage();
+  await mockShopify(page);
+  await page.goto(`${BASE}peca.html?slug=shopify-camiseta-abercrombie-amp-fitch-popeye-graphic`);
+  await page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
+  await page.waitForFunction(() => /Popeye/.test(document.querySelector('h1')?.textContent || ''), null, {timeout: 15000});
+  assert.match(await page.textContent('h1'), /Camiseta Abercrombie & Fitch Popeye/);
+  assert.deepEqual(page.errors, []);
+  await ctx.close();
+});

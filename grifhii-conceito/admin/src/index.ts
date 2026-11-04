@@ -113,6 +113,9 @@ export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, d
       const body = parse(z.object({
         shopify_location_id: z.string().regex(/^gid:\/\/shopify\/Location\/\d{1,20}$/).optional(),
         shopify_publication_ids: z.array(z.string().regex(/^gid:\/\/shopify\/Publication\/\d{1,20}$/)).min(1).max(5).optional(),
+        // Endereço público do site (só https e só o domínio): usado no botão "Ver no site".
+        public_site_url: z.string().trim().max(200).regex(/^https:\/\/[a-z0-9.-]+\.[a-z]{2,}\/?$/i, 'Use o endereço do site, ex.: https://grifhii.netlify.app')
+          .transform(u => u.replace(/\/+$/, '').toLowerCase()).optional(),
       }).strict(), await readJson(req));
       for (const [k, v] of Object.entries(body)) {
         await env.DB.prepare(`INSERT INTO application_settings (key,value,updated_by,updated_at) VALUES (?,?,?,?)
@@ -152,7 +155,10 @@ export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, d
         variants(first: 100) { nodes { id sku price compareAtPrice selectedOptions { name value } inventoryItem { id } } }
         media(first: 50) { nodes { id status alt preview { image { url } } } } } }`, { id: productGid(match[1]) }, deps.gql);
       if (!d.product) throw errors.notFound();
-      return json({ product: d.product });
+      const site = await env.DB.prepare("SELECT value FROM application_settings WHERE key = 'public_site_url'").first<{ value: string }>();
+      const base = site ? JSON.parse(site.value) as string : null;
+      const handle = (d.product as { handle: string }).handle;
+      return json({ product: d.product, siteUrl: base ? `${base}/peca.html?slug=shopify-${encodeURIComponent(handle)}` : null });
     }
     if (path === 'products' && m === 'POST') {
       requirePermission(p, 'products:write');

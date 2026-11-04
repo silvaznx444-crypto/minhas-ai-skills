@@ -390,6 +390,13 @@
       const requested=decodeURIComponent(req.pathname.slice('/products/'.length));
       const added=additions.find(p=>p.slug===requested||p.id===requested);
       if(added) return added;
+      // Botão "Ver no site" do painel usa shopify-<handle>: também abre peças da curadoria.
+      if(requested.startsWith('shopify-')){
+        const h=requested.slice('shopify-'.length);
+        const remote=published.find(p=>p.handle===h);
+        const cur=originals.find(o=>candidateHandle(o)===h||o.slug===h||(remote&&titleMatches(titleTargetFor(o),remote.title)));
+        if(cur) return hydrated(cur);
+      }
       throw localError||new Error('Produto não encontrado na Shopify publicada.');
     }
     if(req.pathname==='/products' && local && Array.isArray(local.data)){

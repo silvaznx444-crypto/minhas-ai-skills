@@ -109,7 +109,7 @@ export function Settings() {
   const pubs = useLoad(() => isOwner ? api('shopify/publications') : Promise.resolve({ nodes: [] }));
   const users = useLoad(() => isOwner ? api('auth/users') : Promise.resolve({ users: [] }));
   const val = (k: string) => { const r = settings.data?.settings?.find((s: any) => s.key === k); return r ? JSON.parse(r.value) : null; };
-  const [loc, setLoc] = useState(''); const [pub, setPub] = useState<string[]>([]);
+  const [loc, setLoc] = useState(''); const [pub, setPub] = useState<string[]>([]); const [site, setSite] = useState<string | null>(null);
   const [invite, setInvite] = useState({ displayName: '', role: 'EMPLOYEE', permissions: ['products:read', 'inventory:read', 'inventory:write'] as string[] });
   const [inviteUrl, setInviteUrl] = useState(''); const [codes, setCodes] = useState<string[] | null>(null); const [error, setError] = useState<unknown>(null);
   const PERMS: [string, string][] = [['products:read', 'Ver produtos'], ['products:write', 'Cadastrar/editar'], ['products:publish', 'Publicar/ocultar'], ['prices:write', 'Alterar preços'],
@@ -125,9 +125,12 @@ export function Settings() {
         <option value="">Escolha…</option>{(locs.data?.nodes ?? []).map((l: any) => <option key={l.id} value={l.id}>{l.name}{l.isActive ? '' : ' (inativo)'}</option>)}</select></label>
       <div className="field">Canais onde publicar<div className="chips">{(pubs.data?.nodes ?? []).map((p: any) => { const cur = pub.length ? pub : val('shopify_publication_ids') ?? []; const on = cur.includes(p.id);
         return <button key={p.id} type="button" className="chip" aria-pressed={on} onClick={() => setPub(on ? cur.filter((x: string) => x !== p.id) : [...cur, p.id])}>{p.name}</button>; })}</div></div>
-      <Button busyText="Confirmando…" disabled={!loc && !pub.length} onClick={async () => {
+      <label className="field">Endereço do site (para o botão “Ver no site”)<input className="input" inputMode="url" autoCapitalize="none" autoCorrect="off" spellCheck={false}
+        placeholder="https://seu-site.netlify.app" value={site ?? val('public_site_url') ?? ''} onChange={e => setSite(e.target.value)} />
+        <span className="muted" style={{ fontSize: 12 }}>Só o endereço principal, sem nada depois da barra.</span></label>
+      <Button busyText="Confirmando…" disabled={!loc && !pub.length && site === null} onClick={async () => {
         setError(null);
-        try { await withStepUp(() => api('settings', { method: 'PUT', body: { ...(loc ? { shopify_location_id: loc } : {}), ...(pub.length ? { shopify_publication_ids: pub } : {}) } })); toast('Configurações salvas.'); settings.reload(); setLoc(''); setPub([]); }
+        try { await withStepUp(() => api('settings', { method: 'PUT', body: { ...(loc ? { shopify_location_id: loc } : {}), ...(pub.length ? { shopify_publication_ids: pub } : {}), ...(site !== null && site.trim() ? { public_site_url: site.trim() } : {}) } })); toast('Configurações salvas.'); settings.reload(); setLoc(''); setPub([]); setSite(null); }
         catch (e) { setError(e); }
       }}>Salvar (pede Face ID)</Button>
     </section>

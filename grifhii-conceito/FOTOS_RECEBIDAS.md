@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**81 de 124** cores recebidas.
+**85 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -104,10 +104,10 @@
 | ✅ | Camiseta Colcci Brasilidade Tropical — Azul-marinho | Azul-marinho |
 | ✅ | Camiseta Colcci Back To The Old Days — Azul-marinho | Azul-marinho |
 | ✅ | Camiseta Ellus Logo Colors — Off-white | Off-white |
-| ⏳ | Camiseta On Performance Poliamida — Moda Fit | Cinza-claro |
-| ⏳ | Camiseta On Performance Poliamida — Moda Fit | Branca |
-| ⏳ | Camiseta On Performance Poliamida — Moda Fit | Azul-bebê claro |
-| ⏳ | Camiseta On Performance Poliamida — Moda Fit | Cinza-escuro |
+| ✅ | Camiseta On Performance Poliamida — Moda Fit | Cinza-claro |
+| ✅ | Camiseta On Performance Poliamida — Moda Fit | Branca |
+| ✅ | Camiseta On Performance Poliamida — Moda Fit | Azul-bebê claro |
+| ✅ | Camiseta On Performance Poliamida — Moda Fit | Cinza-escuro |
 | ⏳ | Short On Running 2 em 1 — Moda Fit | Branco |
 | ⏳ | Short On Running 2 em 1 — Moda Fit | Preto |
 | ⏳ | Short On Running 2 em 1 — Moda Fit | Cinza |

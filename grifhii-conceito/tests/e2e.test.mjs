@@ -640,3 +640,13 @@ test('"Ver no site" do painel (shopify-<handle>) abre também peças da curadori
   assert.deepEqual(page.errors, []);
   await ctx.close();
 });
+
+test('"Ver no site" de peça com "teste" no nome: o site explica por que não mostra (não fala em curadoria)', async () => {
+  const {ctx, page} = await newPage();
+  const teste = {...PAINEL_NOVA, id: 'gid://shopify/Product/990000000999', handle: 'camisa-teste', title: 'Camisa teste'};
+  await mockShopify(page, {nodes: [...NODES, teste]});
+  await page.goto(`${BASE}peca.html?slug=shopify-camisa-teste`);
+  await page.getByText(/não está disponível no site.*“teste” no nome/).waitFor({timeout: 15000});
+  assert.equal(await page.getByText('não encontrado na curadoria').count(), 0);
+  await ctx.close();
+});

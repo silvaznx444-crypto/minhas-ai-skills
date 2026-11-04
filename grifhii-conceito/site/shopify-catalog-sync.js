@@ -397,6 +397,7 @@
         const cur=originals.find(o=>candidateHandle(o)===h||o.slug===h||(remote&&titleMatches(titleTargetFor(o),remote.title)));
         if(cur) return hydrated(cur);
       }
+      if(requested.startsWith('shopify-')) throw new Error('Esta peça não está disponível no site: pode estar em rascunho, oculta ou ter “teste” no nome.');
       throw localError||new Error('Produto não encontrado na Shopify publicada.');
     }
     if(req.pathname==='/products' && local && Array.isArray(local.data)){

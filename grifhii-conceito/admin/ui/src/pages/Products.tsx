@@ -41,10 +41,13 @@ export function ProductDetail({ id }: { id: string }) {
   return <div className="stack fade-in">
     <a href="#/produtos" className="muted" style={{ fontSize: 13 }}>← Produtos</a>
     <div className="row between"><div><div className="kicker">{p.vendor} · {p.productType}</div><h1 className="page-title">{p.title}</h1></div><StatusBadge s={p.status} /></div>
-    {prod.data.siteUrl
-      ? <a className="btn ghost" href={prod.data.siteUrl} target="_blank" rel="noopener noreferrer">Ver no site ↗</a>
-      : <p className="muted" style={{ fontSize: 13, margin: 0 }}>Para ver a peça no site por aqui, o proprietário informa o endereço do site em Configurações.</p>}
-    {p.status !== 'ACTIVE' && <p className="muted" style={{ fontSize: 13, margin: 0 }}>A peça só aparece no site depois de <strong>publicada</strong>. Peças com “teste” no nome nunca aparecem no site.</p>}
+    {/\bteste\b/i.test(p.title)
+      ? <div className="notice warn">Esta peça tem <strong>“teste”</strong> no nome: o site esconde peças de teste de propósito, então ela <strong>não aparece no site</strong>. Se não for usar, oculte-a do site abaixo.</div>
+      : p.status !== 'ACTIVE'
+        ? <div className="notice warn">Esta peça está em <strong>rascunho</strong>: ela aparece no site depois de publicada.</div>
+        : prod.data.siteUrl
+          ? <a className="btn ghost" href={prod.data.siteUrl} target="_blank" rel="noopener noreferrer">Ver no site ↗</a>
+          : <p className="muted" style={{ fontSize: 13, margin: 0 }}>Para ver a peça no site por aqui, o proprietário informa o endereço do site em Configurações.</p>}
     {thumbs.length > 0 && <div className="media-grid">{thumbs.slice(0, 8).map((m: any) => <div className="media-tile" key={m.id}><img src={m.preview.image.url} alt={m.alt?.replace(/\[gh:.*\]/, '') || p.title} loading="lazy" /></div>)}</div>}
     <ErrorNotice error={error} />
 

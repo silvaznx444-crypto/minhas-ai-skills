@@ -21,6 +21,7 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
   const ctx = await browser.newContext({ ...devices['iPhone 13'] });
   const page = await ctx.newPage();
   const errors = []; page.on('pageerror', e => errors.push(e.message));
+  page.on('dialog', d => d.accept());
   page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource: the server responded with a status of (401|409)/.test(m.text())) errors.push(m.text()); });
   const cdp = await ctx.newCDPSession(page);
   await cdp.send('WebAuthn.enable');
@@ -111,6 +112,29 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
       await page.getByText(/Fotos\/3D confirmados na Shopify/).waitFor({ timeout: 20000 }); await noHScroll(); await shot('12b-fotos-cor');
       const s = await state(); const p = s.products.find(x => x.title.includes('Resort'));
       assert.ok(p.media >= 1, 'foto registrada na Shopify');
+    });
+    await step('editar nome e remover uma cor (com Face ID) — a Shopify confirma', async () => {
+      await page.goto(BASE + '/#/produtos'); await page.getByText('Camiseta Tommy Hilfiger Resort').click();
+      await page.getByRole('button', { name: 'Editar nome, marca, categoria ou descrição' }).click();
+      await page.getByLabel('Nome da peça').fill('Camiseta Tommy Hilfiger Resort Floral');
+      await page.getByRole('button', { name: 'Salvar alterações' }).click();
+      await page.getByText('Informações salvas na Shopify.').waitFor();
+      await page.getByRole('heading', { name: 'Camiseta Tommy Hilfiger Resort Floral' }).waitFor();
+      await page.getByRole('button', { name: 'Remover uma cor ou tamanho' }).click();
+      await page.getByRole('button', { name: 'Preta / M', exact: true }).click();
+      await page.getByRole('button', { name: 'Remover selecionadas' }).click();
+      await page.getByText('Removido: Preta/M.').waitFor({ timeout: 15000 }); await noHScroll(); await shot('12c-editar-remover');
+      const p = (await state()).products.find(x => x.title === 'Camiseta Tommy Hilfiger Resort Floral');
+      assert.ok(p && !p.combos.includes('Preta/M'));
+    });
+    await step('apagar peça: exige digitar APAGAR + Face ID; some da Shopify', async () => {
+      await page.goto(BASE + '/#/produtos'); await page.getByText('Camiseta Abercrombie Fitch New York').first().click();
+      await page.getByRole('button', { name: 'Apagar esta peça…' }).click();
+      assert.ok(await page.getByRole('button', { name: 'Apagar definitivamente' }).isDisabled());
+      await page.getByLabel('Para confirmar, digite APAGAR').fill('apagar');
+      await page.getByRole('button', { name: 'Apagar definitivamente' }).click();
+      await page.getByRole('heading', { name: 'Produtos' }).waitFor({ timeout: 15000 });
+      assert.ok(!(await state()).products.some(x => x.title.includes('New York')));
     });
     await step('atividades registram as ações', async () => {
       await page.goto(BASE + '/#/atividades');

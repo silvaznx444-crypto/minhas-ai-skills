@@ -224,7 +224,7 @@
         return;
       }
       filled = true;
-      submenu.innerHTML = brands.map(brand => `
+      submenu.innerHTML = `<a href="${base}produtos.html?marca=todas" class="site-menu-brand-all"><span>Todas as marcas</span></a>` + brands.map(brand => `
       <a href="${base}produtos.html?marca=${encodeURIComponent(brand.slug)}" aria-label="Ver peças ${brand.menuLabel || brand.label}">
         ${brandMark(brand)}
         <span>${brand.menuLabel || brand.label}</span>

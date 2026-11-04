@@ -8,7 +8,8 @@ import { requirePermission, requireRecentAuth, type Principal } from './auth/rba
 import { purgeRateLimits, rateLimit } from './auth/ratelimit.ts';
 import { adminGraphql, ShopifyError, type GqlOptions } from './shopify/client.ts';
 import { getCapabilities } from './shopify/capabilities.ts';
-import { AddColor, AddMedia, CreateProduct, ProductGid, SetInventory, UpdatePrice } from './products/schemas.ts';
+import { deleteProduct, deleteVariants, updateDetails, UpdateDetails } from './products/manage.ts';
+import { AddColor, AddMedia, CreateProduct, ProductGid, VariantGid, SetInventory, UpdatePrice } from './products/schemas.ts';
 import { enqueue, getProductInventory, retryOperation, runDue, runOperation, setInventory, type Deps } from './products/operations.ts';
 import { stageImage } from './media/service.ts';
 import { reconcile } from './products/reconcile.ts';
@@ -148,9 +149,29 @@ export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, d
         WHERE (? = '' OR title LIKE '%' || ? || '%') ORDER BY title LIMIT 50 OFFSET ?`).bind(q, q, page * 50).all();
       return json({ products: rows.results, page });
     }
+    // ---------------- Editar / apagar
+    if ((match = /^products\/(\d{1,20})$/.exec(path)) && m === 'PATCH') {
+      requirePermission(p, 'products:write');
+      await rateLimit(env.DB, 'write:user', p.userId);
+      const body = parse(UpdateDetails, await readJson(req, 32 * 1024));
+      return json(await updateDetails(env, p.userId, productGid(match[1]), body, deps.gql));
+    }
+    if ((match = /^products\/(\d{1,20})$/.exec(path)) && m === 'DELETE') {
+      requirePermission(p, 'products:publish');
+      requireRecentAuth(p); // apagar exige Face ID recente
+      await rateLimit(env.DB, 'write:user', p.userId);
+      return json(await deleteProduct(env, p.userId, productGid(match[1]), deps.gql));
+    }
+    if ((match = /^products\/(\d{1,20})\/variants\/delete$/.exec(path)) && m === 'POST') {
+      requirePermission(p, 'products:write');
+      requireRecentAuth(p);
+      await rateLimit(env.DB, 'write:user', p.userId);
+      const body = parse(z.object({ variantIds: z.array(VariantGid).min(1).max(100) }).strict(), await readJson(req));
+      return json(await deleteVariants(env, p.userId, productGid(match[1]), body.variantIds, deps.gql));
+    }
     if ((match = /^products\/(\d{1,20})$/.exec(path)) && m === 'GET') {
       requirePermission(p, 'products:read');
-      const d = await adminGraphql<{ product: unknown }>(env, `query GhProductRead($id: ID!) { product(id: $id) { id handle title status vendor productType updatedAt
+      const d = await adminGraphql<{ product: unknown }>(env, `query GhProductRead($id: ID!) { product(id: $id) { id handle title status vendor productType description updatedAt
         options { id name linkedMetafield { namespace key } optionValues { id name linkedMetafieldValue } }
         variants(first: 100) { nodes { id sku price compareAtPrice selectedOptions { name value } inventoryItem { id } } }
         media(first: 50) { nodes { id status alt preview { image { url } } } } } }`, { id: productGid(match[1]) }, deps.gql);

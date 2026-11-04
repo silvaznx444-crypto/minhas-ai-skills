@@ -6,6 +6,8 @@
 (() => {
 'use strict';
 const targets = {
+ 'vilebrequin-bermuda-tartarugas-grandes':'bermuda-vilebrequin-estampa-tartaruga', // auditoria 04/11: mesmas 5 variantes na Shopify
+ 'vilebrequin-bermuda-tartarugas-pequenas':'bermuda-vilebrequin-tartarugas-pequenas', // auditoria 04/11
  'camiseta-abercrombie-fitch-new-york-vermelha':'camiseta-abercrombie-fitch-new-york-vermelha',
  'camiseta-tommy-hilfiger-nyc-script':'camiseta-tommy-hilfiger-n-y-c', // Teste 4: alvo validado apenas no nivel de produto; variante exige aprovacao
  'camiseta-abercrombie-popeye':'camiseta-abercrombie-amp-fitch-popeye-graphic', // Teste 4: alvo validado apenas no nivel de produto; variante exige aprovacao
@@ -90,7 +92,8 @@ const colorEquivalents = {
  'camiseta-ellus-logo-colors-off-white':{'off white':'branco'},
  'short-emporio-armani-ea7':{'cinza':'grisalho'},
  'short-hugo-boss-listrado':{'preto branco bege':'preto'},
- 'camisa-social-ralph-lauren-manga-curta':{'vermelho bordo':'vermelho','off white':'branco','azul claro':'azul'},
+ 'camisa-social-ralph-lauren-manga-curta':{'vermelho bordo':'vermelho','off white':'bege','azul claro':'azul'}, // auditoria 04/11: off-white está como Bege na Shopify
+ 'bone-tommy-hilfiger-classico':{'off white':'bege'}, // auditoria 04/11
  'camisa-social-ralph-lauren-xadrez-manga-longa':{'laranja xadrez':'laranja','vermelho xadrez':'vermelho','verde xadrez':'verde'},
  'camiseta-lacoste-paris-verde-escuro':{'verde escuro':'verde'},
  'camiseta-diesel-d-corp-1978-verde-militar':{'verde militar':'verde'},

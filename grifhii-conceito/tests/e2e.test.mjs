@@ -650,3 +650,49 @@ test('"Ver no site" de peça com "teste" no nome: o site explica por que não mo
   assert.equal(await page.getByText('não encontrado na curadoria').count(), 0);
   await ctx.close();
 });
+
+/* ================= 04/11 (2): MARCAS, GALERIA, PEÇA OCULTADA ================= */
+test('Marcas: "Nossas marcas" lista as marcas com peças e cada cartão abre a página só daquela marca', async () => {
+  const {ctx, page} = await newPage({viewport: {width: 390, height: 844}});
+  await mockShopify(page);
+  await page.goto(`${BASE}produtos.html?marca=todas`);
+  await page.locator('[data-brand-card]').first().waitFor();
+  assert.match(await page.locator('h1').first().innerText(), /Nossas\s+marcas/);
+  assert.ok(await page.locator('[data-brand-card]').count() >= 15);
+  await page.locator('[data-brand-card="lacoste"]').click();
+  await page.waitForURL(/marca=lacoste/);
+  assert.equal((await page.locator('h1').first().innerText()).trim(), 'Lacoste');
+  await ctx.close();
+});
+
+test('galeria: na Sport Club, trocar para a foto de trás mostra a FOTO REAL (não repete o 3D da frente) e abre em tela cheia', async () => {
+  const {ctx, page} = await newPage();
+  await mockShopify(page);
+  await page.goto(`${BASE}peca-lacoste-sport-club`);
+  await page.waitForSelector('.product-thumbs button');
+  const view = () => page.evaluate(() => document.getElementById('productGalleryMain').classList.contains('is-photo-visible') || !document.getElementById('grifDetailModel').classList.contains('is-available') ? 'foto' : '3d');
+  assert.equal(await view(), '3d');
+  await page.locator('.product-thumbs button').nth(1).click();
+  assert.equal(await view(), 'foto');
+  assert.match(await page.getAttribute('#productMainImage', 'src'), /sport-club-02/);
+  await page.click('#productGalleryMain');
+  await page.locator('#productLightbox').waitFor({state: 'visible'});
+  assert.match(await page.getAttribute('#productLightboxImage', 'src'), /sport-club-02/);
+  await ctx.close();
+});
+
+test('peça da vitrine apagada/ocultada na Shopify (pelo painel) sai da lista do site', async () => {
+  const {ctx, page} = await newPage();
+  const sem = NODES.filter(n => n.handle !== 'camiseta-lacoste-classic-crocodile-branca');
+  assert.ok(sem.length < NODES.length, 'handle existe no snapshot');
+  await mockShopify(page, {nodes: sem});
+  await page.goto(`${BASE}produtos`);
+  await page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
+  const r = await page.evaluate(async () => {
+    const all = await window.GRIFHII_LOCAL_API('/products?limit=100');
+    const item = window.GRIFHII_CURADORIA.find(p => window.GRIFHII_SHOPIFY_CATALOG.candidateHandle(p) === 'camiseta-lacoste-classic-crocodile-branca');
+    return {listed: all.data.some(p => p.slug === item.slug), total: all.data.length};
+  });
+  assert.equal(r.listed, false); assert.ok(r.total > 60);
+  await ctx.close();
+});

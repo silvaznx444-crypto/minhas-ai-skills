@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { api, money, newKey, numId, SIZES, validMoney, withStepUp } from '../lib.ts';
 import { Button, ErrorNotice, Loading, StatusBadge, useLoad, useSession, useToast } from '../ui.tsx';
 import { forApi, MediaPicker, type StagedMedia } from './Media.tsx';
+import { isSiteBrand, SITE_BRANDS } from '../site.ts';
 
 export function ProductList() {
   const [q, setQ] = useState('');
@@ -60,12 +61,15 @@ export function ProductDetail({ id }: { id: string }) {
     {can('media:write') && <ColorMedia product={p} onDone={() => { prod.reload(); toast('Fotos/3D confirmados na Shopify. O site atualiza em instantes.'); }} />}
     {can('products:write') && <AddColor product={p} onDone={() => { prod.reload(); inv.reload(); toast('Nova cor confirmada na Shopify.'); }} />}
 
+    {can('products:write') && <EditDetails product={p} onDone={() => { prod.reload(); toast('Informações salvas na Shopify.'); }} />}
+    {can('products:write') && <RemoveVariants product={p} onDone={msg => { prod.reload(); inv.reload(); toast(msg); }} />}
     {can('products:publish') && <section className="card row between">
       <div><h2>Visibilidade</h2><p className="muted" style={{ fontSize: 14, margin: 0 }}>{p.status === 'ACTIVE' ? 'Publicado no canal de vendas.' : 'Não está publicado.'}</p></div>
       {p.status === 'ACTIVE'
         ? <Button kind="danger" busyText="Ocultando…" onClick={async () => { if (!confirm('Ocultar este produto do site?')) return; setError(null); try { await runOp(`products/${id}/unpublish`, {}); prod.reload(); toast('Produto ocultado.'); } catch (e) { setError(e); } }}>Ocultar do site</Button>
         : <Button busyText="Publicando…" onClick={async () => { setError(null); try { await runOp(`products/${id}/publish`, {}); prod.reload(); toast('Produto publicado.'); } catch (e) { setError(e); } }}>Publicar</Button>}
     </section>}
+    {can('products:publish') && <DeleteProduct product={p} />}
   </div>;
 }
 
@@ -171,5 +175,81 @@ function ColorMedia({ product, onDone }: { product: any; onDone: () => void }) {
         try { await runOp(`products/${numId(product.id)}/media`, { media: forApi(media) }); setOpen(false); setColor(''); setMedia([]); onDone(); }
         catch (e) { setError(e); }
       }}>Salvar fotos/3D</Button></div>
+  </section>;
+}
+
+/** Editar nome, marca, categoria e descrição (só os campos alterados vão para a Shopify). */
+function EditDetails({ product, onDone }: { product: any; onDone: () => void }) {
+  const cats = useLoad(() => api('categories'));
+  const [open, setOpen] = useState(false); const [error, setError] = useState<unknown>(null);
+  const initCat = () => (cats.data?.categories ?? []).find((c: any) => c.shopify_product_type === product.productType)?.slug ?? '';
+  const [f, setF] = useState<{ title: string; brand: string; category: string; description: string } | null>(null);
+  if (!open) return <button className="btn ghost" onClick={() => { setF({ title: product.title, brand: product.vendor ?? '', category: initCat(), description: product.description ?? '' }); setOpen(true); }}>Editar nome, marca, categoria ou descrição</button>;
+  if (!f) return null;
+  const changed: Record<string, string> = {};
+  if (f.title.trim() !== product.title) changed.title = f.title.trim();
+  if (f.brand.trim() && f.brand.trim() !== (product.vendor ?? '')) changed.brand = f.brand.trim();
+  if (f.category && f.category !== initCat()) changed.category = f.category;
+  if (f.description.trim() !== (product.description ?? '').trim()) changed.description = f.description.trim();
+  return <section className="card stack">
+    <h2>Editar informações</h2>
+    <label className="field">Nome da peça<input className="input" value={f.title} maxLength={120} onChange={e => setF({ ...f, title: e.target.value })} /></label>
+    <div className="grid cols-2">
+      <label className="field">Marca<select className="input" value={isSiteBrand(f.brand) ? SITE_BRANDS.find(b => b.toLowerCase() === f.brand.trim().toLowerCase()) : '__outra'}
+        onChange={e => setF({ ...f, brand: e.target.value === '__outra' ? '' : e.target.value })}>
+        {SITE_BRANDS.map(b => <option key={b} value={b}>{b}</option>)}<option value="__outra">Outra marca…</option></select></label>
+      <label className="field">Categoria<select className="input" value={f.category} onChange={e => setF({ ...f, category: e.target.value })}>
+        <option value="">(manter)</option>{(cats.data?.categories ?? []).map((c: any) => <option key={c.slug} value={c.slug}>{c.label}</option>)}</select></label>
+    </div>
+    {!isSiteBrand(f.brand) && <label className="field">Nome da outra marca<input className="input" value={f.brand} maxLength={60} onChange={e => setF({ ...f, brand: e.target.value })} /></label>}
+    <label className="field">Descrição<textarea className="input" rows={4} value={f.description} maxLength={5000} onChange={e => setF({ ...f, description: e.target.value })} /></label>
+    <p className="muted" style={{ fontSize: 12, margin: 0 }}>Peças cadastradas pelo painel mudam no site na hora. Peças antigas da vitrine mantêm o texto do site; a mudança vale na Shopify e no pedido.</p>
+    <ErrorNotice error={error} />
+    <div className="row"><button className="btn ghost" onClick={() => setOpen(false)}>Cancelar</button>
+      <Button disabled={!Object.keys(changed).length || f.title.trim().length < 2} busyText="Salvando…" onClick={async () => {
+        setError(null);
+        try { await api(`products/${numId(product.id)}`, { method: 'PATCH', body: changed }); setOpen(false); onDone(); } catch (e) { setError(e); }
+      }}>Salvar alterações</Button></div>
+  </section>;
+}
+
+/** Remover cores/tamanhos (nunca todos). Exige Face ID. */
+function RemoveVariants({ product, onDone }: { product: any; onDone: (msg: string) => void }) {
+  const [open, setOpen] = useState(false); const [sel, setSel] = useState<string[]>([]); const [error, setError] = useState<unknown>(null);
+  const vs = product.variants.nodes as any[];
+  if (vs.length < 2) return null;
+  if (!open) return <button className="btn ghost" onClick={() => setOpen(true)}>Remover uma cor ou tamanho</button>;
+  const label = (v: any) => v.selectedOptions.map((o: any) => o.value).join(' / ');
+  return <section className="card stack">
+    <h2>Remover cor ou tamanho</h2>
+    <p className="muted" style={{ fontSize: 14, margin: 0 }}>Marque o que <strong>acabou de vez</strong>. Se só está sem estoque, prefira zerar o estoque. Pelo menos uma opção precisa continuar.</p>
+    <div className="chips">{vs.map(v => <button key={v.id} type="button" className="chip" aria-pressed={sel.includes(v.id)} onClick={() => setSel(sel.includes(v.id) ? sel.filter(x => x !== v.id) : [...sel, v.id])}>{label(v)}</button>)}</div>
+    <ErrorNotice error={error} />
+    <div className="row"><button className="btn ghost" onClick={() => { setOpen(false); setSel([]); }}>Cancelar</button>
+      <Button kind="danger" disabled={!sel.length || sel.length >= vs.length} busyText="Removendo…" onClick={async () => {
+        if (!confirm(`Remover ${sel.length} opção(ões) desta peça? Isso não pode ser desfeito.`)) return;
+        setError(null);
+        try { const r = await withStepUp(() => api(`products/${numId(product.id)}/variants/delete`, { method: 'POST', body: { variantIds: sel } })); setOpen(false); setSel([]); onDone(`Removido: ${r.removed.join(', ')}.`); }
+        catch (e) { setError(e); }
+      }}>Remover selecionadas</Button></div>
+  </section>;
+}
+
+/** Apagar a peça inteira (Shopify). Exige Face ID e digitar a palavra APAGAR. */
+function DeleteProduct({ product }: { product: any }) {
+  const [open, setOpen] = useState(false); const [word, setWord] = useState(''); const [error, setError] = useState<unknown>(null);
+  const toast = useToast();
+  if (!open) return <button className="btn ghost" style={{ color: 'var(--err)' }} onClick={() => setOpen(true)}>Apagar esta peça…</button>;
+  return <section className="card stack" style={{ borderColor: '#d9b3b3' }}>
+    <h2>Apagar peça</h2>
+    <p className="muted" style={{ fontSize: 14, margin: 0 }}>A peça <strong>{product.title}</strong> será apagada da Shopify e sai do site. Pedidos antigos não são afetados. <strong>Não dá para desfazer.</strong> Se quiser só tirar do site por um tempo, use “Ocultar do site”.</p>
+    <label className="field">Para confirmar, digite APAGAR<input className="input" value={word} onChange={e => setWord(e.target.value)} autoCapitalize="characters" autoComplete="off" /></label>
+    <ErrorNotice error={error} />
+    <div className="row"><button className="btn ghost" onClick={() => { setOpen(false); setWord(''); }}>Cancelar</button>
+      <Button kind="danger" disabled={word.trim().toUpperCase() !== 'APAGAR'} busyText="Apagando…" onClick={async () => {
+        setError(null);
+        try { await withStepUp(() => api(`products/${numId(product.id)}`, { method: 'DELETE' })); toast('Peça apagada.'); location.hash = '/produtos'; }
+        catch (e) { setError(e); }
+      }}>Apagar definitivamente</Button></div>
   </section>;
 }

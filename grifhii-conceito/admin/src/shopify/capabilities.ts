@@ -17,6 +17,9 @@ export interface Capabilities {
   variantOptionHasLinkedMetafieldValue: boolean;
   productUpdateHasMedia: boolean;
   hasProductCreateMedia: boolean;
+  /** Opcionais (só usados ao apagar): ausência bloqueia apenas a exclusão, não o resto do painel. */
+  productDeleteArg?: 'input' | 'product' | null;
+  hasVariantsBulkDelete?: boolean;
 }
 
 const INTROSPECTION = `query GhCapabilities {
@@ -49,6 +52,8 @@ export async function detectCapabilities(env: Env, opts?: GqlOptions): Promise<C
     variantOptionHasLinkedMetafieldValue: vo.has('linkedMetafieldValue'),
     productUpdateHasMedia: fields.get('productUpdate')?.has('media') ?? false,
     hasProductCreateMedia: fields.has('productCreateMedia'),
+    productDeleteArg: fields.get('productDelete')?.has('input') ? 'input' : fields.get('productDelete')?.has('product') ? 'product' : null,
+    hasVariantsBulkDelete: fields.has('productVariantsBulkDelete'),
   };
 }
 

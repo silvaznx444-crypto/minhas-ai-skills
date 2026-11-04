@@ -274,9 +274,17 @@
     const variants = Array.isArray(product.variants) ? product.variants : []; // mostrar as opcoes mesmo quando uma variante estiver esgotada
     const originalImages = getProductImages(product);
     const firstPhoto = originalImages[0];
-    const mapped3D = (img,variant=null) => window.GRIFHII_3D?.modelForPhoto(product,img,variant) ||
+    const rawModel = (img,variant=null) => window.GRIFHII_3D?.modelForPhoto(product,img,variant) ||
       (!product.shopifyDynamic && img === firstPhoto ? window.GRIFHII_CATALOG_PREVIEWS?.[product.slug] : null);
-    const images = [...originalImages].sort((a, b) => Number(Boolean(mapped3D(b))) - Number(Boolean(mapped3D(a))));
+    const images = [...originalImages].sort((a, b) => Number(Boolean(rawModel(b))) - Number(Boolean(rawModel(a))));
+    // Cada 3D aparece UMA vez na galeria (na 1ª foto dele). As outras fotos que apontam para o mesmo 3D
+    // (ex.: costas da peça, outro tamanho) mostram a FOTO REAL — senão trocar a foto não mudaria nada na tela.
+    const modelOwner = new Map();
+    for (const img of images) { const m = rawModel(img); if (m && !modelOwner.has(m)) modelOwner.set(m, img); }
+    const mapped3D = (img,variant=null) => {
+      const m = rawModel(img,variant);
+      return m && (!modelOwner.has(m) || modelOwner.get(m) === img) ? m : null;
+    };
     if (!images.length) images.push('assets/product-placeholder.svg');
     const initialModel = mapped3D(images[0]) || null;
     const price = product.promoPriceCents ?? product.priceCents;

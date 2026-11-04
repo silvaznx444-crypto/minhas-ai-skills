@@ -265,3 +265,51 @@ test('"Ver no site": endereço do site salvo pelo dono (só https, só domínio)
   const emp = await makeUser(env, 'EMPLOYEE', ['products:read']);
   assert.equal((await call(env, req('settings', { method: 'PUT', user: emp, body: { public_site_url: 'https://x.netlify.app' } }), fake)).status, 403, 'só o dono altera');
 });
+
+/* ---------- Editar / apagar ---------- */
+const num = (gid: string) => gid.split('/').pop();
+test('editar informações: nome, descrição, marca e categoria vão para a Shopify; nome com HTML é recusado', async () => {
+  const { env, fake, owner } = await setup();
+  const p = fake.seedProduct('Camisa Nome Errado', { Azul: { M: 1 } });
+  let r = await call(env, req(`products/${num(p.id)}`, { method: 'PATCH', user: owner, body: { title: 'Camisa Ralph Lauren Oxford', brand: 'Ralph Lauren', category: 'camisas-sociais', description: 'Linha 1\n\nLinha <b>2</b>' } }), fake);
+  assert.equal(r.status, 200, await r.clone().text());
+  assert.equal(p.title, 'Camisa Ralph Lauren Oxford'); assert.equal(p.vendor, 'Ralph Lauren'); assert.equal(p.productType, 'Camisas');
+  assert.equal((p as any).descriptionHtml, '<p>Linha 1</p><p>Linha &lt;b&gt;2&lt;/b&gt;</p>', 'descrição sem HTML injetado');
+  r = await call(env, req(`products/${num(p.id)}`, { method: 'PATCH', user: owner, body: { title: '<script>x</script>' } }), fake);
+  assert.equal(r.status, 422);
+  r = await call(env, req(`products/${num(p.id)}`, { method: 'PATCH', user: owner, body: {} }), fake);
+  assert.equal(r.status, 422, 'nada para alterar');
+  const emp = await makeUser(env, 'EMPLOYEE', ['products:read']);
+  assert.equal((await call(env, req(`products/${num(p.id)}`, { method: 'PATCH', user: emp, body: { title: 'Outro nome' } }), fake)).status, 403);
+  const a = await env.DB.prepare("SELECT result FROM audit_logs WHERE action = 'product.update_details'").all();
+  assert.equal(a.results.length, 1);
+});
+
+test('apagar peça: exige permissão de publicar + Face ID recente; repetir não dá erro', async () => {
+  const { env, fake, owner } = await setup();
+  const p = fake.seedProduct('Camisa Para Apagar', { Azul: { M: 1 } });
+  const old = await makeUser(env, 'MANAGER', ['products:read', 'products:write', 'products:publish'], { authAgoMs: 10 * 60 * 1000 });
+  let r = await call(env, req(`products/${num(p.id)}`, { method: 'DELETE', user: old }), fake);
+  assert.equal(r.status, 403); assert.equal((await r.json() as any).error.code, 'reauth_required');
+  const writer = await makeUser(env, 'EMPLOYEE', ['products:read', 'products:write']);
+  assert.equal((await call(env, req(`products/${num(p.id)}`, { method: 'DELETE', user: writer }), fake)).status, 403, 'sem permissão de publicar');
+  assert.ok(fake.products.has(p.id));
+  r = await call(env, req(`products/${num(p.id)}`, { method: 'DELETE', user: owner }), fake);
+  assert.equal(r.status, 200); assert.ok(!fake.products.has(p.id));
+  r = await call(env, req(`products/${num(p.id)}`, { method: 'DELETE', user: owner }), fake);
+  assert.equal(r.status, 200, 'apagar de novo é seguro');
+});
+
+test('remover cor/tamanho: só variantes DESTA peça, nunca todas, com Face ID recente', async () => {
+  const { env, fake, owner } = await setup();
+  const p = fake.seedProduct('Camisa Cores', { Azul: { M: 1, G: 1 }, Verde: { G: 1 } });
+  const other = fake.seedProduct('Outra Peça', { Preta: { M: 1 } });
+  const ids = (color: string) => p.variants.nodes.filter(v => v.selectedOptions.some(o => o.value === color)).map(v => v.id);
+  let r = await call(env, req(`products/${num(p.id)}/variants/delete`, { method: 'POST', user: owner, body: { variantIds: [other.variants.nodes[0].id] } }), fake);
+  assert.equal(r.status, 422, 'variante de outra peça é ignorada/recusada'); assert.equal(other.variants.nodes.length, 1);
+  r = await call(env, req(`products/${num(p.id)}/variants/delete`, { method: 'POST', user: owner, body: { variantIds: p.variants.nodes.map(v => v.id) } }), fake);
+  assert.equal(r.status, 409, 'não remove todas');
+  r = await call(env, req(`products/${num(p.id)}/variants/delete`, { method: 'POST', user: owner, body: { variantIds: ids('Verde') } }), fake);
+  assert.equal(r.status, 200); assert.deepEqual((await r.json() as any).removed, ['Verde/G']);
+  assert.deepEqual(fake.combos(p).sort(), ['Azul/G', 'Azul/M']);
+});

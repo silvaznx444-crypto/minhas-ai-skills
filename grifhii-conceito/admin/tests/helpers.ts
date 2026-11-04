@@ -100,7 +100,7 @@ export class FakeShopify {
     if (data?.__gqlErrors) return Response.json({ errors: data.__gqlErrors });
     return Response.json({ data, extensions: { cost: { throttleStatus: { currentlyAvailable: 1000, restoreRate: 100 } } } });
   };
-  rootField(op: string) { return ({ GhProductCreate: 'productCreate', GhVariantsCreate: 'productVariantsBulkCreate', GhVariantsUpdate: 'productVariantsBulkUpdate', GhInvSet: 'inventorySetQuantities', GhProductMedia: 'productUpdate', GhMetafieldsSet: 'metafieldsSet', GhPublish: 'publishablePublish', GhUnpublish: 'publishableUnpublish', GhStatus: 'productUpdate', GhStaged: 'stagedUploadsCreate' } as Record<string, string>)[op]; }
+  rootField(op: string) { return ({ GhProductCreate: 'productCreate', GhVariantsCreate: 'productVariantsBulkCreate', GhVariantsUpdate: 'productVariantsBulkUpdate', GhInvSet: 'inventorySetQuantities', GhProductMedia: 'productUpdate', GhMetafieldsSet: 'metafieldsSet', GhPublish: 'publishablePublish', GhUnpublish: 'publishableUnpublish', GhStatus: 'productUpdate', GhStaged: 'stagedUploadsCreate', GhProductDetails: 'productUpdate', GhProductDelete: 'productDelete', GhVariantsDelete: 'productVariantsBulkDelete' } as Record<string, string>)[op]; }
 
   seedProduct(title: string, colors: Record<string, Record<string, number>>, opts: { linkedColor?: boolean } = {}) {
     const p: P = { id: this.nextId('Product'), handle: title.toLowerCase().replace(/\W+/g, '-'), title, status: 'ACTIVE', updatedAt: '', tags: [],
@@ -141,13 +141,22 @@ export class FakeShopify {
     switch (op) {
       case 'GhCapabilities': {
         const muts = ['productCreate', 'productVariantsBulkCreate', 'productVariantsBulkUpdate', 'productUpdate', 'productOptionUpdate', 'inventorySetQuantities',
-          'stagedUploadsCreate', 'publishablePublish', 'publishableUnpublish', 'metafieldsSet'].filter(m => !this.caps.missing.includes(m));
-        return { mutationType: { fields: muts.map(name => ({ name, args: name === 'productCreate' ? [{ name: 'product' }, { name: 'media' }] : name === 'productUpdate' ? [{ name: 'product' }, { name: 'media' }] : [] })) },
+          'stagedUploadsCreate', 'publishablePublish', 'publishableUnpublish', 'metafieldsSet', 'productDelete', 'productVariantsBulkDelete'].filter(m => !this.caps.missing.includes(m));
+        return { mutationType: { fields: muts.map(name => ({ name, args: name === 'productCreate' ? [{ name: 'product' }, { name: 'media' }] : name === 'productUpdate' ? [{ name: 'product' }, { name: 'media' }]
+          : name === 'productDelete' ? [{ name: 'input' }] : name === 'productVariantsBulkDelete' ? [{ name: 'productId' }, { name: 'variantsIds' }] : [] })) },
           invQty: { inputFields: [{ name: 'inventoryItemId' }, { name: 'locationId' }, { name: 'quantity' }, { name: this.caps.compareField }] },
           variantInput: { inputFields: ['optionValues', 'price', 'compareAtPrice', 'inventoryItem', 'inventoryQuantities', 'mediaId', 'id'].map(name => ({ name })) },
           variantOption: { inputFields: [{ name: 'name' }, { name: 'optionName' }, { name: 'linkedMetafieldValue' }] } };
       }
       case 'GhProduct': case 'GhProductRead': case 'GhWebhookProduct': return { product: prod(v.id) };
+      case 'GhProductVariants': return { product: prod(v.id) };
+      case 'GhProductDetails': { const p = prod(v.p.id); if (!p) return { productUpdate: { product: null, userErrors: [{ field: ['id'], message: 'Product does not exist' }] } };
+        if (v.p.title !== undefined) p.title = v.p.title; if (v.p.vendor !== undefined) p.vendor = v.p.vendor; if (v.p.productType !== undefined) p.productType = v.p.productType;
+        if (v.p.descriptionHtml !== undefined) (p as any).descriptionHtml = v.p.descriptionHtml; this.touch(p); return { productUpdate: { product: p, userErrors: [] } }; }
+      case 'GhProductDelete': { if (!this.products.has(v.p.id)) return { productDelete: { deletedProductId: null, userErrors: [{ field: ['id'], message: 'Product does not exist' }] } };
+        this.products.delete(v.p.id); return { productDelete: { deletedProductId: v.p.id, userErrors: [] } }; }
+      case 'GhVariantsDelete': { const p = prod(v.productId)!; p.variants.nodes = p.variants.nodes.filter(x => !v.variantsIds.includes(x.id)); this.touch(p);
+        return { productVariantsBulkDelete: { product: { id: p.id }, userErrors: [] } }; }
       case 'GhProductByTag': { const tag = /tag:'(.+)'/.exec(v.q)![1]; return { products: { nodes: [...this.products.values()].filter(p => p.tags.includes(tag)).map(p => ({ id: p.id })) } }; }
       case 'GhProductCreate': {
         const i = v.p; const p: P = { id: this.nextId('Product'), handle: i.title.toLowerCase().replace(/\W+/g, '-'), title: i.title, status: i.status, updatedAt: '', tags: i.tags,

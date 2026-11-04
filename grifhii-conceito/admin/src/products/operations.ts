@@ -49,7 +49,7 @@ const variantCombo = (v: Variant) => {
   return comboKey(c, s);
 };
 const escapeHtml = (s: string) => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
-const descriptionHtml = (t: string) => t.split(/\n{2,}/).map(p => `<p>${escapeHtml(p).replace(/\n/g, '<br>')}</p>`).join('');
+export const descriptionHtml = (t: string) => t.split(/\n{2,}/).map(p => `<p>${escapeHtml(p).replace(/\n/g, '<br>')}</p>`).join('');
 const opTag = (opId: string) => `gh-op-${opId.slice(0, 8)}${opId.slice(-4)}`;
 
 // ---------------------------------------------------------------- journal (idempotência)

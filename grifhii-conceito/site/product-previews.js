@@ -13,7 +13,7 @@
   "lacoste-golf-1933-branca": "assets/colecao-20-outubro/lacoste-golf-1933-branca-volume-white.webp",
   "tommy-hilfiger-crest-branca": "assets/colecao-20-outubro/tommy-hilfiger-crest-branca-volume-white.webp",
   "tommy-hilfiger-tricolor-branca": "assets/colecao-20-outubro/tommy-hilfiger-tricolor-branca-volume-white.webp",
-  "lacoste-sport-heritage-tennis-1933": "assets/colecao-20-outubro/lacoste-sport-heritage-tennis-1933-volume-white.webp",
+  "lacoste-sport-heritage-tennis-1933": "assets/modelos-3d/lacoste-sport-heritage-tennis-1933-3d-v2.webp",
   "lacoste-classic-crocodile": "assets/colecao-20-outubro/lacoste-classic-crocodile-volume-white.webp",
   "lacoste-sport-club": "assets/modelos-3d/lacoste-sport-club-volume-fixed.webp",
   "lacoste-signature-script": "assets/catalog-preview/lacoste-signature-script-volume-v1.webp",

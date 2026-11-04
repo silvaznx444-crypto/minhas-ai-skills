@@ -402,9 +402,14 @@
     }
     if(req.pathname==='/products' && local && Array.isArray(local.data)){
       const extra=filterNew(path,additions);
-      const merged=[...local.data.map(hydrated),...extra];
+      // Peça da vitrine que EXISTIA na Shopify (snapshot) e agora não está publicada no canal (apagada ou
+      // "Ocultar do site" pelo painel) sai da lista. Só com a Shopify AO VIVO; peças ainda não cadastradas continuam.
+      const removed=item=>isLive && snapshotDomainMatches() && snapshot().products.has(candidateHandle(item)) &&
+        !publishedLive.some(p=>p.handle===candidateHandle(item));
+      const kept=local.data.filter(item=>!removed(item));
+      const merged=[...kept.map(hydrated),...extra];
       return {...local,data:merged,pagination:{...(local.pagination||{}),
-        total:Number(local.pagination?.total||local.data.length)+extra.length}};
+        total:Number(local.pagination?.total||local.data.length)-(local.data.length-kept.length)+extra.length}};
     }
     if(localError) throw localError;
     return local;

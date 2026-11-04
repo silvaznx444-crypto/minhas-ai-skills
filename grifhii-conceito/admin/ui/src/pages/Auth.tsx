@@ -44,9 +44,10 @@ export function Setup({ onDone }: { onDone: () => void }) {
   return <Shell title="Configuração inicial">
     <p className="muted" style={{ fontSize: 14 }}>Cadastro único do proprietário. Use o código de configuração definido na implantação.</p>
     <label className="field">Seu nome<input className="input" value={name} onChange={e => setName(e.target.value)} autoComplete="name" maxLength={80} /></label>
-    <label className="field">Código de configuração<input className="input" value={token} onChange={e => setToken(e.target.value)} autoComplete="off" spellCheck={false} /></label>
+    <label className="field">Código de configuração<input className="input" value={token} onChange={e => setToken(e.target.value)} autoComplete="off" autoCapitalize="none" autoCorrect="off" spellCheck={false} /></label>
+    {token.trim().length > 0 && token.trim().length < 20 && <p className="muted" style={{ fontSize: 13 }}>O código tem {token.trim().length} caracteres; precisa ter pelo menos 20 (é o ADMIN_SETUP_TOKEN cadastrado no Cloudflare).</p>}
     <ErrorNotice error={error} />
-    <Button kind="block" disabled={!name.trim() || token.length < 32} busyText="Criando chave…" onClick={async () => {
+    <Button kind="block" disabled={!name.trim() || token.trim().length < 20} busyText="Criando chave…" onClick={async () => {
       setError(null);
       try { const r = await passkeyRegister('auth/setup/options', 'auth/setup/verify', { setupToken: token, displayName: name.trim() }); setCsrf(r.csrf); setCodes(r.recoveryCodes); }
       catch (e) { setError(e); }

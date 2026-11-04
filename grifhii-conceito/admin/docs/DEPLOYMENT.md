@@ -53,7 +53,7 @@ O ZIP é gerado com `npm run build:pages` (`GRIFHII_PAINEL_PAGES.zip`: interface
 1. **Armazenamento e bancos de dados → D1 → Criar** → nome `grifhii-admin`. (As tabelas são criadas sozinhas na primeira abertura do painel.)
 2. **Workers e Pages → Criar → Pages → Fazer upload de ativos** → nome do projeto **`grifhii-painel`** → enviar o ZIP → Implantar. Confira o endereço: se não for `grifhii-painel.pages.dev`, crie a variável `ADMIN_ORIGIN` (texto) com o endereço exato.
 3. No projeto → **Configurações → Vinculações → Adicionar → Banco de dados D1**: nome da variável `DB`, banco `grifhii-admin` (ambiente **Produção**).
-4. **Configurações → Variáveis e segredos** (Produção), sempre tipo **Secret**: `SESSION_PEPPER` e `ADMIN_SETUP_TOKEN` (cada um com 40+ caracteres aleatórios, gerados num gerador de senhas). Depois, as credenciais da Shopify (seção 2).
+4. **Configurações → Variáveis e segredos** (Produção), sempre tipo **Secret**: `SESSION_PEPPER` e `ADMIN_SETUP_TOKEN` (cada um com 20+ caracteres aleatórios — a "senha forte" do iPhone serve). Depois, as credenciais da Shopify (seção 2).
 5. **Implantações → nova implantação** (enviar o mesmo ZIP de novo) para aplicar vinculações e segredos.
 6. Abrir `https://grifhii-painel.pages.dev/#/configurar` no iPhone (seção 5).
 

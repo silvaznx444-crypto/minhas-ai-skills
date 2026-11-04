@@ -49,12 +49,12 @@ export async function handleAuth(req: Request, env: Env, path: string): Promise<
   if (path === 'auth/setup/options' && m === 'POST') {
     sameOrigin(env, req);
     await rateLimit(env.DB, 'auth:ip', await ipKey(env, req));
-    const body = parse(z.object({ setupToken: z.string().min(32).max(200), displayName: z.string().trim().min(1).max(80) }), await readJson(req));
+    const body = parse(z.object({ setupToken: z.string().trim().min(20).max(200), displayName: z.string().trim().min(1).max(80) }), await readJson(req));
     const owner = await env.DB.prepare("SELECT id FROM users WHERE role = 'OWNER'").first();
     if (owner) throw new AppError(410, 'setup_closed', 'O cadastro inicial já foi concluído.');
-    if (!env.ADMIN_SETUP_TOKEN || !timingSafeEqualStr(body.setupToken, env.ADMIN_SETUP_TOKEN)) {
+    if (!env.ADMIN_SETUP_TOKEN || !timingSafeEqualStr(body.setupToken, env.ADMIN_SETUP_TOKEN.trim())) {
       await audit(env.DB, { action: 'auth.setup', result: 'denied' });
-      throw new AppError(401, 'setup_denied', 'Código de configuração inválido.');
+      throw new AppError(401, 'setup_denied', 'Código de configuração inválido. Confira se colou o ADMIN_SETUP_TOKEN inteiro e se enviou o ZIP de novo depois de salvar os segredos.');
     }
     const webauthnUserId = newWebauthnUserId();
     const options = await registrationOptions(env, { webauthnUserId, name: body.displayName });

@@ -17,11 +17,19 @@ function withDefaults(env: Env): Env {
     WEBAUTHN_RP_ID: env.WEBAUTHN_RP_ID || new URL(origin).hostname,
     SHOPIFY_SHOP_DOMAIN: env.SHOPIFY_SHOP_DOMAIN || 'grifhiiconceito.myshopify.com',
     SHOPIFY_API_VERSION: env.SHOPIFY_API_VERSION || '2026-10',
+    // Espaços/quebras de linha colados por engano no painel do Cloudflare não podem invalidar o segredo.
+    SESSION_PEPPER: (env.SESSION_PEPPER ?? '').trim(),
+    ...(env.ADMIN_SETUP_TOKEN ? { ADMIN_SETUP_TOKEN: env.ADMIN_SETUP_TOKEN.trim() } : {}),
   };
 }
 
 const text = (status: number, msg: string) => new Response(msg, {
   status, headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', 'X-Robots-Tag': 'noindex' },
+});
+
+/** Erro de configuração no mesmo formato JSON da API, para o painel mostrar a mensagem real. */
+const configError = (msg: string) => new Response(JSON.stringify({ error: { code: 'config_missing', message: msg } }), {
+  status: 503, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' },
 });
 
 let migrated = false;
@@ -55,8 +63,9 @@ export default {
       return text(421, `Abra o painel pelo endereço principal: ${env.ADMIN_ORIGIN}\n(Se o seu projeto tem outro nome, cadastre a variável ADMIN_ORIGIN com o endereço certo.)`);
     }
     if (url.pathname.startsWith('/api/')) {
-      if (!rawEnv.DB) return text(503, 'Falta ligar o banco D1 ao projeto (Configurações → Vinculações → D1, nome da variável: DB).');
-      if (!rawEnv.SESSION_PEPPER || rawEnv.SESSION_PEPPER.length < 32) return text(503, 'Falta cadastrar o segredo SESSION_PEPPER (mínimo 32 caracteres).');
+      if (!rawEnv.DB) return configError('Configuração incompleta no Cloudflare: falta ligar o banco D1 ao projeto (Settings → Bindings → D1, nome da variável: DB) e enviar o ZIP de novo.');
+      if (!rawEnv.SESSION_PEPPER || rawEnv.SESSION_PEPPER.trim().length < 20) return configError('Configuração incompleta no Cloudflare: falta o segredo SESSION_PEPPER (tipo Secret, 20 ou mais caracteres). Depois de salvar, envie o ZIP de novo.');
+      if (!rawEnv.ADMIN_SETUP_TOKEN && url.pathname.includes('/auth/setup/')) return configError('Configuração incompleta no Cloudflare: falta o segredo ADMIN_SETUP_TOKEN. Depois de salvar, envie o ZIP de novo.');
       await ensureMigrated(env);
       if (Date.now() - lastMaintenance > 60_000) {
         lastMaintenance = Date.now();

@@ -375,6 +375,46 @@
       "photoReviewRequired": true
     },
     {
+      "id": "grifhii-camiseta-tommy-hilfiger-championship-azul-marinho",
+      "slug": "camiseta-tommy-hilfiger-championship-azul-marinho",
+      "name": "Camiseta Tommy Hilfiger Championship — Azul-marinho",
+      "brand": "TOMMY HILFIGER",
+      "category": "camisetas",
+      "description": "Camiseta Tommy Hilfiger azul-marinho com assinatura Hilfiger e patch Championship Team 1985 no peito. Gola redonda e detalhe tricolor na nuca. Tamanhos P e M.",
+      "priceCents": 13990,
+      "promoPriceCents": null,
+      "images": [
+        "assets/fotos-reais-05-11-2026/camiseta-tommy-hilfiger-championship-azul-marinho-real.webp"
+      ],
+      "variants": [
+        {
+          "id": "local-tommy-championship-azul-marinho-p",
+          "size": "P",
+          "color": "Azul-marinho",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/camiseta-tommy-hilfiger-championship-azul-marinho-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-tommy-championship-azul-marinho-m",
+          "size": "M",
+          "color": "Azul-marinho",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/camiseta-tommy-hilfiger-championship-azul-marinho-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        }
+      ],
+      "collection": "05-novembro-2026"
+    },
+    {
       "id": "grifhii-tommy-hilfiger-polo",
       "slug": "tommy-hilfiger-polo",
       "name": "Polo Tommy Hilfiger",
@@ -2598,14 +2638,16 @@
     {
       "id": "grifhii-outubro-lacoste-sport-heritage-tennis-1933",
       "slug": "lacoste-sport-heritage-tennis-1933",
-      "name": "Camiseta Lacoste Sport Heritage Tennis 1933 — Branca",
+      "name": "Camiseta Lacoste Sport Heritage Tennis 1933",
       "brand": "LACOSTE",
       "category": "camisetas",
-      "description": "Tradição esportiva, elegância e autenticidade. Camiseta branca com gola redonda e assinatura Lacoste Tennis 1933, acompanhada do icônico crocodilo na parte frontal. Visual limpo e versátil para looks casuais esportivos. Disponível em M, G e GG.",
+      "description": "Tradição esportiva, elegância e autenticidade. Camiseta branca com gola redonda e assinatura Lacoste Tennis 1933, acompanhada do icônico crocodilo na parte frontal. Visual limpo e versátil para looks casuais esportivos. Disponível em M, G e GG. Também na cor preta (M e G), com raquete e “tennis since 1933” nas costas.",
       "priceCents": 13990,
       "promoPriceCents": null,
       "images": [
-        "assets/colecao-20-outubro/lacoste-sport-heritage-tennis-1933-01.webp"
+        "assets/colecao-20-outubro/lacoste-sport-heritage-tennis-1933-01.webp",
+        "assets/fotos-reais-05-11-2026/lacoste-sport-heritage-tennis-1933-preta-frente-real.webp",
+        "assets/fotos-reais-05-11-2026/lacoste-sport-heritage-tennis-1933-preta-costas-real.webp"
       ],
       "variants": [
         {
@@ -2643,6 +2685,30 @@
           "photoNote": "Fotografia real recebida e usada no catálogo.",
           "stockConfirmed": false,
           "catalogVisible": true
+        },
+        {
+          "id": "local-lacoste-sport-heritage-tennis-1933-preta-m",
+          "size": "M",
+          "color": "Preto",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/lacoste-sport-heritage-tennis-1933-preta-frente-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-lacoste-sport-heritage-tennis-1933-preta-g",
+          "size": "G",
+          "color": "Preto",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/lacoste-sport-heritage-tennis-1933-preta-frente-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
         }
       ],
       "photoReviewRequired": false,
@@ -2707,15 +2773,16 @@
     {
       "id": "grifhii-outubro-lacoste-sport-club",
       "slug": "lacoste-sport-club",
-      "name": "Camiseta Lacoste Sport Club — Branca",
+      "name": "Camiseta Lacoste Sport Club",
       "brand": "LACOSTE",
       "category": "camisetas",
-      "description": "Tradição esportiva com identidade contemporânea. Camiseta branca com o crocodilo verde bordado no peito e estampa gráfica Lacoste Sport Club nas costas, em tons de azul. Frente e costas fotografadas da mesma peça. Tamanhos M, G e GG.",
+      "description": "Tradição esportiva com identidade contemporânea. Camiseta branca com o crocodilo verde bordado no peito e estampa gráfica Lacoste Sport Club nas costas, em tons de azul. Frente e costas fotografadas da mesma peça. Tamanhos M, G e GG. Também na cor preta, nos tamanhos M e G.",
       "priceCents": 13990,
       "promoPriceCents": null,
       "images": [
         "assets/colecao-20-outubro/lacoste-sport-club-01.webp",
-        "assets/colecao-20-outubro/lacoste-sport-club-02.webp"
+        "assets/colecao-20-outubro/lacoste-sport-club-02.webp",
+        "assets/fotos-reais-05-11-2026/lacoste-sport-club-preta-real.webp"
       ],
       "variants": [
         {
@@ -2753,6 +2820,30 @@
           "photoNote": "Fotografia real recebida e usada no catálogo.",
           "stockConfirmed": false,
           "catalogVisible": true
+        },
+        {
+          "id": "local-lacoste-sport-club-preta-m",
+          "size": "M",
+          "color": "Preto",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/lacoste-sport-club-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-lacoste-sport-club-preta-g",
+          "size": "G",
+          "color": "Preto",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/lacoste-sport-club-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
         }
       ],
       "photoReviewRequired": false,

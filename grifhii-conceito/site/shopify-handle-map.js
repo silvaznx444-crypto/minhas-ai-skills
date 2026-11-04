@@ -6,6 +6,7 @@
 (() => {
 'use strict';
 const targets = {
+ 'lacoste-sport-club-racquet-preta':'camiseta-lacoste-sport-tennis-preta', // 05/11: mesma camiseta (foto da Shopify confere: raquete + LACOSTE verde)
  'bermuda-diesel-tactel-premium':'bermuda-diesel-masculina-premium', // 05/11: cadastrada na Shopify como "Bermuda Diesel Masculina – Premium"
  'vilebrequin-bermuda-tartarugas-grandes':'bermuda-vilebrequin-estampa-tartaruga', // auditoria 04/11: mesmas 5 variantes na Shopify
  'vilebrequin-bermuda-tartarugas-pequenas':'bermuda-vilebrequin-tartarugas-pequenas', // auditoria 04/11

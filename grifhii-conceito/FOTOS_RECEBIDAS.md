@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**77 de 124** cores recebidas.
+**81 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -87,7 +87,7 @@
 | ⏳ | Camiseta Tommy Hilfiger Heritage | Azul |
 | ⏳ | Camiseta Tommy Hilfiger Heritage | Bege |
 | ⏳ | Camiseta Tommy Hilfiger New York City — Bege | Bege |
-| ⏳ | Camiseta Lacoste Sport Heritage Tennis 1933 — Branca | Branco |
+| ✅ | Camiseta Lacoste Sport Heritage Tennis 1933 — Branca | Branco |
 | ✅ | Camiseta Lacoste Classic Crocodile — Branca | Branco |
 | ✅ | Camiseta Lacoste Sport Club — Branca | Branco |
 | ✅ | Camiseta Abercrombie & Fitch Heritage 1892 — Cinza | Cinza com laranja |
@@ -97,8 +97,8 @@
 | ⏳ | Camiseta Tommy Hilfiger Classic — Azul-marinho | Azul-marinho |
 | ✅ | Camiseta Fred Perry Classic Laurel — Azul-marinho | Azul-marinho |
 | ✅ | Camiseta Lacoste Sport Graphic Crocodile — Azul-marinho | Azul-marinho |
-| ⏳ | Camiseta Lacoste Tennis Club — Azul-marinho | Azul-marinho |
-| ⏳ | Camiseta Lacoste Tennis Club Typography — Preta | Preta |
+| ✅ | Camiseta Lacoste Tennis Club — Azul-marinho | Azul-marinho |
+| ✅ | Camiseta Lacoste Tennis Club Typography — Preta | Preta |
 | ✅ | Camiseta Lacoste Paris Heritage — Preta | Preta |
 | ✅ | Camiseta Armani Exchange A|X Line — Preta | Preta |
 | ✅ | Camiseta Colcci Brasilidade Tropical — Azul-marinho | Azul-marinho |
@@ -112,7 +112,7 @@
 | ⏳ | Short On Running 2 em 1 — Moda Fit | Preto |
 | ⏳ | Short On Running 2 em 1 — Moda Fit | Cinza |
 | ⏳ | Short On Running 2 em 1 — Moda Fit | Verde |
-| ⏳ | Camiseta Lacoste Sport Racquet — Preta | Preta |
+| ✅ | Camiseta Lacoste Sport Racquet — Preta | Preta |
 | ⏳ | Camiseta Tommy Hilfiger NYC Script | Branca |
 | ⏳ | Camiseta Abercrombie & Fitch Popeye | Azul-marinho |
 | ⏳ | Camiseta Abercrombie & Fitch Popeye | Verde-escuro |

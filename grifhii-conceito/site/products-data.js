@@ -194,6 +194,7 @@
     },
     'on': {slug:'on',label:'ON',menuLabel:'On Running',apiBrand:'ON',aliases:['On Running','On Performance'],domain:'on.com',iconUrl:brandIcon('on.com'),kicker:'MODA FIT / PERFORMANCE',presentation:'Peças para corrida, musculação e treinos em geral, com estética esportiva minimalista.',placeholderCategories:['esportivo','bermudas','camisetas']},
     'ayrton-senna': { slug:'ayrton-senna',label:'AYRTON SENNA',menuLabel:'Ayrton Senna',apiBrand:'AYRTON SENNA',aliases:['Senna'],domain:null,iconUrl:'assets/lion-transparent.webp',kicker:'COLEÇÃO AUTOMOBILISMO',presentation:'Bonés temáticos que celebram o legado do piloto brasileiro e a paixão pelo automobilismo.',placeholderCategories:['acessorios'] },
+    'polo-play': { slug:'polo-play',label:'POLO PLAY',menuLabel:'Polo Play',apiBrand:'POLO PLAY',aliases:['Play'],domain:null,iconUrl:'assets/lion-transparent.webp',kicker:'ACESSÓRIOS',presentation:'Bonés Polo Play com bordados divertidos e acabamento premium.',placeholderCategories:['acessorios'] },
     'selecao-grifhii': {
       slug: 'selecao-grifhii', label: 'SELEÇÃO GRIFHII', menuLabel: 'Seleção GRIFHII', apiBrand: null,
       aliases: [], domain: null, iconUrl: 'assets/lion-transparent.webp', kicker: 'CURADORIA GRIFHII', internal: true, showInMenu: false,

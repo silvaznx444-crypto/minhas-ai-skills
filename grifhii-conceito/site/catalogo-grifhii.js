@@ -297,6 +297,34 @@
       "photoReviewRequired": true
     },
     {
+      "id": "grifhii-camiseta-acostamento-menegotti-preta-lobo",
+      "slug": "camiseta-acostamento-menegotti-preta-lobo",
+      "name": "Camiseta Acostamento Algodão Menegotti — Preta",
+      "brand": "ACOSTAMENTO",
+      "category": "camisetas",
+      "description": "Camiseta Acostamento preta em algodão Menegotti, com lobo artístico bordado na frente. Gola redonda. Tamanho M.",
+      "priceCents": 10990,
+      "promoPriceCents": null,
+      "images": [
+        "assets/fotos-reais-05-11-2026/camiseta-acostamento-menegotti-preta-lobo-real.webp"
+      ],
+      "variants": [
+        {
+          "id": "local-acostamento-menegotti-preta-lobo-m",
+          "size": "M",
+          "color": "Preta",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/camiseta-acostamento-menegotti-preta-lobo-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        }
+      ],
+      "collection": "05-novembro-2026"
+    },
+    {
       "id": "grifhii-acostamento-denim-premium",
       "slug": "acostamento-denim-premium",
       "name": "Camiseta Acostamento Denim Premium",
@@ -4705,6 +4733,34 @@
       "photoReviewRequired": false,
       "stockReviewRequired": false,
       "sourceNote": "Shopify ACTIVE em 04/11/2026; publicação no canal Headless deve ser verificada antes de liberar o checkout."
+    },
+    {
+      "id": "grifhii-bone-polo-play-preto",
+      "slug": "bone-polo-play-preto",
+      "name": "Boné Polo Play — Preto",
+      "brand": "POLO PLAY",
+      "category": "acessorios",
+      "description": "Boné Polo Play preto com bordado colorido frontal, aba curva e ajuste traseiro. Acabamento premium.",
+      "priceCents": 8990,
+      "promoPriceCents": null,
+      "images": [
+        "assets/fotos-reais-05-11-2026/bone-polo-play-preto-real.webp"
+      ],
+      "variants": [
+        {
+          "id": "local-bone-polo-play-preto",
+          "size": "Único",
+          "color": "Preto",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/bone-polo-play-preto-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        }
+      ],
+      "collection": "05-novembro-2026"
     }
   ];
   const normalize = value => String(value || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');

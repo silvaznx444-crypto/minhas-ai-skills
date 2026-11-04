@@ -465,12 +465,13 @@
       "name": "Camisa Social Ralph Lauren Manga Longa Custom Fit",
       "brand": "RALPH LAUREN",
       "category": "camisas",
-      "description": "Camisa social masculina de manga longa com gola button-down e assinatura Polo bordada. Versátil para produções clássicas e casuais. Cores e tamanhos selecionáveis.",
+      "description": "Camisa social masculina de manga longa com gola button-down e assinatura Polo bordada. Versátil para produções clássicas e casuais. Cores e tamanhos selecionáveis. Também na cor preta, do M ao G1.",
       "priceCents": null,
       "promoPriceCents": null,
       "images": [
         "assets/catalogo-novos/ralph-lauren-camisa-social-ralph-lauren-manga-longa-custom-fit-azul-marinho-m.webp",
-        "assets/catalogo-novos/ralph-lauren-camisa-social-ralph-lauren-manga-longa-custom-fit-verde-g.webp"
+        "assets/catalogo-novos/ralph-lauren-camisa-social-ralph-lauren-manga-longa-custom-fit-verde-g.webp",
+        "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp"
       ],
       "variants": [
         {
@@ -496,6 +497,54 @@
           "photoNote": "Foto enviada pelo lojista para conferência antes da publicação.",
           "stockConfirmed": true,
           "catalogVisible": true
+        },
+        {
+          "id": "local-ralph-lauren-camisa-social-ralph-lauren-manga-longa-custom-fit-preta-m",
+          "size": "M",
+          "color": "Preta",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-ralph-lauren-camisa-social-ralph-lauren-manga-longa-custom-fit-preta-g",
+          "size": "G",
+          "color": "Preta",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-ralph-lauren-camisa-social-ralph-lauren-manga-longa-custom-fit-preta-gg",
+          "size": "GG",
+          "color": "Preta",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-ralph-lauren-camisa-social-ralph-lauren-manga-longa-custom-fit-preta-g1",
+          "size": "G1",
+          "color": "Preta",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
         }
       ],
       "photoReviewRequired": true,
@@ -508,7 +557,7 @@
       "name": "Camisa Social Ralph Lauren Manga Curta Custom Fit",
       "brand": "RALPH LAUREN",
       "category": "camisas",
-      "description": "Camisa social Ralph Lauren de manga curta, gola com botões e símbolo Polo bordado. Modelo Custom Fit em diferentes cores; escolha a combinação de cor e tamanho.",
+      "description": "Camisa social Ralph Lauren de manga curta, gola com botões e símbolo Polo bordado. Modelo Custom Fit em diferentes cores; escolha a combinação de cor e tamanho. Também na cor preta, do M ao G1.",
       "priceCents": null,
       "promoPriceCents": null,
       "images": [
@@ -516,7 +565,8 @@
         "assets/catalogo-novos/ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-cinza-gg.webp",
         "assets/catalogo-novos/ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-azul-claro-gg.webp",
         "assets/catalogo-novos/ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-off-white-g.webp",
-        "assets/catalogo-novos/ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-branca-g.webp"
+        "assets/catalogo-novos/ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-branca-g.webp",
+        "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp"
       ],
       "variants": [
         {
@@ -578,6 +628,54 @@
           "photoNote": "Foto enviada pelo lojista para conferência antes da publicação.",
           "stockConfirmed": true,
           "catalogVisible": true
+        },
+        {
+          "id": "local-ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-preta-m",
+          "size": "M",
+          "color": "Preta",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-preta-g",
+          "size": "G",
+          "color": "Preta",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-preta-gg",
+          "size": "GG",
+          "color": "Preta",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-preta-g1",
+          "size": "G1",
+          "color": "Preta",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
         }
       ],
       "photoReviewRequired": true,
@@ -1060,6 +1158,133 @@
       "photoReviewRequired": true,
       "stockReviewRequired": false,
       "sourceNote": "Nome do arquivo menciona branco, mas a imagem apresenta azul-gelo; confirmar nomenclatura de cor antes de publicar."
+    },
+    {
+      "id": "grifhii-bermuda-diesel-tactel-premium",
+      "slug": "bermuda-diesel-tactel-premium",
+      "name": "Bermuda Diesel Tactel Premium",
+      "brand": "DIESEL",
+      "category": "bermudas",
+      "description": "Bermuda Diesel em tactel premium, com forro em tela, cordão com ponteiras vermelhas e logo D bordado. Nas cores branca, bege e azul-marinho, do M ao GG.",
+      "priceCents": 11990,
+      "promoPriceCents": null,
+      "images": [
+        "assets/fotos-reais-05-11-2026/bermuda-diesel-tactel-premium-branca-real.webp",
+        "assets/fotos-reais-05-11-2026/bermuda-diesel-tactel-premium-bege-real.webp",
+        "assets/fotos-reais-05-11-2026/bermuda-diesel-tactel-premium-azul-marinho-real.webp"
+      ],
+      "variants": [
+        {
+          "id": "local-bermuda-diesel-tactel-premium-branca-m",
+          "size": "M",
+          "color": "Branca",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/bermuda-diesel-tactel-premium-branca-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-bermuda-diesel-tactel-premium-branca-g",
+          "size": "G",
+          "color": "Branca",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/bermuda-diesel-tactel-premium-branca-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-bermuda-diesel-tactel-premium-branca-gg",
+          "size": "GG",
+          "color": "Branca",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/bermuda-diesel-tactel-premium-branca-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-bermuda-diesel-tactel-premium-bege-m",
+          "size": "M",
+          "color": "Bege",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/bermuda-diesel-tactel-premium-bege-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-bermuda-diesel-tactel-premium-bege-g",
+          "size": "G",
+          "color": "Bege",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/bermuda-diesel-tactel-premium-bege-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-bermuda-diesel-tactel-premium-bege-gg",
+          "size": "GG",
+          "color": "Bege",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/bermuda-diesel-tactel-premium-bege-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-bermuda-diesel-tactel-premium-azul-marinho-m",
+          "size": "M",
+          "color": "Azul-marinho",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/bermuda-diesel-tactel-premium-azul-marinho-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-bermuda-diesel-tactel-premium-azul-marinho-g",
+          "size": "G",
+          "color": "Azul-marinho",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/bermuda-diesel-tactel-premium-azul-marinho-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-bermuda-diesel-tactel-premium-azul-marinho-gg",
+          "size": "GG",
+          "color": "Azul-marinho",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotos-reais-05-11-2026/bermuda-diesel-tactel-premium-azul-marinho-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        }
+      ],
+      "collection": "05-novembro-2026",
+      "sourceNote": "Informada pelo lojista em 05/11/2026 (R$ 119,90, M ao GG). Cadastrar na Shopify com o nome \"Bermuda Diesel Tactel Premium\"."
     },
     {
       "id": "grifhii-vilebrequin-bermuda-tartarugas-grandes",
@@ -2721,48 +2946,6 @@
       "sourceNote": "Fotografias e tamanhos informados pelo lojista; estoque a confirmar. Modelo em volume é representação ilustrativa, não foto original."
     },
     {
-      "id": "grifhii-novidades-camiseta-fred-perry-classic-laurel-azul-marinho",
-      "slug": "camiseta-fred-perry-classic-laurel-azul-marinho",
-      "name": "Camiseta Fred Perry Classic Laurel — Azul-marinho",
-      "brand": "FRED PERRY",
-      "category": "camisetas",
-      "description": "Camiseta azul-marinho com gola e mangas contrastantes em branco e azul-claro, com coroa de louros bordada. GRIFHII CONCEITO — Um novo conceito de moda masculina.",
-      "priceCents": 13990,
-      "promoPriceCents": null,
-      "images": [
-        "assets/fotografias-novidades/camiseta-fred-perry-classic-laurel-azul-marinho-azul-marinho.webp"
-      ],
-      "variants": [
-        {
-          "id": "local-camiseta-fred-perry-classic-laurel-azul-marinho-azul-marinho-m",
-          "size": "M",
-          "color": "Azul-marinho",
-          "availableStock": 0,
-          "catalogVisible": true,
-          "stockConfirmed": false,
-          "sku": "GRIF-CAMISETA-FRED-PERRY-CLASSIC-LAUREL-AZUL-MARINHO-AZUL-MARINHO-M",
-          "image": "assets/fotografias-novidades/camiseta-fred-perry-classic-laurel-azul-marinho-azul-marinho.webp",
-          "photoStatus": "recebida",
-          "photoNote": "Fotografia real fornecida pelo lojista. Estoque a confirmar."
-        },
-        {
-          "id": "local-camiseta-fred-perry-classic-laurel-azul-marinho-azul-marinho-g",
-          "size": "G",
-          "color": "Azul-marinho",
-          "availableStock": 0,
-          "catalogVisible": true,
-          "stockConfirmed": false,
-          "sku": "GRIF-CAMISETA-FRED-PERRY-CLASSIC-LAUREL-AZUL-MARINHO-AZUL-MARINHO-G",
-          "image": "assets/fotografias-novidades/camiseta-fred-perry-classic-laurel-azul-marinho-azul-marinho.webp",
-          "photoStatus": "recebida",
-          "photoNote": "Fotografia real fornecida pelo lojista. Estoque a confirmar."
-        }
-      ],
-      "photoReviewRequired": false,
-      "stockReviewRequired": true,
-      "sourceNote": "Fotografias e tamanhos informados pelo lojista; estoque a confirmar. Modelo em volume é representação ilustrativa, não foto original."
-    },
-    {
       "id": "grifhii-novidades-camiseta-lacoste-sport-graphic-crocodile-azul-marinho",
       "slug": "camiseta-lacoste-sport-graphic-crocodile-azul-marinho",
       "name": "Camiseta Lacoste Sport Graphic Crocodile — Azul-marinho",
@@ -3877,17 +4060,19 @@
     {
       "id": "grifhii-camiseta-fred-perry-punhos-listrados",
       "slug": "camiseta-fred-perry-punhos-listrados",
-      "name": "Camiseta Fred Perry Punhos Listrados",
+      "name": "Camiseta Fred Perry Listras Clássicas",
       "brand": "FRED PERRY",
       "category": "camisetas",
-      "description": "Camiseta de gola redonda com coroa de louros no peito e punhos com listras contrastantes. Cores azul-claro, azul-marinho, preta e branca. Tamanhos G, GG, G1 e G2.",
+      "description": "Camiseta Fred Perry com a coroa de louros bordada no peito e listras clássicas nos punhos; em algumas cores, também na gola. Escolha a cor e o tamanho.",
       "priceCents": 12990,
       "promoPriceCents": null,
       "images": [
         "assets/fotos-reais-03-11-2026/camiseta-fred-perry-punhos-listrados-azul-claro-real.webp",
         "assets/fotos-reais-03-11-2026/camiseta-fred-perry-punhos-listrados-azul-marinho-real.webp",
         "assets/fotos-reais-03-11-2026/camiseta-fred-perry-punhos-listrados-preta-real.webp",
-        "assets/fotos-reais-03-11-2026/camiseta-fred-perry-punhos-listrados-branca-real.webp"
+        "assets/fotos-reais-03-11-2026/camiseta-fred-perry-punhos-listrados-branca-real.webp",
+        "assets/fotos-reais-03-11-2026/camiseta-fred-perry-gola-punhos-dupla-listra-branca-real.webp",
+        "assets/fotografias-novidades/camiseta-fred-perry-classic-laurel-azul-marinho-azul-marinho.webp"
       ],
       "variants": [
         {
@@ -4081,79 +4266,90 @@
           "image": "assets/fotos-reais-03-11-2026/camiseta-fred-perry-punhos-listrados-branca-real.webp",
           "photoStatus": "recebida",
           "photoNote": "Fotografia real adicionada em 03/11/2026 mantendo a apresentação 3D vinculada na galeria."
-        }
-      ],
-      "shopifyLinkPending": true,
-      "collection": "30-outubro-2026",
-      "imagePresentation": "foto-real-com-3d",
-      "photoReviewRequired": true
-    },
-    {
-      "id": "grifhii-camiseta-fred-perry-gola-punhos-dupla-listra",
-      "slug": "camiseta-fred-perry-gola-punhos-dupla-listra",
-      "name": "Camiseta Fred Perry Gola e Punhos Listrados",
-      "brand": "FRED PERRY",
-      "category": "camisetas",
-      "description": "Camiseta branca com listras pretas na gola e nos punhos, acompanhadas pela coroa de louros no peito. Tamanhos G, GG, G1 e G2.",
-      "priceCents": 12990,
-      "promoPriceCents": null,
-      "images": [
-        "assets/fotos-reais-03-11-2026/camiseta-fred-perry-gola-punhos-dupla-listra-branca-real.webp"
-      ],
-      "variants": [
+        },
         {
-          "id": "local-camiseta-fred-perry-gola-punhos-dupla-listra-branca-g",
+          "id": "local-fred-perry-branca-gola-listrada-g",
           "size": "G",
-          "color": "Branca",
+          "color": "Branca gola listrada",
           "availableStock": 0,
           "catalogVisible": true,
           "stockConfirmed": false,
           "sku": null,
           "image": "assets/fotos-reais-03-11-2026/camiseta-fred-perry-gola-punhos-dupla-listra-branca-real.webp",
           "photoStatus": "recebida",
-          "photoNote": "Fotografia real adicionada em 03/11/2026 mantendo a apresentação 3D vinculada na galeria."
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
         },
         {
-          "id": "local-camiseta-fred-perry-gola-punhos-dupla-listra-branca-gg",
+          "id": "local-fred-perry-branca-gola-listrada-gg",
           "size": "GG",
-          "color": "Branca",
+          "color": "Branca gola listrada",
           "availableStock": 0,
           "catalogVisible": true,
           "stockConfirmed": false,
           "sku": null,
           "image": "assets/fotos-reais-03-11-2026/camiseta-fred-perry-gola-punhos-dupla-listra-branca-real.webp",
           "photoStatus": "recebida",
-          "photoNote": "Fotografia real adicionada em 03/11/2026 mantendo a apresentação 3D vinculada na galeria."
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
         },
         {
-          "id": "local-camiseta-fred-perry-gola-punhos-dupla-listra-branca-g1",
+          "id": "local-fred-perry-branca-gola-listrada-g1",
           "size": "G1",
-          "color": "Branca",
+          "color": "Branca gola listrada",
           "availableStock": 0,
           "catalogVisible": true,
           "stockConfirmed": false,
           "sku": null,
           "image": "assets/fotos-reais-03-11-2026/camiseta-fred-perry-gola-punhos-dupla-listra-branca-real.webp",
           "photoStatus": "recebida",
-          "photoNote": "Fotografia real adicionada em 03/11/2026 mantendo a apresentação 3D vinculada na galeria."
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
         },
         {
-          "id": "local-camiseta-fred-perry-gola-punhos-dupla-listra-branca-g2",
+          "id": "local-fred-perry-branca-gola-listrada-g2",
           "size": "G2",
-          "color": "Branca",
+          "color": "Branca gola listrada",
           "availableStock": 0,
           "catalogVisible": true,
           "stockConfirmed": false,
           "sku": null,
           "image": "assets/fotos-reais-03-11-2026/camiseta-fred-perry-gola-punhos-dupla-listra-branca-real.webp",
           "photoStatus": "recebida",
-          "photoNote": "Fotografia real adicionada em 03/11/2026 mantendo a apresentação 3D vinculada na galeria."
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-fred-perry-azul-marinho-gola-listrada-m",
+          "size": "M",
+          "color": "Azul-marinho gola listrada",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotografias-novidades/camiseta-fred-perry-classic-laurel-azul-marinho-azul-marinho.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "shopifySourceHandle": "camiseta-fred-perry-classic-laurel-azul-marinho"
+        },
+        {
+          "id": "local-fred-perry-azul-marinho-gola-listrada-g",
+          "size": "G",
+          "color": "Azul-marinho gola listrada",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": null,
+          "image": "assets/fotografias-novidades/camiseta-fred-perry-classic-laurel-azul-marinho-azul-marinho.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "shopifySourceHandle": "camiseta-fred-perry-classic-laurel-azul-marinho"
         }
       ],
       "shopifyLinkPending": true,
       "collection": "30-outubro-2026",
       "imagePresentation": "foto-real-com-3d",
-      "photoReviewRequired": true
+      "photoReviewRequired": true,
+      "originalSlugs": [
+        "camiseta-fred-perry-gola-punhos-dupla-listra",
+        "camiseta-fred-perry-classic-laurel-azul-marinho"
+      ]
     },
     {
       "id": "grifhii-camiseta-hugo-boss-contraste-azul",

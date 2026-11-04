@@ -154,7 +154,10 @@
     if ((review.rejectedVariantIds || []).includes(localId)) return null;
     // A colecao 30/10 exige autorizacao visual individual, nao por produto completo.
     if (product.shopifyLinkPending && !review.approvedVariantMap?.[localId]) return null;
-    const p=remoteFor(product,published);
+    // Uma cor pode vir de OUTRO produto da Shopify (ex.: peças iguais cadastradas separadas): variante com shopifySourceHandle.
+    const own=clean(variant.shopifySourceHandle);
+    const sameHandle=own?published.filter(x=>x.handle===own):null;
+    const p=own?(sameHandle.length===1?sameHandle[0]:null):remoteFor(product,published);
     if(!p) return null;
     if(p.variants?.pageInfo?.hasNextPage) return null;
     const rows=p.variants?.nodes||[];
@@ -276,6 +279,7 @@
     if (snapshotDomainMatches() && snapshot()?.products?.has(remote.handle)) return false;
     return !localItems.some(item => candidateHandle(item) === remote.handle ||
       item.slug === remote.handle || item.shopifyProductId === remote.id ||
+      (item.variants || []).some(v => v.shopifySourceHandle === remote.handle) ||
       titleMatches(titleTargetFor(item), remote.title));
   }
   // Marca da Shopify → marca oficial do site (aceita apelidos como "Abercrombie" ou "A&F"),

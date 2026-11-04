@@ -108,5 +108,9 @@ const colorEquivalents = {
    'cinza claro':'grisalho','azul bebe claro':'azul','cinza escuro':'cinza'
  }
 };
-window.GRIFHII_SHOPIFY_HANDLE_MAP=Object.freeze({targets:Object.freeze(targets),colorEquivalents:Object.freeze(colorEquivalents)});
+// Peças ainda sem endereço conhecido na Shopify: vínculo pelo NOME (precisa ser único entre os publicados).
+const titleTargets = {
+ 'bermuda-diesel-tactel-premium':'Bermuda Diesel Tactel Premium',
+};
+window.GRIFHII_SHOPIFY_HANDLE_MAP=Object.freeze({targets:Object.freeze(targets),colorEquivalents:Object.freeze(colorEquivalents),titleTargets:Object.freeze(titleTargets)});
 })();

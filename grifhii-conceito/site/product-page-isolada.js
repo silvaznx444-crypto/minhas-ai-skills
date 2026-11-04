@@ -291,7 +291,11 @@
     const oldPrice = product.promoPriceCents != null ? `<del>${money(product.priceCents)}</del>` : '';
     const categorySlug = catalog.getCategorySlug(product.category);
     const profile = catalog.getCategory(categorySlug);
-    const sizes = unique(variants.map(v => v.size));
+    // Tamanhos sempre na ordem de grade (PP → G3), números em ordem crescente e "Único" por último.
+    const SIZE_ORDER = ['PP','P','M','G','GG','G1','G2','G3','G4','XG','XGG','EXG'];
+    const sizeRank = v => { const t = String(v || '').trim().toUpperCase(); const i = SIZE_ORDER.indexOf(t);
+      return i >= 0 ? i : /^\d+$/.test(t) ? 100 + Number(t) : 1000; };
+    const sizes = unique(variants.map(v => v.size)).sort((a, b) => sizeRank(a) - sizeRank(b));
     const colors = unique(variants.map(v => v.color));
     const back = backContext('produtos');
     const whatsappText = encodeURIComponent(`Olá! Vim pelo site da GRIFHII CONCEITO e tenho interesse na peça "${product.name}".`);

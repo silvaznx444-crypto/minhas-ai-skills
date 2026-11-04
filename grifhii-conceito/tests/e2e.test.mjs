@@ -696,3 +696,20 @@ test('peça da vitrine apagada/ocultada na Shopify (pelo painel) sai da lista do
   assert.equal(r.listed, false); assert.ok(r.total > 60);
   await ctx.close();
 });
+
+test('Fred Perry: as 3 peças viraram 1 (6 cores, tamanhos em ordem) e os endereços antigos abrem a peça unificada', async () => {
+  const {ctx, page} = await newPage();
+  await mockShopify(page);
+  await page.goto(`${BASE}peca-camiseta-fred-perry-punhos-listrados`);
+  await page.waitForSelector('[data-color]');
+  const colors = [...new Set(await page.$$eval('[data-color]', b => b.map(x => x.getAttribute('data-color'))))];
+  assert.equal(colors.length, 6, colors.join(', '));
+  assert.deepEqual(await page.$$eval('[data-size]', b => [...new Set(b.map(x => x.getAttribute('data-size')))]), ['M', 'G', 'GG', 'G1', 'G2']);
+  for (const old of ['camiseta-fred-perry-gola-punhos-dupla-listra', 'camiseta-fred-perry-classic-laurel-azul-marinho']) {
+    await page.goto(`${BASE}peca.html?slug=${old}`);
+    await page.waitForFunction(() => /Fred Perry Listras Clássicas/.test(document.querySelector('h1')?.textContent || ''), null, {timeout: 10000});
+  }
+  const redirects = fs.readFileSync(path.join(DIST, '_redirects'), 'utf8');
+  assert.match(redirects, /\/peca-camiseta-fred-perry-classic-laurel-azul-marinho \/peca-camiseta-fred-perry-punhos-listrados 301/);
+  await ctx.close();
+});

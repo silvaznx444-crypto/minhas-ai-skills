@@ -94,6 +94,7 @@ const colorEquivalents = {
  'short-hugo-boss-listrado':{'preto branco bege':'preto'},
  'camisa-social-ralph-lauren-manga-curta':{'vermelho bordo':'vermelho','off white':'bege','azul claro':'azul'}, // auditoria 04/11: off-white está como Bege na Shopify
  'bone-tommy-hilfiger-classico':{'off white':'bege'}, // auditoria 04/11
+ 'short-masculino-diesel':{'azul gelo':'branco'}, // 04/11: foto real azul-gelo; na Shopify a única variante (M) está como Branco
  'camisa-social-ralph-lauren-xadrez-manga-longa':{'laranja xadrez':'laranja','vermelho xadrez':'vermelho','verde xadrez':'verde'},
  'camiseta-lacoste-paris-verde-escuro':{'verde escuro':'verde'},
  'camiseta-diesel-d-corp-1978-verde-militar':{'verde militar':'verde'},

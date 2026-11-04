@@ -1038,7 +1038,7 @@
       "brand": "DIESEL",
       "category": "bermudas",
       "description": "Short masculino de estilo esportivo, com cós elástico e detalhe em vivo vermelho nas laterais. Visual minimalista para momentos de lazer.",
-      "priceCents": null,
+      "priceCents": 11990,
       "promoPriceCents": null,
       "images": [
         "assets/catalogo-novos/diesel-short-diesel-com-vivo-vermelho-azul-gelo-m.webp"
@@ -1068,7 +1068,7 @@
       "brand": "VILEBREQUIN",
       "category": "bermudas",
       "description": "Bermuda Vilebrequin com estampas de tartarugas grandes. Disponível nas cores Laranja, Branco e Azul, cada uma com fotografia real correspondente.",
-      "priceCents": 7990,
+      "priceCents": 12990,
       "promoPriceCents": null,
       "images": [
         "assets/catalogo-novos/vilebrequin-bermuda-vilebrequin-tartarugas-azuis-e-verdes-branca-azul-verde-g.webp",
@@ -1155,7 +1155,7 @@
       "brand": "VILEBREQUIN",
       "category": "bermudas",
       "description": "Bermuda Vilebrequin com microestampa de tartarugas pequenas. Disponível nas cores Laranja, Azul escuro e Amarela, cada uma com fotografia real correspondente.",
-      "priceCents": 7990,
+      "priceCents": 12990,
       "promoPriceCents": null,
       "images": [
         "assets/catalogo-novos/vilebrequin-bermuda-vilebrequin-microtartarugas-azul-marinho-bege-g.webp",

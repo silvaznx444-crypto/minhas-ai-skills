@@ -242,6 +242,13 @@ const prodDeps: Deps = {
   deployHook: async e => { if (e.CATALOG_DEPLOY_HOOK_URL && /^https:\/\/api\.cloudflare\.com\//.test(e.CATALOG_DEPLOY_HOOK_URL)) await fetch(e.CATALOG_DEPLOY_HOOK_URL, { method: 'POST' }); },
 };
 
+/** Manutenção periódica: retoma operações pendentes, limpa limites e sessões vencidas. */
+export async function maintenance(env: Env) {
+  await runDue(env, prodDeps);
+  await purgeRateLimits(env.DB);
+  await env.DB.prepare('DELETE FROM sessions WHERE expires_at < ? OR revoked_at < ?').bind(Date.now() - 86400000, Date.now() - 86400000).run();
+}
+
 export default {
   async fetch(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     // A interface do painel (arquivos estáticos) é servida pelo próprio Worker: mesma origem da API.
@@ -250,6 +257,7 @@ export default {
       const res = await env.ASSETS.fetch(req);
       const h = new Headers(res.headers);
       for (const [k, v] of Object.entries(PANEL_HEADERS)) h.set(k, v);
+      h.delete('Access-Control-Allow-Origin');
       return new Response(res.body, { status: res.status, headers: h });
     }
     try { return await handleApi(req, env, ctx, prodDeps); }
@@ -257,10 +265,6 @@ export default {
   },
   /** Cron (a cada minuto): retoma operações pendentes, limpa limites e sessões vencidas. */
   async scheduled(_ev: ScheduledEvent, env: Env, ctx: ExecutionContext) {
-    ctx.waitUntil((async () => {
-      await runDue(env, prodDeps);
-      await purgeRateLimits(env.DB);
-      await env.DB.prepare('DELETE FROM sessions WHERE expires_at < ? OR revoked_at < ?').bind(Date.now() - 86400000, Date.now() - 86400000).run();
-    })());
+    ctx.waitUntil(maintenance(env));
   },
 };

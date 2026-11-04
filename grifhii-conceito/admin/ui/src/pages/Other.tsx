@@ -119,6 +119,7 @@ export function Settings() {
     <ErrorNotice error={error} />
     <section className="card stack">
       <h2>Loja</h2>
+      {(locs.error || pubs.error) ? <ErrorNotice error={locs.error || pubs.error} /> : null}
       <label className="field">Local de estoque<select className="input" value={loc || val('shopify_location_id') || ''} onChange={e => setLoc(e.target.value)}>
         <option value="">Escolha…</option>{(locs.data?.nodes ?? []).map((l: any) => <option key={l.id} value={l.id}>{l.name}{l.isActive ? '' : ' (inativo)'}</option>)}</select></label>
       <div className="field">Canais onde publicar<div className="chips">{(pubs.data?.nodes ?? []).map((p: any) => { const cur = pub.length ? pub : val('shopify_publication_ids') ?? []; const on = cur.includes(p.id);

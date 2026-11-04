@@ -46,6 +46,19 @@ npx wrangler secret put ADMIN_SETUP_TOKEN
 
 (outro valor aleatório longo; será usado UMA vez no cadastro do proprietário e depois apagado)
 
+## 3A. Caminho SEM terminal — upload de ZIP no Cloudflare Pages (recomendado para o dono)
+
+O ZIP é gerado com `npm run build:pages` (`GRIFHII_PAINEL_PAGES.zip`: interface + `_worker.js`). Ele não contém segredos. Endereço: `https://grifhii-painel.pages.dev`.
+
+1. **Armazenamento e bancos de dados → D1 → Criar** → nome `grifhii-admin`. (As tabelas são criadas sozinhas na primeira abertura do painel.)
+2. **Workers e Pages → Criar → Pages → Fazer upload de ativos** → nome do projeto **`grifhii-painel`** → enviar o ZIP → Implantar. Confira o endereço: se não for `grifhii-painel.pages.dev`, crie a variável `ADMIN_ORIGIN` (texto) com o endereço exato.
+3. No projeto → **Configurações → Vinculações → Adicionar → Banco de dados D1**: nome da variável `DB`, banco `grifhii-admin` (ambiente **Produção**).
+4. **Configurações → Variáveis e segredos** (Produção), sempre tipo **Secret**: `SESSION_PEPPER` e `ADMIN_SETUP_TOKEN` (cada um com 40+ caracteres aleatórios, gerados num gerador de senhas). Depois, as credenciais da Shopify (seção 2).
+5. **Implantações → nova implantação** (enviar o mesmo ZIP de novo) para aplicar vinculações e segredos.
+6. Abrir `https://grifhii-painel.pages.dev/#/configurar` no iPhone (seção 5).
+
+Diferenças do caminho Pages: não há cron; a manutenção (retomar operações pendentes, limpar sessões) roda junto com o uso do painel, no máximo 1×/min. Endereços de prévia (`xxxx.grifhii-painel.pages.dev`) são recusados de propósito.
+
 ## 4. Endereço do painel (gratuito, `.workers.dev`)
 
 1. No Cloudflare: **Workers e Pages** → o seu subdomínio aparece como `NOME.workers.dev`. Em `wrangler.toml`, troque `SEU-SUBDOMINIO` por esse NOME em `ADMIN_ORIGIN` e `WEBAUTHN_RP_ID` (o painel fica em `https://grifhii-painel.NOME.workers.dev`). A passkey fica presa a esse endereço exato: se um dia mudar para domínio próprio, será preciso cadastrar a passkey de novo.

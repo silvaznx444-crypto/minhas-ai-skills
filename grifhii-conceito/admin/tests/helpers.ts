@@ -6,11 +6,11 @@ import type { D1Like, Env } from '../src/env.ts';
 import { pepperedHash, randomToken, uuid } from '../src/lib/crypto.ts';
 import { _resetTokenCache } from '../src/shopify/client.ts';
 
-export function makeDb(): D1Like & { raw: DatabaseSync } {
+export function makeDb(opts: { migrate?: boolean } = {}): D1Like & { raw: DatabaseSync } {
   const raw = new DatabaseSync(':memory:');
   raw.exec('PRAGMA foreign_keys = ON;');
   const dir = new URL('../migrations/', import.meta.url).pathname;
-  for (const f of readdirSync(dir).sort()) raw.exec(readFileSync(join(dir, f), 'utf8'));
+  if (opts.migrate !== false) for (const f of readdirSync(dir).sort()) raw.exec(readFileSync(join(dir, f), 'utf8'));
   const norm = (v: unknown) => (v === undefined ? null : v instanceof Uint8Array ? v : typeof v === 'boolean' ? Number(v) : v);
   const stmt = (sql: string, args: unknown[] = []): any => ({
     bind: (...a: unknown[]) => stmt(sql, a.map(norm)),

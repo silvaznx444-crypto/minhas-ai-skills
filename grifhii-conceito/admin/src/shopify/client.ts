@@ -23,7 +23,7 @@ export function shopEndpoint(env: Env) {
 /** Token Admin: (a) token estático de app personalizado OU (b) client credentials do Dev Dashboard (confirmar disponibilidade na documentação vigente). */
 async function adminToken(env: Env, fetchImpl: typeof fetch): Promise<string> {
   if (env.SHOPIFY_ADMIN_TOKEN) return env.SHOPIFY_ADMIN_TOKEN;
-  if (!env.SHOPIFY_CLIENT_ID || !env.SHOPIFY_CLIENT_SECRET) throw new ShopifyError('auth', 'Integração Shopify não configurada (sem token Admin).');
+  if (!env.SHOPIFY_CLIENT_ID || !env.SHOPIFY_CLIENT_SECRET) throw new ShopifyError('auth', 'A Shopify ainda não está conectada ao painel: faltam os segredos SHOPIFY_CLIENT_ID e SHOPIFY_CLIENT_SECRET (ou SHOPIFY_ADMIN_TOKEN) no Cloudflare.');
   if (cachedToken && cachedToken.expiresAt > Date.now() + 60_000) return cachedToken.value;
   const res = await fetchImpl(`https://${env.SHOPIFY_SHOP_DOMAIN}/admin/oauth/access_token`, {
     method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

@@ -130,6 +130,7 @@ function AddColor({ product, onDone }: { product: any; onDone: () => void }) {
       <div className="qty"><button onClick={() => setSizes({ ...sizes, [s]: Math.max(0, q - 1) })} aria-label={`Menos ${s}`}>−</button><input inputMode="numeric" value={q} aria-label={`Estoque ${s}`} onChange={e => setSizes({ ...sizes, [s]: Math.max(0, Number(e.target.value.replace(/\D/g, '')) || 0) })} /><button onClick={() => setSizes({ ...sizes, [s]: q + 1 })} aria-label={`Mais ${s}`}>+</button></div></div>)}
     {dup.length > 0 && <span className="field-error">Esta combinação de cor e tamanho já existe: {dup.join(', ')}</span>}
     {name.trim() && <MediaPicker color={name.trim()} items={media} onChange={setMedia} />}
+    {name.trim() && !media.some(m => m.role === 'photo') && <div className="notice warn">Sem foto real, esta cor é criada na Shopify mas <strong>não aparece no site</strong>. Adicione uma foto para ela aparecer.</div>}
     <ErrorNotice error={error} />
     <div className="row"><button className="btn ghost" onClick={() => setOpen(false)}>Cancelar</button>
       <Button disabled={!name.trim() || !Object.keys(sizes).length || dup.length > 0 || (!!colorOpt?.linkedMetafield && !/^gid:\/\/shopify\/Metaobject\/\d+$/.test(linked))} busyText="Criando variantes…" onClick={async () => {

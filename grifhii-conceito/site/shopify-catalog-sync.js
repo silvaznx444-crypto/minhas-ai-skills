@@ -180,6 +180,38 @@
     return matches.length===1?{product:p,variant:matches[0]}:null;
   }
   const cents=p=>p?.currencyCode==='BRL' && Number.isFinite(Number(p.amount)) && Number(p.amount)>=0?Math.round(Number(p.amount)*100):null;
+  // IDs de variantes que já existiam quando a curadoria foi feita (snapshot). Calculado uma vez.
+  let knownIds=null;
+  const snapshotVariantIds=()=>{
+    if(knownIds) return knownIds;
+    knownIds=new Set();
+    if(snapshotDomainMatches()) for(const p of snapshot().products.values()) for(const v of p.variants) knownIds.add(v.id);
+    return knownIds;
+  };
+  // Cor/tamanho NOVOS cadastrados pelo painel em uma peça que já está no site.
+  // Só aparecem quando: vêm da Shopify AO VIVO, não existiam no snapshot da curadoria
+  // (o que a curadoria escondeu continua escondido), não repetem cor+tamanho do site e têm foto própria.
+  function newRemoteVariants(product,published,current){
+    if(!snapshotDomainMatches()) return [];
+    const within=published.filter(p=>p.handle===candidateHandle(product));
+    if(within.length!==1) return [];
+    const p=within[0];
+    if(p.variants?.pageInfo?.hasNextPage) return [];
+    const used=new Set(current.map(v=>v.shopifyVariantId).filter(Boolean));
+    const combos=new Set((product.variants||[]).map(v=>`${selectedColor(product,v.color)}|${normSize(v.size)}`));
+    const known=snapshotVariantIds();
+    const out=[];
+    (p.variants?.nodes||[]).forEach((row,i)=>{
+      if(known.has(row.id) || used.has(row.id) || !row.image?.url) return;
+      const v=mapRemoteVariant(row,i,'',p.handle);
+      if(!v.shopifyLinked) return;
+      const key=`${normColor(v.color)}|${normSize(v.size)}`;
+      if(combos.has(key)) return;
+      combos.add(key);
+      out.push({...v,id:`${product.id}-shopify-${numeric(row.id)||i}`,shopifyNewVariant:true});
+    });
+    return out;
+  }
   function hydrateProduct(product,published,live=false) {
     if(!published?.length) return {...product,variants:(product.variants||[]).map(v=>({...v,shopifyLinked:false,shopifyVerified:false,shopifyAvailable:false,shopifyVariantId:null,stockConfirmed:false,availableStock:0}))};
     const variants=(product.variants||[]).map(original=>{
@@ -215,6 +247,7 @@
       v.shopifyAvailable=false;v.availableStock=0;v.stockConfirmed=false;
       v.shopifyPriceCents=null;
     }
+    if(live) variants.push(...newRemoteVariants(product,published,variants));
     const prices=variants.filter(v=>v.shopifyLinked).map(v=>v.shopifyPriceCents);
     return {...product,variants,priceCents:prices.length?Math.min(...prices):product.priceCents,
       promoPriceCents:prices.length?null:product.promoPriceCents,
@@ -252,14 +285,8 @@
     if (/camisa/.test(input)) return 'camisas';
     return 'acessorios'; // tipo não cadastrado: sem categoria inventada
   }
-  const uniqueStrings=values=>[...new Set(values.filter(Boolean).map(String))];
-  function remoteProduct(remote){
-    const items=remote.variants?.nodes||[];
-    if(remote.variants?.pageInfo?.hasNextPage || !items.length) return null;
-    const urls=uniqueStrings([...(remote.images?.nodes||[]).map(i=>i?.url),
-      ...items.map(v=>v.image?.url)]);
-    const slug=`shopify-${remote.handle}`;
-    const variants=items.map((v,i)=>{
+  // Converte uma variante publicada na Shopify (ao vivo) no formato de variante do site.
+  function mapRemoteVariant(v,i,fallbackImage,handle){
       const opts=v.selectedOptions||[];
       const value=names=>opts.find(o=>names.includes(norm(o.name)))?.value;
       let size=value(['tamanho','size','numero','numeracao']);
@@ -273,14 +300,23 @@
       const qty=Number.isSafeInteger(v.quantityAvailable) && v.quantityAvailable>=0 ? v.quantityAvailable : null;
       return {
         id:`shopify-${numeric(v.id)||i}`,size:size||'Único',color:color||'Única',
-        sku:v.sku||null,image:v.image?.url||urls[0]||'',
+        sku:v.sku||null,image:v.image?.url||fallbackImage,
         image3d:(v.metafield?.reference?.image?.url || null),
         catalogVisible:true, availableStock:available?(qty===null?1:Math.min(99,qty)):0,
         shopifyLinked:price!==null,shopifyVerified:true,shopifyAvailable:available,
-        shopifyVariantId:v.id,shopifyHandle:remote.handle,shopifyPriceCents:price,
+        shopifyVariantId:v.id,shopifyHandle:handle,shopifyPriceCents:price,
         stockConfirmed:qty!==null,stockUnquantified:qty===null,
       };
-    });
+    }
+  const uniqueStrings=values=>[...new Set(values.filter(Boolean).map(String))];
+  function remoteProduct(remote){
+    const items=remote.variants?.nodes||[];
+    if(remote.variants?.pageInfo?.hasNextPage || !items.length) return null;
+    const urls=uniqueStrings([...(remote.images?.nodes||[]).map(i=>i?.url),
+      ...items.map(v=>v.image?.url)]);
+    if(!urls.length) return null; // peça sem foto não aparece na vitrine
+    const slug=`shopify-${remote.handle}`;
+    const variants=items.map((v,i)=>mapRemoteVariant(v,i,urls[0]||'',remote.handle));
     // V15: associação de 3D acontece por variante, no render. Não registrar foto
     // globalmente: variantes de cores distintas podem compartilhar uma fotografia.
     const prices=variants.map(v=>v.shopifyPriceCents).filter(Number.isFinite);

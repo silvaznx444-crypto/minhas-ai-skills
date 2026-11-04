@@ -109,6 +109,8 @@ export function NewProduct() {
       <div className="table-wrap"><table className="t"><thead><tr><th>Cor</th><th>Tamanho</th><th>Estoque</th></tr></thead>
         <tbody>{variants.map(v => <tr key={v.color + v.size}><td>{v.color}</td><td>{v.size}</td><td>{v.q}</td></tr>)}</tbody></table></div>
       <p className="muted">{variants.length} variantes · {total} unidades · {media.filter(m => m.role === 'photo').length} foto(s) real(is) · {media.filter(m => m.role === 'render3d').length} imagem(ns) 3D</p>
+      {(() => { const sem = d.colors.map(c => c.name.trim()).filter(n => n && !media.some(m => m.role === 'photo' && m.color.toLowerCase() === n.toLowerCase()));
+        return sem.length ? <div className="notice warn">Sem foto real: <strong>{sem.join(', ')}</strong>. {sem.length === d.colors.length ? 'Sem nenhuma foto, a peça é criada na Shopify mas não aparece no site.' : 'No site, essas cores aparecem com a foto principal da peça.'} Volte ao passo de fotos para adicionar.</div> : null; })()}
       {d.colors.some(c => !media.some(m => m.color === c.name.trim() && m.role === 'photo')) && <div className="notice warn">Há cor sem foto real. Ela aparecerá sem imagem até você adicionar.</div>}
       <ErrorNotice error={error} />
       <div className="grid cols-2">

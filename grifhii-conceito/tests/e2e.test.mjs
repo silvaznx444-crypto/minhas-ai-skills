@@ -48,8 +48,11 @@ const priceOf = gid => {
   return null;
 };
 
+const PNG_1PX = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=', 'base64');
+
 /** Instala a Shopify simulada. cart: função que recebe as variáveis do cartCreate e devolve o JSON de resposta. */
-async function mockShopify(page, {cart, catalogStatus = 200, log = []} = {}) {
+async function mockShopify(page, {cart, catalogStatus = 200, log = [], nodes = NODES} = {}) {
+  await page.route('https://cdn.shopify.com/**', r => r.fulfill({status: 200, contentType: 'image/png', body: PNG_1PX}));
   await page.route(`${SHOP}/api/**`, async route => {
     const body = JSON.parse(route.request().postData() || '{}');
     if (/cartCreate/.test(body.query)) {
@@ -62,9 +65,9 @@ async function mockShopify(page, {cart, catalogStatus = 200, log = []} = {}) {
     }
     if (catalogStatus !== 200) return route.fulfill({status: catalogStatus, body: '{}'});
     const after = body.variables?.after ? Number(body.variables.after) : 0;
-    const slice = NODES.slice(after, after + 10);
+    const slice = nodes.slice(after, after + 10);
     return route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({data: {products: {
-      pageInfo: {hasNextPage: after + 10 < NODES.length, endCursor: String(after + 10)}, nodes: slice}}})});
+      pageInfo: {hasNextPage: after + 10 < nodes.length, endCursor: String(after + 10)}, nodes: slice}}})});
   });
   await page.route(`${SHOP}/cart/**`, r => r.fulfill({status: 200, contentType: 'text/html', body: '<h1>CHECKOUT SIMULADO</h1>'}));
   // Ícones de marca (Google) ficam fora do teste: respondem vazio.
@@ -415,5 +418,70 @@ test('imagens: nenhuma imagem quebrada nas páginas principais', async () => {
     const broken = await page.$$eval('img', imgs => imgs.filter(i => i.complete && i.naturalWidth === 0 && i.getAttribute('src') && !/google\.com/.test(i.src) && getComputedStyle(i).display !== 'none').map(i => i.getAttribute('src')));
     assert.deepEqual(broken, [], `imagens quebradas em /${p}`);
   }
+  await ctx.close();
+});
+
+/* ================= PEÇAS NOVAS CADASTRADAS PELO PAINEL ================= */
+const cdn = n => `https://cdn.shopify.com/s/files/1/teste/${n}.jpg`;
+const remoteVariant = (id, color, size, img, price = '139.90') => ({id: `gid://shopify/ProductVariant/${id}`, sku: null, title: `${color} / ${size}`,
+  availableForSale: true, quantityAvailable: 3, image: img ? {url: img} : null, price: {amount: price, currencyCode: 'BRL'},
+  selectedOptions: [{name: 'Cor', value: color}, {name: 'Tamanho', value: size}]});
+const PAINEL_NOVA = {id: 'gid://shopify/Product/990000000001', handle: 'camiseta-abercrombie-fitch-new-york', title: 'Camiseta Abercrombie Fitch New York',
+  description: 'Camiseta cadastrada pelo painel.', vendor: 'Abercrombie & Fitch', productType: 'Camisetas', availableForSale: true,
+  images: {nodes: [{url: cdn('ny-vermelha'), altText: null}]},
+  variants: {pageInfo: {hasNextPage: false}, nodes: [remoteVariant('990000000011', 'Vermelha', 'M', cdn('ny-vermelha')), remoteVariant('990000000012', 'Vermelha', 'G', cdn('ny-vermelha'))]}};
+/** Mesma peça da curadoria (Lacoste Signature Script) com variantes novas criadas pelo painel. */
+function lacosteComNovidades() {
+  return NODES.map(n => n.handle !== 'camiseta-lacoste-signature-script' && !/lacoste-signature-script/.test(n.handle) ? n : {...n, variants: {...n.variants, nodes: [...n.variants.nodes,
+    remoteVariant('990000000021', 'Verde', 'G', cdn('lacoste-verde'), '129.90'),      // nova cor COM foto → aparece
+    remoteVariant('990000000022', 'Azul', 'G', null, '129.90'),                       // nova cor SEM foto → não aparece
+    remoteVariant('990000000023', 'Branco', 'G', cdn('lacoste-branca-dup'), '129.90'), // repete cor+tamanho do site → não aparece
+  ]}});
+}
+
+test('painel → site: peça NOVA publicada aparece no catálogo, abre a página e vai para a sacola com o ID certo', async () => {
+  const {ctx, page} = await newPage();
+  await enableSalesForTest(page);
+  await mockShopify(page, {cart: okCart(), nodes: [...NODES, PAINEL_NOVA]});
+  await page.goto(`${BASE}produtos`);
+  await page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
+  await page.getByText('Camiseta Abercrombie Fitch New York').first().waitFor({timeout: 15000});
+  const href = await page.$eval('a[href*="shopify-camiseta-abercrombie-fitch-new-york"]', a => a.getAttribute('href'));
+  await page.goto(new URL(href, BASE).href);
+  await page.waitForSelector('#addProduct');
+  await page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
+  assert.equal((await page.textContent('h1')).trim(), 'Camiseta Abercrombie Fitch New York');
+  await page.click('[data-color="Vermelha"]'); await page.click('[data-size="G"]'); await page.click('#addProduct');
+  const cart = await page.evaluate(() => JSON.parse(localStorage.getItem('grifhii-cart-v1') || '[]'));
+  assert.equal(cart.length, 1); assert.equal(cart[0].shopifyVariantId, 'gid://shopify/ProductVariant/990000000012');
+  assert.equal(cart[0].unitPriceCents, 13990);
+  assert.deepEqual(page.errors, []);
+  await ctx.close();
+});
+
+test('painel → site: NOVA COR em peça existente aparece; sem foto ou cor+tamanho repetido continua oculta', async () => {
+  const {ctx, page} = await newPage();
+  await enableSalesForTest(page);
+  await mockShopify(page, {cart: okCart(), nodes: lacosteComNovidades()});
+  const cart = await addFromProductPage(page, 'lacoste-signature-script', {color: 'Verde', size: 'G'});
+  assert.equal(cart.length, 1, 'nova cor Verde/G pode ser comprada');
+  assert.equal(cart[0].shopifyVariantId, 'gid://shopify/ProductVariant/990000000021');
+  const colors = await page.$$eval('[data-color]', b => b.map(x => x.getAttribute('data-color')));
+  assert.ok(colors.includes('Verde'), 'Verde aparece');
+  assert.ok(!colors.includes('Azul'), 'cor sem foto não aparece');
+  const brancas = colors.filter(c => /^branc/i.test(c));
+  assert.ok(brancas.length <= 1, `sem cor duplicada: ${colors}`);
+  // As cores da curadoria continuam lá.
+  for (const c of ['Branca', 'Preta']) assert.ok(colors.includes(c), `${c} preservada`);
+  assert.deepEqual(page.errors, []);
+  await ctx.close();
+});
+
+test('painel → site: sem a Shopify ao vivo, nada novo é inventado (só a curadoria aparece)', async () => {
+  const {ctx, page} = await newPage();
+  await mockShopify(page, {catalogStatus: 503, nodes: [...NODES, PAINEL_NOVA]});
+  await page.goto(`${BASE}produtos`);
+  await page.waitForTimeout(2500);
+  assert.equal(await page.locator('text=Camiseta Abercrombie Fitch New York').count(), 0);
   await ctx.close();
 });

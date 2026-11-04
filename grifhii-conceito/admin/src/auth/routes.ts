@@ -118,6 +118,39 @@ export async function handleAuth(req: Request, env: Env, path: string): Promise<
     return json(sessionJson(s, { id: userId, role: inv.role, display_name: inv.display_name }), 201, { 'Set-Cookie': s.cookie });
   }
 
+  // ---------- Cadastrar OUTRO aparelho na mesma conta (link de uso único criado por quem já está logado) ----------
+  if (path === 'auth/device/options' && m === 'POST') {
+    sameOrigin(env, req);
+    await rateLimit(env.DB, 'auth:ip', await ipKey(env, req));
+    const { linkToken } = parse(z.object({ linkToken: z.string().min(40).max(80) }), await readJson(req));
+    const link = await env.DB.prepare(`SELECT d.id, d.user_id, u.webauthn_user_id, u.display_name FROM device_links d JOIN users u ON u.id = d.user_id
+      WHERE d.token_hash = ? AND d.used_at IS NULL AND d.expires_at > ? AND u.status = 'active'`)
+      .bind(await pepperedHash(env.SESSION_PEPPER, linkToken), Date.now()).first<{ id: string; user_id: string; webauthn_user_id: string; display_name: string }>();
+    if (!link) { await audit(env.DB, { action: 'auth.device_link', result: 'denied' }); throw new AppError(400, 'device_link_invalid', 'Link inválido, já usado ou expirado. Gere um novo no painel (Configurações → Segurança).'); }
+    const existing = (await env.DB.prepare('SELECT credential_id FROM passkeys WHERE user_id = ?').bind(link.user_id).all<{ credential_id: string }>()).results.map(r => r.credential_id);
+    const options = await registrationOptions(env, { webauthnUserId: link.webauthn_user_id, name: link.display_name }, existing);
+    const challengeId = await storeChallenge(env, options.challenge, 'register', link.user_id, { kind: 'device', linkId: link.id });
+    return json({ challengeId, options });
+  }
+  if (path === 'auth/device/verify' && m === 'POST') {
+    sameOrigin(env, req);
+    await rateLimit(env.DB, 'auth:ip', await ipKey(env, req));
+    const body = parse(Verify, await readJson(req));
+    const ch = await consumeChallenge(env, body.challengeId, 'register');
+    if (ch.meta?.kind !== 'device' || !ch.userId) throw errors.forbidden();
+    const info = await verifyRegistration(env, body.credential, ch.challenge);
+    // Uso único mesmo com cliques duplos.
+    const used = await env.DB.prepare('UPDATE device_links SET used_at = ? WHERE id = ? AND user_id = ? AND used_at IS NULL AND expires_at > ? RETURNING id')
+      .bind(Date.now(), ch.meta.linkId, ch.userId, Date.now()).first();
+    if (!used) throw new AppError(400, 'device_link_invalid', 'Link inválido, já usado ou expirado. Gere um novo no painel.');
+    await savePasskey(env, ch.userId, info, 'Aparelho adicionado');
+    const u = await env.DB.prepare("SELECT id, role, display_name FROM users WHERE id = ? AND status = 'active'").bind(ch.userId).first<{ id: string; role: string; display_name: string }>();
+    if (!u) throw errors.forbidden();
+    const s = await createSession(env, ch.userId, req);
+    await audit(env.DB, { userId: ch.userId, action: 'auth.device_added', result: 'success' });
+    return json(sessionJson(s, u), 200, { 'Set-Cookie': s.cookie });
+  }
+
   // ---------- Login com passkey (credenciais detectáveis: sem digitar usuário) ----------
   if (path === 'auth/login/options' && m === 'POST') {
     sameOrigin(env, req);
@@ -185,7 +218,7 @@ export async function handleAuth(req: Request, env: Env, path: string): Promise<
 
   // ---------- Daqui em diante: exige sessão ----------
   if (!path.startsWith('auth/session') && !path.startsWith('auth/logout') && !path.startsWith('auth/reauth') && !path.startsWith('auth/users')
-    && !path.startsWith('auth/passkeys') && !path.startsWith('auth/invites') && path !== 'auth/recovery-codes') return null;
+    && !path.startsWith('auth/passkeys') && !path.startsWith('auth/invites') && path !== 'auth/recovery-codes' && path !== 'auth/device-links') return null;
   const p = await loadPrincipal(env, req);
   verifyCsrf(env, req, p);
 
@@ -262,6 +295,26 @@ export async function handleAuth(req: Request, env: Env, path: string): Promise<
   if (path === 'auth/passkeys' && m === 'GET') {
     const rows = await env.DB.prepare('SELECT credential_id, label, device_type, backed_up, created_at, last_used_at FROM passkeys WHERE user_id = ?').bind(p.userId).all();
     return json({ passkeys: rows.results.map(r => ({ ...r, credential_id: String(r.credential_id).slice(0, 12) + '…', id: r.credential_id })) });
+  }
+  if (path === 'auth/device-links' && m === 'POST') {
+    requireRecentAuth(p);
+    await env.DB.prepare('UPDATE device_links SET used_at = ? WHERE user_id = ? AND used_at IS NULL').bind(Date.now(), p.userId).run(); // só 1 link ativo
+    const token = randomToken(32);
+    const id = uuid();
+    await env.DB.prepare('INSERT INTO device_links (id,token_hash,user_id,expires_at,created_at) VALUES (?,?,?,?,?)')
+      .bind(id, await pepperedHash(env.SESSION_PEPPER, token), p.userId, Date.now() + 30 * 60 * 1000, Date.now()).run();
+    await audit(env.DB, { userId: p.userId, action: 'auth.device_link_created', target: id, result: 'success' });
+    return json({ url: `${env.ADMIN_ORIGIN}/#/aparelho/${token}`, expiresInMinutes: 30 }, 201);
+  }
+  const pkDel = /^auth\/passkeys\/([A-Za-z0-9_-]{16,1400})$/.exec(path);
+  if (pkDel && m === 'DELETE') {
+    requireRecentAuth(p);
+    const n = await env.DB.prepare('SELECT COUNT(*) AS n FROM passkeys WHERE user_id = ?').bind(p.userId).first<{ n: number }>();
+    if ((n?.n ?? 0) <= 1) throw new AppError(409, 'last_passkey', 'Esta é a sua única chave de acesso. Cadastre outro aparelho antes de remover esta.');
+    const r = await env.DB.prepare('DELETE FROM passkeys WHERE credential_id = ? AND user_id = ?').bind(pkDel[1], p.userId).run();
+    if (!r.meta.changes) throw errors.notFound();
+    await audit(env.DB, { userId: p.userId, action: 'auth.passkey_removed', result: 'success' });
+    return json({ ok: true });
   }
   if (path === 'auth/recovery-codes' && m === 'POST') {
     requireRecentAuth(p);

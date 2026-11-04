@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import qrcode from 'qrcode-generator';
 import { api, fmtDate, numId, withStepUp } from '../lib.ts';
 import { Button, ErrorNotice, Loading, StatusBadge, useLoad, useSession, useToast } from '../ui.tsx';
 
@@ -146,8 +147,43 @@ export function Settings() {
     </section>
     <section className="card stack">
       <h2>Segurança</h2>
+      <Devices />
       <Button kind="ghost" busyText="Gerando…" onClick={async () => { if (!confirm('Gerar novos códigos invalida os anteriores. Continuar?')) return; try { const r = await withStepUp(() => api('auth/recovery-codes', { method: 'POST', body: {} })); setCodes(r.recoveryCodes); } catch (e) { setError(e); } }}>Gerar novos códigos de recuperação</Button>
       {codes && <><div className="notice warn">Anote agora: estes códigos não serão mostrados de novo.</div><div className="codes">{codes.map(c => <span key={c}>{c}</span>)}</div></>}
     </section>
+  </div>;
+}
+
+/** Chaves de acesso da própria conta: cadastrar outro aparelho (link + QR de uso único) e remover. */
+function Devices() {
+  const keys = useLoad(() => api('auth/passkeys'));
+  const [link, setLink] = useState<string | null>(null); const [qr, setQr] = useState(''); const [error, setError] = useState<unknown>(null);
+  const toast = useToast();
+  async function gen() {
+    setError(null);
+    try {
+      const r = await withStepUp(() => api('auth/device-links', { method: 'POST', body: {} }));
+      const q = qrcode(0, 'M'); q.addData(r.url); q.make();
+      setQr(q.createDataURL(6, 24)); setLink(r.url);
+    } catch (e) { setError(e); }
+  }
+  async function remove(id: string) {
+    if (!confirm('Remover esta chave? O aparelho dela não entrará mais no painel.')) return;
+    try { await withStepUp(() => api(`auth/passkeys/${encodeURIComponent(id)}`, { method: 'DELETE' })); toast('Chave removida.'); keys.reload(); } catch (e) { setError(e); }
+  }
+  return <div className="stack">
+    <h3 style={{ margin: 0 }}>Seus aparelhos</h3>
+    {(keys.data?.passkeys ?? []).map((k: any) => <div className="row between" key={k.id}>
+      <div><strong>{k.label || 'Chave de acesso'}</strong><div className="muted" style={{ fontSize: 13 }}>Criada em {fmtDate(k.created_at)}{k.last_used_at ? ` · último uso ${fmtDate(k.last_used_at)}` : ''}</div></div>
+      {(keys.data?.passkeys?.length ?? 0) > 1 && <button className="btn small ghost" onClick={() => remove(k.id)}>Remover</button>}
+    </div>)}
+    <ErrorNotice error={error} />
+    {!link ? <Button kind="ghost" busyText="Gerando…" onClick={gen}>Cadastrar outro aparelho (ex.: Face ID do iPhone)</Button>
+      : <div className="stack">
+        <div className="notice warn">Abra no aparelho novo: aponte a câmera para o código ou abra o link nele. Vale 30 minutos e uma única vez. Não envie para outras pessoas: quem abrir entra na SUA conta.</div>
+        <img src={qr} alt="QR code para cadastrar outro aparelho" width={240} height={240} style={{ alignSelf: 'center', imageRendering: 'pixelated', background: '#fff', borderRadius: 8 }} />
+        <div className="row"><Button kind="ghost" busyText="Copiando…" onClick={async () => { await navigator.clipboard.writeText(link); toast('Link copiado.'); }}>Copiar link</Button>
+          <button className="btn small ghost" onClick={() => { setLink(null); keys.reload(); }}>Pronto</button></div>
+      </div>}
   </div>;
 }

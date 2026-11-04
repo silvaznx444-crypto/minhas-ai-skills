@@ -62,9 +62,22 @@ export function AcceptInvite({ token, onDone }: { token: string; onDone: () => v
     <p className="muted">Crie sua chave de acesso para entrar no painel da GRIFHII.</p>
     <ErrorNotice error={error} />
     <Button kind="block" busyText="Criando chave…" onClick={async () => {
-      try { const r = await passkeyRegister('auth/invite/options', 'auth/invite/verify', { inviteToken: token }); setCsrf(r.csrf); history.replaceState(null, '', '/#/'); onDone(); }
+      try { const r = await passkeyRegister('auth/invite/options', 'auth/invite/verify', { inviteToken: token }); setCsrf(r.csrf); history.replaceState(null, '', '/#/'); dispatchEvent(new HashChangeEvent('hashchange')); onDone(); }
       catch (e) { setError(e); }
     }}>Criar minha chave de acesso</Button>
+  </Shell>;
+}
+
+export function AddDevice({ token, onDone }: { token: string; onDone: () => void }) {
+  const [error, setError] = useState<unknown>(null);
+  return <Shell title="Cadastrar este aparelho">
+    <p className="muted">Crie a chave de acesso deste aparelho (Face ID, digital ou senha do aparelho). Ela entra na mesma conta de quem gerou o link.</p>
+    <p className="muted" style={{ fontSize: 13 }}>O link vale por 30 minutos e funciona uma única vez.</p>
+    <ErrorNotice error={error} />
+    <Button kind="block" busyText="Criando chave…" onClick={async () => {
+      try { const r = await passkeyRegister('auth/device/options', 'auth/device/verify', { linkToken: token }); setCsrf(r.csrf); history.replaceState(null, '', '/#/'); dispatchEvent(new HashChangeEvent('hashchange')); onDone(); }
+      catch (e) { setError(e); }
+    }}>Criar chave neste aparelho</Button>
   </Shell>;
 }
 
@@ -82,4 +95,4 @@ export function Recovery({ onDone }: { onDone: () => void }) {
   </Shell>;
 }
 
-export async function logout() { await api('auth/logout', { method: 'POST', body: {} }).catch(() => {}); setCsrf(''); location.hash = '/entrar'; }
+export async function logout() { await api('auth/logout', { method: 'POST', body: {} }).catch(() => {}); setCsrf(''); history.replaceState(null, '', '/#/entrar'); location.reload(); }

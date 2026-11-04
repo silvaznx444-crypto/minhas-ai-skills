@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 import { api, ApiError, setCsrf, setOnUnauthenticated } from './lib.ts';
 import { Icon, SessionCtx, ToastProvider, useRoute, type Session } from './ui.tsx';
-import { AcceptInvite, Login, logout, Recovery, Setup } from './pages/Auth.tsx';
+import { AcceptInvite, AddDevice, Login, logout, Recovery, Setup } from './pages/Auth.tsx';
 import { NewProduct } from './pages/NewProduct.tsx';
 import { ProductDetail, ProductList } from './pages/Products.tsx';
 import { Activities, Overview, Settings, Stock, Sync } from './pages/Other.tsx';
@@ -26,6 +26,8 @@ function App() {
 
   const invite = /^\/convite\/([A-Za-z0-9_-]{40,80})$/.exec(route);
   if (invite) return <AcceptInvite token={invite[1]} onDone={refresh} />;
+  const device = /^\/aparelho\/([A-Za-z0-9_-]{40,80})$/.exec(route);
+  if (device) return <AddDevice token={device[1]} onDone={refresh} />;
   if (route === '/configurar') return <Setup onDone={() => { location.hash = '/'; refresh(); }} />;
   if (route === '/recuperar') return <Recovery onDone={() => { location.hash = '/'; refresh(); }} />;
   if (session === undefined) return <div className="auth"><p className="muted">Carregando…</p></div>;

@@ -33,6 +33,8 @@ const configError = (msg: string) => new Response(JSON.stringify({ error: { code
 });
 
 let migrated = false;
+/** Somente para testes. */
+export const _resetMigrated = () => { migrated = false; };
 /** Aplica as migrações uma única vez (tabela _gh_schema guarda o que já foi aplicado). */
 export async function ensureMigrated(env: Env) {
   if (migrated) return;

@@ -30,5 +30,12 @@ export const MIGRATIONS: { name: string; statements: string[] }[] = [
       "CREATE TRIGGER audit_no_delete BEFORE DELETE ON audit_logs\n  WHEN OLD.at > (CAST(strftime('%s','now') AS INTEGER) * 1000 - 365 * 86400000)\n  BEGIN SELECT RAISE(ABORT,'audit_logs: retention is 365 days'); END;",
       "CREATE TABLE application_settings (\n  key         TEXT PRIMARY KEY CHECK (key IN ('shopify_location_id','shopify_publication_ids','api_capabilities','catalog_deploy_hook_enabled')),\n  value       TEXT NOT NULL,\n  updated_by  TEXT REFERENCES users(id),\n  updated_at  INTEGER NOT NULL\n)"
     ]
+  },
+  {
+    "name": "0002_device_links.sql",
+    "statements": [
+      "CREATE TABLE device_links (\n  id          TEXT PRIMARY KEY,\n  token_hash  TEXT NOT NULL UNIQUE,\n  user_id     TEXT NOT NULL REFERENCES users(id),\n  expires_at  INTEGER NOT NULL,\n  used_at     INTEGER,\n  created_at  INTEGER NOT NULL\n)",
+      "CREATE INDEX device_links_user ON device_links(user_id)"
+    ]
   }
 ];

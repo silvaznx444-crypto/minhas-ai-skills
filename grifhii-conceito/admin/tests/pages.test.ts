@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import pagesWorker, { ensureMigrated } from '../src/pages-entry.ts';
+import pagesWorker, { _resetMigrated, ensureMigrated } from '../src/pages-entry.ts';
 import { MIGRATIONS } from '../src/generated/migrations.ts';
 import { splitSql } from '../tools/build-pages.mjs';
 import { ctx, makeDb, makeEnv } from './helpers.ts';
@@ -46,4 +46,18 @@ test('padrões: sem ADMIN_ORIGIN usa grifhii-painel.pages.dev e a API responde (
   const env = makeEnv({ SESSION_PEPPER: 'p'.repeat(40) } as any); delete (env as any).ADMIN_ORIGIN; delete (env as any).WEBAUTHN_RP_ID;
   const r = await pagesWorker.fetch(new Request('https://grifhii-painel.pages.dev/api/admin/v1/auth/session'), env, ctx());
   assert.equal(r.status, 401);
+});
+
+test('atualização: banco que já tinha só a 1ª migração (com dados) recebe a nova tabela sem perder nada', async () => {
+  const db = makeDb({ migrate: false });
+  const first = MIGRATIONS[0];
+  db.raw.exec('CREATE TABLE _gh_schema (name TEXT PRIMARY KEY, applied_at INTEGER NOT NULL)');
+  for (const s of first.statements) db.raw.exec(s);
+  db.raw.prepare('INSERT INTO _gh_schema VALUES (?, ?)').run(first.name, 1);
+  db.raw.prepare("INSERT INTO users (id,display_name,role,status,webauthn_user_id,created_at,updated_at) VALUES ('u1','Dono','OWNER','active','w',1,1)").run();
+  _resetMigrated();
+  const env = makeEnv(); (env as any).DB = db;
+  await ensureMigrated(env);
+  assert.ok(tables(db).includes('table:device_links'));
+  assert.equal((db.raw.prepare('SELECT COUNT(*) n FROM users').get() as any).n, 1, 'dono preservado');
 });

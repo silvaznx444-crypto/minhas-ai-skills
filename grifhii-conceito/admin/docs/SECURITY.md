@@ -33,7 +33,7 @@ Referência: OWASP ASVS 5.0, nível 2 (controles aplicáveis). Nenhum sistema é
 
 ## Camadas adicionais recomendadas (configuração do proprietário)
 
-1. **Cloudflare Access** no host `admin.SEU-DOMINIO` (e-mail do dono) como camada extra — a autenticação do app continua obrigatória.
+1. **Cloudflare Access** no host `grifhii-painel.SEU-SUBDOMINIO.workers.dev` (e-mail do dono) como camada extra — a autenticação do app continua obrigatória.
 2. **WAF / Rate limiting** do Cloudflare em `/api/admin/v1/auth/*` (ex.: 30 req/min por IP).
 3. **Duas passkeys** (iPhone + outro aparelho) e guardar os códigos de recuperação offline.
 

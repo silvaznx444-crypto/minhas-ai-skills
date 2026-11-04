@@ -21,7 +21,7 @@ Conclusão: o painel é uma **extensão**: nada do site público foi removido ou
 Proprietário (iPhone/PC)
    │  HTTPS, passkey (WebAuthn), cookie __Host- HttpOnly/Secure/SameSite=Strict
    ▼
-admin.SEU-DOMINIO  ──  Painel (SPA estática no Cloudflare Pages)  ── mesma origem ──┐
+grifhii-painel.SEU-SUBDOMINIO.workers.dev  ──  Painel (SPA servida pelo próprio Worker)  ── mesma origem ──┐
                                                                                     ▼
                                                   Cloudflare Worker  /api/admin/v1/*
                                                   ├─ auth (passkeys, sessões, CSRF, rate limit)

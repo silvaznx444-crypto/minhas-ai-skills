@@ -11,7 +11,8 @@
     "migrate:remote": "wrangler d1 migrations apply grifhii-admin --remote",
     "deploy": "npm run build:ui && wrangler deploy",
     "build:ui": "cd ui && npm ci && npm run build",
-    "test:e2e": "node tests/e2e/painel.e2e.cjs"
+    "test:e2e": "node tests/e2e/painel.e2e.cjs",
+    "deploy:cloudflare": "npm run build:ui && wrangler d1 migrations apply grifhii-admin --remote && wrangler deploy"
   },
   "dependencies": {
     "@simplewebauthn/server": "14.0.3",

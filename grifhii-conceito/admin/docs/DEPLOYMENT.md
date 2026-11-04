@@ -46,21 +46,23 @@ npx wrangler secret put ADMIN_SETUP_TOKEN
 
 (outro valor aleatório longo; será usado UMA vez no cadastro do proprietário e depois apagado)
 
-## 4. Domínio do painel
+## 4. Endereço do painel (gratuito, `.workers.dev`)
 
-1. Edite `wrangler.toml`: `ADMIN_ORIGIN = "https://admin.SEU-DOMINIO.com.br"` e `WEBAUTHN_RP_ID = "admin.SEU-DOMINIO.com.br"`; descomente `routes` com o seu domínio.
+1. No Cloudflare: **Workers e Pages** → o seu subdomínio aparece como `NOME.workers.dev`. Em `wrangler.toml`, troque `SEU-SUBDOMINIO` por esse NOME em `ADMIN_ORIGIN` e `WEBAUTHN_RP_ID` (o painel fica em `https://grifhii-painel.NOME.workers.dev`). A passkey fica presa a esse endereço exato: se um dia mudar para domínio próprio, será preciso cadastrar a passkey de novo.
 2. Publique API **e** interface juntas (o mesmo Worker serve o painel em `/` e a API em `/api/`, mesma origem — sem CORS):
 
 ```bash
 npm run deploy
 ```
 
+   Sem terminal: **Workers e Pages → Criar → Importar repositório** (GitHub), pasta raiz `grifhii-conceito/admin`, comando de build `npm ci`, comando de deploy `npm run deploy:cloudflare` (gera a interface, aplica as migrações do D1 e publica). Os segredos são cadastrados em **Configurações → Variáveis e segredos** do Worker, sempre como tipo **Secret**.
+
    (`npm run deploy` gera a interface em `ui/dist` e depois executa `wrangler deploy`. Nenhum segredo vai para a interface: ela só chama `/api/` com o cookie de sessão.)
-4. Recomendado: **Zero Trust → Access → Aplicativos** → proteger `admin.SEU-DOMINIO.com.br` liberando apenas o seu e-mail (camada extra).
+3. Recomendado: **Zero Trust → Access → Aplicativos** → proteger `grifhii-painel.SEU-SUBDOMINIO.workers.dev` liberando apenas o seu e-mail (camada extra).
 
 ## 5. Primeiro acesso (proprietário)
 
-1. Abra `https://admin.SEU-DOMINIO.com.br/` no iPhone → “Configurar painel” → cole o `ADMIN_SETUP_TOKEN` → crie a passkey (Face ID).
+1. Abra `https://grifhii-painel.SEU-SUBDOMINIO.workers.dev/` no iPhone → “Configurar painel” → cole o `ADMIN_SETUP_TOKEN` → crie a passkey (Face ID).
 2. **Guarde os 10 códigos de recuperação** fora do celular (papel ou gerenciador de senhas).
 3. Apague o token de configuração:
 
@@ -73,7 +75,7 @@ npx wrangler secret delete ADMIN_SETUP_TOKEN
 
 ## 6. Webhooks
 
-Shopify Admin → Configurações → Notificações → Webhooks (ou na configuração do app): crie `Atualização de produto`, `Criação de produto`, `Exclusão de produto` e `Atualização de nível de estoque`, formato JSON, URL `https://admin.SEU-DOMINIO.com.br/api/admin/v1/webhooks/shopify`, versão `2026-10`. Se a Shopify mostrar um segredo de assinatura próprio, guarde com `npx wrangler secret put SHOPIFY_WEBHOOK_SECRET`.
+Shopify Admin → Configurações → Notificações → Webhooks (ou na configuração do app): crie `Atualização de produto`, `Criação de produto`, `Exclusão de produto` e `Atualização de nível de estoque`, formato JSON, URL `https://grifhii-painel.SEU-SUBDOMINIO.workers.dev/api/admin/v1/webhooks/shopify`, versão `2026-10`. Se a Shopify mostrar um segredo de assinatura próprio, guarde com `npx wrangler secret put SHOPIFY_WEBHOOK_SECRET`.
 
 ## 7. Testes antes de usar com a loja real
 

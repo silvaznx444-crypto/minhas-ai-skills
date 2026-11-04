@@ -1,16 +1,17 @@
 # GRIFHII — API do painel administrativo (Cloudflare Worker).
 # Segredos NUNCA aqui: use `npx wrangler secret put NOME` (ver docs/DEPLOYMENT.md).
-name = "grifhii-admin-api"
+name = "grifhii-painel"
+workers_dev = true   # endereço gratuito: https://grifhii-painel.SEU-SUBDOMINIO.workers.dev
 main = "src/index.ts"
 compatibility_date = "2026-10-01"
 compatibility_flags = ["nodejs_compat"]
 
-# Rota do painel no domínio da loja (ajuste ao domínio final). O painel e a API ficam na MESMA origem.
+# Domínio próprio é opcional. Se um dia comprar um, troque ADMIN_ORIGIN/WEBAUTHN_RP_ID e use routes:
 # routes = [{ pattern = "admin.SEU-DOMINIO.com.br/api/admin/*", zone_name = "SEU-DOMINIO.com.br" }]
 
 [vars]
-ADMIN_ORIGIN = "https://admin.SEU-DOMINIO.com.br"
-WEBAUTHN_RP_ID = "admin.SEU-DOMINIO.com.br"
+ADMIN_ORIGIN = "https://grifhii-painel.SEU-SUBDOMINIO.workers.dev"
+WEBAUTHN_RP_ID = "grifhii-painel.SEU-SUBDOMINIO.workers.dev"
 SHOPIFY_SHOP_DOMAIN = "grifhiiconceito.myshopify.com"
 SHOPIFY_API_VERSION = "2026-10"
 

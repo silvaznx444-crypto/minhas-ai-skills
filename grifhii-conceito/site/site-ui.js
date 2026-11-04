@@ -172,14 +172,29 @@
     });
   }
 
+  // Caminho base ('' ou '../'), lido do link original: o menu também funciona nas páginas legais.
+  const brandMenuBase = link => String(link?.getAttribute('href') || '').replace(/produtos\.html.*$/, '');
+  let brandDataRequested = false;
+  // A lista de marcas vem de products-data.js. Se ainda não carregou (internet lenta) ou se a página
+  // não o inclui (páginas legais), carrega sob demanda e preenche o acordeão quando chegar.
+  function whenBrandsReady(base, done) {
+    window.addEventListener('load', done, { once:true });
+    if (brandDataRequested || document.querySelector('script[src*="products-data.js"]')) return;
+    brandDataRequested = true;
+    const script = document.createElement('script');
+    script.src = `${base}products-data.js`;
+    script.addEventListener('load', done, { once:true });
+    document.head.appendChild(script);
+  }
+
   function initBrandMenuAccordion() {
     const nav = document.querySelector('.site-menu-nav');
     if (!nav || nav.querySelector('.site-menu-brand-accordion')) return;
-    const mainLink = [...nav.children].find(node => node.matches?.('a[href="produtos.html?marca=todas"]'));
+    const mainLink = [...nav.children].find(node => node.matches?.('a[href$="produtos.html?marca=todas"]'));
     if (!mainLink) return;
-    const brands = getBrandList().filter(brand => brand.showInMenu !== false);
-    if (!brands.length) return;
+    const base = brandMenuBase(mainLink);
 
+    // O acordeão é montado IMEDIATAMENTE: "Marcas" nunca mais age como link direto para Produtos.
     const wrapper = document.createElement('div');
     wrapper.className = 'site-menu-brand-accordion';
     const row = document.createElement('div');
@@ -195,24 +210,40 @@
     submenu.id = 'siteMenuBrands';
     submenu.className = 'site-menu-brand-submenu';
     submenu.hidden = true;
-    submenu.innerHTML = brands.map(brand => `
-      <a href="produtos.html?marca=${encodeURIComponent(brand.slug)}" aria-label="Ver peças ${brand.menuLabel || brand.label}">
-        ${brandMark(brand)}
-        <span>${brand.menuLabel || brand.label}</span>
-      </a>`).join('');
     mainLink.replaceWith(wrapper);
     wrapper.append(row, submenu);
     row.append(button);
+
+    let filled = false;
+    const fill = () => {
+      if (filled) return;
+      const brands = getBrandList().filter(brand => brand.showInMenu !== false);
+      if (!brands.length) {
+        submenu.innerHTML = `<a href="${base}produtos.html?marca=todas">Carregando marcas… ver todas</a>`;
+        submenu.querySelector('a')?.addEventListener('click', closeMenu);
+        return;
+      }
+      filled = true;
+      submenu.innerHTML = brands.map(brand => `
+      <a href="${base}produtos.html?marca=${encodeURIComponent(brand.slug)}" aria-label="Ver peças ${brand.menuLabel || brand.label}">
+        ${brandMark(brand)}
+        <span>${brand.menuLabel || brand.label}</span>
+      </a>`).join('');
+      submenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      wireBrandImageFallbacks(wrapper);
+    };
+    fill();
+    if (!filled) whenBrandsReady(base, () => { ensureBrandExperienceStyles(); fill(); });
+
     button.addEventListener('click', event => {
       event.preventDefault();
       event.stopPropagation();
+      fill();
       const open = button.getAttribute('aria-expanded') !== 'true';
       button.setAttribute('aria-expanded', String(open));
       button.setAttribute('aria-label', open ? 'Ocultar marcas' : 'Mostrar marcas');
       submenu.hidden = !open;
     });
-    submenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
-    wireBrandImageFallbacks(wrapper);
   }
 
   function initHomeBrandCarousel() {
@@ -345,5 +376,8 @@
     }
   }
 
+  // O menu já pode ser aberto antes do fim do carregamento: monta o acordeão de Marcas na hora.
+  ensureBrandExperienceStyles();
+  initBrandMenuAccordion();
   window.addEventListener('DOMContentLoaded', initBrandExperience, { once:true });
 })();

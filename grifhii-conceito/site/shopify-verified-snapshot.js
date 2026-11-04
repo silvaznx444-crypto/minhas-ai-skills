@@ -1,7 +1,7 @@
 /* GRIFHII — Snapshot de IDs Shopify: base de 22/10 + produtos e preços de 31/10/2026.
- * Fonte: consultas autorizadas ao Admin API (73 produtos, 265 variantes).
+ * Fonte: consultas autorizadas ao Admin API (snapshot historico + confirmacoes de 04/11).
  * Os IDs são públicos e utilizáveis em cart permalinks; preços/estoques são uma fotografia,
- * NÃO informação em tempo real. Para preços/estoques vivos usar a Storefront API.
+ * NÃO informação em tempo real. Novas variantes têm fallback de disponibilidade 0 até verificação Storefront.
  */
 (() => {
 'use strict';
@@ -14,7 +14,7 @@ bermuda-sarja-ralph-lauren-masculina-m-ao-g1|13990|Preto~M=67776637501542;Marrom
 bermuda-vilebrequin-estampa-tartaruga|7990|Laranja~M=67717947031654;Laranja~G=67717947064422;Branco~G=67718039470182/0;Branco~GG=67718039502950/0;Azul~M=67718109757542
 bermuda-vilebrequin-tartarugas-pequenas|7990|Laranja~G=67717960302694;Laranja~GG=67718250266726;Azul escuro~G=67718250299494;Azul escuro~GG=67718250332262;Amarela~M=67777494745190
 bone-ayrton-senna|8990|Azul=67719155056742/4;Preto=67719155089510/4
-bone-ralph-lauren|8990|Azul-marinho=67719080706150;Azul escuro=67719080738918;CINZA=67719080771686;Marrom=67719080804454;Roxo=67719080837222;Rosa=67719080869990;Preto=67719080902758
+bone-ralph-lauren|8990|Azul-marinho=67719080706150;Azul escuro=67719080738918;CINZA=67719080771686;Marrom=67719080804454;Roxo=67719080837222;Rosa=67719080869990;Preto=67719080902758;Azul-claro=67916045549670/0;Ciano=67916045582438/0
 bone-tommy-hilfiger-classico|8990|Azul-marinho=67719281573990;Bege=67719281606758
 calca-jeans-calvin-klein-jeans-skinny-azul-medio|18990|38=67776570720358;40=67776570753126;42=67776570785894;44=67776570818662;46=67776570851430;48=67776570884198
 calca-jeans-polo-ralph-lauren-azul-escuro|18990|36=67776523141222
@@ -71,7 +71,7 @@ short-masculino-diesel|7990|M~Branco=67717893095526
 short-on-running-2-em-1-moda-fit|13990|Grisalho~M=67777959264358;Grisalho~G=67777959297126;Grisalho~GG=67777959329894;Branco~M=67777959362662;Branco~G=67777959395430;Branco~GG=67777959428198;Preto~M=67777959460966;Preto~G=67777959493734;Preto~GG=67777959526502;Verde~M=67777959559270;Verde~G=67777959592038;Verde~GG=67777959624806
 short-tommy-hilfiger|7990|Azul-marinho~G=67717850038374;Preto~G=67717971476582;Preto~M=67717971509350
 short-tommy-hilfiger-1|7990|M~Branco=67717906333798
-camiseta-abercrombie-amp-fitch-popeye-graphic|13990|Azul-marinho~M=67873368997990;Azul-marinho~G=67873369030758;Azul-marinho~GG=67873369063526;Azul-marinho~G1=67873369096294;Verde~M=67873369129062;Verde~G=67873369161830;Verde~GG=67873369194598;Verde~G1=67873369227366
+camiseta-abercrombie-amp-fitch-popeye-graphic|13990|Azul-marinho~M=67873368997990;Azul-marinho~G=67873369030758;Azul-marinho~GG=67873369063526;Azul-marinho~G1=67873369096294;Verde~M=67873369129062;Verde~G=67873369161830;Verde~GG=67873369194598;Verde~G1=67873369227366;Preto~M=67918319845478/0;Preto~G=67918319878246/0;Preto~GG=67918319911014/0;Preto~G1=67918319943782/0
 camiseta-fred-perry-logo-bordado|12990|Branco~G=67873370505318;Branco~GG=67873370538086;Branco~G1=67873370570854;Branco~G2=67873370603622;Preto~G=67873370636390;Preto~GG=67873370669158;Preto~G1=67873370701926;Preto~G2=67873370734694;Azul~G=67873370767462;Azul~GG=67873370800230;Azul~G1=67873370832998;Azul~G2=67873370865766;Azul-marinho~G=67873370898534;Azul-marinho~GG=67873370931302;Azul-marinho~G1=67873370964070;Azul-marinho~G2=67873370996838;BRANCO COM LISTRAS~G=67873371029606;BRANCO COM LISTRAS~GG=67873371062374;BRANCO COM LISTRAS~G1=67873371095142;BRANCO COM LISTRAS~G2=67873371127910
 camiseta-hugo-boss-logo-contrast-azul-marinho|12990|Azul-marinho~M=67873374371942;Azul-marinho~G=67873374404710;Azul-marinho~GG=67873374437478;Azul-marinho~G1=67873374470246
 camiseta-abercrombie-fitch-heritage-graphic|13990|Verde Escuro~M=67873374994534;Verde Escuro~G=67873375027302;Verde Escuro~GG=67873375060070;Verde Escuro~G1=67873375092838
@@ -79,6 +79,7 @@ camiseta-armani-exchange-a-x-graphic|12990|Branco~GG=67873375354982;Branco~G1=67
 camiseta-diesel-importada-logo|12990|Branco~M=67873382072422;Branco~G=67873382105190;Branco~GG=67873382137958;Preto~M=67873382170726;Preto~G=67873382203494;Preto~GG=67873382236262
 camiseta-lacoste-sport-logo-graphic|12990|Branco~M=67873425883238;Branco~G=67873425916006;Branco~GG=67873425948774;Branco~G1=67873425981542;Preto~M=67873426014310;Preto~G=67873426047078;Preto~GG=67873426079846;Preto~G1=67873426112614
 camiseta-tommy-hilfiger-n-y-c|12990|Branco~GG=67873448558694;Branco~G1=67873448591462
+camiseta-abercrombie-fitch-new-york-vermelha|13990|Vermelha~M=67915992891494/0;Vermelha~G=67915992924262/0;Vermelha~GG=67915992957030/0;Vermelha~G1=67915992989798/0
 `;
 const data=new Map();
 for(const line of DATA.trim().split('\n')) {
@@ -96,5 +97,5 @@ for(const line of DATA.trim().split('\n')) {
   });
   data.set(handle,{handle,priceCents:Number(priceStr),variants});
 }
-window.GRIFHII_SHOPIFY_SNAPSHOT=Object.freeze({source:'Shopify Admin API autenticada (snapshot; estoque antigo pode estar desatualizado)',capturedAt:'2026-10-31',shopDomain:'grifhiiconceito.myshopify.com',products:data});
+window.GRIFHII_SHOPIFY_SNAPSHOT=Object.freeze({source:'Shopify Admin API autenticada (snapshot; estoque antigo pode estar desatualizado)',capturedAt:'2026-11-04 (base 2026-10-31, novas variantes com fallback bloqueado)',shopDomain:'grifhiiconceito.myshopify.com',products:data});
 })();

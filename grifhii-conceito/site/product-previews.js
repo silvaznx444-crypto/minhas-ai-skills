@@ -36,6 +36,8 @@
   "zara-basic-regular-fit": "assets/modelos-3d/zara-basic-regular-fit-volume.webp",
   "armani-exchange-ax": "assets/modelos-3d/armani-exchange-ax-volume.webp",
   "tommy-hilfiger-short-tommy-hilfiger-colorblock": "assets/modelos-3d/tommy-hilfiger-short-colorblock-volume.webp",
+  "vilebrequin-bermuda-tartarugas-grandes": "assets/modelos-3d/vilebrequin-tartarugas-grandes-branca-3d.webp",
+  "vilebrequin-bermuda-tartarugas-pequenas": "assets/modelos-3d/vilebrequin-tartarugas-pequenas-azul-marinho-3d.webp",
   "tommy-hilfiger-short-tommy-hilfiger-monograma-th": "assets/modelos-3d/tommy-hilfiger-short-monograma-th-volume.webp",
   "diesel-short-diesel-com-vivo-vermelho": "assets/modelos-3d/diesel-short-vivo-vermelho-volume.webp"
 });

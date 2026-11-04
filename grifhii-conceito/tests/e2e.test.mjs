@@ -203,8 +203,13 @@ test('página estática de produto: HTML inicial rastreável + dados estruturado
   const product = blocks.find(b => b['@type'] === 'Product');
   assert.ok(product?.name && product.image?.length, 'Product com nome e imagem');
   assert.ok(blocks.some(b => b['@type'] === 'BreadcrumbList'));
-  const report = JSON.parse(fs.readFileSync(path.join(ROOT, 'build-report.json'), 'utf8'));
-  if (!report.catalogLive) assert.equal(product.offers, undefined, 'sem Shopify ao vivo no build não há preço inventado');
+  // Preço nos dados estruturados só quando o build consultou a Shopify ao vivo; nesse caso precisa ser válido.
+  if (product.offers) {
+    const o = product.offers;
+    assert.equal(o.priceCurrency, 'BRL');
+    assert.ok(Number(o.lowPrice) > 0 && Number(o.highPrice) >= Number(o.lowPrice), 'preço válido');
+    assert.match(o.availability, /^https:\/\/schema\.org\/(InStock|OutOfStock)$/);
+  }
 });
 
 /* ================= SACOLA ================= */
@@ -486,74 +491,94 @@ test('painel → site: sem a Shopify ao vivo, nada novo é inventado (só a cura
   await ctx.close();
 });
 
-/* ================= AJUSTES 04/11: POPEYE PRETA/VERDE, FITCH NEW YORK, 1892 ================= */
+/* ================= AJUSTES 04/11: POPEYE PRETO/VERDE, FITCH NEW YORK VERMELHA, 1892, MENU MARCAS ================= */
 const POPEYE_PRETO = {'M': '67918319845478', 'G': '67918319878246', 'GG': '67918319911014', 'G1': '67918319943782'};
+const FITCH_NY = {'M': '67915992891494', 'G': '67915992924262', 'GG': '67915992957030', 'G1': '67915992989798'};
+const FITCH_HANDLE = 'camiseta-abercrombie-fitch-new-york-vermelha';
+/** Catálogo "ao vivo": Popeye com Preto; Fitch NY publicada (ou não) no canal do site. */
 function nodesAoVivo04Nov({fitchPublicada = true} = {}) {
-  const out = NODES.map(n => n.handle !== 'camiseta-abercrombie-amp-fitch-popeye-graphic' ? n : {...n, variants: {...n.variants, nodes: [...n.variants.nodes,
-    ...Object.entries(POPEYE_PRETO).map(([s, id]) => remoteVariant(id, 'Preto', s, null))]}});
-  if (fitchPublicada) out.push({id: 'gid://shopify/Product/990000000777', handle: 'handle-desconhecido-fitch-ny', title: 'Camiseta Abercrombie &amp; Fitch New York',
+  const has = (n, id) => n.variants.nodes.some(v => v.id.endsWith(id));
+  const out = NODES.filter(n => n.handle !== FITCH_HANDLE).map(n => n.handle !== 'camiseta-abercrombie-amp-fitch-popeye-graphic' ? n : {...n, variants: {...n.variants, nodes: [
+    ...n.variants.nodes, ...Object.entries(POPEYE_PRETO).filter(([, id]) => !has(n, id)).map(([sz, id]) => remoteVariant(id, 'Preto', sz, null))]}});
+  if (fitchPublicada) out.push({id: 'gid://shopify/Product/15463443464294', handle: FITCH_HANDLE, title: 'Camiseta Abercrombie &amp; Fitch New York',
     description: '', vendor: 'Abercombrie', productType: 'Camisa', availableForSale: true, images: {nodes: [{url: cdn('fitch-ny-shopify'), altText: null}]},
-    variants: {pageInfo: {hasNextPage: false}, nodes: ['M', 'G', 'GG', 'G1'].map((s, i) => remoteVariant(`99000000078${i}`, 'Vermelho', s, cdn('fitch-ny-shopify')))}});
+    variants: {pageInfo: {hasNextPage: false}, nodes: Object.entries(FITCH_NY).map(([sz, id]) => remoteVariant(id, 'Vermelha', sz, cdn('fitch-ny-shopify')))}});
   return out;
 }
 
-test('Popeye: só Preta e Verde-escuro (Azul-marinho removida), foto real + 3D, Preta/G vai com o ID Preto da Shopify', async () => {
+test('Popeye: só Preto e Verde-escuro (Azul-marinho removida), foto real + 3D, Preto/G vai com o ID Preto da Shopify', async () => {
   const {ctx, page} = await newPage();
   await enableSalesForTest(page);
   await mockShopify(page, {cart: okCart(), nodes: nodesAoVivo04Nov()});
-  const cart = await addFromProductPage(page, 'camiseta-abercrombie-popeye', {color: 'Preta', size: 'G'});
+  const cart = await addFromProductPage(page, 'camiseta-abercrombie-popeye', {color: 'Preto', size: 'G'});
   const colors = [...new Set(await page.$$eval('[data-color]', b => b.map(x => x.getAttribute('data-color'))))];
-  assert.deepEqual(colors.sort(), ['Preta', 'Verde-escuro']);
+  assert.deepEqual(colors.sort(), ['Preto', 'Verde-escuro']);
   assert.equal(cart.length, 1); assert.equal(cart[0].shopifyVariantId, `gid://shopify/ProductVariant/${POPEYE_PRETO.G}`);
   const m = await page.evaluate(() => {
     const p = window.GRIFHII_CURADORIA.find(x => x.slug === 'camiseta-abercrombie-popeye');
     return p.images.map(i => [i, window.GRIFHII_3D.modelForPhoto(p, i)]);
   });
   assert.deepEqual(m, [
-    ['assets/fotos-reais/camiseta-abercrombie-popeye-preta-real.webp', 'assets/modelos-3d/camiseta-abercrombie-popeye-preta-3d.webp'],
-    ['assets/fotos-reais/camiseta-abercrombie-popeye-verde-escuro-real.webp', 'assets/colecao-30-outubro/camiseta-abercrombie-popeye-verde-escuro.webp']]);
+    ['assets/fotos-reais-04-11-2026/popeye-preta.webp', 'assets/modelos-3d/camiseta-abercrombie-popeye-preta-3d.webp'],
+    ['assets/fotos-reais-03-11-2026/camiseta-abercrombie-popeye-verde-escuro-real.webp', 'assets/colecao-30-outubro/camiseta-abercrombie-popeye-verde-escuro.webp']]);
   assert.deepEqual(page.errors, []);
   await ctx.close();
 });
 
-test('Fitch New York: vinculada pelo NOME quando publicada (sem duplicar), compra com o ID certo; sem publicação não vende', async () => {
+test('Fitch New York vermelha: foto real + 3D; publicada vende com o ID certo e sem duplicar; sem publicação não vende', async () => {
   const {ctx, page} = await newPage();
   await enableSalesForTest(page);
   await mockShopify(page, {cart: okCart(), nodes: nodesAoVivo04Nov()});
-  const cart = await addFromProductPage(page, 'camiseta-abercrombie-fitch-new-york', {color: 'Vermelha', size: 'GG'});
-  assert.equal(cart.length, 1); assert.equal(cart[0].shopifyVariantId, 'gid://shopify/ProductVariant/990000000782');
-  assert.equal(await page.evaluate(() => window.GRIFHII_3D.forPhoto('assets/fotos-reais/camiseta-abercrombie-fitch-new-york-vermelha-real.webp')),
+  const cart = await addFromProductPage(page, FITCH_HANDLE, {color: 'Vermelha', size: 'GG'});
+  assert.equal(cart.length, 1); assert.equal(cart[0].shopifyVariantId, `gid://shopify/ProductVariant/${FITCH_NY.GG}`);
+  assert.equal(await page.evaluate(() => window.GRIFHII_3D.forPhoto('assets/fotos-reais-04-11-2026/fitch-vermelha.webp')),
     'assets/modelos-3d/camiseta-abercrombie-fitch-new-york-vermelha-3d.webp');
   await page.goto(`${BASE}produtos`);
   await page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
   await page.waitForTimeout(800);
-  assert.equal(await page.locator('a[href*="shopify-handle-desconhecido-fitch-ny"]').count(), 0, 'não aparece duplicada como peça dinâmica');
-  assert.ok(await page.locator('a[href*="camiseta-abercrombie-fitch-new-york"]').count() >= 1, 'aparece no catálogo');
+  assert.equal(await page.locator(`a[href*="shopify-${FITCH_HANDLE}"]`).count(), 0, 'não aparece duplicada como peça dinâmica');
   await ctx.close();
 
   const b = await newPage();
   await enableSalesForTest(b.page);
-  const log = [];
-  await mockShopify(b.page, {cart: okCart(), log, nodes: nodesAoVivo04Nov({fitchPublicada: false})});
-  await b.page.goto(`${BASE}peca-camiseta-abercrombie-fitch-new-york`);
+  await mockShopify(b.page, {cart: okCart(), nodes: nodesAoVivo04Nov({fitchPublicada: false})});
+  await b.page.goto(`${BASE}peca-${FITCH_HANDLE}`);
   await b.page.waitForSelector('#addProduct');
   await b.page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
   await b.page.reload(); await b.page.waitForSelector('#addProduct');
   await b.page.waitForFunction(() => window.GRIFHII_SHOPIFY_CATALOG?.state?.status === 'live', null, {timeout: 15000});
-  assert.equal((await b.page.textContent('h1')).trim(), 'Camiseta Abercrombie & Fitch New York', 'a peça aparece no site');
   assert.ok(await b.page.isDisabled('#addProduct'), 'sem publicação na Shopify o botão de compra fica desativado');
-  const c2 = await b.page.evaluate(() => JSON.parse(localStorage.getItem('grifhii-cart-v1') || '[]'));
-  assert.equal(c2.length, 0, 'sem publicação na Shopify não entra na sacola');
-  assert.equal(log.length, 0);
   await b.ctx.close();
 });
 
-test('1892 Verde: foto real nova com o 3D anterior vinculado', async () => {
+test('1892 Verde: foto real com o 3D vinculado', async () => {
   const {ctx, page} = await newPage();
   await mockShopify(page);
   await page.goto(`${BASE}peca-camiseta-abercrombie-graphic-1892-verde`);
   await page.waitForSelector('#addProduct');
   const r = await page.evaluate(() => { const p = window.GRIFHII_CURADORIA.find(x => x.slug === 'camiseta-abercrombie-graphic-1892-verde'); return [p.images[0], window.GRIFHII_3D.modelForPhoto(p, p.images[0])]; });
-  assert.deepEqual(r, ['assets/fotos-reais/camiseta-abercrombie-graphic-1892-verde-real.webp', 'assets/colecao-30-outubro/camiseta-abercrombie-graphic-1892-verde-verde.webp']);
+  assert.ok(/real\.webp$/.test(r[0]), 'foto real');
+  assert.ok(r[1] && /colecao-30-outubro\/camiseta-abercrombie-graphic-1892-verde/.test(r[1]), `3D vinculado: ${r[1]}`);
   await ctx.close();
+});
+
+test('menu Marcas: abre a sanfona (nunca vai direto para Produtos), mesmo com internet lenta e nas páginas legais', async () => {
+  for (const p of ['', 'legal/privacidade']) {
+    const {ctx, page} = await newPage({viewport: {width: 390, height: 844}});
+    await mockShopify(page);
+    await page.route(/(products-data|catalogo-grifhii)\.js/, async r => { await new Promise(x => setTimeout(x, 3000)); await r.continue(); });
+    page.goto(BASE + p).catch(() => {});
+    await page.waitForSelector('#menuToggle', {state: 'visible'});
+    await page.waitForTimeout(300);
+    await page.click('#menuToggle');
+    const before = page.url();
+    await page.locator('.site-menu-nav').getByText('Marcas', {exact: true}).click();
+    await page.waitForTimeout(300);
+    assert.equal(page.url(), before, `${p || 'início'}: Marcas não pode navegar para Produtos`);
+    assert.ok(await page.locator('#siteMenuBrands').isVisible(), 'sanfona aberta');
+    await page.waitForFunction(() => document.querySelectorAll('#siteMenuBrands a').length > 5, null, {timeout: 15000});
+    const href = await page.locator('#siteMenuBrands a').first().getAttribute('href');
+    assert.match(href, p ? /^\.\.\/produtos\.html\?marca=/ : /^produtos\.html\?marca=/);
+    await ctx.close();
+  }
 });

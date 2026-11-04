@@ -241,7 +241,10 @@ ${MODE === 'producao' ? '' : '  X-Robots-Tag: noindex, nofollow\n'}
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
 `);
-write('_redirects', `/marca.html /produtos?marca=todas 301\n/conceito.html / 301\n`);
+// Endereços antigos de peças renomeadas (originalSlugs) levam à página atual — nunca a conteúdo desatualizado.
+const oldSlugRedirects = catalog.products.flatMap(p => (p.originalSlugs || []).filter(o => o && o !== p.slug && /^[a-z0-9-]+$/.test(o))
+  .flatMap(o => [`/peca-${o} /peca-${p.slug} 301`, `/peca-${o}.html /peca-${p.slug} 301`]));
+write('_redirects', `/marca.html /produtos?marca=todas 301\n/conceito.html / 301\n${oldSlugRedirects.join('\n')}${oldSlugRedirects.length ? '\n' : ''}`);
 
 /* ---------- 6b. CSS: um único arquivo por combinação de folhas (mesma ordem => mesmo resultado visual) ---------- */
 const {createHash} = await import('node:crypto');

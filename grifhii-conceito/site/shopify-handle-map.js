@@ -6,6 +6,7 @@
 (() => {
 'use strict';
 const targets = {
+ 'camiseta-abercrombie-fitch-new-york-vermelha':'camiseta-abercrombie-fitch-new-york-vermelha',
  'camiseta-tommy-hilfiger-nyc-script':'camiseta-tommy-hilfiger-n-y-c', // Teste 4: alvo validado apenas no nivel de produto; variante exige aprovacao
  'camiseta-abercrombie-popeye':'camiseta-abercrombie-amp-fitch-popeye-graphic', // Teste 4: alvo validado apenas no nivel de produto; variante exige aprovacao
  'camiseta-abercrombie-graphic-1892-verde':'camiseta-abercrombie-fitch-heritage-graphic', // Teste 4: alvo validado apenas no nivel de produto; variante exige aprovacao
@@ -103,10 +104,5 @@ const colorEquivalents = {
    'cinza claro':'grisalho','azul bebe claro':'azul','cinza escuro':'cinza'
  }
 };
-// Peças cujo endereço (handle) na Shopify ainda não é conhecido: vínculo pelo NOME do produto,
-// só quando houver exatamente um produto publicado com esse nome (ou nome + complemento, ex.: cor).
-const titleTargets = {
- 'camiseta-abercrombie-fitch-new-york':'Camiseta Abercrombie & Fitch New York',
-};
-window.GRIFHII_SHOPIFY_HANDLE_MAP=Object.freeze({targets:Object.freeze(targets),colorEquivalents:Object.freeze(colorEquivalents),titleTargets:Object.freeze(titleTargets)});
+window.GRIFHII_SHOPIFY_HANDLE_MAP=Object.freeze({targets:Object.freeze(targets),colorEquivalents:Object.freeze(colorEquivalents)});
 })();

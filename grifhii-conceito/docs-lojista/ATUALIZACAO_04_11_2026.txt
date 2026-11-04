@@ -1,0 +1,3 @@
+GRIFHII — pacote atualizado em 04/11/2026.
+Shopify: Popeye preta (M/G/GG/G1, 1 cada, R$139,90) criada; camiseta Fitch vermelha está ACTIVE (M/G/GG/G1, 1 cada, R$139,90); bonés Ralph Lauren Azul-claro/Ciano ativos como variantes (1 cada, R$89,90).
+No site: IDs atualizados e imagens preservadas. Disponibilidade do checkout depende da publicação e confirmação via Storefront API.

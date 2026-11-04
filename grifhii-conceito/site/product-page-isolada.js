@@ -300,9 +300,10 @@
       <a class="product-back" href="${esc(back.href)}">← ${esc(back.label)}</a>
       <div class="product-detail-grid">
         <section class="product-gallery" aria-label="Galeria de ${esc(product.name)}">
-          <div class="product-gallery-main" id="productGalleryMain" tabindex="0" role="button" aria-label="Alternar modelo 3D e fotografia de ${esc(product.name)}">
-            <img id="productMainImage" src="${esc(images[0])}" alt="${esc(product.name)}">
+          <div class="product-gallery-main" id="productGalleryMain" tabindex="0" role="button" aria-label="Ampliar fotografia de ${esc(product.name)}" title="Clique ou toque para ampliar a fotografia">
+            <img id="productMainImage" src="${esc(images[0])}" alt="${esc(product.name)}" fetchpriority="high" decoding="async">
             <span id="grifDetailModel" class="grif-detail-model${initialModel ? ' is-available' : ''}" aria-hidden="true"><img id="grifDetailModelImage" src="${esc(initialModel || '')}" alt=""></span>
+            <span class="grif-gallery-expand" aria-hidden="true">Ampliar foto ↗</span>
             <span class="product-gallery-index" id="galleryIndex">01 / ${String(images.length).padStart(2,'0')}</span>
           </div>
           <button id="grifDetailToggle" class="grif-detail-toggle" type="button" aria-pressed="false" ${initialModel ? '' : 'hidden'}>Ver foto real</button>
@@ -363,8 +364,9 @@
       strong(detailCopy,'position','relative');
       strong(detailCopy,'top','auto');
       strong(detailMain,'width','100%');
-      strong(detailMain,'height',mobile ? (window.innerWidth <= 480 ? '285px' : '320px') : '420px');
-      strong(detailMain,'max-height',mobile ? '320px' : '420px');
+      strong(detailMain,'height','auto');
+      strong(detailMain,'aspect-ratio','4 / 5');
+      strong(detailMain,'max-height','none');
       strong(detailMain,'min-height','0');
       strong(detailMain,'overflow','hidden');
       strong(detailMain,'display','grid');
@@ -557,8 +559,15 @@
       if (!validateChoice()) return;
       if (addToCart(product, selectedVariant, quantity)) location.href = 'index.html?cart=open#inicio';
     });
-    mainGallery.addEventListener('click', () => { if(detailModel?.classList.contains('is-available') && !canHover.matches){detailPinnedPhoto=!detailPinnedPhoto;setDetailState();} });
-    mainGallery.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){e.preventDefault(); if(detailModel?.classList.contains('is-available')){detailPinnedPhoto=!detailPinnedPhoto;setDetailState();}} });
+    const enlargeCurrentPhoto = () => {
+      const photo = mainImage?.getAttribute('src');
+      if (!photo || photo === 'assets/product-placeholder.svg') return;
+      openLightbox(photo, `${product.name} — fotografia ${currentImageIndex + 1} de ${images.length}`);
+    };
+    mainGallery.addEventListener('click', enlargeCurrentPhoto);
+    mainGallery.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); enlargeCurrentPhoto(); }
+    });
     if (sizes.length === 1) selectedSize = sizes[0];
     if (colors.length === 1) selectedColor = colors[0];
     updateDetailModel(images[0]);
@@ -583,37 +592,59 @@
     } catch { /* relacionados são opcionais */ }
   }
 
-  function openLightbox(src, name = 'Imagem do produto') {
+  let photoZoomPreviousFocus = null;
+  function openLightbox(src, name = 'Fotografia do produto') {
+    if (!document.getElementById('productLightbox')) setupLightbox();
     const lightbox = document.getElementById('productLightbox');
     const img = document.getElementById('productLightboxImage');
-    if (!lightbox || !img) return;
+    photoZoomPreviousFocus = document.activeElement;
     img.src = src;
     img.alt = name;
     img.style.setProperty('--zoom', '1');
+    lightbox.querySelector('[data-zoom="reset"]').textContent='100%';
     lightbox.hidden = false;
-    document.body.style.overflow = 'hidden';
+    document.body.classList.add('grif-photo-zoom-open');
+    lightbox.querySelector('.product-lightbox-close')?.focus({preventScroll:true});
   }
   function closeLightbox() {
     const lightbox = document.getElementById('productLightbox');
-    if (!lightbox) return;
+    if (!lightbox || lightbox.hidden) return;
     lightbox.hidden = true;
-    document.body.style.overflow = '';
+    document.body.classList.remove('grif-photo-zoom-open');
+    photoZoomPreviousFocus?.focus?.({preventScroll:true});
   }
   function setupLightbox() {
     const wrap = document.createElement('div');
     wrap.className = 'product-lightbox';
     wrap.id = 'productLightbox';
     wrap.hidden = true;
-    wrap.innerHTML = `<button class="product-lightbox-close" type="button" aria-label="Fechar zoom">×</button><div class="product-lightbox-image-wrap"><img id="productLightboxImage" alt="Imagem ampliada do produto"></div><div class="product-lightbox-tools"><button type="button" data-zoom="out" aria-label="Diminuir zoom">−</button><button type="button" data-zoom="reset" aria-label="Resetar zoom">100%</button><button type="button" data-zoom="in" aria-label="Aumentar zoom">+</button></div>`;
+    wrap.setAttribute('role','dialog');
+    wrap.setAttribute('aria-modal','true');
+    wrap.setAttribute('aria-label','Fotografia ampliada do produto');
+    wrap.innerHTML = `<button class="product-lightbox-close" type="button" aria-label="Fechar fotografia ampliada">×</button><div class="product-lightbox-image-wrap"><img id="productLightboxImage" alt="Fotografia ampliada do produto"></div><div class="product-lightbox-tools"><button type="button" data-zoom="out" aria-label="Diminuir zoom">−</button><button type="button" data-zoom="reset" aria-label="Restaurar zoom">100%</button><button type="button" data-zoom="in" aria-label="Aumentar zoom">+</button></div>`;
     document.body.appendChild(wrap);
+    const img=wrap.querySelector('#productLightboxImage');
+    const resetButton=wrap.querySelector('[data-zoom="reset"]');
+    const setZoom = value => {
+      const zoom=Math.max(1,Math.min(3,value));
+      img.style.setProperty('--zoom',String(zoom));
+      resetButton.textContent=`${Math.round(zoom*100)}%`;
+    };
     wrap.querySelector('.product-lightbox-close').addEventListener('click', closeLightbox);
     wrap.addEventListener('click', e => { if (e.target === wrap) closeLightbox(); });
     wrap.querySelectorAll('[data-zoom]').forEach(btn => btn.addEventListener('click', () => {
-      const img = document.getElementById('productLightboxImage');
       const current = Number(img.style.getPropertyValue('--zoom') || 1);
-      const next = btn.dataset.zoom === 'in' ? Math.min(3, current + .25) : btn.dataset.zoom === 'out' ? Math.max(1, current - .25) : 1;
-      img.style.setProperty('--zoom', next);
+      setZoom(btn.dataset.zoom === 'in' ? current + .25 : btn.dataset.zoom === 'out' ? current - .25 : 1);
     }));
+    wrap.querySelector('.product-lightbox-image-wrap').addEventListener('dblclick', () => {
+      setZoom(Number(img.style.getPropertyValue('--zoom') || 1) > 1 ? 1 : 2);
+    });
+    wrap.addEventListener('wheel', e => {
+      if (e.target.closest('.product-lightbox-image-wrap')) {
+        e.preventDefault();
+        setZoom(Number(img.style.getPropertyValue('--zoom') || 1) + (e.deltaY<0 ? .2 : -.2));
+      }
+    },{passive:false});
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && !wrap.hidden) closeLightbox(); });
   }
   function renderError(message) {

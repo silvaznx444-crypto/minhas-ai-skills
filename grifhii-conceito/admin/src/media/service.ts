@@ -40,7 +40,8 @@ export async function stageImage(env: Env, userId: string, req: Request, deps: {
   const form = new FormData();
   for (const p of t.parameters) form.append(p.name, p.value);
   form.append('file', new Blob([clean], { type }), filename);
-  const res = await (deps.gql?.fetchImpl ?? fetch)(t.url, { method: 'POST', body: form, redirect: 'error' });
+  const res = await (deps.gql?.fetchImpl ?? fetch)(t.url, { method: 'POST', body: form, redirect: 'manual' });
+  if (res.status >= 300 && res.status < 400) throw new ShopifyError('permanent', `O armazenamento redirecionou o envio (HTTP ${res.status}); não seguido por segurança.`);
   if (!res.ok) throw new ShopifyError(res.status >= 500 ? 'transient' : 'permanent', `Envio da imagem falhou (HTTP ${res.status})`);
   await audit(env.DB, { userId, action: 'media.upload', result: 'success', details: { sha256, bytes: clean.byteLength, width: info.width, height: info.height } });
   return { resourceUrl: t.resourceUrl, sha256, width: info.width, height: info.height, bytes: clean.byteLength, mimeType: type };

@@ -239,7 +239,7 @@ export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, d
 
 /** Após publicar, pode disparar o deploy hook do Cloudflare Pages (gera as páginas estáticas de SEO). */
 const prodDeps: Deps = {
-  deployHook: async e => { if (e.CATALOG_DEPLOY_HOOK_URL && /^https:\/\/api\.cloudflare\.com\//.test(e.CATALOG_DEPLOY_HOOK_URL)) await fetch(e.CATALOG_DEPLOY_HOOK_URL, { method: 'POST' }); },
+  deployHook: async e => { if (e.CATALOG_DEPLOY_HOOK_URL && /^https:\/\/api\.cloudflare\.com\//.test(e.CATALOG_DEPLOY_HOOK_URL)) await fetch(e.CATALOG_DEPLOY_HOOK_URL, { method: 'POST', redirect: 'manual' }); },
 };
 
 /** Manutenção periódica: retoma operações pendentes, limpa limites e sessões vencidas. */

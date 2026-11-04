@@ -26,11 +26,12 @@ async function adminToken(env: Env, fetchImpl: typeof fetch): Promise<string> {
   if (!env.SHOPIFY_CLIENT_ID || !env.SHOPIFY_CLIENT_SECRET) throw new ShopifyError('auth', 'A Shopify ainda não está conectada ao painel: faltam os segredos SHOPIFY_CLIENT_ID e SHOPIFY_CLIENT_SECRET (ou SHOPIFY_ADMIN_TOKEN) no Cloudflare.');
   if (cachedToken && cachedToken.expiresAt > Date.now() + 60_000) return cachedToken.value;
   const res = await fetchImpl(`https://${env.SHOPIFY_SHOP_DOMAIN}/admin/oauth/access_token`, {
-    method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    method: 'POST', redirect: 'manual', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({ grant_type: 'client_credentials', client_id: env.SHOPIFY_CLIENT_ID, client_secret: env.SHOPIFY_CLIENT_SECRET }),
   });
-  if (!res.ok) throw new ShopifyError(res.status >= 500 ? 'transient' : 'auth', `Falha ao obter token Admin (HTTP ${res.status})`);
-  const body = await res.json() as { access_token?: string; expires_in?: number };
+  if (res.status >= 300 && res.status < 400) throw new ShopifyError('permanent', `A Shopify redirecionou o pedido de token (HTTP ${res.status}): confira SHOPIFY_SHOP_DOMAIN.`);
+  if (!res.ok) throw new ShopifyError(res.status >= 500 ? 'transient' : 'auth', `A Shopify recusou o Client ID/Client secret (HTTP ${res.status}). Confira os segredos e se o app está instalado na loja.`);
+  const body = await res.json().catch(() => { throw new ShopifyError('transient', 'Resposta de token ilegível da Shopify'); }) as { access_token?: string; expires_in?: number };
   if (!body.access_token) throw new ShopifyError('auth', 'Resposta de token sem access_token');
   cachedToken = { value: body.access_token, expiresAt: Date.now() + Math.max(300, body.expires_in ?? 3600) * 1000 };
   return cachedToken.value;
@@ -51,10 +52,12 @@ export async function adminGraphql<T = Record<string, unknown>>(env: Env, query:
     const timer = setTimeout(() => controller.abort(), 15_000);
     try {
       const res = await fetchImpl(url, {
-        method: 'POST', signal: controller.signal, redirect: 'error', // SSRF: nunca seguir redirecionamentos
+        // SSRF: nunca seguir redirecionamentos. ('error' não existe no runtime da Cloudflare: usa-se 'manual' + checagem de 3xx.)
+        method: 'POST', signal: controller.signal, redirect: 'manual',
         headers: { 'Content-Type': 'application/json', 'X-Shopify-Access-Token': await adminToken(env, fetchImpl) },
         body: JSON.stringify({ query, variables }),
       });
+      if (res.status >= 300 && res.status < 400) throw new ShopifyError('permanent', `A Shopify redirecionou a chamada (HTTP ${res.status}); redirecionamentos não são seguidos. Confira SHOPIFY_SHOP_DOMAIN.`);
       if (res.status === 401 || res.status === 403) { cachedToken = null; throw new ShopifyError('auth', `Shopify recusou a credencial (HTTP ${res.status}). Verifique token e escopos.`); }
       if (res.status === 429 || res.status >= 500) throw new ShopifyError('transient', `Shopify HTTP ${res.status}`);
       const body = await res.json().catch(() => { throw new ShopifyError('transient', 'Resposta incompleta da Shopify'); }) as {
@@ -71,7 +74,7 @@ export async function adminGraphql<T = Record<string, unknown>>(env: Env, query:
       if (!body.data) throw new ShopifyError('transient', 'Resposta sem dados');
       return body.data;
     } catch (e) {
-      const err = e instanceof ShopifyError ? e : new ShopifyError('transient', (e as Error)?.name === 'AbortError' ? 'Tempo esgotado na Shopify' : 'Falha de rede com a Shopify');
+      const err = e instanceof ShopifyError ? e : new ShopifyError('transient', (e as Error)?.name === 'AbortError' ? 'Tempo esgotado na Shopify' : `Falha de rede com a Shopify: ${String((e as Error)?.message ?? e).slice(0, 200)}`);
       lastErr = err;
       // Mutação NÃO é repetida às cegas após timeout/5xx (a Shopify pode já ter gravado): o jornal confere o estado e decide.
       // Só repete quando a Shopify comprovadamente não executou (THROTTLED/429).

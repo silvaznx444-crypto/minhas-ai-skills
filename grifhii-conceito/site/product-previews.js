@@ -14,7 +14,7 @@
   "tommy-hilfiger-crest-branca": "assets/colecao-20-outubro/tommy-hilfiger-crest-branca-volume-white.webp",
   "tommy-hilfiger-tricolor-branca": "assets/colecao-20-outubro/tommy-hilfiger-tricolor-branca-volume-white.webp",
   "lacoste-sport-heritage-tennis-1933": "assets/modelos-3d/lacoste-sport-heritage-tennis-1933-3d-v2.webp",
-  "lacoste-classic-crocodile": "assets/colecao-20-outubro/lacoste-classic-crocodile-volume-white.webp",
+  "lacoste-classic-crocodile": "assets/modelos-3d/lacoste-classic-crocodile-branca-3d-v2.webp",
   "lacoste-sport-club": "assets/modelos-3d/lacoste-sport-club-volume-fixed.webp",
   "lacoste-signature-script": "assets/catalog-preview/lacoste-signature-script-volume-v1.webp",
   "emporio-armani-importada": "assets/catalog-preview/emporio-armani-importada-volume-v1.webp",

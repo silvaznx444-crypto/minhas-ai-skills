@@ -13,3 +13,5 @@
   - Usar a foto nova só quando ela for **melhor** (resolução, nitidez, enquadramento) ou quando a cor **não tem foto**.
   - Nunca remover um 3D que já corresponde à cor certa.
 - Mostrar ao proprietário a lista "manter / trocar" com antes × depois antes de publicar.
+- **Lacoste Sport Club – Branca:** a frente é igual à Classic Crocodile; usar a **foto das costas como principal** (estampa "Lacoste Sport Club") e a frente como segunda foto. (04/11/2026)
+- **Lacoste Sport Club – Preta:** a Shopify tem "Camiseta Lacoste Sport Club – Branca e Preto" com Preto (M, G). Adicionar a cor Preta à peça Sport Club do site, com a foto das costas. (04/11/2026)

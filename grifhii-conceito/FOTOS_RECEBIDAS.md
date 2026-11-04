@@ -1,6 +1,6 @@
 # Fotos novas — recebidas × faltando
 
-**74 de 124** cores recebidas.
+**77 de 124** cores recebidas.
 
 | | Peça | Cor |
 |---|---|---|
@@ -71,7 +71,7 @@
 | ✅ | Bermuda Sarja Ralph Lauren — Masculina | Vermelho |
 | ✅ | Bermuda Sarja Ralph Lauren — Masculina | Branco |
 | ✅ | Bermuda Sarja Abercrombie & Fitch — Laranja | Laranja |
-| ⏳ | Camiseta Lacoste Paris — Verde Escuro | Verde-escuro |
+| ✅ | Camiseta Lacoste Paris — Verde Escuro | Verde-escuro |
 | ✅ | Camiseta Diesel D-Corp 1978 — Verde Militar | Verde-militar |
 | ✅ | Camiseta Tommy Hilfiger Resort New York | Verde-escuro |
 | ✅ | Camiseta Tommy Hilfiger Resort New York | Azul-marinho |
@@ -89,7 +89,7 @@
 | ⏳ | Camiseta Tommy Hilfiger New York City — Bege | Bege |
 | ⏳ | Camiseta Lacoste Sport Heritage Tennis 1933 — Branca | Branco |
 | ✅ | Camiseta Lacoste Classic Crocodile — Branca | Branco |
-| ⏳ | Camiseta Lacoste Sport Club — Branca | Branco |
+| ✅ | Camiseta Lacoste Sport Club — Branca | Branco |
 | ✅ | Camiseta Abercrombie & Fitch Heritage 1892 — Cinza | Cinza com laranja |
 | ✅ | Camiseta Acostamento Rock’n Roll 1993 — Azul-marinho | Azul-marinho |
 | ✅ | Camiseta Acostamento Classic — Azul-marinho | Azul-marinho |
@@ -99,7 +99,7 @@
 | ✅ | Camiseta Lacoste Sport Graphic Crocodile — Azul-marinho | Azul-marinho |
 | ⏳ | Camiseta Lacoste Tennis Club — Azul-marinho | Azul-marinho |
 | ⏳ | Camiseta Lacoste Tennis Club Typography — Preta | Preta |
-| ⏳ | Camiseta Lacoste Paris Heritage — Preta | Preta |
+| ✅ | Camiseta Lacoste Paris Heritage — Preta | Preta |
 | ✅ | Camiseta Armani Exchange A|X Line — Preta | Preta |
 | ✅ | Camiseta Colcci Brasilidade Tropical — Azul-marinho | Azul-marinho |
 | ✅ | Camiseta Colcci Back To The Old Days — Azul-marinho | Azul-marinho |

@@ -48,3 +48,16 @@
  .campaign-stage{aspect-ratio:4/5}
  .campaign-model{height:86%;max-width:92%}
 }
+
+/* Botão "Garanta seu desconto" no banner da Black Friday (posição em % do palco: acompanha o tamanho da tela). */
+.campaign-banner-cta{position:absolute;z-index:3;left:8.5%;bottom:15.5%;display:inline-flex;align-items:center;gap:10px;padding:clamp(11px,1.1vw,16px) clamp(20px,2vw,32px);border-radius:999px;background:#111;color:#fff;font:700 clamp(13px,1.15vw,17px)/1 'Manrope',sans-serif;letter-spacing:.02em;text-decoration:none;box-shadow:0 10px 26px rgba(17,17,17,.22);transition:background .2s ease,transform .2s ease}
+.campaign-banner-cta:hover{background:#9b1111;transform:translateY(-2px)}
+.campaign-banner-cta:focus-visible{outline:2px solid #9b1111;outline-offset:3px}
+.campaign-banner-cta svg{flex:0 0 auto}
+.campaign-banner-cta{white-space:nowrap}
+.campaign-slide--banner:not(.is-active) .campaign-banner-cta{pointer-events:none}
+@media(max-width:700px){
+ .campaign-banner-cta{left:50%;bottom:1.8%;transform:translateX(-50%);padding:8px 16px;gap:8px;font-size:12px;white-space:nowrap;box-shadow:0 6px 16px rgba(17,17,17,.2)}
+ .campaign-banner-cta:hover{transform:translateX(-50%)}
+}
+@media(prefers-reduced-motion:reduce){.campaign-banner-cta{transition:none}}

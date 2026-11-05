@@ -24,7 +24,7 @@
   });
   const slide=slides[index],label=slide.dataset.label;
   if(counter)counter.textContent=String(index+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
-  if(link){link.href=slide.getAttribute('href');link.textContent='Explorar '+label;link.setAttribute('aria-label','Explorar a seleção '+label)}
+  if(link){link.href=slide.getAttribute('href')||slide.dataset.href||'produtos.html';link.textContent='Explorar '+label;link.setAttribute('aria-label','Explorar a seleção '+label)}
   if(status&&announce)status.textContent=label+', '+(index+1)+' de '+slides.length;
  }
  function finish(outgoing){

@@ -698,6 +698,12 @@ test('Início: o banner Black Friday é o 1º slide do carrossel, com a arte cer
     assert.match(await img.evaluate(i => i.currentSrc), new RegExp(file.replace('.', '\\.')));
     assert.equal(await page.locator('[data-campaign-slide]').count(), 4);
     assert.equal(await page.locator('.gh-campaign-banner').count(), 0);
+    const cta = page.locator('.campaign-slide--banner .campaign-banner-cta');
+    assert.equal((await cta.innerText()).trim(), 'Garanta seu desconto');
+    const box = await cta.boundingBox(); const vw = page.viewportSize().width;
+    assert.ok(box && box.x >= 0 && box.x + box.width <= vw && box.height < 60, 'botão inteiro na tela e em uma linha');
+    await cta.click();
+    await page.waitForURL(/produtos/);
     await ctx.close();
   }
 });

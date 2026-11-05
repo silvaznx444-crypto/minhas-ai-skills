@@ -448,12 +448,13 @@
       "name": "Polo Tommy Hilfiger",
       "brand": "TOMMY HILFIGER",
       "category": "polos",
-      "description": "Camisa polo Tommy Hilfiger com gola, assinatura discreta frontal e acabamento tricolor nas mangas. Preta M e azul-marinho G; fotos de cores parecidas aguardam confirmação visual.",
-      "priceCents": 12990,
+      "description": "Camisa polo Tommy Hilfiger com gola, assinatura discreta frontal e acabamento tricolor nas mangas. Cores preta (M e GG), azul-marinho (G e GG) e branca (G e GG).",
+      "priceCents": 13990,
       "promoPriceCents": null,
       "images": [
         "assets/fotos-loja-15-10-2026/tommy-hilfiger-polo-195554.webp",
-        "assets/fotos-loja-15-10-2026/tommy-hilfiger-polo-195607.webp"
+        "assets/fotos-loja-15-10-2026/tommy-hilfiger-polo-195607.webp",
+        "assets/fotos-reais-05-11-2026/polo-tommy-hilfiger-branca-real.webp"
       ],
       "variants": [
         {
@@ -467,6 +468,16 @@
           "photoNote": "Fotos da polo preta e azul-marinho são parecidas; confirmar associação da cor e tamanho antes de publicar."
         },
         {
+          "id": "local-tommy-hilfiger-polo-preta-gg",
+          "size": "GG",
+          "color": "Preta",
+          "availableStock": 1,
+          "sku": "GRIF-POLO-TOMMY-PRETA-GG",
+          "image": "assets/fotos-loja-15-10-2026/tommy-hilfiger-polo-195554.webp",
+          "photoStatus": "conferir-cor",
+          "photoNote": "Fotos da polo preta e azul-marinho são parecidas; confirmar associação da cor e tamanho antes de publicar."
+        },
+        {
           "id": "local-tommy-hilfiger-polo-2",
           "size": "G",
           "color": "Azul-marinho",
@@ -475,9 +486,147 @@
           "image": "assets/fotos-loja-15-10-2026/tommy-hilfiger-polo-195607.webp",
           "photoStatus": "conferir-cor",
           "photoNote": "Fotos da polo preta e azul-marinho são parecidas; confirmar associação da cor e tamanho antes de publicar."
+        },
+        {
+          "id": "local-tommy-hilfiger-polo-azulmarinho-gg",
+          "size": "GG",
+          "color": "Azul-marinho",
+          "availableStock": 1,
+          "sku": "GRIF-POLO-TOMMY-AZUL-MARINHO-GG",
+          "image": "assets/fotos-loja-15-10-2026/tommy-hilfiger-polo-195607.webp",
+          "photoStatus": "conferir-cor",
+          "photoNote": "Fotos da polo preta e azul-marinho são parecidas; confirmar associação da cor e tamanho antes de publicar."
+        },
+        {
+          "id": "local-tommy-hilfiger-polo-branca-g",
+          "size": "G",
+          "color": "Branca",
+          "availableStock": 1,
+          "sku": "GRIF-POLO-TOMMY-BRANCA-G",
+          "image": "assets/fotos-reais-05-11-2026/polo-tommy-hilfiger-branca-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-tommy-hilfiger-polo-branca-gg",
+          "size": "GG",
+          "color": "Branca",
+          "availableStock": 1,
+          "sku": "GRIF-POLO-TOMMY-BRANCA-GG",
+          "image": "assets/fotos-reais-05-11-2026/polo-tommy-hilfiger-branca-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
         }
       ],
       "photoReviewRequired": true
+    },
+    {
+      "id": "grifhii-novembro-moletom-tommy-hilfiger-masculino-bicolor",
+      "slug": "moletom-tommy-hilfiger-masculino-bicolor",
+      "name": "Moletom Tommy Hilfiger Masculino Bicolor — Branco e Azul-marinho",
+      "brand": "TOMMY HILFIGER",
+      "category": "moletons",
+      "description": "Elegância casual e estilo atemporal. Parte superior branca e inferior azul-marinho, gola redonda, mangas longas com punhos ajustados e o logo Tommy Hilfiger bordado no peito. Ideal com jeans, calças casuais e looks streetwear. Tamanhos M, G e GG.",
+      "priceCents": 18990,
+      "promoPriceCents": null,
+      "images": [
+        "assets/fotos-reais-05-11-2026/moletom-tommy-hilfiger-bicolor-branco-azul-marinho-real.webp"
+      ],
+      "variants": [
+        {
+          "id": "local-moletom-tommy-hilfiger-masculino-bicolor-m",
+          "size": "M",
+          "color": "Branco com azul-marinho",
+          "availableStock": 0,
+          "sku": "GRIF-MOLETOM-TOMMY-HILFIGER-MASCULINO-BICOLOR-M",
+          "image": "assets/fotos-reais-05-11-2026/moletom-tommy-hilfiger-bicolor-branco-azul-marinho-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-moletom-tommy-hilfiger-masculino-bicolor-g",
+          "size": "G",
+          "color": "Branco com azul-marinho",
+          "availableStock": 0,
+          "sku": "GRIF-MOLETOM-TOMMY-HILFIGER-MASCULINO-BICOLOR-G",
+          "image": "assets/fotos-reais-05-11-2026/moletom-tommy-hilfiger-bicolor-branco-azul-marinho-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-moletom-tommy-hilfiger-masculino-bicolor-gg",
+          "size": "GG",
+          "color": "Branco com azul-marinho",
+          "availableStock": 0,
+          "sku": "GRIF-MOLETOM-TOMMY-HILFIGER-MASCULINO-BICOLOR-GG",
+          "image": "assets/fotos-reais-05-11-2026/moletom-tommy-hilfiger-bicolor-branco-azul-marinho-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        }
+      ],
+      "photoReviewRequired": false,
+      "stockReviewRequired": true,
+      "sourceNote": "Peça cadastrada na Shopify pelo lojista em 05/11/2026."
+    },
+    {
+      "id": "grifhii-novembro-moletom-tommy-hilfiger-masculino-bicolor-azul-marinho-e-branco",
+      "slug": "moletom-tommy-hilfiger-masculino-bicolor-azul-marinho-e-branco",
+      "name": "Moletom Tommy Hilfiger Masculino Bicolor — Azul-marinho e Branco",
+      "brand": "TOMMY HILFIGER",
+      "category": "moletons",
+      "description": "Estilo clássico, conforto e sofisticação. Parte superior azul-marinho e inferior branca, gola redonda, mangas longas com punhos ajustados e o logo Tommy Hilfiger bordado no peito. Combina com jeans, calças de sarja e tênis. Tamanhos M, G e GG.",
+      "priceCents": 18990,
+      "promoPriceCents": null,
+      "images": [
+        "assets/fotos-reais-05-11-2026/moletom-tommy-hilfiger-bicolor-azul-marinho-branco-real.webp"
+      ],
+      "variants": [
+        {
+          "id": "local-moletom-tommy-hilfiger-masculino-bicolor-azul-marinho-e-branco-m",
+          "size": "M",
+          "color": "Branco com azul-marinho",
+          "availableStock": 0,
+          "sku": "GRIF-MOLETOM-TOMMY-HILFIGER-MASCULINO-BICOLOR-AZUL-MARINHO-E-BRANCO-M",
+          "image": "assets/fotos-reais-05-11-2026/moletom-tommy-hilfiger-bicolor-azul-marinho-branco-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-moletom-tommy-hilfiger-masculino-bicolor-azul-marinho-e-branco-g",
+          "size": "G",
+          "color": "Branco com azul-marinho",
+          "availableStock": 0,
+          "sku": "GRIF-MOLETOM-TOMMY-HILFIGER-MASCULINO-BICOLOR-AZUL-MARINHO-E-BRANCO-G",
+          "image": "assets/fotos-reais-05-11-2026/moletom-tommy-hilfiger-bicolor-azul-marinho-branco-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-moletom-tommy-hilfiger-masculino-bicolor-azul-marinho-e-branco-gg",
+          "size": "GG",
+          "color": "Branco com azul-marinho",
+          "availableStock": 0,
+          "sku": "GRIF-MOLETOM-TOMMY-HILFIGER-MASCULINO-BICOLOR-AZUL-MARINHO-E-BRANCO-GG",
+          "image": "assets/fotos-reais-05-11-2026/moletom-tommy-hilfiger-bicolor-azul-marinho-branco-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        }
+      ],
+      "photoReviewRequired": false,
+      "stockReviewRequired": true,
+      "sourceNote": "Peça cadastrada na Shopify pelo lojista em 05/11/2026."
     },
     {
       "id": "grifhii-lacoste-french-heritage",

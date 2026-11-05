@@ -6,6 +6,8 @@
 (() => {
 'use strict';
 const targets = {
+ 'moletom-tommy-hilfiger-masculino-bicolor':'moletom-tommy-hilfiger-masculino-bicolor',
+ 'moletom-tommy-hilfiger-masculino-bicolor-azul-marinho-e-branco':'moletom-tommy-hilfiger-masculino-bicolor-azul-marinho-e-branco',
  'camiseta-diesel-masculina-branca':'camiseta-diesel-masculina-branca',
  'camiseta-diesel-industry-masculina':'camiseta-diesel-industry-masculina',
  'camiseta-diesel-masculina':'camiseta-diesel-masculina',

@@ -2228,6 +2228,90 @@
       "sourceNote": "Peça cadastrada na Shopify pelo lojista em 05/11/2026 (Camiseta Diesel Masculina)."
     },
     {
+      "id": "grifhii-novembro-camiseta-diesel-masculina-branca",
+      "slug": "camiseta-diesel-masculina-branca",
+      "name": "Camiseta Diesel Masculina Branca — Logo Minimalista",
+      "brand": "DIESEL",
+      "category": "camisetas",
+      "description": "Minimalismo, estilo e autenticidade em uma única peça. Design clean com o icônico símbolo Diesel em vermelho no peito, que combina discrição e personalidade. Modelagem casual, gola redonda e mangas curtas, do básico com jeans ao streetwear. Cor branca. Tamanhos G e GG.",
+      "priceCents": 13990,
+      "promoPriceCents": null,
+      "images": [
+        "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-branca-logo-d-real.webp"
+      ],
+      "variants": [
+        {
+          "id": "local-camiseta-diesel-masculina-branca-branca-g",
+          "size": "G",
+          "color": "Branca",
+          "availableStock": 0,
+          "sku": "GRIF-CAMISETA-DIESEL-MASCULINA-BRANCA-BRANCA-G",
+          "image": "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-branca-logo-d-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-camiseta-diesel-masculina-branca-branca-gg",
+          "size": "GG",
+          "color": "Branca",
+          "availableStock": 0,
+          "sku": "GRIF-CAMISETA-DIESEL-MASCULINA-BRANCA-BRANCA-GG",
+          "image": "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-branca-logo-d-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        }
+      ],
+      "photoReviewRequired": false,
+      "stockReviewRequired": true,
+      "sourceNote": "Peça cadastrada na Shopify pelo lojista em 05/11/2026."
+    },
+    {
+      "id": "grifhii-novembro-camiseta-diesel-industry-masculina",
+      "slug": "camiseta-diesel-industry-masculina",
+      "name": "Camiseta Diesel Industry Masculina — Branca",
+      "brand": "DIESEL",
+      "category": "camisetas",
+      "description": "Minimalismo, autenticidade e sofisticação para o dia a dia. Estampa Diesel Industry – Denim Division em cinza na frente, com visual clean. Gola redonda e mangas curtas, ideal com jeans, bermudas e looks casuais ou streetwear. Cor branca. Tamanhos GG e G1.",
+      "priceCents": 13990,
+      "promoPriceCents": null,
+      "images": [
+        "assets/fotos-reais-05-11-2026/camiseta-diesel-industry-masculina-branca-real.webp"
+      ],
+      "variants": [
+        {
+          "id": "local-camiseta-diesel-industry-masculina-branca-gg",
+          "size": "GG",
+          "color": "Branca",
+          "availableStock": 0,
+          "sku": "GRIF-CAMISETA-DIESEL-INDUSTRY-MASCULINA-BRANCA-GG",
+          "image": "assets/fotos-reais-05-11-2026/camiseta-diesel-industry-masculina-branca-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-camiseta-diesel-industry-masculina-branca-g1",
+          "size": "G1",
+          "color": "Branca",
+          "availableStock": 0,
+          "sku": "GRIF-CAMISETA-DIESEL-INDUSTRY-MASCULINA-BRANCA-G1",
+          "image": "assets/fotos-reais-05-11-2026/camiseta-diesel-industry-masculina-branca-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        }
+      ],
+      "photoReviewRequired": false,
+      "stockReviewRequired": true,
+      "sourceNote": "Peça cadastrada na Shopify pelo lojista em 05/11/2026."
+    },
+    {
       "id": "grifhii-outubro-tommy-hilfiger-resort-floral",
       "slug": "tommy-hilfiger-resort-floral",
       "name": "Camiseta Tommy Hilfiger Resort New York",

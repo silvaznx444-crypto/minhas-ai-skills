@@ -133,10 +133,10 @@
       .site-menu-brand-toggle{height:100%;min-height:58px;border:0;background:transparent;color:#111;cursor:pointer;display:grid;place-items:center;padding:0}
       .site-menu-brand-toggle span{display:block;font-size:18px;line-height:1;transition:transform .28s ease}
       .site-menu-brand-toggle[aria-expanded="true"] span{transform:rotate(180deg)}
-      .site-menu-brand-full>.site-menu-brand-arrow{display:grid!important;place-items:center;width:34px;height:34px;flex:0 0 34px;border:1px solid rgba(17,17,17,.18);border-radius:50%;color:#111;font-size:0!important;transition:transform .28s ease,background .2s ease,border-color .2s ease}
-      .site-menu-brand-full:hover>.site-menu-brand-arrow{border-color:#9a8050;color:#9a8050}
-      .site-menu-brand-full[aria-expanded="true"]>.site-menu-brand-arrow{transform:rotate(180deg);background:#111;border-color:#111;color:#f7f5f0}
-      .site-menu-brand-full>.site-menu-brand-arrow svg{display:block}
+      .site-menu-brand-full>.site-menu-brand-arrow{display:grid!important;place-items:center;width:28px;height:28px;flex:0 0 28px;color:#111;font-size:0!important;transition:transform .28s ease,color .2s ease}
+      .site-menu-brand-full:hover>.site-menu-brand-arrow{color:#9a8050}
+      .site-menu-brand-full[aria-expanded="true"]>.site-menu-brand-arrow{transform:rotate(180deg)}
+      .site-menu-brand-full>.site-menu-brand-arrow svg{display:block;width:18px;height:18px}
       .site-menu-brand-submenu{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;padding:4px 4px 18px 12px;max-height:min(48vh,430px);overflow:auto}
       .site-menu-brand-submenu[hidden]{display:none!important}
       .site-menu-brand-submenu a{display:flex!important;align-items:center;gap:9px;padding:9px 0!important;border:0!important;font-size:10px!important;font-weight:700!important;letter-spacing:.04em!important;line-height:1.25!important;color:#4c4740!important}

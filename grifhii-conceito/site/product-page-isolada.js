@@ -102,6 +102,7 @@
     if (/azul.marinho|marinho|azul.escuro/.test(c)) return '#273450';
     if (/ciano|azul.bebe|azul.claro/.test(c)) return '#a2c7d5';
     if (/azul/.test(c)) return '#42608d';
+    if (/verde.?(a|á)gua|menta/.test(c)) return '#bfe3d9';
     if (/verde.escuro/.test(c)) return '#314635';
     if (/verde/.test(c)) return '#57725a';
     if (/cinza/.test(c)) return '#91908e';

@@ -634,7 +634,8 @@
         "assets/catalogo-novos/ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-azul-claro-gg.webp",
         "assets/catalogo-novos/ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-off-white-g.webp",
         "assets/catalogo-novos/ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-branca-g.webp",
-        "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp"
+        "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp",
+        "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-manga-curta-verde-agua-real.webp"
       ],
       "variants": [
         {
@@ -742,6 +743,30 @@
           "stockConfirmed": false,
           "sku": null,
           "image": "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-verde-agua-gg",
+          "size": "GG",
+          "color": "Verde-água",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": "GRIF-RL-SOCIAL-MC-VERDE-AGUA-GG",
+          "image": "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-manga-curta-verde-agua-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
+        },
+        {
+          "id": "local-ralph-lauren-camisa-social-ralph-lauren-manga-curta-custom-fit-verde-agua-g1",
+          "size": "G1",
+          "color": "Verde-água",
+          "availableStock": 0,
+          "catalogVisible": true,
+          "stockConfirmed": false,
+          "sku": "GRIF-RL-SOCIAL-MC-VERDE-AGUA-G1",
+          "image": "assets/fotos-reais-05-11-2026/camisa-social-ralph-lauren-manga-curta-verde-agua-real.webp",
           "photoStatus": "recebida",
           "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026."
         }

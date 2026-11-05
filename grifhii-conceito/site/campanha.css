@@ -1,0 +1,11 @@
+/* Banner da campanha (Black Friday): primeiro destaque do Início e de Produtos/Marcas.
+   Imagem original sem recompressão; versão vertical no celular, horizontal no computador. */
+.gh-campaign-banner{display:block;width:100%;background:#f4eae4;line-height:0;overflow:hidden}
+.gh-campaign-banner a{display:block;max-width:1774px;margin:0 auto}
+.gh-campaign-banner picture,.gh-campaign-banner img{display:block;width:100%;height:auto}
+.gh-campaign-banner img{aspect-ratio:1774/887}
+@media (max-width:760px),(max-aspect-ratio:4/5){.gh-campaign-banner img{aspect-ratio:1122/1402}.gh-campaign-banner a{max-width:1122px}}
+/* Início: o cabeçalho é fixo; o banner ocupa o espaço que antes era do carrossel, que vem logo abaixo. */
+.gh-campaign-banner--home{margin-top:calc(var(--header-h,88px) + var(--promo-h,34px));scroll-margin-top:calc(var(--header-h,88px) + var(--promo-h,34px))}
+.gh-campaign-banner--home + .vj-hero{margin-top:0}
+@media (max-width:620px){.gh-campaign-banner--home{margin-top:calc(var(--header-h,72px) + var(--promo-h,31px))}}

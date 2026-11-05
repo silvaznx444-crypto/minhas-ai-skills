@@ -75,6 +75,7 @@ test('trocar o próprio nome (passar a conta ao proprietário): exige reconfirma
   assert.equal((await call(env, req('auth/me', { method: 'PATCH', user: old, body: { displayName: 'Dono' } }))).status, 403);
   const u = await makeUser(env, 'OWNER');
   assert.equal((await call(env, req('auth/me', { method: 'PATCH', user: u, body: { displayName: '   ' } }))).status, 422);
+  assert.equal((await call(env, req('auth/me', { method: 'PATCH', user: u, body: { displayName: '<script>alert(1)</script>' } }))).status, 422, 'sem < >');
   assert.equal((await call(env, req('auth/me', { method: 'PATCH', user: u, body: { displayName: 'Dono', role: 'OWNER' } }))).status, 422, 'não aceita outros campos');
   const r = await call(env, req('auth/me', { method: 'PATCH', user: u, body: { displayName: '  Proprietário GRIFHII ' } }));
   assert.equal(r.status, 200);

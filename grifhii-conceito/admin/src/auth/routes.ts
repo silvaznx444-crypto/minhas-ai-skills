@@ -229,7 +229,7 @@ export async function handleAuth(req: Request, env: Env, path: string): Promise<
   // Nome exibido da própria conta (ex.: ao passar a conta de proprietário para outra pessoa).
   if (path === 'auth/me' && m === 'PATCH') {
     requireRecentAuth(p);
-    const { displayName } = parse(z.object({ displayName: z.string().trim().min(1).max(80) }).strict(), await readJson(req));
+    const { displayName } = parse(z.object({ displayName: z.string().trim().min(1).max(80).regex(/^[^<>]*$/, 'Não use < ou >') }).strict(), await readJson(req));
     await env.DB.prepare('UPDATE users SET display_name = ?, updated_at = ? WHERE id = ?').bind(displayName, Date.now(), p.userId).run();
     await audit(env.DB, { userId: p.userId, action: 'users.rename_self', target: p.userId, result: 'success' });
     return json({ ok: true, displayName });

@@ -2991,7 +2991,8 @@
       "priceCents": 10990,
       "promoPriceCents": null,
       "images": [
-        "assets/fotografias-novidades/camiseta-acostamento-classic-azul-marinho-azul-marinho.webp"
+        "assets/fotografias-novidades/camiseta-acostamento-classic-azul-marinho-azul-marinho.webp",
+        "assets/fotos-reais-05-11-2026/camiseta-acostamento-classic-azul-marinho-costas-real.webp"
       ],
       "variants": [
         {
@@ -4064,7 +4065,8 @@
       "priceCents": 12990,
       "promoPriceCents": null,
       "images": [
-        "assets/fotos-reais-03-11-2026/camiseta-armani-exchange-big-a-branca-branca-real.webp"
+        "assets/fotos-reais-03-11-2026/camiseta-armani-exchange-big-a-branca-branca-real.webp",
+        "assets/fotos-reais-05-11-2026/camiseta-armani-exchange-big-a-branca-costas-real.webp"
       ],
       "variants": [
         {

@@ -39,3 +39,12 @@
  .campaign-toolbar .vj-campaign__actions{width:100%;justify-content:space-between;gap:14px}
 }
 @media(prefers-reduced-motion:reduce){.campaign-slide,.campaign-word,.campaign-model{transition:none!important}}
+
+/* Slide de campanha (Black Friday): a arte inteira, sem cortes, nas versões computador (2:1) e celular (4:5). */
+.campaign-slide--banner{background:#f4eae4}
+.campaign-slide--banner picture{position:absolute;inset:0;display:block}
+.campaign-slide--banner .campaign-banner-img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
+@media(max-width:700px){
+ .campaign-stage{aspect-ratio:4/5}
+ .campaign-model{height:86%;max-width:92%}
+}

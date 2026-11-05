@@ -169,7 +169,7 @@ test('carrossel principal avança e pausa', async () => {
   await page.goto(BASE);
   await page.click('[data-campaign-next]');
   await page.waitForTimeout(500);
-  assert.match(await page.textContent('[data-campaign-counter]'), /02 \/ 03/);
+  assert.match(await page.textContent('[data-campaign-counter]'), /02 \/ 04/);
   await page.click('[data-campaign-pause]');
   assert.equal(await page.getAttribute('[data-campaign-pause]', 'aria-pressed'), 'true');
   await ctx.close();
@@ -652,17 +652,35 @@ test('"Ver no site" de peça com "teste" no nome: o site explica por que não mo
 });
 
 /* ================= 04/11 (2): MARCAS, GALERIA, PEÇA OCULTADA ================= */
-test('Marcas: "Nossas marcas" lista as marcas com peças e cada cartão abre a página só daquela marca', async () => {
+test('Marcas: o menu abre o acordeão com as marcas (seta visível) e a página "todas" mostra as peças, sem grade de marcas', async () => {
   const {ctx, page} = await newPage({viewport: {width: 390, height: 844}});
   await mockShopify(page);
+  await page.goto(`${BASE}index.html`);
+  const toggle = page.locator('.site-menu-brand-toggle');
+  await toggle.waitFor({state: 'attached'});
+  assert.equal(await page.locator('.site-menu-brand-arrow svg').count(), 1);
+  await page.evaluate(() => document.querySelector('.site-menu-brand-toggle').click());
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'true');
+  assert.ok(await page.locator('#siteMenuBrands a[href*="marca=lacoste"]').count() === 1);
   await page.goto(`${BASE}produtos.html?marca=todas`);
-  await page.locator('[data-brand-card]').first().waitFor();
-  assert.match(await page.locator('h1').first().innerText(), /Nossas\s+marcas/);
-  assert.ok(await page.locator('[data-brand-card]').count() >= 15);
-  await page.locator('[data-brand-card="lacoste"]').click();
-  await page.waitForURL(/marca=lacoste/);
-  assert.equal((await page.locator('h1').first().innerText()).trim(), 'Lacoste');
+  await page.locator('.products-page-card, [data-product-card], article').first().waitFor();
+  assert.equal(await page.locator('[data-brand-card]').count(), 0);
   await ctx.close();
+});
+
+test('Início: o banner Black Friday é o 1º slide do carrossel, com a arte certa no computador e no celular', async () => {
+  for (const [vp, file] of [[{width: 1440, height: 900}, 'black-friday-desktop.webp'], [{width: 390, height: 844}, 'black-friday-mobile.webp']]) {
+    const {ctx, page} = await newPage({viewport: vp});
+    await mockShopify(page);
+    await page.goto(`${BASE}index.html`);
+    const img = page.locator('.campaign-slide--banner.is-active .campaign-banner-img');
+    await img.waitFor();
+    await page.waitForFunction(() => document.querySelector('.campaign-banner-img').complete);
+    assert.match(await img.evaluate(i => i.currentSrc), new RegExp(file.replace('.', '\\.')));
+    assert.equal(await page.locator('[data-campaign-slide]').count(), 4);
+    assert.equal(await page.locator('.gh-campaign-banner').count(), 0);
+    await ctx.close();
+  }
 });
 
 test('galeria: na Sport Club, trocar para a foto de trás mostra a FOTO REAL (não repete o 3D da frente) e abre em tela cheia', async () => {

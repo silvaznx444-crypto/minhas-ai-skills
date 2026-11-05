@@ -25,42 +25,6 @@
     if (title) title.textContent = selectedBrand.menuLabel || selectedBrand.label;
     if (desc) desc.textContent = 'Seleção da marca na GRIFHII. Escolha sua peça e selecione cor e tamanho.';
   }
-  // "Marcas" (marca=todas): página própria com um cartão por marca → página só daquela marca.
-  // Não depende do menu: mesmo sem o acordeão, o cliente chega às marcas.
-  if (brandParameter === 'todas') {
-    const title = document.querySelector('.products-catalog-hero h1');
-    const desc = document.querySelector('.products-catalog-hero p');
-    if (title) title.innerHTML = 'Nossas<br><em>marcas.</em>';
-    if (desc) desc.textContent = 'Escolha uma marca para ver só as peças dela.';
-    const P = window.GRIFHII_PRODUCTS;
-    const counts = new Map();
-    for (const product of products) {
-      const slug = P.getBrand(product.brand)?.slug;
-      if (slug && (product.variants || []).some(v => v.catalogVisible !== false)) counts.set(slug, (counts.get(slug) || 0) + 1);
-    }
-    const brands = Object.values(P.brands || {}).filter(b => !b.internal && counts.get(b.slug))
-      .sort((a, b) => (a.menuLabel || a.label).localeCompare(b.menuLabel || b.label, 'pt-BR'));
-    if (brands.length) {
-      const style = document.createElement('style');
-      style.textContent = `.brand-directory{max-width:1280px;margin:0 auto;padding:8px clamp(16px,4vw,56px) 56px}
-        .brand-directory h2{font-size:clamp(28px,4vw,44px);margin:0 0 22px}
-        .brand-directory-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-        .brand-directory-grid a{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:118px;padding:20px;border:1px solid rgba(17,17,17,.12);background:rgba(255,255,255,.45);color:var(--black);text-decoration:none;transition:border-color .2s,transform .2s}
-        .brand-directory-grid a:hover,.brand-directory-grid a:focus-visible{border-color:var(--gold);transform:translateY(-2px)}
-        .brand-directory-grid strong{font-family:var(--serif);font-size:26px;font-weight:500;line-height:1}
-        .brand-directory-grid span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray)}
-        .brand-directory-all{margin:44px 0 0;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray)}
-        @media (max-width:560px){.brand-directory-grid{grid-template-columns:1fr 1fr}.brand-directory-grid a{min-height:96px;padding:16px}.brand-directory-grid strong{font-size:21px}}`;
-      document.head.appendChild(style);
-      const section = document.createElement('section');
-      section.className = 'brand-directory'; section.setAttribute('aria-label', 'Marcas da GRIFHII');
-      section.innerHTML = `<div class="brand-directory-grid">${brands.map(b => `<a href="produtos.html?marca=${encodeURIComponent(b.slug)}" data-brand-card="${esc(b.slug)}">
-          <strong>${esc(b.menuLabel || b.label)}</strong><span>${counts.get(b.slug)} ${counts.get(b.slug) === 1 ? 'peça' : 'peças'} →</span></a>`).join('')}</div>
-        <p class="brand-directory-all">Ou veja todas as peças abaixo</p>`;
-      document.querySelector('.products-catalog-hero')?.after(section);
-    }
-  }
-
   // O modelo 3D corresponde à fotografia da mesma variante, nunca a outra cor.
   // Nas galerias, uma fotografia com render validado aparece primeiro.
   function getProductImages(product) {

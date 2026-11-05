@@ -13,7 +13,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/hero-model-lacoste-transparent-v1.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/campanha/black-friday-desktop.webp" media="(min-width: 701px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/campanha/black-friday-mobile.webp" media="(max-width: 700px)" fetchpriority="high">
   <link rel="stylesheet" href="style.css?rev=20261101-auditada-3d-v2">
   <link rel="stylesheet" href="hero-journey.css?rev=20261101-auditada-3d-v2">
   <link rel="stylesheet" href="hero-carousel.css?rev=20261101-auditada-3d-v2">
@@ -25,7 +26,6 @@
 <link rel="stylesheet" href="colecao-30-outubro.css?rev=20261101-auditada-3d-v2">
 <link rel="stylesheet" href="grifhii-unidade-visual.css?rev=20261101-auditada-3d-v2">
 <link rel="stylesheet" href="grifhii-correcao-consistente.css?rev=20261101-auditada-3d-v2">
-<link rel="stylesheet" href="campanha.css?rev=20261105-bf">
 </head>
 <body class="has-promo-bar ui-clean">
 
@@ -74,15 +74,6 @@
 </div>
   <main>
 
-    <!-- Campanha Black Friday: primeiro destaque da página. -->
-    <section class="gh-campaign-banner gh-campaign-banner--home" aria-label="Black Friday GRIFHII CONCEITO: 30 a 50% off em toda a loja">
-      <a href="produtos.html" aria-label="Black Friday: 30 a 50% off em toda a loja. Ver produtos">
-        <picture>
-          <source media="(max-width: 760px), (max-aspect-ratio: 4/5)" srcset="assets/campanha/black-friday-mobile.webp" width="1122" height="1402">
-          <img src="assets/campanha/black-friday-desktop.webp" width="1774" height="887" alt="Black Friday GRIFHII CONCEITO: 30 a 50% off em toda a loja" fetchpriority="high" decoding="async">
-        </picture>
-      </a>
-    </section>
 
     <!-- Campanha principal com fundo off-white fixo. -->
     <section class="vj-hero" id="inicio" data-hero-banner aria-label="Campanha GRIFHII">
@@ -92,8 +83,14 @@
             <h1 class="visually-hidden" id="grifhiiHeroTitle">GRIFHII CONCEITO — marcas selecionadas</h1>
             <div class="campaign-carousel" data-campaign-carousel aria-roledescription="carrossel" aria-label="Campanhas por marca">
               <div class="campaign-stage" data-campaign-viewport tabindex="0" aria-label="Use as setas para mudar de marca">
-                <a class="campaign-slide is-active" data-campaign-slide data-brand="lacoste" data-label="Lacoste" href="produtos.html?marca=lacoste" aria-label="Explorar Lacoste" aria-hidden="false">
-                  <img class="campaign-model" src="assets/hero-model-lacoste-transparent-v1.webp" width="1024" height="1536" fetchpriority="high" decoding="async" alt="Modelo com polo e bermuda Lacoste verde-escuro.">
+                <a class="campaign-slide campaign-slide--banner is-active" data-campaign-slide data-brand="black-friday" data-label="Black Friday" href="produtos.html" aria-label="Black Friday: 30 a 50% off em toda a loja. Ver produtos" aria-hidden="false">
+                  <picture>
+                    <source media="(max-width: 700px)" srcset="assets/campanha/black-friday-mobile.webp" width="1122" height="1402">
+                    <img class="campaign-banner-img" src="assets/campanha/black-friday-desktop.webp" width="1774" height="887" fetchpriority="high" decoding="async" alt="Black Friday GRIFHII CONCEITO: 30 a 50% off em toda a loja">
+                  </picture>
+                </a>
+                <a class="campaign-slide" data-campaign-slide data-brand="lacoste" data-label="Lacoste" href="produtos.html?marca=lacoste" aria-label="Explorar Lacoste" aria-hidden="true" inert>
+                  <img class="campaign-model" src="assets/hero-model-lacoste-transparent-v1.webp" width="1024" height="1536" decoding="async" alt="Modelo com polo e bermuda Lacoste verde-escuro.">
                   <span class="campaign-word" aria-hidden="true">LACOSTE</span>
                 </a>
                 <a class="campaign-slide campaign-slide--stacked" data-campaign-slide data-brand="tommy-hilfiger" data-label="Tommy Hilfiger" href="produtos.html?marca=tommy-hilfiger" aria-label="Explorar Tommy Hilfiger" aria-hidden="true" inert>
@@ -109,17 +106,17 @@
               </div>
               <div class="campaign-toolbar">
                 <div class="vj-campaign__actions">
-                  <a href="produtos.html?marca=lacoste" data-campaign-link>Explorar Lacoste <span aria-hidden="true"><svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+                  <a href="produtos.html" data-campaign-link>Explorar Black Friday <span aria-hidden="true"><svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
                   <a href="produtos.html">Explorar coleção <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
                 </div>
                 <div class="campaign-controls" aria-label="Controles do carrossel">
                   
-                  <span class="campaign-counter" data-campaign-counter aria-hidden="true">01 / 03</span>
+                  <span class="campaign-counter" data-campaign-counter aria-hidden="true">01 / 04</span>
                   
                   <button type="button" class="campaign-control" data-campaign-pause aria-label="Pausar carrossel" aria-pressed="false"><svg class="campaign-pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg><svg class="campaign-play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 10 7-10 7Z"/></svg></button>
                 </div>
               </div>
-              <span class="visually-hidden" data-campaign-status role="status" aria-live="polite">Lacoste, 1 de 3</span>
+              <span class="visually-hidden" data-campaign-status role="status" aria-live="polite">Black Friday, 1 de 4</span>
             </div>
           </article>
         </div>

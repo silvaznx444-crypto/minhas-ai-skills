@@ -230,13 +230,13 @@ write('_headers', `/*
   Cross-Origin-Opener-Policy: same-origin
 ${MODE === 'producao' ? '' : '  X-Robots-Tag: noindex, nofollow\n'}
 /assets/*
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=3600, must-revalidate
 
 /*.css
   Cache-Control: public, max-age=86400
 
 /*.js
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=0, must-revalidate
 
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
@@ -266,6 +266,21 @@ for (const f of walk(OUT).filter(f => f.endsWith('.html'))) {
   html = html.replace(links[0][0], `<link rel="stylesheet" href="${rel}">\n`);
   for (const m of links.slice(1)) html = html.replace(m[0], '');
   write(f, html);
+}
+
+/* ---------- 6c. JS: versão pelo conteúdo, para o navegador nunca usar um script antigo do cache ---------- */
+{
+  const jsHash = new Map();
+  for (const f of walk(OUT).filter(f => f.endsWith('.html'))) {
+    let html = read(f);
+    const dir = path.posix.dirname(f);
+    html = html.replace(/<script([^>]*?)\ssrc="((?!https?:)[^"?#]+\.js)(?:\?[^"]*)?"/g, (all, pre, src) => {
+      const file = path.posix.normalize(path.posix.join(dir, src));
+      if (!jsHash.has(file)) jsHash.set(file, createHash('sha256').update(read(file)).digest('hex').slice(0, 10));
+      return `<script${pre} src="${src}?v=${jsHash.get(file)}"`;
+    });
+    write(f, html);
+  }
 }
 
 /* ---------- 7. Validações do dist ---------- */

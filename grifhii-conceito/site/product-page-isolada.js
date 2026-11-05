@@ -146,15 +146,15 @@
     }
     try {
       const referrer = new URL(document.referrer);
-      if (referrer.pathname.endsWith('/produtos.html') || referrer.pathname.endsWith('produtos.html')) {
+      if (/(^|\/)produtos(\.html)?$/.test(referrer.pathname)) {
         const brand = catalog.getBrand(referrer.searchParams.get('marca'));
         if (brand) return { label:`Voltar para ${brand.label}`, href:`produtos.html?marca=${encodeURIComponent(brand.slug)}` };
         return { label:'Ver coleção', href:'produtos.html' };
       }
-      if (referrer.pathname.endsWith('/index.html') || referrer.pathname.endsWith('index.html') || referrer.pathname.endsWith('/')) {
+      if (/(^|\/)index(\.html)?$/.test(referrer.pathname) || referrer.pathname.endsWith('/')) {
         return { label:'Voltar para a coleção', href:'index.html#produtos' };
       }
-      if (referrer.pathname.endsWith('/produtos.html') || referrer.pathname.endsWith('produtos.html')) {
+      if (/(^|\/)produtos(\.html)?$/.test(referrer.pathname)) {
         return { label:'Voltar para produtos', href:'produtos.html' };
       }
     } catch { /* sem referrer utilizável */ }

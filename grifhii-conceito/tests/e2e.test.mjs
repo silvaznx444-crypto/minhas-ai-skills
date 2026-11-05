@@ -668,6 +668,25 @@ test('Marcas: o menu abre o acordeão com as marcas (seta visível) e a página 
   await ctx.close();
 });
 
+test('Marcas: o acordeão também funciona com os links reescritos pelo Netlify (Pretty URLs, sem ".html")', async () => {
+  for (const pagePath of ['index.html', 'legal/entrega.html']) {
+    const {ctx, page} = await newPage({viewport: {width: 390, height: 844}});
+    await mockShopify(page);
+    await page.route(/\.html(\?.*)?$/, async route => {
+      const res = await route.fetch();
+      const body = (await res.text()).replace(/href="(?:\.\.\/)?([\w-]+)\.html/g, (m, n) => `href="/${n === 'index' ? '' : n}`);
+      await route.fulfill({response: res, body});
+    });
+    await page.goto(`${BASE}${pagePath}`);
+    const toggle = page.locator('.site-menu-brand-toggle');
+    await toggle.waitFor({state: 'attached'});
+    await page.evaluate(() => document.querySelector('.site-menu-brand-toggle').click());
+    assert.equal(await toggle.getAttribute('aria-expanded'), 'true');
+    assert.ok(await page.locator('#siteMenuBrands a').count() >= 15);
+    await ctx.close();
+  }
+});
+
 test('Início: o banner Black Friday é o 1º slide do carrossel, com a arte certa no computador e no celular', async () => {
   for (const [vp, file] of [[{width: 1440, height: 900}, 'black-friday-desktop.webp'], [{width: 390, height: 844}, 'black-friday-mobile.webp']]) {
     const {ctx, page} = await newPage({viewport: vp});

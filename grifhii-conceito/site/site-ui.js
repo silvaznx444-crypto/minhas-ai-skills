@@ -7,7 +7,7 @@
 
   const isHomePage = () => {
     const path = new URL(location.href).pathname.replace(/\/+$/, '');
-    return path.endsWith('/index.html') || path === '';
+    return /(^|\/)index(\.html)?$/.test(path) || path === '';
   };
 
   const scrollToHash = hash => {
@@ -47,7 +47,7 @@
   document.querySelectorAll('.site-menu-nav a').forEach(link => link.addEventListener('click', event => {
     const rawHref = link.getAttribute('href') || '';
     const targetUrl = new URL(rawHref, location.href);
-    const sameHome = isHomePage() && targetUrl.pathname === new URL('index.html', location.href).pathname;
+    const sameHome = isHomePage() && /(^|\/)(index(\.html)?)?$/.test(targetUrl.pathname.replace(/\/+$/, '')) && targetUrl.origin === location.origin;
     const isTracking = targetUrl.searchParams.get('tracking') === 'open' && targetUrl.hash === '#rastreio';
     const isHomeHash = sameHome && Boolean(targetUrl.hash) && !isTracking;
 
@@ -130,9 +130,9 @@
       .site-menu-brand-accordion{border-bottom:1px solid rgba(16,16,16,.10)}
       .site-menu-brand-row{display:grid;grid-template-columns:minmax(0,1fr) 46px;align-items:center}
       .site-menu-brand-row>.site-menu-brand-link{border-bottom:0!important}
-      .site-menu-brand-toggle{height:100%;min-height:58px;border:0;background:transparent;color:#111;cursor:pointer;display:grid;place-items:center;padding:0}
-      .site-menu-brand-toggle span{display:block;font-size:18px;line-height:1;transition:transform .28s ease}
-      .site-menu-brand-toggle[aria-expanded="true"] span{transform:rotate(180deg)}
+      .site-menu-brand-toggle{min-height:58px;border:0;background:transparent;color:#111;cursor:pointer;padding:0}
+      .site-menu-brand-full{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;font:inherit}
+      .site-menu-brand-full>span:first-child{display:block;font-size:clamp(19px,2.4vw,24px);font-weight:700;letter-spacing:-.025em;line-height:1.2;transform:none}
       .site-menu-brand-full>.site-menu-brand-arrow{display:grid!important;place-items:center;width:28px;height:28px;flex:0 0 28px;color:#111;font-size:0!important;transition:transform .28s ease,color .2s ease}
       .site-menu-brand-full:hover>.site-menu-brand-arrow{color:#9a8050}
       .site-menu-brand-full[aria-expanded="true"]>.site-menu-brand-arrow{transform:rotate(180deg)}
@@ -177,7 +177,8 @@
   }
 
   // Caminho base ('' ou '../'), lido do link original: o menu também funciona nas páginas legais.
-  const brandMenuBase = link => String(link?.getAttribute('href') || '').replace(/produtos\.html.*$/, '');
+  // O Netlify (Pretty URLs) reescreve "produtos.html?marca=todas" para "/produtos?marca=todas": aceitar os dois formatos.
+  const brandMenuBase = link => String(link?.getAttribute('href') || '').replace(/produtos(?:\.html)?(?:[?#].*)?$/, '');
   let brandDataRequested = false;
   // A lista de marcas vem de products-data.js. Se ainda não carregou (internet lenta) ou se a página
   // não o inclui (páginas legais), carrega sob demanda e preenche o acordeão quando chegar.
@@ -194,7 +195,7 @@
   function initBrandMenuAccordion() {
     const nav = document.querySelector('.site-menu-nav');
     if (!nav || nav.querySelector('.site-menu-brand-accordion')) return;
-    const mainLink = [...nav.children].find(node => node.matches?.('a[href$="produtos.html?marca=todas"]'));
+    const mainLink = [...nav.children].find(node => node.tagName === 'A' && /(^|\/)produtos(\.html)?\?marca=todas$/.test(node.getAttribute('href') || ''));
     if (!mainLink) return;
     const base = brandMenuBase(mainLink);
 

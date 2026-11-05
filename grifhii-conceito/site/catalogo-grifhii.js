@@ -491,7 +491,8 @@
       "images": [
         "assets/fotos-loja-15-10-2026/lacoste-french-heritage-195510.webp",
         "assets/fotos-loja-15-10-2026/lacoste-french-heritage-195519.webp",
-        "assets/fotos-loja-15-10-2026/lacoste-french-heritage-french-black.webp"
+        "assets/fotos-loja-15-10-2026/lacoste-french-heritage-french-black.webp",
+        "assets/fotos-reais-05-11-2026/lacoste-french-heritage-tres-cores-costas-real.webp"
       ],
       "variants": [
         {

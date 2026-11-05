@@ -6,6 +6,7 @@
 (() => {
 'use strict';
 const targets = {
+ 'camiseta-diesel-masculina':'camiseta-diesel-masculina',
  'bone-polo-play-preto':'bone-polo-play-preto-premium', // 05/11
  'camiseta-acostamento-menegotti-preta-lobo':'camiseta-acostamento-horse-art-preta', // 05/11: foto da Shopify confere (lobo bordado, preta, M)
  'lacoste-sport-club-racquet-preta':'camiseta-lacoste-sport-tennis-preta', // 05/11: mesma camiseta (foto da Shopify confere: raquete + LACOSTE verde)

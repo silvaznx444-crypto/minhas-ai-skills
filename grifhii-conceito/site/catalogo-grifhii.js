@@ -2113,6 +2113,121 @@
       "sourceNote": "Produto/tamanhos/cores informados pelo lojista na conversa em 20/10/2026. Quantidade e preços ainda não foram confirmados na Shopify."
     },
     {
+      "id": "grifhii-novembro-camiseta-diesel-masculina",
+      "slug": "camiseta-diesel-masculina",
+      "name": "Camiseta Diesel Masculina",
+      "brand": "DIESEL",
+      "category": "camisetas",
+      "description": "Estilo urbano, personalidade e autenticidade em cada detalhe. Estampa frontal DIESEL – For Successful Living com efeito degradê vermelho. Gola redonda, mangas curtas e modelagem versátil, ideal com jeans, bermudas ou calças. Cores preta e branca. Tamanhos M, G, GG e G1.",
+      "priceCents": 13990,
+      "promoPriceCents": null,
+      "images": [
+        "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-preta-real.webp",
+        "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-branca-real.webp"
+      ],
+      "variants": [
+        {
+          "id": "local-camiseta-diesel-masculina-preta-m",
+          "size": "M",
+          "color": "Preta",
+          "availableStock": 0,
+          "sku": "GRIF-DIESEL-MASCULINA-PRETA-M",
+          "image": "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-camiseta-diesel-masculina-preta-g",
+          "size": "G",
+          "color": "Preta",
+          "availableStock": 0,
+          "sku": "GRIF-DIESEL-MASCULINA-PRETA-G",
+          "image": "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-camiseta-diesel-masculina-preta-gg",
+          "size": "GG",
+          "color": "Preta",
+          "availableStock": 0,
+          "sku": "GRIF-DIESEL-MASCULINA-PRETA-GG",
+          "image": "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-camiseta-diesel-masculina-preta-g1",
+          "size": "G1",
+          "color": "Preta",
+          "availableStock": 0,
+          "sku": "GRIF-DIESEL-MASCULINA-PRETA-G1",
+          "image": "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-preta-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-camiseta-diesel-masculina-branca-m",
+          "size": "M",
+          "color": "Branca",
+          "availableStock": 0,
+          "sku": "GRIF-DIESEL-MASCULINA-BRANCA-M",
+          "image": "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-branca-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-camiseta-diesel-masculina-branca-g",
+          "size": "G",
+          "color": "Branca",
+          "availableStock": 0,
+          "sku": "GRIF-DIESEL-MASCULINA-BRANCA-G",
+          "image": "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-branca-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-camiseta-diesel-masculina-branca-gg",
+          "size": "GG",
+          "color": "Branca",
+          "availableStock": 0,
+          "sku": "GRIF-DIESEL-MASCULINA-BRANCA-GG",
+          "image": "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-branca-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        },
+        {
+          "id": "local-camiseta-diesel-masculina-branca-g1",
+          "size": "G1",
+          "color": "Branca",
+          "availableStock": 0,
+          "sku": "GRIF-DIESEL-MASCULINA-BRANCA-G1",
+          "image": "assets/fotos-reais-05-11-2026/camiseta-diesel-masculina-branca-real.webp",
+          "photoStatus": "recebida",
+          "photoNote": "Fotografia real enviada pelo lojista em 05/11/2026.",
+          "stockConfirmed": false,
+          "catalogVisible": true
+        }
+      ],
+      "photoReviewRequired": false,
+      "stockReviewRequired": true,
+      "sourceNote": "Peça cadastrada na Shopify pelo lojista em 05/11/2026 (Camiseta Diesel Masculina)."
+    },
+    {
       "id": "grifhii-outubro-tommy-hilfiger-resort-floral",
       "slug": "tommy-hilfiger-resort-floral",
       "name": "Camiseta Tommy Hilfiger Resort New York",

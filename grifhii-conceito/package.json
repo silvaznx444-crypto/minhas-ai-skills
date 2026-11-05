@@ -5,7 +5,7 @@
   "description": "GRIFHII CONCEITO — loja headless Shopify (fonte em site/, build público em dist/).",
   "scripts": {
     "build": "node tools/build.mjs",
-    "build:producao": "node tools/build.mjs --mode=producao",
+    "build:producao": "node tools/build.mjs --mode=producao --site-url=https://grifhii-conceito.netlify.app",
     "legal": "python3 tools/gerar-paginas-legais.py site/legal",
     "test:whatsapp": "node --test integracoes/whatsapp-pedido-pago/test/worker.test.mjs",
     "test:e2e": "node tools/build.mjs --offline && node --test --test-concurrency=1 tests/e2e.test.mjs",

@@ -266,7 +266,7 @@
       "brand": "FRED PERRY",
       "category": "camisetas",
       "description": "Camiseta Fred Perry com emblema de coroa de louros, faixas horizontais e assinatura grande na barra. Cores preta e branca no tamanho G.",
-      "priceCents": 12990,
+      "priceCents": 13990,
       "promoPriceCents": null,
       "images": [
         "assets/fotos-loja-15-10-2026/fred-perry-signature-stripe-195820.webp",

@@ -117,3 +117,17 @@ body.product-page #productDetail .product-gallery-main {border:none!important}
    No computador, a foto real aparece ao passar o mouse — o mesmo comportamento da imagem principal. */
 body.product-page .product-thumbs button.has-model .thumb-photo{opacity:0;transition:opacity .25s ease}
 @media(hover:hover) and (pointer:fine){body.product-page .product-thumbs button.has-model:hover .thumb-photo{opacity:1}}
+
+/* 05/11 — Perguntas frequentes e rodapé (fundo preto): textos, ícones e o nome GRIFHII em branco para não sumirem. */
+#contato .support-copy > p,#contato .support-contact-copy,#contato .support-location,#contato .support-points p{color:rgba(255,255,255,.82)!important}
+#contato .support-signature{color:#fff!important}
+#contato .support-signature span{color:#c9ad73!important}
+#contato .support-message > summary{color:#fff!important}
+#contato .support-message > summary::after,#contato .support-message > summary::marker{color:#fff!important;border-color:#fff!important}
+#contato .support-points svg{stroke:#fff!important;color:#fff!important;opacity:1!important}
+#contato .support-points svg *{stroke:#fff!important}
+#contato .support-points h3{color:#fff!important}
+.footer .footer-brand,.footer .footer-brand span{color:#fff!important}
+.footer p,.footer .footer-contact p{color:rgba(255,255,255,.72)!important}
+.footer .footer-bottom,.footer .footer-bottom a{color:rgba(255,255,255,.66)!important}
+html body #contato.support-section .support-copy p:not(.contact-feedback){color:rgba(255,255,255,.82)!important}

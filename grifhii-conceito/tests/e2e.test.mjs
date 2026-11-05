@@ -702,8 +702,9 @@ test('Início: o banner Black Friday é o 1º slide do carrossel, com a arte cer
     assert.equal((await cta.innerText()).trim(), 'Garanta seu desconto');
     const box = await cta.boundingBox(); const vw = page.viewportSize().width;
     assert.ok(box && box.x >= 0 && box.x + box.width <= vw && box.height < 60, 'botão inteiro na tela e em uma linha');
-    await cta.click();
-    await page.waitForURL(/produtos/);
+    assert.match(await cta.getAttribute('href'), /^https:\/\/wa\.me\/5564981025225\?text=.*Black%20Friday/);
+    assert.equal(await cta.getAttribute('target'), '_blank');
+    assert.match(await cta.getAttribute('rel'), /noopener/);
     await ctx.close();
   }
 });

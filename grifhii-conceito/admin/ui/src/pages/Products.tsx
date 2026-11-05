@@ -5,16 +5,19 @@ import { forApi, MediaPicker, type StagedMedia } from './Media.tsx';
 import { isSiteBrand, SITE_BRANDS } from '../site.ts';
 
 export function ProductList() {
-  const [q, setQ] = useState('');
-  const { data, error, loading } = useLoad(() => api(`products?q=${encodeURIComponent(q)}`), [q]);
+  const [q, setQ] = useState(''); const [refresh, setRefresh] = useState(0);
+  const { data, error, loading } = useLoad(() => api(`products?q=${encodeURIComponent(q)}${refresh ? '&refresh=1' : ''}`), [q, refresh]);
   return <div className="stack fade-in">
     <div className="row between"><div><div className="kicker">Catálogo</div><h1 className="page-title">Produtos</h1></div><a className="btn" href="#/novo">+ Novo produto</a></div>
-    <input className="input" type="search" placeholder="Buscar pelo nome" value={q} onChange={e => setQ(e.target.value)} aria-label="Buscar produto" />
+    <div className="row"><input className="input" type="search" placeholder="Buscar pelo nome" value={q} onChange={e => setQ(e.target.value)} aria-label="Buscar produto" />
+      <button className="btn small ghost" type="button" onClick={() => setRefresh(n => n + 1)} disabled={loading}>Atualizar da Shopify</button></div>
+    <p className="muted" style={{ fontSize: 13, margin: 0 }}>Todas as peças da Shopify (as mesmas do site). Toque numa peça para mudar preço, estoque, cores e fotos: o site acompanha a Shopify sozinho.</p>
+    {data?.syncWarning && <div className="notice warn">{data.syncWarning}</div>}
     <ErrorNotice error={error} />
-    {loading ? <Loading /> : !data?.products?.length ? <div className="notice">Nenhum produto no espelho local. Em <a href="#/sincronizacao">Sincronização</a>, use “Reconciliar com a Shopify” para trazer o catálogo.</div> :
+    {loading ? <Loading /> : !data?.products?.length ? <div className="notice">Nenhuma peça encontrada. Toque em “Atualizar da Shopify”.</div> :
       <div className="list">{data.products.map((p: any) => <a key={p.id} className="list-item" href={`#/produtos/${numId(p.id)}`}>
-        <div className="thumb" aria-hidden="true" />
-        <div><strong>{p.title}</strong><div className="muted" style={{ fontSize: 13 }}>{p.handle}</div></div>
+        {p.image ? <img className="thumb" src={p.image} alt="" loading="lazy" style={{ objectFit: 'cover' }} /> : <div className="thumb" aria-hidden="true" />}
+        <div><strong>{p.title}</strong><div className="muted" style={{ fontSize: 13 }}>{p.minPrice == null ? 'Sem preço' : p.minPrice === p.maxPrice ? money(String(p.minPrice)) : `${money(String(p.minPrice))} a ${money(String(p.maxPrice))}`}</div></div>
         <StatusBadge s={p.status} />
       </a>)}</div>}
   </div>;
@@ -108,7 +111,7 @@ function PriceEditor({ product, onDone }: { product: any; onDone: () => void }) 
   const current = [...new Set(product.variants.nodes.map((v: any) => v.price))] as string[];
   return <section className="card stack">
     <h2>Preço</h2>
-    <p className="muted" style={{ margin: 0 }}>Atual: {current.map(c => money(c)).join(', ')}</p>
+    <p className="muted" style={{ margin: 0 }}>Atual: {current.map(c => money(c)).join(', ')}. O novo preço vale na Shopify e no site ao mesmo tempo (o site lê o preço da Shopify).</p>
     <div className="grid cols-2">
       <label className="field">Novo preço (R$)<input className="input" inputMode="decimal" value={price} onChange={e => setPrice(e.target.value)} placeholder="139,90" /></label>
       <label className="field">Preço “de” (opcional)<input className="input" inputMode="decimal" value={compare} onChange={e => setCompare(e.target.value)} /></label>

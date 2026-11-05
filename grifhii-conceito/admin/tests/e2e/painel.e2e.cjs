@@ -58,6 +58,14 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
       await page.getByRole('button', { name: 'Reconciliar agora' }).click();
       await page.getByText(/1 produtos · 3 variantes na Shopify/).waitFor(); await shot('05-sincronizacao');
     });
+    await step('lista de produtos mostra as peças que já estavam na Shopify, com preço e botão "Atualizar da Shopify"', async () => {
+      await page.goto(BASE + '/#/produtos');
+      await page.getByRole('button', { name: 'Atualizar da Shopify' }).waitFor();
+      await page.locator('.list-item').first().waitFor();
+      const txt = await page.locator('.list-item').first().innerText();
+      if (!/R\$\s?\d/.test(txt)) throw new Error('preço não aparece na lista: ' + txt);
+      await noHScroll(); await shot('05b-lista-produtos');
+    });
     await step('cadastro completo: 4 tamanhos + foto real enviada → publicado e confirmado', async () => {
       await page.goto(BASE + '/#/novo');
       await page.getByLabel('Nome do produto').fill('Camiseta Abercrombie Fitch New York');

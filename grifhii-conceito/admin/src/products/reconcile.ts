@@ -3,13 +3,13 @@ import { audit } from '../audit.ts';
 import { adminGraphql, type GqlOptions } from '../shopify/client.ts';
 
 const Q = `query GhReconcile($after: String) { products(first: 50, after: $after) { pageInfo { hasNextPage endCursor }
-  nodes { id handle title status updatedAt totalInventory variants(first: 100) { nodes { id sku selectedOptions { name value } } } } } }`;
+  nodes { id handle title status updatedAt totalInventory featuredMedia { preview { image { url } } } variants(first: 100) { nodes { id sku price selectedOptions { name value } } } } } }`;
 
 /**
  * Reconciliação SOMENTE LEITURA: lê o catálogo da Shopify, atualiza o espelho local e gera um relatório.
  * Não altera preços, estoque, variantes nem imagens. Correspondências duvidosas ficam como "requer revisão".
  */
-export async function reconcile(env: Env, userId: string, gql?: GqlOptions) {
+export async function reconcile(env: Env, userId: string, gql?: GqlOptions, opts: { silent?: boolean } = {}) {
   const all: { id: string; handle: string; title: string; status: string; updatedAt: string; totalInventory: number; variants: { nodes: { id: string; sku: string | null; selectedOptions: { name: string; value: string }[] }[] } }[] = [];
   let after: string | null = null;
   for (let page = 0; page < 40; page++) {
@@ -24,6 +24,8 @@ export async function reconcile(env: Env, userId: string, gql?: GqlOptions) {
       VALUES (?,?,?,?,?,?,?,'synced') ON CONFLICT(shopify_product_id) DO UPDATE SET handle=excluded.handle,title=excluded.title,status=excluded.status,
       shopify_updated_at=excluded.shopify_updated_at,data=excluded.data,synced_at=excluded.synced_at`).bind(p.id, p.handle, p.title, p.status, p.updatedAt, JSON.stringify(p), t).run();
   }
+  // Peça apagada na Shopify sai da lista do painel (só as já sincronizadas; operações em andamento ficam).
+  await env.DB.prepare("UPDATE product_cache SET status = 'REMOVED' WHERE synced_at < ? AND sync_state = 'synced'").bind(t).run();
   const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   const byTitle = new Map<string, string[]>();
   for (const p of all) byTitle.set(norm(p.title), [...(byTitle.get(norm(p.title)) ?? []), p.id]);
@@ -42,6 +44,6 @@ export async function reconcile(env: Env, userId: string, gql?: GqlOptions) {
     shopifyProductsWithoutSiteMapping: all.filter(p => !prefs.results.some(r => r.shopify_product_id === p.id)).map(p => ({ id: p.id, title: p.title })),
     removedFromShopifyButCached: (await env.DB.prepare('SELECT shopify_product_id FROM product_cache WHERE synced_at < ?').bind(t).all<{ shopify_product_id: string }>()).results.map(r => r.shopify_product_id),
   };
-  await audit(env.DB, { userId, action: 'sync.reconcile', result: 'success', details: { products: report.shopifyProducts, dupes: report.possibleDuplicateProducts.length } });
+  if (!opts.silent) await audit(env.DB, { userId, action: 'sync.reconcile', result: 'success', details: { products: report.shopifyProducts, dupes: report.possibleDuplicateProducts.length } });
   return report;
 }

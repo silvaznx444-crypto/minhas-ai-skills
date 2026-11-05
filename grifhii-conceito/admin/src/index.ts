@@ -145,9 +145,28 @@ export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, d
       requirePermission(p, 'products:read');
       const page = Math.max(0, Math.min(1000, Number(url.searchParams.get('page') || 0) | 0));
       const q = (url.searchParams.get('q') || '').slice(0, 60);
-      const rows = await env.DB.prepare(`SELECT shopify_product_id id, handle, title, status, shopify_updated_at, sync_state FROM product_cache
-        WHERE (? = '' OR title LIKE '%' || ? || '%') ORDER BY title LIMIT 50 OFFSET ?`).bind(q, q, page * 50).all();
-      return json({ products: rows.results, page });
+      // A lista vem do espelho local; ele se atualiza sozinho lendo a Shopify (somente leitura) a cada 10 min,
+      // ou na hora com "Atualizar da Shopify" (refresh=1). Assim as peças que já existiam na loja/site aparecem sem passo manual.
+      let syncWarning: string | null = null;
+      if (page === 0) {
+        const last = await env.DB.prepare("SELECT MAX(synced_at) AS t FROM product_cache WHERE sync_state = 'synced'").first<{ t: number | null }>();
+        const age = Date.now() - (last?.t ?? 0);
+        if (age > 10 * 60 * 1000 || (url.searchParams.get('refresh') === '1' && age > 20 * 1000)) {
+          try { await reconcile(env, p.userId, deps.gql, { silent: true }); }
+          catch { syncWarning = 'Não foi possível ler a Shopify agora; mostrando a última lista salva.'; }
+        }
+      }
+      const rows = await env.DB.prepare(`SELECT shopify_product_id id, handle, title, status, shopify_updated_at, sync_state, data FROM product_cache
+        WHERE status <> 'REMOVED' AND (? = '' OR title LIKE '%' || ? || '%') ORDER BY title LIMIT 50 OFFSET ?`).bind(q, q, page * 50).all<Record<string, unknown>>();
+      const products = rows.results.map(({ data, ...r }) => {
+        let d: { variants?: { nodes?: { price?: string }[] }; featuredMedia?: { preview?: { image?: { url?: string } } } } = {};
+        try { d = JSON.parse(String(data || '{}')); } catch { /* espelho antigo sem detalhes */ }
+        const prices = (d.variants?.nodes ?? []).map(v => Number(v.price)).filter(n => Number.isFinite(n) && n > 0);
+        const image = d.featuredMedia?.preview?.image?.url;
+        return { ...r, minPrice: prices.length ? Math.min(...prices) : null, maxPrice: prices.length ? Math.max(...prices) : null,
+          image: typeof image === 'string' && image.startsWith('https://cdn.shopify.com/') ? image : null };
+      });
+      return json({ products, page, syncWarning });
     }
     // ---------------- Editar / apagar
     if ((match = /^products\/(\d{1,20})$/.exec(path)) && m === 'PATCH') {

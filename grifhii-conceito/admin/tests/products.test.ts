@@ -313,3 +313,38 @@ test('remover cor/tamanho: só variantes DESTA peça, nunca todas, com Face ID r
   assert.equal(r.status, 200); assert.deepEqual((await r.json() as any).removed, ['Verde/G']);
   assert.deepEqual(fake.combos(p).sort(), ['Azul/G', 'Azul/M']);
 });
+
+test('lista de produtos: traz sozinha as peças que já existiam na Shopify/site, com preço, e tira as apagadas', async () => {
+  const { env, fake, owner } = await setup();
+  const a = fake.seedProduct('Camiseta Diesel Masculina', { Preta: { M: 1, G: 1 } });
+  fake.seedProduct('Polo Tommy Hilfiger', { Branca: { G: 1 } });
+  a.variants.nodes[1].price = '139.90';
+  // Nada no espelho local: a primeira abertura da lista lê a Shopify (somente leitura).
+  const r1 = await (await call(env, req('products', { user: owner }), fake)).json() as any;
+  assert.deepEqual(r1.products.map((p: any) => p.title), ['Camiseta Diesel Masculina', 'Polo Tommy Hilfiger']);
+  const d = r1.products[0];
+  assert.equal(d.minPrice, 129.9); assert.equal(d.maxPrice, 139.9);
+  assert.equal(r1.syncWarning, null);
+  assert.ok(fake.calls.every(c => !/^Gh(ProductCreate|Variants|InvSet|Publish|Status|ProductMedia|Metafields)/.test(c.op)), 'nenhuma mutação');
+  assert.equal((await env.DB.prepare("SELECT COUNT(*) n FROM audit_logs WHERE action = 'sync.reconcile'").first<any>()).n, 0, 'atualização automática não enche as Atividades');
+  // Logo em seguida não lê de novo (usa o espelho)...
+  const before = fake.calls.filter(c => c.op === 'GhReconcile').length;
+  await call(env, req('products', { user: owner }), fake);
+  assert.equal(fake.calls.filter(c => c.op === 'GhReconcile').length, before);
+  // ...mas "Atualizar da Shopify" lê, e a peça apagada na Shopify sai da lista.
+  fake.products.delete(a.id);
+  await env.DB.prepare('UPDATE product_cache SET synced_at = synced_at - 60000').run();
+  const r2 = await (await call(env, req('products?refresh=1', { user: owner }), fake)).json() as any;
+  assert.deepEqual(r2.products.map((p: any) => p.title), ['Polo Tommy Hilfiger']);
+});
+
+test('lista de produtos: se a Shopify não responder, mostra a última lista salva com aviso (não quebra)', async () => {
+  const { env, fake, owner } = await setup();
+  fake.seedProduct('Bermuda Vilebrequin', { Azul: { M: 1 } });
+  await call(env, req('products', { user: owner }), fake);
+  await env.DB.prepare('UPDATE product_cache SET synced_at = 0').run();
+  const broken = { ...fake, fetch: async () => new Response('erro', { status: 500 }) } as any;
+  const r = await (await call(env, req('products', { user: owner }), broken)).json() as any;
+  assert.deepEqual(r.products.map((p: any) => p.title), ['Bermuda Vilebrequin']);
+  assert.match(r.syncWarning, /última lista salva/);
+});

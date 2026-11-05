@@ -133,6 +133,10 @@
       .site-menu-brand-toggle{height:100%;min-height:58px;border:0;background:transparent;color:#111;cursor:pointer;display:grid;place-items:center;padding:0}
       .site-menu-brand-toggle span{display:block;font-size:18px;line-height:1;transition:transform .28s ease}
       .site-menu-brand-toggle[aria-expanded="true"] span{transform:rotate(180deg)}
+      .site-menu-brand-full>.site-menu-brand-arrow{display:grid!important;place-items:center;width:34px;height:34px;flex:0 0 34px;border:1px solid rgba(17,17,17,.18);border-radius:50%;color:#111;font-size:0!important;transition:transform .28s ease,background .2s ease,border-color .2s ease}
+      .site-menu-brand-full:hover>.site-menu-brand-arrow{border-color:#9a8050;color:#9a8050}
+      .site-menu-brand-full[aria-expanded="true"]>.site-menu-brand-arrow{transform:rotate(180deg);background:#111;border-color:#111;color:#f7f5f0}
+      .site-menu-brand-full>.site-menu-brand-arrow svg{display:block}
       .site-menu-brand-submenu{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;padding:4px 4px 18px 12px;max-height:min(48vh,430px);overflow:auto}
       .site-menu-brand-submenu[hidden]{display:none!important}
       .site-menu-brand-submenu a{display:flex!important;align-items:center;gap:9px;padding:9px 0!important;border:0!important;font-size:10px!important;font-weight:700!important;letter-spacing:.04em!important;line-height:1.25!important;color:#4c4740!important}
@@ -205,7 +209,7 @@
     button.setAttribute('aria-label', 'Marcas: expandir lista');
     button.setAttribute('aria-expanded', 'false');
     button.setAttribute('aria-controls', 'siteMenuBrands');
-    button.innerHTML = '<span>Marcas</span><span aria-hidden="true">⌄</span>';
+    button.innerHTML = '<span>Marcas</span><span class="site-menu-brand-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>';
     const submenu = document.createElement('div');
     submenu.id = 'siteMenuBrands';
     submenu.className = 'site-menu-brand-submenu';

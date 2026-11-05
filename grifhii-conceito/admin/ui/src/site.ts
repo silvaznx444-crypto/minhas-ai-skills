@@ -2,7 +2,7 @@
  * senão a peça aparece em Produtos mas fora da página da marca/categoria certa.
  * Fonte: site/products-data.js (atualizar aqui quando uma marca nova entrar no site). */
 export const SITE_BRANDS: string[] = ['Abercrombie & Fitch', 'Acostamento', 'Armani Exchange', 'Ayrton Senna', 'Calvin Klein Jeans', 'Colcci',
-  'Diesel', 'Ellus', 'Emporio Armani', 'Fred Perry', 'Hugo Boss', 'Lacoste', 'On Running', 'Ralph Lauren', 'Tommy Hilfiger', 'Vilebrequin', 'Zara'];
+  'Diesel', 'Ellus', 'Emporio Armani', 'Fred Perry', 'Hugo Boss', 'Lacoste', 'On Running', 'Polo Play', 'Ralph Lauren', 'Tommy Hilfiger', 'Vilebrequin', 'Zara'];
 
 /** Categoria do painel → onde a peça aparece no site (quando o nome é diferente). */
 export const SITE_CATEGORY_NOTE: Record<string, string> = { bones: 'Acessórios', jeans: 'Calças', shorts: 'Bermudas', 'camisas-sociais': 'Camisas' };

@@ -68,3 +68,19 @@ test('remover chave: só as suas, com reconfirmação, e nunca a última', async
   assert.equal(r.status, 200);
   assert.equal((await env.DB.prepare('SELECT COUNT(*) n FROM passkeys WHERE user_id = ?').bind(u.id).first<any>()).n, 1);
 });
+
+test('trocar o próprio nome (passar a conta ao proprietário): exige reconfirmação, valida e registra na auditoria', async () => {
+  const env = makeEnv();
+  const old = await makeUser(env, 'MANAGER', [], { authAgoMs: 10 * 60 * 1000 });
+  assert.equal((await call(env, req('auth/me', { method: 'PATCH', user: old, body: { displayName: 'Dono' } }))).status, 403);
+  const u = await makeUser(env, 'OWNER');
+  assert.equal((await call(env, req('auth/me', { method: 'PATCH', user: u, body: { displayName: '   ' } }))).status, 422);
+  assert.equal((await call(env, req('auth/me', { method: 'PATCH', user: u, body: { displayName: 'Dono', role: 'OWNER' } }))).status, 422, 'não aceita outros campos');
+  const r = await call(env, req('auth/me', { method: 'PATCH', user: u, body: { displayName: '  Proprietário GRIFHII ' } }));
+  assert.equal(r.status, 200);
+  const s = await (await call(env, req('auth/session', { user: u }))).json() as any;
+  assert.equal(s.user.name, 'Proprietário GRIFHII');
+  assert.equal(s.user.role, 'OWNER');
+  const a = await env.DB.prepare("SELECT COUNT(*) AS n FROM audit_logs WHERE action = 'users.rename_self'").first<any>();
+  assert.equal(a.n, 1);
+});

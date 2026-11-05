@@ -6,7 +6,7 @@ import { Button, ErrorNotice, Loading, StatusBadge, useLoad, useSession, useToas
 const OPS: Record<string, string> = { 'product.create': 'Novo produto', 'product.add_color': 'Nova cor', 'media.attach': 'Fotos/3D', 'product.update_price': 'Preço', 'product.publish': 'Publicar', 'product.unpublish': 'Ocultar' };
 const ACTIONS: Record<string, string> = { 'auth.login': 'Entrou no painel', 'auth.logout': 'Saiu', 'auth.reauth': 'Confirmou identidade', 'auth.setup': 'Configuração inicial',
   'product.create': 'Produto criado', 'product.add_color': 'Cor adicionada', 'media.attach': 'Fotos/3D atualizados', 'product.update_price': 'Preço alterado', 'product.publish': 'Produto publicado', 'product.unpublish': 'Produto ocultado',
-  'inventory.set': 'Estoque alterado', 'media.upload': 'Imagem enviada', 'settings.update': 'Configurações alteradas', 'users.invite': 'Convite criado', 'users.update': 'Usuário alterado',
+  'inventory.set': 'Estoque alterado', 'media.upload': 'Imagem enviada', 'settings.update': 'Configurações alteradas', 'users.invite': 'Convite criado', 'users.update': 'Usuário alterado', 'users.rename_self': 'Nome da conta alterado',
   'sync.reconcile': 'Reconciliação', 'operation.retry': 'Nova tentativa', 'categories.create': 'Categoria criada' };
 
 export function Overview() {
@@ -150,10 +150,28 @@ export function Settings() {
     </section>
     <section className="card stack">
       <h2>Segurança</h2>
+      <MyName />
       <Devices />
       <Button kind="ghost" busyText="Gerando…" onClick={async () => { if (!confirm('Gerar novos códigos invalida os anteriores. Continuar?')) return; try { const r = await withStepUp(() => api('auth/recovery-codes', { method: 'POST', body: {} })); setCodes(r.recoveryCodes); } catch (e) { setError(e); } }}>Gerar novos códigos de recuperação</Button>
       {codes && <><div className="notice warn">Anote agora: estes códigos não serão mostrados de novo.</div><div className="codes">{codes.map(c => <span key={c}>{c}</span>)}</div></>}
     </section>
+  </div>;
+}
+
+/** Nome exibido da própria conta (ao passar a conta para o proprietário, troque para o nome dele). */
+function MyName() {
+  const me = useLoad(() => api('auth/session'));
+  const [name, setName] = useState<string | null>(null); const [error, setError] = useState<unknown>(null);
+  const toast = useToast();
+  const current = me.data?.user?.name ?? '';
+  return <div className="stack">
+    <label className="field">Seu nome no painel<input className="input" autoComplete="name" value={name ?? current} onChange={e => setName(e.target.value)} /></label>
+    <ErrorNotice error={error} />
+    <Button kind="ghost" busyText="Salvando…" disabled={name === null || !name.trim() || name.trim() === current} onClick={async () => {
+      setError(null);
+      try { await withStepUp(() => api('auth/me', { method: 'PATCH', body: { displayName: name!.trim() } })); toast('Nome atualizado.'); setName(null); me.reload(); }
+      catch (e) { setError(e); }
+    }}>Atualizar nome (pede Face ID)</Button>
   </div>;
 }
 

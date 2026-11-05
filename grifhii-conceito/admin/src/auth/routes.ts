@@ -218,13 +218,21 @@ export async function handleAuth(req: Request, env: Env, path: string): Promise<
 
   // ---------- Daqui em diante: exige sessão ----------
   if (!path.startsWith('auth/session') && !path.startsWith('auth/logout') && !path.startsWith('auth/reauth') && !path.startsWith('auth/users')
-    && !path.startsWith('auth/passkeys') && !path.startsWith('auth/invites') && path !== 'auth/recovery-codes' && path !== 'auth/device-links') return null;
+    && !path.startsWith('auth/passkeys') && !path.startsWith('auth/invites') && path !== 'auth/recovery-codes' && path !== 'auth/device-links' && path !== 'auth/me') return null;
   const p = await loadPrincipal(env, req);
   verifyCsrf(env, req, p);
 
   if (path === 'auth/session' && m === 'GET') {
     const u = await env.DB.prepare('SELECT id, role, display_name FROM users WHERE id = ?').bind(p.userId).first<{ id: string; role: string; display_name: string }>();
     return json({ ...sessionJson({ csrf: p.csrf }, u!), permissions: p.role === 'OWNER' ? ['*'] : [...p.permissions], stepUpValidUntil: p.authenticatedAt + 5 * 60 * 1000 });
+  }
+  // Nome exibido da própria conta (ex.: ao passar a conta de proprietário para outra pessoa).
+  if (path === 'auth/me' && m === 'PATCH') {
+    requireRecentAuth(p);
+    const { displayName } = parse(z.object({ displayName: z.string().trim().min(1).max(80) }).strict(), await readJson(req));
+    await env.DB.prepare('UPDATE users SET display_name = ?, updated_at = ? WHERE id = ?').bind(displayName, Date.now(), p.userId).run();
+    await audit(env.DB, { userId: p.userId, action: 'users.rename_self', target: p.userId, result: 'success' });
+    return json({ ok: true, displayName });
   }
   if (path === 'auth/logout' && m === 'POST') {
     await revokeSession(env.DB, p.sessionId);

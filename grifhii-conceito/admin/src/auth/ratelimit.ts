@@ -9,6 +9,8 @@ export const LIMITS = {
   'write:user': { max: 60, windowSec: 60 },
   'upload:user': { max: 30, windowSec: 600 },
   'publish:user': { max: 20, windowSec: 600 },
+  // Contadores de visitas do site: por origem (hash), generoso para navegação normal.
+  'metrics:ip': { max: 120, windowSec: 60 },
 } as const;
 export type Bucket = keyof typeof LIMITS;
 

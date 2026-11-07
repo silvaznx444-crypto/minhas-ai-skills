@@ -210,13 +210,16 @@ write('robots.txt', MODE === 'producao'
 const cfgText = fs.readFileSync(path.join(SITE, 'shopify-config.js'), 'utf8');
 const shopDomain = /shopDomain:'([a-z0-9-]+\.myshopify\.com)'/.exec(cfgText)?.[1];
 if (!shopDomain) errors.push('shopDomain não encontrado em shopify-config.js');
+// Painel da loja (Cloudflare Pages): recebe os contadores anônimos de visitas (site/grifhii-metricas.js).
+const PANEL_ORIGIN = 'https://grifhii-painel.pages.dev';
+if (!read('grifhii-metricas.js').includes(PANEL_ORIGIN + '/api/admin/v1/public/events')) errors.push('grifhii-metricas.js não aponta para o painel ' + PANEL_ORIGIN);
 const csp = [
   "default-src 'self'",
   "script-src 'self'",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob: https://cdn.shopify.com https://www.google.com https://*.gstatic.com",
-  `connect-src 'self' https://${shopDomain}`,
+  `connect-src 'self' https://${shopDomain} ${PANEL_ORIGIN}`, // painel: contagem anônima de visitas
   "frame-src 'none'", "object-src 'none'", "base-uri 'self'", "form-action 'self'",
   "frame-ancestors 'none'", 'upgrade-insecure-requests',
 ].join('; ');
@@ -274,6 +277,11 @@ for (const f of walk(OUT).filter(f => f.endsWith('.html'))) {
   for (const f of walk(OUT).filter(f => f.endsWith('.html'))) {
     let html = read(f);
     const dir = path.posix.dirname(f);
+    // Contagem anônima de visitas em todas as páginas (exceto a 404).
+    if (!/(^|\/)404\.html$/.test(f) && !html.includes('grifhii-metricas.js') && html.includes('</body>')) {
+      const rel = path.posix.relative(dir, 'grifhii-metricas.js') || 'grifhii-metricas.js';
+      html = html.replace('</body>', `<script defer src="${rel}"></script>\n</body>`);
+    }
     html = html.replace(/<script([^>]*?)\ssrc="((?!https?:)[^"?#]+\.js)(?:\?[^"]*)?"/g, (all, pre, src) => {
       const file = path.posix.normalize(path.posix.join(dir, src));
       if (!jsHash.has(file)) jsHash.set(file, createHash('sha256').update(read(file)).digest('hex').slice(0, 10));

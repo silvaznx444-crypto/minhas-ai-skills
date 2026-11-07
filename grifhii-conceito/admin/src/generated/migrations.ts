@@ -52,5 +52,12 @@ export const MIGRATIONS: { name: string; statements: string[] }[] = [
       "DROP TABLE application_settings",
       "ALTER TABLE application_settings_new RENAME TO application_settings"
     ]
+  },
+  {
+    "name": "0005_site_metrics.sql",
+    "statements": [
+      "CREATE TABLE IF NOT EXISTS site_metrics (\n  day     TEXT NOT NULL,\n  event   TEXT NOT NULL CHECK (event IN ('visit','view','brand','product','whatsapp','cart_add','checkout')),\n  target  TEXT NOT NULL DEFAULT '',\n  count   INTEGER NOT NULL DEFAULT 0,\n  PRIMARY KEY (day, event, target)\n)",
+      "CREATE INDEX IF NOT EXISTS site_metrics_event_day ON site_metrics (event, day)"
+    ]
   }
 ];

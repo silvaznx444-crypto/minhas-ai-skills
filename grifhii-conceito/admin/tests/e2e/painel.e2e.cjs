@@ -49,6 +49,7 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
       await page.goto(BASE + '/#/configuracoes');
       await page.getByLabel('Local de estoque').selectOption({ label: 'Loja Santa Helena' });
       await page.getByRole('button', { name: 'Headless' }).click();
+      await page.getByPlaceholder('https://seu-site.netlify.app').fill('https://grifhii-conceito.netlify.app');
       await page.getByRole('button', { name: /Salvar/ }).click();
       await page.getByText('Configurações salvas.').waitFor(); await shot('04-configuracoes');
     });
@@ -147,6 +148,19 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
     await step('atividades registram as ações', async () => {
       await page.goto(BASE + '/#/atividades');
       await page.getByText('Estoque alterado').first().waitFor(); await page.getByText('1 → 3 unidade(s)').waitFor(); await shot('13-atividades');
+    });
+    await step('visitas do site: o site envia contadores anônimos e o painel mostra os totais', async () => {
+      const send = (e, origin = 'https://grifhii-conceito.netlify.app') => fetch(BASE + '/api/admin/v1/public/events', { method: 'POST', headers: { Origin: origin, 'Content-Type': 'text/plain' }, body: JSON.stringify({ e }) });
+      await send([{ t: 'visit' }, { t: 'view', k: 'inicio' }, { t: 'product', k: 'camiseta-diesel-masculina' }, { t: 'whatsapp', k: 'banner' }]);
+      await send([{ t: 'visit' }, { t: 'product', k: 'camiseta-diesel-masculina' }, { t: 'brand', k: 'diesel' }, { t: 'cart_add', k: 'camiseta-diesel-masculina' }, { t: 'checkout' }]);
+      await send([{ t: 'visit' }], 'https://site-falso.example'); // ignorado
+      await page.goto(BASE + '/#/');
+      await page.getByText(/Visitas: 2/).waitFor();
+      await page.goto(BASE + '/#/visitas');
+      await page.getByRole('heading', { name: 'Peças mais abertas' }).waitFor();
+      await page.getByText('Camiseta diesel masculina').first().waitFor();
+      await page.getByText('Banner Black Friday').waitFor();
+      await noHScroll(); await shot('13b-visitas');
     });
     await step('sair e entrar de novo com a passkey (login real)', async () => {
       await page.getByRole('button', { name: 'Sair do painel' }).click();

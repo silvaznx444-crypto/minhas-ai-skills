@@ -9,6 +9,14 @@ const ACTIONS: Record<string, string> = { 'auth.login': 'Entrou no painel', 'aut
   'inventory.set': 'Estoque alterado', 'media.upload': 'Imagem enviada', 'settings.update': 'Configurações alteradas', 'users.invite': 'Convite criado', 'users.update': 'Usuário alterado', 'users.rename_self': 'Nome da conta alterado',
   'sync.reconcile': 'Reconciliação', 'operation.retry': 'Nova tentativa', 'categories.create': 'Categoria criada' };
 
+/** Atalho na tela inicial: visitas do site nos últimos 7 dias. */
+function VisitsCard() {
+  const m = useLoad(() => api('metrics?days=7'));
+  return <a className="card" href="#/visitas" style={{ textDecoration: 'none' }}><span className="kicker">Site · últimos 7 dias</span>
+    <h2 className="serif" style={{ fontSize: 24 }}>Visitas{m.data ? `: ${(m.data.totals?.visit ?? 0).toLocaleString('pt-BR')}` : ''}</h2>
+    {m.data && <span className="muted" style={{ fontSize: 13 }}>{(m.data.totals?.whatsapp ?? 0).toLocaleString('pt-BR')} cliques no WhatsApp · {(m.data.totals?.product ?? 0).toLocaleString('pt-BR')} peças abertas</span>}</a>;
+}
+
 export function Overview() {
   const { session, can } = useSession();
   const o = useLoad(() => api('overview'));
@@ -28,6 +36,7 @@ export function Overview() {
       <a className="card" href="#/novo" style={{ textDecoration: 'none' }}><span className="kicker">Ação rápida</span><h2 className="serif" style={{ fontSize: 24 }}>Cadastrar produto</h2></a>
       <a className="card" href="#/estoque" style={{ textDecoration: 'none' }}><span className="kicker">Ação rápida</span><h2 className="serif" style={{ fontSize: 24 }}>Ajustar estoque</h2></a>
       {can('sync:read') && <a className="card" href="#/sincronizacao" style={{ textDecoration: 'none' }}><span className="kicker">Shopify</span><h2 className="serif" style={{ fontSize: 24 }}>Sincronização</h2></a>}
+      {can('audit:read') && <VisitsCard />}
       {can('audit:read') && <a className="card" href="#/atividades" style={{ textDecoration: 'none' }}><span className="kicker">Histórico</span><h2 className="serif" style={{ fontSize: 24 }}>Atividades</h2></a>}
     </div>
   </div>;

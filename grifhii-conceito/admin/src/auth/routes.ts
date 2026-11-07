@@ -128,7 +128,7 @@ export async function handleAuth(req: Request, env: Env, path: string): Promise<
       .bind(await pepperedHash(env.SESSION_PEPPER, linkToken), Date.now()).first<{ id: string; user_id: string; webauthn_user_id: string; display_name: string }>();
     if (!link) { await audit(env.DB, { action: 'auth.device_link', result: 'denied' }); throw new AppError(400, 'device_link_invalid', 'Link inválido, já usado ou expirado. Gere um novo no painel (Configurações → Segurança).'); }
     const existing = (await env.DB.prepare('SELECT credential_id FROM passkeys WHERE user_id = ?').bind(link.user_id).all<{ credential_id: string }>()).results.map(r => r.credential_id);
-    const options = await registrationOptions(env, { webauthnUserId: link.webauthn_user_id, name: link.display_name }, existing);
+    const options = await registrationOptions(env, { webauthnUserId: link.webauthn_user_id, name: link.display_name }, existing, { thisDevice: true });
     const challengeId = await storeChallenge(env, options.challenge, 'register', link.user_id, { kind: 'device', linkId: link.id });
     return json({ challengeId, options });
   }
@@ -197,7 +197,7 @@ export async function handleAuth(req: Request, env: Env, path: string): Promise<
       .first<{ webauthn_user_id: string; display_name: string }>();
     if (!u) throw new AppError(401, 'recovery_failed', 'Código inválido.');
     await revokeAllSessions(env.DB, rc.user_id); // evento de segurança
-    const options = await registrationOptions(env, { webauthnUserId: u.webauthn_user_id, name: u.display_name });
+    const options = await registrationOptions(env, { webauthnUserId: u.webauthn_user_id, name: u.display_name }, [], { thisDevice: true });
     const challengeId = await storeChallenge(env, options.challenge, 'register', rc.user_id, { kind: 'recovery' });
     await audit(env.DB, { userId: rc.user_id, action: 'auth.recovery_code_used', result: 'success' });
     return json({ challengeId, options });

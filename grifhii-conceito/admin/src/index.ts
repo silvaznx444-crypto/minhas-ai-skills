@@ -13,6 +13,7 @@ import { AddColor, AddMedia, CreateProduct, ProductGid, VariantGid, SetInventory
 import { enqueue, getProductInventory, retryOperation, runDue, runOperation, setInventory, type Deps } from './products/operations.ts';
 import { stageImage } from './media/service.ts';
 import { reconcile } from './products/reconcile.ts';
+import { handlePublicEvents, metricsSummary, purgeOldMetrics } from './metrics.ts';
 import { handleWebhook } from './webhooks/handler.ts';
 
 const BASE = '/api/admin/v1/';
@@ -62,6 +63,8 @@ export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, d
 
   // Webhooks Shopify: autenticação própria (HMAC), sem sessão do proprietário.
   if (path === 'webhooks/shopify') return handleWebhook(req, env, ctx, deps);
+  // Contadores anônimos de visitas do site (sem sessão; só aceita a origem do site cadastrado).
+  if (path === 'public/events') return handlePublicEvents(req, env);
 
   if (path.startsWith('auth/')) { const r = await handleAuth(req, env, path); if (r) return r; return json({ error: { code: 'not_found', message: 'Não encontrado.' } }, 404); }
 
@@ -287,6 +290,13 @@ export async function handleApi(req: Request, env: Env, ctx: ExecutionContext, d
       return json({ report: await reconcile(env, p.userId, deps.gql) });
     }
 
+    // ---------------- Visitas do site (monitoramento anônimo)
+    if (path === 'metrics' && m === 'GET') {
+      requirePermission(p, 'audit:read');
+      const days = [7, 30, 90].includes(Number(url.searchParams.get('days'))) ? Number(url.searchParams.get('days')) : 7;
+      return json(await metricsSummary(env, days));
+    }
+
     // ---------------- Auditoria
     if (path === 'audit' && m === 'GET') {
       requirePermission(p, 'audit:read');
@@ -309,6 +319,7 @@ const prodDeps: Deps = {
 export async function maintenance(env: Env) {
   await runDue(env, prodDeps);
   await purgeRateLimits(env.DB);
+  await purgeOldMetrics(env);
   await env.DB.prepare('DELETE FROM sessions WHERE expires_at < ? OR revoked_at < ?').bind(Date.now() - 86400000, Date.now() - 86400000).run();
 }
 

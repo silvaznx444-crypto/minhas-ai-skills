@@ -358,7 +358,14 @@ test('contato monta mensagem no WhatsApp sem enviar dados a servidor', async () 
   const {ctx, page} = await newPage();
   await mockShopify(page);
   const posts = [];
-  page.on('request', r => { if (r.method() === 'POST' && !r.url().startsWith(SHOP)) posts.push(r.url()); });
+  const counters = [];
+  page.on('request', r => {
+    if (r.method() !== 'POST' || r.url().startsWith(SHOP)) return;
+    // Contadores anônimos de visitas (painel) são permitidos — mas nunca com dados do formulário.
+    if (r.url() === 'https://grifhii-painel.pages.dev/api/admin/v1/public/events') { counters.push(r.postData() || ''); return; }
+    posts.push(r.url());
+  });
+  await page.route('https://grifhii-painel.pages.dev/**', r => r.fulfill({status: 204, body: ''}));
   await page.goto(`${BASE}#contato`);
   await page.click('.support-message summary');
   await page.fill('#contactForm [name=name]', '<img src=x onerror=alert(1)>');
@@ -370,6 +377,7 @@ test('contato monta mensagem no WhatsApp sem enviar dados a servidor', async () 
   assert.match(href, /^https:\/\/wa\.me\/5564981025225\?text=/);
   assert.equal(await page.locator('#contactFeedback img').count(), 0, 'sem injeção de HTML');
   assert.deepEqual(posts, []);
+  assert.ok(counters.every(c => !/cliente|exemplo|64981025225|prazo|img/i.test(c)), 'contadores sem dados do formulário');
   assert.deepEqual(page.dialogs, []);
   await ctx.close();
 });
@@ -685,6 +693,48 @@ test('Marcas: o acordeão também funciona com os links reescritos pelo Netlify 
     assert.ok(await page.locator('#siteMenuBrands a').count() >= 15);
     await ctx.close();
   }
+});
+
+test('visitas anônimas: o site conta visita, página, marca, peça e cliques no WhatsApp — sem cookie e sem dados pessoais', async () => {
+  const {ctx, page} = await newPage({viewport: {width: 390, height: 844}});
+  await mockShopify(page);
+  const sent = [];
+  await page.route('https://grifhii-painel.pages.dev/**', async route => {
+    const r = route.request();
+    sent.push({url: r.url(), body: JSON.parse(r.postData() || '{}'), headers: await r.allHeaders()});
+    await route.fulfill({status: 204, body: ''});
+  });
+  const events = () => sent.flatMap(s => s.body.e || []);
+  await page.goto(`${BASE}index.html`);
+  await page.waitForTimeout(2200);
+  await page.goto(`${BASE}produtos.html?marca=diesel`);
+  await page.waitForTimeout(2200);
+  await page.goto(`${BASE}peca-camiseta-diesel-masculina`);
+  await page.waitForSelector('.product-whatsapp-button');
+  await page.waitForTimeout(2200);
+  await page.evaluate(() => { const a = document.querySelector('.product-whatsapp-button'); a.removeAttribute('target'); a.addEventListener('click', e => e.preventDefault()); a.click(); });
+  await page.waitForTimeout(300);
+  const ev = events();
+  assert.equal(ev.filter(e => e.t === 'visit').length, 1, 'uma visita por aba, mesmo trocando de página');
+  assert.deepEqual(ev.filter(e => e.t === 'view').map(e => e.k), ['inicio', 'produtos', 'peca']);
+  assert.ok(ev.some(e => e.t === 'brand' && e.k === 'diesel'));
+  assert.ok(ev.some(e => e.t === 'product' && e.k === 'camiseta-diesel-masculina'));
+  assert.ok(ev.some(e => e.t === 'whatsapp' && e.k === 'peca'));
+  assert.ok(sent.every(s => s.url === 'https://grifhii-painel.pages.dev/api/admin/v1/public/events'));
+  assert.ok(sent.every(s => !s.headers.cookie), 'nenhum cookie enviado');
+  assert.ok(ev.every(e => Object.keys(e).every(k => k === 't' || k === 'k')), 'só tipo e alvo, nenhum dado pessoal');
+  assert.equal((await ctx.cookies()).length, 0, 'o site não cria cookies');
+  await ctx.close();
+});
+
+test('visitas anônimas: com "Não rastrear" (Global Privacy Control) o site não envia nada', async () => {
+  const {ctx, page} = await newPage();
+  await mockShopify(page);
+  await page.addInitScript(() => Object.defineProperty(navigator, 'globalPrivacyControl', {get: () => true}));
+  let n = 0; await page.route('https://grifhii-painel.pages.dev/**', r => { n++; return r.fulfill({status: 204, body: ''}); });
+  await page.goto(`${BASE}index.html`); await page.waitForTimeout(2200);
+  assert.equal(n, 0);
+  await ctx.close();
 });
 
 test('Início: o banner Black Friday é o 1º slide do carrossel, com a arte certa no computador e no celular', async () => {

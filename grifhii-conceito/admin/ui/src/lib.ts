@@ -34,9 +34,22 @@ export async function api<T = any>(path: string, init: { method?: string; body?:
 export const newKey = () => crypto.randomUUID();
 
 /* ------------------------------------------------------------------ Passkeys */
+/** Mensagens claras para os erros do iPhone/Android ao criar a chave de acesso. */
+export function friendlyPasskeyError(e: unknown): Error {
+  const err = e as { name?: string; code?: string };
+  const code = err?.code || ''; const name = err?.name || '';
+  if (code === 'ERROR_AUTHENTICATOR_PREVIOUSLY_REGISTERED' || name === 'InvalidStateError')
+    return new Error('Este aparelho já tem uma chave de acesso desta conta (ela pode ter vindo pelo iCloud ou pelo Google). Não precisa criar outra: volte ao início e toque em “Entrar com Face ID”.');
+  if (name === 'NotAllowedError' || code === 'ERROR_CEREMONY_ABORTED')
+    return new Error('A chave não foi criada (cancelado ou o tempo acabou). Toque de novo e confirme com o Face ID. Se o iPhone pedir para ativar as “Chaves do iCloud” (app Senhas), ative. Se ele perguntar o que fazer com senhas já salvas, escolha MANTER ou MESCLAR — nunca apagar.');
+  if (name === 'SecurityError') return new Error('Abra o painel pelo endereço oficial (grifhii-painel.pages.dev) no Safari e tente de novo.');
+  return e instanceof Error ? e : new Error('Não foi possível criar a chave de acesso. Tente de novo.');
+}
 export async function passkeyRegister(optionsPath: string, verifyPath: string, payload: object) {
   const { challengeId, options } = await api(optionsPath, { method: 'POST', body: payload });
-  const credential = await startRegistration({ optionsJSON: options });
+  let credential;
+  try { credential = await startRegistration({ optionsJSON: options }); }
+  catch (e) { throw friendlyPasskeyError(e); }
   return api(verifyPath, { method: 'POST', body: { challengeId, credential } });
 }
 export async function passkeyLogin() {

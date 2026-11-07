@@ -42,6 +42,7 @@ PAGES = {
 <p>Shopify, Cloudflare, Google e Meta podem processar dados fora do Brasil. Essas transferências ocorrem para a execução do contrato com você e com base nas garantias contratuais oferecidas por esses fornecedores (LGPD, art. 33).</p>
 <h2>5. Cookies e armazenamento no navegador</h2>
 <p><strong>Estritamente necessários:</strong> a sacola é guardada no armazenamento local do seu navegador (chave <code>grifhii-cart-v1</code>) e pode ser apagada a qualquer momento limpando os dados do site. O checkout da Shopify usa cookies próprios necessários à compra.</p>
+<p><strong>Contagem anônima de visitas:</strong> para saber quais peças e páginas interessam mais, o site soma contadores anônimos (por exemplo: “a peça X foi aberta”, “o botão do WhatsApp do banner foi clicado”). Não usamos cookies para isso e não enviamos nem guardamos seu IP, nome, e-mail, telefone ou qualquer identificador do aparelho: o painel da loja recebe apenas totais por dia, guardados por até 400 dias. Um único sinal (<code>gh_v</code>) fica no armazenamento da aba aberta para não contar a mesma visita duas vezes e some ao fechá-la. Se o seu navegador estiver com “Não rastrear” ou Global Privacy Control ativado, nada é contado.</p>
 <p><strong>Estatística e marketing:</strong> o site <em>não</em> utiliza, nesta versão, Google Analytics, pixels de anúncios ou outros rastreadores. Se forem ativados no futuro, só carregarão depois do seu consentimento, com opção de recusar, e esta política será atualizada.</p>
 <h2>6. Por quanto tempo guardamos</h2>
 <ul>

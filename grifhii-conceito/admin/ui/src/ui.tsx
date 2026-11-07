@@ -63,6 +63,7 @@ export const StatusBadge = ({ s }: { s: string }) => { const [label, k] = STATUS
 /* ------------------------------------------------------------------ Ícones (traço fino, sem emojis) */
 const P = (d: string) => () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>;
 export const Icon = {
+  chart: P('M4 20V11M10 20V5M16 20v-7M21 20H3'),
   home: P('M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z'),
   tag: P('M20 13 13 20a2 2 0 0 1-2.8 0L3 12.8V4h8.8L20 12.2a.6.6 0 0 1 0 .8zM7.5 7.5h.01'),
   plus: P('M12 5v14M5 12h14'),

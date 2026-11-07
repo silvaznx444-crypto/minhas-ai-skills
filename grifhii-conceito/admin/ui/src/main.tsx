@@ -8,11 +8,12 @@ import { AcceptInvite, AddDevice, Login, logout, Recovery, Setup } from './pages
 import { NewProduct } from './pages/NewProduct.tsx';
 import { ProductDetail, ProductList } from './pages/Products.tsx';
 import { Activities, Overview, Settings, Stock, Sync } from './pages/Other.tsx';
+import { Visits } from './pages/Visits.tsx';
 
 const NAV: [string, string, () => React.JSX.Element, string?][] = [
   ['/', 'Início', Icon.home], ['/produtos', 'Produtos', Icon.tag, 'products:read'], ['/novo', 'Novo', Icon.plus, 'products:write'],
   ['/estoque', 'Estoque', Icon.box, 'inventory:read'], ['/sincronizacao', 'Sincronização', Icon.sync, 'sync:read'],
-  ['/atividades', 'Atividades', Icon.list, 'audit:read'], ['/configuracoes', 'Configurações', Icon.gear],
+  ['/visitas', 'Visitas', Icon.chart, 'audit:read'], ['/atividades', 'Atividades', Icon.list, 'audit:read'], ['/configuracoes', 'Configurações', Icon.gear],
 ];
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
   const path = route.split('?')[0];
   const prod = /^\/produtos\/(\d{1,20})$/.exec(path);
   const page = prod ? <ProductDetail id={prod[1]} /> : path === '/produtos' ? <ProductList /> : path === '/novo' ? <NewProduct key={route} />
-    : path === '/estoque' ? <Stock /> : path === '/sincronizacao' ? <Sync /> : path === '/atividades' ? <Activities /> : path === '/configuracoes' ? <Settings /> : <Overview />;
+    : path === '/estoque' ? <Stock /> : path === '/sincronizacao' ? <Sync /> : path === '/visitas' ? <Visits /> : path === '/atividades' ? <Activities /> : path === '/configuracoes' ? <Settings /> : <Overview />;
   const nav = NAV.filter(n => !n[3] || can(n[3]));
   const current = (to: string) => (to === '/' ? path === '/' : path.startsWith(to)) ? 'page' : undefined;
   const mobileNav = ['/', '/produtos', '/novo', '/estoque', '/configuracoes'].map(t => nav.find(n => n[0] === t)).filter(Boolean) as typeof NAV;

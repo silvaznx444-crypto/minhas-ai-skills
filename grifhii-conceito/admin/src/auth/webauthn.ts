@@ -28,7 +28,9 @@ export async function consumeChallenge(env: Env, id: string, purpose: Purpose) {
   return { challenge: row.challenge, userId: row.user_id, meta: row.meta ? JSON.parse(row.meta) : null };
 }
 
-export async function registrationOptions(env: Env, user: { webauthnUserId: string; name: string }, excludeIds: string[] = []) {
+/** localDevice: "cadastrar ESTE aparelho" (link de aparelho, recuperação). O iPhone vai direto para o Face ID dele,
+ * sem oferecer QR code / chave de segurança / outro aparelho. */
+export async function registrationOptions(env: Env, user: { webauthnUserId: string; name: string }, excludeIds: string[] = [], opts: { thisDevice?: boolean } = {}) {
   return webauthnLib.generateRegistrationOptions({
     rpName: 'GRIFHII CONCEITO — Painel', rpID: env.WEBAUTHN_RP_ID,
     userName: user.name, userDisplayName: user.name,
@@ -36,6 +38,7 @@ export async function registrationOptions(env: Env, user: { webauthnUserId: stri
     attestationType: 'none',
     excludeCredentials: excludeIds.map(id => ({ id })),
     authenticatorSelection: { residentKey: 'required', userVerification: 'required' },
+    ...(opts.thisDevice ? { preferredAuthenticatorType: 'localDevice' as const } : {}),
   });
 }
 export async function verifyRegistration(env: Env, response: unknown, expectedChallenge: string) {

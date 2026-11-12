@@ -6,15 +6,17 @@
 <title>Vimac Acabamentos — Pisos e revestimentos em Santa Helena de Goiás</title>
 <meta name="description" content="Showroom de pisos, porcelanatos e revestimentos em Santa Helena de Goiás. Rua Delcides de Morais, 98 – Loja 1, Bairro Blandina.">
 <meta name="theme-color" content="#0e0e10">
+<link rel="preload" as="image" href="assets/hero.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0e0e10; --bg-2:#141417; --bg-3:#1b1b1f;
-  --line:rgba(236,234,230,.10); --line-2:rgba(236,234,230,.18);
-  --ink:#eceae6; --ink-2:#b4b2ad; --muted:#7f7d84;
+  --bg:#0e0e10; --bg-2:#151518; --bg-3:#1c1c20;
+  --ink:#eceae6; --ink-2:#b4b2ad; --muted:#85838a;
+  --line:rgba(236,234,230,.10); --line-2:rgba(236,234,230,.20);
   --accent:#bdb6d6; --accent-ink:#121116;
+  --paper:#eeece7;
   --display:"Barlow Condensed","Arial Narrow",sans-serif;
   --text:"Barlow",system-ui,sans-serif;
   --gutter:clamp(20px,5vw,72px);
@@ -24,11 +26,19 @@
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-img{display:block;max-width:100%}
+img,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:1px solid var(--accent);outline-offset:4px}
 ::selection{background:var(--accent);color:var(--accent-ink)}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* light sections: same components, inverted tokens */
+.light{
+  --ink:#141416; --ink-2:#4a484f; --muted:#7a7780;
+  --line:rgba(20,20,22,.12); --line-2:rgba(20,20,22,.28);
+  --accent:#4f4a6b; --accent-ink:#f4f2ee;
+  --bg-2:#e5e2dc; --bg-3:#dcd9d2;
+  background:var(--paper); color:var(--ink);
+}
 
 /* ---------- type ---------- */
 .display{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.01em;line-height:.95;margin:0}
@@ -36,41 +46,44 @@ a{color:inherit;text-decoration:none}
 .idx{font-family:var(--display);font-weight:400;color:var(--accent);font-size:18px;letter-spacing:.04em}
 
 /* ---------- rail ---------- */
-.rail{position:fixed;inset:0 auto 0 0;width:var(--rail);border-right:1px solid var(--line);z-index:30;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:40px;gap:28px;background:linear-gradient(var(--bg),transparent 30%)}
-.rail a{writing-mode:vertical-rl;transform:rotate(180deg);font:500 11px/1 var(--text);letter-spacing:.22em;text-transform:uppercase;color:var(--muted);transition:color .3s}
-.rail a:hover{color:var(--ink)}
+.rail{position:fixed;inset:0 auto 0 0;width:var(--rail);border-right:1px solid rgba(128,126,132,.22);z-index:30;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:40px;gap:28px}
+.rail a{writing-mode:vertical-rl;transform:rotate(180deg);font:500 11px/1 var(--text);letter-spacing:.22em;text-transform:uppercase;color:#8d8a92;transition:color .3s}
+.rail a:hover{color:var(--accent)}
 
 /* ---------- header ---------- */
 .top{position:fixed;top:0;left:var(--rail);right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:22px var(--gutter);transition:background .4s,padding .4s,border-color .4s;border-bottom:1px solid transparent}
-.top.scrolled{background:rgba(14,14,16,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding-top:14px;padding-bottom:14px;border-color:var(--line)}
+.top.scrolled{background:rgba(14,14,16,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding-top:14px;padding-bottom:14px;border-color:rgba(236,234,230,.1)}
 .brand img{height:38px;width:auto}
-.nav{display:flex;align-items:center;gap:clamp(20px,3vw,40px)}
-.nav a{font:500 13px/1 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);padding:8px 0;position:relative;transition:color .3s}
-.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:2px;height:1px;background:var(--accent);transition:right .4s var(--ease)}
-.nav a:hover{color:var(--ink)}
+.nav{display:flex;align-items:center;gap:clamp(18px,2.6vw,38px)}
+.nav a{font:500 13px/1 var(--text);letter-spacing:.14em;text-transform:uppercase;color:#cfcdc8;padding:8px 0;position:relative;transition:color .3s}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:2px;height:1px;background:#bdb6d6;transition:right .4s var(--ease)}
+.nav a:hover{color:#fff}
 .nav a:hover::after{right:0}
-.nav .tel{color:var(--ink);font-family:var(--display);font-size:17px;letter-spacing:.06em;border:1px solid var(--line-2);padding:11px 16px}
+.nav .tel{color:#fff;font-family:var(--display);font-size:17px;letter-spacing:.06em;border:1px solid rgba(236,234,230,.25);padding:11px 16px}
 .nav .tel::after{display:none}
-.nav .tel:hover{border-color:var(--accent)}
-.menu-btn{display:none;background:none;border:0;color:var(--ink);width:44px;height:44px;padding:10px;cursor:pointer}
-.menu-btn span{display:block;height:1px;background:currentColor;margin:6px 0;transition:transform .4s var(--ease),opacity .3s}
+.nav .tel:hover{border-color:#bdb6d6}
+.menu-btn{display:none;background:none;border:0;color:#fff;width:44px;height:44px;padding:10px;cursor:pointer}
+.menu-btn span{display:block;height:1px;background:currentColor;margin:6px 0;transition:transform .4s var(--ease)}
 
-/* ---------- hero ---------- */
-.hero{position:relative;min-height:100svh;padding-top:120px!important;display:grid;grid-template-columns:repeat(12,1fr);align-items:end;padding:0 var(--gutter) 0 calc(var(--rail) + var(--gutter));isolation:isolate}
-.hero-media{position:absolute;inset:0 0 0 var(--rail);z-index:-1;overflow:hidden}
-.hero-media img{width:100%;height:100%;object-fit:cover;object-position:72% 78%;transform:scale(1.06);transition:transform 2.4s var(--ease);filter:brightness(.78)}
-.loaded .hero-media img{transform:scale(1)}
-.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,rgba(14,14,16,.82) 32%,rgba(14,14,16,.15) 70%),linear-gradient(0deg,var(--bg) 0%,rgba(14,14,16,0) 38%)}
-.hero-copy{grid-column:1 / span 7;padding-bottom:clamp(120px,18vh,180px)}
-.hero h1{font-size:clamp(42px,6vw,96px);margin-top:22px;max-width:14ch;text-wrap:balance}
-.hero p{max-width:40ch;color:var(--ink-2);margin:28px 0 40px;font-size:17px}
-.actions{display:flex;flex-wrap:wrap;gap:14px 32px;align-items:center}
-.btn{display:inline-flex;align-items:center;gap:14px;min-height:52px;padding:0 26px;background:var(--accent);color:var(--accent-ink);font:500 13px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;transition:background .3s,gap .3s var(--ease)}
-.btn:hover{background:var(--ink);gap:20px}
+/* ---------- buttons/links ---------- */
+.btn{display:inline-flex;align-items:center;gap:14px;min-height:52px;padding:0 26px;background:var(--accent);color:var(--accent-ink);font:500 13px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;border:0;cursor:pointer;transition:background .3s,color .3s,gap .3s var(--ease)}
+.btn:hover{background:var(--ink);color:var(--paper);gap:20px}
+.light .btn:hover{color:var(--paper)}
 .link{display:inline-flex;align-items:center;gap:12px;min-height:44px;font:500 13px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
 .link i{display:block;width:28px;height:1px;background:currentColor;transition:width .4s var(--ease)}
 .link:hover i{width:44px}
-.hero-bar{position:absolute;left:calc(var(--rail) + var(--gutter));right:var(--gutter);bottom:0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:24px;padding:22px 0 26px;font-size:13px;color:var(--muted)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:repeat(12,1fr);align-items:end;padding:120px var(--gutter) 0 calc(var(--rail) + var(--gutter));isolation:isolate}
+.hero-media{position:absolute;inset:0 0 0 var(--rail);z-index:-1;overflow:hidden;background:#1a1a1c}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:62% 50%;transform:scale(1.05);transition:transform 2.6s var(--ease)}
+.loaded .hero-media img{transform:scale(1)}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,16,.7) 0%,rgba(14,14,16,0) 22%),linear-gradient(90deg,rgba(14,14,16,.94) 0%,rgba(14,14,16,.72) 30%,rgba(14,14,16,.08) 62%),linear-gradient(0deg,var(--bg) 0%,rgba(14,14,16,0) 34%)}
+.hero-copy{grid-column:1 / span 6;padding-bottom:clamp(120px,17vh,170px)}
+.hero h1{font-size:clamp(42px,5.6vw,92px);margin-top:22px;max-width:13ch;text-wrap:balance}
+.hero p{max-width:40ch;color:var(--ink-2);margin:28px 0 40px;font-size:17px}
+.actions{display:flex;flex-wrap:wrap;gap:14px 32px;align-items:center}
+.hero-bar{position:absolute;left:calc(var(--rail) + var(--gutter));right:var(--gutter);bottom:0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:24px;padding:22px 0 26px;font-size:13px;color:var(--ink-2)}
 .hero-bar a:hover{color:var(--ink)}
 .hero-bar .scroll{display:flex;align-items:center;gap:12px;font-family:var(--display);color:var(--ink);font-size:15px;letter-spacing:.08em}
 .hero-bar .scroll i{display:block;width:1px;height:28px;background:linear-gradient(var(--accent),transparent);animation:drip 2.2s var(--ease) infinite}
@@ -79,54 +92,88 @@ a{color:inherit;text-decoration:none}
 /* ---------- sections ---------- */
 section{position:relative}
 .wrap{padding-left:calc(var(--rail) + var(--gutter));padding-right:var(--gutter)}
+.pad{padding-top:clamp(100px,12vw,170px);padding-bottom:clamp(100px,12vw,170px)}
 .sec-head{display:flex;align-items:baseline;gap:18px;position:relative}
-.sec-head h2{font-size:clamp(28px,3vw,40px);position:relative;z-index:1}
-.ghost{position:absolute;left:clamp(40px,7vw,120px);top:50%;transform:translateY(-58%);font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:clamp(64px,10vw,150px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(236,234,230,.07);pointer-events:none;white-space:nowrap;user-select:none}
+.sec-head h2{font-size:clamp(30px,3.2vw,44px);position:relative;z-index:1}
+.ghost{position:absolute;left:clamp(40px,7vw,120px);top:50%;transform:translateY(-58%);font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:clamp(64px,10vw,150px);line-height:1;color:transparent;-webkit-text-stroke:1px var(--line);pointer-events:none;white-space:nowrap;user-select:none}
+.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.intro p{max-width:42ch;color:var(--ink-2);margin:0}
 
 /* 01 loja */
-.loja{padding-top:clamp(110px,14vw,180px)}
-.loja-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:clamp(48px,6vw,80px)}
+.loja-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:clamp(48px,6vw,80px);align-items:center}
 .loja-text{grid-column:1 / span 5;max-width:46ch}
 .loja-text p{color:var(--ink-2);margin:0 0 20px}
 .loja-text p:first-child{color:var(--ink);font-size:19px;line-height:1.55}
 .loja-text .link{margin-top:14px}
-.board{grid-column:7 / span 6;display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:1fr 1fr;gap:6px;aspect-ratio:6/5}
-.board figure{margin:0;position:relative;overflow:hidden;background:var(--bg-3)}
-.board figure:first-child{grid-row:span 2}
-.board img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
-.board figure:hover img{transform:scale(1.04)}
-.board figcaption{position:absolute;left:14px;bottom:12px;font:500 11px/1 var(--text);letter-spacing:.2em;text-transform:uppercase;color:#fff;mix-blend-mode:difference}
-
+.loja-img{grid-column:7 / span 6;margin:0;position:relative;overflow:hidden;aspect-ratio:9/5}
+.loja-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.loja-img:hover img{transform:scale(1.03)}
+.loja-img figcaption{position:absolute;left:16px;bottom:14px;font:500 11px/1 var(--text);letter-spacing:.2em;text-transform:uppercase;color:#fff}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(80px,9vw,130px);border-top:1px solid var(--line)}
-.step{padding:32px 28px 8px 0}
+.step{padding:32px 28px 0 0}
 .step+.step{padding-left:28px;border-left:1px solid var(--line)}
-.step b{display:block;font-family:var(--display);font-weight:500;font-size:clamp(40px,4vw,56px);line-height:1;color:var(--ink)}
+.step b{display:block;font-family:var(--display);font-weight:500;font-size:clamp(40px,4vw,56px);line-height:1}
 .step span{display:block;margin-top:14px;color:var(--ink-2);font-size:15px;line-height:1.5;max-width:22ch}
 
-/* 02 materiais */
-.materiais{padding-top:clamp(110px,14vw,180px)}
-.mat-intro{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
-.mat-intro p{max-width:42ch;color:var(--ink-2);margin:0}
-.panels{display:flex;height:min(78vh,760px);min-height:520px;margin-top:clamp(40px,5vw,64px);margin-left:var(--rail);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.panel{position:relative;flex:1 1 0;overflow:hidden;transition:flex-grow .8s var(--ease);border-right:1px solid var(--line);color:var(--ink)}
+/* 02 ambientes (light) */
+.rooms{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(10px,1.2vw,18px);margin-top:clamp(48px,6vw,80px);align-items:start}
+.room{margin:0}
+.room .ph{overflow:hidden;background:var(--bg-3);aspect-ratio:3/4}
+.room:nth-child(even){margin-top:clamp(28px,4vw,64px)}
+.room:nth-child(3n+1) .ph{aspect-ratio:3/4.4}
+.room img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.room:hover img{transform:scale(1.05)}
+.room figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding-top:14px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.room figcaption b{font-family:var(--display);font-weight:500;font-size:20px;letter-spacing:.03em;text-transform:uppercase}
+.room figcaption span{font-size:12px;color:var(--muted);letter-spacing:.06em}
+
+/* 03 materiais */
+.panels{display:flex;height:min(80vh,780px);min-height:540px;margin-top:clamp(40px,5vw,64px);margin-left:var(--rail);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.panel{position:relative;flex:1 1 0;overflow:hidden;transition:flex-grow .8s var(--ease);border-right:1px solid var(--line);color:#eceae6;background:#1a1a1c}
 .panel:last-child{border-right:0}
-.panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.9);transition:filter .8s var(--ease),transform 1.4s var(--ease);transform:scale(1.04)}
-.panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,16,.75) 0%,rgba(14,14,16,0) 35%,rgba(14,14,16,0) 60%,rgba(14,14,16,.85) 100%)}
+.panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.6);transition:filter .8s var(--ease),transform 1.4s var(--ease);transform:scale(1.05)}
+.panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,16,.78) 0%,rgba(14,14,16,0) 34%,rgba(14,14,16,0) 55%,rgba(14,14,16,.9) 100%)}
 .panel-top{position:absolute;z-index:2;left:28px;right:28px;top:28px}
 .panel-top .idx{display:block;margin-bottom:10px}
 .panel-top h3{font-size:clamp(22px,2vw,30px);max-width:12ch}
 .panel-foot{position:absolute;z-index:2;left:28px;right:28px;bottom:28px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
-.panel-foot p{margin:0;max-width:30ch;font-size:15px;line-height:1.5;color:var(--ink-2);opacity:0;transform:translateY(10px);transition:opacity .5s,transform .6s var(--ease)}
-.panel-foot .tag{writing-mode:vertical-rl;transform:rotate(180deg);font:500 11px/1 var(--text);letter-spacing:.22em;text-transform:uppercase;color:var(--muted);white-space:nowrap;transition:opacity .4s}
-.panel-cta{display:inline-flex;align-items:center;gap:10px;margin-top:16px;font:500 12px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
-.panel-cta i{display:block;width:24px;height:1px;background:var(--accent)}
-.panel:hover,.panel:focus-visible,.panel.is-open{flex-grow:2.1}
-.panel:hover img,.panel:focus-visible img,.panel.is-open img{filter:brightness(.72) saturate(1);transform:scale(1)}
-.panel:hover .panel-foot p,.panel:focus-visible .panel-foot p,.panel.is-open .panel-foot p{opacity:1;transform:none;transition-delay:.15s}
+.panel-foot p{margin:0;max-width:30ch;font-size:15px;line-height:1.5;color:#c9c7c2;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .6s var(--ease)}
+.panel-foot .tag{writing-mode:vertical-rl;transform:rotate(180deg);font:500 11px/1 var(--text);letter-spacing:.22em;text-transform:uppercase;color:#a09ea6;white-space:nowrap}
+.panel-cta{display:inline-flex;align-items:center;gap:10px;margin-top:16px;font:500 12px/1 var(--text);letter-spacing:.16em;text-transform:uppercase}
+.panel-cta i{display:block;width:24px;height:1px;background:#bdb6d6}
+.panel:hover,.panel:focus-visible{flex-grow:2.1}
+.panel:hover img,.panel:focus-visible img{filter:brightness(.8);transform:scale(1)}
+.panel:hover .panel-foot p,.panel:focus-visible .panel-foot p{opacity:1;transform:none;transition-delay:.15s}
 .panel:focus-visible{outline-offset:-2px}
 
-/* 03 equipe */
-.equipe{padding-top:clamp(110px,14vw,180px)}
+/* 04 ofertas (light, video) */
+.offer{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:center}
+.offer-text{grid-column:1 / span 6}
+.offer-text h2{font-size:clamp(46px,6vw,96px);margin:22px 0 0;max-width:10ch}
+.offer-date{display:inline-flex;gap:14px;align-items:center;margin-top:28px;font-family:var(--display);font-size:22px;letter-spacing:.06em;text-transform:uppercase}
+.offer-date i{display:block;width:40px;height:1px;background:var(--ink)}
+.offer-text p{max-width:44ch;color:var(--ink-2);margin:24px 0 36px}
+.offer-list{list-style:none;padding:0;margin:0 0 40px;border-top:1px solid var(--line);max-width:520px}
+.offer-list li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px}
+.offer-list li span:last-child{color:var(--muted)}
+.player{grid-column:8 / span 5;justify-self:center;position:relative;width:min(100%,380px);aspect-ratio:9/16;background:#000;box-shadow:0 40px 80px -40px rgba(0,0,0,.55);overflow:hidden}
+.player video{width:100%;height:100%;object-fit:cover}
+.player-ui{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:16px;pointer-events:none}
+.player-ui > *{pointer-events:auto}
+.p-top{display:flex;justify-content:space-between;align-items:center}
+.p-btn{width:44px;height:44px;display:grid;place-items:center;background:rgba(0,0,0,.55);border:0;color:#fff;cursor:pointer;transition:background .3s}
+.p-btn:hover{background:#000}
+.p-btn svg{width:18px;height:18px}
+.p-bottom{display:flex;align-items:center;gap:12px}
+.p-bar{flex:1;height:2px;background:rgba(255,255,255,.3);position:relative}
+.p-bar b{position:absolute;inset:0 auto 0 0;width:0;background:#fff}
+.player .big-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.92);color:#111;border:0;display:grid;place-items:center;cursor:pointer;transition:transform .4s var(--ease),opacity .3s}
+.player .big-play:hover{transform:translate(-50%,-50%) scale(1.06)}
+.player .big-play svg{width:26px;height:26px;margin-left:4px}
+.player.playing .big-play{opacity:0;pointer-events:none}
+.player-note{grid-column:8 / span 5;justify-self:center;font-size:13px;color:var(--muted);margin-top:-8px;text-align:center}
+
+/* 05 equipe */
 .team{margin-top:clamp(40px,5vw,64px);border-top:1px solid var(--line)}
 .person{display:grid;grid-template-columns:72px 1.4fr 1fr 1fr auto;align-items:center;gap:24px;padding:26px 0;border-bottom:1px solid var(--line);transition:background .4s,padding .4s var(--ease)}
 .person:hover{background:var(--bg-2);padding-left:20px;padding-right:20px}
@@ -136,65 +183,74 @@ section{position:relative}
 .person .num{font-family:var(--display);font-size:20px;letter-spacing:.05em}
 .person .link{font-size:12px}
 
-/* 04 contato */
-.contato{padding-top:clamp(110px,14vw,180px);padding-bottom:clamp(80px,9vw,120px)}
+/* 06 contato (light) */
 .contact-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:clamp(40px,5vw,64px)}
 form{grid-column:1 / span 6;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field{position:relative;display:flex;flex-direction:column}
+.field{display:flex;flex-direction:column}
 .field.full{grid-column:1 / -1}
 .field label{font:500 11px/1 var(--text);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.field input,.field textarea,.field select{appearance:none;-webkit-appearance:none;border:1px solid var(--line);background:var(--bg-2);color:var(--ink);font:400 16px/1.4 var(--text);padding:15px 16px;border-radius:0;transition:border-color .3s,background .3s}
+.field input,.field textarea,.field select{appearance:none;-webkit-appearance:none;border:1px solid var(--line-2);background:#f7f6f3;color:var(--ink);font:400 16px/1.4 var(--text);padding:15px 16px;border-radius:0;transition:border-color .3s,background .3s}
 .field select{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(-45deg,transparent 50%,var(--muted) 50%);background-position:calc(100% - 22px) 52%,calc(100% - 17px) 52%;background-size:5px 5px;background-repeat:no-repeat;padding-right:44px}
 .field textarea{min-height:140px;resize:vertical}
-.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--accent);background:var(--bg-3)}
-.field input[aria-invalid=true]{border-color:#c98a7d}
-.field .err{font-size:13px;color:#d69c8f;margin-top:8px;min-height:0}
-form .btn{border:0;cursor:pointer;justify-self:start;margin-top:12px}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--ink);background:#fff}
+.field input[aria-invalid=true]{border-color:#a5483a}
+.field .err{font-size:13px;color:#a5483a;margin-top:8px}
+form .btn{justify-self:start;margin-top:12px}
 .form-note{grid-column:1/-1;font-size:13px;color:var(--muted);margin:4px 0 0}
 .info{grid-column:8 / span 5;display:flex;flex-direction:column;gap:36px}
-.info .big{font-family:var(--display);font-size:clamp(28px,2.8vw,40px);line-height:1.15;letter-spacing:.03em}
+.info .big{font-family:var(--display);font-size:clamp(28px,2.8vw,40px);line-height:1.15;letter-spacing:.03em;margin-top:14px}
 .info .big a:hover{color:var(--accent)}
-.info address{font-style:normal;color:var(--ink-2);line-height:1.7}
+.info address{font-style:normal;color:var(--ink-2);line-height:1.7;margin-top:14px}
 .info .row{display:flex;gap:28px;flex-wrap:wrap}
 
 footer{border-top:1px solid var(--line);padding-top:28px;padding-bottom:36px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:13px}
 footer img{height:30px;width:auto;opacity:.85}
+footer a:hover{color:var(--ink)}
 
 /* ---------- reveal ---------- */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform 1s var(--ease)}
 .rv.in{opacity:1;transform:none}
-.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}
 .no-js .rv{opacity:1;transform:none}
 
 /* ---------- responsive ---------- */
 @media (max-width:1080px){
-  .board{grid-column:7 / span 6}
   .person{grid-template-columns:52px 1.3fr 1fr auto}
   .person .role{display:none}
+  .rooms{grid-template-columns:repeat(3,1fr)}
+  .room:nth-child(even){margin-top:0}
+  .room:nth-child(3n+2){margin-top:clamp(28px,4vw,64px)}
 }
 @media (max-width:900px){
   :root{--rail:0px}
   .rail{display:none}
   .menu-btn{display:block;position:relative;z-index:2}
-  .nav{position:fixed;inset:0;flex-direction:column;justify-content:center;align-items:flex-start;gap:6px;padding:0 var(--gutter);background:var(--bg);opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
-  .nav a{font-family:var(--display);font-size:40px;letter-spacing:.02em;color:var(--ink)}
+  .nav{position:fixed;inset:0;flex-direction:column;justify-content:center;align-items:flex-start;gap:6px;padding:0 var(--gutter);background:#0e0e10;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+  .nav a{font-family:var(--display);font-size:40px;letter-spacing:.02em;color:#eceae6}
   .nav .tel{margin-top:24px;font-size:20px}
   .menu-open .nav{opacity:1;visibility:visible}
   .menu-open .menu-btn span:first-child{transform:translateY(3.5px) rotate(45deg)}
   .menu-open .menu-btn span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
   .hero-copy{grid-column:1 / -1}
-  .hero-media::after{background:linear-gradient(0deg,var(--bg) 8%,rgba(14,14,16,.55) 55%,rgba(14,14,16,.35) 100%)}
-  .loja-text,.board{grid-column:1 / -1}
-  .board{margin-top:24px}
+  .hero-media img{object-position:58% 50%}
+  .hero-media::after{background:linear-gradient(0deg,var(--bg) 6%,rgba(14,14,16,.78) 50%,rgba(14,14,16,.5) 100%)}
+  .loja-text,.loja-img{grid-column:1 / -1}
   .steps{grid-template-columns:1fr 1fr}
   .step:nth-child(3){padding-left:0;border-left:0}
   .step:nth-child(n+3){border-top:1px solid var(--line);margin-top:24px}
+  .rooms{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-right:calc(var(--gutter) * -1);padding-right:var(--gutter);scrollbar-width:none}
+  .rooms::-webkit-scrollbar{display:none}
+  .room{flex:0 0 62%;scroll-snap-align:start}
+  .room:nth-child(n){margin-top:0}
   .panels{flex-direction:column;height:auto;min-height:0}
-  .panel{flex:none;height:300px;border-right:0;border-bottom:1px solid var(--line)}
+  .panel{flex:none;height:320px;border-right:0;border-bottom:1px solid var(--line)}
   .panel:last-child{border-bottom:0}
-  .panel:hover,.panel.is-open{flex-grow:0}
+  .panel:hover{flex-grow:0}
+  .panel img{filter:brightness(.7)}
   .panel-foot p{opacity:1;transform:none}
   .panel-foot .tag{display:none}
+  .offer-text,.player,.player-note{grid-column:1 / -1}
+  .player{margin-top:24px}
   form,.info{grid-column:1 / -1}
   .info{margin-top:48px}
 }
@@ -202,9 +258,9 @@ footer img{height:30px;width:auto;opacity:.85}
   .hero-bar{flex-direction:column;gap:6px}
   .hero-bar .scroll{display:none}
   .hero-copy{padding-bottom:150px}
+  .room{flex-basis:76%}
   .person{grid-template-columns:1fr auto;gap:6px 16px;padding:22px 0}
   .person .idx{grid-column:1/-1}
-  .person .num{grid-column:1}
   .person .link{grid-column:2;grid-row:2 / span 2;align-self:center}
   .person:hover{padding-left:0;padding-right:0;background:none}
   form{grid-template-columns:1fr}
@@ -232,8 +288,9 @@ footer img{height:30px;width:auto;opacity:.85}
   <a class="brand" href="#inicio" aria-label="Vimac Acabamentos — início"><img src="assets/logo.png" alt="Vimac Acabamentos" width="146" height="58"></a>
   <nav class="nav" id="nav" aria-label="Principal">
     <a href="#loja">A loja</a>
+    <a href="#ambientes">Ambientes</a>
     <a href="#materiais">Materiais</a>
-    <a href="#equipe">Equipe</a>
+    <a href="#ofertas">Ofertas</a>
     <a href="#contato">Contato</a>
     <a class="tel" href="tel:+556436411740">(64) 3641-1740</a>
   </nav>
@@ -241,8 +298,9 @@ footer img{height:30px;width:auto;opacity:.85}
 </header>
 
 <main>
+  <!-- HERO -->
   <section class="hero" id="inicio">
-    <div class="hero-media"><img src="assets/fachada.jpg" alt="Fachada da loja Vimac Acabamentos em Santa Helena de Goiás" width="998" height="880" fetchpriority="high"></div>
+    <div class="hero-media"><img src="assets/hero.webp" alt="Fachada da loja Vimac com painéis de porcelanato expostos na calçada" width="1672" height="941" fetchpriority="high"></div>
     <div class="hero-copy">
       <span class="eyebrow rv">Pisos · Porcelanatos · Revestimentos</span>
       <h1 class="display rv d1">O acabamento é a parte da obra que fica à vista.</h1>
@@ -259,7 +317,8 @@ footer img{height:30px;width:auto;opacity:.85}
     </div>
   </section>
 
-  <section class="loja wrap" id="loja" aria-labelledby="loja-t">
+  <!-- 01 LOJA (dark) -->
+  <section class="wrap pad" id="loja" aria-labelledby="loja-t">
     <div class="sec-head rv">
       <span class="idx">01</span>
       <h2 class="display" id="loja-t">A loja</h2>
@@ -268,16 +327,11 @@ footer img{height:30px;width:auto;opacity:.85}
     <div class="loja-grid">
       <div class="loja-text rv">
         <p>A Vimac Acabamentos reúne pisos, porcelanatos e revestimentos para obra nova e reforma, com atendimento direto de quem conhece cada linha da loja.</p>
-        <p>No showroom, as peças ficam montadas em painéis para você comparar textura, tom e formato lado a lado. Se o projeto já tem planta, a equipe ajuda a calcular a metragem e a perda de cada ambiente antes do orçamento.</p>
+        <p>As peças ficam montadas em painéis para você comparar textura, tom e formato lado a lado. Se o projeto já tem planta, a equipe ajuda a calcular a metragem e a perda de cada ambiente antes do orçamento.</p>
         <a class="link" href="https://www.google.com/maps/search/?api=1&query=Rua+Delcides+de+Morais+98+Santa+Helena+de+Goi%C3%A1s" target="_blank" rel="noopener"><i></i>Como chegar</a>
       </div>
-      <div class="board rv d2" aria-label="Amostras de materiais">
-        <figure><img src="assets/mat-madeira.jpg" alt="Amostra de porcelanato com acabamento amadeirado" loading="lazy" width="900" height="1350"><figcaption>Madeirado</figcaption></figure>
-        <figure><img src="assets/mat-marmore.jpg" alt="Amostra de porcelanato marmorizado claro" loading="lazy" width="900" height="1350"><figcaption>Marmorizado</figcaption></figure>
-        <figure><img src="assets/mat-grafite.jpg" alt="Amostra de porcelanato grafite em grande formato" loading="lazy" width="900" height="1350"><figcaption>Grafite</figcaption></figure>
-      </div>
+      <figure class="loja-img rv d2"><img src="assets/img/loja.jpg" alt="Painéis de porcelanato marmorizado e madeirado expostos na frente da loja" loading="lazy" width="900" height="401"><figcaption>Rua Delcides de Morais, 98</figcaption></figure>
     </div>
-
     <div class="steps">
       <div class="step rv"><b>01</b><span>Escolha das peças no showroom</span></div>
       <div class="step rv d1"><b>02</b><span>Cálculo de metragem e perda por ambiente</span></div>
@@ -286,42 +340,93 @@ footer img{height:30px;width:auto;opacity:.85}
     </div>
   </section>
 
-  <section class="materiais" id="materiais" aria-labelledby="mat-t">
-    <div class="wrap mat-intro">
+  <!-- 02 AMBIENTES (light) -->
+  <section class="light wrap pad" id="ambientes" aria-labelledby="amb-t">
+    <div class="intro">
       <div class="sec-head rv">
         <span class="idx">02</span>
+        <h2 class="display" id="amb-t">Ambientes</h2>
+        <span class="ghost" aria-hidden="true">Projetos</span>
+      </div>
+      <p class="rv d1">Cada cômodo pede um tipo de peça. Antes de escolher o modelo, vale pensar no uso: tráfego, umidade, luz e limpeza.</p>
+    </div>
+    <div class="rooms">
+      <figure class="room rv"><div class="ph"><img src="assets/img/sala-800.jpg" srcset="assets/img/sala-800.jpg 800w, assets/img/sala-1600.jpg 1600w" sizes="(max-width:900px) 70vw, 16vw" alt="Sala integrada com piso claro" loading="lazy" width="800" height="533"></div><figcaption><b>Sala</b><span>Retificado</span></figcaption></figure>
+      <figure class="room rv d1"><div class="ph"><img src="assets/img/cozinha-800.jpg" srcset="assets/img/cozinha-800.jpg 800w, assets/img/cozinha-1600.jpg 1600w" sizes="(max-width:900px) 70vw, 16vw" alt="Cozinha branca com piso amadeirado" loading="lazy" width="800" height="531"></div><figcaption><b>Cozinha</b><span>Fácil limpeza</span></figcaption></figure>
+      <figure class="room rv d2"><div class="ph"><img src="assets/img/banheiro-800.jpg" srcset="assets/img/banheiro-800.jpg 800w, assets/img/banheiro-1600.jpg 1600w" sizes="(max-width:900px) 70vw, 16vw" alt="Banheiro com box de vidro e revestimento branco" loading="lazy" width="800" height="533"></div><figcaption><b>Banheiro</b><span>Antiderrapante</span></figcaption></figure>
+      <figure class="room rv d3"><div class="ph"><img src="assets/img/quarto-800.jpg" srcset="assets/img/quarto-800.jpg 800w, assets/img/quarto-1600.jpg 1600w" sizes="(max-width:900px) 70vw, 16vw" alt="Quarto em tons neutros" loading="lazy" width="800" height="533"></div><figcaption><b>Quarto</b><span>Toque quente</span></figcaption></figure>
+      <figure class="room rv d4"><div class="ph"><img src="assets/img/escada-800.jpg" srcset="assets/img/escada-800.jpg 800w, assets/img/escada-1600.jpg 1600w" sizes="(max-width:900px) 70vw, 16vw" alt="Escada com degraus em madeira" loading="lazy" width="800" height="1200"></div><figcaption><b>Escadas</b><span>Peças de borda</span></figcaption></figure>
+      <figure class="room rv d5"><div class="ph"><img src="assets/img/externa-800.jpg" srcset="assets/img/externa-800.jpg 800w, assets/img/externa-1600.jpg 1600w" sizes="(max-width:900px) 70vw, 16vw" alt="Área externa com piscina" loading="lazy" width="800" height="533"></div><figcaption><b>Área externa</b><span>Atérmico</span></figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 03 MATERIAIS (dark) -->
+  <section class="pad" id="materiais" aria-labelledby="mat-t" style="padding-bottom:0">
+    <div class="wrap intro">
+      <div class="sec-head rv">
+        <span class="idx">03</span>
         <h2 class="display" id="mat-t">Materiais</h2>
         <span class="ghost" aria-hidden="true">Superfícies</span>
       </div>
       <p class="rv d1">Quatro linhas que concentram a maior parte dos projetos. Toque em uma para pedir as opções disponíveis no estoque.</p>
     </div>
-    <div class="panels" id="panels">
+    <div class="panels">
       <a class="panel" href="https://wa.me/5564999984826?text=Ol%C3%A1!%20Quero%20ver%20op%C3%A7%C3%B5es%20de%20porcelanato%20madeirado." target="_blank" rel="noopener">
-        <img src="assets/mat-madeira.jpg" alt="" loading="lazy" width="900" height="1350">
+        <img src="assets/img/madeirado-800.jpg" srcset="assets/img/madeirado-800.jpg 800w, assets/img/madeirado-1600.jpg 1600w" sizes="(max-width:900px) 100vw, 45vw" alt="" loading="lazy" width="800" height="706">
         <div class="panel-top"><span class="idx">01</span><h3 class="display">Porcelanato madeirado</h3></div>
         <div class="panel-foot"><div><p>Aparência de madeira com a resistência do porcelanato. Funciona em sala, quarto e varanda coberta.</p><span class="panel-cta"><i></i>Pedir opções</span></div><span class="tag" aria-hidden="true">Áreas internas</span></div>
       </a>
       <a class="panel" href="https://wa.me/5564999984826?text=Ol%C3%A1!%20Quero%20ver%20op%C3%A7%C3%B5es%20de%20porcelanato%20marmorizado." target="_blank" rel="noopener">
-        <img src="assets/mat-marmore.jpg" alt="" loading="lazy" width="900" height="1350">
+        <img src="assets/img/marmorizado-800.jpg" srcset="assets/img/marmorizado-800.jpg 800w, assets/img/marmorizado-1600.jpg 1600w" sizes="(max-width:900px) 100vw, 45vw" alt="" loading="lazy" width="800" height="533">
         <div class="panel-top"><span class="idx">02</span><h3 class="display">Marmorizados</h3></div>
-        <div class="panel-foot"><div><p>Veios claros e superfície polida ou acetinada para salas, banheiros e bancadas.</p><span class="panel-cta"><i></i>Pedir opções</span></div><span class="tag" aria-hidden="true">Polido e acetinado</span></div>
+        <div class="panel-foot"><div><p>Veios e superfície polida ou acetinada para salas, banheiros e bancadas.</p><span class="panel-cta"><i></i>Pedir opções</span></div><span class="tag" aria-hidden="true">Polido e acetinado</span></div>
       </a>
       <a class="panel" href="https://wa.me/5564999984826?text=Ol%C3%A1!%20Quero%20ver%20op%C3%A7%C3%B5es%20de%20piso%20ciment%C3%ADcio." target="_blank" rel="noopener">
-        <img src="assets/mat-cimenticio.jpg" alt="" loading="lazy" width="900" height="1350">
+        <img src="assets/img/cimenticio-800.jpg" srcset="assets/img/cimenticio-800.jpg 800w, assets/img/cimenticio-1600.jpg 1600w" sizes="(max-width:900px) 100vw, 45vw" alt="" loading="lazy" width="800" height="544">
         <div class="panel-top"><span class="idx">03</span><h3 class="display">Cimentícios</h3></div>
         <div class="panel-foot"><div><p>O visual de cimento queimado sem trinca e sem manutenção constante.</p><span class="panel-cta"><i></i>Pedir opções</span></div><span class="tag" aria-hidden="true">Visual neutro</span></div>
       </a>
       <a class="panel" href="https://wa.me/5564999984826?text=Ol%C3%A1!%20Quero%20ver%20op%C3%A7%C3%B5es%20de%20porcelanato%20em%20grande%20formato." target="_blank" rel="noopener">
-        <img src="assets/mat-grafite.jpg" alt="" loading="lazy" width="900" height="1350">
+        <img src="assets/img/grandes-800.jpg" srcset="assets/img/grandes-800.jpg 800w, assets/img/grandes-1600.jpg 1600w" sizes="(max-width:900px) 100vw, 45vw" alt="" loading="lazy" width="800" height="422">
         <div class="panel-top"><span class="idx">04</span><h3 class="display">Grandes formatos</h3></div>
         <div class="panel-foot"><div><p>Peças maiores, menos rejunte e leitura contínua do piso em ambientes integrados.</p><span class="panel-cta"><i></i>Pedir opções</span></div><span class="tag" aria-hidden="true">Menos rejunte</span></div>
       </a>
     </div>
   </section>
 
-  <section class="equipe wrap" id="equipe" aria-labelledby="eq-t">
+  <!-- 04 OFERTAS (light, video) -->
+  <section class="light wrap pad" id="ofertas" aria-labelledby="of-t" style="margin-top:clamp(100px,12vw,170px)">
+    <div class="offer">
+      <div class="offer-text">
+        <div class="sec-head rv"><span class="idx">04</span><span class="eyebrow">Na loja agora</span></div>
+        <h2 class="display rv d1" id="of-t">Esquenta Black Friday</h2>
+        <div class="offer-date rv d2"><i></i>09 a 14 de novembro</div>
+        <p class="rv d2">Porcelanatos polidos e retificados com preço por m² e lotes fechados. Pagamento à vista, enquanto durar o estoque.</p>
+        <ul class="offer-list rv d3">
+          <li><span>Piso Gran Onix · 88×88</span><span>Polido e retificado</span></li>
+          <li><span>Piso Perla · 88×88</span><span>Polido</span></li>
+          <li><span>Bellastone Polido · 74×74</span><span>Cedasa</span></li>
+          <li><span>Porcelanato LEF 71062 · 71×71</span><span>Lote fechado</span></li>
+        </ul>
+        <a class="btn rv d4" href="https://wa.me/5564992893991?text=Ol%C3%A1!%20Vi%20o%20Esquenta%20Black%20Friday%20no%20site%20e%20quero%20consultar%20o%20estoque." target="_blank" rel="noopener">Consultar estoque <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="player rv d2" id="player">
+        <video id="vid" playsinline muted loop preload="none" poster="assets/video-poster.jpg" width="720" height="1280" aria-label="Vídeo das ofertas no showroom da Vimac">
+          <source data-src="assets/video-ofertas.mp4" type="video/mp4">
+        </video>
+        <button class="big-play" id="bigPlay" aria-label="Assistir com som"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+        <div class="player-ui">
+          <div class="p-top" style="justify-content:flex-end"><button class="p-btn" id="mute" aria-label="Ativar som"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="w" d="M17 9l4 6M21 9l-4 6"/></svg></button></div>
+          <div class="p-bottom"><button class="p-btn" id="toggle" aria-label="Pausar"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path class="i-pause" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button><div class="p-bar"><b id="bar"></b></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 EQUIPE (dark) -->
+  <section class="wrap pad" id="equipe" aria-labelledby="eq-t">
     <div class="sec-head rv">
-      <span class="idx">03</span>
+      <span class="idx">05</span>
       <h2 class="display" id="eq-t">Equipe</h2>
       <span class="ghost" aria-hidden="true">Atendimento</span>
     </div>
@@ -333,16 +438,17 @@ footer img{height:30px;width:auto;opacity:.85}
     </div>
   </section>
 
-  <section class="contato wrap" id="contato" aria-labelledby="ct-t">
+  <!-- 06 CONTATO (light) -->
+  <section class="light wrap pad" id="contato" aria-labelledby="ct-t">
     <div class="sec-head rv">
-      <span class="idx">04</span>
+      <span class="idx">06</span>
       <h2 class="display" id="ct-t">Contato</h2>
       <span class="ghost" aria-hidden="true">Orçamento</span>
     </div>
     <div class="contact-grid">
       <form id="form" novalidate class="rv">
         <div class="field"><label for="f-nome">Nome</label><input id="f-nome" name="nome" autocomplete="name" required><span class="err" id="e-nome" aria-live="polite"></span></div>
-        <div class="field"><label for="f-tel">Telefone</label><input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(64) 9 0000-0000"><span class="err"></span></div>
+        <div class="field"><label for="f-tel">Telefone</label><input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(64) 9 0000-0000"></div>
         <div class="field full"><label for="f-para">Falar com</label>
           <select id="f-para" name="para">
             <option value="5564999984826">Leonardo</option>
@@ -355,14 +461,8 @@ footer img{height:30px;width:auto;opacity:.85}
         <p class="form-note">A mensagem abre no WhatsApp já preenchida. Nada é enviado antes de você confirmar.</p>
       </form>
       <div class="info rv d2">
-        <div>
-          <span class="eyebrow">Loja</span>
-          <div class="big" style="margin-top:14px"><a href="tel:+556436411740">(64) 3641-1740</a></div>
-        </div>
-        <div>
-          <span class="eyebrow">Endereço</span>
-          <address style="margin-top:14px">Rua Delcides de Morais, nº 98 – Loja 1<br>Bairro Blandina<br>Santa Helena de Goiás – GO</address>
-        </div>
+        <div><span class="eyebrow">Loja</span><div class="big"><a href="tel:+556436411740">(64) 3641-1740</a></div></div>
+        <div><span class="eyebrow">Endereço</span><address>Rua Delcides de Morais, nº 98 – Loja 1<br>Bairro Blandina<br>Santa Helena de Goiás – GO</address></div>
         <div class="row">
           <a class="link" href="https://www.google.com/maps/search/?api=1&query=Rua+Delcides+de+Morais+98+Santa+Helena+de+Goi%C3%A1s" target="_blank" rel="noopener"><i></i>Ver no mapa</a>
           <a class="link" href="https://www.instagram.com/vimacacabamentos/" target="_blank" rel="noopener"><i></i>Instagram</a>
@@ -384,6 +484,7 @@ footer img{height:30px;width:auto;opacity:.85}
   b.classList.remove('no-js');
   requestAnimationFrame(() => b.classList.add('loaded'));
   document.getElementById('yr').textContent = new Date().getFullYear();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const top = document.getElementById('top');
   const onScroll = () => top.classList.toggle('scrolled', scrollY > 40);
@@ -398,15 +499,38 @@ footer img{height:30px;width:auto;opacity:.85}
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
-  const form = document.getElementById('form');
-  const nome = document.getElementById('f-nome');
-  const err = document.getElementById('e-nome');
+  /* video: loads only near the viewport, plays muted while visible, sound on demand */
+  const player = document.getElementById('player'), v = document.getElementById('vid');
+  const src = v.querySelector('source'), bar = document.getElementById('bar');
+  const muteBtn = document.getElementById('mute'), toggle = document.getElementById('toggle');
+  let loaded = false, userPaused = false;
+  const load = () => { if (loaded) return; src.src = src.dataset.src; v.load(); loaded = true; };
+  const sync = () => {
+    player.classList.toggle('playing', !v.paused);
+    toggle.setAttribute('aria-label', v.paused ? 'Reproduzir' : 'Pausar');
+    toggle.querySelector('path').setAttribute('d', v.paused ? 'M7 4.5v15l13-7.5z' : 'M7 5h3.5v14H7zM13.5 5H17v14h-3.5z');
+    muteBtn.setAttribute('aria-label', v.muted ? 'Ativar som' : 'Desativar som');
+    muteBtn.querySelector('.w').style.display = v.muted ? '' : 'none';
+  };
+  ['play','pause','volumechange'].forEach(ev => v.addEventListener(ev, sync));
+  v.addEventListener('timeupdate', () => { if (v.duration) bar.style.width = (v.currentTime / v.duration * 100) + '%'; });
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { load(); if (!reduce && !userPaused) v.play().catch(()=>{}); }
+    else if (!v.paused) v.pause();
+  }, {threshold:.45, rootMargin:'200px 0px'}).observe(player);
+  document.getElementById('bigPlay').addEventListener('click', () => { load(); v.muted = false; v.currentTime = 0; userPaused = false; v.play(); });
+  muteBtn.addEventListener('click', () => { v.muted = !v.muted; if (v.paused) { load(); v.play(); } });
+  toggle.addEventListener('click', () => { load(); if (v.paused) { userPaused = false; v.play(); } else { userPaused = true; v.pause(); } });
+  v.addEventListener('click', () => toggle.click());
+  sync();
+
+  const form = document.getElementById('form'), nome = document.getElementById('f-nome'), err = document.getElementById('e-nome');
   nome.addEventListener('input', () => { nome.removeAttribute('aria-invalid'); err.textContent = ''; });
   form.addEventListener('submit', e => {
     e.preventDefault();
     if (!nome.value.trim()) { nome.setAttribute('aria-invalid','true'); err.textContent = 'Informe seu nome.'; nome.focus(); return; }
-    const d = new FormData(form);
-    const txt = `Olá! Sou ${d.get('nome').trim()}` + (d.get('tel').trim() ? ` (${d.get('tel').trim()})` : '') + '.' + (d.get('msg').trim() ? `\n${d.get('msg').trim()}` : '\nGostaria de um orçamento.');
+    const d = new FormData(form), tel = d.get('tel').trim(), msg = d.get('msg').trim();
+    const txt = `Olá! Sou ${d.get('nome').trim()}` + (tel ? ` (${tel})` : '') + '.' + (msg ? `\n${msg}` : '\nGostaria de um orçamento.');
     window.open(`https://wa.me/${d.get('para')}?text=${encodeURIComponent(txt)}`, '_blank', 'noopener');
   });
 })();

@@ -818,3 +818,19 @@ test('Boné Ralph Lauren: cor Bege (nova) vincula sozinha pelo nome quando apare
   assert.equal(cart.length, 1); assert.equal(cart[0].shopifyVariantId, 'gid://shopify/ProductVariant/990000000555');
   await ctx.close();
 });
+
+test('busca local e IA: título, FAQ estruturada, dados da loja e llms.txt falam de "loja de roupa masculina em Santa Helena de Goiás"', () => {
+  const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
+  assert.match(html, /<title>[^<]*Loja de roupa masculina em Santa Helena de Goiás<\/title>/);
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
+  const store = blocks.find(b => Array.isArray(b['@type']) && b['@type'].includes('ClothingStore'));
+  assert.ok(store && store.areaServed.some(c => c.name === 'Santa Helena de Goiás') && store.brand.length >= 10);
+  const faq = blocks.find(b => b['@type'] === 'FAQPage');
+  assert.ok(faq.mainEntity.some(q => /Santa Helena de Goiás/.test(q.name)), 'pergunta local na FAQ');
+  // A FAQ estruturada só pode ter perguntas que aparecem na página (regra do Google).
+  for (const q of faq.mainEntity) assert.ok(html.includes(q.name), q.name);
+  assert.match(html, /id="moda-masculina"/);
+  const llms = fs.readFileSync(path.join(DIST, 'llms.txt'), 'utf8');
+  assert.match(llms, /^# GRIFHII CONCEITO/); assert.match(llms, /Santa Helena de Goiás/); assert.match(llms, /\/peca-/);
+  assert.doesNotMatch(llms, /DOMINIO-PENDENTE|shpat_|teste/i);
+});

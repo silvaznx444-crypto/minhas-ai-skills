@@ -101,22 +101,41 @@ if (!catalog.live) warnings.push(`Shopify não respondeu no build (${catalog.syn
 let index = read('index.html');
 for (const rx of TEST_SCRIPT_TAGS) index = index.replace(rx, '');
 index = index.replace(/\n?<script id="grifhii-zip-viewer-warning">[\s\S]*?<\/script>/, ''); // aviso só p/ file:// local
+const brandLabel = b => catalog.brands?.[Object.keys(catalog.brands).find(k => catalog.brands[k].apiBrand === b || catalog.brands[k].label === b)]?.menuLabel || b;
+// ---- Palavras e dados para busca local / assistentes de IA (sempre de dados reais do catálogo) ----
+const SEO_KEYWORDS = ['loja de roupa masculina em Santa Helena de Goiás', 'moda masculina Santa Helena de Goiás', 'roupa masculina de marca',
+  'loja multimarcas masculina', 'camisa polo masculina', 'camiseta masculina de marca', 'camisa social masculina', 'bermuda masculina', 'moletom masculino',
+  'boné masculino', 'Lacoste', 'Tommy Hilfiger', 'Ralph Lauren', 'Diesel', 'Hugo Boss', 'roupa masculina Rio Verde', 'loja de grife masculina Goiás'];
+const STORE_BRANDS = [...new Set(catalog.products.filter(p => (p.variants || []).some(v => v.catalogVisible !== false)).map(p => brandLabel(p.brand)).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+const LIVE_PRICES = catalog.live ? catalog.products.flatMap(p => (p.variants || []).filter(v => v.shopifyVerified === true && Number.isSafeInteger(v.shopifyPriceCents)).map(v => v.shopifyPriceCents)) : [];
+const brl = c => 'R$ ' + (c / 100).toFixed(2).replace('.', ',');
+const PRICE_RANGE = LIVE_PRICES.length ? `${brl(Math.min(...LIVE_PRICES))} – ${brl(Math.max(...LIVE_PRICES))}` : null;
 const org = {
   // Loja física + online: "loja de roupa masculina em Santa Helena de Goiás".
   '@context': 'https://schema.org', '@type': ['ClothingStore', 'OnlineStore'], '@id': `${BASE}/#loja`,
   name: 'GRIFHII CONCEITO', url: `${BASE}/`, logo: abs('assets/logo-grifhii.jpg'), image: abs('assets/logo-grifhii.jpg'),
   description: 'Loja de roupa masculina em Santa Helena de Goiás (GO): camisetas, polos, camisas, bermudas e moletons de marcas selecionadas, com compra pelo site, retirada na loja e atendimento pelo WhatsApp.',
   telephone: '+55-64-98102-5225',
-  areaServed: {'@type': 'City', name: 'Santa Helena de Goiás'},
+  areaServed: ['Santa Helena de Goiás', 'Rio Verde', 'Acreúna', 'Maurilândia', 'Turvelândia', 'Santo Antônio da Barra'].map(name => ({'@type': 'City', name})),
+  knowsAbout: ['moda masculina', 'roupa masculina de marca', 'camisetas masculinas', 'camisas polo', 'camisas sociais masculinas', 'bermudas masculinas', 'moletons masculinos', 'bonés'],
+  keywords: SEO_KEYWORDS.join(', '),
+  ...(STORE_BRANDS.length ? {brand: STORE_BRANDS.map(name => ({'@type': 'Brand', name}))} : {}),
+  ...(PRICE_RANGE ? {priceRange: PRICE_RANGE} : {}),
   sameAs: ['https://www.instagram.com/grifhii.reserva/', 'https://www.facebook.com/profile.php?id=61592017326782'],
   address: {'@type': 'PostalAddress', addressLocality: 'Santa Helena de Goiás', addressRegion: 'GO', addressCountry: 'BR'},
   contactPoint: {'@type': 'ContactPoint', telephone: '+55-64-98102-5225', contactType: 'customer service', availableLanguage: 'pt-BR'},
 };
-index = headInject(index, seoHead({file: 'index.html', image: 'assets/hero-model-lacoste-transparent-v1.webp'}) + '\n' + jsonLd(org));
+const stripTags = h => h.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+const faq = [...index.matchAll(/<details><summary>([\s\S]*?)<\/summary><p>([\s\S]*?)<\/p><\/details>/g)].map(m => ({'@type': 'Question', name: stripTags(m[1]), acceptedAnswer: {'@type': 'Answer', text: stripTags(m[2])}}));
+if (faq.length < 4) errors.push('Perguntas frequentes não encontradas no index.html (FAQPage).');
+index = headInject(index, [seoHead({file: 'index.html', image: 'assets/hero-model-lacoste-transparent-v1.webp'}), jsonLd(org),
+  jsonLd({'@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq}),
+  `<meta name="keywords" content="${esc(SEO_KEYWORDS.join(', '))}">`, '<meta name="geo.region" content="BR-GO">', '<meta name="geo.placename" content="Santa Helena de Goiás">'].join('\n'));
 write('index.html', index);
 
 let produtos = read('produtos.html');
 produtos = headInject(produtos, [
+  `<meta name="keywords" content="${esc(SEO_KEYWORDS.join(', '))}">`,
   seoHead({file: 'produtos.html', title: 'Roupas masculinas em Santa Helena de Goiás — GRIFHII CONCEITO', description: 'Roupas masculinas de marca em Santa Helena de Goiás: camisetas, polos, camisas, bermudas, moletons e acessórios, com fotos reais e estoque da loja.'}),
   '<meta property="og:title" content="Roupas masculinas em Santa Helena de Goiás — GRIFHII CONCEITO">', '<meta property="og:type" content="website">',
   jsonLd({'@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -139,8 +158,7 @@ for (const rel of copied.filter(f => f.startsWith('legal/') && f.endsWith('.html
 const pecaTemplate = read('peca.html');
 // peca.html?slug= continua funcionando para links antigos; a versão indexável é peca-<slug>.
 write('peca.html', headInject(pecaTemplate, '<meta name="robots" content="noindex,follow">'));
-const brandLabel = b => catalog.brands?.[Object.keys(catalog.brands).find(k => catalog.brands[k].apiBrand === b || catalog.brands[k].label === b)]?.menuLabel || b;
-const categoryLabel = {camisetas: 'Camisetas', polos: 'Polos', camisas: 'Camisas', bermudas: 'Bermudas', calcas: 'Calças', bones: 'Bonés', moletons: 'Moletons', conjuntos: 'Conjuntos'};
+const categoryLabel = {camisetas: 'Camisetas', polos: 'Camisas polo', camisas: 'Camisas', bermudas: 'Bermudas', calcas: 'Calças', bones: 'Bonés', moletons: 'Moletons', conjuntos: 'Conjuntos', acessorios: 'Acessórios', esportivo: 'Esportivo', shorts: 'Shorts', calcados: 'Calçados', cintos: 'Cintos'};
 const productUrls = [];
 for (const p of catalog.products) {
   if (!/^[a-z0-9-]{1,120}$/.test(p.slug || '')) { warnings.push(`slug ignorado: ${p.slug}`); continue; }
@@ -149,9 +167,11 @@ for (const p of catalog.products) {
   const brand = brandLabel(p.brand);
   const colors = [...new Set((p.variants || []).map(v => v.color).filter(Boolean))];
   const sizes = [...new Set((p.variants || []).map(v => v.size).filter(Boolean))];
-  const desc = String(p.description || `${p.name} na GRIFHII CONCEITO.`).replace(/\s+/g, ' ').trim().slice(0, 155);
+  const baseDesc = String(p.description || `${p.name} na GRIFHII CONCEITO.`).replace(/\s+/g, ' ').trim();
+  const suffix = ' Na GRIFHII CONCEITO, loja de roupa masculina em Santa Helena de Goiás.';
+  const desc = (baseDesc.length + suffix.length <= 158 ? baseDesc + suffix : baseDesc.slice(0, 158 - suffix.length).replace(/\s+\S*$/, '') + '…' + suffix).trim();
   const images = [...new Set([...(p.images || []), ...(p.variants || []).map(v => v.image)].filter(i => /^assets\/[\w./-]+\.(webp|jpe?g|png)$/i.test(i || '')))];
-  const title = `${p.name} — GRIFHII CONCEITO`;
+  const title = `${p.name} | GRIFHII CONCEITO Santa Helena de Goiás`;
   const product = {'@context': 'https://schema.org', '@type': 'Product', name: p.name, description: desc,
     brand: brand ? {'@type': 'Brand', name: brand} : undefined, image: images.slice(0, 6).map(abs), url: BASE + pretty(file),
     category: categoryLabel[p.category] || p.category || undefined,
@@ -207,6 +227,28 @@ const today = new Date().toISOString().slice(0, 10);
 const urls = ['/', '/produtos', ...brandSlugs.map(s => `/produtos?marca=${encodeURIComponent(s)}`), ...productUrls,
   '/legal/privacidade', '/legal/termos', '/legal/trocas-e-devolucoes', '/legal/entrega'];
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${esc(BASE + u)}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+// llms.txt: resumo da loja para assistentes de IA (ChatGPT, Gemini, Claude, Perplexity...). Só fatos do catálogo real.
+{
+  const pub = catalog.products.filter(p => /^[a-z0-9-]{1,120}$/.test(p.slug || '') && !/\bteste\b/i.test(`${p.name} ${p.slug}`) && (p.variants || []).some(v => v.catalogVisible !== false));
+  const cats = [...new Set(pub.map(p => categoryLabel[p.category] || p.category).filter(Boolean))];
+  const lines = ['# GRIFHII CONCEITO', '',
+    '> Loja de roupa masculina multimarcas em Santa Helena de Goiás (GO), Brasil. Roupas de marca originais para homens, com compra pelo site (checkout Shopify), retirada grátis na loja em Santa Helena de Goiás, envio pelos Correios para todo o Brasil e atendimento pelo WhatsApp.', '',
+    '## Loja',
+    '- Cidade: Santa Helena de Goiás — GO (atende também Rio Verde, Acreúna, Maurilândia, Turvelândia, Santo Antônio da Barra e região por envio)',
+    '- WhatsApp: +55 64 98102-5225',
+    '- Instagram: https://www.instagram.com/grifhii.reserva/',
+    `- Site: ${BASE}/`,
+    ...(PRICE_RANGE ? [`- Faixa de preço: ${PRICE_RANGE}`] : []),
+    `- Categorias: ${cats.join(', ')}`,
+    `- Marcas: ${STORE_BRANDS.join(', ')}`, '',
+    '## Páginas principais',
+    `- [Todas as roupas masculinas](${BASE}/produtos)`,
+    ...STORE_BRANDS.map(b => { const k = Object.keys(catalog.brands || {}).find(k => (catalog.brands[k].menuLabel || catalog.brands[k].label) === b); return k ? `- [${b}](${BASE}/produtos?marca=${k})` : null; }).filter(Boolean),
+    `- [Entrega e retirada](${BASE}/legal/entrega)`, `- [Trocas e devoluções](${BASE}/legal/trocas-e-devolucoes)`, '',
+    '## Peças',
+    ...pub.map(p => `- [${p.name}](${BASE}${pretty(`peca-${p.slug}.html`)}): ${brandLabel(p.brand)}${p.category ? ', ' + (categoryLabel[p.category] || p.category).toLowerCase() : ''}`), ''];
+  write('llms.txt', lines.join('\n'));
+}
 write('robots.txt', MODE === 'producao'
   ? `User-agent: *\nAllow: /\nDisallow: /peca.html\nDisallow: /product.html\nDisallow: /*?cart=\nDisallow: /*?checkout=\nDisallow: /*?tracking=\n\nSitemap: ${BASE}/sitemap.xml\n`
   : `# Homologação: não indexar.\nUser-agent: *\nDisallow: /\n`);
@@ -323,7 +365,7 @@ for (const f of distFiles.filter(f => /\.(js|html|css|txt|xml|json)$/.test(f) ||
   for (const rx of SECRET) if (rx.test(text)) errors.push(`${f}: possível segredo exposto (${rx})`);
   if (/127\.0\.0\.1:3333|grifhii-api-url/.test(text)) errors.push(`${f}: referência à API local de desenvolvimento`);
 }
-for (const f of distFiles) if (EXCLUDE.some(rx => rx.test(f) || rx.test(path.basename(f))) && !['_headers', '_redirects', 'robots.txt'].includes(f)) errors.push(`arquivo de teste/documentação no dist: ${f}`);
+for (const f of distFiles) if (EXCLUDE.some(rx => rx.test(f) || rx.test(path.basename(f))) && !['_headers', '_redirects', 'robots.txt', 'llms.txt'].includes(f)) errors.push(`arquivo de teste/documentação no dist: ${f}`);
 if (/salesEnabled:true/.test(cfgText)) warnings.push('salesEnabled:true — confirme o GO/NO-GO antes de publicar.');
 else warnings.push('salesEnabled:false — vitrine publicada SEM vendas (checkout bloqueado).');
 

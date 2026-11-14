@@ -131,3 +131,11 @@ body.product-page .product-thumbs button.has-model .thumb-photo{opacity:0;transi
 .footer p,.footer .footer-contact p{color:rgba(255,255,255,.72)!important}
 .footer .footer-bottom,.footer .footer-bottom a{color:rgba(255,255,255,.66)!important}
 html body #contato.support-section .support-copy p:not(.contact-feedback){color:rgba(255,255,255,.82)!important}
+
+/* Bloco "Loja de roupa masculina em Santa Helena de Goiás" (texto local para busca e IA). */
+.local-seo{padding:clamp(48px,7vw,96px) clamp(18px,5vw,72px);border-top:1px solid rgba(17,17,17,.08)}
+.local-seo .section-heading p{max-width:640px;line-height:1.7;color:#4c463e}
+.local-seo-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;margin-top:32px}
+.local-seo-links strong{display:block;margin-bottom:10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8c7246}
+.local-seo-links a{display:inline-block;margin:0 8px 8px 0;padding:8px 14px;border:1px solid rgba(17,17,17,.14);border-radius:999px;font-size:13px;color:#26221c;text-decoration:none;transition:border-color .2s,color .2s}
+.local-seo-links a:hover,.local-seo-links a:focus-visible{border-color:#8c7246;color:#8c7246}

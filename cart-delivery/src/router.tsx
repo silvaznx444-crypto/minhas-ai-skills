@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { createBrowserRouter, Outlet, useLocation } from 'react-router-dom';
+import { createBrowserRouter, createMemoryRouter, Outlet, useLocation, type RouteObject } from 'react-router-dom';
 import { scrollToTop } from './lib/motion';
 import Landing from './pages/Landing';
 
@@ -28,7 +28,7 @@ function Shell() {
   );
 }
 
-export const router = createBrowserRouter([
+const routes: RouteObject[] = [
   {
     element: <Shell />,
     children: [
@@ -40,4 +40,7 @@ export const router = createBrowserRouter([
       { path: '*', element: <Landing /> },
     ],
   },
-]);
+];
+
+// Build de prévia (link privado) não controla a URL: navegação fica em memória.
+export const router = import.meta.env.VITE_ARTIFACT ? createMemoryRouter(routes) : createBrowserRouter(routes);

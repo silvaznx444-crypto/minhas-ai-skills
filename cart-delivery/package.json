@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:preview-link": "tsc --noEmit && VITE_ARTIFACT=1 vite build --base=./ --outDir dist-artifact"
   },
   "dependencies": {
     "lenis": "1.1.20",

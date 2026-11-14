@@ -102,8 +102,12 @@ let index = read('index.html');
 for (const rx of TEST_SCRIPT_TAGS) index = index.replace(rx, '');
 index = index.replace(/\n?<script id="grifhii-zip-viewer-warning">[\s\S]*?<\/script>/, ''); // aviso só p/ file:// local
 const org = {
-  '@context': 'https://schema.org', '@type': 'OnlineStore', '@id': `${BASE}/#loja`,
-  name: 'GRIFHII CONCEITO', url: `${BASE}/`, logo: abs('assets/logo-grifhii.jpg'),
+  // Loja física + online: "loja de roupa masculina em Santa Helena de Goiás".
+  '@context': 'https://schema.org', '@type': ['ClothingStore', 'OnlineStore'], '@id': `${BASE}/#loja`,
+  name: 'GRIFHII CONCEITO', url: `${BASE}/`, logo: abs('assets/logo-grifhii.jpg'), image: abs('assets/logo-grifhii.jpg'),
+  description: 'Loja de roupa masculina em Santa Helena de Goiás (GO): camisetas, polos, camisas, bermudas e moletons de marcas selecionadas, com compra pelo site, retirada na loja e atendimento pelo WhatsApp.',
+  telephone: '+55-64-98102-5225',
+  areaServed: {'@type': 'City', name: 'Santa Helena de Goiás'},
   sameAs: ['https://www.instagram.com/grifhii.reserva/', 'https://www.facebook.com/profile.php?id=61592017326782'],
   address: {'@type': 'PostalAddress', addressLocality: 'Santa Helena de Goiás', addressRegion: 'GO', addressCountry: 'BR'},
   contactPoint: {'@type': 'ContactPoint', telephone: '+55-64-98102-5225', contactType: 'customer service', availableLanguage: 'pt-BR'},
@@ -113,8 +117,8 @@ write('index.html', index);
 
 let produtos = read('produtos.html');
 produtos = headInject(produtos, [
-  seoHead({file: 'produtos.html', title: 'Produtos — GRIFHII CONCEITO', description: 'Coleção GRIFHII CONCEITO: camisetas, polos, camisas, bermudas e acessórios das marcas selecionadas.'}),
-  '<meta property="og:title" content="Produtos — GRIFHII CONCEITO">', '<meta property="og:type" content="website">',
+  seoHead({file: 'produtos.html', title: 'Roupas masculinas em Santa Helena de Goiás — GRIFHII CONCEITO', description: 'Roupas masculinas de marca em Santa Helena de Goiás: camisetas, polos, camisas, bermudas, moletons e acessórios, com fotos reais e estoque da loja.'}),
+  '<meta property="og:title" content="Roupas masculinas em Santa Helena de Goiás — GRIFHII CONCEITO">', '<meta property="og:type" content="website">',
   jsonLd({'@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     {'@type': 'ListItem', position: 1, name: 'Início', item: `${BASE}/`},
     {'@type': 'ListItem', position: 2, name: 'Produtos', item: `${BASE}/produtos`}]}),

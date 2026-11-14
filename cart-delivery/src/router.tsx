@@ -1,0 +1,43 @@
+import { lazy, Suspense, useEffect } from 'react';
+import { createBrowserRouter, Outlet, useLocation } from 'react-router-dom';
+import { scrollToTop } from './lib/motion';
+import Landing from './pages/Landing';
+
+// Landing vai no bundle principal (primeira pintura rápida); o resto carrega sob demanda.
+const Cardapio = lazy(() => import('./pages/Cardapio'));
+const Checkout = lazy(() => import('./pages/Checkout'));
+const Reserva = lazy(() => import('./pages/Reserva'));
+const Painel = lazy(() => import('./pages/Painel'));
+
+// Pré-carrega as páginas do cliente quando o navegador fica ocioso.
+if (typeof window !== 'undefined') {
+  const idle = (window as Window & { requestIdleCallback?: (cb: () => void) => void }).requestIdleCallback ?? ((cb: () => void) => setTimeout(cb, 1200));
+  idle(() => {
+    import('./pages/Cardapio');
+    import('./pages/Checkout');
+  });
+}
+
+function Shell() {
+  const { pathname } = useLocation();
+  useEffect(() => scrollToTop(), [pathname]);
+  return (
+    <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+      <Outlet />
+    </Suspense>
+  );
+}
+
+export const router = createBrowserRouter([
+  {
+    element: <Shell />,
+    children: [
+      { path: '/', element: <Landing /> },
+      { path: '/r/:slug', element: <Cardapio /> },
+      { path: '/r/:slug/pedido', element: <Checkout /> },
+      { path: '/r/:slug/reserva', element: <Reserva /> },
+      { path: '/painel', element: <Painel /> },
+      { path: '*', element: <Landing /> },
+    ],
+  },
+]);

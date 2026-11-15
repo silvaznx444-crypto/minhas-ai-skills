@@ -54,8 +54,8 @@ export function Storefront({ preview = false, mesa = null }: Props) {
       <section className="sf-block" key="destaques">
         <h2 className="sf-h2">Destaques</h2>
         <div className="sf-feat">
-          {MENU.filter((m) => m.featured).map((m, i) => (
-            <Ticket key={m.id} tilt={i % 2 ? 1.5 : -1.5} className="sf-feat__card" reveal={!preview}>
+          {MENU.filter((m) => m.featured).map((m) => (
+            <Ticket key={m.id} tilt={0} className="sf-feat__card" reveal={!preview}>
               <div className="dot-photo" style={{ width: 64, height: 64 }} />
               <span>{m.name}</span>
               <span className="sf-feat__price">{brl(m.price)}</span>
@@ -76,7 +76,7 @@ export function Storefront({ preview = false, mesa = null }: Props) {
             </button>
           ))}
         </div>
-        <Ticket tilt={-0.6} taped tape={70} className="sf-menu" reveal={!preview}>
+        <Ticket tilt={0} className="sf-menu" reveal={!preview}>
           {CATEGORIES.map((cat) => (
             <div key={cat} data-cat={cat} className="sf-cat">
               <h3 className="mono sf-cat__title">{cat}</h3>
@@ -114,10 +114,10 @@ export function Storefront({ preview = false, mesa = null }: Props) {
     ),
     reservas: (
       <section className="sf-block" key="reservas">
-        <Ticket tilt={1.2} className="ticket--dark sf-res" reveal={!preview}>
+        <Ticket tilt={0} className="ticket--dark sf-res" reveal={!preview}>
           <p className="mono">Vem jantar com a gente?</p>
           <p className="sf-res__big">Reserve sua mesa</p>
-          <ToLink preview={preview} to={`${base}/reserva${q}`} className="btn btn--light" style={{ '--r': '-1.5deg' } as CSSProperties}>Reservar</ToLink>
+          <ToLink preview={preview} to={`${base}/reserva${q}`} className="btn btn--light" style={{ '--r': '0deg' } as CSSProperties}>Reservar</ToLink>
         </Ticket>
       </section>
     ),
@@ -139,7 +139,6 @@ export function Storefront({ preview = false, mesa = null }: Props) {
 
   return (
     <div ref={rootRef} className={`sf ${preview ? 'sf--preview' : ''}`} style={{ '--brand': config.color } as CSSProperties} data-lenis-prevent={preview ? '' : undefined}>
-      <div className="halftone sf__dots" />
       <header className="sf-head">
         <p className="mono sf-head__hours">{RESTAURANT.hours}</p>
         <h1 className={config.titleFont === 'archivo' ? 'display sf-title' : 'sf-title sf-title--light'} style={{ viewTransitionName: preview ? undefined : 'sf-title' }}>

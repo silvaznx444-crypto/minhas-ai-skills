@@ -28,7 +28,7 @@
 .sf-tabs > *:hover, .sf-tabs .is-active { border-color: currentColor; }
 
 .sf-block { margin-top: 26px; }
-.sf-h2 { margin: 0 0 14px; font-family: var(--f-mono); font-weight: 700; font-size: 15px; text-transform: uppercase; border-bottom: 2px dashed currentColor; padding-bottom: 6px; }
+.sf-h2 { margin: 0 0 12px; font-family: var(--f-mono); font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em; }
 
 .sf-feat { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .sf-feat__card { display: flex; flex-direction: column; gap: 6px; padding: 14px 14px 20px; font-weight: 700; text-transform: uppercase; font-size: 14px; }
@@ -37,12 +37,12 @@
 .sf-feat__card .icon-btn { position: absolute; right: 10px; top: 10px; }
 
 .sf-cats { position: sticky; top: 0; z-index: 3; display: flex; gap: 6px; padding: 10px 0 12px; margin-inline: -18px; padding-inline: 18px; overflow-x: auto; scrollbar-width: none; background: linear-gradient(var(--butter) 80%, transparent); }
-.sf-cats button { flex-shrink: 0; min-height: 40px; padding: 6px 12px; border: 2px solid var(--brand); border-radius: 3px; background: transparent; color: var(--brand); font-family: var(--f-mono); font-weight: 700; text-transform: uppercase; font-size: 14px; transition: background-color 0.25s, color 0.25s, rotate 0.4s var(--spring); }
-.sf-cats button.is-active { background: var(--brand); color: var(--butter); rotate: -2deg; }
+.sf-cats button { flex-shrink: 0; min-height: 40px; padding: 6px 14px; border: 1.5px solid color-mix(in srgb, var(--brand) 35%, transparent); border-radius: 999px; background: transparent; color: var(--brand); font-family: var(--f-mono); font-weight: 700; text-transform: uppercase; font-size: 14px; transition: background-color 0.25s, color 0.25s, rotate 0.4s var(--spring); }
+.sf-cats button.is-active { background: var(--brand); color: var(--butter); }
 
 .sf-menu { display: flex; flex-direction: column; gap: 6px; padding: 18px 16px 24px; margin-top: 6px; }
 .sf-cat { scroll-margin-top: 70px; }
-.sf-cat + .sf-cat { margin-top: 14px; padding-top: 14px; border-top: 2px dashed var(--brand); }
+.sf-cat + .sf-cat { margin-top: 14px; padding-top: 14px; border-top: 1px solid color-mix(in srgb, var(--brand) 15%, transparent); }
 .sf-cat__title { margin: 0 0 10px; font-size: 14px; }
 .sf-item { display: flex; gap: 12px; align-items: center; padding-block: 8px; }
 .sf-item__body { flex: 1; min-width: 0; }
@@ -63,8 +63,7 @@
 
 .sf-cart { position: fixed; left: 50%; bottom: 16px; width: min(452px, calc(100% - 28px)); translate: -50% 140%; visibility: hidden; transition: translate 0.55s var(--spring), visibility 0s 0.55s; z-index: 10; }
 .sf-cart.is-on { translate: -50% 0; visibility: visible; transition: translate 0.55s var(--spring); }
-.sf-cart__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; background: var(--brand); color: var(--butter); border-radius: 3px; text-decoration: none; font-size: 15px; rotate: 0.6deg; transition: rotate 0.35s var(--spring); }
-.sf-cart__bar:hover { rotate: -0.6deg; }
+.sf-cart__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; background: var(--brand); color: var(--butter); border-radius: 12px; text-decoration: none; font-size: 15px; box-shadow: 0 12px 28px -12px rgb(43 25 18 / 0.5); }
 .sf-cart__count { display: inline-block; animation: bump 0.4s var(--spring); }
 .sf-cart__go { border-bottom: 2px solid currentColor; }
 
@@ -121,3 +120,9 @@
 .counter { display: flex; align-items: center; justify-content: space-between; border: 2px solid var(--choc); border-radius: 3px; }
 .counter .icon-btn { border: 0; }
 .counter b { font-family: var(--f-display); font-weight: 900; font-size: 24px; }
+
+/* Versão calma: botões arredondados e pontilhado mais leve */
+.sf .icon-btn { border-radius: 10px; }
+.sf .dot-photo { background-image: radial-gradient(circle, color-mix(in srgb, var(--brand) 45%, transparent) 1.3px, transparent 1.6px); background-size: 6px 6px; }
+.sf .ticket::after { display: none; }
+.sf .ticket { border-radius: 14px; }

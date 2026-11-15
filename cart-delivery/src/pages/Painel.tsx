@@ -1,228 +1,105 @@
-import { useState, type CSSProperties, type ReactNode } from 'react';
-import { flushSync } from 'react-dom';
+import { useEffect, useState, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { Storefront } from '../components/Storefront';
 import { Icon, Mark } from '../components/ui';
-import { BLOCK_LABELS, BRAND_COLORS, RESTAURANT } from '../lib/data';
-import { brl, deliveryFee } from '../lib/format';
-import { withViewTransition } from '../lib/motion';
-import { useStore, type PageConfig } from '../lib/store';
+import { BlocksSection, CoverSection, DeliverySection, MenuSection, ShareSection, TablesSection, ThemeSection } from '../painel/sections';
+import { useStore } from '../lib/store';
 import '../styles/store.css';
 import '../styles/painel.css';
 
-const NAV = ['Visão geral', 'Pedidos', 'Mesas', 'Reservas', 'Minha página', 'Entregas', 'Ajustes'];
-const TABS = ['Conteúdo', 'Aparência', 'Entrega', 'Mesas'] as const;
-type Tab = (typeof TABS)[number];
-
-function Field({ label, children, hint }: { label: string; children: ReactNode; hint?: string }) {
-  return (
-    <label className="pf">
-      <span className="pf__label">{label}</span>
-      {children}
-      {hint && <span className="pf__hint">{hint}</span>}
-    </label>
-  );
-}
+const TABS = [
+  { id: 'tema', label: 'Tema', el: ThemeSection },
+  { id: 'capa', label: 'Capa', el: CoverSection },
+  { id: 'cardapio', label: 'Cardápio', el: MenuSection },
+  { id: 'blocos', label: 'Blocos', el: BlocksSection },
+  { id: 'entrega', label: 'Entrega', el: DeliverySection },
+  { id: 'mesas', label: 'Mesas', el: TablesSection },
+  { id: 'compartilhar', label: 'Compartilhar', el: ShareSection },
+] as const;
+type TabId = (typeof TABS)[number]['id'];
 
 export default function Painel() {
-  const { config, setConfig, resetConfig } = useStore();
-  const [tab, setTab] = useState<Tab>('Conteúdo');
+  const { config, published, publish, dirty, undo, redo, canUndo, canRedo, saveError } = useStore();
+  const [tab, setTab] = useState<TabId>('tema');
+  const [device, setDevice] = useState<'celular' | 'computador'>('celular');
+  const [mode, setMode] = useState<'mesa' | 'delivery'>('mesa');
   const [toast, setToast] = useState<string | null>(null);
-  const [copied, setCopied] = useState<number | null>(null);
 
-  const animate = (update: (c: PageConfig) => PageConfig) => withViewTransition(() => flushSync(() => setConfig(update)));
-  const set = <K extends keyof PageConfig>(key: K, value: PageConfig[K]) => setConfig((c) => ({ ...c, [key]: value }));
-  const setFee = (key: keyof PageConfig['fee'], value: number) =>
-    setConfig((c) => ({ ...c, fee: { ...c.fee, [key]: Number.isFinite(value) ? Math.max(0, value) : 0 } }));
+  // Ctrl/Cmd+Z desfaz, Ctrl/Cmd+Shift+Z refaz (fora de campos de texto, que têm o próprio desfazer)
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement;
+      if (t.closest('input, textarea, select, [contenteditable]')) return;
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'z') {
+        e.preventDefault();
+        if (e.shiftKey) redo();
+        else undo();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [undo, redo]);
 
-  const move = (i: number, dir: -1 | 1) =>
-    animate((c) => {
-      const blocks = [...c.blocks];
-      const j = i + dir;
-      if (j < 0 || j >= blocks.length) return c;
-      [blocks[i], blocks[j]] = [blocks[j], blocks[i]];
-      return { ...c, blocks };
-    });
-  const toggle = (i: number) => animate((c) => ({ ...c, blocks: c.blocks.map((b, k) => (k === i ? { ...b, on: !b.on } : b)) }));
-
-  const publish = () => {
-    setToast('Salvo neste navegador (demo sem servidor)');
-    window.setTimeout(() => setToast(null), 3000);
+  const say = (msg: string) => {
+    setToast(msg);
+    window.setTimeout(() => setToast(null), 3200);
   };
+  const onPublish = () => (publish() ? say('Publicado. Seus clientes já veem a nova versão.') : say('Não foi possível publicar: sem espaço. Use fotos menores.'));
 
-  const tablePath = (n: number) => `/r/${RESTAURANT.slug}?mesa=${String(n).padStart(2, '0')}`;
-  const copy = async (n: number) => {
-    try {
-      await navigator.clipboard.writeText(window.location.origin + tablePath(n));
-      setCopied(n);
-      window.setTimeout(() => setCopied(null), 1500);
-    } catch {
-      /* sem permissão de área de transferência */
-    }
-  };
-
-  const example = deliveryFee(3.5, config.fee);
+  const Active = TABS.find((t) => t.id === tab)!.el;
 
   return (
     <div className="painel">
       <header className="ph">
         <div className="ph__left">
-          <Link to="/" viewTransition aria-label="Cart Delivery, início"><Mark size={30} /></Link>
+          <Link to="/" viewTransition aria-label="Cart Delivery, início"><Mark size={32} /></Link>
           <span className="ph__sep" aria-hidden="true" />
-          <span className="ph__name">{config.name}</span>
-          <span className="chip">Rascunho</span>
+          <span className="ph__name">{config.name || 'Sem nome'}</span>
+          <span className={`chip ${dirty ? 'chip--warn' : 'chip--ok'}`}>{dirty ? 'Alterações não publicadas' : 'Publicado'}</span>
         </div>
         <div className="ph__right">
-          <Link to={`/r/${RESTAURANT.slug}`} viewTransition className="pbtn pbtn--ghost">Ver página</Link>
-          <button type="button" className="pbtn" onClick={publish}>Publicar</button>
+          <div className="ph__history">
+            <button type="button" className="picon" aria-label="Desfazer" title="Desfazer (Ctrl+Z)" disabled={!canUndo} onClick={undo}>{Icon.undo}</button>
+            <button type="button" className="picon" aria-label="Refazer" title="Refazer (Ctrl+Shift+Z)" disabled={!canRedo} onClick={redo}>{Icon.redo}</button>
+          </div>
+          <Link to={`/r/${published.slug}`} viewTransition className="pbtn pbtn--ghost">Ver página publicada</Link>
+          <button type="button" className="pbtn" disabled={!dirty} onClick={onPublish}>Publicar</button>
         </div>
       </header>
 
+      {saveError && <p className="pbanner" role="alert">{saveError}</p>}
+
       <div className="pb">
-        <nav className="pnav" aria-label="Menu do painel">
-          {NAV.map((n) => (
-            <a key={n} href="#" className={n === 'Minha página' ? 'is-active' : ''} aria-current={n === 'Minha página' ? 'page' : undefined} onClick={(e) => e.preventDefault()}>
-              {n}
-            </a>
+        <nav className="prail" aria-label="Seções do construtor" role="tablist">
+          {TABS.map((t) => (
+            <button key={t.id} type="button" role="tab" id={`tab-${t.id}`} aria-selected={tab === t.id} aria-controls="ptab" onClick={() => setTab(t.id)}>
+              {t.label}
+            </button>
           ))}
         </nav>
 
-        <section className="pedit" aria-label="Editor da página">
-          <div className="ptabs" role="tablist" aria-label="Seções do editor">
-            {TABS.map((t) => (
-              <button key={t} type="button" role="tab" id={`tab-${t}`} aria-selected={tab === t} aria-controls="painel-tab" onClick={() => setTab(t)}>
-                {t}
-              </button>
-            ))}
+        <section className="pedit" id="ptab" role="tabpanel" aria-labelledby={`tab-${tab}`} data-lenis-prevent="">
+          <div className="pedit__inner" key={tab}>
+            <Active />
           </div>
-
-          <div id="painel-tab" role="tabpanel" aria-labelledby={`tab-${tab}`} className="ppanel" key={tab}>
-            {tab === 'Conteúdo' && (
-              <>
-                <div className="pgroup">
-                  <Field label="Nome do restaurante">
-                    <input id="f-name" value={config.name} maxLength={40} onChange={(e) => set('name', e.target.value)} />
-                  </Field>
-                  <Field label="Frase curta">
-                    <input id="f-tag" value={config.tagline} maxLength={60} onChange={(e) => set('tagline', e.target.value)} />
-                  </Field>
-                </div>
-
-                <div className="pgroup">
-                  <div className="pgroup__head">
-                    <h2>Blocos</h2>
-                    <span>A capa fica sempre no topo</span>
-                  </div>
-                  <ol className="blist">
-                    {config.blocks.map((b, i) => (
-                      <li key={b.id} className={`brow ${b.on ? '' : 'is-off'}`} style={{ viewTransitionName: `blk-${b.id}` } as CSSProperties}>
-                        <span className="brow__text">
-                          <b>{BLOCK_LABELS[b.id].name}</b>
-                          <span>{BLOCK_LABELS[b.id].hint}</span>
-                        </span>
-                        <span className="brow__move">
-                          <button type="button" aria-label={`Subir ${BLOCK_LABELS[b.id].name}`} disabled={i === 0} onClick={() => move(i, -1)}>{Icon.up}</button>
-                          <button type="button" aria-label={`Descer ${BLOCK_LABELS[b.id].name}`} disabled={i === config.blocks.length - 1} onClick={() => move(i, 1)}>{Icon.down}</button>
-                        </span>
-                        <label className="tgl">
-                          <input type="checkbox" checked={b.on} onChange={() => toggle(i)} />
-                          <span className="tgl__track" aria-hidden="true" />
-                          <span className="sr-only">Mostrar {BLOCK_LABELS[b.id].name}</span>
-                        </label>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-
-                {config.blocks.some((b) => b.id === 'sobre' && b.on) && (
-                  <Field label="Sobre a casa">
-                    <textarea id="f-about" rows={3} value={config.about} maxLength={240} onChange={(e) => set('about', e.target.value)} />
-                  </Field>
-                )}
-              </>
-            )}
-
-            {tab === 'Aparência' && (
-              <>
-                <fieldset className="pf">
-                  <legend className="pf__label">Cor da casa</legend>
-                  <div className="swatches">
-                    {BRAND_COLORS.map((c) => (
-                      <label key={c.value} className="sw" title={c.name}>
-                        <input type="radio" name="cor" checked={config.color === c.value} onChange={() => animate((cfg) => ({ ...cfg, color: c.value }))} />
-                        <span style={{ background: c.value }} />
-                        <span className="sr-only">{c.name}</span>
-                      </label>
-                    ))}
-                  </div>
-                  <span className="pf__hint">{BRAND_COLORS.find((c) => c.value === config.color)?.name}. Usada no texto, botões e carimbo da mesa.</span>
-                </fieldset>
-                <fieldset className="pf">
-                  <legend className="pf__label">Estilo do título</legend>
-                  <div className="fontpick">
-                    {(['archivo', 'outfit'] as const).map((f) => (
-                      <label key={f} className={`fontpick__opt ${config.titleFont === f ? 'is-on' : ''}`}>
-                        <input type="radio" name="fonte" className="sr-only" checked={config.titleFont === f} onChange={() => animate((c) => ({ ...c, titleFont: f }))} />
-                        <span className={f === 'archivo' ? 'fontpick__a' : 'fontpick__b'}>Aa</span>
-                        <span>{f === 'archivo' ? 'Marcante' : 'Leve'}</span>
-                      </label>
-                    ))}
-                  </div>
-                </fieldset>
-              </>
-            )}
-
-            {tab === 'Entrega' && (
-              <>
-                <div className="pgrid">
-                  <Field label="Taxa fixa">
-                    <span className="affix"><i>R$</i><input id="f-fixed" type="number" inputMode="decimal" min={0} step={0.5} value={config.fee.fixed} onChange={(e) => setFee('fixed', e.target.valueAsNumber)} /></span>
-                  </Field>
-                  <Field label="Por km">
-                    <span className="affix"><i>R$</i><input id="f-perkm" type="number" inputMode="decimal" min={0} step={0.1} value={config.fee.perKm} onChange={(e) => setFee('perKm', e.target.valueAsNumber)} /></span>
-                  </Field>
-                  <Field label="Raio máximo">
-                    <span className="affix"><input id="f-max" type="number" inputMode="decimal" min={0} step={0.5} value={config.fee.maxKm} onChange={(e) => setFee('maxKm', e.target.valueAsNumber)} /><i>km</i></span>
-                  </Field>
-                  <Field label="Pedido mínimo">
-                    <span className="affix"><i>R$</i><input id="f-min" type="number" inputMode="decimal" min={0} step={1} value={config.fee.minOrder} onChange={(e) => setFee('minOrder', e.target.valueAsNumber)} /></span>
-                  </Field>
-                </div>
-                <p className="pnote">
-                  Exemplo: para 3,5 km o cliente paga <b>{example.inArea ? brl(example.fee) : 'fora do raio'}</b>.
-                </p>
-              </>
-            )}
-
-            {tab === 'Mesas' && (
-              <>
-                <Field label="Quantidade de mesas" hint="Cada link abre a página com a mesa marcada. Use-o para gerar o QR.">
-                  <input id="f-tables" type="number" min={1} max={99} value={config.tables} onChange={(e) => set('tables', Math.min(99, Math.max(1, e.target.valueAsNumber || 1)))} />
-                </Field>
-                <ul className="tlist" data-lenis-prevent="">
-                  {Array.from({ length: config.tables }, (_, k) => k + 1).map((n) => (
-                    <li key={n}>
-                      <span>Mesa {String(n).padStart(2, '0')}</span>
-                      <code>{tablePath(n)}</code>
-                      <button type="button" onClick={() => copy(n)}>{copied === n ? 'Copiado' : 'Copiar'}</button>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-          </div>
-
-          <button type="button" className="preset" onClick={() => withViewTransition(() => flushSync(resetConfig))}>Restaurar padrão</button>
         </section>
 
         <section className="pprev" aria-label="Prévia ao vivo">
           <div className="pprev__bar">
-            <span>Prévia ao vivo</span>
-            <span className="pprev__url">cartdelivery.app/r/{RESTAURANT.slug}</span>
+            <span className="pprev__live">Prévia ao vivo</span>
+            <div className="ptoggle" role="radiogroup" aria-label="Dispositivo">
+              <button type="button" role="radio" aria-checked={device === 'celular'} onClick={() => setDevice('celular')}>{Icon.phone} Celular</button>
+              <button type="button" role="radio" aria-checked={device === 'computador'} onClick={() => setDevice('computador')}>{Icon.desktop} Computador</button>
+            </div>
+            <div className="ptoggle" role="radiogroup" aria-label="Como o cliente chegou">
+              <button type="button" role="radio" aria-checked={mode === 'mesa'} onClick={() => setMode('mesa')}>Pela mesa</button>
+              <button type="button" role="radio" aria-checked={mode === 'delivery'} onClick={() => setMode('delivery')}>Pelo link</button>
+            </div>
           </div>
-          <div className="phone">
-            <div className="phone__screen">
-              <Storefront preview mesa="07" />
+          <div className={`frame frame--${device}`} style={{ '--frame-bg': 'var(--root)' } as CSSProperties}>
+            {device === 'computador' && <div className="frame__bar"><i /><i /><i /><span>cartdelivery.app/r/{config.slug}</span></div>}
+            <div className="frame__screen">
+              <Storefront config={config} preview mesa={mode === 'mesa' ? '07' : null} desktop={device === 'computador'} />
             </div>
           </div>
         </section>

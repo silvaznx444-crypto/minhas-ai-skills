@@ -2,10 +2,11 @@ import { useEffect, useState, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { Storefront } from '../components/Storefront';
 import { Icon, Mark } from '../components/ui';
-import { BlocksSection, CoverSection, DeliverySection, MenuSection, ShareSection, TablesSection, ThemeSection } from '../painel/sections';
+import { BlocksSection, CoverSection, DeliverySection, MenuSection, PaymentSection, ShareSection, TablesSection, ThemeSection } from '../painel/sections';
 import { useStore } from '../lib/store';
 import '../styles/store.css';
 import '../styles/painel.css';
+import '../styles/pedidos.css';
 
 const TABS = [
   { id: 'tema', label: 'Tema', el: ThemeSection },
@@ -13,6 +14,7 @@ const TABS = [
   { id: 'cardapio', label: 'Cardápio', el: MenuSection },
   { id: 'blocos', label: 'Blocos', el: BlocksSection },
   { id: 'entrega', label: 'Entrega', el: DeliverySection },
+  { id: 'pagamento', label: 'Pagamento', el: PaymentSection },
   { id: 'mesas', label: 'Mesas', el: TablesSection },
   { id: 'compartilhar', label: 'Compartilhar', el: ShareSection },
 ] as const;
@@ -55,6 +57,10 @@ export default function Painel() {
           <Link to="/" viewTransition aria-label="Cart Delivery, início"><Mark size={32} /></Link>
           <span className="ph__sep" aria-hidden="true" />
           <span className="ph__name">{config.name || 'Sem nome'}</span>
+          <nav className="ph__nav" aria-label="Painel">
+            <Link to="/painel/pedidos" viewTransition>Pedidos</Link>
+            <Link to="/painel" aria-current="page">Minha página</Link>
+          </nav>
           <span className={`chip ${dirty ? 'chip--warn' : 'chip--ok'}`}>{dirty ? 'Alterações não publicadas' : 'Publicado'}</span>
         </div>
         <div className="ph__right">

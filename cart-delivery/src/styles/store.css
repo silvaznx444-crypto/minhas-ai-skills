@@ -216,3 +216,15 @@
 .counter .icon-btn { border: 0; }
 .counter .icon-btn:last-child { background: var(--sf-primary); color: var(--sf-on); }
 .counter b { font-size: 20px; }
+
+/* formulário do pedido */
+.fields { display: flex; flex-direction: column; gap: 14px; }
+.fld { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; }
+.fld small { font-weight: 400; color: var(--sf-muted); }
+.fld input:not([type='range']), .fld textarea { width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid var(--sf-line); border-radius: calc(var(--sf-card) * 0.7); background: var(--sf-surface); color: var(--sf-ink); font: inherit; font-weight: 400; font-size: 16px; transition: border-color 0.15s, box-shadow 0.15s; }
+.fld textarea { resize: vertical; }
+.fld input:focus, .fld textarea:focus { outline: none; border-color: var(--sf-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sf-primary) 18%, transparent); }
+.fld input[aria-invalid='true'] { border-color: #b3361c; }
+.fld em { font-style: normal; font-weight: 600; font-size: 13px; color: #b3361c; }
+.fld .flow-note, .fld .warn { margin: 2px 0 0; font-weight: 400; }
+.done__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }

@@ -1,49 +1,94 @@
-import { useState, type CSSProperties } from 'react';
+import { useState, type CSSProperties, type FormEvent } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { AnimatedNumber, Icon, Leader, Stamp, Ticket } from '../components/ui';
+import { AnimatedNumber, Icon, Leader } from '../components/ui';
 import { useThemedPage } from '../hooks/useThemedPage';
 import { brl, deliveryFee, etaMinutes, km } from '../lib/format';
+import { cents, useOrders, type Order, type OrderMode } from '../lib/orders';
 import { allItems, useStore } from '../lib/store';
 import '../styles/store.css';
 
-type Mode = 'entrega' | 'retirada' | 'mesa';
-
 export default function Checkout() {
   const [params] = useSearchParams();
-  const mesa = params.get('mesa');
+  const rawMesa = params.get('mesa');
+  const mesa = rawMesa && /^\d{1,3}$/.test(rawMesa) ? rawMesa.padStart(2, '0') : null;
   const { cart, cartCount, subtotal, clearCart } = useStore();
+  const { placeOrder } = useOrders();
   const { published: c, vars } = useThemedPage();
-  const modes: { id: Mode; label: string }[] = [
+
+  const modes: { id: OrderMode; label: string }[] = [
+    ...(mesa ? [{ id: 'mesa' as OrderMode, label: `Mesa ${mesa}` }] : []),
     { id: 'entrega', label: 'Entrega' },
     { id: 'retirada', label: 'Retirada' },
-    ...(mesa ? [{ id: 'mesa' as Mode, label: 'Na mesa' }] : []),
   ];
-  const [mode, setMode] = useState<Mode>(mesa ? 'mesa' : 'entrega');
+  const [mode, setMode] = useState<OrderMode>(mesa ? 'mesa' : 'entrega');
   const [dist, setDist] = useState(3.5);
-  const [sent, setSent] = useState<null | { total: number; code: string; mode: Mode }>(null);
+  const [form, setForm] = useState({ name: '', phone: '', address: '', complement: '', note: '' });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [sent, setSent] = useState<Order | null>(null);
 
   const back = `/r/${c.slug}${mesa ? `?mesa=${mesa}` : ''}`;
   const { fee, inArea } = deliveryFee(dist, c.fee);
   const isDelivery = mode === 'entrega';
-  const total = subtotal + (isDelivery ? fee : 0);
+  const total = cents(subtotal + (isDelivery ? fee : 0));
   const belowMin = isDelivery && subtotal < c.fee.minOrder;
-  const blocked = cartCount === 0 || (isDelivery && (!inArea || belowMin));
-  const idx = modes.findIndex((m) => m.id === mode);
   const items = allItems(c.menu);
+  const idx = modes.findIndex((m) => m.id === mode);
+  const set = (k: keyof typeof form) => (e: { target: { value: string } }) => setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (mode !== 'mesa' && form.name.trim().length < 2) e.name = 'Informe seu nome.';
+    if (mode !== 'mesa' && form.phone.replace(/\D/g, '').length < 10) e.phone = 'Informe um telefone com DDD.';
+    if (isDelivery && form.address.trim().length < 6) e.address = 'Informe rua e número.';
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const submit = (ev: FormEvent) => {
+    ev.preventDefault();
+    if (cartCount === 0 || (isDelivery && (!inArea || belowMin)) || !validate()) return;
+    const order = placeOrder({
+      mode,
+      mesa: mode === 'mesa' ? mesa ?? undefined : undefined,
+      customer: {
+        name: form.name.trim() || undefined,
+        phone: form.phone.trim() || undefined,
+        address: isDelivery ? [form.address.trim(), form.complement.trim()].filter(Boolean).join(' · ') : undefined,
+      },
+      note: form.note.trim() || undefined,
+      items: Object.entries(cart).flatMap(([id, qty]) => {
+        const it = items.find((m) => m.id === id);
+        return it ? [{ id, name: it.name, qty, price: it.price }] : [];
+      }),
+      subtotal,
+      fee: isDelivery ? fee : 0,
+      distanceKm: isDelivery ? dist : undefined,
+      total,
+    });
+    clearCart();
+    setSent(order);
+  };
 
   if (sent) {
     return (
       <main className="app" style={vars}>
         <div className="flow">
           <div className="done">
-            <Stamp slam>Pedido enviado</Stamp>
-            <h1 className="sf-display flow__title">Pedido #{sent.code}</h1>
+            <span className="stamp stamp--slam">Pedido nº {sent.number} recebido</span>
+            <h1 className="sf-display flow__title">Obrigado{sent.customer?.name ? `, ${sent.customer.name.split(' ')[0]}` : ''}.</h1>
             <p className="lead">
-              {sent.mode === 'mesa' && <>Já está na cozinha. Ele chega na <b>mesa {mesa}</b>.</>}
-              {sent.mode === 'retirada' && <>Retire no balcão em {c.content.address}, em cerca de 25 min.</>}
-              {sent.mode === 'entrega' && <>Chega em cerca de <b>{etaMinutes(dist)} min</b>. Total {brl(sent.total)}.</>}
+              {sent.mode === 'mesa' && <>O pedido foi para a cozinha e será servido na mesa {sent.mesa}.</>}
+              {sent.mode === 'retirada' && <>Retire no balcão em {c.content.address}. Previsão de 25 minutos.</>}
+              {sent.mode === 'entrega' && <>Previsão de entrega: cerca de {etaMinutes(sent.distanceKm ?? 0)} minutos. Total de {brl(sent.total)}, pago na entrega.</>}
             </p>
-            <Link to={back} viewTransition className="btn">Voltar ao cardápio</Link>
+            {sent.mode === 'mesa' ? (
+              <div className="done__actions">
+                <Link to={`/r/${c.slug}/conta?mesa=${sent.mesa}`} viewTransition className="btn">Ver a conta da mesa</Link>
+                <Link to={back} viewTransition className="link">Voltar ao cardápio</Link>
+              </div>
+            ) : (
+              <Link to={back} viewTransition className="btn">Voltar ao cardápio</Link>
+            )}
           </div>
         </div>
       </main>
@@ -52,7 +97,7 @@ export default function Checkout() {
 
   return (
     <main className="app" style={vars}>
-      <div className="flow">
+      <form className="flow" onSubmit={submit} noValidate>
         <div className="flow__top">
           <Link to={back} viewTransition className="icon-btn" aria-label="Voltar ao cardápio">{Icon.back}</Link>
           <span className="flow__name">{c.name}</span>
@@ -66,56 +111,68 @@ export default function Checkout() {
           ))}
         </div>
 
-        {isDelivery && (
-          <>
-            <div className="map">
-              <svg viewBox="0 0 354 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-                <g stroke="var(--sf-surface)" strokeWidth="12" fill="none"><path d="M0 42h354M0 118h354M74 0v160M196 0v160M296 0v160" /></g>
-                <path className="route-path" d="M60 118 C 120 118, 124 42, 196 42 S 266 64, 296 42" stroke="var(--sf-ink)" strokeWidth="3" fill="none" />
-                <rect x="50" y="108" width="20" height="20" rx="5" fill="var(--sf-ink)" />
-                <circle cx="296" cy="42" r="12" fill="var(--sf-primary)" />
-                <circle cx="296" cy="42" r="4" fill="var(--sf-on)" />
-              </svg>
-              <Stamp>{km(dist)} km · ~{etaMinutes(dist)} min</Stamp>
-            </div>
-            <label className="sr-only" htmlFor="dist">Distância até o endereço</label>
-            <div className="stepper">
-              <button type="button" className="icon-btn" aria-label="Diminuir distância" onClick={() => setDist((d) => Math.max(0.5, +(d - 0.5).toFixed(1)))}>{Icon.minus}</button>
-              <input id="dist" className="range" type="range" min={0.5} max={12} step={0.1} value={dist} onChange={(e) => setDist(Number(e.target.value))} aria-valuetext={`${km(dist)} quilômetros`} />
-              <button type="button" className="icon-btn" aria-label="Aumentar distância" onClick={() => setDist((d) => Math.min(12, +(d + 0.5).toFixed(1)))}>{Icon.plus}</button>
-            </div>
-            <p className="flow-note">
-              Simulação de distância (na versão final vem do endereço).
-              {!inArea && <span className="warn"> Fora do raio de entrega ({c.fee.maxKm} km).</span>}
-            </p>
-          </>
-        )}
-
-        {mode === 'retirada' && <p className="lead"><b>Retirar no balcão</b> em {c.content.address}. Pronto em cerca de 25 min.</p>}
-        {mode === 'mesa' && <p className="lead">Pedido para a <b>mesa {mesa}</b>, lida pelo QR code. Vai direto para a cozinha.</p>}
-
-        <Ticket className="receipt">
-          <p className="receipt__head">Resumo</p>
-          {cartCount === 0 && <p className="receipt__empty">Nenhum item ainda. Volte ao cardápio para escolher.</p>}
+        <section className="ticket receipt" aria-label="Resumo do pedido">
+          {cartCount === 0 && <p className="receipt__empty">Nenhum item no pedido. Volte ao cardápio para escolher.</p>}
           {Object.entries(cart).map(([id, qty]) => {
             const item = items.find((m) => m.id === id);
             return item ? <Leader key={id} left={`${qty}× ${item.name}`} right={brl(qty * item.price)} /> : null;
           })}
-          {isDelivery && (
-            <>
-              <Leader left="Entrega" right={inArea ? <AnimatedNumber value={fee} format={brl} /> : '—'} />
-              <p className="receipt__sub">{brl(c.fee.fixed)} fixo + {km(dist)} km × {brl(c.fee.perKm)}</p>
-            </>
-          )}
+          {isDelivery && <Leader left={`Entrega · ${km(dist)} km`} right={inArea ? <AnimatedNumber value={fee} format={brl} /> : 'fora da área'} />}
           <hr className="rule" />
           <Leader strong left="Total" right={<AnimatedNumber value={total} format={brl} />} />
-          {belowMin && cartCount > 0 && <p className="warn">Pedido mínimo para entrega: {brl(c.fee.minOrder)}</p>}
-        </Ticket>
+        </section>
 
-        <button type="button" className="btn btn--block" style={{ marginTop: 'auto' }} disabled={blocked} onClick={() => { setSent({ total, code: String(Math.floor(1000 + Math.random() * 9000)), mode }); clearCart(); }}>
-          Confirmar pedido
+        {mode !== 'mesa' && (
+          <div className="fields">
+            <label className="fld">
+              <span>Nome</span>
+              <input autoComplete="name" value={form.name} onChange={set('name')} aria-invalid={!!errors.name} />
+              {errors.name && <em>{errors.name}</em>}
+            </label>
+            <label className="fld">
+              <span>Telefone (WhatsApp)</span>
+              <input type="tel" inputMode="tel" autoComplete="tel" placeholder="(11) 99999-9999" value={form.phone} onChange={set('phone')} aria-invalid={!!errors.phone} />
+              {errors.phone && <em>{errors.phone}</em>}
+            </label>
+          </div>
+        )}
+
+        {isDelivery && (
+          <div className="fields">
+            <label className="fld">
+              <span>Endereço</span>
+              <input autoComplete="street-address" placeholder="Rua e número" value={form.address} onChange={set('address')} aria-invalid={!!errors.address} />
+              {errors.address && <em>{errors.address}</em>}
+            </label>
+            <label className="fld">
+              <span>Complemento <small>(opcional)</small></span>
+              <input placeholder="Apto, bloco, referência" value={form.complement} onChange={set('complement')} />
+            </label>
+            <div className="fld">
+              <span id="dist-l">Distância até o restaurante</span>
+              <div className="stepper">
+                <button type="button" className="icon-btn" aria-label="Diminuir distância" onClick={() => setDist((d) => Math.max(0.5, +(d - 0.5).toFixed(1)))}>{Icon.minus}</button>
+                <input className="range" type="range" min={0.5} max={12} step={0.1} value={dist} onChange={(e) => setDist(Number(e.target.value))} aria-labelledby="dist-l" aria-valuetext={`${km(dist)} quilômetros`} />
+                <button type="button" className="icon-btn" aria-label="Aumentar distância" onClick={() => setDist((d) => Math.min(12, +(d + 0.5).toFixed(1)))}>{Icon.plus}</button>
+              </div>
+              <p className="flow-note">
+                {km(dist)} km · taxa de {brl(c.fee.fixed)} + {brl(c.fee.perKm)} por km. Nesta demonstração a distância é ajustada à mão; na versão final ela vem do endereço.
+              </p>
+              {!inArea && <p className="warn">Fora da área de entrega ({c.fee.maxKm} km).</p>}
+              {belowMin && cartCount > 0 && <p className="warn">Pedido mínimo para entrega: {brl(c.fee.minOrder)}.</p>}
+            </div>
+          </div>
+        )}
+
+        <label className="fld">
+          <span>Observação <small>(opcional)</small></span>
+          <textarea rows={2} placeholder={mode === 'mesa' ? 'Ex.: sem cebola' : 'Ex.: troco para R$ 100'} value={form.note} onChange={set('note')} />
+        </label>
+
+        <button type="submit" className="btn btn--block" style={{ marginTop: 'auto' }} disabled={cartCount === 0 || (isDelivery && (!inArea || belowMin))}>
+          Enviar pedido · {brl(total)}
         </button>
-      </div>
+      </form>
     </main>
   );
 }

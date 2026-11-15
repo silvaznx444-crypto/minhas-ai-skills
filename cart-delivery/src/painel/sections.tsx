@@ -8,6 +8,7 @@ import { withViewTransition } from '../lib/motion';
 import { useStore, type CoverLayout, type MenuLayout, type PageConfig } from '../lib/store';
 import { contrast, ensureFont, FONTS, THEMES, type ButtonShape, type FontId, type ThemeId } from '../lib/theme';
 import { Choice, Field, ImagePick, Section, Toggle } from './fields';
+import { pixKeyKind } from '../lib/pix';
 
 type Setter = ReturnType<typeof useStore>['setConfig'];
 const anim = (set: Setter, u: (c: PageConfig) => PageConfig) => withViewTransition(() => flushSync(() => set(u)));
@@ -469,6 +470,38 @@ export function ShareSection() {
             <p>{c.seo.description}</p>
           </div>
         </div>
+      </Section>
+    </>
+  );
+}
+
+/* ---------------- Pagamento ---------------- */
+export function PaymentSection() {
+  const { config: c, setConfig: set } = useStore();
+  const kind = pixKeyKind(c.payment.pixKey);
+  const setPay = (k: keyof PageConfig['payment'], v: string | number) => set((x) => ({ ...x, payment: { ...x.payment, [k]: v } }), { group: `pay.${k}` });
+  return (
+    <>
+      <Section title="Pix" desc="O cliente paga a conta da mesa lendo um QR gerado com o valor exato. O dinheiro cai direto na sua conta.">
+        <Field
+          label="Chave Pix"
+          hint={c.payment.pixKey ? (kind ? `Chave do tipo ${kind}.` : 'Formato não reconhecido. Use CPF, CNPJ, e-mail, +55 com DDD ou chave aleatória.') : 'Sem chave, o pagamento por Pix fica desativado.'}
+        >
+          <input value={c.payment.pixKey} placeholder="CPF, CNPJ, e-mail, telefone ou chave aleatória" onChange={(e) => setPay('pixKey', e.target.value.trim())} />
+        </Field>
+        <div className="pgrid">
+          <Field label="Nome do recebedor" hint="Como aparece no app do banco.">
+            <input value={c.payment.receiver} maxLength={25} onChange={(e) => setPay('receiver', e.target.value)} />
+          </Field>
+          <Field label="Cidade">
+            <input value={c.payment.city} maxLength={15} onChange={(e) => setPay('city', e.target.value)} />
+          </Field>
+        </div>
+      </Section>
+      <Section title="Taxa de serviço" desc="Sugerida na conta da mesa. O cliente pode desmarcar.">
+        <Field label="Percentual">
+          <span className="affix"><input type="number" min={0} max={20} step={1} value={c.payment.service} onChange={(e) => setPay('service', Math.min(20, Math.max(0, e.target.valueAsNumber || 0)))} /><i>%</i></span>
+        </Field>
       </Section>
     </>
   );

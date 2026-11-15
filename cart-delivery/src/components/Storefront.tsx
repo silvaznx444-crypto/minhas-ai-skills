@@ -280,7 +280,7 @@ export function Storefront({ config: c, preview = false, mesa = null, desktop = 
       <nav className="sf-tabs" aria-label="Seções">
         <span className="is-active">Cardápio</span>
         {on('reservas') && <ToLink preview={preview} to={`${base}/reserva${q}`}>Reservar</ToLink>}
-        <ToLink preview={preview} to={`${base}/pedido${q}`}>{mesa ? 'Meu pedido' : 'Entrega'}</ToLink>
+        {mesa ? <ToLink preview={preview} to={`${base}/conta${q}`}>Conta</ToLink> : <ToLink preview={preview} to={`${base}/pedido${q}`}>Entrega</ToLink>}
       </nav>
 
       <div className="sf-content">{c.blocks.filter((b) => b.on).map((b) => blocks[b.id])}</div>

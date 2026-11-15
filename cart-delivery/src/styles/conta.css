@@ -1,0 +1,24 @@
+/* Conta da mesa */
+.ct-service { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px; min-height: 40px; font-size: 15px; cursor: pointer; }
+.ct-service input { width: 18px; height: 18px; accent-color: var(--sf-primary); }
+.ct-service span:nth-child(2) { color: var(--sf-muted); }
+.ct-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-weight: 600; }
+.ct-row .counter { min-width: 150px; }
+.ct-units { list-style: none; margin: 0; padding: 4px 0; border-radius: var(--sf-card); background: var(--sf-surface); }
+.ct-units li + li { border-top: 1px solid var(--sf-line); }
+.ct-units label { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; min-height: 48px; padding: 0 16px; cursor: pointer; }
+.ct-units input { width: 20px; height: 20px; accent-color: var(--sf-primary); }
+.ct-units__note { padding: 10px 16px; font-size: 13px; color: var(--sf-muted); }
+.ct-amount { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 4px 2px; }
+.ct-amount > span { font-weight: 600; color: var(--sf-muted); }
+.ct-amount b { font-size: 40px; color: var(--sf-ink); }
+.ct-pix { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px; border-radius: var(--sf-card); background: var(--sf-surface); text-align: center; animation: pop 0.35s var(--ease); }
+.ct-pix img { width: min(240px, 70vw); aspect-ratio: 1; border-radius: 12px; background: #fff; padding: 8px; }
+.ct-pix p { margin: 0; font-size: 14px; color: var(--sf-muted); max-width: 30em; }
+.ct-pix__code { width: 100%; display: flex; gap: 8px; }
+.ct-pix__code input { flex: 1; min-width: 0; min-height: 48px; padding: 0 12px; border: 1px solid var(--sf-line); border-radius: 12px; background: var(--sf-bg); color: var(--sf-ink); font-size: 13px; font-family: ui-monospace, monospace; }
+.ct-pix__code .btn { min-height: 48px; padding: 0 18px; }
+.ct-done { margin: 0; padding: 14px 16px; border-radius: var(--sf-card); background: #e3efe5; color: #1f5b37; font-weight: 600; font-size: 15px; }
+.ct-paid { display: flex; flex-direction: column; gap: 4px; padding: 20px; border-radius: var(--sf-card); background: var(--sf-primary); color: var(--sf-on); }
+.ct-paid b { font-size: 20px; }
+.ct-more { align-self: center; padding: 12px; font-weight: 600; color: var(--sf-ink); text-underline-offset: 4px; }

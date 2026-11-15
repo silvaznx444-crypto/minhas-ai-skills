@@ -34,6 +34,7 @@ export type PageConfig = {
   };
   menu: Category[];
   fee: FeeConfig;
+  payment: { pixKey: string; receiver: string; city: string; service: number };
   tables: number;
   seo: { title: string; description: string };
 };
@@ -85,6 +86,7 @@ export const DEFAULT_CONFIG: PageConfig = {
   },
   menu: DEFAULT_MENU,
   fee: { fixed: 4, perKm: 1.5, maxKm: 8, minOrder: 30 },
+  payment: { pixKey: '', receiver: 'Forno da Vila', city: 'Sao Paulo', service: 10 },
   tables: 12,
   seo: { title: 'Forno da Vila — pizzaria', description: 'Peça pelo cardápio, reserve sua mesa ou receba em casa.' },
 };

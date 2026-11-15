@@ -1,274 +1,257 @@
-import { useRef, type CSSProperties, type MouseEvent } from 'react';
+import { useState, type CSSProperties, type MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { Magnetic } from '../components/Magnetic';
-import { Mark } from '../components/ui';
-import { clamp01, stickyProgress, useScrollFx } from '../hooks/useScrollFx';
+import { HeroDelivery } from '../components/HeroDelivery';
+import { AnimatedNumber, Mark } from '../components/ui';
 import { demo } from '../lib/data';
 import { brl, deliveryFee, km } from '../lib/format';
 import { scrollToEl } from '../lib/motion';
 import { DEFAULT_CONFIG } from '../lib/store';
+import { THEMES, type ThemeId } from '../lib/theme';
 import '../styles/landing.css';
 
+const d = (ms: number) => ({ '--d': `${ms}ms` }) as CSSProperties;
+
+/* ---------- demonstrações curtas, uma por recurso ---------- */
+
+function BillDemo() {
+  const [mode, setMode] = useState<'tudo' | 'igual' | 'item'>('igual');
+  const items = [
+    { name: 'Margherita', price: 48 },
+    { name: 'Rúcula e Parma', price: 62 },
+    { name: 'Soda italiana', price: 14 },
+  ];
+  const total = 124 * 1.1;
+  const amount = mode === 'tudo' ? total : mode === 'igual' ? total / 3 : 62 * 1.1;
+  return (
+    <div className="demo bill" data-reveal="">
+      <div className="demo__bar"><b>Conta da mesa 07</b><span>3 pessoas</span></div>
+      <ul className="bill__items">
+        {items.map((it) => (
+          <li key={it.name} className={mode === 'item' && it.name === 'Rúcula e Parma' ? 'is-pick' : ''}>
+            <span>{it.name}</span>
+            <span className="tabular">{brl(it.price)}</span>
+          </li>
+        ))}
+        <li className="bill__svc"><span>Serviço (10%)</span><span className="tabular">{brl(12.4)}</span></li>
+      </ul>
+      <div className="bill__seg" role="radiogroup" aria-label="Como dividir (exemplo)">
+        {(['tudo', 'igual', 'item'] as const).map((m) => (
+          <button key={m} type="button" role="radio" aria-checked={mode === m} onClick={() => setMode(m)}>
+            {m === 'tudo' ? 'Tudo' : m === 'igual' ? 'Igual' : 'Por item'}
+          </button>
+        ))}
+      </div>
+      <div className="bill__pay">
+        <span>Valor do Pix</span>
+        <b className="tabular"><AnimatedNumber value={amount} format={brl} /></b>
+      </div>
+    </div>
+  );
+}
+
+function ReceiptDemo() {
+  return (
+    <div className="demo rcpt" data-reveal="">
+      <div className="rcpt__printer"><span>Impressora térmica · 80 mm</span><i /></div>
+      <div className="rcpt__clip">
+        <div className="rcpt__paper">
+          <b className="c">FORNO DA VILA</b>
+          <span className="c">Av. Central, 88</span>
+          <hr />
+          <b className="c big">PEDIDO 131</b>
+          <b className="c big">MESA 04</b>
+          <span className="c">15/11/2026 20:42</span>
+          <hr />
+          <span className="r"><span>2x Margherita</span><span>96,00</span></span>
+          <span className="r"><span>1x Burrata</span><span>46,00</span></span>
+          <span className="r"><span>Obs.: sem manjericão</span><span /></span>
+          <hr />
+          <b className="r"><span>TOTAL</span><span>142,00</span></b>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FeeDemo() {
+  const [dist, setDist] = useState(3.4);
+  const cfg = DEFAULT_CONFIG.fee;
+  const { fee, inArea } = deliveryFee(dist, cfg);
+  return (
+    <div className="demo fee" data-reveal="">
+      <div className="demo__bar"><b>Taxa de entrega</b><span>{brl(cfg.fixed)} + {brl(cfg.perKm)}/km</span></div>
+      <label className="fee__label" htmlFor="fee-range">
+        <span>Distância</span>
+        <b className="tabular">{km(dist)} km</b>
+      </label>
+      <input id="fee-range" type="range" min={0.5} max={10} step={0.1} value={dist} onChange={(e) => setDist(Number(e.target.value))} aria-valuetext={`${km(dist)} quilômetros`} />
+      <div className="fee__out">
+        <span>{inArea ? 'O cliente paga' : `Fora do raio de ${cfg.maxKm} km`}</span>
+        <b className="tabular">{inArea ? <AnimatedNumber value={fee} format={brl} /> : '—'}</b>
+      </div>
+    </div>
+  );
+}
+
+function ThemeDemo() {
+  const [t, setT] = useState<ThemeId>('manjericao');
+  const th = THEMES[t];
+  return (
+    <div className="demo thd" data-reveal="">
+      <div className="thd__page" style={{ background: th.bg, color: th.ink }}>
+        <div className="thd__cover" style={{ backgroundImage: `url(${demo('capa.jpg')})` }} />
+        <b className="thd__name">Forno da Vila</b>
+        <span className="thd__tag" style={{ color: th.muted }}>Pizzas de fermentação longa</span>
+        {[['margherita.jpg', 'Margherita', 48], ['rucula.jpg', 'Rúcula e Parma', 62]].map(([img, n, p]) => (
+          <div key={n as string} className="thd__item" style={{ background: th.surface }}>
+            <img src={demo(img as string)} alt="" />
+            <span>{n}</span>
+            <span className="tabular" style={{ color: th.muted }}>{brl(p as number)}</span>
+            <i style={{ background: th.primary, color: t === 'noturno' ? '#17100D' : '#fff' }} aria-hidden="true">+</i>
+          </div>
+        ))}
+      </div>
+      <div className="thd__pick" role="radiogroup" aria-label="Tema (exemplo)">
+        {(['manjericao', 'classico', 'noturno', 'feira'] as ThemeId[]).map((id) => (
+          <button key={id} type="button" role="radio" aria-checked={t === id} onClick={() => setT(id)}>
+            <i style={{ background: THEMES[id].primary, boxShadow: `inset 0 0 0 3px ${THEMES[id].bg}` }} />
+            {THEMES[id].name}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const FEATURES = [
+  {
+    id: 'conta',
+    title: 'Conta da mesa pelo celular',
+    text: 'O cliente lê o QR code da mesa, faz o pedido e, no fim, paga a própria parte sem esperar a maquininha.',
+    points: ['Divisão igual ou por item consumido', 'Pix gerado com o valor exato, direto na conta do restaurante', 'Taxa de serviço opcional e configurável', 'Chamada do garçom com a maquininha'],
+    demo: <BillDemo />,
+  },
+  {
+    id: 'impressao',
+    title: 'Comprovante impresso a cada pedido',
+    text: 'Pedidos da mesa, do delivery e da retirada saem na impressora da cozinha assim que chegam.',
+    points: ['Impressora térmica de 58 ou 80 mm (ESC/POS)', 'Ou qualquer impressora instalada no computador', 'Uma ou duas vias por pedido', 'Reimpressão a qualquer momento'],
+    demo: <ReceiptDemo />,
+  },
+  {
+    id: 'entrega',
+    title: 'Entrega com taxa por distância',
+    text: 'Você define o valor fixo, o valor por quilômetro, o raio de entrega e o pedido mínimo.',
+    points: ['Taxa calculada antes de o cliente confirmar', 'Pedidos fora do raio são bloqueados', 'Endereço e observações no comprovante'],
+    demo: <FeeDemo />,
+  },
+  {
+    id: 'pagina',
+    title: 'Uma página com a identidade da casa',
+    text: 'Cardápio, reservas, horários e endereço em um link para a mesa, o Instagram e o WhatsApp.',
+    points: ['Cinco temas, cor, fonte e capa ajustáveis', 'Itens com foto, destaque e aviso de esgotado', 'Alterações publicadas quando você decidir'],
+    demo: <ThemeDemo />,
+  },
+];
+
 const STEPS = [
-  { k: 'Na mesa', title: 'Aponta a câmera.', text: 'Cada mesa tem o seu QR. A página abre sabendo que o pedido é da mesa 07.' },
-  { k: 'No cardápio', title: 'Escolhe sem esperar.', text: 'Fotos, destaques e itens esgotados em tempo real. O pedido vai direto para a cozinha.' },
-  { k: 'Na entrega', title: 'Paga a taxa certa.', text: 'Valor fixo mais o quilômetro da rota. Quem mora perto paga menos.' },
-  { k: 'Na reserva', title: 'Garante o sábado.', text: 'Horários tirados do seu funcionamento, com lembrete no WhatsApp.' },
-  { k: 'No seu jeito', title: 'Com a cara da casa.', text: 'Tema, cor, fonte, capa e blocos. Você muda e a página muda na hora.' },
+  { title: 'Cadastre o cardápio', text: 'Itens, fotos, preços e categorias. Você pode começar pelos mais vendidos e completar depois.' },
+  { title: 'Configure a operação', text: 'Taxa de entrega, chave Pix, impressora e número de mesas.' },
+  { title: 'Divulgue o link', text: 'QR code em cada mesa e o mesmo link no Instagram e no WhatsApp.' },
 ];
-
-const STATEMENT = 'Um link só. Funciona na mesa, no Instagram e no WhatsApp. Seu cliente não baixa nada.';
-const TIMES = ['19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30'];
-const MENU = [
-  { name: 'Margherita', price: 48, photo: 'margherita.jpg' },
-  { name: '4 Queijos', price: 56, photo: '4queijos.jpg' },
-  { name: 'Rúcula e Parma', price: 62, photo: 'rucula.jpg' },
-  { name: 'Calabresa', price: 52, photo: 'calabresa.jpg' },
-  { name: 'Portuguesa', price: 54, photo: 'portuguesa.jpg' },
-];
-const STRIP = ['margherita.jpg', 'bruschetta.jpg', 'salao-1.jpg', 'rucula.jpg', 'tiramisu.jpg', 'forno.jpg', '4queijos.jpg', 'soda.jpg', 'salao-2.jpg', 'calabresa.jpg'];
-
-const v = (o: Record<string, string | number>) => o as CSSProperties;
 
 export default function Landing() {
-  const nav = useRef<HTMLElement>(null);
-  const hero = useRef<HTMLElement>(null);
-  const statement = useRef<HTMLParagraphElement>(null);
-  const story = useRef<HTMLElement>(null);
-  const kmEl = useRef<HTMLElement>(null);
-  const feeEl = useRef<HTMLElement>(null);
-  const totalEl = useRef<HTMLElement>(null);
-  const routeEl = useRef<SVGPathElement>(null);
-  const dotEl = useRef<SVGCircleElement>(null);
-  const last = useRef({ y: 0, step: -1, sel: -1, theme: -1 });
-
-  // Um único laço por quadro: escreve variáveis CSS e alguns textos. Sem setState.
-  useScrollFx(() => {
-    const y = window.scrollY;
-    const vh = window.innerHeight;
-    const L = last.current;
-
-    const n = nav.current;
-    if (n) {
-      n.dataset.solid = String(y > 12);
-      if (y > L.y + 6 && y > 240) n.dataset.hidden = 'true';
-      else if (y < L.y - 6) n.dataset.hidden = 'false';
-    }
-    L.y = y;
-
-    if (hero.current) hero.current.style.setProperty('--hp', clamp01(y / hero.current.offsetHeight).toFixed(4));
-
-    const st = statement.current;
-    if (st) {
-      const r = st.getBoundingClientRect();
-      st.style.setProperty('--wp', clamp01((vh * 0.9 - r.top) / (r.height + vh * 0.45)).toFixed(4));
-    }
-
-    const s = story.current;
-    if (s) {
-      const p = stickyProgress(s);
-      const raw = p * STEPS.length;
-      const step = Math.min(STEPS.length - 1, Math.floor(raw));
-      const lp = clamp01(raw - step);
-      s.style.setProperty('--sp', p.toFixed(4));
-      s.style.setProperty('--lp', lp.toFixed(4));
-      if (step !== L.step) {
-        s.dataset.step = String(step);
-        L.step = step;
-      }
-      if (step === 2) {
-        const d = 0.8 + lp * 3.6;
-        const { fee } = deliveryFee(d, DEFAULT_CONFIG.fee);
-        if (kmEl.current) kmEl.current.textContent = `${km(d)} km`;
-        if (feeEl.current) feeEl.current.textContent = brl(fee);
-        if (totalEl.current) totalEl.current.textContent = brl(110 + fee);
-        const path = routeEl.current;
-        if (path && dotEl.current) {
-          const pt = path.getPointAtLength(path.getTotalLength() * lp);
-          dotEl.current.setAttribute('cx', pt.x.toFixed(1));
-          dotEl.current.setAttribute('cy', pt.y.toFixed(1));
-        }
-      }
-      const sel = step === 3 ? Math.min(3, Math.floor(lp * 4.4)) : -1;
-      if (sel !== L.sel) {
-        s.dataset.sel = String(sel + 1);
-        L.sel = sel;
-      }
-      const theme = step === 4 ? Math.min(2, Math.floor(lp * 3)) : 0;
-      if (theme !== L.theme) {
-        s.dataset.theme = String(theme);
-        L.theme = theme;
-      }
-    }
-  });
-
   const go = (id: string) => (e: MouseEvent) => {
     e.preventDefault();
-    scrollToEl(document.getElementById(id)!, 0);
+    scrollToEl(document.getElementById(id)!, -72);
   };
-
   return (
-    <div className="ln">
-      <nav ref={nav} className="ln-nav" aria-label="Principal">
-        <Link to="/" className="ln-nav__brand" aria-label="Cart Delivery, início">
-          <Mark size={30} />
-          <span className="wordmark">cart delivery</span>
-        </Link>
-        <div className="ln-nav__links">
-          <a href="#como" onClick={go('como')}>Como funciona</a>
-          <Link to="/r/forno-da-vila?mesa=07" viewTransition>Exemplo</Link>
-          <Link to="/painel" viewTransition className="ln-nav__cta">Criar página</Link>
+    <div className="lp">
+      <nav className="lp-nav" aria-label="Principal">
+        <div className="lp-wrap lp-nav__inner">
+          <Link to="/" className="lp-nav__brand" aria-label="Cart Delivery, início">
+            <Mark size={28} />
+            <span className="wordmark">cart delivery</span>
+          </Link>
+          <div className="lp-nav__links">
+            <a href="#recursos" onClick={go('recursos')}>Recursos</a>
+            <a href="#como" onClick={go('como')}>Como funciona</a>
+            <Link to="/painel/pedidos" viewTransition>Entrar</Link>
+            <Link to="/painel" viewTransition className="lp-btn lp-btn--sm">Criar conta</Link>
+          </div>
         </div>
       </nav>
 
-      <header ref={hero} className="ln-hero">
-        <div className="ln-hero__inner">
-          <h1 className="display ln-hero__title lines" aria-label="Da mesa até a porta.">
-            <span aria-hidden="true"><span style={v({ '--i': 0 })}>Da mesa</span></span>
-            <span aria-hidden="true"><span style={v({ '--i': 1 })}>até a porta.</span></span>
-          </h1>
-          <div className="ln-hero__foot">
-            <p className="ln-hero__lead">Cardápio por QR code, reservas e delivery com taxa por km, numa página que o seu restaurante monta sozinho.</p>
-            <div className="ln-hero__cta">
-              <Magnetic><Link to="/painel" viewTransition className="btn">Criar minha página</Link></Magnetic>
-              <a href="#como" onClick={go('como')} className="ln-scroll">Ver como funciona <span aria-hidden="true">↓</span></a>
-            </div>
+      <header className="lp-wrap lp-hero">
+        <div className="lp-hero__copy">
+          <p className="lp-kicker" data-reveal="">Sistema para restaurantes</p>
+          <h1 className="lp-hero__title" data-reveal="" style={d(60)}>Pedidos do salão e do delivery em um só lugar.</h1>
+          <p className="lp-hero__lead" data-reveal="" style={d(140)}>
+            Cardápio por QR code na mesa, conta paga pelo celular, entrega com taxa por distância e comprovante impresso na cozinha a cada pedido.
+          </p>
+          <div className="lp-hero__cta" data-reveal="" style={d(220)}>
+            <Link to="/painel" viewTransition className="lp-btn">Criar conta</Link>
+            <Link to="/r/forno-da-vila?mesa=07" viewTransition className="lp-btn lp-btn--ghost">Ver restaurante de exemplo</Link>
           </div>
+          <ul className="lp-hero__facts" data-reveal="" style={d(300)}>
+            <li>O cliente não instala aplicativo</li>
+            <li>Pix direto na conta do restaurante</li>
+            <li>Funciona com impressora térmica</li>
+          </ul>
         </div>
-        <svg className="ln-hero__route" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
-          <path pathLength={1} d="M-20 170 C 240 40, 420 230, 720 120 S 1180 30, 1400 120" />
-          <circle cx="1400" cy="120" r="12" />
-        </svg>
+        <div className="lp-hero__visual" data-reveal="" style={d(120)}>
+          <HeroDelivery />
+        </div>
       </header>
 
-      <section className="ln-statement" aria-label="Resumo">
-        <p ref={statement} className="ln-statement__text">
-          {STATEMENT.split(' ').map((w, i, a) => (
-            <span key={i} style={v({ '--i': i, '--n': a.length })}>{w} </span>
+      <section id="recursos" className="lp-features" aria-labelledby="recursos-t">
+        <div className="lp-wrap">
+          <h2 id="recursos-t" className="lp-h2" data-reveal="">Recursos</h2>
+          {FEATURES.map((f, i) => (
+            <article key={f.id} className={`lp-feat ${i % 2 ? 'lp-feat--flip' : ''}`}>
+              <div className="lp-feat__copy" data-reveal="">
+                <h3>{f.title}</h3>
+                <p>{f.text}</p>
+                <ul>{f.points.map((p) => <li key={p}>{p}</li>)}</ul>
+              </div>
+              <div className="lp-feat__demo">{f.demo}</div>
+            </article>
           ))}
-        </p>
+        </div>
       </section>
 
-      <section id="como" ref={story} className="ln-story" data-step="0" data-sel="0" data-theme="0" style={v({ '--steps': STEPS.length })}>
-        <div className="ln-story__sticky">
-          <div className="ln-story__copy">
-            <ol className="ln-story__rail" aria-hidden="true">
-              {STEPS.map((s, i) => <li key={s.k} className={`r-${i}`}>{s.k}</li>)}
-            </ol>
-            <div className="ln-story__texts">
-              {STEPS.map((s, i) => (
-                <div key={s.k} className={`st st-${i}`}>
-                  <h2 className="display">{s.title}</h2>
-                  <p>{s.text}</p>
-                  {i === 4 && <Link to="/painel" viewTransition className="ln-link">Abrir o construtor →</Link>}
-                </div>
-              ))}
-            </div>
+      <section id="como" className="lp-steps" aria-labelledby="como-t">
+        <div className="lp-wrap">
+          <h2 id="como-t" className="lp-h2" data-reveal="">Como funciona</h2>
+          <ol>
+            {STEPS.map((s, i) => (
+              <li key={s.title} data-reveal="" style={d(i * 80)}>
+                <span className="lp-steps__n">{i + 1}</span>
+                <b>{s.title}</b>
+                <p>{s.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="lp-cta">
+        <div className="lp-wrap lp-cta__inner">
+          <div data-reveal="">
+            <h2>Monte a página do seu restaurante.</h2>
+            <p>Você configura o cardápio e a operação, e publica quando estiver pronto.</p>
           </div>
-
-          <div className="ln-phone" aria-hidden="true">
-            <div className="ln-phone__screen">
-              {/* 0 · QR da mesa */}
-              <div className="scr scr-0">
-                <div className="scan">
-                  <div className="scan__frame">
-                    <div className="scan__qr">{Array.from({ length: 49 }, (_, i) => <i key={i} className={(i * 7 + (i % 5)) % 3 === 0 || [0, 1, 2, 7, 9, 14, 15, 16, 4, 5, 6, 11, 13, 18, 19, 20, 28, 29, 30, 35, 37, 42, 43, 44].includes(i) ? 'on' : ''} />)}</div>
-                    <span className="scan__line" />
-                  </div>
-                  <p>Aponte para o QR da mesa</p>
-                </div>
-                <div className="sheet">
-                  <img src={demo('capa.jpg')} alt="" />
-                  <div>
-                    <b>Forno da Vila</b>
-                    <span>Mesa 07 · aberto até 23h</span>
-                  </div>
-                  <span className="sheet__btn">Abrir cardápio</span>
-                </div>
-              </div>
-
-              {/* 1 · cardápio */}
-              <div className="scr scr-1">
-                <div className="menu">
-                  <div className="menu__cover" style={{ backgroundImage: `url(${demo('capa.jpg')})` }} />
-                  <div className="menu__head">
-                    <b>Forno da Vila</b>
-                    <span>Mesa 07</span>
-                  </div>
-                  <div className="menu__list">
-                    {MENU.map((m, i) => (
-                      <div key={m.name} className="menu__item">
-                        <img src={demo(m.photo)} alt="" />
-                        <div><b>{m.name}</b><span>{brl(m.price)}</span></div>
-                        <span className={`menu__add ${i === 0 ? 'menu__add--first' : ''}`}><i>+</i><i>1</i></span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="cartbar"><span>1 item · R$ 48,00</span><span>Ver pedido →</span></div>
-              </div>
-
-              {/* 2 · entrega */}
-              <div className="scr scr-2">
-                <div className="lmap">
-                  <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
-                    <g className="lmap__streets"><path d="M0 90h300M0 200h300M0 320h300M70 0v400M160 0v400M240 0v400" /></g>
-                    <path ref={routeEl} className="lmap__route" pathLength={1} d="M70 320 C 70 250, 160 260, 160 200 S 240 120, 240 90" />
-                    <rect x="58" y="308" width="24" height="24" rx="7" className="lmap__from" />
-                    <circle cx="240" cy="90" r="12" className="lmap__to" />
-                    <circle ref={dotEl} cx="70" cy="320" r="8" className="lmap__dot" />
-                  </svg>
-                </div>
-                <div className="bill">
-                  <div><span>Distância</span><b ref={kmEl}>0,8 km</b></div>
-                  <div><span>Entrega</span><b ref={feeEl}>R$ 5,20</b></div>
-                  <div className="bill__total"><span>Total</span><b ref={totalEl}>R$ 115,20</b></div>
-                </div>
-              </div>
-
-              {/* 3 · reserva */}
-              <div className="scr scr-3">
-                <div className="res">
-                  <b className="res__title">Reservar mesa</b>
-                  <div className="res__days">{['qui', 'sex', 'sáb', 'dom'].map((d, i) => <span key={d} className={i === 2 ? 'on' : ''}><small>{d}</small><b>{19 + i}</b></span>)}</div>
-                  <div className="res__times">{TIMES.map((t, i) => <span key={t} className={`t t-${i + 1}`}>{t}</span>)}</div>
-                  <div className="res__people"><span>Pessoas</span><b>4</b></div>
-                  <span className="res__ok">Reserva confirmada</span>
-                </div>
-              </div>
-
-              {/* 4 · temas */}
-              <div className="scr scr-4">
-                <div className="thm">
-                  <div className="thm__cover" style={{ backgroundImage: `url(${demo('capa.jpg')})` }} />
-                  <b className="thm__name">Forno da Vila</b>
-                  <span className="thm__tag">Pizzas de fermentação longa</span>
-                  <span className="thm__promo">Terça da Margherita</span>
-                  {MENU.slice(0, 2).map((m) => (
-                    <div key={m.name} className="thm__item"><img src={demo(m.photo)} alt="" /><b>{m.name}</b><span className="thm__add">+</span></div>
-                  ))}
-                </div>
-              </div>
-            </div>
+          <div className="lp-cta__actions" data-reveal="" style={d(80)}>
+            <Link to="/painel" viewTransition className="lp-btn lp-btn--light">Criar conta</Link>
+            <Link to="/painel/pedidos" viewTransition className="lp-btn lp-btn--outline">Ver painel de pedidos</Link>
           </div>
         </div>
       </section>
 
-      <section className="ln-strip" aria-label="Fotos do restaurante de exemplo">
-        <div className="ln-strip__track">
-          {[...STRIP, ...STRIP].map((f, i) => <img key={i} src={demo(f)} alt="" loading="lazy" />)}
-        </div>
-      </section>
-
-      <footer className="ln-end">
-        <div className="ln-end__inner">
-          <h2 className="display">Sua casa, no bolso de cada cliente.</h2>
-          <Magnetic><Link to="/painel" viewTransition className="btn">Criar minha página</Link></Magnetic>
-        </div>
-        <div className="ln-end__foot">
-          <span><Mark size={22} /> Cart Delivery · {new Date().getFullYear()}</span>
-          <span className="ln-end__links"><a href="#">Termos</a><a href="#">Privacidade</a><a href="#">Contato</a></span>
-        </div>
+      <footer className="lp-wrap lp-foot">
+        <span className="lp-foot__brand"><Mark size={22} /> Cart Delivery</span>
+        <span className="lp-foot__links"><a href="#">Termos de uso</a><a href="#">Privacidade</a><a href="#">Contato</a></span>
+        <span className="lp-foot__copy">© {new Date().getFullYear()} Cart Delivery</span>
       </footer>
     </div>
   );

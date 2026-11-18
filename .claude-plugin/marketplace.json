@@ -1,0 +1,11 @@
+{
+  "name": "minhas-ai-skills",
+  "owner": { "name": "minhas-ai-skills" },
+  "plugins": [
+    {
+      "name": "growkaz-stickman",
+      "source": "./plugins/tubemakers",
+      "description": "Vídeos animados de bonecos-palito (2D + 3D) a partir de uma narração."
+    }
+  ]
+}

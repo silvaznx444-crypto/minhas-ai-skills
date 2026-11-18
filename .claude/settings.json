@@ -1,0 +1,10 @@
+{
+  "extraKnownMarketplaces": {
+    "minhas-ai-skills": {
+      "source": { "source": "directory", "path": "./" }
+    }
+  },
+  "enabledPlugins": {
+    "growkaz-stickman@minhas-ai-skills": true
+  }
+}

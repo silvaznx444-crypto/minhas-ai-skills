@@ -737,24 +737,23 @@ test('visitas anônimas: com "Não rastrear" (Global Privacy Control) o site nã
   await ctx.close();
 });
 
-test('Início: o banner Black Friday é o 1º slide do carrossel, com a arte certa no computador e no celular', async () => {
-  for (const [vp, file] of [[{width: 1440, height: 900}, 'black-friday-desktop.webp'], [{width: 390, height: 844}, 'black-friday-mobile.webp']]) {
+test('Início: a arte GRIFHII é o 1º slide do carrossel, inteira (sem cortes) no computador e no celular, e não há mais Black Friday', async () => {
+  for (const vp of [{width: 1440, height: 900}, {width: 390, height: 844}]) {
     const {ctx, page} = await newPage({viewport: vp});
     await mockShopify(page);
     await page.goto(`${BASE}index.html`);
     const img = page.locator('.campaign-slide--banner.is-active .campaign-banner-img');
     await img.waitFor();
     await page.waitForFunction(() => document.querySelector('.campaign-banner-img').complete);
-    assert.match(await img.evaluate(i => i.currentSrc), new RegExp(file.replace('.', '\\.')));
+    assert.match(await img.evaluate(i => i.currentSrc), /grifhii-moda-masculina-(16x9|4x5)\.webp/);
+    // A arte original (1466×1073) fica no centro da versão estendida; conferir que ela cabe inteira na área visível.
+    const fit = await img.evaluate(i => { const r = i.getBoundingClientRect(); const s = Math.min(r.width / i.naturalWidth, r.height / i.naturalHeight);
+      return { artW: 1466 * s, artH: 1073 * s, w: r.width, h: r.height }; });
+    assert.ok(fit.artW <= fit.w + 1 && fit.artH <= fit.h + 1, 'arte inteira, sem cortes: ' + JSON.stringify(fit));
     assert.equal(await page.locator('[data-campaign-slide]').count(), 4);
-    assert.equal(await page.locator('.gh-campaign-banner').count(), 0);
-    const cta = page.locator('.campaign-slide--banner .campaign-banner-cta');
-    assert.equal((await cta.innerText()).trim(), 'Garanta seu desconto');
-    const box = await cta.boundingBox(); const vw = page.viewportSize().width;
-    assert.ok(box && box.x >= 0 && box.x + box.width <= vw && box.height < 60, 'botão inteiro na tela e em uma linha');
-    assert.match(await cta.getAttribute('href'), /^https:\/\/wa\.me\/5564981025225\?text=.*Black%20Friday/);
-    assert.equal(await cta.getAttribute('target'), '_blank');
-    assert.match(await cta.getAttribute('rel'), /noopener/);
+    assert.equal(await page.locator('.campaign-banner-cta').count(), 0, 'sem o botão da Black Friday');
+    assert.doesNotMatch(await page.content(), /black.friday/i);
+    assert.match(await page.getAttribute('.campaign-banner-link', 'href'), /produtos/);
     await ctx.close();
   }
 });

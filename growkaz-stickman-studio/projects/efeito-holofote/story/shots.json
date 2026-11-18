@@ -1,0 +1,1145 @@
+{
+ "title": "Ninguém está te observando",
+ "duration": 154.58,
+ "shots": [
+  {
+   "id": "s001",
+   "start": 0,
+   "end": 1.9,
+   "line": "Você tropeça na calçada.",
+   "scene": "rua ao entardecer: VOCÊ caminha e tropeça",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.7,
+     "name": "swish",
+     "gain": -10
+    },
+    {
+     "at": 1.0,
+     "name": "hit",
+     "gain": -8
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s002",
+   "start": 1.9,
+   "end": 3.55,
+   "line": "Seu rosto esquenta.",
+   "scene": "bigFace VOCÊ envergonhado, bochechas brilham",
+   "set": "street",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s003",
+   "start": 3.55,
+   "end": 4.9,
+   "line": "Parece que o mundo inteiro viu.",
+   "scene": "imaginação: holofote no herói, dezenas de olhos na escuridão",
+   "set": "street",
+   "bars": "scope",
+   "in": {
+    "type": "flash",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s004",
+   "start": 4.9,
+   "end": 9.65,
+   "line": "Mas e se eu te dissesse que quase ninguém percebeu?",
+   "scene": "realidade: passantes olham o celular, ninguém viu; herói se levanta",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "whoosh",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s005",
+   "start": 9.65,
+   "end": 12.9,
+   "line": "E que a ciência consegue provar isso?",
+   "scene": "TÍTULO: NINGUÉM ESTÁ TE OBSERVANDO",
+   "set": "title",
+   "bars": "scope",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.05,
+     "name": "stinger",
+     "gain": -6
+    }
+   ],
+   "notes": "",
+   "captions": false
+  },
+  {
+   "id": "s006",
+   "start": 12.9,
+   "end": 15.55,
+   "line": "Você já percebeu que lembra por dias de uma",
+   "scene": "reunião: herói fala, erra a frase, colegas neutros",
+   "set": "office",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 1.2,
+     "name": "glitch",
+     "gain": -16
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -20
+   }
+  },
+  {
+   "id": "s007",
+   "start": 15.55,
+   "end": 17.9,
+   "line": "frase errada que disse numa reunião?",
+   "scene": "noite: herói acordado na cama, relembra; badge DIA 3",
+   "set": "bedroom",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "clock",
+     "gain": -16
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s008",
+   "start": 17.9,
+   "end": 21.35,
+   "line": "Ou de uma espinha que apareceu justo no dia da foto?",
+   "scene": "insert: foto em grupo no celular, círculo na espinha",
+   "set": "phone",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "phonebuzz",
+     "gain": -14
+    },
+    {
+     "at": 1.2,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s009",
+   "start": 21.35,
+   "end": 22.95,
+   "line": "Esse sentimento tem nome.",
+   "scene": "bigFace herói pensativo sob luz de cima",
+   "set": "street",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "ding",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s010",
+   "start": 22.95,
+   "end": 27.6,
+   "line": "E entender como ele funciona pode mudar a forma como você se comporta em público.",
+   "scene": "3D: praça com pessoas, herói no centro, órbita",
+   "set": "3d-plaza",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s011",
+   "start": 27.6,
+   "end": 32.45,
+   "line": "Mas antes, uma pergunta: por que o nosso cérebro erra tanto nessa conta?",
+   "scene": "blueprint: cabeça + cérebro com ponto de interrogação",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "zoom",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 2.6,
+     "name": "blip",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s012",
+   "start": 32.45,
+   "end": 37.8,
+   "line": "No ano 2000, o psicólogo Thomas Gilovich, da Universidade Cornell, fez um experimento curioso.",
+   "scene": "3D: prédio da universidade à noite, CORNELL 2000",
+   "set": "3d-campus",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -14
+    },
+    {
+     "at": 1.0,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s013",
+   "start": 37.8,
+   "end": 40.15,
+   "line": "Ele pediu que estudantes vestissem uma camiseta",
+   "scene": "sala do psicólogo: GILOVICH entrega a camiseta amarela ao estudante",
+   "set": "dept",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 1.2,
+     "name": "swish",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -20
+   }
+  },
+  {
+   "id": "s014",
+   "start": 40.15,
+   "end": 45.3,
+   "line": "com o rosto de um cantor considerado brega pelos jovens da época: Barry Manilow.",
+   "scene": "insert: camiseta com rosto de cantor brega; estudante constrangido",
+   "set": "dept",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s015",
+   "start": 45.3,
+   "end": 48.6,
+   "line": "Depois, cada um entrava numa sala cheia de colegas.",
+   "scene": "sala cheia: estudante entra pela porta, colegas sentados",
+   "set": "classroom",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "footstep",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "murmur",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s016",
+   "start": 48.6,
+   "end": 53.05,
+   "line": "Os voluntários acharam que cerca de metade da sala tinha notado a camiseta.",
+   "scene": "blueprint: mapa de assentos, metade acende (ACHOU ~50%)",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "counter",
+     "gain": -16
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s017",
+   "start": 53.05,
+   "end": 56.3,
+   "line": "O número real? Pouco menos de um quarto.",
+   "scene": "blueprint: luzes apagam, só ~23% acendem (REAL ~23%)",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "riser",
+     "gain": -14
+    },
+    {
+     "at": 1.5,
+     "name": "impact",
+     "gain": -8
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s018",
+   "start": 56.3,
+   "end": 59.15,
+   "line": "Gilovich chamou isso de efeito holofote.",
+   "scene": "EFEITO HOLOFOTE: palco escuro, feixe enorme sobre o estudante",
+   "set": "stage",
+   "bars": "scope",
+   "in": {
+    "type": "flash",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "freeze",
+     "gain": -6
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s019",
+   "start": 59.15,
+   "end": 63.05,
+   "line": "A sensação de que existe uma luz sempre apontada para você.",
+   "scene": "3D: holofote segue VOCÊ andando no escuro",
+   "set": "3d-spot",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "hum",
+     "gain": -18
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s020",
+   "start": 63.05,
+   "end": 64.9,
+   "line": "Mas o efeito não para nos erros.",
+   "scene": "rua à noite: herói caminha, pequeno feixe o segue",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "whip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "swish",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s021",
+   "start": 64.9,
+   "end": 67.6,
+   "line": "Ele também aparece no que você sente.",
+   "scene": "plano médio: coração brilhando no peito, linha de batimento",
+   "set": "void",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "heartbeat",
+     "gain": -8
+    },
+    {
+     "at": 1.1,
+     "name": "heartbeat",
+     "gain": -9
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s022",
+   "start": 67.6,
+   "end": 72.05,
+   "line": "Em outros estudos, Gilovich e seus colegas pediram que pessoas falassem em público.",
+   "scene": "3D: auditório, plateia, orador no palco",
+   "set": "3d-hall",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s023",
+   "start": 72.05,
+   "end": 75.7,
+   "line": "Os oradores tinham certeza de que o nervosismo estava",
+   "scene": "palco: herói no púlpito, suando, tremendo",
+   "set": "stage",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "murmur",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s024",
+   "start": 75.7,
+   "end": 77.5,
+   "line": "estampado no rosto.",
+   "scene": "bigFace nervoso, carimbo NERVOSO no rosto",
+   "set": "stage",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "impact",
+     "gain": -8
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s025",
+   "start": 77.5,
+   "end": 80.35,
+   "line": "A plateia?",
+   "scene": "contraplano: plateia distraída, celulares",
+   "set": "stage",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "phonebuzz",
+     "gain": -18
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "murmur",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s026",
+   "start": 80.35,
+   "end": 82.75,
+   "line": "Percebeu muito menos do que eles imaginavam.",
+   "scene": "blueprint: SENTIU vs PERCEBERAM",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 0.7,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s027",
+   "start": 82.75,
+   "end": 85.2,
+   "line": "Isso se chama ilusão de transparência: achamos que nossas",
+   "scene": "ILUSÃO DE TRANSPARÊNCIA: figura de vidro surge",
+   "set": "void",
+   "bars": "scope",
+   "in": {
+    "type": "flash",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "shimmer",
+     "gain": -8
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s028",
+   "start": 85.2,
+   "end": 90.15,
+   "line": "emoções estão expostas, como se fôssemos de vidro.",
+   "scene": "figura de vidro com emoções visíveis; plateia vê silhueta escura",
+   "set": "void",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s029",
+   "start": 90.15,
+   "end": 92.7,
+   "line": "A explicação é simples, e um pouco incômoda.",
+   "scene": "GILOVICH explica no quadro, herói ouve",
+   "set": "dept",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "swish",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -20
+   }
+  },
+  {
+   "id": "s030",
+   "start": 92.7,
+   "end": 97.85,
+   "line": "Você é a única pessoa que vive cem por cento do tempo dentro da sua própria cabeça.",
+   "scene": "blueprint: herói dentro da própria cabeça, 100%",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "zoom",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 1.9,
+     "name": "counter",
+     "gain": -16
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s031",
+   "start": 97.85,
+   "end": 102.4,
+   "line": "Seus detalhes são enormes para você, porque você está sempre olhando para eles.",
+   "scene": "herói com lupa gigante sobre mancha na camisa",
+   "set": "bedroom",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s032",
+   "start": 102.4,
+   "end": 108.0,
+   "line": "E quando tenta imaginar o que os outros veem, parte do seu ponto de vista.",
+   "scene": "blueprint: seu ponto de vista projetado nos outros",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "blip",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s033",
+   "start": 108.0,
+   "end": 110.5,
+   "line": "Você até corrige um pouco, mas não o suficiente.",
+   "scene": "blueprint: ajuste insuficiente",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "tick",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s034",
+   "start": 110.5,
+   "end": 112.6,
+   "line": "E aqui está a parte mais interessante.",
+   "scene": "bigFace herói curioso",
+   "set": "street",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "riser",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s035",
+   "start": 112.6,
+   "end": 115.6,
+   "line": "Num desses estudos, os pesquisadores simplesmente explicaram",
+   "scene": "bastidores: GILOVICH explica ao orador",
+   "set": "backstage",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "impact",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s036",
+   "start": 115.6,
+   "end": 118.9,
+   "line": "a ilusão de transparência para alguns oradores antes da fala.",
+   "scene": "OTS: ombro do psicólogo, herói aliviado",
+   "set": "backstage",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s037",
+   "start": 118.9,
+   "end": 121.55,
+   "line": "Resultado: esses oradores ficaram mais calmos, e",
+   "scene": "palco: herói confiante, plateia atenta",
+   "set": "stage",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "ding",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "murmur",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s038",
+   "start": 121.55,
+   "end": 124.2,
+   "line": "o público avaliou as falas deles como melhores.",
+   "scene": "blueprint: avaliação do público SEM AVISO vs COM AVISO",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 0.7,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s039",
+   "start": 124.2,
+   "end": 128.15,
+   "line": "Só saber que o holofote é menor do que parece já ajudou.",
+   "scene": "holofote encolhe sobre o herói",
+   "set": "stage",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s040",
+   "start": 128.15,
+   "end": 133.25,
+   "line": "Todas as pessoas ao seu redor estão ocupadas demais com o próprio holofote.",
+   "scene": "3D: praça, cada pessoa com o próprio holofote, grua sobe",
+   "set": "3d-plaza",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s041",
+   "start": 133.25,
+   "end": 135.75,
+   "line": "Então, da próxima vez que errar uma palavra,",
+   "scene": "montagem: reunião, erro",
+   "set": "office",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 1.6,
+     "name": "glitch",
+     "gain": -16
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s042",
+   "start": 135.75,
+   "end": 136.45,
+   "line": "tropeçar ou",
+   "scene": "montagem: tropeço",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.15,
+     "name": "hit",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s043",
+   "start": 136.45,
+   "end": 137.85,
+   "line": "sentir o rosto esquentar,",
+   "scene": "montagem: rosto esquenta",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s044",
+   "start": 137.85,
+   "end": 140.7,
+   "line": "lembre-se: o mundo não está assistindo.",
+   "scene": "rua: ninguém olhando, herói sorri",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "whoosh",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s045",
+   "start": 140.7,
+   "end": 144.25,
+   "line": "Está ocupado demais se preocupando consigo mesmo.",
+   "scene": "passantes com bolhas de pensamento sobre si mesmos",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 0.8,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 1.2,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s046",
+   "start": 144.25,
+   "end": 147.25,
+   "line": "E isso, no fundo, é libertador.",
+   "scene": "pôr do sol: herói abre os braços, livre",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s047",
+   "start": 147.25,
+   "end": 154.58,
+   "line": "Qual foi o momento em que você teve certeza de que todos estavam olhando? Conta aqui nos comentários.",
+   "scene": "tela final: pergunta + comentários + inscreva-se",
+   "set": "end",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "captions": false
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 12.9,
+   "mood": "tension",
+   "intensity": 0.45
+  },
+  {
+   "start": 12.9,
+   "end": 32.45,
+   "mood": "mystery",
+   "intensity": 0.4
+  },
+  {
+   "start": 32.45,
+   "end": 67.6,
+   "mood": "playful",
+   "intensity": 0.45
+  },
+  {
+   "start": 67.6,
+   "end": 110.5,
+   "mood": "mystery",
+   "intensity": 0.5
+  },
+  {
+   "start": 110.5,
+   "end": 133.25,
+   "mood": "wonder",
+   "intensity": 0.55
+  },
+  {
+   "start": 133.25,
+   "end": 154.58,
+   "mood": "hopeful",
+   "intensity": 0.6
+  }
+ ]
+}

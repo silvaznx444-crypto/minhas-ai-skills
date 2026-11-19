@@ -1,10 +1,20 @@
 {
+  "enabledPlugins": {
+    "growkaz-stickman@minhas-ai-skills": true,
+    "hyperframes@hyperframes": true
+  },
   "extraKnownMarketplaces": {
     "minhas-ai-skills": {
-      "source": { "source": "directory", "path": "./" }
+      "source": {
+        "source": "directory",
+        "path": "./"
+      }
+    },
+    "hyperframes": {
+      "source": {
+        "source": "github",
+        "repo": "heygen-com/hyperframes"
+      }
     }
-  },
-  "enabledPlugins": {
-    "growkaz-stickman@minhas-ai-skills": true
   }
 }

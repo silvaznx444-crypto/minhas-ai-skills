@@ -1,0 +1,379 @@
+{
+ "title": "4 sinais que destroem um relacionamento",
+ "duration": 62.5,
+ "shots": [
+  {
+   "id": "s01",
+   "start": 0,
+   "end": 4.9,
+   "line": "Existem quatro sinais que podem destruir um relacionamento.",
+   "scene": "casa do casal, título do vídeo",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "stinger",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s02",
+   "start": 4.9,
+   "end": 6.4,
+   "line": "E quase todo casal já cometeu pelo menos um.",
+   "scene": "casal mais perto",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s03",
+   "start": 6.4,
+   "end": 12.5,
+   "line": "O psicólogo John Gottman passou décadas observando casais conversando.",
+   "scene": "pesquisador observa casais: JOHN GOTTMAN",
+   "bars": "none",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "swish",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s04",
+   "start": 12.5,
+   "end": 17.5,
+   "line": "E percebeu que alguns comportamentos aparecem com muito mais frequência nos relacionamentos que terminam.",
+   "scene": "nuvens se juntam: relacionamentos que terminam",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "riser",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s05",
+   "start": 17.5,
+   "end": 23.6,
+   "line": "O primeiro é a crítica. Não é reclamar de uma atitude. É atacar quem a pessoa é.",
+   "scene": "SINAL 1 CRÍTICA, rachadura laranja",
+   "bars": "none",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "impact",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s06",
+   "start": 23.6,
+   "end": 25.3,
+   "line": "\"Você sempre esquece\", em vez de \"eu fiquei chateado\".",
+   "scene": "VOCÊ SEMPRE ESQUECE ✗ / EU FIQUEI CHATEADO ✓",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 0.9,
+     "name": "ding",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s07",
+   "start": 25.3,
+   "end": 29.55,
+   "line": "O segundo é o desprezo. Revirar os olhos, ironizar, falar de cima.",
+   "scene": "SINAL 2 DESPREZO, nuvem roxa e raio",
+   "bars": "none",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "impact",
+     "gain": -8
+    },
+    {
+     "at": 1.0,
+     "name": "thunder",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s08",
+   "start": 29.55,
+   "end": 33.6,
+   "line": "Para Gottman, esse é o sinal mais perigoso de todos.",
+   "scene": "o mais perigoso",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "stinger",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s09",
+   "start": 33.6,
+   "end": 38.7,
+   "line": "O terceiro é a defensividade. Nunca assumir a culpa.",
+   "scene": "SINAL 3 DEFENSIVIDADE, ele se protege",
+   "bars": "none",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "impact",
+     "gain": -8
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s10",
+   "start": 38.7,
+   "end": 41.9,
+   "line": "Sempre devolver o problema para o outro.",
+   "scene": "devolve o problema",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "swish",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s11",
+   "start": 41.9,
+   "end": 48.5,
+   "line": "E o quarto é o muro de silêncio. Quando um dos dois simplesmente se fecha e para de responder.",
+   "scene": "SINAL 4 MURO DE SILÊNCIO, muro sobe",
+   "bars": "none",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "impact",
+     "gain": -8
+    },
+    {
+     "at": 1.0,
+     "name": "hit",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s12",
+   "start": 48.5,
+   "end": 52.2,
+   "line": "A boa notícia? Os casais que dão certo também brigam.",
+   "scene": "a boa notícia: o sol volta",
+   "bars": "none",
+   "in": {
+    "type": "fade",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s13",
+   "start": 52.2,
+   "end": 58.45,
+   "line": "A diferença é que eles reclamam sem atacar, mostram carinho no dia a dia e sabem pedir desculpas.",
+   "scene": "rachaduras se consertam, corações",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 2.0,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 4.0,
+     "name": "ding",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  },
+  {
+   "id": "s14",
+   "start": 58.45,
+   "end": 62.5,
+   "line": "Manda esse vídeo para quem divide a vida com você.",
+   "scene": "chamada final: casal comemora",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -30
+   },
+   "notes": ""
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 17.5,
+   "mood": "playful",
+   "intensity": 0.45
+  },
+  {
+   "start": 17.5,
+   "end": 48.5,
+   "mood": "tension",
+   "intensity": 0.5
+  },
+  {
+   "start": 48.5,
+   "end": 62.5,
+   "mood": "hopeful",
+   "intensity": 0.6
+  }
+ ]
+}

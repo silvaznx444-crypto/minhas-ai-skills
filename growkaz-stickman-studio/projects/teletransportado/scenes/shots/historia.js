@@ -174,7 +174,7 @@ function caption(g, T) {
   if (!str) return; text(g, str, E.W / 2, E.H * 0.7, { size: 74, color: CAPC[who], font: FONTS.ui, weight: 900, stroke: 16, strokeColor: alpha('#000000', 0.85) });
 }
 function whiteFade(g, T) { const a = T < 17.4 ? ease.in(prog(T, 15.6, 17.3)) : 1 - ease.out(prog(T, 17.4, 18.6)); if (a > 0) { g.fillStyle = `rgba(255,252,240,${a})`; g.fillRect(0, 0, E.W, E.H); } }
-function phoneOverlay(g, T) { const a = ease.outBack(prog(T, 21.6, 22.0)) * (1 - prog(T, 23.6, 23.9)); if (a <= 0) return; g.save(); g.translate(E.W * 0.7, E.H * 0.34); g.rotate(0.06); g.scale(a, a); rr(g, -150, -270, 300, 540, 40); g.fillStyle = '#16141c'; g.fill(); rr(g, -136, -256, 272, 512, 30); g.fillStyle = '#0e1220'; g.fill();
+function phoneOverlay(g, T) { const a = ease.outBack(prog(T, 21.6, 22.0)) * (1 - prog(T, 23.6, 23.9)); if (a <= 0) return; g.save(); g.translate(E.W * 0.8, E.H * 0.2); g.rotate(0.08); g.scale(a * 0.62, a * 0.62); rr(g, -150, -270, 300, 540, 40); g.fillStyle = '#16141c'; g.fill(); rr(g, -136, -256, 272, 512, 30); g.fillStyle = '#0e1220'; g.fill();
   for (let k = 0; k < 4; k++) { g.fillStyle = k < 0 ? '#fff' : 'rgba(255,255,255,.25)'; g.fillRect(-100 + k * 22, -200 - k * 10, 14, 20 + k * 10); } text(g, 'SEM SERVIÇO', 0, -40, { size: 40, color: '#ff6a6a', font: FONTS.ui, weight: 900 }); text(g, '✕', 0, 60, { size: 110, color: '#ff6a6a', font: FONTS.ui, weight: 900 });
   for (let i = 0; i < 6; i++) { const x = -110 + i * 44; g.save(); g.translate(x, 180); g.rotate(0.6); g.fillStyle = 'rgba(255,255,255,.35)'; g.fillRect(-2, -26, 4, 52); g.restore(); } g.restore(); }
 

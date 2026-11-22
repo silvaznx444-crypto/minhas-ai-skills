@@ -1,0 +1,432 @@
+{
+ "title": "Teletransportado - Parte 1",
+ "duration": 52.0,
+ "shots": [
+  {
+   "id": "A1",
+   "start": 0,
+   "end": 3.8,
+   "line": "",
+   "scene": "A1",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "rain",
+     "gain": -20
+    },
+    {
+     "at": 1.5,
+     "name": "phonebuzz",
+     "gain": -12
+    },
+    {
+     "at": 3.0,
+     "name": "phonebuzz",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -22
+   }
+  },
+  {
+   "id": "A2",
+   "start": 3.8,
+   "end": 6.2,
+   "line": "",
+   "scene": "A2",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "phonebuzz",
+     "gain": -12
+    },
+    {
+     "at": 1.2,
+     "name": "swish",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -22
+   }
+  },
+  {
+   "id": "A3",
+   "start": 6.2,
+   "end": 9.4,
+   "line": "",
+   "scene": "A3",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.8,
+     "name": "swish",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -22
+   }
+  },
+  {
+   "id": "B1",
+   "start": 9.4,
+   "end": 12.0,
+   "line": "",
+   "scene": "B1",
+   "bars": "none",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "hum",
+     "gain": -18
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -24
+   }
+  },
+  {
+   "id": "B2",
+   "start": 12.0,
+   "end": 14.8,
+   "line": "",
+   "scene": "B2",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "buzz",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -24
+   }
+  },
+  {
+   "id": "B3",
+   "start": 14.8,
+   "end": 17.4,
+   "line": "",
+   "scene": "B3",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "riser",
+     "gain": -10
+    },
+    {
+     "at": 1.8,
+     "name": "flash",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -24
+   }
+  },
+  {
+   "id": "C1",
+   "start": 17.4,
+   "end": 20.2,
+   "line": "",
+   "scene": "C1",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "wind",
+     "gain": -18
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "C2",
+   "start": 20.2,
+   "end": 23.9,
+   "line": "",
+   "scene": "C2",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 1.6,
+     "name": "blip",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "C3",
+   "start": 23.9,
+   "end": 26.4,
+   "line": "",
+   "scene": "C3",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "whoosh",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "D1",
+   "start": 26.4,
+   "end": 29.6,
+   "line": "",
+   "scene": "D1",
+   "bars": "none",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "hit",
+     "gain": -18
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "D2",
+   "start": 29.6,
+   "end": 31.8,
+   "line": "",
+   "scene": "D2",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "footstep",
+     "gain": -16
+    },
+    {
+     "at": 0.8,
+     "name": "footstep",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "D3",
+   "start": 31.8,
+   "end": 34.4,
+   "line": "",
+   "scene": "D3",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [],
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "E1",
+   "start": 34.4,
+   "end": 37.2,
+   "line": "",
+   "scene": "E1",
+   "bars": "none",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "shimmer",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "E2",
+   "start": 37.2,
+   "end": 41.6,
+   "line": "",
+   "scene": "E2",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 1.2,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "E3",
+   "start": 41.6,
+   "end": 43.4,
+   "line": "",
+   "scene": "E3",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "F1",
+   "start": 43.4,
+   "end": 46.4,
+   "line": "",
+   "scene": "F1",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "F2",
+   "start": 46.4,
+   "end": 49.4,
+   "line": "",
+   "scene": "F2",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "shimmer",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  },
+  {
+   "id": "F3",
+   "start": 49.4,
+   "end": 52.0,
+   "line": "",
+   "scene": "F3",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 1.0,
+     "name": "stinger",
+     "gain": -10
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -28
+   }
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 17.4,
+   "mood": "sad",
+   "intensity": 0.35
+  },
+  {
+   "start": 17.4,
+   "end": 34.4,
+   "mood": "mystery",
+   "intensity": 0.4
+  },
+  {
+   "start": 34.4,
+   "end": 52.0,
+   "mood": "wonder",
+   "intensity": 0.5
+  }
+ ]
+}

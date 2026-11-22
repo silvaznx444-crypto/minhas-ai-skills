@@ -55,6 +55,9 @@ class Gemini:
             return r.json()
         raise GeminiError(f"Falhou após várias tentativas: {url}")
 
+    def _url(self, model: str, metodo: str) -> str:
+        return f"{BASE}/models/{model}:{metodo}"
+
     # --------------------------------------------------------------- modelos
     def models(self) -> list[dict]:
         if self._models is None:
@@ -98,7 +101,7 @@ class Gemini:
         body = {"contents": [{"role": "user", "parts": (parts or []) + [{"text": prompt}]}]}
         if json_out:
             body["generationConfig"] = {"responseMimeType": "application/json"}
-        d = self._req("POST", f"{BASE}/models/{model}:generateContent", json=body)
+        d = self._req("POST", self._url(model, "generateContent"), json=body)
         txt = "".join(p.get("text", "") for c in d.get("candidates", [])[:1]
                       for p in c.get("content", {}).get("parts", []))
         if not txt:
@@ -122,7 +125,7 @@ class Gemini:
             "generationConfig": {"responseModalities": ["TEXT", "IMAGE"],
                                  "imageConfig": {"aspectRatio": aspect}},
         }
-        d = self._req("POST", f"{BASE}/models/{model}:generateContent", json=body)
+        d = self._req("POST", self._url(model, "generateContent"), json=body)
         for c in d.get("candidates", []):
             for p in c.get("content", {}).get("parts", []):
                 if "inlineData" in p:

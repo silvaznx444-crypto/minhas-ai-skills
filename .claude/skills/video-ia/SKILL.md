@@ -9,11 +9,24 @@ Pipeline em `scripts/videoia.py`. Cada etapa grava em `projetos/<nome>/` e pula 
 então dá para corrigir uma cena e rodar de novo sem pagar tudo outra vez.
 
 ## Pré-requisitos
+Dois provedores; o script escolhe sozinho (`--provedor auto`): Vertex se houver credencial do Google Cloud, senão Gemini API.
+
+**A) Vertex AI / Google Cloud (recomendado — usa os US$ 300 de crédito grátis de conta nova)**
+1. console.cloud.google.com → criar conta (teste grátis) e um projeto.
+2. Ativar a API **Vertex AI** no projeto.
+3. IAM → Service accounts → criar `video-ia` com o papel **Vertex AI User** → Keys → Add key → JSON.
+4. Variáveis de ambiente: `VERTEX_SA_JSON` = conteúdo do JSON (texto ou base64) e,
+   opcional, `GOOGLE_CLOUD_LOCATION` (padrão `us-central1`). O projeto vem do próprio JSON.
+   Localmente também serve `gcloud auth application-default login` + `GOOGLE_CLOUD_PROJECT`.
+- `pip install google-auth`
+- Hosts usados: `oauth2.googleapis.com`, `us-central1-aiplatform.googleapis.com`, `aiplatform.googleapis.com`.
+
+**B) Gemini API (AI Studio)**
 - Chave da Gemini API com faturamento (aistudio.google.com → Get API key).
   - No ambiente cloud: salve em *Network secrets* para o host `generativelanguage.googleapis.com`,
     header `x-goog-api-key`; ou como variável de ambiente `GEMINI_API_KEY`.
   - Na máquina local: `export GEMINI_API_KEY=...`
-- `ffmpeg` com libass e `pip install requests`.
+- `ffmpeg` com libass e `pip install requests google-auth`.
 - Teste: `python3 scripts/videoia.py modelos` (mostra os modelos escolhidos automaticamente).
 
 ## Fluxo recomendado (quando o Claude conduz)

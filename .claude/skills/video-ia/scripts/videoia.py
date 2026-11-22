@@ -25,6 +25,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gemini import Gemini, GeminiError  # noqa: E402
 import legendas as leg  # noqa: E402
+import vertex  # noqa: E402
 
 ESTILO_PADRAO = (
     "Stylized 3D cartoon animation, cel-shaded with thick black outlines, flat vibrant colors, "
@@ -323,12 +324,16 @@ def main() -> None:
     ap.add_argument("--modelo-texto", default="auto")
     ap.add_argument("--modelo-imagem", default="auto")
     ap.add_argument("--modelo-video", default="auto")
+    ap.add_argument("--provedor", choices=["auto", "vertex", "gemini"], default="auto",
+                    help="vertex = Google Cloud (créditos grátis); gemini = chave do AI Studio")
     a = ap.parse_args()
 
     if not shutil.which("ffmpeg"):
         sys.exit("ffmpeg não encontrado")
-    g = Gemini()
     try:
+        usar_vertex = a.provedor == "vertex" or (a.provedor == "auto" and vertex.configurado())
+        g = vertex.Vertex() if usar_vertex else Gemini()
+        log(f"[provedor] {'Vertex AI (projeto ' + g.projeto + ')' if usar_vertex else 'Gemini API'}")
         if a.etapa == "modelos":
             for k in ("texto", "image", "veo"):
                 log(f"{k:7s} -> {g.pick(k)}")

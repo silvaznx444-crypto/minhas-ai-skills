@@ -91,3 +91,23 @@ Opções úteis: `--resolucao 1080p|720p|4k`, `--sem-quadro` (Veo só por texto)
 - **Legenda fora de sincronia**: ajuste `cortar_*` ou rode `legendas --sem-alinhamento`.
 - Custos de referência (confira a tabela do Google): Veo ~US$0,40/s, Veo fast ~US$0,15/s;
   clipe de 8 s ≈ US$3,20 / US$1,20.
+
+## Postar no Instagram no horário pedido
+Script: `scripts/instagram.py` (API oficial, "Instagram API com Instagram Login").
+Requer `IG_ACCESS_TOKEN` (token de longa duração, 60 dias) e os hosts `graph.instagram.com` e
+`rupload.facebook.com` liberados. Teste: `python3 scripts/instagram.py conta`.
+
+Quando o usuário disser algo como "gera X e posta às 19h":
+1. Gere o vídeo (fluxo acima) e mostre frames/arquivo; escreva a legenda do post (gancho + 3–6 hashtags)
+   e salve em `projetos/<nome>/legenda.txt`.
+2. **Horário em até ~23h:** `python3 scripts/instagram.py preparar --video projetos/<nome>/final.mp4 --legenda-arquivo projetos/<nome>/legenda.txt`
+   → devolve `creation_id` (o vídeo já fica no Instagram, sem publicar; vale 24h).
+   Agende com `send_later` (horário com fuso, ex. `2026-11-23T19:00:00[America/Sao_Paulo]`) a mensagem:
+   "Publicar no Instagram: python3 .claude/skills/video-ia/scripts/instagram.py publicar --id <creation_id> e avisar o link."
+   Não depende do container continuar vivo.
+3. **Mais de 23h à frente:** faça commit do `storyboard.json` + `legenda.txt` e crie um agendamento
+   (`create_trigger` com `run_once_at` ~1h antes, `create_new_session_on_fire: true`) cujo prompt completo
+   manda: rodar o pipeline `tudo --sim` no projeto e depois `instagram.py postar`.
+4. Confirme ao usuário: horário (fuso de Brasília por padrão), legenda e custo estimado.
+- Sempre `America/Sao_Paulo` se o usuário não disser o fuso.
+- O token expira em 60 dias: `instagram.py renovar` antes disso (o usuário salva o novo valor).

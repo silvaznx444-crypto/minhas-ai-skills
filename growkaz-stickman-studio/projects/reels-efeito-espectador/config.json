@@ -1,0 +1,23 @@
+{
+ "title": "Por que ninguém ajuda quando todos estão olhando",
+ "aspect": "9:16",
+ "resolution": "1080p",
+ "fps": 30,
+ "style": "mosaico",
+ "voiceover": "input/voiceover.wav",
+ "script": "input/script.txt",
+ "duration": 57.08,
+ "captions": false,
+ "bars": "none",
+ "fadeIn": 0.5,
+ "fadeOut": 0.8,
+ "music": {
+  "enabled": true,
+  "gainDb": -19
+ },
+ "sfx": {
+  "enabled": true,
+  "gainDb": -6
+ },
+ "loudness": -14
+}

@@ -40,6 +40,22 @@ Dois provedores; o script escolhe sozinho (`--provedor auto`): Vertex se houver 
 4. Mostre o custo estimado ao usuário e, com o ok dele, rode `clipes --sim`.
 5. `legendas` e `montar`. Extraia alguns frames do `final.mp4` para conferir e entregue o arquivo.
 
+## Estilos prontos (presets) — use SEMPRE que o usuário quiser "o estilo do vídeo de referência"
+Texto só não basta para acertar o visual: a IA de imagem precisa VER o estilo. Cada pasta em `estilos/`
+tem `estilo.txt` (descrição detalhada) e `ref_*.png` (quadros de referência sem legenda), enviados
+automaticamente em toda imagem gerada (referências, quadros).
+- `policial-pov`: o vídeo de referência do usuário — 3D tipo jogo indie, bonecos simples de cabeça grande,
+  olhos de pálpebra caída, lente grande-angular em primeira pessoa com rádio na mão.
+- Usar: no storyboard.json coloque `"estilo_preset": "policial-pov"` (o texto de `estilo` é substituído pelo
+  do preset ao carregar; para manter um texto próprio use `"estilo_personalizado": true`), ou
+  `planejar --preset policial-pov`. Extras: `"estilo_refs": ["caminho/img.png"]`.
+- Trocar o estilo de um projeto já começado: ponha o preset e rode `referencias --refazer` e `quadros --refazer`.
+- **Antes de gerar clipes, compare (Read) cada quadro com os `ref_*.png` do preset.** Se parecer ilustração 2D,
+  câmera reta/chapada ou proporções realistas, regere aquele quadro. Não gaste Veo com quadro fora do estilo.
+- Novo estilo a partir de um vídeo do usuário: extraia 2–4 quadros variados com ffmpeg, corte (crop) a área
+  das legendas em vez de borrar, salve em `estilos/<nome>/ref_N_*.png`, escreva `estilo.txt` descrevendo
+  render, proporções, olhos, cabelo, paleta, luz e lente; faça commit.
+
 ## Comandos
 ```bash
 S=.claude/skills/video-ia/scripts/videoia.py

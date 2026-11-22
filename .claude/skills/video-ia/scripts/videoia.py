@@ -45,7 +45,11 @@ def carregar(proj: Path) -> dict:
     f = proj / "storyboard.json"
     if not f.exists():
         sys.exit(f"Não achei {f}. Rode 'planejar' antes ou escreva o storyboard à mão.")
-    return json.loads(f.read_text())
+    sb = json.loads(f.read_text())
+    preset = sb.get("estilo_preset")
+    if preset and (ESTILOS / preset / "estilo.txt").exists() and not sb.get("estilo_personalizado"):
+        sb["estilo"] = (ESTILOS / preset / "estilo.txt").read_text().strip()
+    return sb
 
 
 def personagem(sb: dict, pid: str) -> dict:
@@ -60,6 +64,44 @@ def cenario(sb: dict, cid: str) -> dict:
         if c["id"] == cid:
             return c
     return {"id": cid, "descricao": cid}
+
+
+ESTILOS = Path(__file__).resolve().parent.parent / "estilos"
+
+
+def estilo_refs(sb: dict, proj: Path) -> list[Path]:
+    """Imagens de referência de ESTILO: do preset (estilos/<nome>/ref_*.png) e/ou 'estilo_refs' do storyboard."""
+    out: list[Path] = []
+    if sb.get("estilo_preset"):
+        out += sorted((ESTILOS / sb["estilo_preset"]).glob("ref_*.*"))
+    for r in sb.get("estilo_refs", []):
+        p = Path(r)
+        p = p if p.is_absolute() else (proj / p if (proj / p).exists() else Path.cwd() / p)
+        if p.exists():
+            out.append(p)
+    return out
+
+
+def com_estilo(prompt: str, n_estilo: int, n_outros: int) -> str:
+    if not n_estilo:
+        return prompt
+    txt = (f"The first {n_estilo} image(s) are ART STYLE references only: match their exact look "
+           "(3D render style, shading, outlines, character proportions, eye design, colors, lighting and "
+           "wide-angle camera lens). Do NOT copy their characters, text or layout. ")
+    if n_outros:
+        txt += f"The next {n_outros} image(s) are character/setting references for this shot. "
+    return txt + prompt
+
+
+def aplicar_preset(sb: dict, preset: str | None) -> None:
+    if not preset:
+        return
+    d = ESTILOS / preset
+    if not d.is_dir():
+        sys.exit(f"Estilo '{preset}' não existe. Disponíveis: {[x.name for x in ESTILOS.iterdir() if x.is_dir()]}")
+    sb["estilo_preset"] = preset
+    if (d / "estilo.txt").exists():
+        sb["estilo"] = (d / "estilo.txt").read_text().strip()
 
 
 # ------------------------------------------------------------------ planejar
@@ -107,6 +149,7 @@ def planejar(g: Gemini, a) -> None:
     log(f"[planejar] escrevendo roteiro com {modelo}...")
     sb = g.text(PROMPT_PLANO.format(ideia=a.ideia, cenas=a.cenas, estilo=a.estilo), modelo, json_out=True)
     sb.setdefault("estilo", a.estilo)
+    aplicar_preset(sb, a.preset)
     for i, p in enumerate(sb["personagens"]):
         p.setdefault("cor_legenda", CORES[i % len(CORES)])
     a.projeto.mkdir(parents=True, exist_ok=True)
@@ -119,28 +162,30 @@ def referencias(g: Gemini, a) -> None:
     sb = carregar(a.projeto)
     modelo = g.pick("image", a.modelo_imagem)
     refs = a.projeto / "refs"
+    est = estilo_refs(sb, a.projeto)
     for p in sb["personagens"]:
         out = refs / f"personagem_{p['id']}.png"
         if out.exists() and not a.refazer:
             continue
         log(f"[referencias] personagem {p['nome']} ({modelo})")
-        g.image(
+        g.image(com_estilo(
             f"Character reference sheet. Single character, full body, front view, neutral standing pose, "
             f"plain light gray studio background, no text. Character: {p['descricao']}. Style: {sb['estilo']}.",
-            out, modelo, aspect="3:4")
+            len(est), 0), out, modelo, refs=est, aspect="3:4")
     for c in sb["cenarios"]:
         out = refs / f"cenario_{c['id']}.png"
         if out.exists() and not a.refazer:
             continue
         log(f"[referencias] cenário {c['id']}")
-        g.image(f"Empty environment establishing shot, no people, vertical 9:16. {c['descricao']}. "
-                f"Style: {sb['estilo']}.", out, modelo, aspect="9:16")
+        g.image(com_estilo(f"Empty environment establishing shot, no people, vertical 9:16. {c['descricao']}. "
+                           f"Style: {sb['estilo']}.", len(est), 0), out, modelo, refs=est, aspect="9:16")
 
 
 # -------------------------------------------------------------------- quadros
 def quadros(g: Gemini, a) -> None:
     sb = carregar(a.projeto)
     modelo = g.pick("image", a.modelo_imagem)
+    est = estilo_refs(sb, a.projeto)
     for i, cena in enumerate(sb["cenas"], 1):
         if a.cena and i != a.cena:
             continue
@@ -153,13 +198,13 @@ def quadros(g: Gemini, a) -> None:
         chars = "; ".join(f"{personagem(sb, pid)['nome']}: {personagem(sb, pid)['descricao']}"
                           for pid in cena.get("personagens", []))
         log(f"[quadros] cena {i}")
-        g.image(
+        g.image(com_estilo(
             "Create the FIRST FRAME of a vertical 9:16 video shot. Keep the characters and the place "
             "exactly like the reference images (same face, clothes, colors, props). "
             f"Setting: {cenario(sb, cena['cenario'])['descricao']}. Characters: {chars}. "
             f"Camera: {cena.get('camera', '')}. Moment: start of this action: {cena.get('acao', '')}. "
             f"Style: {sb['estilo']}. No text, no captions, no watermark.",
-            out, modelo, refs=refs, aspect="9:16")
+            len(est), len(refs)), out, modelo, refs=est + refs, aspect="9:16")
 
 
 # --------------------------------------------------------------------- clipes
@@ -308,6 +353,7 @@ def main() -> None:
     ap.add_argument("--ideia")
     ap.add_argument("--cenas", type=int, default=3)
     ap.add_argument("--estilo", default=ESTILO_PADRAO)
+    ap.add_argument("--preset", help="estilo pronto da pasta estilos/ (ex: policial-pov)")
     ap.add_argument("--cena", type=int, help="só esta cena (1, 2, ...)")
     ap.add_argument("--refazer", action="store_true", help="regera mesmo se o arquivo já existe")
     ap.add_argument("--sim", action="store_true", help="confirma o custo do Veo sem perguntar")

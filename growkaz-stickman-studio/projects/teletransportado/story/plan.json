@@ -3,58 +3,66 @@
   {
    "n": 1,
    "who": "leo",
-   "start": 1.0,
-   "dur": 4.6,
-   "text": "Mais uma e eu paro. Amanhã eu paro... eu sempre falo isso."
+   "start": 0.6,
+   "dur": 6.19,
+   "text": "Mais uma e eu paro. Amanhã eu paro... eu sempre falo isso.",
+   "audio": true
   },
   {
    "n": 2,
    "who": "leo",
-   "start": 12.2,
-   "dur": 2.5,
-   "text": "Que isso... eu tô viajando de novo?"
+   "start": 10.6,
+   "dur": 3.45,
+   "text": "Que isso... eu tô viajando de novo?",
+   "audio": true
   },
   {
    "n": 3,
    "who": "leo",
-   "start": 20.6,
-   "dur": 3.2,
-   "text": "Onde eu tô? Sem sinal... Que lugar é esse?"
+   "start": 21.4,
+   "dur": 6.17,
+   "text": "Onde eu tô? Sem sinal... Que lugar é esse?",
+   "audio": true
   },
   {
    "n": 4,
    "who": "pedro",
-   "start": 27.0,
-   "dur": 3.0,
-   "text": "Ei, estrangeiro! Que roupa é essa? Tá perdido?"
+   "start": 31.4,
+   "dur": 4.01,
+   "text": "Ei, estrangeiro! Que roupa é essa? Tá perdido?",
+   "audio": true
   },
   {
    "n": 5,
    "who": "leo",
-   "start": 32.0,
-   "dur": 1.6,
-   "text": "Mais do que você imagina."
+   "start": 35.7,
+   "dur": 2.12,
+   "text": "Mais do que você imagina.",
+   "audio": true
   },
   {
    "n": 6,
    "who": "jesus",
-   "start": 37.4,
-   "dur": 4.0,
-   "text": "Léo. Eu sei de onde você veio. Vem e segue-me."
+   "start": 40.6,
+   "dur": 4.38,
+   "text": "Léo. Eu sei de onde você veio. Vem e segue-me.",
+   "audio": true
   },
   {
    "n": 7,
    "who": "leo",
-   "start": 43.6,
-   "dur": 2.0,
-   "text": "Como você sabe meu nome?"
+   "start": 47.4,
+   "dur": 2.19,
+   "text": "Como você sabe meu nome?",
+   "audio": true
   },
   {
    "n": 8,
    "who": "pedro",
-   "start": 46.6,
+   "start": 50.3,
    "dur": 2.6,
-   "text": "Ele chamou a gente do mesmo jeito."
+   "text": "Ele chamou a gente do mesmo jeito.",
+   "audio": false
   }
  ],
  "shots": [
@@ -64,72 +72,80 @@
   ],
   [
    "A2",
-   3.8
+   3.4
   ],
   [
    "A3",
-   6.2
+   5.6
   ],
   [
    "B1",
-   9.4
+   8.2
   ],
   [
    "B2",
-   12.0
+   10.0
   ],
   [
    "B3",
-   14.8
+   13.6
   ],
   [
    "C1",
-   17.4
+   16.4
   ],
   [
    "C2",
-   20.2
+   19.4
   ],
   [
    "C3",
-   23.9
+   21.2
+  ],
+  [
+   "C4",
+   24.6
+  ],
+  [
+   "C5",
+   27.8
   ],
   [
    "D1",
-   26.4
-  ],
-  [
-   "D2",
    29.6
   ],
   [
+   "D2",
+   31.0
+  ],
+  [
    "D3",
-   31.8
+   35.4
   ],
   [
    "E1",
-   34.4
+   38.0
   ],
   [
    "E2",
-   37.2
+   40.4
   ],
   [
    "E3",
-   41.6
+   45.5
   ],
   [
    "F1",
-   43.4
+   47.0
   ],
   [
    "F2",
-   46.4
+   50.0
   ],
   [
    "F3",
-   49.4
+   53.4
   ]
  ],
- "duration": 52.0
+ "duration": 56.5
 }

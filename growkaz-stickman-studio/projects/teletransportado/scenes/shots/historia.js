@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { Reflector } from 'three/addons/objects/Reflector.js';
 import { E, registerShot, ease, prog, clamp, lerp, text, FONTS, alpha, rr, circle, noise } from '/engine/core.js';
 import { makePuppet, POSE, posesAt, walkPose, blendPose } from '/kits/psique/puppet3d.js';
+import { makePovArm } from '/kits/psique/pov.js';
 
 const PLAN = await (await fetch('/project/story/plan.json')).json();
 const LINES = PLAN.lines;
@@ -66,13 +67,9 @@ function room(T) {
   const glowM = new THREE.MeshBasicMaterial({ color: 0xfff6e0, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false }); const glowP = new THREE.Mesh(new THREE.PlaneGeometry(0.75, 1.2), glowM); glowP.position.set(-2.9, 1.58, -0.6); glowP.rotation.y = Math.PI / 2; sc.add(glowP);
   const mirL = new THREE.PointLight(new THREE.Color('#fff4e0'), 0, 8, 1.2); mirL.position.set(-2.5, 1.6, -0.6); sc.add(mirL);
   const leo = puppet(sc, 'leo'); leo.root.position.set(-2.05, 0, -0.6); leo.root.rotation.y = -Math.PI / 2;
-  // braço em primeira pessoa (filho da câmera)
-  sc.add(st.camera); const arm = new THREE.Group(); st.camera.add(arm);
-  const sleeve = add(arm, new THREE.CylinderGeometry(0.06, 0.075, 0.55, 12), '#8a8a94', 0.06, -0.05, 0.12, Math.PI / 2 - 0.5, 0, 0.25, { shadow: false, outline: 0.04 });
-  const hand = add(arm, new THREE.BoxGeometry(0.1, 0.1, 0.11), '#b07a52', 0, 0.06, -0.14, 0, 0, 0, { shadow: false, outline: 0.06 });
-  const hb = bottle(arm, 0.0, -0.02, -0.15, '#5a3416'); hb.scale.setScalar(1.25);
-  arm.position.set(0.2, -0.24, -0.5);
-  R = { st, sc, win, ph, phone, phLight, bulb, bl, glowM, mirL, leo, arm, handle: shared(st) };
+  sc.add(st.camera); const pov = povRig(st.camera, 'bottle'); const fill = new THREE.PointLight(new THREE.Color('#ffd8b0'), 0.14, 1.3, 2); fill.position.set(0.05, 0.12, 0.05); st.camera.add(fill);
+  setLayer(leo.root, 1); mir.camera.layers.enable(1);
+  R = { st, sc, win, ph, phone, phLight, bulb, bl, glowM, mirL, leo, pov, handle: shared(st) };
   return R;
 }
 function drawWindow(T) { const { g, c, t } = R.win; const gr = g.createLinearGradient(0, 0, 0, c.height); gr.addColorStop(0, '#0a0c24'); gr.addColorStop(1, '#1a1030'); g.fillStyle = gr; g.fillRect(0, 0, c.width, c.height);
@@ -80,25 +77,12 @@ function drawWindow(T) { const { g, c, t } = R.win; const gr = g.createLinearGra
   g.globalAlpha = 1; g.shadowBlur = 0; g.strokeStyle = 'rgba(200,220,255,.45)'; g.lineWidth = 1; for (let i = 0; i < 60; i++) { const x = (i * 41 + T * 30) % 256, y = ((i * 71) + T * 520) % 220 - 20; g.beginPath(); g.moveTo(x, y); g.lineTo(x - 3, y + 14); g.stroke(); } t.needsUpdate = true; }
 function drawPhone(T, ring) { const { g, c, t } = R.ph; g.fillStyle = '#0e1220'; g.fillRect(0, 0, 128, 256); g.fillStyle = '#ffffff'; g.font = '700 22px Nunito'; g.textAlign = 'center'; g.fillText('Mãe', 64, 70); g.font = '700 12px Nunito'; g.fillStyle = '#ff6a6a'; g.fillText('12 chamadas perdidas', 64, 96);
   if (ring) { g.fillStyle = '#3ad06a'; g.beginPath(); g.arc(40, 200, 16, 0, 7); g.fill(); g.fillStyle = '#e83a3a'; g.beginPath(); g.arc(88, 200, 16, 0, 7); g.fill(); g.fillStyle = 'rgba(255,255,255,.6)'; g.beginPath(); g.arc(64, 140, 22 + 6 * Math.abs(Math.sin(T * 6)), 0, 7); g.fill(); } t.needsUpdate = true; }
-function updateRoom(T) {
-  drawWindow(T); const ringing = T > 1.4 && T < 6.0 && Math.sin(T * 9) > -0.2; drawPhone(T, T > 1.4 && T < 6.0);
-  R.phone.position.x = 0.48 + (ringing ? Math.sin(T * 80) * 0.004 : 0) + ease.inOut(prog(T, 5.0, 5.8)) * 0.18; R.phLight.intensity = T > 1.4 && T < 6.0 ? 0.35 : 0.1;
-  const flick = T > 12 ? (Math.sin(T * (12 + (T - 12) * 10)) > 0.2 ? 1 : 0.25) : (noise(T * 6, 3) > -0.75 ? 1 : 0.3); R.bl.intensity = 2.2 * flick; R.bulb.material.color.set(flick > 0.5 ? '#fff2c0' : '#6a5a40');
-  const glow = ease.in(prog(T, 14.0, 17.2)); R.glowM.opacity = glow; R.mirL.intensity = glow * 60;
-  const L = R.leo; L.root.visible = T >= 9.0;
-  L.setPose(posesAt(T, [[9, POSE.relaxed], [11.0, POSE.headDown], [12.2, POSE.relaxed], [15.4, POSE.coverEyes]])); face(L, 'leo', T, { lids: T > 12.3 ? 0.15 : 0.5, brows: T > 12.3 ? -0.6 : 0, browUp: T > 12.3 ? 1 : 0 });
-  // braço POV: segura a garrafa; em A3 leva à boca
-  const drink = ease.inOut(prog(T, 6.6, 8.0)), back = ease.inOut(prog(T, 8.4, 9.2)), up = drink * (1 - back);
-  R.arm.position.set(0.2 - up * 0.08, -0.24 + up * 0.08 + Math.sin(T * 1.7) * 0.008, -0.5 + up * 0.06); R.arm.rotation.set(up * 0.55, 0, up * 0.35);
-  R.arm.visible = T < 9.4;
-}
-
 // ===================== COLINA (Galileia, meio-dia) =====================
 let H = null;
 const hgt = (x, z) => { let h = 0.35 * Math.sin(x * 0.18) + 0.3 * Math.cos(z * 0.22 + 1) + 0.15 * Math.sin((x + z) * 0.5); const d = Math.hypot(x, z); h *= Math.min(1, d / 4); if (z < -10) h -= (-10 - z) * 0.32; return h; };
 function hill(T) {
   if (H) return H;
-  const st = T.stage({ mood: 'day', sky: ['#3a86e0', '#8ac0f0', '#e6f0f8'], fov: 46, fog: [40, 170], fogColor: '#d8e8f6', keyPos: [8, 18, 6], keyIntensity: 3.0, ambient: 1.5, bloom: 0.35, shadowSize: 10 });
+  const st = T.stage({ mood: 'day', sky: ['#3a86e0', '#8ac0f0', '#e6f0f8'], fov: 46, fog: [70, 280], fogColor: '#d8e8f6', keyPos: [8, 18, 6], keyIntensity: 3.0, ambient: 1.5, bloom: 0.35, shadowSize: 10 });
   const sc = st.scene, geo = new THREE.PlaneGeometry(140, 140, 90, 90); geo.rotateX(-Math.PI / 2); const pos = geo.attributes.position, colors = [];
   for (let i = 0; i < pos.count; i++) { const x = pos.getX(i), z = pos.getZ(i), y = hgt(x, z); pos.setY(i, y); const k = 0.5 + 0.5 * Math.sin(x * 1.3 + z * 0.7); const c = new THREE.Color('#e2c478').lerp(new THREE.Color('#c8a05a'), k * 0.5); colors.push(c.r, c.g, c.b); }
   geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3)); geo.computeVertexNormals(); const terr = new THREE.Mesh(geo, new THREE.MeshToonMaterial({ vertexColors: true })); terr.receiveShadow = true; sc.add(terr);
@@ -109,17 +93,9 @@ function hill(T) {
   [[-5, -3, 1.2], [4.5, -5, 1.4], [-8, 3, 1.1], [7, 2, 1.0], [-3, -9, 1.3], [10, -8, 1.2], [-12, -6, 1.3]].forEach(([x, z, s]) => olive(x, z, s));
   for (let i = 0; i < 18; i++) { const a = i * 2.399, r = 2.6 + (i % 6) * 1.4, x = Math.cos(a) * r, z = Math.sin(a) * r; add(sc, new THREE.DodecahedronGeometry(0.18 + (i % 4) * 0.12, 0), '#b8a888', x, hgt(x, z) + 0.08, z, i, i, 0, { outline: 0.04 }); }
   const leo = puppet(sc, 'leo'); leo.root.position.set(0, hgt(0, 0), 0);
-  H = { st, sc, leo, handle: shared(st) }; return H;
+  sc.add(st.camera); const pov = povRig(st.camera, 'phone');
+  H = { st, sc, leo, pov, handle: shared(st) }; return H;
 }
-function updateHill(T) {
-  const L = H.leo, t = T - 17.4;
-  let pose, ry = 0.5;
-  if (t < 2.4) { pose = POSE.lieFace; ry = 2.2; }
-  else if (t < 6.3) { pose = posesAt(t, [[2.4, POSE.lieFace], [2.9, POSE.sitGround], [3.6, { ...POSE.sitGround, shR: [-0.8, 0, -0.1], elR: 1.5, head: [0.45, 0, 0] }], [5.6, { ...POSE.sitGround, head: [0, 0.6, 0] }]], 0.45); ry = 0.5; }
-  else { pose = posesAt(t, [[6.3, POSE.sitGround], [6.6, POSE.stand], [7.4, { head: [-0.1, -0.7, 0] }], [8.2, { head: [-0.1, 0.7, 0] }]], 0.5); ry = 0.5; }
-  L.setPose(pose); L.root.rotation.y = ry; face(L, 'leo', T, { lids: t < 2.6 ? 1 : 0.3, brows: -0.5, browUp: 1 });
-}
-
 // ===================== PRAIA (mar da Galileia, manhã) =====================
 let S = null;
 function shore(T) {
@@ -140,75 +116,141 @@ function shore(T) {
   for (const [x, z] of [[-3.6, -2.6], [-1.6, -3.0], [0.4, -3.3]]) add(sc, new THREE.CylinderGeometry(0.05, 0.06, 1.9, 8), '#6a4a2a', x, 0.95, z, 0, 0, 0.05, { outline: 0.05 });
   for (const [x, z, w] of [[-2.6, -2.8, 2.0], [-0.6, -3.15, 2.0]]) { const n = add(sc, new THREE.PlaneGeometry(w, 1.2), new THREE.MeshToonMaterial({ map: net.t, transparent: true, alphaTest: 0.3, side: THREE.DoubleSide }), x, 1.15, z, 0.05, -0.18, 0, { shadow: false }); }
   const pedro = puppet(sc, 'pedro'), jesus = puppet(sc, 'jesus'), leo = puppet(sc, 'leo');
-  S = { st, sc, pedro, jesus, leo, handle: shared(st) }; return S;
-}
-function updateShore(T) {
-  const { pedro: P, jesus: J, leo: L } = S;
-  // Léo
-  L.root.position.set(0, 0, 1.5); let lry = Math.PI; L.root.visible = !(T >= 34.4 && T < 43.4);
-  if (T >= 43.0) lry = Math.PI;
-  L.setPose(posesAt(T, [[26, POSE.relaxed], [31.9, POSE.shrug], [34.0, POSE.relaxed], [44.8, POSE.lookHands], [47.2, POSE.headDown], [49.8, POSE.relaxed]], 0.4)); L.root.rotation.y = lry;
-  face(L, 'leo', T, { lids: T > 43 ? 0.35 : 0.5, sad: T > 43.4 && T < 50, tears: T > 43.6, brows: T > 43 ? -0.6 : 0, browUp: T > 43 ? 1 : 0 });
-  // Pedro: perto dos barcos → caminha até o Léo → abre espaço
-  const pw = [[26, 1.9, -1.9], [29.6, 1.9, -1.9], [31.4, 0.75, 0.45], [36.3, 0.75, 0.45], [37.8, 1.6, -0.6], [43.35, 1.6, -0.6], [43.4, 1.25, 2.4], [99, 1.25, 2.4]];
-  let px = pw[0][1], pz = pw[0][2], moving = false; for (let i = 1; i < pw.length; i++) if (T <= pw[i][0]) { const [t0, x0, z0] = pw[i - 1], [t1, x1, z1] = pw[i], k = (T - t0) / (t1 - t0); px = x0 + (x1 - x0) * k; pz = z0 + (z1 - z0) * k; moving = Math.hypot(x1 - x0, z1 - z0) > 0.01; break; }
-  P.root.position.set(px, 0, pz);
-  const toLeo = Math.atan2(0 - px, 1.5 - pz); P.root.rotation.y = T >= 43.4 ? Math.atan2(0.2 - px, 0.9 - pz) : T > 36.8 ? Math.atan2(-2 - px, -2 - pz) * 0.6 + toLeo * 0.4 : toLeo;
-  P.setPose(moving ? walkPose(T * 7) : posesAt(T, [[26, POSE.relaxed], [27.2, POSE.point], [29.0, POSE.relaxed], [31.5, { head: [0.35, 0, 0] }], [32.4, POSE.relaxed], [46.2, POSE.crossArms]], 0.35));
-  face(P, 'pedro', T, { brows: T < 34 ? 0.7 : 0, smile: T > 46.4, lids: T > 46.4 ? 0.3 : 0.4 });
-  // Jesus: caminha pela margem até parar diante do Léo
-  const [jx, jz, jm, jdir] = jesusAt(T);
-  J.root.visible = T >= 34.0; J.root.position.set(jx, 0, jz); J.root.rotation.y = jm ? jdir : Math.atan2(0 - jx, 1.5 - jz);
-  J.setPose(jm ? walkPose(T * 6) : posesAt(T, [[37.6, POSE.relaxed], [38.6, POSE.offer], [43.0, POSE.relaxed], [46.4, { ...POSE.handShoulder, shR: [-1.5, -0.15, -0.1], elR: 0.1 }]], 0.45));
-  face(J, 'jesus', T, { smile: !jm, lids: 0.1 });
+  sc.add(st.camera); const pov = povRig(st.camera, null);
+  S = { st, sc, pedro, jesus, leo, pov, handle: shared(st) }; return S;
 }
 
-function jesusAt(T) { const jw = [[34.4, -4.6, -3.6], [37.6, 0.0, 0.05], [45.8, 0.0, 0.05], [46.6, 0.45, 0.95], [99, 0.45, 0.95]];
-  for (let i = 1; i < jw.length; i++) if (T <= jw[i][0]) { const [t0, x0, z0] = jw[i - 1], [t1, x1, z1] = jw[i], k = clamp((T - t0) / (t1 - t0)), mv = Math.hypot(x1 - x0, z1 - z0) > 0.01 && T >= t0; return [x0 + (x1 - x0) * k, z0 + (z1 - z0) * k, mv, Math.atan2(x1 - x0, z1 - z0)]; }
-  return [0.45, 0.95, false, 0]; }
-// ===================== overlays =====================
-function caption(g, T) {
-  const ws = E.words || []; let who = null, str = null;
-  if (ws.length && ws[0].who) { let i = -1; for (let k = ws.length - 1; k >= 0; k--) if (T >= ws[k].start - 0.05) { if (T <= ws[k].end + 0.4) i = k; break; } if (i >= 0) { const w = ws[i], same = ws.filter((x) => x.line === w.line), j = same.indexOf(w), st = Math.floor(j / 3) * 3; str = same.slice(st, st + 3).map((x) => x.word).join(' '); who = w.who; } }
-  else { const l = LINES.find((l) => T >= l.start && T <= l.start + l.dur); if (l) { const parts = l.text.split(' '), k = Math.min(parts.length - 1, Math.floor(((T - l.start) / l.dur) * parts.length)), st = Math.floor(k / 3) * 3; str = parts.slice(st, st + 3).join(' '); who = l.who; } }
-  if (!str) return; text(g, str, E.W / 2, E.H * 0.7, { size: 74, color: CAPC[who], font: FONTS.ui, weight: 900, stroke: 16, strokeColor: alpha('#000000', 0.85) });
+// ===================== mãos em primeira pessoa =====================
+function setLayer(o, n) { o.traverse((m) => m.layers.set(n)); }
+function povRig(cam, kind) {
+  const mk = (side) => makePovArm(side, { skin: SPEC.leo.skin, sleeve: '#8a8a94', cuff: '#76767e' });
+  const L = mk(-1), Rh = mk(1), gL = new THREE.Group(), gR = new THREE.Group(); cam.add(gL, gR); gL.add(L.group); gR.add(Rh.group);
+  let held = null;
+  if (kind === 'bottle') { held = bottle(gR, 0, -0.12, 0, '#7a4a1e'); held.scale.setScalar(1.2); }
+  if (kind === 'phone') { held = new THREE.Group(); gR.add(held); const body = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.15, 0.01), toon('#16141c')); held.add(body); const ol = new THREE.Mesh(body.geometry, OUT); ol.scale.setScalar(1.05); body.add(ol);
+    const c = document.createElement('canvas'); c.width = 128; c.height = 256; const g = c.getContext('2d'); g.fillStyle = '#0e1220'; g.fillRect(0, 0, 128, 256); g.fillStyle = '#ffffff'; g.font = '700 16px Nunito'; g.textAlign = 'center'; g.fillText('14:07', 64, 30);
+    for (let k = 0; k < 4; k++) { g.fillStyle = 'rgba(255,255,255,.25)'; g.fillRect(84 + k * 8, 16 - k * 3, 5, 6 + k * 3); } g.strokeStyle = '#ff5a5a'; g.lineWidth = 3; g.beginPath(); g.moveTo(84, 6); g.lineTo(114, 24); g.stroke();
+    g.fillStyle = '#ff6a6a'; g.font = '900 17px Nunito'; g.fillText('SEM SERVIÇO', 64, 82); g.font = '900 40px Nunito'; g.fillText('✕', 64, 128); g.fillStyle = 'rgba(255,255,255,.5)'; g.font = '700 10px Nunito'; g.fillText('Nenhuma rede encontrada', 64, 156);
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.068, 0.14), new THREE.MeshBasicMaterial({ map: t })); scr.position.z = 0.0056; held.add(scr); }
+  if (held) setLayer(held, 2);
+  [L, Rh].forEach((a) => setLayer(a.group, 2)); gL.visible = gR.visible = false;
+  function set(side, o) {
+    const g = side < 0 ? gL : gR, a = side < 0 ? L : Rh; g.visible = !!o; if (!o) return;
+    g.position.set(...o.pos); const r = o.rot || [0, 0, 0]; g.rotation.set(r[0], r[1], r[2], o.ord || 'XYZ');
+    if (o.grip === 'bottle') { a.group.position.set(0.068, 0.02, 0.055); a.group.rotation.set(0, 0, -Math.PI / 2, 'XYZ'); }
+    else if (o.grip === 'phone') { a.group.position.set(0.06, -0.108, -0.024); a.group.rotation.set(-Math.PI / 2, 0, -Math.PI / 2 - 0.45, 'ZYX'); }
+    else { a.group.position.set(0, 0, 0); a.group.rotation.set(0, 0, 0, 'XYZ'); }
+    if (held && side > 0) held.visible = !!o.grip;
+    a.setHand({ curl: o.curl ?? 0.2, thumb: o.thumb, spread: o.spread ?? 0.06, wave: o.wave });
+  }
+  return { set };
 }
-function whiteFade(g, T) { const a = T < 17.4 ? ease.in(prog(T, 15.6, 17.3)) : 1 - ease.out(prog(T, 17.4, 18.6)); if (a > 0) { g.fillStyle = `rgba(255,252,240,${a})`; g.fillRect(0, 0, E.W, E.H); } }
-function phoneOverlay(g, T) { const a = ease.outBack(prog(T, 21.6, 22.0)) * (1 - prog(T, 23.6, 23.9)); if (a <= 0) return; g.save(); g.translate(E.W * 0.8, E.H * 0.2); g.rotate(0.08); g.scale(a * 0.62, a * 0.62); rr(g, -150, -270, 300, 540, 40); g.fillStyle = '#16141c'; g.fill(); rr(g, -136, -256, 272, 512, 30); g.fillStyle = '#0e1220'; g.fill();
-  for (let k = 0; k < 4; k++) { g.fillStyle = k < 0 ? '#fff' : 'rgba(255,255,255,.25)'; g.fillRect(-100 + k * 22, -200 - k * 10, 14, 20 + k * 10); } text(g, 'SEM SERVIÇO', 0, -40, { size: 40, color: '#ff6a6a', font: FONTS.ui, weight: 900 }); text(g, '✕', 0, 60, { size: 110, color: '#ff6a6a', font: FONTS.ui, weight: 900 });
-  for (let i = 0; i < 6; i++) { const x = -110 + i * 44; g.save(); g.translate(x, 180); g.rotate(0.6); g.fillStyle = 'rgba(255,255,255,.35)'; g.fillRect(-2, -26, 4, 52); g.restore(); } g.restore(); }
+const trem = (T, a = 0.004, s = 1) => [noise(T * 9, s) * a, noise(T * 9, s + 4) * a, 0];
+const addv = (a, b) => a.map((v, i) => v + (b[i] || 0));
+
+// ===================== ATUALIZAÇÃO: QUARTO =====================
+function updateRoom(T) {
+  drawWindow(T); drawPhone(T, T > 1.0 && T < 5.4);
+  const ringing = T > 1.0 && T < 5.4 && Math.sin(T * 9) > -0.2;
+  R.phone.position.x = 0.48 + (ringing ? Math.sin(T * 80) * 0.004 : 0) + ease.inOut(prog(T, 4.95, 5.5)) * 0.14; R.phLight.intensity = T > 1.0 && T < 5.4 ? 0.14 : 0.05;
+  const flick = T > 13.4 ? (Math.sin(T * (12 + (T - 13.4) * 12)) > 0.2 ? 1 : 0.25) : (noise(T * 6, 3) > -0.75 ? 1 : 0.3); R.bl.intensity = 2.2 * flick; R.bulb.material.color.set(flick > 0.5 ? '#fff2c0' : '#6a5a40');
+  const glow = ease.in(prog(T, 14.0, 16.2)); R.glowM.opacity = glow; R.mirL.intensity = glow * 60;
+  // Léo (camada 1: o espelho sempre vê; a câmera principal não vê no POV do espelho)
+  const L = R.leo, wk = clamp((T - 8.2) / 1.3); L.root.visible = T >= 8.0;
+  L.root.position.set(lerp(-0.7, -1.62, wk), 0, lerp(-0.2, -0.6, wk)); L.root.rotation.y = T < 9.5 ? Math.atan2(-0.92, -0.4) : -Math.PI / 2;
+  L.setPose(T < 9.5 ? walkPose(T * 7) : posesAt(T, [[9.5, POSE.relaxed], [11.4, POSE.rubFace], [13.2, POSE.relaxed], [14.9, POSE.coverEyes]], 0.35));
+  face(L, 'leo', T, { lids: T > 13.6 ? 0.1 : 0.55, brows: T > 13.6 ? -0.6 : 0, browUp: T > 13.6 ? 1 : 0 });
+  // mãos POV
+  const P = R.pov, sw = [Math.sin(T * 1.3) * 0.006, Math.sin(T * 1.9) * 0.005, 0];
+  if (T < 5.6) { P.set(1, { grip: 'bottle', pos: addv(T < 3.4 ? [0.055, -0.27, -0.4] : [0.1, -0.25, -0.42], sw), rot: [0.47, -0.4, 0.1], curl: 0.85, thumb: 0.8 });
+    if (T >= 3.4) { const k = ease.inOut(prog(T, 4.2, 4.9)), k2 = ease.inOut(prog(T, 4.95, 5.5)); P.set(-1, { pos: [lerp(-0.34, -0.206, k) + k2 * 0.13, lerp(-0.34, -0.118, k), lerp(-0.42, -0.603, k) + k2 * 0.03], rot: [0.55, -0.5, 0.05], curl: 0.1, spread: 0.1, thumb: 0.1 }); } else P.set(-1, null); }
+  else if (T < 8.2) { const d = ease.inOut(prog(T, 6.0, 7.0)) * (1 - ease.inOut(prog(T, 7.6, 8.15))); P.set(1, { grip: 'bottle', pos: addv([lerp(0.055, 0.084, d), lerp(-0.27, 0.008, d), lerp(-0.4, -0.257, d)], sw), rot: [lerp(0.47, 2.07, d), -0.4 * (1 - d), lerp(0.1, 0.357, d)], curl: 0.85, thumb: 0.8 }); P.set(-1, null); }
+  else if (T >= 10.0 && T < 13.6) { const u = ease.out(prog(T, 11.35, 11.85)) * (1 - ease.inOut(prog(T, 13.0, 13.5))), rub = Math.sin(T * 7) * 0.012 * u; P.set(1, { pos: [lerp(0.2, 0.08, u) + rub, lerp(-0.42, -0.15, u), lerp(-0.32, -0.32, u)], rot: [Math.PI / 2 - 0.15, Math.PI, 0.25], ord: 'YXZ', curl: 0.3, spread: 0.08, thumb: 0.2 }); P.set(-1, null); }
+  else { P.set(1, null); P.set(-1, null); }
+}
+
+// ===================== ATUALIZAÇÃO: COLINA =====================
+const LEO_HILL = [0.4, -1.0];
+function updateHill(T) {
+  const L = H.leo, [lx, lz] = LEO_HILL; let x = lx, z = lz, ry = Math.PI + 0.3, pose = POSE.lieFace, vis = (T >= 19.4 && T < 21.2) || T >= 27.8;
+  if (T < 21.2) pose = posesAt(T, [[19.4, POSE.lieFace], [19.9, POSE.sitGround]], 0.5);
+  else if (T < 27.8) pose = POSE.sitGround;
+  else if (T < 28.5) pose = posesAt(T, [[27.8, POSE.sitGround], [28.1, POSE.stand]], 0.4);
+  else { const k = clamp((T - 28.5) / 1.1); z = lz - k * 2.0; pose = walkPose(T * 6.5); ry = Math.PI; }
+  L.root.visible = vis; L.root.position.set(x, hgt(x, z), z); L.root.rotation.y = ry; L.setPose(pose); face(L, 'leo', T, { lids: 0.3, brows: -0.5, browUp: 1 });
+  const P = H.pov;
+  if (T >= 16.4 && T < 19.4) { const push = ease.inOut(prog(T, 18.7, 19.3)); P.set(-1, { pos: [-0.06, -0.13 - push * 0.04, -0.3], rot: [0.35, 0.2, 0.25], curl: 0.35 + push * 0.2, spread: 0.12 }); P.set(1, { pos: [0.075, -0.17 - push * 0.04, -0.4], rot: [0.4, -0.2, -0.2], curl: 0.4, spread: 0.1 }); }
+  else if (T >= 21.2 && T < 25.4) { const down = ease.in(prog(T, 24.6, 25.3)); P.set(1, { grip: 'phone', pos: addv([0.0, -0.075 - down * 0.45, -0.34], trem(T, 0.003)), rot: [0.12, 0, 0.04], curl: 0.6, thumb: 0.3 }); P.set(-1, null); }
+  else { P.set(1, null); P.set(-1, null); }
+}
+
+// ===================== ATUALIZAÇÃO: PRAIA =====================
+function path(T, wp) { if (T <= wp[0][0]) return [wp[0][1], wp[0][2], false, 0]; for (let i = 1; i < wp.length; i++) if (T <= wp[i][0]) { const [t0, x0, z0] = wp[i - 1], [t1, x1, z1] = wp[i], k = clamp((T - t0) / (t1 - t0)), mv = Math.hypot(x1 - x0, z1 - z0) > 0.05 && t1 - t0 > 0.2; return [x0 + (x1 - x0) * k, z0 + (z1 - z0) * k, mv, Math.atan2(x1 - x0, z1 - z0)]; } const l = wp[wp.length - 1]; return [l[1], l[2], false, 0]; }
+const pedroAt = (T) => path(T, [[29.6, 1.9, -1.9], [31.6, 1.9, -1.9], [33.0, 0.55, 0.4], [37.9, 0.55, 0.4], [39.0, 1.6, -0.6], [49.9, 1.6, -0.6], [49.95, 1.25, 2.4], [99, 1.25, 2.4]]);
+const jesusAt = (T) => path(T, [[38.0, -4.6, -3.6], [40.6, 0, 0.05], [45.0, 0, 0.05], [45.5, 0, 0.55], [49.6, 0, 0.55], [50.0, 0.45, 0.95], [99, 0.45, 0.95]]);
+const leoAt = (T) => path(T, [[29.6, -2.6, 3.6], [31.0, 0, 1.5], [99, 0, 1.5]]);
+const POV_S = (T) => (T >= 31.0 && T < 35.4) || (T >= 38.0 && T < 45.5) || (T >= 47.0 && T < 50.0);
+function updateShore(T) {
+  const { pedro: Pd, jesus: J, leo: L } = S;
+  const [lx, lz, lm, ld] = leoAt(T); L.root.visible = !POV_S(T); L.root.position.set(lx, 0, lz); L.root.rotation.y = lm ? ld : Math.PI;
+  L.setPose(lm ? walkPose(T * 6.5) : posesAt(T, [[31, POSE.relaxed], [35.6, POSE.shrug], [37.9, POSE.relaxed], [45.5, POSE.reach], [50.0, POSE.headDown], [52.6, POSE.relaxed]], 0.4));
+  face(L, 'leo', T, { lids: T > 45 ? 0.35 : 0.5, sad: T > 46 && T < 54, tears: T > 46.5, brows: T > 45 ? -0.6 : 0, browUp: T > 45 ? 1 : 0 });
+  const [px, pz, pm, pd] = pedroAt(T); Pd.root.position.set(px, 0, pz);
+  const toLeo = Math.atan2(lx - px, lz - pz); Pd.root.rotation.y = pm ? pd : T >= 49.9 ? Math.atan2(0.2 - px, 0.9 - pz) : T > 39 ? Math.atan2(-1 - px, -2 - pz) * 0.5 + toLeo * 0.5 : toLeo;
+  Pd.setPose(pm ? walkPose(T * 7) : posesAt(T, [[29.6, POSE.holdFront], [31.3, POSE.relaxed], [33.2, POSE.point], [35.4, POSE.relaxed], [36.0, { head: [0.35, 0, 0] }], [37.0, POSE.relaxed], [50.0, POSE.crossArms]], 0.35));
+  face(Pd, 'pedro', T, { brows: T < 36 ? 0.7 : 0, smile: T > 50.2, lids: T > 50.2 ? 0.3 : 0.4 });
+  const [jx, jz, jm, jd] = jesusAt(T); J.root.visible = T >= 37.8; J.root.position.set(jx, 0, jz); J.root.rotation.y = jm ? jd : Math.atan2(lx - jx, lz - jz);
+  J.setPose(jm ? walkPose(T * 6) : posesAt(T, [[40.6, POSE.relaxed], [43.4, POSE.offer], [47.0, POSE.relaxed], [50.3, { ...POSE.handShoulder, shR: [-1.5, -0.15, -0.1], elR: 0.1 }]], 0.45));
+  face(J, 'jesus', T, { smile: !jm, lids: 0.1 });
+  const P = S.pov;
+  if (T >= 31.0 && T < 35.4) { const up = ease.out(prog(T, 33.2, 33.7)) * (1 - ease.in(prog(T, 35.0, 35.4))); if (up > 0.01) { P.set(-1, { pos: addv([-0.1, -0.4 + up * 0.17, -0.46], trem(T, 0.003, 2)), rot: [Math.PI / 2 - 0.35, 0, -0.3], curl: 0.12, spread: 0.14, thumb: 0 }); P.set(1, { pos: addv([0.1, -0.4 + up * 0.17, -0.46], trem(T, 0.003, 5)), rot: [Math.PI / 2 - 0.35, 0, 0.3], curl: 0.12, spread: 0.14, thumb: 0 }); } else { P.set(-1, null); P.set(1, null); } }
+  else if (T >= 38.0 && T < 45.5) { const r = ease.inOut(prog(T, 44.4, 45.4)); if (r > 0.01) P.set(1, { pos: [lerp(0.22, 0.04, r), lerp(-0.42, -0.13, r), lerp(-0.3, -0.56, r)], rot: [0.15, 0.1, Math.PI * 0.7], curl: 0.25, spread: 0.08 }); else P.set(1, null); P.set(-1, null); }
+  else if (T >= 47.0 && T < 50.0) { P.set(-1, { pos: addv([-0.085, -0.165, -0.34], trem(T, 0.004, 3)), rot: [0.25, 0.15, Math.PI], curl: 0.3, spread: 0.08 }); P.set(1, { pos: addv([0.085, -0.165, -0.34], trem(T, 0.004, 8)), rot: [0.25, -0.15, Math.PI], curl: 0.3, spread: 0.08 }); }
+  else { P.set(-1, null); P.set(1, null); }
+}
+
+// ===================== overlays =====================
+function caption(g, T, y = 0.72) {
+  const ws = E.words || []; let i = -1; for (let k = ws.length - 1; k >= 0; k--) if (T >= ws[k].start - 0.05) { if (T <= ws[k].end + 0.4) i = k; break; }
+  if (i < 0) return; const w = ws[i], same = ws.filter((x) => x.line === w.line), j = same.indexOf(w), st = Math.floor(j / 3) * 3, str = same.slice(st, st + 3).map((x) => x.word).join(' ');
+  text(g, str, E.W / 2, E.H * y, { size: 74, color: CAPC[w.who], font: FONTS.ui, weight: 900, stroke: 16, strokeColor: alpha('#000000', 0.85) });
+}
+function whiteFade(g, T) { const a = T < 16.4 ? ease.in(prog(T, 14.6, 16.3)) : 1 - ease.out(prog(T, 16.4, 17.0)); if (a > 0) { g.fillStyle = `rgba(255,252,240,${a})`; g.fillRect(0, 0, E.W, E.H); } }
+function eyelids(g, open) { if (open >= 1) return; const h = (1 - open) * E.H * 0.56, lid = g.createRadialGradient(E.W / 2, E.H / 2, 50, E.W / 2, E.H / 2, E.H * 0.6); lid.addColorStop(0, '#4a160a'); lid.addColorStop(1, '#0e0403'); g.fillStyle = lid; g.beginPath(); g.moveTo(0, 0); g.lineTo(E.W, 0); g.lineTo(E.W, h); g.quadraticCurveTo(E.W / 2, h + 140 * (1 - open), 0, h); g.fill(); g.beginPath(); g.moveTo(0, E.H); g.lineTo(E.W, E.H); g.lineTo(E.W, E.H - h); g.quadraticCurveTo(E.W / 2, E.H - h - 140 * (1 - open), 0, E.H - h); g.fill(); }
+function tears(g, t) { for (let i = 0; i < 3; i++) { const ph = ((t * 0.55 + i * 0.37) % 1), x = E.W * (0.42 + i * 0.07), y = lerp(E.H * 0.35, E.H * 0.8, ph * ph); g.fillStyle = alpha('#8ad8ff', 0.85 * (1 - ph * 0.6)); g.beginPath(); g.ellipse(x, y, 9, 15, 0, 0, Math.PI * 2); g.fill(); g.fillStyle = alpha('#ffffff', 0.7); g.beginPath(); g.ellipse(x - 3, y - 5, 3, 4, 0, 0, Math.PI * 2); g.fill(); } }
 
 // ===================== tomadas =====================
 const C = (pos, look, fov) => ({ pos, look, ...(fov ? { fov } : {}) });
-const shake = (t, a = 0.02) => [noise(t * 1.6, 1) * a, noise(t * 1.6, 7) * a, 0];
+const shk = (t, a = 0.02) => [noise(t * 1.6, 1) * a, noise(t * 1.6, 7) * a, 0];
 const plus = (a, b) => a.map((v, i) => v + (b[i] || 0));
-function shot(id, world, cam, overlay) {
+function shot(id, world, cam, overlay, opt = {}) {
   const make = { R: room, H: hill, S: shore }[world], upd = { R: updateRoom, H: updateHill, S: updateShore }[world], W = () => ({ R, H, S })[world];
   registerShot(id, { kind: '3d', init(T) { return make(T).handle; },
-    draw(s, t, info, T) { upd(info.globalT); const k = cam(t, info, info.globalT); T.dolly(W().st.camera, t, Array.isArray(k[0]) ? k : [[0, k[0]], [info.dur, k[1]]]); },
-    overlay(g, t, info) { overlay?.(g, t, info); caption(g, info.globalT); whiteFade(g, info.globalT); } });
+    draw(s, t, info, T) { upd(info.globalT); const cm = W().st.camera, k = cam(t, info, info.globalT); T.dolly(cm, t, Array.isArray(k[0]) ? k : [[0, k[0]], [info.dur, k[1]]]); if (opt.roll) cm.rotateZ(opt.roll(t, info)); cm.layers.set(0); cm.layers.enable(2); if (!opt.mirrorPov) cm.layers.enable(1); },
+    overlay(g, t, info) { overlay?.(g, t, info); caption(g, info.globalT, opt.capY); whiteFade(g, info.globalT); } });
 }
-// QUARTO — POV
-shot('A1', 'R', (t, i, T) => { const s = shake(T); return [C(plus([0.15, 1.55, 0.35], s), plus([0.45, 0.75, -1.15], s), 62), C(plus([0.2, 1.5, 0.2], s), plus([0.48, 0.74, -1.1], s), 60)]; });
-shot('A2', 'R', (t, i, T) => { const s = shake(T, 0.008); return [C(plus([0.42, 1.32, -0.72], s), [0.52, 0.75, -1.02], 46), C(plus([0.46, 1.22, -0.8], s), [0.58, 0.75, -1.02], 42)]; });
-shot('A3', 'R', (t, i, T) => { const s = shake(T); return [C(plus([0.2, 1.5, 0.2], s), plus([0.3, 1.2, -1.6], s), 62), C(plus([0.2, 1.52, 0.2], s), plus([0.2, 1.9, -1.8], s), 62)]; });
-// QUARTO — espelho
-shot('B1', 'R', () => [C([-0.4, 1.7, 1.1], [-2.6, 1.45, -0.6], 52), C([-0.9, 1.65, 0.6], [-2.6, 1.5, -0.6], 50)]);
-shot('B2', 'R', () => [C([-2.7, 1.72, 0.9], [-2.05, 1.6, -0.6], 42), C([-2.7, 1.7, 0.7], [-2.05, 1.6, -0.6], 38)]);
-shot('B3', 'R', (t, i, T) => { const s = shake(T, 0.03 * prog(T, 15, 17)); return [C(plus([-0.6, 1.6, 0.8], s), [-2.6, 1.5, -0.6], 54), C(plus([-1.2, 1.6, 0.2], s), [-2.7, 1.55, -0.6], 50)]; });
+const EYE = [0, 1.66, 1.38];
+// QUARTO
+shot('A1', 'R', (t, i, T) => { const s = shk(T); return [C(plus([0.15, 1.55, 0.4], s), plus([0.45, 0.75, -1.15], s), 60), C(plus([0.2, 1.5, 0.25], s), plus([0.48, 0.74, -1.1], s), 58)]; });
+shot('A2', 'R', (t, i, T) => { const s = shk(T, 0.008); return [C(plus([0.36, 1.36, -0.52], s), [0.55, 0.75, -1.02], 54), C(plus([0.4, 1.3, -0.6], s), [0.6, 0.75, -1.02], 52)]; });
+shot('A3', 'R', (t, i, T) => { const s = shk(T); return [C(plus([0.2, 1.5, 0.25], s), plus([0.3, 1.1, -1.6], s), 60), C(plus([0.2, 1.52, 0.25], s), plus([0.25, 2.2, -1.5], s), 62)]; });
+shot('B1', 'R', () => [C([0.8, 1.8, 1.3], [-1.4, 1.3, -0.5], 54), C([0.3, 1.7, 0.9], [-1.9, 1.4, -0.6], 50)]);
+shot('B2', 'R', (t, i, T) => { const s = shk(T, 0.006); return [C(plus([-1.76, 1.66, -0.6], s), [-2.93, 1.62, -0.62], 64), C(plus([-1.84, 1.66, -0.6], s), [-2.93, 1.62, -0.6], 58)]; }, null, { mirrorPov: true });
+shot('B3', 'R', (t, i, T) => { const s = shk(T, 0.03 * prog(T, 14.5, 16.4)); return [C(plus([-0.35, 1.65, 0.95], s), [-2.4, 1.5, -0.7], 54), C(plus([-0.75, 1.62, 0.6], s), [-2.5, 1.52, -0.7], 50)]; });
 // COLINA
-shot('C1', 'H', () => [C([7, 6, 9], [0, 0.4, 0], 46), C([3.2, 2.6, 4.6], [0, 0.3, 0], 44)]);
-shot('C2', 'H', () => [C([1.6, 1.0, 2.6], [0, 0.6, 0], 44), C([1.3, 0.95, 2.2], [0, 0.65, 0], 42)], (g, t, info) => phoneOverlay(g, info.globalT));
-shot('C3', 'H', () => [C([1.8, 1.4, 3.0], [0, 1.3, 0], 46), C([-1.5, 1.8, 3.6], [0, 0.2, -18], 50)]);
-// PRAIA — Pedro
-shot('D1', 'S', () => [C([-1.0, 1.95, 3.9], [1.5, 1.1, -1.4], 44), C([-0.8, 1.9, 3.6], [1.4, 1.15, -1.2], 42)]);
-shot('D2', 'S', () => [C([3.6, 1.6, 1.4], [1.6, 1.0, -1.4], 44), C([3.0, 1.5, 2.4], [0.6, 1.0, 0.6], 44)]);
-shot('D3', 'S', () => [C([-1.1, 1.7, 0.0], [0.1, 1.5, 1.4], 42), C([-0.95, 1.68, 0.2], [0.1, 1.5, 1.4], 38)]);
-// JESUS — POV do Léo
-shot('E1', 'S', (t, i, T) => { const s = shake(T, 0.012), [jx, jz] = jesusAt(T), lk = [jx * 0.85, 1.35, jz]; return [[0, C(plus([0, 1.62, 1.6], s), lk, 50)], [i.dur, C(plus([0, 1.62, 1.6], s), lk, 50)]]; });
-shot('E2', 'S', (t, i, T) => { const s = shake(T, 0.008); return [C(plus([0, 1.62, 1.6], s), [0, 1.35, 0.05], 52), C(plus([0, 1.62, 1.5], s), [0, 1.4, 0.05], 48)]; });
-shot('E3', 'S', () => [C([0.25, 1.62, 2.0], [0, 1.58, 0.05], 36), C([0.2, 1.62, 1.85], [0, 1.58, 0.05], 33)]);
+shot('C1', 'H', (t, i, T) => [C([0.55, 0.2, -1.35], [3.0, 0.45, -12], 52), C([0.55, 0.24, -1.35], [2.4, 0.55, -12], 52)], (g, t, info) => { const T = info.globalT; const o = T < 16.75 ? 0 : T < 17.05 ? ease.out(prog(T, 16.75, 17.05)) * 0.45 : T < 17.35 ? 0.45 * (1 - prog(T, 17.05, 17.35)) : ease.inOut(prog(T, 17.45, 18.0)); eyelids(g, o); }, { roll: () => 0.38 });
+shot('C2', 'H', () => [C([1.25, 1.2, -3.4], [0.4, 0.82, -1.0], 40), C([1.1, 1.12, -3.05], [0.4, 0.85, -1.0], 38)]);
+shot('C3', 'H', (t, i, T) => { const s = shk(T, 0.004); const e = [0.4, 0.95, -0.95]; return [C(plus(e, s), [0.4, 0.78, -1.5], 54), C(plus(e, s), [0.4, 0.8, -1.5], 52)]; }, null, { capY: 0.2 });
+shot('C4', 'H', (t, i, T) => { const e = [0.4, 0.95, -0.95]; return [[0, C(e, [0.4, 0.6, -1.6], 54)], [0.7, C(e, [-1.5, 0.8, -12], 56)], [3.2, C(e, [5.0, 0.2, -14], 56)]]; });
+shot('C5', 'H', () => [C([2.0, 2.2, 1.2], [0.4, 0.8, -2.2], 50), C([1.6, 2.6, 1.8], [0.4, 0.2, -6], 52)]);
+// PRAIA
+shot('D1', 'S', () => [C([-3.8, 2.4, 6.2], [0.4, 1.0, -0.6], 50), C([-3.2, 2.2, 5.4], [0.6, 1.0, -0.6], 48)]);
+shot('D2', 'S', (t, i, T) => { const s = shk(T, 0.008), [px, pz] = pedroAt(T); const lk = [px * 0.9, 1.5, pz]; return [[0, C(plus(EYE, s), lk, 54)], [i.dur, C(plus(EYE, s), lk, 54)]]; });
+shot('D3', 'S', () => [C([-1.1, 1.62, 0.15], [0.0, 1.42, 1.5], 44), C([-0.95, 1.6, 0.3], [0.0, 1.42, 1.5], 40)]);
+shot('E1', 'S', (t, i, T) => { const s = shk(T, 0.01), [jx, jz] = jesusAt(T); const lk = [jx * 0.85, 1.35, jz]; return [[0, C(plus(EYE, s), lk, 52)], [i.dur, C(plus(EYE, s), lk, 52)]]; });
+shot('E2', 'S', (t, i, T) => { const s = shk(T, 0.006); return [[0, C(plus(EYE, s), [0, 1.38, 0.05], 52)], [3.9, C(plus(EYE, s), [0, 1.42, 0.05], 50)], [5.1, C(plus(EYE, s), [0, 1.3, 0.5], 60)]]; });
+shot('E3', 'S', () => [C([0.98, 1.62, 2.65], [-0.05, 1.38, 0.55], 44), C([0.88, 1.6, 2.45], [-0.05, 1.4, 0.55], 40)]);
 // FINAL
-shot('F1', 'S', () => [C([-1.3, 1.72, 0.2], [0, 1.55, 1.5], 38), C([-1.1, 1.7, 0.4], [0, 1.55, 1.5], 34)]);
+shot('F1', 'S', (t, i, T) => [C(plus([0, 1.66, 1.42], trem(T, 0.003)), [0, 0.95, 0.7], 54), C(plus([0, 1.64, 1.42], trem(T, 0.003)), [0, 0.92, 0.72], 52)], (g, t) => tears(g, t));
 shot('F2', 'S', () => [C([-1.8, 1.62, -1.4], [0.35, 1.25, 1.0], 44), C([-1.55, 1.58, -1.1], [0.35, 1.25, 1.0], 42)]);
 shot('F3', 'S', () => [C([-1.55, 1.58, -1.1], [0.35, 1.25, 1.0], 42), C([-3.2, 3.2, -4.2], [0.5, 1.0, 0.6], 48)], (g, t) => { const a = ease.out(prog(t, 1.2, 2.0)); if (a > 0) text(g, 'CONTINUA...', E.W / 2, E.H * 0.16, { size: 84, color: '#ffffff', font: FONTS.title, weight: 700, stroke: 14, strokeColor: '#14101e', alpha: a }); });

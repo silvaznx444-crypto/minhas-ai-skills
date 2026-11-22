@@ -20,6 +20,8 @@ export const POSE = {
   handShoulder: { shR: [-1.25, 0.6, -0.2], elR: 0.25 },
   lookHands: { shL: [-0.9, 0, 0.2], shR: [-0.9, 0, -0.2], elL: 1.1, elR: 1.1, head: [0.55, 0, 0], torso: [0.12, 0, 0] },
   phone: { shR: [-0.8, 0, -0.1], elR: 1.5, head: [0.5, 0, 0] },
+  rubFace: { shR: [-2.05, 0, -0.45], elR: 2.35, head: [0.15, 0, 0] },
+  reach: { shR: [-1.25, 0, -0.12], elR: 0.15, head: [0.1, 0, 0] },
   wipeTears: { shR: [-2.0, 0, -0.45], elR: 2.4, head: [0.2, 0, 0] },
   headDown: { head: [0.45, 0, 0], torso: [0.12, 0, 0] },
   sitGround: { rootY: -0.64, hipL: [-1.5, 0, 0.12], hipR: [-1.5, 0, -0.12], knL: 0.25, knR: 0.25, shL: [-0.25, 0, 0.3], shR: [-0.25, 0, -0.3], elL: 0.5, elR: 0.5, torso: [-0.15, 0, 0] },
@@ -78,7 +80,7 @@ export function makePuppet(spec = {}) {
   // braços
   const arm = (sx) => { const sh = new THREE.Group(); sh.position.set(sx * 0.25, 0.48, 0); torso.add(sh);
     const sleeve = spec.sleeveless ? skin : top; sh.add(mesh(cyl(0.058, 0.05, 0.28), sleeve)); const el = new THREE.Group(); el.position.y = -0.28; sh.add(el);
-    el.add(mesh(cyl(0.05, 0.045, 0.25), spec.longSleeve === false || spec.sleeveless ? skin : top)); const hand = mesh(sph(0.06, 12, 10), skin, 0.01); hand.scale.set(0.9, 1.1, 0.8); hand.position.y = -0.29; el.add(hand);
+    el.add(mesh(cyl(0.05, 0.045, 0.25), spec.longSleeve === false || spec.sleeveless ? skin : top)); const hand = new THREE.Group(); hand.position.y = -0.27; el.add(hand); const palm = mesh(new THREE.CapsuleGeometry(0.042, 0.05, 4, 10), skin, 0.01); palm.scale.set(1, 1, 0.62); palm.position.y = -0.05; hand.add(palm); const thumb = mesh(new THREE.CapsuleGeometry(0.016, 0.035, 4, 8), skin, 0.006); thumb.position.set(-sx * 0.04, -0.035, 0.02); thumb.rotation.z = -sx * 0.6; hand.add(thumb);
     return { sh, el, hand }; };
   const AL = arm(1), AR = arm(-1);
   // estado

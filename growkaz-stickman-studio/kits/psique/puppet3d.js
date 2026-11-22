@@ -24,6 +24,7 @@ export const POSE = {
   reach: { shR: [-1.25, 0, -0.12], elR: 0.15, head: [0.1, 0, 0] },
   wipeTears: { shR: [-2.0, 0, -0.45], elR: 2.4, head: [0.2, 0, 0] },
   headDown: { head: [0.45, 0, 0], torso: [0.12, 0, 0] },
+  holdFront: { shL: [-0.7, 0, 0.15], shR: [-0.7, 0, -0.15], elL: 1.0, elR: 1.0, head: [0.3, 0, 0], torso: [0.08, 0, 0] },
   sitGround: { rootY: -0.64, hipL: [-1.5, 0, 0.12], hipR: [-1.5, 0, -0.12], knL: 0.25, knR: 0.25, shL: [-0.25, 0, 0.3], shR: [-0.25, 0, -0.3], elL: 0.5, elR: 0.5, torso: [-0.15, 0, 0] },
   lieFace: { rootY: 0.13, rootRX: 1.52, rootZ: 0, shL: [-2.9, 0, 0.3], shR: [-2.9, 0, -0.3], elL: 0.6, elR: 0.6, head: [-0.6, 0.6, 0] },
 };

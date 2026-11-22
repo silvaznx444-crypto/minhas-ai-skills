@@ -209,7 +209,7 @@ def quadros(g: Gemini, a) -> None:
 
 # --------------------------------------------------------------------- clipes
 def prompt_veo(sb: dict, cena: dict) -> str:
-    linhas = [f"{sb['estilo']}. Vertical 9:16 video.",
+    linhas = [f"{sb['estilo'].rstrip('. ')}. Vertical 9:16 video.",
               f"Setting: {cenario(sb, cena['cenario'])['descricao']}."]
     for pid in cena.get("personagens", []):
         p = personagem(sb, pid)

@@ -94,8 +94,11 @@ Opções úteis: `--resolucao 1080p|720p|4k`, `--sem-quadro` (Veo só por texto)
 
 ## Postar no Instagram no horário pedido
 Script: `scripts/instagram.py` (API oficial, "Instagram API com Instagram Login").
-Requer `IG_ACCESS_TOKEN` (token de longa duração, 60 dias) e os hosts `graph.instagram.com` e
-`rupload.facebook.com` liberados. Teste: `python3 scripts/instagram.py conta`.
+Apps novos da Meta (login unificado): `IG_ACCESS_TOKEN` = token de **usuário do sistema** (não expira,
+gerado em business.facebook.com → Configurações → Usuários do sistema, com o app e a conta do Instagram
+atribuídos e as permissões `instagram_basic` + `instagram_content_publish`) e `IG_USER_ID` = ID da conta do
+Instagram (Configurações do negócio → Contas → Contas do Instagram). Hosts: `graph.facebook.com`, `rupload.facebook.com`.
+Apps antigos com login do Instagram: só `IG_ACCESS_TOKEN` (60 dias) e host `graph.instagram.com`. Teste: `python3 scripts/instagram.py conta`.
 
 Quando o usuário disser algo como "gera X e posta às 19h":
 1. Gere o vídeo (fluxo acima) e mostre frames/arquivo; escreva a legenda do post (gancho + 3–6 hashtags)
@@ -110,4 +113,4 @@ Quando o usuário disser algo como "gera X e posta às 19h":
    manda: rodar o pipeline `tudo --sim` no projeto e depois `instagram.py postar`.
 4. Confirme ao usuário: horário (fuso de Brasília por padrão), legenda e custo estimado.
 - Sempre `America/Sao_Paulo` se o usuário não disser o fuso.
-- O token expira em 60 dias: `instagram.py renovar` antes disso (o usuário salva o novo valor).
+- Token de usuário do sistema não expira; só o de apps antigos (60 dias) precisa de `instagram.py renovar`.

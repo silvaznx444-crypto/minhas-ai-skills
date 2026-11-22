@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Posta Reels no Instagram pela API oficial (Instagram API com Instagram Login).
 
-Token: IG_ACCESS_TOKEN (variável de ambiente) ou Network secret "Authorization: Bearer"
-para graph.instagram.com e rupload.facebook.com (o proxy injeta).
+Variáveis:
+  IG_ACCESS_TOKEN  token (apps novos: token de usuário do sistema, não expira)
+  IG_USER_ID       ID da conta do Instagram (apps novos, login unificado -> usa graph.facebook.com)
+Hosts: graph.facebook.com (ou graph.instagram.com) e rupload.facebook.com.
 
   python3 instagram.py conta
   python3 instagram.py preparar --video projetos/x/final.mp4 --legenda "texto #tags"   # envia, NÃO publica
@@ -25,7 +27,11 @@ from pathlib import Path
 import requests
 
 VER = os.environ.get("IG_GRAPH_VERSION", "v24.0")
-GRAPH = f"https://graph.instagram.com/{VER}"
+# Apps novos (login unificado / token de usuário do sistema) usam graph.facebook.com + IG_USER_ID.
+# Apps antigos com "login do Instagram" usam graph.instagram.com e descobrem o ID sozinhos.
+IG_USER_ID = os.environ.get("IG_USER_ID", "").strip()
+HOST = os.environ.get("IG_GRAPH_HOST") or ("graph.facebook.com" if IG_USER_ID else "graph.instagram.com")
+GRAPH = f"https://{HOST}/{VER}"
 
 
 class IGError(RuntimeError):
@@ -41,7 +47,7 @@ class Instagram:
         self.token = os.environ.get("IG_ACCESS_TOKEN") or "injetado-pelo-proxy"
         self.s = requests.Session()
         self.s.headers["Authorization"] = f"Bearer {self.token}"
-        self._uid = None
+        self._uid = IG_USER_ID or None
 
     def _r(self, method: str, url: str, **kw) -> dict:
         for tentativa in range(4):
@@ -59,6 +65,8 @@ class Instagram:
         raise IGError(f"Falhou após várias tentativas: {url}")
 
     def conta(self) -> dict:
+        if IG_USER_ID:
+            return self._r("GET", f"{GRAPH}/{IG_USER_ID}", params={"fields": "id,username,name"})
         d = self._r("GET", f"{GRAPH}/me", params={"fields": "user_id,username,account_type"})
         self._uid = d.get("user_id") or d.get("id")
         return d
@@ -107,6 +115,8 @@ class Instagram:
         return {"media_id": m["id"], **info}
 
     def renovar(self) -> dict:
+        if HOST != "graph.instagram.com":
+            return {"expires_in": 0, "aviso": "token de usuário do sistema não expira"}
         return self._r("GET", "https://graph.instagram.com/refresh_access_token",
                        params={"grant_type": "ig_refresh_token", "access_token": self.token})
 

@@ -85,7 +85,7 @@ class Vertex(Gemini):
         if chave in self._escolhidos:
             return self._escolhidos[chave]
         for m in CANDIDATOS[chave]:
-            url = f"https://{self._host(self.local)}/v1beta1/publishers/google/models/{m}"
+            url = f"https://{self._host(self._local_do(m))}/v1beta1/publishers/google/models/{m}"
             try:
                 self._req("GET", url, timeout=30)
             except GeminiError:

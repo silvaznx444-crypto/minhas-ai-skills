@@ -286,7 +286,11 @@ def legendas(g: Gemini, a) -> None:
             cor = personagem(sb, f["personagem"]).get("cor_legenda", "#FFFFFF")
             eventos.append((offset + t0 - ini, offset + t1 - ini, f["texto"], cor))
         offset += fim - ini
-    leg.escrever_ass(eventos, a.projeto / "legendas.ass", palavras=a.palavras)
+    opc = {"palavras": a.palavras}
+    if sb.get("estilo_preset") and (ESTILOS / sb["estilo_preset"] / "legenda.json").exists():
+        opc.update(json.loads((ESTILOS / sb["estilo_preset"] / "legenda.json").read_text()))
+    opc.update(sb.get("legenda", {}))
+    leg.escrever_ass(eventos, a.projeto / "legendas.ass", **opc)
     log(f"[legendas] {len(eventos)} fala(s) -> legendas.ass")
 
 

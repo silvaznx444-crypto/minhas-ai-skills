@@ -72,7 +72,8 @@ def blocos(texto: str, n: int) -> list[str]:
     return out
 
 
-def escrever_ass(eventos: list[tuple[float, float, str, str]], out: Path, palavras: int = 3) -> None:
+def escrever_ass(eventos: list[tuple[float, float, str, str]], out: Path, palavras: int = 3,
+                 tamanho: int = 78, margem: int = 620, contorno: int = 6, pop: bool = True) -> None:
     cab = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: 1080
@@ -82,7 +83,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Fala,{FONTE},78,&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,-1,0,0,0,100,100,0,0,1,6,3,2,80,80,620,1
+Style: Fala,{FONTE},{tamanho},&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,-1,0,0,0,100,100,0,0,1,{contorno},{max(1, contorno // 2)},2,80,80,{margem},1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -95,7 +96,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         for b, p in zip(bs, pesos):
             d = (t1 - t0) * p / tot
             txt = b.replace("{", "(").replace("}", ")")
-            efeito = r"{\c" + _cor(cor) + r"\fscx85\fscy85\t(0,90,\fscx100\fscy100)}"
+            efeito = r"{\c" + _cor(cor) + (r"\fscx85\fscy85\t(0,90,\fscx100\fscy100)}" if pop else "}")
             linhas.append(f"Dialogue: 0,{_ts(t)},{_ts(t + d)},Fala,,0,0,0,,{efeito}{txt}")
             t += d
     out.write_text(cab + "\n".join(linhas) + "\n", encoding="utf-8")

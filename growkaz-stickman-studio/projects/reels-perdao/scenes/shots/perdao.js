@@ -5,6 +5,8 @@ import { E, registerShot, ease, prog, clamp, lerp, text, FONTS, alpha, noise, rr
 import { makePuppet, POSE, posesAt, walkPose, blendPose } from '/kits/psique/puppet3d.js';
 import { makePovArm, elbowIK } from '/kits/psique/pov.js';
 import { prop } from '/kits/psique/world3d.js';
+import { GRAD } from '/kits/psique/pov.js';
+import { TEX, rbox, books, plant, wallClock, curtain, frameArt, chandelier, umbrella, clipboard, bird, grassField, flowerField, crowdSpec, ctex as ctex2 } from '/kits/psique/props3d.js';
 
 try { await document.fonts?.ready; } catch (e) { /* segue */ }
 
@@ -15,7 +17,8 @@ const SHADOW = { skin: '#0a0a0e', top: 'hoodie', topColor: '#0b0b10', legColor: 
 const SLEEVE = '#3e4e6e', CUFF = '#344262';
 
 // ---------- utilidades ----------
-const toon = (c, o = {}) => new THREE.MeshToonMaterial({ color: new THREE.Color(c), ...o });
+const toon = (c, o = {}) => new THREE.MeshToonMaterial({ color: new THREE.Color(c), gradientMap: GRAD, ...o });
+const texM = (t, o = {}) => new THREE.MeshToonMaterial({ map: t, gradientMap: GRAD, ...o });
 const std = (c, o = {}) => new THREE.MeshStandardMaterial({ color: new THREE.Color(c), roughness: 0.85, ...o });
 const basic = (c, o = {}) => new THREE.MeshBasicMaterial({ color: new THREE.Color(c), ...o });
 const OUT = new THREE.MeshBasicMaterial({ color: 0x0a0a0e, side: THREE.BackSide });
@@ -54,7 +57,7 @@ function study(T) {
   const st = T.stage({ mood: 'night', fov: 45, fog: false, keyPos: [-7, 3.2, -0.6], keyColor: '#7f9cff', keyIntensity: 0.7, ambient: 0.78, ambientSky: '#8a84a8', bloom: 0.5, bloomThreshold: 0.86, shadowSize: 5 });
   const sc = st.scene; sc.background = new THREE.Color('#07080f'); const ceil = new THREE.PointLight(new THREE.Color('#ffd2a0'), 3.2, 9, 1.3); ceil.position.set(0.2, 2.85, -0.7); sc.add(ceil);
   add(sc, new THREE.PlaneGeometry(6, 6), new THREE.MeshToonMaterial({ map: T.planks('#6a4630', 12, [2, 2]) }), 0, 0, 0, -Math.PI / 2, 0, 0, { shadow: false });
-  const wm = toon('#5e5048'), wm2 = toon('#4e4440');
+  const wm = texM(TEX.wallpaper('#5e5a50', 'rgba(0,0,0,.09)', [6, 3])), wm2 = texM(TEX.wallpaper('#524e46', 'rgba(0,0,0,.09)', [6, 3]));
   add(sc, BOX(6, 3.2, 0.1), wm, 0, 1.6, -3.0, 0, 0, 0, { shadow: false }); add(sc, BOX(0.1, 3.2, 6), wm2, -3.0, 1.6, 0, 0, 0, 0, { shadow: false }); add(sc, BOX(6, 3.2, 0.1), wm, 0, 1.6, 3.0, 0, 0, 0, { shadow: false });
   add(sc, BOX(0.1, 3.2, 2.75), wm2, 3.0, 1.6, -1.625, 0, 0, 0, { shadow: false }); add(sc, BOX(0.1, 3.2, 2.35), wm2, 3.0, 1.6, 1.825, 0, 0, 0, { shadow: false }); add(sc, BOX(0.1, 1.15, 0.9), wm2, 3.0, 2.625, 0.2, 0, 0, 0, { shadow: false });
   add(sc, BOX(6, 0.1, 6), '#241e1c', 0, 3.2, 0, 0, 0, 0, { shadow: false });
@@ -99,7 +102,19 @@ function study(T) {
   const pchalk = pc.hold(1, new THREE.Mesh(new THREE.CylinderGeometry(0.011, 0.011, 0.075, 8), toon('#f4f4ec'))); pchalk.rotation.x = Math.PI / 2; pchalk.position.set(-0.01, -0.012, -0.2);
   const pen = pw.hold(1, new THREE.Mesh(new THREE.CylinderGeometry(0.006, 0.004, 0.14, 8), toon('#1a2a5a'))); pen.rotation.set(Math.PI / 2 - 0.5, 0, 0.2); pen.position.set(0.0, 0.02, -0.15);
   const fill = new THREE.PointLight(new THREE.Color('#ffd8b0'), 0.18, 1.4, 2); fill.position.set(0.05, 0.1, 0.05); st.camera.add(fill);
-  STU = { st, sc, bd, bkey: '', phc, phone, phL, pivot, hero, chalk, hphone, shadow, pc, pw, rigs: [pc, pw], pchalk, pen, handle: handle(st) };
+  // ---- acabamento ----
+  for (const [w, d, x, z] of [[6, 0.08, 0, -2.93], [0.08, 6, -2.93, 0]]) add(sc, rbox(w, 0.1, d, 0.02), '#e8e0d4', x, 3.1, z, 0, 0, 0, { shadow: false });
+  for (const zc of [-1.32, 0.12]) { const c = curtain(0.55, 1.95, '#6a2a2e'); c.position.set(-2.86, 1.95, zc); c.rotation.y = Math.PI / 2; c.castShadow = true; sc.add(c); } add(sc, new THREE.CylinderGeometry(0.015, 0.015, 1.9, 8), '#3a2a20', -2.86, 2.95, -0.6, Math.PI / 2, 0, 0);
+  const clock = wallClock(0.2); clock.g.position.set(2.93, 2.62, 0.2); clock.g.rotation.y = -Math.PI / 2; sc.add(clock.g);
+  const dip = (txt) => frameArt(0.42, 0.32, (g, w, h) => { g.fillStyle = '#f6f0e0'; g.fillRect(0, 0, w, h); g.strokeStyle = '#c8a040'; g.lineWidth = 6; g.strokeRect(10, 10, w - 20, h - 20); g.fillStyle = '#3a2a1a'; g.textAlign = 'center'; g.font = '700 30px "Playfair Display"'; g.fillText(txt, w / 2, 76); g.font = '600 16px Nunito'; g.fillText('Universidade', w / 2, 112); g.fillRect(w / 2 - 50, 150, 100, 2); g.fillStyle = '#c83a3a'; g.beginPath(); g.arc(w - 50, h - 45, 16, 0, 7); g.fill(); }, '#3a2a1a');
+  [['Diploma', -2.1], ['Ph.D.', 0.75]].forEach(([t, z]) => { const d = dip(t); d.position.set(-2.94, 1.72, z); d.rotation.y = Math.PI / 2; sc.add(d); });
+  const pl = plant(1.4); pl.position.set(-2.45, 0, 0.55); sc.add(pl); const pl2 = plant(0.55, '#e8e4dc'); pl2.position.set(-0.62, 0.79, -0.28); desk.add(pl2);
+  const bk = books(9, { h: 0.24, seed: 2, lean: true }); bk.position.set(0.2, 0.79, -0.3); bk.rotation.y = Math.PI; desk.add(bk);
+  for (let k = 0; k < 2; k++) { const sb = books(4, { h: 0.2, seed: k * 3 }); sb.rotation.set(0, 0.3 * k, Math.PI / 2); sb.position.set(1.85 + k * 0.34, 0.0, -1.95 + k * 0.12); sc.add(sb); }
+  // alunos (só na abertura)
+  const students = []; [[-1.75, -1.3], [-1.0, -1.3], [-0.25, -1.3], [-1.45, -0.45], [-0.6, -0.5]].forEach(([x, z], i) => { const chp = prop('chair_A', 0.95); chp.position.set(x, 0, z + 0.06); chp.rotation.y = Math.PI; sc.add(chp); const p = puppet(sc, crowdSpec(i + 3)); p.root.position.set(x, 0, z); p.root.rotation.y = Math.PI; students.push({ p, chp, i }); });
+  const X = { clock, students };
+  STU = { st, sc, X, bd, bkey: '', phc, phone, phL, pivot, hero, chalk, hphone, shadow, pc, pw, rigs: [pc, pw], pchalk, pen, handle: handle(st) };
   { const g = bd.g; g.font = '700 96px "Fredoka"'; STU.lineF = { w1: g.measureText('PERDOAR').width, w2: g.measureText('≠ ESQUECER').width }; g.font = '700 170px "Fredoka"'; STU.lineA = { w: g.measureText('PERDÃO').width, cy: 165 }; }
   return STU;
 }
@@ -115,6 +130,7 @@ function drawBoard(rA, rF) {
 const boardPt = (px, py) => V3(BOARD.cx + (px / BOARD.pw - 0.5) * BOARD.w, BOARD.cy - (py / BOARD.ph - 0.5) * BOARD.h, BOARD.z + 0.005);
 function drawPhoneScreen(T, ring) { const { g, t } = STU.phc; g.fillStyle = ring ? '#0e1424' : '#050507'; g.fillRect(0, 0, 128, 256); if (ring) { g.fillStyle = '#9ab0d0'; g.font = '700 11px Nunito'; g.textAlign = 'center'; g.fillText('Chamada recebida', 64, 46); g.fillStyle = '#ffffff'; g.font = '900 20px Nunito'; g.fillText('Família', 64, 76); g.fillStyle = 'rgba(255,255,255,.18)'; g.beginPath(); g.arc(64, 140, 26 + 8 * Math.abs(Math.sin(T * 6)), 0, 7); g.fill(); g.fillStyle = '#3ad06a'; g.beginPath(); g.arc(36, 210, 15, 0, 7); g.fill(); g.fillStyle = '#e83a3a'; g.beginPath(); g.arc(92, 210, 15, 0, 7); g.fill(); } t.needsUpdate = true; }
 function updStudy(T, W) {
+  W.X.clock.set(T); const cls = T < 3.4; W.X.students.forEach(({ p, chp, i }) => { p.root.visible = cls; chp.visible = cls; if (!cls) return; const up = i === 3 ? ease.inOut(prog(T, 1.4, 1.9)) : 0; p.setPose({ ...POSE.seated, shL: [-0.5, 0, 0.12], shR: [lerp(-0.5, -2.9, up), 0, lerp(-0.12, -0.25, up)], elL: 0.9, elR: lerp(0.9, 0.3, up), handL: 0.4, handR: lerp(0.4, 0.08, up), head: [-0.12, Math.sin(T * 0.7 + i) * 0.12, 0] }); p.setFace({ blink: blinkAt(T, i), t: T }); });
   drawBoard(ease.inOut(prog(T, 0.55, 2.75)), prog(T, 41.1, 42.8));
   const ring = T > 5.95 && T < 8.1; if (W.ringState !== ring || ring) { drawPhoneScreen(T, ring); W.ringState = ring; }
   W.phone.position.x = 1.58 + (ring && Math.sin(T * 70) > 0 ? 0.003 : 0); W.phL.intensity = ring ? 0.7 : 0;
@@ -148,8 +164,8 @@ function street(T) {
   add(sc, new THREE.PlaneGeometry(1.3, 8.2), std('#55555c', { roughness: 0.35, metalness: 0.15 }), 0, 0.02, 4.4, -Math.PI / 2, 0, 0, { shadow: false });
   for (let x = -38; x < 40; x += 4) add(sc, BOX(1.8, 0.01, 0.15), basic('#8a8a70'), x, 0.015, 13.5, 0, 0, 0, { shadow: false });
   // casa da mãe
-  const house = (x, z, s, lit) => { const g = new THREE.Group(); g.position.set(x, 0, z); g.scale.setScalar(s); sc.add(g); add(g, BOX(7, 3.0, 5), std('#b8ac98'), 0, 1.5, -2.5, 0, 0, 0, { outline: 0.004 });
-    const sh = new THREE.Shape(); sh.moveTo(-3.8, 0); sh.lineTo(3.8, 0); sh.lineTo(0, 1.9); sh.lineTo(-3.8, 0); const rg = new THREE.ExtrudeGeometry(sh, { depth: 5.6, bevelEnabled: false }); add(g, rg, std('#4a3430'), 0, 3.0, -5.3);
+  const house = (x, z, s, lit) => { const g = new THREE.Group(); g.position.set(x, 0, z); g.scale.setScalar(s); sc.add(g); add(g, BOX(7, 3.0, 5), new THREE.MeshStandardMaterial({ map: TEX.siding('#b8ac98', [1, 16]), roughness: 0.85 }), 0, 1.5, -2.5, 0, 0, 0, { outline: 0.004 });
+    const sh = new THREE.Shape(); sh.moveTo(-3.8, 0); sh.lineTo(3.8, 0); sh.lineTo(0, 1.9); sh.lineTo(-3.8, 0); const rg = new THREE.ExtrudeGeometry(sh, { depth: 5.6, bevelEnabled: false }); add(g, rg, new THREE.MeshStandardMaterial({ map: TEX.shingles('#5a3e38', [1, 1]), roughness: 0.8 }), 0, 3.0, -5.3); add(g, BOX(0.6, 1.4, 0.6), std('#7a3a2a'), 2.2, 4.0, -3.6);
     add(g, BOX(1.0, 2.1, 0.08), std('#3e2418'), 0, 1.05, 0.02); for (const wx of [-2.3, 2.3]) { add(g, BOX(1.3, 1.1, 0.06), lit ? basic('#ffcf8a') : std('#18203a', { roughness: 0.2, metalness: 0.4 }), wx, 1.6, 0.02, 0, 0, 0, { shadow: false }); add(g, BOX(1.42, 0.08, 0.1), '#e8e0d4', wx, 1.02, 0.05); }
     add(g, BOX(2.6, 0.12, 1.6), std('#4a3430'), 0, 2.5, 0.7); for (const px of [-1.15, 1.15]) add(g, BOX(0.12, 2.5, 0.12), '#e8e0d4', px, 1.25, 1.4); add(g, BOX(2.2, 0.18, 1.2), std('#6a6a70'), 0, 0.09, 0.7); return g; };
   house(0, 0, 1, false); house(-11, -1, 0.9, true); house(11.5, -1.5, 0.95, false);
@@ -160,7 +176,7 @@ function street(T) {
   const tape = add(sc, new THREE.PlaneGeometry(3.4, 0.09), new THREE.MeshToonMaterial({ map: tp.t, side: THREE.DoubleSide }), 0, 0.98, 3.2, 0, 0, 0.0, { shadow: false });
   const tape2 = add(sc, new THREE.PlaneGeometry(2.2, 0.09), new THREE.MeshToonMaterial({ map: tp.t, side: THREE.DoubleSide }), 1.6, 1.1, 2.1, 0, 1.35, 0.1, { shadow: false });
   // viaturas
-  const cars = [[-3.4, 6.8, 0.65, 0], [3.9, 10.6, -0.35, 1]].map(([x, z, ry, i]) => { const g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = ry; sc.add(g); const c = prop('car_sedan', 1.45); g.add(c); const bar = new THREE.Group(); bar.position.set(0, 1.5, 0); g.add(bar);
+  const cars = [[-3.5, 10.4, 0.3, 0], [3.9, 10.9, -0.35, 1]].map(([x, z, ry, i]) => { const g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = ry; sc.add(g); const c = prop('car_sedan', 1.45); g.add(c); const bar = new THREE.Group(); bar.position.set(0, 1.5, 0); g.add(bar);
     const rm = basic('#ff2020'), bm = basic('#2050ff'); add(bar, BOX(0.42, 0.11, 0.24), rm, -0.24, 0, 0, 0, 0, 0, { shadow: false }); add(bar, BOX(0.42, 0.11, 0.24), bm, 0.24, 0, 0, 0, 0, 0, { shadow: false });
     const red = new THREE.PointLight(new THREE.Color('#ff2a2a'), 0, 20, 1.3), blue = new THREE.PointLight(new THREE.Color('#3a5aff'), 0, 20, 1.3); red.position.set(-0.4, 1.8, 0); blue.position.set(0.4, 1.8, 0); g.add(red, blue); return { g, rm, bm, red, blue, i }; });
   const lp = prop('streetlight', 4.4); lp.position.set(-6.2, 0, 9.4); lp.rotation.y = Math.PI / 2; sc.add(lp); const sl = new THREE.PointLight(new THREE.Color('#ffcf8a'), 10, 14, 1.6); sl.position.set(-5.3, 4.2, 9.4); sl.castShadow = true; sl.shadow.bias = -0.003; sl.shadow.normalBias = 0.05; sc.add(sl);
@@ -172,9 +188,26 @@ function street(T) {
   geo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); const rain = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color: new THREE.Color('#a8bce8'), transparent: true, opacity: 0.42 })); rain.frustumCulled = false; sc.add(rain);
   const hero = puppet(sc, HERO); hero.root.position.set(0, 0, 6.2); hero.root.rotation.y = Math.PI;
   sc.add(st.camera); const pc = povRig(st.camera, st.camera); const fill = new THREE.PointLight(new THREE.Color('#ffd8b0'), 1.15, 2.6, 2); fill.position.set(0, 0.1, 0.1); st.camera.add(fill);
-  STR = { st, sc, cars, rain, base, porch, pbulb, tape, tape2, hero, pc, rigs: [pc], handle: handle(st) }; return STR;
+  // ---- acabamento ----
+  const fenceM = toon('#e8e4dc'); for (let x = -6; x <= 6; x += 0.26) { if (Math.abs(x) < 0.9) continue; add(sc, BOX(0.07, 0.72, 0.03), fenceM, x, 0.36, 8.15); } for (const sx of [-1, 1]) for (const y of [0.22, 0.55]) add(sc, BOX(5.1, 0.05, 0.025), fenceM, sx * 3.45, y, 8.13);
+  for (const [x, z, k] of [[-1.2, 9.4, 1], [2.4, 12.6, 1.4], [0.55, 5.6, 0.8], [-3.2, 12.0, 1.2]]) { const pd = add(sc, new THREE.CircleGeometry(0.6 * k, 24), std('#0c0e16', { roughness: 0.04, metalness: 0.7 }), x, 0.026, z, -Math.PI / 2, 0, 0, { shadow: false }); pd.scale.y = 0.55; }
+  [['car_hatchback', -8.5, 12.0, Math.PI / 2], ['car_stationwagon', 7.6, 12.9, -Math.PI / 2]].forEach(([n, x, z, r]) => { const c = prop(n, 1.4); c.position.set(x, 0, z); c.rotation.y = r; sc.add(c); });
+  const bin = prop('trash_A', 0.95); bin.position.set(2.5, 0, 8.95); sc.add(bin);
+  // figurantes: policiais, detetive, vizinhos
+  const mk = (spec, x, z, ry) => { const p = puppet(sc, spec); p.root.position.set(x, 0, z); p.root.rotation.y = ry; return p; };
+  const COP = { skin: '#8a5a3a', top: 'sweater', topColor: '#1e2a48', legColor: '#1a1e2e', shoeColor: '#0e0e10', hair: 'short', hairColor: '#141012', hat: 'police', badge: true, belt: '#0e0e12', lids: 0.4 };
+  const X = {}; X.cop1 = mk(COP, 1.3, 3.75, -0.15); X.cop2 = mk({ ...COP, skin: '#d8a47a', hairColor: '#6a4a2a' }, -2.6, 9.2, Math.PI - 0.3); add(X.cop2.parts.AR.hand, BOX(0.05, 0.11, 0.03), '#141418', 0, -0.09, 0.03);
+  X.det = mk({ ...crowdSpec(2, { top: 'coat', topColor: '#6a5a42' }), glasses: false, hair: 'short', hairColor: '#3a2a1a' }, 0.95, 1.45, 0.35); add(X.det.parts.AL.hand, BOX(0.09, 0.12, 0.012), '#f4f0e4', 0, -0.1, 0.04);
+  X.n1 = mk(crowdSpec(5, { top: 'coat', topColor: '#7a3a3a' }), 3.35, 8.75, Math.PI - 0.35); X.n2 = mk(crowdSpec(8, { top: 'hoodie' }), 3.95, 8.8, Math.PI - 0.45); const um = umbrella('#1e2a3a'); um.position.set(3.62, 1.12, 8.78); sc.add(um);
+  X.n3 = mk({ ...crowdSpec(9, { top: 'coat', topColor: '#d8c8b0' }), headscarf: '#5a6a8a' }, -3.1, 8.95, Math.PI + 0.3);
+  STR = { st, sc, X, cars, rain, base, porch, pbulb, tape, tape2, hero, pc, rigs: [pc], handle: handle(st) }; return STR;
 }
 function updStreet(T, W) {
+  { const X = W.X, idle = (p, i, pose, face = {}) => { const hd = pose.head || [0, 0, 0]; p.setPose({ ...pose, head: [hd[0] + Math.sin(T * 0.6 + i) * 0.03, hd[1] + Math.sin(T * 0.37 + i * 2) * 0.12, 0] }); p.setFace({ blink: blinkAt(T, i), t: T, ...face }); };
+    const stop = ease.inOut(prog(T, 16.2, 16.7)); idle(X.cop1, 1, blendPose(POSE.crossArms, { shR: [-1.45, 0, -0.15], elR: 0.15, handR: 0.02, shL: [0.05, 0, 0.12], elL: 0.25 }, stop), { brows: 0.4, talk: T > 16.4 && T < 17.4 ? 0.35 + 0.3 * Math.abs(Math.sin(T * 14)) : 0 });
+    idle(X.cop2, 2, { shR: [-1.25, 0.5, -0.45], elR: 2.35, handR: 0.7, shL: [0.05, 0, 0.12], elL: 0.3, head: [0.1, 0, 0] }, { talk: Math.max(0, Math.sin(T * 2.3)) * 0.5 });
+    idle(X.det, 3, { shL: [-0.9, 0, 0.1], elL: 1.5, handL: 0.6, shR: [-0.7, 0, -0.1], elR: 1.7 + Math.sin(T * 6) * 0.1, handR: 0.75, head: [0.35, 0, 0] });
+    idle(X.n1, 4, { shR: [-0.85, 0, -0.1], elR: 1.55, handR: 0.85, shL: [0.05, 0, 0.12], elL: 0.3 }, { sad: true }); idle(X.n2, 5, POSE.crossArms); idle(X.n3, 6, { ...POSE.crossArms, head: [0.15, 0, 0] }, { sad: true }); }
   const r = Math.max(0, Math.sin(T * 11)) ** 2, b = Math.max(0, Math.sin(T * 11 + Math.PI)) ** 2;
   const dim = T > 20.6 && T < 23.8 ? 0.45 : 1; W.cars.forEach((c) => { const rr2 = c.i ? b : r, bb = c.i ? r : b; c.red.intensity = 17 * rr2 * dim; c.blue.intensity = 24 * bb * dim; c.rm.color.setRGB(0.25 + 2.2 * rr2, 0.08, 0.08); c.bm.color.setRGB(0.08, 0.12, 0.3 + 2.4 * bb); });
   W.porch.intensity = noise(T * 9, 2) > -0.6 ? 2.2 : 0.4;
@@ -198,7 +231,7 @@ function church(T) {
   const sc = st.scene; const stone = T.tiles('#5e564e', 6, [6, 10]);
   add(sc, new THREE.PlaneGeometry(10, 22), new THREE.MeshToonMaterial({ map: stone }), 0, 0, -3, -Math.PI / 2, 0, 0, { shadow: false });
   add(sc, new THREE.PlaneGeometry(1.6, 18), toon('#6a1e22'), 0, 0.005, -2, -Math.PI / 2, 0, 0, { shadow: false }); // tapete
-  for (const sx of [-1, 1]) add(sc, BOX(0.3, 9, 22), '#4a4048', sx * 5, 4.5, -3, 0, 0, 0, { shadow: false }); add(sc, BOX(10, 12, 0.3), '#3e3640', 0, 6, -12.1, 0, 0, 0, { shadow: false }); add(sc, BOX(10, 9, 0.3), '#3e3640', 0, 4.5, 7.5, 0, 0, 0, { shadow: false }); add(sc, BOX(10, 0.3, 22), '#241e26', 0, 9, -3, 0, 0, 0, { shadow: false });
+  const stoneM = texM(TEX.stone('#6a6068', [10, 5])); for (const sx of [-1, 1]) add(sc, BOX(0.3, 9, 22), stoneM, sx * 5, 4.5, -3, 0, 0, 0, { shadow: false }); add(sc, BOX(10, 12, 0.3), stoneM, 0, 6, -12.1, 0, 0, 0, { shadow: false }); add(sc, BOX(10, 9, 0.3), '#3e3640', 0, 4.5, 7.5, 0, 0, 0, { shadow: false }); add(sc, BOX(10, 0.3, 22), '#241e26', 0, 9, -3, 0, 0, 0, { shadow: false });
   for (let z = 4; z > -10; z -= 3.2) for (const sx of [-1, 1]) { add(sc, new THREE.CylinderGeometry(0.28, 0.32, 9, 12), '#6a6068', sx * 3.4, 4.5, z, 0, 0, 0, { outline: 0.01 }); }
   for (let z = 3.4; z > -6; z -= 1.35) for (const sx of [-1, 1]) { const g = new THREE.Group(); g.position.set(sx * 1.85, 0, z); sc.add(g); add(g, BOX(2.2, 0.08, 0.45), '#5a3a24', 0, 0.45, 0, 0, 0, 0, { outline: 0.01 }); add(g, BOX(2.2, 0.5, 0.06), '#4e3220', 0, 0.78, 0.24, 0, 0, 0, { outline: 0.01 }); for (const lx of [-1.0, 1.0]) add(g, BOX(0.07, 0.45, 0.4), '#4a2e1c', lx, 0.22, 0.02); }
   add(sc, BOX(4.5, 0.4, 2.4), '#5a5058', 0, 0.2, -9.4); add(sc, BOX(1.8, 0.95, 0.8), toon('#efe8dc'), 0, 0.88, -9.4, 0, 0, 0, { outline: 0.01 });
@@ -221,7 +254,16 @@ function church(T) {
   for (const x of [-0.5, 0.5]) { const l = new THREE.PointLight(new THREE.Color('#ffb060'), 2.5, 7, 1.5); l.position.set(x, 1.8, -8.9); sc.add(l); cl.push(l); }
   const win = new THREE.PointLight(new THREE.Color('#ffe4b0'), 12, 22, 1.2); win.position.set(0, 5.0, -10.5); sc.add(win);
   const hero = puppet(sc, HERO); hero.root.position.set(1.15, 0, 0.78); hero.root.rotation.y = Math.PI;
-  CH = { st, sc, glass, rays, dust, dbase, flames, cl, win, hero, handle: handle(st) }; return CH;
+  // ---- acabamento ----
+  for (let z = 6; z > -12; z -= 2.6) add(sc, BOX(10, 0.32, 0.3), '#3a2416', 0, 8.7, z, 0, 0, 0, { shadow: false });
+  [2.6, -1.6, -5.8].forEach((z) => { const c = chandelier(1.2); c.position.set(0, 5.4, z); sc.add(c); });
+  const sgt = ctex2(128, 256, (g, w, h) => { g.fillStyle = '#000'; g.fillRect(0, 0, w, h); g.save(); g.beginPath(); g.moveTo(0, h); g.lineTo(0, 64); g.arc(64, 64, 64, Math.PI, 0); g.lineTo(w, h); g.closePath(); g.clip(); const pal = ['#1a4ab8', '#b81a2a', '#e8b020', '#1a8a5a', '#6a2ab0']; for (let r = 0; r < 8; r++) for (let c = 0; c < 4; c++) { g.fillStyle = pal[(r * 2 + c) % 5]; g.fillRect(c * 32, r * 32, 32, 32); g.strokeStyle = '#0a0806'; g.lineWidth = 4; g.strokeRect(c * 32, r * 32, 32, 32); } g.restore(); });
+  for (const sx of [-1, 1]) for (const z of [2.2, -2.6, -7.0]) { const m = add(sc, new THREE.PlaneGeometry(1.0, 2.4), basic('#ffffff', { map: sgt, transparent: true, alphaTest: 0.02 }), sx * 4.83, 4.6, z, 0, -sx * Math.PI / 2, 0, { shadow: false }); m.material.fog = false; }
+  for (const sx of [-1, 1]) { add(sc, new THREE.CylinderGeometry(0.12, 0.09, 0.45, 14), '#d8d0c0', sx * 1.5, 0.62, -9.0); for (let k = 0; k < 7; k++) add(sc, new THREE.SphereGeometry(0.07, 8, 6), ['#ffffff', '#ffd0e0', '#ffe080'][k % 3], sx * 1.5 + Math.cos(k) * 0.1, 0.95 + (k % 3) * 0.06, -9.0 + Math.sin(k) * 0.1); }
+  // fiéis rezando
+  const prayer = { ...POSE.seated, shL: [-0.95, 0, 0.12], shR: [-0.95, 0, -0.12], elL: 1.85, elR: 1.85, handL: 0.1, handR: 0.1, head: [0.4, 0, 0] };
+  const X = { fol: [] }; [[-1.6, 2.05, 0], [-2.3, -0.65, 1], [2.1, -0.65, 2], [-1.2, -2.0, 3], [1.5, -3.35, 4], [1.0, -3.35, 5, 0.72], [-2.0, -4.7, 6]].forEach(([x, z, i, hg]) => { const sp = crowdSpec(i + 11, { height: hg }); if (i === 1) { sp.headscarf = '#3a3a5a'; sp.hair = 'long'; } const p = puppet(sc, sp); p.root.position.set(x, hg ? 0.15 : 0, z + 0.08); p.root.rotation.y = Math.PI; p.setPose(i === 5 ? { ...POSE.seated, head: [-0.2, 0.3, 0] } : prayer); p.setFace({ lids: i === 5 ? 0.3 : 0.85, t: 0 }); X.fol.push(p); });
+  CH = { st, sc, X, glass, rays, dust, dbase, flames, cl, win, hero, handle: handle(st) }; return CH;
 }
 function updChurch(T, W) {
   const k = ease.inOut(prog(T, 24.6, 26.0)); W.glass.material.color.setScalar(0.8 + k * 0.9); W.rays.forEach((m) => (m.material.opacity = 0.09 + k * 0.15)); W.win.intensity = 10 + k * 14;
@@ -257,7 +299,22 @@ function lab(T) {
   const wireM = toon('#1e1e22'); const wire = (a, b, c) => { const cur = new THREE.CatmullRomCurve3([a, b, c]); add(sc, new THREE.TubeGeometry(cur, 24, 0.008, 6), wireM, 0, 0, 0, 0, 0, 0, { shadow: false }); };
   wire(V3(0.1, 0.86, 0.2), V3(0.55, 0.7, 0.35), MON.clone().add(V3(-0.1, -0.26, 0.0))); wire(V3(-0.1, 0.8, 0.2), V3(0.4, 0.6, 0.4), MON.clone().add(V3(-0.05, -0.28, 0.0)));
   for (const [x, y] of [[0.1, 0.86], [-0.1, 0.8]]) add(sc, new THREE.CylinderGeometry(0.022, 0.022, 0.01, 10), '#f4f4f4', x, y, 0.2, Math.PI / 2, 0, 0, { shadow: false });
-  LB = { st, sc, mc, screen, glow, vol, cool, warm, handle: handle(st) }; return LB;
+  // ---- acabamento ----
+  add(sc, BOX(9, 1.15, 0.06), texM(TEX.tiles('#dfe8ea', 10, [9, 1.2])), 0, 0.58, -2.93, 0, 0, 0, { shadow: false });
+  for (const x of [-2.75, -1.9]) { add(sc, rbox(0.82, 0.88, 0.5, 0.03), '#e8ecf0', x, 0.44, -2.62); add(sc, BOX(0.84, 0.03, 0.52), '#9aa4ae', x, 0.9, -2.62); add(sc, rbox(0.82, 0.7, 0.32, 0.02), '#e8ecf0', x, 2.05, -2.76); add(sc, new THREE.PlaneGeometry(0.7, 0.58), basic('#bcd8e8', { transparent: true, opacity: 0.5 }), x, 2.05, -2.595, 0, 0, 0, { shadow: false }); for (let k = 0; k < 4; k++) add(sc, new THREE.CylinderGeometry(0.03, 0.03, 0.14, 10), ['#4a8ac8', '#c84a4a', '#e8c04a', '#4ac88a'][k], x - 0.24 + k * 0.16, 1.82, -2.72); }
+  const cd = new THREE.Group(); cd.position.set(-1.0, 0, -2.3); sc.add(cd); add(cd, rbox(1.3, 0.05, 0.62, 0.015), '#c8ccd2', 0, 0.75, 0); for (const [x, z] of [[-0.6, -0.26], [0.6, -0.26], [-0.6, 0.26], [0.6, 0.26]]) add(cd, BOX(0.04, 0.73, 0.04), '#8a929c', x, 0.37, z);
+  const cht = ctex2(256, 160, (g, w, h) => { g.fillStyle = '#0a1420'; g.fillRect(0, 0, w, h); g.strokeStyle = '#3ac8ff'; g.lineWidth = 3; g.beginPath(); for (let x = 0; x < w; x += 4) { const y = 90 - Math.sin(x * 0.05) * 25 - (x > 120 && x < 170 ? 30 : 0); x ? g.lineTo(x, y) : g.moveTo(x, y); } g.stroke(); g.fillStyle = '#ffd24a'; for (let i = 0; i < 8; i++) g.fillRect(16 + i * 28, 150 - (20 + ((i * 37) % 50)), 16, 20 + ((i * 37) % 50)); g.fillStyle = '#9ab0c8'; g.font = '700 14px Nunito'; g.fillText('ESTUDO 2001 — n = 71', 10, 20); });
+  for (const dx of [-0.32, 0.32]) { add(cd, rbox(0.56, 0.36, 0.04, 0.01), '#2a2e34', dx, 1.1, -0.12); add(cd, new THREE.PlaneGeometry(0.52, 0.32), basic('#ffffff', { map: cht }), dx, 1.1, -0.098, 0, 0, 0, { shadow: false }); add(cd, BOX(0.04, 0.2, 0.04), '#2a2e34', dx, 0.85, -0.14); }
+  const poster = (title, draw) => frameArt(0.62, 0.86, (g, w, h) => { g.fillStyle = '#f4f6f8'; g.fillRect(0, 0, w, h); g.fillStyle = '#2a3a5a'; g.font = '900 17px Nunito'; g.textAlign = 'center'; g.fillText(title, w / 2, 30); draw(g, w, h); }, '#c8ccd2');
+  const p1 = poster('SISTEMA CARDIOVASCULAR', (g, w, h) => { g.fillStyle = '#d84a4a'; g.beginPath(); g.moveTo(w / 2, 300); g.bezierCurveTo(30, 200, 60, 70, w / 2, 130); g.bezierCurveTo(w - 60, 70, w - 30, 200, w / 2, 300); g.fill(); g.strokeStyle = '#4a6ad8'; g.lineWidth = 8; g.beginPath(); g.moveTo(w / 2 - 20, 130); g.lineTo(w / 2 - 30, 60); g.stroke(); });
+  p1.position.set(-3.44, 1.75, -0.9); p1.rotation.y = Math.PI / 2; sc.add(p1);
+  const p2 = poster('ESTRESSE x PERDÃO', (g, w, h) => { g.fillStyle = '#e8a0b0'; g.beginPath(); g.ellipse(w / 2, 170, 90, 70, 0, 0, 7); g.fill(); g.strokeStyle = '#a85a6a'; g.lineWidth = 4; for (let i = 0; i < 6; i++) { g.beginPath(); g.arc(w / 2 - 60 + i * 24, 170, 22, 0, Math.PI); g.stroke(); } g.fillStyle = '#2a3a5a'; g.font = '700 14px Nunito'; g.fillText('cortisol ↓   FC ↓   PA ↓', w / 2, 300); });
+  p2.position.set(-3.44, 1.75, 0.6); p2.rotation.y = Math.PI / 2; sc.add(p2);
+  const lclock = wallClock(0.17); lclock.g.position.set(1.6, 2.4, -2.94); sc.add(lclock.g); const lp = plant(1.3, '#e8ecf0'); lp.position.set(2.9, 0, -2.5); sc.add(lp);
+  // figurantes: pesquisador de jaleco com prancheta; assistente no computador
+  const X = { lclock }; X.doc = puppet(sc, { skin: '#d8a47a', top: 'coat', topColor: '#d8dee6', inner: '#5a7a9a', legColor: '#3a3a44', shoeColor: '#2a2020', hair: 'short', hairColor: '#8a8a8a', glasses: true, lids: 0.35 }); X.doc.root.position.set(-0.62, 0, -0.78); X.doc.root.rotation.y = 1.2; const cb = clipboard(); cb.scale.setScalar(0.8); cb.position.set(0, -0.12, 0.07); cb.rotation.set(-1.2, 0, 0); X.doc.parts.AL.hand.add(cb);
+  X.asst = puppet(sc, { ...crowdSpec(7), top: 'coat', topColor: '#d8dee6', inner: '#3a6a5a' }); X.asst.root.position.set(-1.0, 0, -1.72); X.asst.root.rotation.y = Math.PI; const ach = prop('chair_A', 0.95); ach.position.set(-1.0, 0, -1.62); ach.rotation.y = Math.PI; sc.add(ach);
+  LB = { st, sc, X, mc, screen, glow, vol, cool, warm, handle: handle(st) }; return LB;
 }
 const BPM = (T) => T < 28.2 ? 72 : T < 31.8 ? lerp(72, 114, ease.inOut(prog(T, 28.2, 31.8))) : T < 32.9 ? 114 : lerp(114, 66, ease.inOut(prog(T, 32.9, 35.6)));
 function ecg(x) { x = ((x % 1) + 1) % 1; const b = (c, w, a) => a * Math.exp(-(((x - c) / w) ** 2)); return b(0.14, 0.03, 0.12) - b(0.3, 0.008, 0.12) + b(0.32, 0.01, 1.0) - b(0.345, 0.01, 0.28) + b(0.58, 0.05, 0.22); }
@@ -276,6 +333,8 @@ function drawMonitor(T) {
   t.needsUpdate = true; return { col, beat };
 }
 function updLab(T, W) {
+  { const X = W.X; X.lclock.set(T, 14, 12); const wr = T > 28 && T < 33 ? 1 : 0; X.doc.setPose({ shL: [-0.95, 0.2, 0.15], elL: 1.4, handL: 0.6, shR: [-0.75, -0.2, -0.05], elR: 1.65 + Math.sin(T * 7) * 0.08 * wr, handR: 0.75, head: [T > 29 && T < 32.6 ? 0.05 : 0.3, T > 29.5 && T < 32.6 ? -0.45 : 0, 0] }); X.doc.setFace({ blink: blinkAt(T, 5), t: T, browUp: T > 29 && T < 33 ? 0.6 : 0 });
+    X.asst.setPose({ ...POSE.seated, shL: [-1.2, 0, 0.12], shR: [-1.2, 0, -0.12], elL: 0.5 + Math.sin(T * 11) * 0.06, elR: 0.5 + Math.sin(T * 13 + 1) * 0.06, handL: 0.4, handR: 0.4, head: [0.15, 0, 0] }); X.asst.setFace({ blink: blinkAt(T, 6), t: T }); }
   const m = drawMonitor(T), calm = clamp((T - 33.0) / 1.2), stress = clamp((T - 28.2) / 2.5) * (1 - calm);
   W.glow.color.set(m.col); W.glow.intensity = 0.6 + Math.exp(-m.beat * 6) * 0.8;
   W.warm.intensity = calm * 5; W.cool.intensity = 4.5 - calm * 1.8;
@@ -316,7 +375,18 @@ function hill(T) {
   const drop = makePack(false); sc.add(drop.g); drop.g.visible = false;
   const rocks = [0.13, 0.1, 0.11, 0.09, 0.08, 0.08].map((r, i) => { const m = add(sc, new THREE.DodecahedronGeometry(r, 0), '#8a8884', 0, 0, 0, 0, 0, 0, { outline: 0.04 }); m.visible = false; m.userData.r = r; return m; });
   sc.add(st.camera); const pc = povRig(st.camera, st.camera); const straps = [-1, 1].map((sx) => { const m = add(st.camera, BOX(0.02, 0.36, 0.01), '#3a2e20', sx * 0.11, -0.08, -0.3, 0.3, 0, -sx * 0.32, { shadow: false }); setLayer(m, 2); return m; });
-  HL = { st, sc, sky, skyKey: '', sun, halo, stars, clouds, hero, pack, drop, rocks, pc, straps, rigs: [pc], handle: handle(st) }; return HL;
+  // ---- acabamento: grama, flores, arbustos, cerca, vila, pássaros, trilheiros ----
+  const onPath = (x, z) => Math.abs(x - pathX(z)) < 0.72 && z > -9.9 && z < 8.5, [smx, , smz] = SUM();
+  grassField(sc, hh, { count: 24000, w: 0.024, h: 0.2, x0: -16, x1: 16, z0: -24, z1: 12, skip: (x, z) => onPath(x, z) || Math.hypot(x - smx, z - smz - 0.6) < 1.3 });
+  flowerField(sc, hh, { count: 1400, x0: -16, x1: 16, z0: -24, z1: 12, skip: (x, z) => onPath(x, z) || Math.hypot(x - smx, z - smz - 0.6) < 1.3 });
+  for (let i = 0; i < 14; i++) { const z = 7 - i * 1.25, x = pathX(z) + (i % 2 ? 1.6 : -1.7) + Math.sin(i) * 0.4, g = new THREE.Group(); g.position.set(x, hh(x, z), z); sc.add(g); for (let k = 0; k < 3; k++) add(g, new THREE.IcosahedronGeometry(0.32 - k * 0.06, 1), ['#4a7a34', '#5a8a3a', '#3e6a2e'][k], k * 0.22 - 0.2, 0.25, (k % 2) * 0.15); }
+  for (let z = 6.5; z > -1.5; z -= 1.15) { const x = pathX(z) + 1.25; add(sc, new THREE.CylinderGeometry(0.04, 0.05, 0.9, 7), '#6a4a2e', x, hh(x, z) + 0.45, z); }
+  for (let z = 6.5; z > -0.35; z -= 1.15) { const x1 = pathX(z) + 1.25, x2 = pathX(z - 1.15) + 1.25, a = V3(x1, hh(x1, z) + 0.72, z), b = V3(x2, hh(x2, z - 1.15) + 0.72, z - 1.15), m = add(sc, new THREE.CylinderGeometry(0.025, 0.025, a.distanceTo(b), 6), '#6a4a2e', (a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2); m.quaternion.setFromUnitVectors(V3(0, 1, 0), b.clone().sub(a).normalize()); }
+  for (let i = 0; i < 9; i++) { const x = 16 + (i % 3) * 3.2 + Math.sin(i) * 1.5, z = -20 - Math.floor(i / 3) * 3.5, y = hh(x, z); add(sc, BOX(1.6, 1.2, 1.4), ['#e8dcc8', '#d8c8b0', '#f0e8d8'][i % 3], x, y + 0.6, z, 0, i * 0.4, 0); add(sc, new THREE.ConeGeometry(1.25, 0.8, 4), '#8a4a3a', x, y + 1.6, z, 0, i * 0.4 + Math.PI / 4, 0); }
+  const birds = Array.from({ length: 6 }, () => { const b = bird(); b.g.scale.setScalar(1.6); sc.add(b.g); return b; });
+  const hikers = [0, 1, 2].map((k) => { const sp = crowdSpec(20 + k, { top: k === 1 ? 'coat' : 'hoodie' }); if (k === 0) sp.hat = 'beanie'; const p = puppet(sc, sp); const pk = makePack(false); pk.g.scale.setScalar(0.72); pk.g.position.set(0, 0.32, -0.27); p.parts.torso.add(pk.g); return p; });
+  const X = { birds, hikers };
+  HL = { st, sc, X, sky, skyKey: '', sun, halo, stars, clouds, hero, pack, drop, rocks, pc, straps, rigs: [pc], handle: handle(st) }; return HL;
 }
 function skyState(T) {
   if (T < 46) { const a = ((T - 36.5) * 0.36 + 0.08) * Math.PI * 2, el = Math.sin(a), day = clamp(el * 2.0 + 0.75), dusk = clamp(1 - Math.abs(el + 0.15) * 3.2);
@@ -326,6 +396,9 @@ function skyState(T) {
   return { top: new THREE.Color('#2a4a8a'), mid: new THREE.Color('#d87a6a'), hor: new THREE.Color('#ffc880'), dir: V3(0, 0.07, -1).normalize(), light: 2.4, col: new THREE.Color('#ffc890'), night: 0, ambient: 1.0, sunrise: true };
 }
 function updHill(T, W) {
+  { const X = W.X, [bx, by, bz] = SUM(), E1 = T < 46, hz = heroZ(T), cx = E1 ? pathX(hz) - 16 + ((T - 36.5) * 7) : bx - 9 + (T - 46) * 1.6, cy = E1 ? hh(pathX(hz), hz) + 7 : by + 5.5, cz = E1 ? hz - 9 : bz - 16;
+    X.birds.forEach((b, i) => { const k = i - 2.5; b.g.position.set(cx - Math.abs(k) * 0.9, cy + Math.sin(T * 2 + i) * 0.15 + (i % 2) * 0.3, cz + k * 0.8); b.g.rotation.y = Math.PI / 2; b.flap(T * 11 + i * 1.3); });
+    X.hikers.forEach((h, k) => { h.root.visible = E1; if (!E1) return; const up = k !== 2, ph = (T * 2.8 + k * 6.1) % 17, z = up ? 7.5 - ph : -9.4 + ph, x = pathX(z) + (k === 1 ? 0.78 : -0.78); h.root.position.set(x, hh(x, z), z); h.root.rotation.y = up ? Math.atan2(pathX(z - 0.3) - pathX(z), -0.3) : Math.atan2(pathX(z + 0.3) - pathX(z), 0.3); h.setPose(walkPose(T * 26 + k * 2)); h.setFace({ t: T }); }); }
   const S = skyState(T), key = S.sunrise ? 'sr' : T.toFixed(3);
   if (key !== W.skyKey) { W.skyKey = key; const g = W.sky.g, gr = g.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, '#' + S.top.getHexString()); gr.addColorStop(0.55, '#' + S.mid.getHexString()); gr.addColorStop(1, '#' + S.hor.getHexString()); g.fillStyle = gr; g.fillRect(0, 0, 4, 256); W.sky.t.needsUpdate = true; W.sc.fog.color.copy(S.hor); }
   const [sx, sy, sz] = SUM(), center = T < 46 ? V3(pathX(heroZ(T)), hh(pathX(heroZ(T)), heroZ(T)), heroZ(T)) : V3(sx, sy, sz);
@@ -379,7 +452,7 @@ function shot(id, w, cam, o = {}) {
     overlay(g, t, info) { const Tg = info.globalT; if (o.pov) povVignette(g); o.overlay?.(g, Tg, t, info); if (!o.noCap) caption(g, Tg, o.capY ?? 0.7); } });
 }
 // ESCRITÓRIO
-shot('A1', 'study', () => [C([1.0, 1.72, 0.5], [-0.9, 1.62, -2.9], 48), C([0.15, 1.66, -0.75], [-0.85, 1.62, -2.9], 46)], { overlay: (g, T) => hook(g, T) });
+shot('A1', 'study', () => [C([1.35, 2.2, 1.05], [-0.85, 1.3, -2.6], 52), C([0.85, 2.05, 0.25], [-0.85, 1.38, -2.6], 48)], { overlay: (g, T) => hook(g, T) });
 shot('A2', 'study', (t, i, T) => { const s = shk(T, 0.006); const look = T < 6.3 ? [1.25, 0.8, -1.55] : [lerp(1.25, 1.52, ease.inOut(prog(T, 6.3, 7.1))), 0.8, lerp(-1.55, -1.4, ease.inOut(prog(T, 6.3, 7.1)))]; return [[0, C(plus([1.18, 1.44, -0.68], s), look, 60)], [i.dur, C(plus([1.22, 1.38, -0.8], s), look, 56)]]; }, { pov: true });
 shot('A3', 'study', (t, i, T) => { const fov = lerp(40, 29, ease.inOut(prog(T, 8.1, 12.9))); return [[0, C([-0.45, 1.6, 0.05], [-2.15, 1.62, -0.6], 42)], [i.dur, C([-0.85, 1.62, -0.22], [-2.15, 1.64, -0.58], 34)]]; }, { overlay: (g, T) => lowerThird(g, T, 8.3, 11.6, 'Everett Worthington', 'psicólogo, pesquisador do perdão') });
 // RUA

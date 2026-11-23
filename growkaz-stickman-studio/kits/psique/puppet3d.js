@@ -35,6 +35,13 @@ export const POSE = {
   reach: { handR: 0.1,  shR: [-1.25, 0, -0.12], elR: 0.15, head: [0.1, 0, 0] },
   wipeTears: { shR: [-2.0, 0, -0.45], elR: 2.4, head: [0.2, 0, 0] },
   headDown: { head: [0.45, 0, 0], torso: [0.12, 0, 0] },
+  lieBack: { rootY: 0.17, rootRX: -1.52, shL: [0.05, 0, 0.12], shR: [0.05, 0, -0.12], elL: 0.25, elR: 0.25, handL: 0.35, handR: 0.35 },
+  shout: { handL: 1, handR: 1, shL: [0.15, 0, 0.35], shR: [0.15, 0, -0.35], elL: 0.6, elR: 0.6, torso: [0.12, 0, 0], head: [-0.15, 0, 0] },
+  headInHands: { handL: 0.2, handR: 0.2, shL: [-1.2, 0, 0.25], shR: [-1.2, 0, -0.25], elL: 2.35, elR: 2.35, head: [0.45, 0, 0], torso: [0.2, 0, 0] },
+  laugh: { handL: 0.3, handR: 0.3, shL: [-0.2, 0, 0.2], shR: [-0.6, 0, -0.1], elL: 0.4, elR: 1.6, head: [-0.2, 0, 0.05], torso: [-0.05, 0, 0] },
+  stretch: { handL: 0.1, handR: 0.1, shL: [-2.8, 0, 0.35], shR: [-2.8, 0, -0.35], elL: 0.2, elR: 0.2, head: [-0.25, 0, 0], torso: [-0.1, 0, 0] },
+  wave: { handR: 0.05, shR: [-2.4, 0, -0.5], elR: 0.5, head: [-0.05, 0, 0] },
+  typing: { rootY: -0.36, hipL: [-1.45, 0, 0.06], hipR: [-1.45, 0, -0.06], knL: 1.45, knR: 1.45, shL: [-1.05, 0, 0.12], shR: [-1.05, 0, -0.12], elL: 0.75, elR: 0.75, handL: 0.45, handR: 0.45, head: [0.12, 0, 0] },
   strapsHeavy: { handL: 0.92, handR: 0.92,  shL: [-0.35, 0, 0.18], shR: [-0.35, 0, -0.18], elL: 1.6, elR: 1.6, torso: [0.32, 0, 0], head: [-0.25, 0, 0] },
   chalk: { handR: 0.7,  shR: [-2.4, 0, -0.2], elR: 0.5, head: [-0.1, 0, 0] },
   seated: { rootY: -0.36, hipL: [-1.45, 0, 0.06], hipR: [-1.45, 0, -0.06], knL: 1.45, knR: 1.45, shL: [-0.5, 0, 0.12], shR: [-0.5, 0, -0.12], elL: 0.9, elR: 0.9 },
@@ -86,7 +93,7 @@ export function makePuppet(spec = {}) {
     const lidLo = new THREE.Mesh(new THREE.SphereGeometry(0.071, 18, 10, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), lidM); lidLo.scale.z = 0.66; g.add(lidLo);
     const brow = mesh(new THREE.BoxGeometry(0.075, 0.016, 0.02), hairM, 0.004); brow.position.set(0, 0.095, 0.03); g.add(brow);
     const bag = new THREE.Mesh(new THREE.TorusGeometry(0.05, 0.007, 6, 14, Math.PI * 0.7), toon(spec.bagColor || '#6a4a52')); bag.rotation.z = Math.PI + Math.PI * 0.15; bag.position.set(0, -0.045, 0.03); bag.visible = !!spec.eyeBags; g.add(bag);
-    return { g, p, lid, lidLo, brow, sx }; });
+    return { g, p, lid, lidLo, brow, sx, bag }; });
   const nose = mesh(sph(0.032, 12, 10), skin, 0.006); nose.position.set(0, -0.035, 0.21); face.add(nose);
   const mouth = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.014, 0.01), new THREE.MeshBasicMaterial({ color: 0x3a1a18 })); mouth.position.set(0, -0.105, 0.198); face.add(mouth);
   const smile = new THREE.Mesh(new THREE.TorusGeometry(0.04, 0.008, 6, 14, Math.PI * 0.8), new THREE.MeshBasicMaterial({ color: 0x3a1a18 })); smile.rotation.z = Math.PI + Math.PI * 0.1; smile.position.set(0, -0.085, 0.2); face.add(smile);
@@ -126,6 +133,7 @@ export function makePuppet(spec = {}) {
     const lid = f.blink ? 1 : f.lids ?? spec.lids ?? 0.45, look = f.look || [0, 0];
     const cl = f.blink ? 1 : clamp01(f.closed || 0); eyes.forEach((e) => { e.lid.rotation.x = (-Math.PI / 2 + lid * 1.35 - 0.25) * (1 - cl) + 0.55 * cl; e.lidLo.rotation.x = Math.PI / 2 - (0.05 + 0.95 * cl) * 1.2; e.p.position.x = look[0] * 0.025; e.p.position.y = look[1] * 0.02;
       const em = f.brows || 0; e.brow.rotation.z = e.sx * em * 0.4; e.brow.position.y = 0.095 + (f.browUp || 0) * 0.02; });
+    if (f.bags !== undefined) eyes.forEach((e) => (e.bag.visible = !!f.bags));
     const talk = f.talk || 0; mouth.scale.y = 1 + talk * 2.6; mouth.visible = !f.smile; smile.visible = !!f.smile; smile.rotation.z = f.sad ? 0.1 : Math.PI + Math.PI * 0.1; if (f.sad) { smile.visible = true; mouth.visible = talk > 0.05; smile.position.y = -0.13; } else smile.position.y = -0.085;
     tears.forEach((t, i) => { t.visible = !!f.tears; if (f.tears) t.position.y = -0.04 - ((f.t || 0) * 0.15 + i * 0.4) % 0.16; });
   }

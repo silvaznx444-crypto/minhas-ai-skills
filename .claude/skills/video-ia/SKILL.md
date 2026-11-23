@@ -96,6 +96,9 @@ Opções úteis: `--resolucao 1080p|720p|4k`, `--sem-quadro` (Veo só por texto)
 }
 ```
 - `via_radio: true` numa fala faz o Veo gerar a voz saindo do rádio, com chiado.
+- `fora_de_cena: true` numa fala: voz de quem segura a câmera em primeira pessoa (não aparece na imagem).
+- POV como na referência: descreva em `camera` a mão do protagonista (manga, objeto que segura) no canto
+  inferior direito em TODAS as cenas, personagem de corpo inteiro a ~2 m, lente grande-angular. Nada de closes.
 - `cortar_inicio` / `cortar_fim` (segundos) aparam sobras do clipe na montagem.
 
 ## Problemas comuns

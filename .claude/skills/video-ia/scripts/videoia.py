@@ -177,7 +177,8 @@ def referencias(g: Gemini, a) -> None:
         if out.exists() and not a.refazer:
             continue
         log(f"[referencias] cenário {c['id']}")
-        g.image(com_estilo(f"Empty environment establishing shot, no people, vertical 9:16. {c['descricao']}. "
+        g.image(com_estilo(f"Empty environment seen at EYE LEVEL from a standing person's point of view (not aerial, "
+                           f"not top-down), wide-angle lens, no people, vertical 9:16. {c['descricao']}. "
                            f"Style: {sb['estilo']}.", len(est), 0), out, modelo, refs=est, aspect="9:16")
 
 
@@ -219,7 +220,10 @@ def prompt_veo(sb: dict, cena: dict) -> str:
         linhas.append("Dialogue, spoken in Brazilian Portuguese with accurate lip-sync, in this order:")
         for f in cena["falas"]:
             p = personagem(sb, f["personagem"])
-            if f.get("via_radio"):
+            if f.get("fora_de_cena"):
+                linhas.append(f'- Off-screen voice of {p["nome"]}, the person holding the first-person camera, who is '
+                              f'NOT visible ({p.get("voz", "")}), says: "{f["texto"]}"')
+            elif f.get("via_radio"):
                 linhas.append(f'- A voice coming through the walkie-talkie radio, crackly distorted radio sound '
                               f'({p.get("voz", "")}), says: "{f["texto"]}"')
             else:

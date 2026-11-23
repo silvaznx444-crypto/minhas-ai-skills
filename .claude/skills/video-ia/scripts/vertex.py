@@ -20,8 +20,9 @@ from gemini import Gemini, GeminiError, _log
 CANDIDATOS = {
     "veo": ["veo-3.1-generate-001", "veo-3.1-generate-preview", "veo-3.0-generate-001"],
     "veo_fast": ["veo-3.1-fast-generate-001", "veo-3.1-fast-generate-preview", "veo-3.0-fast-generate-001"],
-    "image": ["gemini-3-pro-image-preview", "gemini-2.5-flash-image"],
-    "texto": ["gemini-3-pro-preview", "gemini-2.5-pro", "gemini-2.5-flash"],
+    "image": ["gemini-3-pro-image", "gemini-3-pro-image-preview", "gemini-3.1-flash-image", "gemini-2.5-flash-image"],
+    "texto": ["gemini-3.5-pro", "gemini-3.5-flash", "gemini-3.1-pro", "gemini-3.1-pro-preview", "gemini-3-pro",
+              "gemini-3-flash-preview", "gemini-2.5-pro", "gemini-2.5-flash"],
 }
 
 
@@ -69,8 +70,8 @@ class Vertex(Gemini):
         return "aiplatform.googleapis.com" if local == "global" else f"{local}-aiplatform.googleapis.com"
 
     def _local_do(self, model: str) -> str:
-        # Gemini 3 só existe no endpoint global; Veo e o resto na região.
-        return "global" if model.startswith("gemini-3") else self.local
+        # Modelos Gemini novos só existem no endpoint global; o Veo fica na região.
+        return "global" if model.startswith("gemini") else self.local
 
     def _url(self, model: str, metodo: str) -> str:
         loc = self._local_do(model)
@@ -85,9 +86,14 @@ class Vertex(Gemini):
         if chave in self._escolhidos:
             return self._escolhidos[chave]
         for m in CANDIDATOS[chave]:
-            url = f"https://{self._host(self._local_do(m))}/v1beta1/publishers/google/models/{m}"
             try:
-                self._req("GET", url, timeout=30)
+                if m.startswith("gemini"):
+                    # countTokens é grátis e confirma que ESTE projeto tem acesso ao modelo.
+                    self._req("POST", self._url(m, "countTokens"), timeout=30,
+                              json={"contents": [{"role": "user", "parts": [{"text": "oi"}]}]})
+                else:
+                    self._req("GET", f"https://{self._host(self.local)}/v1beta1/publishers/google/models/{m}",
+                              timeout=30)
             except GeminiError:
                 continue
             self._escolhidos[chave] = m

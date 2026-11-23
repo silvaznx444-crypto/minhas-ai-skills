@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import { E, registerShot, ease, prog, clamp, lerp, text, FONTS, alpha, noise, rr } from '/engine/core.js';
 import { makePuppet, POSE, posesAt, walkPose, blendPose } from '/kits/psique/puppet3d.js';
-import { makePovArm } from '/kits/psique/pov.js';
+import { makePovArm, elbowIK } from '/kits/psique/pov.js';
 import { prop } from '/kits/psique/world3d.js';
 
 try { await document.fonts?.ready; } catch (e) { /* segue */ }
@@ -29,12 +29,14 @@ const mix = (a, b, k) => new THREE.Color(a).lerp(new THREE.Color(b), clamp(k));
 const V3 = (x, y, z) => new THREE.Vector3(x, y, z);
 function setLayer(o, n) { o.traverse((m) => m.layers.set(n)); }
 
-// mãos em primeira pessoa (filhas da câmera ou do cenário)
-function povRig(parent) {
-  const A = {}, G = {};
-  for (const s of [-1, 1]) { A[s] = makePovArm(s, { skin: HERO.skin, sleeve: SLEEVE, cuff: CUFF }); G[s] = new THREE.Group(); G[s].add(A[s].group); parent.add(G[s]); G[s].visible = false; }
+// mãos em primeira pessoa (filhas da câmera ou do cenário). O braço sai do ombro, abaixo da câmera (IK de 2 ossos).
+function povRig(parent, cam) {
+  const A = {}, G = {}, world = parent !== cam;
+  for (const s of [-1, 1]) { A[s] = makePovArm(s, { skin: HERO.skin, sleeve: SLEEVE, cuff: CUFF, forearm: 'aim' }); G[s] = new THREE.Group(); G[s].add(A[s].group); parent.add(G[s], A[s].limbs); G[s].visible = false; }
   return { A, G, hold(side, obj) { G[side].add(obj); setLayer(obj, 2); return obj; },
-    set(side, o) { const g = G[side]; g.visible = !!o; if (!o) return; g.position.set(...o.pos); const r = o.rot || [0, 0, 0]; g.rotation.set(r[0], r[1], r[2], o.ord || 'XYZ'); A[side].setHand({ curl: o.curl ?? 0.2, thumb: o.thumb, spread: o.spread ?? 0.06 }); } };
+    set(side, o) { const g = G[side]; g.visible = !!o; if (!o) { A[side].limbs.visible = false; return; } g.position.set(...o.pos); const r = o.rot || [0, 0, 0]; g.rotation.set(r[0], r[1], r[2], o.ord || 'XYZ'); A[side].setHand({ curl: o.curl ?? 0.2, thumb: o.thumb, spread: o.spread ?? 0.06 }); },
+    solve() { for (const s of [-1, 1]) { if (!G[s].visible) { A[s].limbs.visible = false; continue; } const Wp = A[s].group.position.clone().applyQuaternion(G[s].quaternion).add(G[s].position); let S = V3(s * 0.19, -0.26, 0.1), pole = V3(s * 0.55, -1, 0.1);
+      if (world) { cam.updateMatrixWorld(true); S = parent.worldToLocal(cam.localToWorld(S)); pole = pole.applyQuaternion(cam.getWorldQuaternion(new THREE.Quaternion())); } A[s].aim(S, elbowIK(S, Wp, 0.3, 0.28, pole), Wp); } } };
 }
 const trem = (T, a, s = 1) => [noise(T * 11, s) * a, noise(T * 11, s + 9) * a, 0];
 const addv = (a, b) => a.map((v, i) => v + (b[i] || 0));
@@ -93,11 +95,11 @@ function study(T) {
   // protagonista, giz e celular de mão
   const hero = puppet(sc, HERO); const chalk = add(hero.parts.AR.hand, new THREE.CylinderGeometry(0.012, 0.012, 0.08, 8), '#f4f4ec', 0, -0.1, 0.03, 0.4, 0, 0); const hphone = add(hero.parts.AR.hand, BOX(0.075, 0.15, 0.012), '#141418', -0.02, -0.08, 0.04, 0, 0, 0, { outline: 0.04 });
   // mãos POV: na câmera (giz, porta) e no cenário (sobre a mesa)
-  sc.add(st.camera); const pc = povRig(st.camera), pw = povRig(sc);
+  sc.add(st.camera); const pc = povRig(st.camera, st.camera), pw = povRig(sc, st.camera);
   const pchalk = pc.hold(1, new THREE.Mesh(new THREE.CylinderGeometry(0.011, 0.011, 0.075, 8), toon('#f4f4ec'))); pchalk.rotation.x = Math.PI / 2; pchalk.position.set(-0.01, -0.012, -0.2);
   const pen = pw.hold(1, new THREE.Mesh(new THREE.CylinderGeometry(0.006, 0.004, 0.14, 8), toon('#1a2a5a'))); pen.rotation.set(Math.PI / 2 - 0.5, 0, 0.2); pen.position.set(0.0, 0.02, -0.15);
   const fill = new THREE.PointLight(new THREE.Color('#ffd8b0'), 0.18, 1.4, 2); fill.position.set(0.05, 0.1, 0.05); st.camera.add(fill);
-  STU = { st, sc, bd, bkey: '', phc, phone, phL, pivot, hero, chalk, hphone, shadow, pc, pw, pchalk, pen, handle: handle(st) };
+  STU = { st, sc, bd, bkey: '', phc, phone, phL, pivot, hero, chalk, hphone, shadow, pc, pw, rigs: [pc, pw], pchalk, pen, handle: handle(st) };
   { const g = bd.g; g.font = '700 96px "Fredoka"'; STU.lineF = { w1: g.measureText('PERDOAR').width, w2: g.measureText('≠ ESQUECER').width }; g.font = '700 170px "Fredoka"'; STU.lineA = { w: g.measureText('PERDÃO').width, cy: 165 }; }
   return STU;
 }
@@ -169,12 +171,12 @@ function street(T) {
   const geo = new THREE.BufferGeometry(), pos = new Float32Array(NR * 6), base = []; for (let i = 0; i < NR; i++) { const x = ((i * 7.31) % 14) - 7, z = ((i * 3.77) % 16) - 2, y = (i * 0.917) % 9; base.push([x, y, z]); }
   geo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); const rain = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color: new THREE.Color('#a8bce8'), transparent: true, opacity: 0.42 })); rain.frustumCulled = false; sc.add(rain);
   const hero = puppet(sc, HERO); hero.root.position.set(0, 0, 6.2); hero.root.rotation.y = Math.PI;
-  sc.add(st.camera); const pc = povRig(st.camera); const fill = new THREE.PointLight(new THREE.Color('#ffd8b0'), 1.15, 2.6, 2); fill.position.set(0, 0.1, 0.1); st.camera.add(fill);
-  STR = { st, sc, cars, rain, base, porch, pbulb, tape, tape2, hero, pc, handle: handle(st) }; return STR;
+  sc.add(st.camera); const pc = povRig(st.camera, st.camera); const fill = new THREE.PointLight(new THREE.Color('#ffd8b0'), 1.15, 2.6, 2); fill.position.set(0, 0.1, 0.1); st.camera.add(fill);
+  STR = { st, sc, cars, rain, base, porch, pbulb, tape, tape2, hero, pc, rigs: [pc], handle: handle(st) }; return STR;
 }
 function updStreet(T, W) {
   const r = Math.max(0, Math.sin(T * 11)) ** 2, b = Math.max(0, Math.sin(T * 11 + Math.PI)) ** 2;
-  W.cars.forEach((c) => { const rr2 = c.i ? b : r, bb = c.i ? r : b; c.red.intensity = 17 * rr2; c.blue.intensity = 24 * bb; c.rm.color.setRGB(0.25 + 2.2 * rr2, 0.08, 0.08); c.bm.color.setRGB(0.08, 0.12, 0.3 + 2.4 * bb); });
+  const dim = T > 20.6 && T < 23.8 ? 0.45 : 1; W.cars.forEach((c) => { const rr2 = c.i ? b : r, bb = c.i ? r : b; c.red.intensity = 17 * rr2 * dim; c.blue.intensity = 24 * bb * dim; c.rm.color.setRGB(0.25 + 2.2 * rr2, 0.08, 0.08); c.bm.color.setRGB(0.08, 0.12, 0.3 + 2.4 * bb); });
   W.porch.intensity = noise(T * 9, 2) > -0.6 ? 2.2 : 0.4;
   const p = W.rain.geometry.attributes.position.array; for (let i = 0; i < NR; i++) { const [x, y0, z] = W.base[i], y = ((y0 - T * 10.5) % 9 + 9) % 9; p[i * 6] = x + 0.035; p[i * 6 + 1] = y + 0.34; p[i * 6 + 2] = z; p[i * 6 + 3] = x; p[i * 6 + 4] = y; p[i * 6 + 5] = z; } W.rain.geometry.attributes.position.needsUpdate = true;
   W.tape.rotation.x = Math.sin(T * 3) * 0.12; W.tape2.rotation.x = Math.sin(T * 2.6 + 1) * 0.1;
@@ -313,8 +315,8 @@ function hill(T) {
   for (const sx of [-1, 1]) { add(hero.parts.torso, BOX(0.045, 0.46, 0.02), '#3a2e20', sx * 0.13, 0.33, 0.145, 0, 0, 0, { shadow: false }); add(hero.parts.torso, BOX(0.045, 0.02, 0.32), '#3a2e20', sx * 0.13, 0.565, -0.01, 0, 0, 0, { shadow: false }); }
   const drop = makePack(false); sc.add(drop.g); drop.g.visible = false;
   const rocks = [0.13, 0.1, 0.11, 0.09, 0.08, 0.08].map((r, i) => { const m = add(sc, new THREE.DodecahedronGeometry(r, 0), '#8a8884', 0, 0, 0, 0, 0, 0, { outline: 0.04 }); m.visible = false; m.userData.r = r; return m; });
-  sc.add(st.camera); const pc = povRig(st.camera); const straps = [-1, 1].map((sx) => { const m = add(st.camera, BOX(0.03, 0.34, 0.012), '#3a2e20', sx * 0.07, -0.06, -0.27, 0.35, 0, -sx * 0.22, { shadow: false }); setLayer(m, 2); return m; });
-  HL = { st, sc, sky, skyKey: '', sun, halo, stars, clouds, hero, pack, drop, rocks, pc, straps, handle: handle(st) }; return HL;
+  sc.add(st.camera); const pc = povRig(st.camera, st.camera); const straps = [-1, 1].map((sx) => { const m = add(st.camera, BOX(0.02, 0.36, 0.01), '#3a2e20', sx * 0.11, -0.08, -0.3, 0.3, 0, -sx * 0.32, { shadow: false }); setLayer(m, 2); return m; });
+  HL = { st, sc, sky, skyKey: '', sun, halo, stars, clouds, hero, pack, drop, rocks, pc, straps, rigs: [pc], handle: handle(st) }; return HL;
 }
 function skyState(T) {
   if (T < 46) { const a = ((T - 36.5) * 0.36 + 0.08) * Math.PI * 2, el = Math.sin(a), day = clamp(el * 2.0 + 0.75), dusk = clamp(1 - Math.abs(el + 0.15) * 3.2);
@@ -341,7 +343,7 @@ function updHill(T, W) {
   W.rocks.forEach((m, i) => { const t0 = 47.95 + i * 0.1, dt = T - t0; m.visible = T > 46 && dt > 0; if (!m.visible) return; const r = m.userData.r, dist = Math.min(26, 0.5 * 2.4 * dt * dt + dt * 0.6), z = sz + 0.6 + dist, x = sx + (i - 2.5) * 0.12 + Math.sin(i * 2.1) * dist * 0.18; m.position.set(x, hh(x, z) + r + Math.abs(Math.sin(dt * 8 + i)) * 0.09 * Math.exp(-dt * 1.2), z); m.rotation.set(dist / r, i, 0); });
   // mãos POV nas alças
   const P = W.pc, showStraps = (T >= 38.7 && T < 40.9) || (T >= 46.1 && T < 47.75);
-  if (showStraps) { const rel = ease.in(prog(T, 47.35, 47.75)); for (const s of [-1, 1]) P.set(s, { pos: addv([s * 0.062, -0.2 - rel * 0.3, -0.3], trem(T, 0.004, s + 3)), rot: [Math.PI / 2 - 0.3, 0, s * 0.3], curl: 0.85 - rel * 0.6, thumb: 0.8 }); W.straps.forEach((m) => { m.visible = rel < 0.6; m.position.y = -0.06 - rel * 0.3; }); }
+  if (showStraps) { const rel = ease.in(prog(T, 47.35, 47.75)); for (const s of [-1, 1]) P.set(s, { pos: addv([s * 0.075, -0.23 - rel * 0.3, -0.32], trem(T, 0.004, s + 3)), rot: [Math.PI / 2 - 0.3, 0, s * 0.3], curl: 0.85 - rel * 0.6, thumb: 0.8 }); W.straps.forEach((m) => { m.visible = rel < 0.6; m.position.y = -0.08 - rel * 0.3; }); }
   else { P.set(-1, null); P.set(1, null); W.straps.forEach((m) => (m.visible = false)); }
 }
 
@@ -358,6 +360,7 @@ function caption(g, T, y = 0.7) {
 function hook(g, T) { const a = 1 - ease.in(prog(T, 2.9, 3.35)); if (a <= 0) return; const s = ease.outBack(prog(T, 0.0, 0.35)); g.save(); g.globalAlpha = a; g.translate(E.W / 2, E.H * 0.17); g.scale(s, s); text(g, 'ELE PERDOOU', 0, -46, { size: 92, color: '#ffffff', font: FONTS.title, weight: 700, stroke: 16, strokeColor: '#0e0a14' }); text(g, 'O ASSASSINO DA MÃE', 0, 52, { size: 78, color: '#ffd94a', font: FONTS.title, weight: 700, stroke: 16, strokeColor: '#0e0a14' }); g.restore(); }
 function lowerThird(g, T, a0, a1, name, role) { const k = ease.out(prog(T, a0, a0 + 0.45)) * (1 - ease.in(prog(T, a1 - 0.35, a1))); if (k <= 0) return; const x = 56 - (1 - k) * 120, y = E.H * 0.15; g.save(); g.globalAlpha = k; rr(g, x, y - 52, 640, 132, 18); g.fillStyle = 'rgba(8,10,18,.78)'; g.fill(); g.fillStyle = '#ffd94a'; g.fillRect(x, y - 52, 10, 132); text(g, name, x + 34, y - 6, { size: 50, color: '#ffffff', font: FONTS.ui, weight: 900, align: 'left' }); text(g, role, x + 34, y + 48, { size: 32, color: '#ffd94a', font: FONTS.ui, weight: 800, align: 'left' }); g.restore(); }
 function pulse(g, T, bpm, rgb, amt) { const ph = (T * bpm / 60) % 1, p = Math.exp(-ph * 5); const gr = g.createRadialGradient(E.W / 2, E.H / 2, E.W * 0.22, E.W / 2, E.H / 2, E.H * 0.62); gr.addColorStop(0, `rgba(${rgb},0)`); gr.addColorStop(1, `rgba(${rgb},${amt * (0.4 + 0.6 * p)})`); g.fillStyle = gr; g.fillRect(0, 0, E.W, E.H); }
+function povVignette(g) { const gr = g.createRadialGradient(E.W / 2, E.H * 0.46, E.W * 0.36, E.W / 2, E.H * 0.5, E.H * 0.66); gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,0.5)'); g.fillStyle = gr; g.fillRect(0, 0, E.W, E.H); }
 function chip(g, s, y, a = 1) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.font = `900 34px "${FONTS.ui}"`; const w = g.measureText(s).width + 56; rr(g, E.W / 2 - w / 2, y - 30, w, 60, 30); g.fillStyle = 'rgba(8,10,18,.75)'; g.fill(); text(g, s, E.W / 2, y + 1, { size: 34, color: '#ffffff', font: FONTS.ui, weight: 900 }); g.restore(); }
 function dayCounter(g, T) { const k = prog(T, 36.6, 40.8), d = Math.max(1, Math.round(1 + 364 * k ** 2.4)); chip(g, `DIA ${d}`, E.H * 0.12); }
 function endTitle(g, T) { const a = ease.out(prog(T, 51.35, 51.9)); if (a > 0) { g.save(); g.globalAlpha = a; text(g, 'Quem você ainda', E.W / 2, E.H * 0.2, { size: 84, color: '#ffffff', font: FONTS.title, weight: 700, stroke: 14, strokeColor: '#1a0e0a' }); text(g, 'precisa perdoar?', E.W / 2, E.H * 0.2 + 96, { size: 92, color: '#ffd94a', font: FONTS.title, weight: 700, stroke: 14, strokeColor: '#1a0e0a' }); g.restore(); }
@@ -372,16 +375,16 @@ const shk = (T, a) => [noise(T * 1.7, 1) * a, noise(T * 1.7, 7) * a, 0];
 const plus = (a, b) => a.map((v, i) => v + (b[i] || 0));
 function shot(id, w, cam, o = {}) {
   registerShot(id, { kind: '3d', init(T) { return WORLDS[w](T).handle; },
-    draw(s, t, info, T) { const W = WORLDS[w](T), Tg = info.globalT; UPD[w](Tg, W); const cm = W.st.camera, k = cam(t, info, Tg, W); T.dolly(cm, t, Array.isArray(k[0]) ? k : [[0, k[0]], [info.dur, k[1]]]); if (o.roll) cm.rotateZ(o.roll(t, Tg)); cm.layers.enable(2); cm.updateMatrixWorld(true); if (W.hero) W.hero.root.visible = !o.pov; o.after?.(Tg, W, cm); },
-    overlay(g, t, info) { const Tg = info.globalT; o.overlay?.(g, Tg, t, info); if (!o.noCap) caption(g, Tg, o.capY ?? 0.7); } });
+    draw(s, t, info, T) { const W = WORLDS[w](T), Tg = info.globalT; UPD[w](Tg, W); const cm = W.st.camera, k = cam(t, info, Tg, W); T.dolly(cm, t, Array.isArray(k[0]) ? k : [[0, k[0]], [info.dur, k[1]]]); if (o.roll) cm.rotateZ(o.roll(t, Tg)); if (o.pov) { cm.position.y += Math.sin(Tg * 1.7) * 0.005; cm.rotateX(noise(Tg * 0.9, 5) * 0.006); cm.rotateY(noise(Tg * 0.8, 3) * 0.007); } cm.layers.enable(2); cm.updateMatrixWorld(true); if (W.hero) W.hero.root.visible = !o.pov; o.after?.(Tg, W, cm); (W.rigs || []).forEach((r) => r.solve()); },
+    overlay(g, t, info) { const Tg = info.globalT; if (o.pov) povVignette(g); o.overlay?.(g, Tg, t, info); if (!o.noCap) caption(g, Tg, o.capY ?? 0.7); } });
 }
 // ESCRITÓRIO
 shot('A1', 'study', () => [C([1.0, 1.72, 0.5], [-0.9, 1.62, -2.9], 48), C([0.15, 1.66, -0.75], [-0.85, 1.62, -2.9], 46)], { overlay: (g, T) => hook(g, T) });
-shot('A2', 'study', (t, i, T) => { const s = shk(T, 0.006); const look = T < 6.3 ? [1.25, 0.8, -1.55] : [lerp(1.25, 1.52, ease.inOut(prog(T, 6.3, 7.1))), 0.8, lerp(-1.55, -1.4, ease.inOut(prog(T, 6.3, 7.1)))]; return [[0, C(plus([1.18, 1.44, -0.68], s), look, 52)], [i.dur, C(plus([1.22, 1.38, -0.8], s), look, 48)]]; }, { pov: true });
+shot('A2', 'study', (t, i, T) => { const s = shk(T, 0.006); const look = T < 6.3 ? [1.25, 0.8, -1.55] : [lerp(1.25, 1.52, ease.inOut(prog(T, 6.3, 7.1))), 0.8, lerp(-1.55, -1.4, ease.inOut(prog(T, 6.3, 7.1)))]; return [[0, C(plus([1.18, 1.44, -0.68], s), look, 60)], [i.dur, C(plus([1.22, 1.38, -0.8], s), look, 56)]]; }, { pov: true });
 shot('A3', 'study', (t, i, T) => { const fov = lerp(40, 29, ease.inOut(prog(T, 8.1, 12.9))); return [[0, C([-0.45, 1.6, 0.05], [-2.15, 1.62, -0.6], 42)], [i.dur, C([-0.85, 1.62, -0.22], [-2.15, 1.64, -0.58], 34)]]; }, { overlay: (g, T) => lowerThird(g, T, 8.3, 11.6, 'Everett Worthington', 'psicólogo, pesquisador do perdão') });
 // RUA
-shot('B1', 'street', (t, i, T) => { const k = ease.out(prog(T, 12.9, 17.6)), z = lerp(12.6, 6.7, k), bob = Math.abs(Math.sin(T * 5.2)) * 0.035 * (1 - prog(T, 16.8, 17.6)); const c = C([Math.sin(T * 2.6) * 0.03, 1.62 - bob, z], [Math.sin(T * 1.3) * 0.15, 1.5 - bob, 0], 52); return [c, c]; }, { pov: true, roll: (t, T) => Math.sin(T * 2.6) * 0.012 });
-shot('B2', 'street', (t, i, T) => { const s = trem(T, 0.004, 4); return [C(plus([0, 1.62, 6.45], s), [0, 0.92, 5.7], 54), C(plus([0, 1.6, 6.4], s), [0, 0.95, 5.72], 50)]; }, { pov: true, overlay: (g, T) => pulse(g, T, 120, '200,20,20', 0.42) });
+shot('B1', 'street', (t, i, T) => { const k = ease.out(prog(T, 12.9, 17.6)), z = lerp(12.6, 6.7, k), bob = Math.abs(Math.sin(T * 5.2)) * 0.035 * (1 - prog(T, 16.8, 17.6)); const c = C([Math.sin(T * 2.6) * 0.03, 1.62 - bob, z], [Math.sin(T * 1.3) * 0.15, 1.5 - bob, 0], 62); return [c, c]; }, { pov: true, roll: (t, T) => Math.sin(T * 2.6) * 0.012 });
+shot('B2', 'street', (t, i, T) => { const s = trem(T, 0.004, 4); return [C(plus([0, 1.62, 6.45], s), [0, 0.92, 5.7], 62), C(plus([0, 1.6, 6.4], s), [0, 0.95, 5.72], 58)]; }, { pov: true, overlay: (g, T) => pulse(g, T, 120, '200,20,20', 0.42) });
 shot('B3', 'street', () => [C([0.5, 1.45, 4.5], [0, 1.55, 6.2], 42), C([0.32, 1.52, 4.8], [0, 1.6, 6.2], 37)], { overlay: (g, T) => pulse(g, T, 80, '120,10,10', 0.35 * (1 - prog(T, 21.2, 22.6))) });
 // IGREJA
 shot('C1', 'church', () => [C([1.95, 1.15, 3.7], [1.2, 1.3, 0.6], 50), C([0.6, 2.9, 2.7], [0, 5.0, -11.8], 54)]);
@@ -392,13 +395,13 @@ shot('D2', 'lab', (t, i, T) => { const a = MON.clone().add(MN.clone().multiplySc
 shot('D3', 'lab', (t, i, T) => { const a = MON.clone().add(MN.clone().multiplyScalar(1.0)); return [[0, C(a.toArray(), MON.toArray(), 42)], [1.1, C(a.toArray(), MON.toArray(), 42)], [i.dur, C([1.5, 1.35, 2.0], [0.45, 1.0, -0.1], 40)]]; }, { capY: 0.88 });
 // COLINA (dias passando)
 shot('E1', 'hill', (t, i, T) => { const z = heroZ(T), x = pathX(z), y = hh(x, z); return [C([x + 4.6, y + 1.3, z - 0.6], [x, y + 1.05, z - 0.4], 44), C([x + 4.3, y + 1.4, z - 0.9], [x, y + 1.1, z - 0.6], 44)]; }, { overlay: (g, T) => dayCounter(g, T) });
-shot('E2', 'hill', (t, i, T) => { const z = heroZ(T), x = pathX(z), y = hh(x, z), bob = Math.abs(Math.sin(T * 4.0)) * 0.06, z2 = z - 5, x2 = pathX(z2); return [C([x, y + 1.52 - bob, z], [x2, hh(x2, z2) + 1.1 - bob, z2], 56), C([x, y + 1.52 - bob, z], [x2, hh(x2, z2) + 1.1 - bob, z2], 56)]; }, { pov: true, roll: (t, T) => Math.sin(T * 2.0) * 0.03, overlay: (g, T) => dayCounter(g, T) });
+shot('E2', 'hill', (t, i, T) => { const z = heroZ(T), x = pathX(z), y = hh(x, z), bob = Math.abs(Math.sin(T * 4.0)) * 0.06, z2 = z - 5, x2 = pathX(z2); return [C([x, y + 1.52 - bob, z], [x2, hh(x2, z2) + 1.1 - bob, z2], 64), C([x, y + 1.52 - bob, z], [x2, hh(x2, z2) + 1.1 - bob, z2], 64)]; }, { pov: true, roll: (t, T) => Math.sin(T * 2.0) * 0.03, overlay: (g, T) => dayCounter(g, T) });
 // ESCRITÓRIO (giz e porta)
 const tipF = (T, W) => { const r = prog(T, 41.1, 42.8), lf = W.lineF, two = r >= 0.5, w = two ? lf.w2 : lf.w1, rr2 = two ? clamp(r * 2 - 1) : clamp(r * 2); return boardPt(550 - w / 2 + w * rr2, (two ? 516 : 412) + 22 + Math.sin(T * 30) * 5); };
-shot('F1', 'study', (t, i, T, W) => { const P = tipF(T, W), back = ease.inOut(prog(T, 42.85, 43.55)), x = lerp(lerp(-0.9, P.x, 0.7), -0.9, back), z = lerp(-2.02, -1.15, back), ly = lerp(P.y + 0.12, 1.55, back), c = C([x, 1.6, z], [lerp(P.x, -0.9, back), ly, -2.92], lerp(52, 56, back)); return [c, c]; },
+shot('F1', 'study', (t, i, T, W) => { const P = tipF(T, W), back = ease.inOut(prog(T, 42.85, 43.55)), x = lerp(lerp(-0.9, P.x, 0.7), -0.9, back), z = lerp(-2.02, -1.15, back), ly = lerp(P.y + 0.12, 1.55, back), c = C([x, 1.6, z], [lerp(P.x, -0.9, back), ly, -2.92], lerp(58, 62, back)); return [c, c]; },
   { pov: true, after: (T, W, cam) => { const back = ease.in(prog(T, 42.82, 43.3)); if (back >= 0.99) { W.pc.set(1, null); return; } const P = tipF(T, W).add(V3(0, -back * 0.5, back * 0.4)); touch(W.pc, 1, cam, P, [0.75, -0.15, 0.1], V3(-0.01, -0.012, -0.24), { curl: 0.62, thumb: 0.8, spread: 0.03 }); } });
-shot('F2', 'study', (t, i, T) => [C([1.72, 1.62, 0.02], [2.95, 1.3, 0.12], 56), C([1.86, 1.62, 0.05], [2.95, 1.32, 0.12], 52)], { pov: true, after: (T, W, cam) => { const reach = ease.inOut(prog(T, 44.15, 44.6)), back = ease.in(prog(T, 45.3, 45.85)); if (reach <= 0.01 || back >= 0.99) { W.pc.set(1, null); return; } const edge = W.pivot.localToWorld(V3(-0.06, 1.18, -0.72)), rest = cam.localToWorld(V3(0.22, -0.42, -0.3)), P = rest.clone().lerp(edge, reach * (1 - back)); touch(W.pc, 1, cam, P, [Math.PI / 2 - 0.15, -0.35, 0.0], V3(0, 0.02, -0.17), { curl: 0.1, spread: 0.12, thumb: 0.1 }); } });
+shot('F2', 'study', (t, i, T) => [C([1.72, 1.62, 0.02], [2.95, 1.3, 0.12], 62), C([1.86, 1.62, 0.05], [2.95, 1.32, 0.12], 58)], { pov: true, after: (T, W, cam) => { const reach = ease.inOut(prog(T, 44.15, 44.6)), back = ease.in(prog(T, 45.3, 45.85)); if (reach <= 0.01 || back >= 0.99) { W.pc.set(1, null); return; } const edge = W.pivot.localToWorld(V3(-0.06, 1.18, -0.72)), rest = cam.localToWorld(V3(0.22, -0.42, -0.3)), P = rest.clone().lerp(edge, reach * (1 - back)); touch(W.pc, 1, cam, P, [Math.PI / 2 - 0.15, -0.35, 0.0], V3(0, 0.02, -0.17), { curl: 0.1, spread: 0.12, thumb: 0.1 }); } });
 // TOPO (soltar o peso)
-shot('G1', 'hill', (t, i, T) => { const [x, y, z] = SUM(), up = ease.out(prog(T, 47.75, 48.5)); return [C([x, y + 1.5 + up * 0.1, z], [0, y + 1.0 + up * 0.9, -40], 52), C([x, y + 1.5 + up * 0.1, z], [0, y + 1.1 + up * 0.9, -40], 50)]; }, { pov: true, roll: (t, T) => Math.sin(T * 1.5) * 0.01 });
+shot('G1', 'hill', (t, i, T) => { const [x, y, z] = SUM(), up = ease.out(prog(T, 47.75, 48.5)); return [C([x, y + 1.5 + up * 0.1, z], [0, y + 1.0 + up * 0.9, -40], 60), C([x, y + 1.5 + up * 0.1, z], [0, y + 1.1 + up * 0.9, -40], 58)]; }, { pov: true, roll: (t, T) => Math.sin(T * 1.5) * 0.01 });
 shot('G2', 'hill', () => { const [x, y, z] = SUM(); return [C([x + 1.1, y + 0.45, z + 4.4], [x + 0.3, y + 1.05, z - 2.0], 48), C([x + 0.95, y + 0.8, z + 4.9], [x + 0.35, y + 1.2, z - 2.0], 46)]; });
 shot('H1', 'hill', () => { const [x, y, z] = SUM(); return [C([x + 3.4, y + 1.9, z + 3.2], [x, y + 1.3, z - 0.8], 50), C([x + 7.5, y + 4.6, z + 9.5], [x, y + 1.6, z - 2.0], 56)]; }, { noCap: true, overlay: (g, T) => endTitle(g, T) });

@@ -4,7 +4,18 @@
 import * as THREE from 'three';
 
 const OUT = new THREE.MeshBasicMaterial({ color: 0x0a0a0e, side: THREE.BackSide });
-function toon(c) { return new THREE.MeshToonMaterial({ color: new THREE.Color(c) }); }
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { GRAD } from './pov.js';
+function toon(c) { const m = new THREE.MeshToonMaterial({ color: new THREE.Color(c), gradientMap: GRAD }); m.userData.inkScale = 1.2; return m; }
+// mão pequena com 4 dedos (2 falanges) e polegar; pende para -y, palma para dentro (-sx em x), indicador para a frente (+z)
+const capY = (r, len) => { const g = new THREE.CapsuleGeometry(r, len, 4, 10); g.translate(0, -len / 2, 0); return g; };
+function miniHand(sx, skin) {
+  const h = new THREE.Group(), palm = mesh(new RoundedBoxGeometry(0.032, 0.078, 0.072, 2, 0.013), skin, 0.006); palm.position.y = -0.044; h.add(palm);
+  const fingers = [[0.025, 0.031, 0.021], [0.0085, 0.034, 0.023], [-0.0085, 0.032, 0.021], [-0.025, 0.026, 0.018]].map(([z, a, b], i) => { const f = new THREE.Group(); f.position.set(0, -0.08, z); h.add(f); f.add(mesh(capY(0.0088, a), skin, 0.005)); const j = new THREE.Group(); j.position.y = -a; f.add(j); j.add(mesh(capY(0.008, b), skin, 0.005)); return { f, j }; });
+  const t = new THREE.Group(); t.position.set(-sx * 0.004, -0.024, 0.034); h.add(t); t.add(mesh(capY(0.0098, 0.026), skin, 0.005)); const t2 = new THREE.Group(); t2.position.y = -0.026; t.add(t2); t2.add(mesh(capY(0.009, 0.018), skin, 0.005));
+  function set(c) { fingers.forEach(({ f, j }, i) => { const ci = Math.min(1, c + [0, 0.02, 0.05, 0.1][i] * (c > 0.05 ? 1 : 0)); f.rotation.z = -sx * ci * 1.35; j.rotation.z = -sx * ci * 1.5; }); t.rotation.set(-0.5 - c * 0.2, 0, -sx * (0.25 + c * 0.7)); t2.rotation.z = -sx * c * 0.6; }
+  set(0.3); return { h, set };
+}
 function mesh(geo, mat, outline = 0.018) { const g = new THREE.Group(), m = new THREE.Mesh(geo, mat); m.castShadow = true; m.receiveShadow = true; g.add(m); if (outline) { const o = new THREE.Mesh(geo, OUT); o.scale.setScalar(1 + outline / 0.1); g.add(o); g.userData.out = o; } g.userData.m = m; return g; }
 const cyl = (r1, r2, h, seg = 12) => { const g = new THREE.CylinderGeometry(r1, r2, h, seg); g.translate(0, -h / 2, 0); return g; }; // pendurado a partir do topo
 const sph = (r, ws = 20, hs = 14) => new THREE.SphereGeometry(r, ws, hs);
@@ -12,29 +23,29 @@ const sph = (r, ws = 20, hs = 14) => new THREE.SphereGeometry(r, ws, hs);
 export const POSE = {
   stand: {},
   relaxed: { shL: [0.05, 0, 0.12], shR: [0.05, 0, -0.12], elL: 0.25, elR: 0.25 },
-  point: { shR: [-1.45, 0, -0.1], elR: 0.05, head: [0, -0.2, 0] },
-  offer: { shR: [-1.15, 0, -0.25], elR: 0.35, head: [0.05, 0, 0] },
-  coverEyes: { shR: [-2.3, 0, -0.35], elR: 2.2, shL: [-2.2, 0, 0.35], elL: 2.2, head: [-0.25, 0, 0], torso: [-0.1, 0, 0] },
-  shrug: { shL: [-0.3, 0, 0.55], shR: [-0.3, 0, -0.55], elL: 1.5, elR: 1.5, head: [0, 0, 0.12] },
-  crossArms: { shL: [-0.55, 0, 0.25], shR: [-0.55, 0, -0.25], elL: 1.9, elR: 1.9 },
-  handShoulder: { shR: [-1.25, 0.6, -0.2], elR: 0.25 },
+  point: { handR: 0.75,  shR: [-1.45, 0, -0.1], elR: 0.05, head: [0, -0.2, 0] },
+  offer: { handR: 0.08,  shR: [-1.15, 0, -0.25], elR: 0.35, head: [0.05, 0, 0] },
+  coverEyes: { handL: 0.15, handR: 0.15,  shR: [-2.3, 0, -0.35], elR: 2.2, shL: [-2.2, 0, 0.35], elL: 2.2, head: [-0.25, 0, 0], torso: [-0.1, 0, 0] },
+  shrug: { handL: 0.1, handR: 0.1,  shL: [-0.3, 0, 0.55], shR: [-0.3, 0, -0.55], elL: 1.5, elR: 1.5, head: [0, 0, 0.12] },
+  crossArms: { handL: 0.55, handR: 0.55,  shL: [-0.55, 0, 0.25], shR: [-0.55, 0, -0.25], elL: 1.9, elR: 1.9 },
+  handShoulder: { handR: 0.15,  shR: [-1.25, 0.6, -0.2], elR: 0.25 },
   lookHands: { shL: [-0.9, 0, 0.2], shR: [-0.9, 0, -0.2], elL: 1.1, elR: 1.1, head: [0.55, 0, 0], torso: [0.12, 0, 0] },
-  phone: { shR: [-0.8, 0, -0.1], elR: 1.5, head: [0.5, 0, 0] },
-  rubFace: { shR: [-2.05, 0, -0.45], elR: 2.35, head: [0.15, 0, 0] },
-  reach: { shR: [-1.25, 0, -0.12], elR: 0.15, head: [0.1, 0, 0] },
+  phone: { handR: 0.7,  shR: [-0.8, 0, -0.1], elR: 1.5, head: [0.5, 0, 0] },
+  rubFace: { handR: 0.2,  shR: [-2.05, 0, -0.45], elR: 2.35, head: [0.15, 0, 0] },
+  reach: { handR: 0.1,  shR: [-1.25, 0, -0.12], elR: 0.15, head: [0.1, 0, 0] },
   wipeTears: { shR: [-2.0, 0, -0.45], elR: 2.4, head: [0.2, 0, 0] },
   headDown: { head: [0.45, 0, 0], torso: [0.12, 0, 0] },
-  strapsHeavy: { shL: [-0.35, 0, 0.18], shR: [-0.35, 0, -0.18], elL: 1.6, elR: 1.6, torso: [0.32, 0, 0], head: [-0.25, 0, 0] },
-  chalk: { shR: [-2.4, 0, -0.2], elR: 0.5, head: [-0.1, 0, 0] },
+  strapsHeavy: { handL: 0.92, handR: 0.92,  shL: [-0.35, 0, 0.18], shR: [-0.35, 0, -0.18], elL: 1.6, elR: 1.6, torso: [0.32, 0, 0], head: [-0.25, 0, 0] },
+  chalk: { handR: 0.7,  shR: [-2.4, 0, -0.2], elR: 0.5, head: [-0.1, 0, 0] },
   seated: { rootY: -0.36, hipL: [-1.45, 0, 0.06], hipR: [-1.45, 0, -0.06], knL: 1.45, knR: 1.45, shL: [-0.5, 0, 0.12], shR: [-0.5, 0, -0.12], elL: 0.9, elR: 0.9 },
-  fists: { shL: [0.0, 0, 0.18], shR: [0.0, 0, -0.18], elL: 0.35, elR: 0.35, torso: [0.06, 0, 0] },
-  openArms: { shL: [-0.25, 0, 0.7], shR: [-0.25, 0, -0.7], elL: 0.2, elR: 0.2, head: [-0.3, 0, 0] },
-  holdFront: { shL: [-0.7, 0, 0.15], shR: [-0.7, 0, -0.15], elL: 1.0, elR: 1.0, head: [0.3, 0, 0], torso: [0.08, 0, 0] },
+  fists: { handL: 1, handR: 1,  shL: [0.0, 0, 0.18], shR: [0.0, 0, -0.18], elL: 0.35, elR: 0.35, torso: [0.06, 0, 0] },
+  openArms: { handL: 0.05, handR: 0.05,  shL: [-0.25, 0, 0.7], shR: [-0.25, 0, -0.7], elL: 0.2, elR: 0.2, head: [-0.3, 0, 0] },
+  holdFront: { handL: 0.6, handR: 0.6,  shL: [-0.7, 0, 0.15], shR: [-0.7, 0, -0.15], elL: 1.0, elR: 1.0, head: [0.3, 0, 0], torso: [0.08, 0, 0] },
   sitGround: { rootY: -0.64, hipL: [-1.5, 0, 0.12], hipR: [-1.5, 0, -0.12], knL: 0.25, knR: 0.25, shL: [-0.25, 0, 0.3], shR: [-0.25, 0, -0.3], elL: 0.5, elR: 0.5, torso: [-0.15, 0, 0] },
   lieFace: { rootY: 0.13, rootRX: 1.52, rootZ: 0, shL: [-2.9, 0, 0.3], shR: [-2.9, 0, -0.3], elL: 0.6, elR: 0.6, head: [-0.6, 0.6, 0] },
 };
 const KEYS = ['shL', 'shR', 'hipL', 'hipR', 'head', 'torso'], SCAL = ['elL', 'elR', 'knL', 'knR', 'rootY', 'rootRX', 'rootZ'];
-export function blendPose(a, b, k) { const o = {}; for (const key of KEYS) { const x = a[key] || [0, 0, 0], y = b[key] || [0, 0, 0]; o[key] = [0, 1, 2].map((i) => x[i] + (y[i] - x[i]) * k); } for (const key of SCAL) { const x = a[key] || 0, y = b[key] || 0; o[key] = x + (y - x) * k; } return o; }
+export function blendPose(a, b, k) { const o = {}; for (const key of KEYS) { const x = a[key] || [0, 0, 0], y = b[key] || [0, 0, 0]; o[key] = [0, 1, 2].map((i) => x[i] + (y[i] - x[i]) * k); } for (const key of SCAL) { const x = a[key] || 0, y = b[key] || 0; o[key] = x + (y - x) * k; } for (const key of ['handL', 'handR']) { const x = a[key] ?? 0.3, y = b[key] ?? 0.3; o[key] = x + (y - x) * k; } return o; }
 export function posesAt(t, keys, blend = 0.35) { let i = 0; for (let j = 0; j < keys.length; j++) if (t >= keys[j][0]) i = j; if (i === 0) return keys[0][1]; const k = Math.min(1, (t - keys[i][0]) / blend); return k >= 1 ? keys[i][1] : blendPose(keys[i - 1][1], keys[i][1], k * k * (3 - 2 * k)); }
 export function walkPose(ph, base = {}) { const s = Math.sin(ph), c = Math.cos(ph); return { ...base, hipL: [s * 0.5, 0, 0.04], hipR: [-s * 0.5, 0, -0.04], knL: Math.max(0, -c) * 0.8 + 0.08, knR: Math.max(0, c) * 0.8 + 0.08, shL: [-s * 0.4, 0, 0.1], shR: [s * 0.4, 0, -0.1], elL: 0.3, elR: 0.3, rootY: -Math.abs(Math.cos(ph)) * 0.03 }; }
 
@@ -92,15 +103,15 @@ export function makePuppet(spec = {}) {
   // braços
   const arm = (sx) => { const sh = new THREE.Group(); sh.position.set(sx * 0.25, 0.48, 0); torso.add(sh);
     const sleeve = spec.sleeveless ? skin : top; sh.add(mesh(cyl(0.058, 0.05, 0.28), sleeve)); const el = new THREE.Group(); el.position.y = -0.28; sh.add(el);
-    el.add(mesh(cyl(0.05, 0.045, 0.25), spec.longSleeve === false || spec.sleeveless ? skin : top)); const hand = new THREE.Group(); hand.position.y = -0.27; el.add(hand); const palm = mesh(new THREE.CapsuleGeometry(0.042, 0.05, 4, 10), skin, 0.01); palm.scale.set(1, 1, 0.62); palm.position.y = -0.05; hand.add(palm); const thumb = mesh(new THREE.CapsuleGeometry(0.016, 0.035, 4, 8), skin, 0.006); thumb.position.set(-sx * 0.04, -0.035, 0.02); thumb.rotation.z = -sx * 0.6; hand.add(thumb);
-    return { sh, el, hand }; };
+    el.add(mesh(cyl(0.05, 0.045, 0.25), spec.longSleeve === false || spec.sleeveless ? skin : top)); const hand = new THREE.Group(); hand.position.y = -0.27; el.add(hand); const mh = miniHand(sx, skin); hand.add(mh.h);
+    return { sh, el, hand, mh }; };
   const AL = arm(1), AR = arm(-1);
   // estado
   const P = { body, torso, head, L, R, AL, AR, eyes, mouth, smile, tears };
   function setPose(p = {}) {
     const v3 = (k) => p[k] || [0, 0, 0];
     AL.sh.rotation.set(...v3('shL')); AR.sh.rotation.set(...v3('shR')); AL.sh.rotation.z += 0.08; AR.sh.rotation.z -= 0.08;
-    AL.el.rotation.x = -(p.elL ?? 0.15); AR.el.rotation.x = -(p.elR ?? 0.15);
+    AL.el.rotation.x = -(p.elL ?? 0.15); AR.el.rotation.x = -(p.elR ?? 0.15); AL.mh.set(p.handL ?? 0.3); AR.mh.set(p.handR ?? 0.3);
     L.hip.rotation.set(...v3('hipL')); R.hip.rotation.set(...v3('hipR')); L.knee.rotation.x = p.knL ?? 0; R.knee.rotation.x = p.knR ?? 0;
     head.rotation.set(...v3('head')); torso.rotation.set(...v3('torso'));
     body.position.y = (p.rootY || 0) * H; body.rotation.x = p.rootRX || 0; body.position.z = (p.rootZ || 0) * H;

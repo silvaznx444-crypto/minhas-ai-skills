@@ -19,5 +19,6 @@
   "enabled": true,
   "gainDb": -6
  },
- "loudness": -14
+ "loudness": -14,
+ "ink": 0.0042
 }

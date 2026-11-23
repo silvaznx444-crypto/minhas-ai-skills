@@ -1,0 +1,604 @@
+{
+ "title": "Ele perdoou o assassino da mae",
+ "duration": 54.6,
+ "shots": [
+  {
+   "id": "A1",
+   "start": 0,
+   "end": 3.4,
+   "line": "",
+   "scene": "A1",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "clock",
+     "gain": -24
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "A2",
+   "start": 3.4,
+   "end": 8.1,
+   "line": "",
+   "scene": "A2",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 2.55,
+     "name": "phonebuzz",
+     "gain": -12
+    },
+    {
+     "at": 2.75,
+     "name": "phonering",
+     "gain": -15
+    },
+    {
+     "at": 3.9,
+     "name": "phonering",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "A3",
+   "start": 8.1,
+   "end": 12.9,
+   "line": "",
+   "scene": "A3",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 2.6,
+     "name": "riser",
+     "gain": -15
+    },
+    {
+     "at": 4.0,
+     "name": "impact",
+     "gain": -9
+    },
+    {
+     "at": 4.05,
+     "name": "slowmo",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "B1",
+   "start": 12.9,
+   "end": 17.9,
+   "line": "",
+   "scene": "B1",
+   "bars": "none",
+   "in": {
+    "type": "dip",
+    "dur": 0.45
+   },
+   "sfx": [
+    {
+     "at": 0.15,
+     "name": "thunder",
+     "gain": -12
+    },
+    {
+     "at": 0.6,
+     "name": "footstep",
+     "gain": -15
+    },
+    {
+     "at": 1.6,
+     "name": "footstep",
+     "gain": -15
+    },
+    {
+     "at": 2.6,
+     "name": "footstep",
+     "gain": -15
+    },
+    {
+     "at": 3.5,
+     "name": "footstep",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -14
+   }
+  },
+  {
+   "id": "B2",
+   "start": 17.9,
+   "end": 20.6,
+   "line": "",
+   "scene": "B2",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "heartbeat",
+     "gain": -6
+    },
+    {
+     "at": 0.55,
+     "name": "heartbeat",
+     "gain": -6
+    },
+    {
+     "at": 1.05,
+     "name": "heartbeat",
+     "gain": -6
+    },
+    {
+     "at": 1.55,
+     "name": "heartbeat",
+     "gain": -6
+    },
+    {
+     "at": 2.05,
+     "name": "heartbeat",
+     "gain": -6
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -14
+   }
+  },
+  {
+   "id": "B3",
+   "start": 20.6,
+   "end": 23.8,
+   "line": "",
+   "scene": "B3",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "heartbeat",
+     "gain": -9
+    },
+    {
+     "at": 0.75,
+     "name": "heartbeat",
+     "gain": -11
+    },
+    {
+     "at": 1.7,
+     "name": "shimmer",
+     "gain": -18
+    }
+   ],
+   "amb": {
+    "name": "rain",
+    "gain": -14
+   }
+  },
+  {
+   "id": "C1",
+   "start": 23.8,
+   "end": 26.6,
+   "line": "",
+   "scene": "C1",
+   "bars": "none",
+   "in": {
+    "type": "dipWhite",
+    "dur": 0.5
+   },
+   "sfx": [
+    {
+     "at": 0.25,
+     "name": "shimmer",
+     "gain": -12
+    },
+    {
+     "at": 1.2,
+     "name": "riser",
+     "gain": -20
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -26
+   }
+  },
+  {
+   "id": "D1",
+   "start": 26.6,
+   "end": 29.3,
+   "line": "",
+   "scene": "D1",
+   "bars": "none",
+   "in": {
+    "type": "fade",
+    "dur": 0.35
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "blip",
+     "gain": -20
+    },
+    {
+     "at": 1.13,
+     "name": "blip",
+     "gain": -20
+    },
+    {
+     "at": 1.9,
+     "name": "blip",
+     "gain": -20
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -28
+   }
+  },
+  {
+   "id": "D2",
+   "start": 29.3,
+   "end": 32.6,
+   "line": "",
+   "scene": "D2",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.0,
+     "name": "heartbeat",
+     "gain": -9
+    },
+    {
+     "at": 0.6,
+     "name": "heartbeat",
+     "gain": -9
+    },
+    {
+     "at": 1.15,
+     "name": "heartbeat",
+     "gain": -8
+    },
+    {
+     "at": 1.65,
+     "name": "heartbeat",
+     "gain": -8
+    },
+    {
+     "at": 2.15,
+     "name": "heartbeat",
+     "gain": -7
+    },
+    {
+     "at": 2.65,
+     "name": "heartbeat",
+     "gain": -7
+    },
+    {
+     "at": 3.1,
+     "name": "heartbeat",
+     "gain": -7
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -28
+   }
+  },
+  {
+   "id": "D3",
+   "start": 32.6,
+   "end": 36.5,
+   "line": "",
+   "scene": "D3",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "heartbeat",
+     "gain": -10
+    },
+    {
+     "at": 1.2,
+     "name": "heartbeat",
+     "gain": -12
+    },
+    {
+     "at": 2.2,
+     "name": "heartbeat",
+     "gain": -14
+    },
+    {
+     "at": 1.0,
+     "name": "shimmer",
+     "gain": -17
+    }
+   ],
+   "amb": {
+    "name": "hum",
+    "gain": -28
+   }
+  },
+  {
+   "id": "E1",
+   "start": 36.5,
+   "end": 38.7,
+   "line": "",
+   "scene": "E1",
+   "bars": "none",
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "whoosh",
+     "gain": -17
+    },
+    {
+     "at": 0.4,
+     "name": "clock",
+     "gain": -18
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "E2",
+   "start": 38.7,
+   "end": 40.9,
+   "line": "",
+   "scene": "E2",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.25,
+     "name": "footstep",
+     "gain": -12
+    },
+    {
+     "at": 0.95,
+     "name": "footstep",
+     "gain": -12
+    },
+    {
+     "at": 1.7,
+     "name": "footstep",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -20
+   }
+  },
+  {
+   "id": "F1",
+   "start": 40.9,
+   "end": 43.6,
+   "line": "",
+   "scene": "F1",
+   "bars": "none",
+   "in": {
+    "type": "fade",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "swish",
+     "gain": -24
+    },
+    {
+     "at": 1.2,
+     "name": "swish",
+     "gain": -24
+    },
+    {
+     "at": 1.9,
+     "name": "swish",
+     "gain": -24
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "F2",
+   "start": 43.6,
+   "end": 46.1,
+   "line": "",
+   "scene": "F2",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 1.62,
+     "name": "impact",
+     "gain": -13
+    },
+    {
+     "at": 1.65,
+     "name": "hit",
+     "gain": -18
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "G1",
+   "start": 46.1,
+   "end": 48.6,
+   "line": "",
+   "scene": "G1",
+   "bars": "none",
+   "in": {
+    "type": "dipWhite",
+    "dur": 0.5
+   },
+   "sfx": [
+    {
+     "at": 1.62,
+     "name": "impact",
+     "gain": -10
+    },
+    {
+     "at": 1.9,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "G2",
+   "start": 48.6,
+   "end": 51.1,
+   "line": "",
+   "scene": "G2",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "hit",
+     "gain": -24
+    },
+    {
+     "at": 0.6,
+     "name": "hit",
+     "gain": -26
+    },
+    {
+     "at": 1.0,
+     "name": "hit",
+     "gain": -27
+    },
+    {
+     "at": 0.8,
+     "name": "riser",
+     "gain": -20
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "H1",
+   "start": 51.1,
+   "end": 54.6,
+   "line": "",
+   "scene": "H1",
+   "bars": "none",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "shimmer",
+     "gain": -13
+    },
+    {
+     "at": 1.95,
+     "name": "ding",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 12.9,
+   "mood": "mystery",
+   "intensity": 0.35
+  },
+  {
+   "start": 12.9,
+   "end": 23.8,
+   "mood": "dark",
+   "intensity": 0.45
+  },
+  {
+   "start": 23.8,
+   "end": 36.5,
+   "mood": "wonder",
+   "intensity": 0.4
+  },
+  {
+   "start": 36.5,
+   "end": 46.1,
+   "mood": "sad",
+   "intensity": 0.4
+  },
+  {
+   "start": 46.1,
+   "end": 54.6,
+   "mood": "hopeful",
+   "intensity": 0.5
+  }
+ ]
+}

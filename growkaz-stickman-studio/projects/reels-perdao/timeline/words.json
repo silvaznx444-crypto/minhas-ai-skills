@@ -1,0 +1,670 @@
+{
+ "source": "pause-aligned script",
+ "words": [
+  {
+   "word": "Um",
+   "start": 0.23,
+   "end": 0.415
+  },
+  {
+   "word": "psicólogo",
+   "start": 0.431,
+   "end": 0.939
+  },
+  {
+   "word": "passou",
+   "start": 0.983,
+   "end": 1.352
+  },
+  {
+   "word": "a",
+   "start": 1.384,
+   "end": 1.523
+  },
+  {
+   "word": "vida",
+   "start": 1.535,
+   "end": 1.812
+  },
+  {
+   "word": "estudando",
+   "start": 1.836,
+   "end": 2.344
+  },
+  {
+   "word": "o",
+   "start": 2.388,
+   "end": 2.526
+  },
+  {
+   "word": "perdão.",
+   "start": 2.538,
+   "end": 2.954
+  },
+  {
+   "word": "Até",
+   "start": 3.45,
+   "end": 3.68
+  },
+  {
+   "word": "que",
+   "start": 3.7,
+   "end": 3.93
+  },
+  {
+   "word": "a",
+   "start": 3.95,
+   "end": 4.088
+  },
+  {
+   "word": "teoria",
+   "start": 4.1,
+   "end": 4.468
+  },
+  {
+   "word": "dele",
+   "start": 4.5,
+   "end": 4.776
+  },
+  {
+   "word": "foi",
+   "start": 4.8,
+   "end": 5.03
+  },
+  {
+   "word": "colocada",
+   "start": 5.05,
+   "end": 5.51
+  },
+  {
+   "word": "à",
+   "start": 5.55,
+   "end": 5.688
+  },
+  {
+   "word": "prova",
+   "start": 5.7,
+   "end": 6.022
+  },
+  {
+   "word": "da",
+   "start": 6.05,
+   "end": 6.234
+  },
+  {
+   "word": "pior",
+   "start": 6.25,
+   "end": 6.526
+  },
+  {
+   "word": "forma",
+   "start": 6.55,
+   "end": 6.872
+  },
+  {
+   "word": "possível.",
+   "start": 6.9,
+   "end": 7.406
+  },
+  {
+   "word": "Everett",
+   "start": 8.21,
+   "end": 8.614
+  },
+  {
+   "word": "Worthington",
+   "start": 8.649,
+   "end": 9.232
+  },
+  {
+   "word": "pesquisava",
+   "start": 9.283,
+   "end": 9.821
+  },
+  {
+   "word": "o",
+   "start": 9.868,
+   "end": 10.003
+  },
+  {
+   "word": "perdão",
+   "start": 10.014,
+   "end": 10.373
+  },
+  {
+   "word": "havia",
+   "start": 10.404,
+   "end": 10.718
+  },
+  {
+   "word": "anos,",
+   "start": 10.746,
+   "end": 11.06
+  },
+  {
+   "word": "quando",
+   "start": 11.087,
+   "end": 11.446
+  },
+  {
+   "word": "recebeu",
+   "start": 11.477,
+   "end": 11.881
+  },
+  {
+   "word": "a",
+   "start": 11.916,
+   "end": 12.051
+  },
+  {
+   "word": "notícia:",
+   "start": 12.062,
+   "end": 12.511
+  },
+  {
+   "word": "a",
+   "start": 13.07,
+   "end": 13.212
+  },
+  {
+   "word": "mãe",
+   "start": 13.224,
+   "end": 13.461
+  },
+  {
+   "word": "dele",
+   "start": 13.482,
+   "end": 13.766
+  },
+  {
+   "word": "tinha",
+   "start": 13.79,
+   "end": 14.122
+  },
+  {
+   "word": "sido",
+   "start": 14.151,
+   "end": 14.435
+  },
+  {
+   "word": "assassinada",
+   "start": 14.46,
+   "end": 15.075
+  },
+  {
+   "word": "dentro",
+   "start": 15.129,
+   "end": 15.507
+  },
+  {
+   "word": "de",
+   "start": 15.54,
+   "end": 15.73
+  },
+  {
+   "word": "casa,",
+   "start": 15.746,
+   "end": 16.078
+  },
+  {
+   "word": "durante",
+   "start": 16.106,
+   "end": 16.532
+  },
+  {
+   "word": "um",
+   "start": 16.57,
+   "end": 16.759
+  },
+  {
+   "word": "assalto.",
+   "start": 16.775,
+   "end": 17.249
+  },
+  {
+   "word": "Ele",
+   "start": 18.17,
+   "end": 18.381
+  },
+  {
+   "word": "tinha",
+   "start": 18.399,
+   "end": 18.695
+  },
+  {
+   "word": "todos",
+   "start": 18.72,
+   "end": 19.016
+  },
+  {
+   "word": "os",
+   "start": 19.042,
+   "end": 19.21
+  },
+  {
+   "word": "motivos",
+   "start": 19.225,
+   "end": 19.605
+  },
+  {
+   "word": "para",
+   "start": 19.638,
+   "end": 19.891
+  },
+  {
+   "word": "odiar.",
+   "start": 19.913,
+   "end": 20.251
+  },
+  {
+   "word": "Mas",
+   "start": 20.71,
+   "end": 20.936
+  },
+  {
+   "word": "decidiu",
+   "start": 20.955,
+   "end": 21.361
+  },
+  {
+   "word": "fazer",
+   "start": 21.397,
+   "end": 21.712
+  },
+  {
+   "word": "exatamente",
+   "start": 21.74,
+   "end": 22.281
+  },
+  {
+   "word": "o",
+   "start": 22.328,
+   "end": 22.464
+  },
+  {
+   "word": "que",
+   "start": 22.475,
+   "end": 22.701
+  },
+  {
+   "word": "ensinava.",
+   "start": 22.721,
+   "end": 23.217
+  },
+  {
+   "word": "E",
+   "start": 23.98,
+   "end": 24.094
+  },
+  {
+   "word": "é",
+   "start": 24.104,
+   "end": 24.218
+  },
+  {
+   "word": "aqui",
+   "start": 24.228,
+   "end": 24.457
+  },
+  {
+   "word": "que",
+   "start": 24.477,
+   "end": 24.667
+  },
+  {
+   "word": "a",
+   "start": 24.684,
+   "end": 24.798
+  },
+  {
+   "word": "psicologia",
+   "start": 24.808,
+   "end": 25.265
+  },
+  {
+   "word": "encontra",
+   "start": 25.305,
+   "end": 25.686
+  },
+  {
+   "word": "a",
+   "start": 25.719,
+   "end": 25.833
+  },
+  {
+   "word": "fé.",
+   "start": 25.843,
+   "end": 26.033
+  },
+  {
+   "word": "Num",
+   "start": 26.86,
+   "end": 27.08
+  },
+  {
+   "word": "experimento,",
+   "start": 27.1,
+   "end": 27.717
+  },
+  {
+   "word": "só",
+   "start": 27.771,
+   "end": 27.947
+  },
+  {
+   "word": "de",
+   "start": 27.962,
+   "end": 28.139
+  },
+  {
+   "word": "relembrar",
+   "start": 28.154,
+   "end": 28.639
+  },
+  {
+   "word": "uma",
+   "start": 28.681,
+   "end": 28.902
+  },
+  {
+   "word": "mágoa,",
+   "start": 28.921,
+   "end": 29.274
+  },
+  {
+   "word": "o",
+   "start": 29.304,
+   "end": 29.437
+  },
+  {
+   "word": "coração",
+   "start": 29.448,
+   "end": 29.845
+  },
+  {
+   "word": "das",
+   "start": 29.879,
+   "end": 30.1
+  },
+  {
+   "word": "pessoas",
+   "start": 30.119,
+   "end": 30.516
+  },
+  {
+   "word": "acelerava",
+   "start": 30.55,
+   "end": 31.035
+  },
+  {
+   "word": "e",
+   "start": 31.078,
+   "end": 31.21
+  },
+  {
+   "word": "a",
+   "start": 31.221,
+   "end": 31.354
+  },
+  {
+   "word": "pressão",
+   "start": 31.365,
+   "end": 31.762
+  },
+  {
+   "word": "subia.",
+   "start": 31.797,
+   "end": 32.149
+  },
+  {
+   "word": "Quando",
+   "start": 32.88,
+   "end": 33.187
+  },
+  {
+   "word": "elas",
+   "start": 33.213,
+   "end": 33.443
+  },
+  {
+   "word": "imaginavam",
+   "start": 33.463,
+   "end": 33.923
+  },
+  {
+   "word": "perdoar,",
+   "start": 33.963,
+   "end": 34.347
+  },
+  {
+   "word": "o",
+   "start": 34.69,
+   "end": 34.842
+  },
+  {
+   "word": "corpo",
+   "start": 34.856,
+   "end": 35.211
+  },
+  {
+   "word": "se",
+   "start": 35.242,
+   "end": 35.445
+  },
+  {
+   "word": "acalmava.",
+   "start": 35.463,
+   "end": 36.021
+  },
+  {
+   "word": "Guardar",
+   "start": 36.85,
+   "end": 37.305
+  },
+  {
+   "word": "rancor",
+   "start": 37.344,
+   "end": 37.749
+  },
+  {
+   "word": "é",
+   "start": 37.784,
+   "end": 37.935
+  },
+  {
+   "word": "viver",
+   "start": 37.948,
+   "end": 38.302
+  },
+  {
+   "word": "a",
+   "start": 38.333,
+   "end": 38.484
+  },
+  {
+   "word": "mesma",
+   "start": 38.498,
+   "end": 38.851
+  },
+  {
+   "word": "ferida",
+   "start": 38.882,
+   "end": 39.286
+  },
+  {
+   "word": "todos",
+   "start": 39.321,
+   "end": 39.675
+  },
+  {
+   "word": "os",
+   "start": 39.706,
+   "end": 39.908
+  },
+  {
+   "word": "dias.",
+   "start": 39.926,
+   "end": 40.279
+  },
+  {
+   "word": "Mas",
+   "start": 41.18,
+   "end": 41.376
+  },
+  {
+   "word": "atenção:",
+   "start": 41.393,
+   "end": 41.786
+  },
+  {
+   "word": "perdoar",
+   "start": 42.18,
+   "end": 42.573
+  },
+  {
+   "word": "não",
+   "start": 42.608,
+   "end": 42.826
+  },
+  {
+   "word": "é",
+   "start": 42.845,
+   "end": 42.976
+  },
+  {
+   "word": "esquecer.",
+   "start": 42.987,
+   "end": 43.468
+  },
+  {
+   "word": "E",
+   "start": 43.83,
+   "end": 43.939
+  },
+  {
+   "word": "não",
+   "start": 43.949,
+   "end": 44.131
+  },
+  {
+   "word": "é",
+   "start": 44.146,
+   "end": 44.256
+  },
+  {
+   "word": "voltar",
+   "start": 44.265,
+   "end": 44.556
+  },
+  {
+   "word": "para",
+   "start": 44.582,
+   "end": 44.8
+  },
+  {
+   "word": "quem",
+   "start": 44.819,
+   "end": 45.037
+  },
+  {
+   "word": "te",
+   "start": 45.056,
+   "end": 45.202
+  },
+  {
+   "word": "machuca.",
+   "start": 45.214,
+   "end": 45.578
+  },
+  {
+   "word": "Perdoar",
+   "start": 46.36,
+   "end": 46.781
+  },
+  {
+   "word": "é",
+   "start": 46.818,
+   "end": 46.958
+  },
+  {
+   "word": "parar",
+   "start": 46.97,
+   "end": 47.298
+  },
+  {
+   "word": "de",
+   "start": 47.326,
+   "end": 47.513
+  },
+  {
+   "word": "carregar",
+   "start": 47.529,
+   "end": 47.997
+  },
+  {
+   "word": "um",
+   "start": 48.038,
+   "end": 48.225
+  },
+  {
+   "word": "peso",
+   "start": 48.241,
+   "end": 48.522
+  },
+  {
+   "word": "que",
+   "start": 48.546,
+   "end": 48.78
+  },
+  {
+   "word": "outra",
+   "start": 48.8,
+   "end": 49.128
+  },
+  {
+   "word": "pessoa",
+   "start": 49.156,
+   "end": 49.531
+  },
+  {
+   "word": "colocou",
+   "start": 49.563,
+   "end": 49.984
+  },
+  {
+   "word": "em",
+   "start": 50.021,
+   "end": 50.208
+  },
+  {
+   "word": "você.",
+   "start": 50.224,
+   "end": 50.552
+  },
+  {
+   "word": "Quem",
+   "start": 51.39,
+   "end": 51.651
+  },
+  {
+   "word": "você",
+   "start": 51.674,
+   "end": 51.936
+  },
+  {
+   "word": "ainda",
+   "start": 51.958,
+   "end": 52.263
+  },
+  {
+   "word": "precisa",
+   "start": 52.29,
+   "end": 52.682
+  },
+  {
+   "word": "perdoar?",
+   "start": 52.716,
+   "end": 53.152
+  }
+ ]
+}

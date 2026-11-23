@@ -229,7 +229,8 @@ def prompt_veo(sb: dict, cena: dict) -> str:
             else:
                 linhas.append(f'- {p["nome"]} ({p.get("voz", "")}) says: "{f["texto"]}"')
     linhas.append(f"Audio: {cena.get('audio', 'natural ambient sound')}. No background music.")
-    linhas.append("No subtitles, no captions, no on-screen text, no watermark.")
+    linhas.append("IMPORTANT: no subtitles, no captions, no caption boxes, no speech text overlays, "
+                  "no on-screen text of any kind, no watermark. Dialogue is audio only.")
     return "\n".join(linhas)
 
 

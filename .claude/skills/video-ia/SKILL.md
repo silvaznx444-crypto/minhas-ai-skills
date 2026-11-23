@@ -107,6 +107,15 @@ Opções úteis: `--resolucao 1080p|720p|4k`, `--sem-quadro` (Veo só por texto)
 - **HTTP 400 em parâmetros**: o script tenta sozinho sem `resolution`; senão use `--resolucao ''`.
 - **Download do vídeo bloqueado no ambiente cloud**: o vídeo pode vir de outro host do Google;
   adicione o host que aparecer no erro à rede do ambiente.
+- **Veo escreveu legenda/texto falso no vídeo** (caixinha escura com palavras sem sentido): confira cada clipe
+  extraindo quadros (`fps=4`, recorte da metade de baixo). Se a área tiver fundo simples e o personagem estiver
+  parado, cubra com um pedaço limpo do próprio clipe de um instante antes:
+  `ffmpeg -ss T_LIMPO -i clip.mp4 -frames:v 1 limpo.png` e depois
+  `[1:v]crop=W:H:X:Y[p];[0:v][p]overlay=X:Y:enable='between(t,INI,FIM)'` (guarde o original em `v1/`).
+  Se o texto cobrir rosto/ação, regere o clipe (`--cena N --refazer`).
+- **Filtro de segurança do Veo** (`raiMediaFilteredReasons`, não é cobrado): tente de novo; se repetir, deixe
+  explícito "adult man" na descrição e use um nome neutro no campo `nome` (ex.: figura religiosa → "the Teacher");
+  a legenda não muda, pois usa o texto da fala.
 - **Legenda fora de sincronia**: ajuste `cortar_*` ou rode `legendas --sem-alinhamento`.
 - Custos de referência (confira a tabela do Google): Veo ~US$0,40/s, Veo fast ~US$0,15/s;
   clipe de 8 s ≈ US$3,20 / US$1,20.

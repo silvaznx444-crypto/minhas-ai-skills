@@ -1,0 +1,26 @@
+{
+  "canal": {
+    "palavras_chave": "psicologia \"saúde mental\" neurociência \"comportamento humano\" \"psicologia explicada\" cérebro emoções \"curiosidades de psicologia\" ansiedade sono burnout \"experimentos de psicologia\" psique"
+  },
+  "videos": [
+    {
+      "id": "Y7E9acqygGo",
+      "tags": ["efeito holofote", "spotlight effect", "ilusão de transparência", "todo mundo está olhando", "medo de julgamento", "vergonha", "ansiedade social", "Thomas Gilovich", "psicologia social", "comportamento humano", "psicologia", "experimento de psicologia"],
+      "idioma": "pt-BR",
+      "motivo": "Vídeo que está bombando (95 views, 5x a mediana): título e miniatura ficam como estão. Só entram tags (não tem nenhuma) e idioma pt-BR (está pt-PT), para ajudar busca e sugeridos no Brasil."
+    },
+    {
+      "id": "z3Z3kU8hXZ4",
+      "tags": ["noite sem dormir", "privação de sono", "falta de sono", "sono e emoções", "sono REM", "amígdala", "Matthew Walker", "irritabilidade", "cérebro", "neurociência", "psicologia", "saúde mental"],
+      "categoria": "27",
+      "idioma": "pt-BR",
+      "motivo": "Publicado há 1 dia, sem tags e com idioma pt-PT. Título fica (cedo demais para julgar). Categoria 22 (Pessoas e blogs) -> 27 (Educação), que descreve melhor um vídeo de ciência explicada."
+    },
+    {
+      "id": "5p0p-jMpUG4",
+      "categoria": "27",
+      "idioma": "pt-BR",
+      "motivo": "Tags já estão boas. Corrige idioma pt-PT -> pt-BR e categoria 22 -> 27 (Educação). O problema deste vídeo é a retenção dos primeiros 30 s (só 25% seguem assistindo), não o texto."
+    }
+  ]
+}

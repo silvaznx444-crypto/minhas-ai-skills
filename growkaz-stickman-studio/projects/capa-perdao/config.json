@@ -1,0 +1,24 @@
+{
+ "title": "Capa perdao",
+ "aspect": "9:16",
+ "resolution": "1080p",
+ "fps": 30,
+ "style": "mosaico",
+ "voiceover": "input/voiceover.wav",
+ "script": null,
+ "duration": 23,
+ "captions": false,
+ "bars": "none",
+ "fadeIn": 0.5,
+ "fadeOut": 0.8,
+ "music": {
+  "enabled": true,
+  "gainDb": -18
+ },
+ "sfx": {
+  "enabled": true,
+  "gainDb": -6
+ },
+ "loudness": -14,
+ "ink": 0.0042
+}

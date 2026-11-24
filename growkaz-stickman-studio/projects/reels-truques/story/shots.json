@@ -1,0 +1,363 @@
+{
+ "title": "4 truques para as pessoas gostarem de voce",
+ "duration": 66.19,
+ "shots": [
+  {
+   "id": "S01",
+   "start": 0,
+   "end": 5.33,
+   "line": "",
+   "scene": "S01",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -14
+    },
+    {
+     "at": 0.6,
+     "name": "shimmer",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S02",
+   "start": 5.33,
+   "end": 7.62,
+   "line": "",
+   "scene": "S02",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "swish",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S03",
+   "start": 7.62,
+   "end": 10.38,
+   "line": "",
+   "scene": "S03",
+   "bars": "none",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "ding",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S04",
+   "start": 10.38,
+   "end": 15.29,
+   "line": "",
+   "scene": "S04",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "pop",
+     "gain": -14
+    },
+    {
+     "at": 1.4,
+     "name": "shimmer",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S05",
+   "start": 15.29,
+   "end": 21.91,
+   "line": "",
+   "scene": "S05",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "blip",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S06",
+   "start": 21.91,
+   "end": 31.59,
+   "line": "",
+   "scene": "S06",
+   "bars": "none",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "ding",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S07",
+   "start": 31.59,
+   "end": 34.97,
+   "line": "",
+   "scene": "S07",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "pop",
+     "gain": -14
+    },
+    {
+     "at": 1.2,
+     "name": "shimmer",
+     "gain": -18
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S08",
+   "start": 34.97,
+   "end": 37.23,
+   "line": "",
+   "scene": "S08",
+   "bars": "none",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "ding",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S09",
+   "start": 37.23,
+   "end": 44.37,
+   "line": "",
+   "scene": "S09",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.9,
+     "name": "swish",
+     "gain": -12
+    },
+    {
+     "at": 1.15,
+     "name": "hit",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S10",
+   "start": 44.37,
+   "end": 46.45,
+   "line": "",
+   "scene": "S10",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "cheer",
+     "gain": -18
+    },
+    {
+     "at": 0.4,
+     "name": "pop",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S11",
+   "start": 46.45,
+   "end": 54.04,
+   "line": "",
+   "scene": "S11",
+   "bars": "none",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "ding",
+     "gain": -14
+    },
+    {
+     "at": 0.6,
+     "name": "tick",
+     "gain": -18
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S12",
+   "start": 54.04,
+   "end": 56.51,
+   "line": "",
+   "scene": "S12",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S13",
+   "start": 56.51,
+   "end": 61.22,
+   "line": "",
+   "scene": "S13",
+   "bars": "none",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "pop",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S14",
+   "start": 61.22,
+   "end": 66.19,
+   "line": "",
+   "scene": "S14",
+   "bars": "none",
+   "in": {
+    "type": "fade",
+    "dur": 0.35
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "cheer",
+     "gain": -14
+    },
+    {
+     "at": 1.0,
+     "name": "ding",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "city",
+    "gain": -30
+   }
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 66.19,
+   "mood": "playful",
+   "intensity": 0.45
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+[
+  {"t0": 0.4,  "t1": 3.0,  "texto": "JERUSALÉM • c. 445 a.C.", "tipo": "pill", "cor": "#FF8A00", "y": 260},
+  {"t0": 3.5,  "t1": 6.4,  "texto": "META: 52 DIAS", "tipo": "selo", "y": 300},
+  {"t0": 8.5,  "t1": 11.1, "texto": "NEEMIAS 4:3", "tipo": "pill", "cor": "#FF3B3B", "y": 260},
+  {"t0": 14.5, "t1": 19.2, "texto": "NEEMIAS 3 • TRECHO DA FAMÍLIA", "tipo": "pill", "cor": "#2F80FF", "y": 260},
+  {"t0": 19.4, "t1": 21.5, "texto": "ATAQUE SURPRESA • NEEMIAS 4:8", "tipo": "pill", "cor": "#FF3B3B", "y": 260},
+  {"t0": 24.4, "t1": 27.1, "texto": "½ CONSTRÓI  •  ½ VIGIA", "tipo": "pill", "cor": "#FFC400", "y": 260},
+  {"t0": 27.3, "t1": 30.9, "texto": "NEEMIAS 4:17", "tipo": "pill", "cor": "#FFC400", "y": 260},
+  {"t0": 31.0, "t1": 35.0, "texto": "SHOFAR (TROMBETA) • NEEMIAS 4:20", "tipo": "pill", "cor": "#FF8A00", "y": 260},
+  {"t0": 35.2, "t1": 39.5, "texto": "SISTEMA DE ALARME", "tipo": "pill", "cor": "#FFC400", "y": 260},
+  {"t0": 39.6, "t1": 41.7, "texto": "DIA 52", "tipo": "calendario", "y": 250},
+  {"t0": 39.6, "t1": 41.7, "texto": "NEEMIAS 6:15", "tipo": "pill", "cor": "#2F80FF", "y": 560},
+  {"t0": 47.4, "t1": 52.1, "texto": "EILAT MAZAR • 2007", "tipo": "pill", "cor": "#2F80FF", "y": 240},
+  {"t0": 47.4, "t1": 52.1, "texto": "Universidade Hebraica de Jerusalém", "tipo": "sub", "y": 340},
+  {"t0": 52.3, "t1": 56.2, "texto": "ISRAEL FINKELSTEIN", "tipo": "pill", "cor": "#2F80FF", "y": 240},
+  {"t0": 52.3, "t1": 56.2, "texto": "DATA CONTESTADA", "tipo": "selo", "y": 340},
+  {"t0": 56.4, "t1": 61.0, "texto": "CONSTRÓI  ou  VIGIA?", "tipo": "pill", "cor": "#FFC400", "y": 260}
+]

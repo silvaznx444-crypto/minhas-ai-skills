@@ -1,0 +1,810 @@
+{
+ "source": "pause-aligned script",
+ "words": [
+  {
+   "word": "Existem",
+   "start": 0.0,
+   "end": 0.581
+  },
+  {
+   "word": "quatro",
+   "start": 0.631,
+   "end": 1.148
+  },
+  {
+   "word": "sinais",
+   "start": 1.193,
+   "end": 1.709
+  },
+  {
+   "word": "que",
+   "start": 1.754,
+   "end": 2.076
+  },
+  {
+   "word": "podem",
+   "start": 2.104,
+   "end": 2.556
+  },
+  {
+   "word": "destruir",
+   "start": 2.595,
+   "end": 3.241
+  },
+  {
+   "word": "um",
+   "start": 3.297,
+   "end": 3.555
+  },
+  {
+   "word": "relacionamento.",
+   "start": 3.578,
+   "end": 4.675
+  },
+  {
+   "word": "E",
+   "start": 5.03,
+   "end": 5.095
+  },
+  {
+   "word": "quase",
+   "start": 5.101,
+   "end": 5.252
+  },
+  {
+   "word": "todo",
+   "start": 5.265,
+   "end": 5.395
+  },
+  {
+   "word": "casal",
+   "start": 5.406,
+   "end": 5.558
+  },
+  {
+   "word": "já",
+   "start": 5.571,
+   "end": 5.657
+  },
+  {
+   "word": "cometeu",
+   "start": 5.665,
+   "end": 5.86
+  },
+  {
+   "word": "pelo",
+   "start": 5.877,
+   "end": 6.006
+  },
+  {
+   "word": "menos",
+   "start": 6.018,
+   "end": 6.169
+  },
+  {
+   "word": "um.",
+   "start": 6.182,
+   "end": 6.291
+  },
+  {
+   "word": "O",
+   "start": 6.52,
+   "end": 6.724
+  },
+  {
+   "word": "psicólogo",
+   "start": 6.741,
+   "end": 7.488
+  },
+  {
+   "word": "John",
+   "start": 7.553,
+   "end": 7.96
+  },
+  {
+   "word": "Gottman",
+   "start": 7.995,
+   "end": 8.606
+  },
+  {
+   "word": "passou",
+   "start": 8.659,
+   "end": 9.202
+  },
+  {
+   "word": "décadas",
+   "start": 9.249,
+   "end": 9.859
+  },
+  {
+   "word": "observando",
+   "start": 9.913,
+   "end": 10.727
+  },
+  {
+   "word": "casais",
+   "start": 10.798,
+   "end": 11.34
+  },
+  {
+   "word": "conversando.",
+   "start": 11.388,
+   "end": 12.337
+  },
+  {
+   "word": "E",
+   "start": 12.65,
+   "end": 12.759
+  },
+  {
+   "word": "percebeu",
+   "start": 12.769,
+   "end": 13.133
+  },
+  {
+   "word": "que",
+   "start": 13.165,
+   "end": 13.347
+  },
+  {
+   "word": "alguns",
+   "start": 13.363,
+   "end": 13.654
+  },
+  {
+   "word": "comportamentos",
+   "start": 13.679,
+   "end": 14.262
+  },
+  {
+   "word": "aparecem",
+   "start": 14.312,
+   "end": 14.677
+  },
+  {
+   "word": "com",
+   "start": 14.708,
+   "end": 14.89
+  },
+  {
+   "word": "muito",
+   "start": 14.906,
+   "end": 15.161
+  },
+  {
+   "word": "mais",
+   "start": 15.183,
+   "end": 15.402
+  },
+  {
+   "word": "frequência",
+   "start": 15.421,
+   "end": 15.858
+  },
+  {
+   "word": "nos",
+   "start": 15.896,
+   "end": 16.078
+  },
+  {
+   "word": "relacionamentos",
+   "start": 16.094,
+   "end": 16.713
+  },
+  {
+   "word": "que",
+   "start": 16.767,
+   "end": 16.949
+  },
+  {
+   "word": "terminam.",
+   "start": 16.965,
+   "end": 17.365
+  },
+  {
+   "word": "O",
+   "start": 17.64,
+   "end": 17.825
+  },
+  {
+   "word": "primeiro",
+   "start": 17.841,
+   "end": 18.456
+  },
+  {
+   "word": "é",
+   "start": 18.51,
+   "end": 18.694
+  },
+  {
+   "word": "a",
+   "start": 18.71,
+   "end": 18.895
+  },
+  {
+   "word": "crítica.",
+   "start": 18.911,
+   "end": 19.526
+  },
+  {
+   "word": "Não",
+   "start": 20.07,
+   "end": 20.283
+  },
+  {
+   "word": "é",
+   "start": 20.301,
+   "end": 20.429
+  },
+  {
+   "word": "reclamar",
+   "start": 20.44,
+   "end": 20.865
+  },
+  {
+   "word": "de",
+   "start": 20.902,
+   "end": 21.072
+  },
+  {
+   "word": "uma",
+   "start": 21.087,
+   "end": 21.3
+  },
+  {
+   "word": "atitude.",
+   "start": 21.318,
+   "end": 21.744
+  },
+  {
+   "word": "É",
+   "start": 21.781,
+   "end": 21.908
+  },
+  {
+   "word": "atacar",
+   "start": 21.919,
+   "end": 22.26
+  },
+  {
+   "word": "quem",
+   "start": 22.289,
+   "end": 22.544
+  },
+  {
+   "word": "a",
+   "start": 22.567,
+   "end": 22.694
+  },
+  {
+   "word": "pessoa",
+   "start": 22.705,
+   "end": 23.045
+  },
+  {
+   "word": "é.",
+   "start": 23.075,
+   "end": 23.245
+  },
+  {
+   "word": "\"Você",
+   "start": 23.74,
+   "end": 23.886
+  },
+  {
+   "word": "sempre",
+   "start": 23.899,
+   "end": 24.065
+  },
+  {
+   "word": "esquece\",",
+   "start": 24.08,
+   "end": 24.309
+  },
+  {
+   "word": "em",
+   "start": 24.329,
+   "end": 24.412
+  },
+  {
+   "word": "vez",
+   "start": 24.42,
+   "end": 24.524
+  },
+  {
+   "word": "de",
+   "start": 24.533,
+   "end": 24.616
+  },
+  {
+   "word": "\"eu",
+   "start": 24.624,
+   "end": 24.728
+  },
+  {
+   "word": "fiquei",
+   "start": 24.737,
+   "end": 24.904
+  },
+  {
+   "word": "chateado\".",
+   "start": 24.918,
+   "end": 25.168
+  },
+  {
+   "word": "O",
+   "start": 25.47,
+   "end": 25.644
+  },
+  {
+   "word": "segundo",
+   "start": 25.659,
+   "end": 26.182
+  },
+  {
+   "word": "é",
+   "start": 26.227,
+   "end": 26.401
+  },
+  {
+   "word": "o",
+   "start": 26.417,
+   "end": 26.591
+  },
+  {
+   "word": "desprezo.",
+   "start": 26.606,
+   "end": 27.244
+  },
+  {
+   "word": "Revirar",
+   "start": 27.76,
+   "end": 28.018
+  },
+  {
+   "word": "os",
+   "start": 28.041,
+   "end": 28.156
+  },
+  {
+   "word": "olhos,",
+   "start": 28.166,
+   "end": 28.395
+  },
+  {
+   "word": "ironizar,",
+   "start": 28.415,
+   "end": 28.731
+  },
+  {
+   "word": "falar",
+   "start": 28.758,
+   "end": 28.959
+  },
+  {
+   "word": "de",
+   "start": 28.977,
+   "end": 29.092
+  },
+  {
+   "word": "cima.",
+   "start": 29.102,
+   "end": 29.303
+  },
+  {
+   "word": "Para",
+   "start": 29.71,
+   "end": 30.04
+  },
+  {
+   "word": "Gottman,",
+   "start": 30.069,
+   "end": 30.62
+  },
+  {
+   "word": "esse",
+   "start": 30.667,
+   "end": 30.998
+  },
+  {
+   "word": "é",
+   "start": 31.027,
+   "end": 31.192
+  },
+  {
+   "word": "o",
+   "start": 31.206,
+   "end": 31.371
+  },
+  {
+   "word": "sinal",
+   "start": 31.386,
+   "end": 31.771
+  },
+  {
+   "word": "mais",
+   "start": 31.804,
+   "end": 32.135
+  },
+  {
+   "word": "perigoso",
+   "start": 32.163,
+   "end": 32.714
+  },
+  {
+   "word": "de",
+   "start": 32.762,
+   "end": 32.982
+  },
+  {
+   "word": "todos.",
+   "start": 33.001,
+   "end": 33.442
+  },
+  {
+   "word": "O",
+   "start": 33.75,
+   "end": 33.932
+  },
+  {
+   "word": "terceiro",
+   "start": 33.948,
+   "end": 34.555
+  },
+  {
+   "word": "é",
+   "start": 34.608,
+   "end": 34.79
+  },
+  {
+   "word": "a",
+   "start": 34.806,
+   "end": 34.988
+  },
+  {
+   "word": "defensividade.",
+   "start": 35.004,
+   "end": 35.976
+  },
+  {
+   "word": "Nunca",
+   "start": 36.69,
+   "end": 37.11
+  },
+  {
+   "word": "assumir",
+   "start": 37.146,
+   "end": 37.686
+  },
+  {
+   "word": "a",
+   "start": 37.733,
+   "end": 37.913
+  },
+  {
+   "word": "culpa.",
+   "start": 37.929,
+   "end": 38.408
+  },
+  {
+   "word": "Sempre",
+   "start": 38.88,
+   "end": 39.326
+  },
+  {
+   "word": "devolver",
+   "start": 39.365,
+   "end": 39.923
+  },
+  {
+   "word": "o",
+   "start": 39.971,
+   "end": 40.139
+  },
+  {
+   "word": "problema",
+   "start": 40.153,
+   "end": 40.711
+  },
+  {
+   "word": "para",
+   "start": 40.759,
+   "end": 41.094
+  },
+  {
+   "word": "o",
+   "start": 41.123,
+   "end": 41.29
+  },
+  {
+   "word": "outro.",
+   "start": 41.305,
+   "end": 41.751
+  },
+  {
+   "word": "E",
+   "start": 42.1,
+   "end": 42.165
+  },
+  {
+   "word": "o",
+   "start": 42.171,
+   "end": 42.236
+  },
+  {
+   "word": "quarto",
+   "start": 42.242,
+   "end": 42.416
+  },
+  {
+   "word": "é",
+   "start": 42.431,
+   "end": 42.497
+  },
+  {
+   "word": "o",
+   "start": 42.502,
+   "end": 42.567
+  },
+  {
+   "word": "muro",
+   "start": 42.573,
+   "end": 42.704
+  },
+  {
+   "word": "de",
+   "start": 42.715,
+   "end": 42.802
+  },
+  {
+   "word": "silêncio.",
+   "start": 42.81,
+   "end": 43.049
+  },
+  {
+   "word": "Quando",
+   "start": 43.3,
+   "end": 43.76
+  },
+  {
+   "word": "um",
+   "start": 43.8,
+   "end": 44.03
+  },
+  {
+   "word": "dos",
+   "start": 44.05,
+   "end": 44.337
+  },
+  {
+   "word": "dois",
+   "start": 44.362,
+   "end": 44.707
+  },
+  {
+   "word": "simplesmente",
+   "start": 44.737,
+   "end": 45.541
+  },
+  {
+   "word": "se",
+   "start": 45.611,
+   "end": 45.841
+  },
+  {
+   "word": "fecha",
+   "start": 45.861,
+   "end": 46.263
+  },
+  {
+   "word": "e",
+   "start": 46.298,
+   "end": 46.471
+  },
+  {
+   "word": "para",
+   "start": 46.486,
+   "end": 46.831
+  },
+  {
+   "word": "de",
+   "start": 46.861,
+   "end": 47.09
+  },
+  {
+   "word": "responder.",
+   "start": 47.11,
+   "end": 47.8
+  },
+  {
+   "word": "A",
+   "start": 48.67,
+   "end": 48.808
+  },
+  {
+   "word": "boa",
+   "start": 48.82,
+   "end": 49.051
+  },
+  {
+   "word": "notícia?",
+   "start": 49.071,
+   "end": 49.533
+  },
+  {
+   "word": "Os",
+   "start": 49.573,
+   "end": 49.757
+  },
+  {
+   "word": "casais",
+   "start": 49.773,
+   "end": 50.143
+  },
+  {
+   "word": "que",
+   "start": 50.175,
+   "end": 50.405
+  },
+  {
+   "word": "dão",
+   "start": 50.425,
+   "end": 50.656
+  },
+  {
+   "word": "certo",
+   "start": 50.676,
+   "end": 50.999
+  },
+  {
+   "word": "também",
+   "start": 51.027,
+   "end": 51.396
+  },
+  {
+   "word": "brigam.",
+   "start": 51.429,
+   "end": 51.844
+  },
+  {
+   "word": "A",
+   "start": 52.35,
+   "end": 52.47
+  },
+  {
+   "word": "diferença",
+   "start": 52.48,
+   "end": 52.92
+  },
+  {
+   "word": "é",
+   "start": 52.958,
+   "end": 53.078
+  },
+  {
+   "word": "que",
+   "start": 53.089,
+   "end": 53.289
+  },
+  {
+   "word": "eles",
+   "start": 53.306,
+   "end": 53.546
+  },
+  {
+   "word": "reclamam",
+   "start": 53.567,
+   "end": 53.967
+  },
+  {
+   "word": "sem",
+   "start": 54.002,
+   "end": 54.201
+  },
+  {
+   "word": "atacar,",
+   "start": 54.219,
+   "end": 54.579
+  },
+  {
+   "word": "mostram",
+   "start": 54.94,
+   "end": 55.342
+  },
+  {
+   "word": "carinho",
+   "start": 55.377,
+   "end": 55.78
+  },
+  {
+   "word": "no",
+   "start": 55.815,
+   "end": 55.994
+  },
+  {
+   "word": "dia",
+   "start": 56.009,
+   "end": 56.233
+  },
+  {
+   "word": "a",
+   "start": 56.252,
+   "end": 56.386
+  },
+  {
+   "word": "dia",
+   "start": 56.398,
+   "end": 56.621
+  },
+  {
+   "word": "e",
+   "start": 56.641,
+   "end": 56.775
+  },
+  {
+   "word": "sabem",
+   "start": 56.787,
+   "end": 57.1
+  },
+  {
+   "word": "pedir",
+   "start": 57.127,
+   "end": 57.44
+  },
+  {
+   "word": "desculpas.",
+   "start": 57.467,
+   "end": 58.003
+  },
+  {
+   "word": "Manda",
+   "start": 58.6,
+   "end": 58.807
+  },
+  {
+   "word": "esse",
+   "start": 58.825,
+   "end": 59.002
+  },
+  {
+   "word": "vídeo",
+   "start": 59.018,
+   "end": 59.225
+  },
+  {
+   "word": "para",
+   "start": 59.243,
+   "end": 59.42
+  },
+  {
+   "word": "quem",
+   "start": 59.435,
+   "end": 59.613
+  },
+  {
+   "word": "divide",
+   "start": 59.628,
+   "end": 59.865
+  },
+  {
+   "word": "a",
+   "start": 59.885,
+   "end": 59.974
+  },
+  {
+   "word": "vida",
+   "start": 59.982,
+   "end": 60.159
+  },
+  {
+   "word": "com",
+   "start": 60.174,
+   "end": 60.322
+  },
+  {
+   "word": "você.",
+   "start": 60.335,
+   "end": 60.542
+  }
+ ]
+}

@@ -1,0 +1,401 @@
+{
+ "title": "Por que ninguém ajuda quando todos estão olhando",
+ "duration": 58.58,
+ "shots": [
+  {
+   "id": "s01",
+   "start": 0,
+   "end": 3.33,
+   "line": "Se você passar mal no meio de uma multidão,",
+   "scene": "praça: multidão caminha, ela tropeça e cai",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 2.5,
+     "name": "hit",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s02",
+   "start": 3.33,
+   "end": 8.01,
+   "line": "quanto mais gente estiver olhando, menor pode ser a chance de alguém te ajudar.",
+   "scene": "close no chão: pessoas param, olham e seguem",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "footstep",
+     "gain": -16
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s03",
+   "start": 8.01,
+   "end": 14.05,
+   "line": "Parece absurdo. Mas a psicologia tem um nome para isso: efeito espectador.",
+   "scene": "grua sobe: EFEITO ESPECTADOR",
+   "bars": "none",
+   "in": {
+    "type": "zoom",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -12
+    },
+    {
+     "at": 3.6,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s04",
+   "start": 14.05,
+   "end": 17.13,
+   "line": "Em 1968, os psicólogos John Darley e Bibb Latané fizeram um experimento.",
+   "scene": "laboratório 1968, cabines",
+   "bars": "none",
+   "in": {
+    "type": "dip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s05",
+   "start": 17.13,
+   "end": 19.53,
+   "line": "Os voluntários conversavam por um interfone e,",
+   "scene": "voluntários falam pelo interfone",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "blip",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s06",
+   "start": 19.53,
+   "end": 24.81,
+   "line": "de repente, ouviam outro participante passando mal.",
+   "scene": "interfones ficam vermelhos: alguém passando mal",
+   "bars": "none",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "glitch",
+     "gain": -10
+    },
+    {
+     "at": 0.8,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s07",
+   "start": 24.81,
+   "end": 31.39,
+   "line": "Quando achavam que estavam sozinhos com ele, oitenta e cinco por cento correram para ajudar antes do fim da crise.",
+   "scene": "sozinho: ele levanta e corre, barra 85%",
+   "bars": "none",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "swish",
+     "gain": -10
+    },
+    {
+     "at": 1.6,
+     "name": "riser",
+     "gain": -16
+    },
+    {
+     "at": 3.8,
+     "name": "ding",
+     "gain": -8
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s08",
+   "start": 31.39,
+   "end": 36.78,
+   "line": "Quando achavam que havia mais quatro pessoas ouvindo, esse número caiu para trinta e um por cento.",
+   "scene": "com 4 pessoas: quase ninguém levanta, barra 31%",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 3.6,
+     "name": "impact",
+     "gain": -8
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s09",
+   "start": 36.78,
+   "end": 39.69,
+   "line": "Por quê? Porque a responsabilidade se divide.",
+   "scene": "círculo na praça: a responsabilidade se divide",
+   "bars": "none",
+   "in": {
+    "type": "zoom",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "whoosh",
+     "gain": -12
+    },
+    {
+     "at": 1.4,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s10",
+   "start": 39.69,
+   "end": 42.77,
+   "line": "Cada um pensa: alguém já deve estar ajudando.",
+   "scene": "balão 'alguém já vai ajudar' pula de cabeça em cabeça",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 0.9,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 1.6,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s11",
+   "start": 42.77,
+   "end": 44.46,
+   "line": "E aqui está o mais importante.",
+   "scene": "zoom no rosto dela",
+   "bars": "none",
+   "in": {
+    "type": "flash",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s12",
+   "start": 44.46,
+   "end": 48.83,
+   "line": "Se um dia você precisar de ajuda, não peça para a multidão.",
+   "scene": "ela pede ajuda à multidão: ninguém se mexe",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s13",
+   "start": 48.83,
+   "end": 54.17,
+   "line": "Aponte para uma pessoa e diga: você, de camiseta azul, chame uma ambulância.",
+   "scene": "ela aponta: holofote no de camiseta azul, ele corre e liga 192",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "ding",
+     "gain": -10
+    },
+    {
+     "at": 3.9,
+     "name": "phonering",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s14",
+   "start": 54.17,
+   "end": 58.58,
+   "line": "Agora você sabe. E quem sabe, ajuda.",
+   "scene": "todos ajudam, ela levanta, comemoram",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "cheer",
+     "gain": -14
+    },
+    {
+     "at": 0.5,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -24
+   }
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 14.05,
+   "mood": "mystery",
+   "intensity": 0.45
+  },
+  {
+   "start": 14.05,
+   "end": 36.78,
+   "mood": "tension",
+   "intensity": 0.5
+  },
+  {
+   "start": 36.78,
+   "end": 48.83,
+   "mood": "mystery",
+   "intensity": 0.5
+  },
+  {
+   "start": 48.83,
+   "end": 58.58,
+   "mood": "triumph",
+   "intensity": 0.6
+  }
+ ]
+}

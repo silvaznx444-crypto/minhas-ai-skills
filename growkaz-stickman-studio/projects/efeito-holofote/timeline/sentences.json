@@ -1,0 +1,242 @@
+[
+ {
+  "i": 0,
+  "start": 0.25,
+  "end": 2.013,
+  "text": "Você tropeça na calçada."
+ },
+ {
+  "i": 1,
+  "start": 2.062,
+  "end": 3.445,
+  "text": "Seu rosto esquenta."
+ },
+ {
+  "i": 2,
+  "start": 3.72,
+  "end": 4.826,
+  "text": "Parece que o mundo inteiro viu."
+ },
+ {
+  "i": 3,
+  "start": 5.04,
+  "end": 9.328,
+  "text": "Mas e se eu te dissesse que quase ninguém percebeu?"
+ },
+ {
+  "i": 4,
+  "start": 9.82,
+  "end": 11.983,
+  "text": "E que a ciência consegue provar isso?"
+ },
+ {
+  "i": 5,
+  "start": 13.05,
+  "end": 17.602,
+  "text": "Você já percebeu que lembra por dias de uma frase errada que disse numa reunião?"
+ },
+ {
+  "i": 6,
+  "start": 18.05,
+  "end": 20.736,
+  "text": "Ou de uma espinha que apareceu justo no dia da foto?"
+ },
+ {
+  "i": 7,
+  "start": 21.5,
+  "end": 22.736,
+  "text": "Esse sentimento tem nome."
+ },
+ {
+  "i": 8,
+  "start": 23.08,
+  "end": 26.898,
+  "text": "E entender como ele funciona pode mudar a forma como você se comporta em público."
+ },
+ {
+  "i": 9,
+  "start": 27.73,
+  "end": 31.941,
+  "text": "Mas antes, uma pergunta: por que o nosso cérebro erra tanto nessa conta?"
+ },
+ {
+  "i": 10,
+  "start": 32.62,
+  "end": 37.534,
+  "text": "No ano 2000, o psicólogo Thomas Gilovich, da Universidade Cornell, fez um experimento curioso."
+ },
+ {
+  "i": 11,
+  "start": 37.95,
+  "end": 44.73,
+  "text": "Ele pediu que estudantes vestissem uma camiseta com o rosto de um cantor considerado brega pelos jovens da época: Barry Manilow."
+ },
+ {
+  "i": 12,
+  "start": 45.45,
+  "end": 48.282,
+  "text": "Depois, cada um entrava numa sala cheia de colegas."
+ },
+ {
+  "i": 13,
+  "start": 48.75,
+  "end": 52.73,
+  "text": "Os voluntários acharam que cerca de metade da sala tinha notado a camiseta."
+ },
+ {
+  "i": 14,
+  "start": 53.22,
+  "end": 53.966,
+  "text": "O número real?"
+ },
+ {
+  "i": 15,
+  "start": 54.47,
+  "end": 55.789,
+  "text": "Pouco menos de um quarto."
+ },
+ {
+  "i": 16,
+  "start": 56.49,
+  "end": 58.953,
+  "text": "Gilovich chamou isso de efeito holofote."
+ },
+ {
+  "i": 17,
+  "start": 59.31,
+  "end": 62.475,
+  "text": "A sensação de que existe uma luz sempre apontada para você."
+ },
+ {
+  "i": 18,
+  "start": 63.2,
+  "end": 65.015,
+  "text": "Mas o efeito não para nos erros."
+ },
+ {
+  "i": 19,
+  "start": 65.045,
+  "end": 67.09,
+  "text": "Ele também aparece no que você sente."
+ },
+ {
+  "i": 20,
+  "start": 67.73,
+  "end": 71.687,
+  "text": "Em outros estudos, Gilovich e seus colegas pediram que pessoas falassem em público."
+ },
+ {
+  "i": 21,
+  "start": 72.21,
+  "end": 77.212,
+  "text": "Os oradores tinham certeza de que o nervosismo estava estampado no rosto."
+ },
+ {
+  "i": 22,
+  "start": 77.66,
+  "end": 79.659,
+  "text": "A plateia?"
+ },
+ {
+  "i": 23,
+  "start": 80.5,
+  "end": 82.46,
+  "text": "Percebeu muito menos do que eles imaginavam."
+ },
+ {
+  "i": 24,
+  "start": 82.9,
+  "end": 89.725,
+  "text": "Isso se chama ilusão de transparência: achamos que nossas emoções estão expostas, como se fôssemos de vidro."
+ },
+ {
+  "i": 25,
+  "start": 90.32,
+  "end": 92.824,
+  "text": "A explicação é simples, e um pouco incômoda."
+ },
+ {
+  "i": 26,
+  "start": 92.867,
+  "end": 97.685,
+  "text": "Você é a única pessoa que vive cem por cento do tempo dentro da sua própria cabeça."
+ },
+ {
+  "i": 27,
+  "start": 98.01,
+  "end": 102.207,
+  "text": "Seus detalhes são enormes para você, porque você está sempre olhando para eles."
+ },
+ {
+  "i": 28,
+  "start": 102.54,
+  "end": 107.375,
+  "text": "E quando tenta imaginar o que os outros veem, parte do seu ponto de vista."
+ },
+ {
+  "i": 29,
+  "start": 108.17,
+  "end": 110.056,
+  "text": "Você até corrige um pouco, mas não o suficiente."
+ },
+ {
+  "i": 30,
+  "start": 110.65,
+  "end": 112.675,
+  "text": "E aqui está a parte mais interessante."
+ },
+ {
+  "i": 31,
+  "start": 112.729,
+  "end": 119.032,
+  "text": "Num desses estudos, os pesquisadores simplesmente explicaram a ilusão de transparência para alguns oradores antes da fala."
+ },
+ {
+  "i": 32,
+  "start": 119.057,
+  "end": 124.08,
+  "text": "Resultado: esses oradores ficaram mais calmos, e o público avaliou as falas deles como melhores."
+ },
+ {
+  "i": 33,
+  "start": 124.37,
+  "end": 127.467,
+  "text": "Só saber que o holofote é menor do que parece já ajudou."
+ },
+ {
+  "i": 34,
+  "start": 128.29,
+  "end": 132.805,
+  "text": "Todas as pessoas ao seu redor estão ocupadas demais com o próprio holofote."
+ },
+ {
+  "i": 35,
+  "start": 133.43,
+  "end": 140.764,
+  "text": "Então, da próxima vez que errar uma palavra, tropeçar ou sentir o rosto esquentar, lembre-se: o mundo não está assistindo."
+ },
+ {
+  "i": 36,
+  "start": 140.823,
+  "end": 143.994,
+  "text": "Está ocupado demais se preocupando consigo mesmo."
+ },
+ {
+  "i": 37,
+  "start": 144.41,
+  "end": 146.628,
+  "text": "E isso, no fundo, é libertador."
+ },
+ {
+  "i": 38,
+  "start": 147.41,
+  "end": 151.116,
+  "text": "Qual foi o momento em que você teve certeza de que todos estavam olhando?"
+ },
+ {
+  "i": 39,
+  "start": 151.48,
+  "end": 152.744,
+  "text": "Conta aqui nos comentários."
+ }
+]

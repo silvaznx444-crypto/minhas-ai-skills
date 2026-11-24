@@ -1,0 +1,760 @@
+{
+ "source": "pause-aligned script",
+ "words": [
+  {
+   "word": "Se",
+   "start": 0.0,
+   "end": 0.217
+  },
+  {
+   "word": "você",
+   "start": 0.235,
+   "end": 0.56
+  },
+  {
+   "word": "passar",
+   "start": 0.589,
+   "end": 1.022
+  },
+  {
+   "word": "mal",
+   "start": 1.06,
+   "end": 1.33
+  },
+  {
+   "word": "no",
+   "start": 1.354,
+   "end": 1.571
+  },
+  {
+   "word": "meio",
+   "start": 1.589,
+   "end": 1.914
+  },
+  {
+   "word": "de",
+   "start": 1.943,
+   "end": 2.159
+  },
+  {
+   "word": "uma",
+   "start": 2.178,
+   "end": 2.449
+  },
+  {
+   "word": "multidão,",
+   "start": 2.472,
+   "end": 3.068
+  },
+  {
+   "word": "quanto",
+   "start": 3.45,
+   "end": 3.777
+  },
+  {
+   "word": "mais",
+   "start": 3.806,
+   "end": 4.051
+  },
+  {
+   "word": "gente",
+   "start": 4.073,
+   "end": 4.359
+  },
+  {
+   "word": "estiver",
+   "start": 4.384,
+   "end": 4.752
+  },
+  {
+   "word": "olhando,",
+   "start": 4.784,
+   "end": 5.193
+  },
+  {
+   "word": "menor",
+   "start": 5.229,
+   "end": 5.515
+  },
+  {
+   "word": "pode",
+   "start": 5.54,
+   "end": 5.785
+  },
+  {
+   "word": "ser",
+   "start": 5.807,
+   "end": 6.011
+  },
+  {
+   "word": "a",
+   "start": 6.029,
+   "end": 6.152
+  },
+  {
+   "word": "chance",
+   "start": 6.163,
+   "end": 6.49
+  },
+  {
+   "word": "de",
+   "start": 6.518,
+   "end": 6.682
+  },
+  {
+   "word": "alguém",
+   "start": 6.696,
+   "end": 7.023
+  },
+  {
+   "word": "te",
+   "start": 7.052,
+   "end": 7.216
+  },
+  {
+   "word": "ajudar.",
+   "start": 7.23,
+   "end": 7.598
+  },
+  {
+   "word": "Parece",
+   "start": 8.13,
+   "end": 8.529
+  },
+  {
+   "word": "absurdo.",
+   "start": 8.564,
+   "end": 9.063
+  },
+  {
+   "word": "Mas",
+   "start": 9.106,
+   "end": 9.356
+  },
+  {
+   "word": "a",
+   "start": 9.378,
+   "end": 9.527
+  },
+  {
+   "word": "psicologia",
+   "start": 9.54,
+   "end": 10.139
+  },
+  {
+   "word": "tem",
+   "start": 10.191,
+   "end": 10.441
+  },
+  {
+   "word": "um",
+   "start": 10.462,
+   "end": 10.662
+  },
+  {
+   "word": "nome",
+   "start": 10.679,
+   "end": 10.979
+  },
+  {
+   "word": "para",
+   "start": 11.005,
+   "end": 11.304
+  },
+  {
+   "word": "isso:",
+   "start": 11.33,
+   "end": 11.68
+  },
+  {
+   "word": "efeito",
+   "start": 12.08,
+   "end": 12.602
+  },
+  {
+   "word": "espectador.",
+   "start": 12.648,
+   "end": 13.496
+  },
+  {
+   "word": "Em",
+   "start": 14.17,
+   "end": 14.303
+  },
+  {
+   "word": "1968,",
+   "start": 14.315,
+   "end": 14.549
+  },
+  {
+   "word": "os",
+   "start": 14.569,
+   "end": 14.702
+  },
+  {
+   "word": "psicólogos",
+   "start": 14.714,
+   "end": 15.114
+  },
+  {
+   "word": "John",
+   "start": 15.149,
+   "end": 15.349
+  },
+  {
+   "word": "Darley",
+   "start": 15.367,
+   "end": 15.633
+  },
+  {
+   "word": "e",
+   "start": 15.657,
+   "end": 15.757
+  },
+  {
+   "word": "Bibb",
+   "start": 15.765,
+   "end": 15.966
+  },
+  {
+   "word": "Latané",
+   "start": 15.983,
+   "end": 16.25
+  },
+  {
+   "word": "fizeram",
+   "start": 16.273,
+   "end": 16.573
+  },
+  {
+   "word": "um",
+   "start": 16.599,
+   "end": 16.733
+  },
+  {
+   "word": "experimento.",
+   "start": 16.744,
+   "end": 17.211
+  },
+  {
+   "word": "Os",
+   "start": 17.252,
+   "end": 17.385
+  },
+  {
+   "word": "voluntários",
+   "start": 17.397,
+   "end": 17.831
+  },
+  {
+   "word": "conversavam",
+   "start": 17.868,
+   "end": 18.302
+  },
+  {
+   "word": "por",
+   "start": 18.34,
+   "end": 18.507
+  },
+  {
+   "word": "um",
+   "start": 18.521,
+   "end": 18.655
+  },
+  {
+   "word": "interfone",
+   "start": 18.666,
+   "end": 19.033
+  },
+  {
+   "word": "e,",
+   "start": 19.065,
+   "end": 19.198
+  },
+  {
+   "word": "de",
+   "start": 19.65,
+   "end": 19.966
+  },
+  {
+   "word": "repente,",
+   "start": 19.993,
+   "end": 20.782
+  },
+  {
+   "word": "ouviam",
+   "start": 20.851,
+   "end": 21.482
+  },
+  {
+   "word": "outro",
+   "start": 21.537,
+   "end": 22.089
+  },
+  {
+   "word": "participante",
+   "start": 22.137,
+   "end": 23.242
+  },
+  {
+   "word": "passando",
+   "start": 23.338,
+   "end": 24.127
+  },
+  {
+   "word": "mal.",
+   "start": 24.195,
+   "end": 24.669
+  },
+  {
+   "word": "Quando",
+   "start": 24.93,
+   "end": 25.27
+  },
+  {
+   "word": "achavam",
+   "start": 25.3,
+   "end": 25.682
+  },
+  {
+   "word": "que",
+   "start": 25.716,
+   "end": 25.928
+  },
+  {
+   "word": "estavam",
+   "start": 25.947,
+   "end": 26.33
+  },
+  {
+   "word": "sozinhos",
+   "start": 26.363,
+   "end": 26.788
+  },
+  {
+   "word": "com",
+   "start": 26.825,
+   "end": 27.038
+  },
+  {
+   "word": "ele,",
+   "start": 27.056,
+   "end": 27.311
+  },
+  {
+   "word": "oitenta",
+   "start": 27.334,
+   "end": 27.716
+  },
+  {
+   "word": "e",
+   "start": 27.75,
+   "end": 27.877
+  },
+  {
+   "word": "cinco",
+   "start": 27.888,
+   "end": 28.186
+  },
+  {
+   "word": "por",
+   "start": 28.212,
+   "end": 28.424
+  },
+  {
+   "word": "cento",
+   "start": 28.443,
+   "end": 28.741
+  },
+  {
+   "word": "correram",
+   "start": 28.766,
+   "end": 29.192
+  },
+  {
+   "word": "para",
+   "start": 29.229,
+   "end": 29.484
+  },
+  {
+   "word": "ajudar",
+   "start": 29.506,
+   "end": 29.846
+  },
+  {
+   "word": "antes",
+   "start": 29.876,
+   "end": 30.173
+  },
+  {
+   "word": "do",
+   "start": 30.199,
+   "end": 30.369
+  },
+  {
+   "word": "fim",
+   "start": 30.384,
+   "end": 30.597
+  },
+  {
+   "word": "da",
+   "start": 30.615,
+   "end": 30.785
+  },
+  {
+   "word": "crise.",
+   "start": 30.8,
+   "end": 31.14
+  },
+  {
+   "word": "Quando",
+   "start": 31.51,
+   "end": 31.822
+  },
+  {
+   "word": "achavam",
+   "start": 31.849,
+   "end": 32.199
+  },
+  {
+   "word": "que",
+   "start": 32.23,
+   "end": 32.424
+  },
+  {
+   "word": "havia",
+   "start": 32.441,
+   "end": 32.714
+  },
+  {
+   "word": "mais",
+   "start": 32.738,
+   "end": 32.971
+  },
+  {
+   "word": "quatro",
+   "start": 32.991,
+   "end": 33.303
+  },
+  {
+   "word": "pessoas",
+   "start": 33.33,
+   "end": 33.681
+  },
+  {
+   "word": "ouvindo,",
+   "start": 33.711,
+   "end": 34.1
+  },
+  {
+   "word": "esse",
+   "start": 34.134,
+   "end": 34.368
+  },
+  {
+   "word": "número",
+   "start": 34.388,
+   "end": 34.7
+  },
+  {
+   "word": "caiu",
+   "start": 34.727,
+   "end": 34.961
+  },
+  {
+   "word": "para",
+   "start": 34.981,
+   "end": 35.215
+  },
+  {
+   "word": "trinta",
+   "start": 35.235,
+   "end": 35.546
+  },
+  {
+   "word": "e",
+   "start": 35.573,
+   "end": 35.69
+  },
+  {
+   "word": "um",
+   "start": 35.7,
+   "end": 35.856
+  },
+  {
+   "word": "por",
+   "start": 35.87,
+   "end": 36.064
+  },
+  {
+   "word": "cento.",
+   "start": 36.081,
+   "end": 36.393
+  },
+  {
+   "word": "Por",
+   "start": 36.9,
+   "end": 37.034
+  },
+  {
+   "word": "quê?",
+   "start": 37.045,
+   "end": 37.206
+  },
+  {
+   "word": "Porque",
+   "start": 37.67,
+   "end": 38.005
+  },
+  {
+   "word": "a",
+   "start": 38.034,
+   "end": 38.159
+  },
+  {
+   "word": "responsabilidade",
+   "start": 38.17,
+   "end": 38.923
+  },
+  {
+   "word": "se",
+   "start": 38.989,
+   "end": 39.156
+  },
+  {
+   "word": "divide.",
+   "start": 39.171,
+   "end": 39.547
+  },
+  {
+   "word": "Cada",
+   "start": 39.81,
+   "end": 40.092
+  },
+  {
+   "word": "um",
+   "start": 40.117,
+   "end": 40.305
+  },
+  {
+   "word": "pensa:",
+   "start": 40.321,
+   "end": 40.697
+  },
+  {
+   "word": "alguém",
+   "start": 40.95,
+   "end": 41.236
+  },
+  {
+   "word": "já",
+   "start": 41.261,
+   "end": 41.404
+  },
+  {
+   "word": "deve",
+   "start": 41.417,
+   "end": 41.631
+  },
+  {
+   "word": "estar",
+   "start": 41.65,
+   "end": 41.9
+  },
+  {
+   "word": "ajudando.",
+   "start": 41.922,
+   "end": 42.316
+  },
+  {
+   "word": "E",
+   "start": 42.89,
+   "end": 43.016
+  },
+  {
+   "word": "aqui",
+   "start": 43.027,
+   "end": 43.279
+  },
+  {
+   "word": "está",
+   "start": 43.301,
+   "end": 43.553
+  },
+  {
+   "word": "o",
+   "start": 43.575,
+   "end": 43.701
+  },
+  {
+   "word": "mais",
+   "start": 43.712,
+   "end": 43.963
+  },
+  {
+   "word": "importante.",
+   "start": 43.985,
+   "end": 44.531
+  },
+  {
+   "word": "Se",
+   "start": 44.579,
+   "end": 44.747
+  },
+  {
+   "word": "um",
+   "start": 44.761,
+   "end": 44.929
+  },
+  {
+   "word": "dia",
+   "start": 44.944,
+   "end": 45.154
+  },
+  {
+   "word": "você",
+   "start": 45.172,
+   "end": 45.424
+  },
+  {
+   "word": "precisar",
+   "start": 45.446,
+   "end": 45.866
+  },
+  {
+   "word": "de",
+   "start": 45.902,
+   "end": 46.07
+  },
+  {
+   "word": "ajuda,",
+   "start": 46.085,
+   "end": 46.421
+  },
+  {
+   "word": "não",
+   "start": 46.69,
+   "end": 46.954
+  },
+  {
+   "word": "peça",
+   "start": 46.977,
+   "end": 47.294
+  },
+  {
+   "word": "para",
+   "start": 47.322,
+   "end": 47.639
+  },
+  {
+   "word": "a",
+   "start": 47.666,
+   "end": 47.825
+  },
+  {
+   "word": "multidão.",
+   "start": 47.838,
+   "end": 48.419
+  },
+  {
+   "word": "Aponte",
+   "start": 48.95,
+   "end": 49.272
+  },
+  {
+   "word": "para",
+   "start": 49.3,
+   "end": 49.542
+  },
+  {
+   "word": "uma",
+   "start": 49.563,
+   "end": 49.764
+  },
+  {
+   "word": "pessoa",
+   "start": 49.782,
+   "end": 50.104
+  },
+  {
+   "word": "e",
+   "start": 50.132,
+   "end": 50.253
+  },
+  {
+   "word": "diga:",
+   "start": 50.264,
+   "end": 50.545
+  },
+  {
+   "word": "você,",
+   "start": 50.93,
+   "end": 51.291
+  },
+  {
+   "word": "de",
+   "start": 51.322,
+   "end": 51.529
+  },
+  {
+   "word": "camiseta",
+   "start": 51.547,
+   "end": 52.063
+  },
+  {
+   "word": "azul,",
+   "start": 52.107,
+   "end": 52.469
+  },
+  {
+   "word": "chame",
+   "start": 52.72,
+   "end": 52.975
+  },
+  {
+   "word": "uma",
+   "start": 52.997,
+   "end": 53.179
+  },
+  {
+   "word": "ambulância.",
+   "start": 53.195,
+   "end": 53.669
+  },
+  {
+   "word": "Agora",
+   "start": 54.29,
+   "end": 54.554
+  },
+  {
+   "word": "você",
+   "start": 54.577,
+   "end": 54.803
+  },
+  {
+   "word": "sabe.",
+   "start": 54.823,
+   "end": 55.087
+  },
+  {
+   "word": "E",
+   "start": 55.59,
+   "end": 55.69
+  },
+  {
+   "word": "quem",
+   "start": 55.699,
+   "end": 55.899
+  },
+  {
+   "word": "sabe,",
+   "start": 55.916,
+   "end": 56.15
+  },
+  {
+   "word": "ajuda.",
+   "start": 56.4,
+   "end": 56.823
+  }
+ ]
+}

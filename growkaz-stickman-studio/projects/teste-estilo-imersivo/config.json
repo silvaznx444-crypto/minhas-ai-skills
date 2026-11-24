@@ -1,0 +1,23 @@
+{
+ "title": "Teste estilo imersivo",
+ "aspect": "16:9",
+ "resolution": "1080p",
+ "fps": 24,
+ "style": "mosaico",
+ "voiceover": "input/voiceover.wav",
+ "script": null,
+ "duration": 15.0,
+ "captions": false,
+ "bars": "none",
+ "fadeIn": 0.5,
+ "fadeOut": 0.8,
+ "music": {
+  "enabled": true,
+  "gainDb": -17
+ },
+ "sfx": {
+  "enabled": true,
+  "gainDb": -6
+ },
+ "loudness": -14
+}

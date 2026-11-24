@@ -1,11 +1,11 @@
 {
  "title": "4 truques para as pessoas gostarem de voce",
- "duration": 66.19,
+ "duration": 53.98,
  "shots": [
   {
    "id": "S01",
    "start": 0,
-   "end": 5.33,
+   "end": 4.09,
    "line": "",
    "scene": "S01",
    "bars": "none",
@@ -31,8 +31,8 @@
   },
   {
    "id": "S02",
-   "start": 5.33,
-   "end": 7.62,
+   "start": 4.09,
+   "end": 6.35,
    "line": "",
    "scene": "S02",
    "bars": "none",
@@ -53,8 +53,8 @@
   },
   {
    "id": "S03",
-   "start": 7.62,
-   "end": 10.38,
+   "start": 6.35,
+   "end": 8.61,
    "line": "",
    "scene": "S03",
    "bars": "none",
@@ -76,8 +76,8 @@
   },
   {
    "id": "S04",
-   "start": 10.38,
-   "end": 15.29,
+   "start": 8.61,
+   "end": 12.27,
    "line": "",
    "scene": "S04",
    "bars": "none",
@@ -103,8 +103,8 @@
   },
   {
    "id": "S05",
-   "start": 15.29,
-   "end": 21.91,
+   "start": 12.27,
+   "end": 17.79,
    "line": "",
    "scene": "S05",
    "bars": "none",
@@ -125,8 +125,8 @@
   },
   {
    "id": "S06",
-   "start": 21.91,
-   "end": 31.59,
+   "start": 17.79,
+   "end": 26.17,
    "line": "",
    "scene": "S06",
    "bars": "none",
@@ -148,8 +148,8 @@
   },
   {
    "id": "S07",
-   "start": 31.59,
-   "end": 34.97,
+   "start": 26.17,
+   "end": 29.41,
    "line": "",
    "scene": "S07",
    "bars": "none",
@@ -175,8 +175,8 @@
   },
   {
    "id": "S08",
-   "start": 34.97,
-   "end": 37.23,
+   "start": 29.41,
+   "end": 31.2,
    "line": "",
    "scene": "S08",
    "bars": "none",
@@ -198,8 +198,8 @@
   },
   {
    "id": "S09",
-   "start": 37.23,
-   "end": 44.37,
+   "start": 31.2,
+   "end": 36.37,
    "line": "",
    "scene": "S09",
    "bars": "none",
@@ -225,8 +225,8 @@
   },
   {
    "id": "S10",
-   "start": 44.37,
-   "end": 46.45,
+   "start": 36.37,
+   "end": 38.42,
    "line": "",
    "scene": "S10",
    "bars": "none",
@@ -252,8 +252,8 @@
   },
   {
    "id": "S11",
-   "start": 46.45,
-   "end": 54.04,
+   "start": 38.42,
+   "end": 44.39,
    "line": "",
    "scene": "S11",
    "bars": "none",
@@ -280,8 +280,8 @@
   },
   {
    "id": "S12",
-   "start": 54.04,
-   "end": 56.51,
+   "start": 44.39,
+   "end": 46.6,
    "line": "",
    "scene": "S12",
    "bars": "none",
@@ -302,8 +302,8 @@
   },
   {
    "id": "S13",
-   "start": 56.51,
-   "end": 61.22,
+   "start": 46.6,
+   "end": 50.53,
    "line": "",
    "scene": "S13",
    "bars": "none",
@@ -325,8 +325,8 @@
   },
   {
    "id": "S14",
-   "start": 61.22,
-   "end": 66.19,
+   "start": 50.53,
+   "end": 53.98,
    "line": "",
    "scene": "S14",
    "bars": "none",
@@ -355,7 +355,7 @@
  "music": [
   {
    "start": 0,
-   "end": 66.19,
+   "end": 53.98,
    "mood": "playful",
    "intensity": 0.45
   }

@@ -1,710 +1,710 @@
 {
- "source": "estimado (sem áudio)",
+ "source": "pause-aligned script",
  "words": [
   {
    "word": "Quatro",
-   "start": 0.35,
-   "end": 0.757
+   "start": 0.25,
+   "end": 0.6
   },
   {
    "word": "truques",
-   "start": 0.792,
-   "end": 1.246
+   "start": 0.63,
+   "end": 1.024
   },
   {
    "word": "da",
-   "start": 1.286,
-   "end": 1.501
+   "start": 1.058,
+   "end": 1.233
   },
   {
    "word": "psicologia",
-   "start": 1.52,
-   "end": 2.118
+   "start": 1.248,
+   "end": 1.773
   },
   {
    "word": "que",
-   "start": 2.17,
-   "end": 2.433
+   "start": 1.819,
+   "end": 2.038
   },
   {
    "word": "fazem",
-   "start": 2.456,
-   "end": 2.815
+   "start": 2.057,
+   "end": 2.363
   },
   {
    "word": "as",
-   "start": 2.846,
-   "end": 3.061
+   "start": 2.389,
+   "end": 2.564
   },
   {
    "word": "pessoas",
-   "start": 3.08,
-   "end": 3.534
+   "start": 2.58,
+   "end": 2.973
   },
   {
    "word": "gostarem",
-   "start": 3.574,
-   "end": 4.076
+   "start": 3.007,
+   "end": 3.445
   },
   {
    "word": "mais",
-   "start": 4.12,
-   "end": 4.431
+   "start": 3.483,
+   "end": 3.745
   },
   {
    "word": "de",
-   "start": 4.458,
-   "end": 4.673
+   "start": 3.768,
+   "end": 3.943
   },
   {
    "word": "você.",
-   "start": 4.692,
-   "end": 5.003
+   "start": 3.958,
+   "end": 4.264
   },
   {
    "word": "E",
-   "start": 5.53,
-   "end": 5.697
+   "start": 4.291,
+   "end": 4.422
   },
   {
    "word": "o",
-   "start": 5.712,
-   "end": 5.879
+   "start": 4.434,
+   "end": 4.565
   },
   {
    "word": "terceiro",
-   "start": 5.894,
-   "end": 6.396
+   "start": 4.576,
+   "end": 5.014
   },
   {
    "word": "parece",
-   "start": 6.44,
-   "end": 6.847
+   "start": 5.052,
+   "end": 5.402
   },
   {
    "word": "errado.",
-   "start": 6.882,
-   "end": 7.289
+   "start": 5.432,
+   "end": 5.826
   },
   {
    "word": "Primeiro:",
-   "start": 7.824,
-   "end": 8.326
+   "start": 6.55,
+   "end": 7.084
   },
   {
    "word": "peça",
-   "start": 8.62,
-   "end": 8.931
+   "start": 7.37,
+   "end": 7.595
   },
   {
    "word": "um",
-   "start": 8.958,
-   "end": 9.173
+   "start": 7.614,
+   "end": 7.764
   },
   {
    "word": "pequeno",
-   "start": 9.192,
-   "end": 9.646
+   "start": 7.777,
+   "end": 8.115
   },
   {
    "word": "favor.",
-   "start": 9.686,
-   "end": 10.045
+   "start": 8.144,
+   "end": 8.444
   },
   {
    "word": "Parece",
-   "start": 10.576,
-   "end": 10.983
+   "start": 8.81,
+   "end": 9.122
   },
   {
    "word": "estranho,",
-   "start": 11.018,
-   "end": 11.52
+   "start": 9.149,
+   "end": 9.578
   },
   {
    "word": "mas",
-   "start": 11.814,
-   "end": 12.077
+   "start": 9.615,
+   "end": 9.81
   },
   {
    "word": "quem",
-   "start": 12.1,
-   "end": 12.411
+   "start": 9.827,
+   "end": 10.061
   },
   {
    "word": "te",
-   "start": 12.438,
-   "end": 12.653
+   "start": 10.081,
+   "end": 10.237
   },
   {
    "word": "ajuda",
-   "start": 12.672,
-   "end": 13.031
+   "start": 10.251,
+   "end": 10.523
   },
   {
    "word": "tende",
-   "start": 13.062,
-   "end": 13.421
+   "start": 10.547,
+   "end": 10.82
   },
   {
    "word": "a",
-   "start": 13.452,
-   "end": 13.619
+   "start": 10.844,
+   "end": 10.961
   },
   {
    "word": "gostar",
-   "start": 13.634,
-   "end": 14.041
+   "start": 10.971,
+   "end": 11.283
   },
   {
    "word": "mais",
-   "start": 14.076,
-   "end": 14.387
+   "start": 11.31,
+   "end": 11.544
   },
   {
    "word": "de",
-   "start": 14.414,
-   "end": 14.629
+   "start": 11.564,
+   "end": 11.72
   },
   {
    "word": "você.",
-   "start": 14.648,
-   "end": 14.959
+   "start": 11.733,
+   "end": 12.006
   },
   {
    "word": "É",
-   "start": 15.486,
-   "end": 15.653
+   "start": 12.47,
+   "end": 12.589
   },
   {
    "word": "o",
-   "start": 15.668,
-   "end": 15.835
+   "start": 12.599,
+   "end": 12.719
   },
   {
    "word": "efeito",
-   "start": 15.85,
-   "end": 16.257
+   "start": 12.729,
+   "end": 13.046
   },
   {
    "word": "Benjamin",
-   "start": 16.292,
-   "end": 16.794
+   "start": 13.074,
+   "end": 13.471
   },
   {
    "word": "Franklin.",
-   "start": 16.838,
-   "end": 17.34
+   "start": 13.505,
+   "end": 13.942
   },
   {
    "word": "O",
-   "start": 17.884,
-   "end": 18.051
+   "start": 14.26,
+   "end": 14.515
   },
   {
    "word": "cérebro",
-   "start": 18.066,
-   "end": 18.52
+   "start": 14.537,
+   "end": 15.303
   },
   {
    "word": "pensa:",
-   "start": 18.56,
-   "end": 18.919
+   "start": 15.37,
+   "end": 16.051
   },
   {
    "word": "se",
-   "start": 19.2,
-   "end": 19.415
+   "start": 16.35,
+   "end": 16.422
   },
   {
    "word": "eu",
-   "start": 19.434,
-   "end": 19.649
+   "start": 16.428,
+   "end": 16.5
   },
   {
    "word": "ajudei,",
-   "start": 19.668,
-   "end": 20.075
+   "start": 16.506,
+   "end": 16.667
   },
   {
    "word": "é",
-   "start": 20.36,
-   "end": 20.527
+   "start": 16.681,
+   "end": 16.735
   },
   {
    "word": "porque",
-   "start": 20.542,
-   "end": 20.949
+   "start": 16.74,
+   "end": 16.884
   },
   {
    "word": "eu",
-   "start": 20.984,
-   "end": 21.199
+   "start": 16.896,
+   "end": 16.968
   },
   {
    "word": "gosto.",
-   "start": 21.218,
-   "end": 21.577
+   "start": 16.974,
+   "end": 17.118
   },
   {
    "word": "Segundo:",
-   "start": 22.108,
-   "end": 22.562
+   "start": 17.99,
+   "end": 19.83
   },
   {
    "word": "espelhe",
-   "start": 22.852,
-   "end": 23.306
+   "start": 20.36,
+   "end": 20.704
   },
   {
    "word": "os",
-   "start": 23.346,
-   "end": 23.561
+   "start": 20.734,
+   "end": 20.888
   },
   {
    "word": "gestos.",
-   "start": 23.58,
-   "end": 23.987
+   "start": 20.901,
+   "end": 21.245
   },
   {
    "word": "Pessoas",
-   "start": 24.522,
-   "end": 24.976
+   "start": 21.275,
+   "end": 21.62
   },
   {
    "word": "que",
-   "start": 25.016,
-   "end": 25.279
+   "start": 21.65,
+   "end": 21.841
   },
   {
    "word": "imitam,",
-   "start": 25.302,
-   "end": 25.709
+   "start": 21.858,
+   "end": 22.202
   },
   {
    "word": "de",
-   "start": 25.994,
-   "end": 26.209
+   "start": 22.232,
+   "end": 22.385
   },
   {
    "word": "leve,",
-   "start": 26.228,
-   "end": 26.539
+   "start": 22.399,
+   "end": 22.667
   },
   {
    "word": "a",
-   "start": 26.816,
-   "end": 26.983
+   "start": 22.69,
+   "end": 22.805
   },
   {
    "word": "postura",
-   "start": 26.998,
-   "end": 27.452
+   "start": 22.815,
+   "end": 23.159
   },
   {
    "word": "de",
-   "start": 27.492,
-   "end": 27.707
+   "start": 23.189,
+   "end": 23.342
   },
   {
    "word": "quem",
-   "start": 27.726,
-   "end": 28.037
+   "start": 23.356,
+   "end": 23.585
   },
   {
    "word": "conversa",
-   "start": 28.064,
-   "end": 28.566
+   "start": 23.605,
+   "end": 23.988
   },
   {
    "word": "com",
-   "start": 28.61,
-   "end": 28.873
+   "start": 24.021,
+   "end": 24.213
   },
   {
    "word": "elas",
-   "start": 28.896,
-   "end": 29.207
+   "start": 24.229,
+   "end": 24.459
   },
   {
    "word": "são",
-   "start": 29.234,
-   "end": 29.497
+   "start": 24.479,
+   "end": 24.67
   },
   {
    "word": "vistas",
-   "start": 29.52,
-   "end": 29.927
+   "start": 24.687,
+   "end": 24.993
   },
   {
    "word": "como",
-   "start": 29.962,
-   "end": 30.273
+   "start": 25.02,
+   "end": 25.25
   },
   {
    "word": "mais",
-   "start": 30.3,
-   "end": 30.611
+   "start": 25.269,
+   "end": 25.499
   },
   {
    "word": "simpáticas.",
-   "start": 30.638,
-   "end": 31.236
+   "start": 25.519,
+   "end": 26.017
   },
   {
    "word": "Os",
-   "start": 31.788,
-   "end": 32.003
+   "start": 26.37,
+   "end": 26.536
   },
   {
    "word": "psicólogos",
-   "start": 32.022,
-   "end": 32.62
+   "start": 26.55,
+   "end": 27.048
   },
   {
    "word": "chamam",
-   "start": 32.672,
-   "end": 33.079
+   "start": 27.092,
+   "end": 27.423
   },
   {
    "word": "isso",
-   "start": 33.114,
-   "end": 33.425
+   "start": 27.452,
+   "end": 27.701
   },
   {
    "word": "de",
-   "start": 33.452,
-   "end": 33.667
+   "start": 27.723,
+   "end": 27.889
   },
   {
    "word": "efeito",
-   "start": 33.686,
-   "end": 34.093
+   "start": 27.903,
+   "end": 28.235
   },
   {
    "word": "camaleão.",
-   "start": 34.128,
-   "end": 34.63
+   "start": 28.264,
+   "end": 28.72
   },
   {
    "word": "Terceiro:",
-   "start": 35.174,
-   "end": 35.676
+   "start": 29.61,
+   "end": 30.14
   },
   {
    "word": "erre",
-   "start": 35.97,
-   "end": 36.281
+   "start": 30.187,
+   "end": 30.476
   },
   {
    "word": "um",
-   "start": 36.308,
-   "end": 36.523
+   "start": 30.501,
+   "end": 30.694
   },
   {
    "word": "pouco.",
-   "start": 36.542,
-   "end": 36.901
+   "start": 30.711,
+   "end": 31.096
   },
   {
    "word": "Num",
-   "start": 37.432,
-   "end": 37.695
+   "start": 31.4,
+   "end": 31.598
   },
   {
    "word": "estudo",
-   "start": 37.718,
-   "end": 38.125
+   "start": 31.615,
+   "end": 31.932
   },
   {
    "word": "clássico,",
-   "start": 38.16,
-   "end": 38.662
+   "start": 31.96,
+   "end": 32.396
   },
   {
    "word": "quando",
-   "start": 38.956,
-   "end": 39.363
+   "start": 32.434,
+   "end": 32.751
   },
   {
    "word": "alguém",
-   "start": 39.398,
-   "end": 39.805
+   "start": 32.778,
+   "end": 33.095
   },
   {
    "word": "competente",
-   "start": 39.84,
-   "end": 40.438
+   "start": 33.123,
+   "end": 33.598
   },
   {
    "word": "derrubava",
-   "start": 40.49,
-   "end": 41.04
+   "start": 33.64,
+   "end": 34.076
   },
   {
    "word": "café",
-   "start": 41.088,
-   "end": 41.399
+   "start": 34.113,
+   "end": 34.351
   },
   {
    "word": "na",
-   "start": 41.426,
-   "end": 41.641
+   "start": 34.372,
+   "end": 34.53
   },
   {
    "word": "roupa,",
-   "start": 41.66,
-   "end": 42.019
+   "start": 34.544,
+   "end": 34.861
   },
   {
    "word": "ficava",
-   "start": 42.3,
-   "end": 42.707
+   "start": 34.889,
+   "end": 35.206
   },
   {
    "word": "ainda",
-   "start": 42.742,
-   "end": 43.101
+   "start": 35.233,
+   "end": 35.511
   },
   {
    "word": "mais",
-   "start": 43.132,
-   "end": 43.443
+   "start": 35.535,
+   "end": 35.772
   },
   {
    "word": "simpático.",
-   "start": 43.47,
-   "end": 44.02
+   "start": 35.793,
+   "end": 36.269
   },
   {
    "word": "O",
-   "start": 44.568,
-   "end": 44.735
+   "start": 36.57,
+   "end": 36.693
   },
   {
    "word": "erro",
-   "start": 44.75,
-   "end": 45.061
+   "start": 36.703,
+   "end": 36.949
   },
   {
    "word": "te",
-   "start": 45.088,
-   "end": 45.303
+   "start": 36.97,
+   "end": 37.134
   },
   {
    "word": "deixa",
-   "start": 45.322,
-   "end": 45.681
+   "start": 37.148,
+   "end": 37.435
   },
   {
    "word": "humano.",
-   "start": 45.712,
-   "end": 46.119
+   "start": 37.46,
+   "end": 37.828
   },
   {
    "word": "Quarto:",
-   "start": 46.654,
-   "end": 47.061
+   "start": 38.62,
+   "end": 39.181
   },
   {
    "word": "apareça",
-   "start": 47.346,
-   "end": 47.8
+   "start": 39.23,
+   "end": 39.791
   },
   {
    "word": "com",
-   "start": 47.84,
-   "end": 48.103
+   "start": 39.84,
+   "end": 40.152
   },
   {
    "word": "frequência.",
-   "start": 48.126,
-   "end": 48.724
+   "start": 40.179,
+   "end": 40.99
   },
   {
    "word": "Quanto",
-   "start": 49.276,
-   "end": 49.683
+   "start": 41.36,
+   "end": 41.65
   },
   {
    "word": "mais",
-   "start": 49.718,
-   "end": 50.029
+   "start": 41.675,
+   "end": 41.892
   },
   {
    "word": "a",
-   "start": 50.056,
-   "end": 50.223
+   "start": 41.911,
+   "end": 42.02
   },
   {
    "word": "gente",
-   "start": 50.238,
-   "end": 50.597
+   "start": 42.029,
+   "end": 42.282
   },
   {
    "word": "vê",
-   "start": 50.628,
-   "end": 50.843
+   "start": 42.304,
+   "end": 42.449
   },
   {
    "word": "alguém,",
-   "start": 50.862,
-   "end": 51.269
+   "start": 42.462,
+   "end": 42.788
   },
   {
    "word": "mais",
-   "start": 51.554,
-   "end": 51.865
+   "start": 42.816,
+   "end": 43.033
   },
   {
    "word": "tende",
-   "start": 51.892,
-   "end": 52.251
+   "start": 43.052,
+   "end": 43.305
   },
   {
    "word": "a",
-   "start": 52.282,
-   "end": 52.449
+   "start": 43.328,
+   "end": 43.436
   },
   {
    "word": "gostar",
-   "start": 52.464,
-   "end": 52.871
+   "start": 43.446,
+   "end": 43.735
   },
   {
    "word": "dessa",
-   "start": 52.906,
-   "end": 53.265
+   "start": 43.76,
+   "end": 44.014
   },
   {
    "word": "pessoa.",
-   "start": 53.296,
-   "end": 53.703
+   "start": 44.036,
+   "end": 44.362
   },
   {
    "word": "É",
-   "start": 54.238,
-   "end": 54.405
+   "start": 44.59,
+   "end": 44.717
   },
   {
    "word": "o",
-   "start": 54.42,
-   "end": 54.587
+   "start": 44.728,
+   "end": 44.856
   },
   {
    "word": "efeito",
-   "start": 54.602,
-   "end": 55.009
+   "start": 44.867,
+   "end": 45.206
   },
   {
    "word": "da",
-   "start": 55.044,
-   "end": 55.259
+   "start": 45.236,
+   "end": 45.405
   },
   {
    "word": "mera",
-   "start": 55.278,
-   "end": 55.589
+   "start": 45.42,
+   "end": 45.675
   },
   {
    "word": "exposição.",
-   "start": 55.616,
-   "end": 56.166
+   "start": 45.697,
+   "end": 46.206
   },
   {
    "word": "Só",
-   "start": 56.714,
-   "end": 56.929
+   "start": 46.8,
+   "end": 46.974
   },
   {
    "word": "não",
-   "start": 56.948,
-   "end": 57.211
+   "start": 46.989,
+   "end": 47.206
   },
   {
    "word": "esquece:",
-   "start": 57.234,
-   "end": 57.688
+   "start": 47.225,
+   "end": 47.66
   },
   {
    "word": "nenhum",
-   "start": 57.978,
-   "end": 58.385
+   "start": 47.698,
+   "end": 48.046
   },
   {
    "word": "truque",
-   "start": 58.42,
-   "end": 58.827
+   "start": 48.076,
+   "end": 48.424
   },
   {
    "word": "substitui",
-   "start": 58.862,
-   "end": 59.412
+   "start": 48.454,
+   "end": 48.932
   },
   {
    "word": "ser",
-   "start": 59.46,
-   "end": 59.723
+   "start": 48.974,
+   "end": 49.191
   },
   {
    "word": "gentil",
-   "start": 59.746,
-   "end": 60.153
+   "start": 49.21,
+   "end": 49.558
   },
   {
    "word": "de",
-   "start": 60.188,
-   "end": 60.403
+   "start": 49.588,
+   "end": 49.762
   },
   {
    "word": "verdade.",
-   "start": 60.422,
-   "end": 60.876
+   "start": 49.777,
+   "end": 50.212
   },
   {
    "word": "Manda",
-   "start": 61.416,
-   "end": 61.775
+   "start": 50.73,
+   "end": 50.915
   },
   {
    "word": "pra",
-   "start": 61.806,
-   "end": 62.069
+   "start": 50.932,
+   "end": 51.064
   },
   {
    "word": "alguém",
-   "start": 62.092,
-   "end": 62.499
+   "start": 51.076,
+   "end": 51.287
   },
   {
    "word": "que",
-   "start": 62.534,
-   "end": 62.797
+   "start": 51.306,
+   "end": 51.438
   },
   {
    "word": "vai",
-   "start": 62.82,
-   "end": 63.083
+   "start": 51.45,
+   "end": 51.582
   },
   {
    "word": "começar",
-   "start": 63.106,
-   "end": 63.56
+   "start": 51.594,
+   "end": 51.832
   },
   {
    "word": "num",
-   "start": 63.6,
-   "end": 63.863
+   "start": 51.853,
+   "end": 51.985
   },
   {
    "word": "lugar",
-   "start": 63.886,
-   "end": 64.245
+   "start": 51.997,
+   "end": 52.182
   },
   {
    "word": "novo.",
-   "start": 64.276,
-   "end": 64.587
+   "start": 52.198,
+   "end": 52.384
   }
  ]
 }

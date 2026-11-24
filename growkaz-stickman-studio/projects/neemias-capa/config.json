@@ -1,0 +1,25 @@
+{
+ "title": "A muralha de 52 dias",
+ "aspect": "9:16",
+ "resolution": "1080p",
+ "fps": 30,
+ "style": "vivo",
+ "voiceover": "input/voiceover.wav",
+ "script": "input/script.txt",
+ "duration": 61.0,
+ "captions": false,
+ "bars": "none",
+ "fadeIn": 0,
+ "fadeOut": 0.6,
+ "music": {
+  "enabled": true,
+  "file": "audio/musica.wav",
+  "gainDb": -17
+ },
+ "sfx": {
+  "enabled": true,
+  "gainDb": -6
+ },
+ "loudness": -14,
+ "capa": true
+}

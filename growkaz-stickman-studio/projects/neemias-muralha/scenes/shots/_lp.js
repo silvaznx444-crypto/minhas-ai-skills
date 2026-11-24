@@ -221,6 +221,7 @@ export function figurante(seed, o = {}) { const r = rng(seed * 31 + 7); const pi
 // ---------------------------------------------------------------- camada 2D: legenda, etiquetas, efeitos
 const AMARELAS = new Set(['52', 'raposa', 'neemias', 'trombeta', 'arma', 'alarme', '2007', 'eilat', 'mazar', 'finkelstein', 'constrói', 'vigia', 'lanças', 'derruba', 'surpresa', 'pronta', 'inscreve', 'data', 'chão', 'família']);
 export function legenda(g, T) {
+  if (E.cfg.capa) return;
   const W = E.words; let i = -1; for (let k = 0; k < W.length; k++) { if (T >= W[k].start - 0.04) i = k; else break; }
   if (i < 0) return; const w = W[i], next = W[i + 1]; if (T > Math.min(next ? next.start : 1e9, w.end + 0.45)) return;
   let s = w.word.replace(/["“”.,!?:;…]/g, ''); if (!s) return; const low = s.toLowerCase(); s = s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
@@ -234,6 +235,7 @@ export function legenda(g, T) {
 export function tela(cam, v) { const p = v.clone().project(cam); return [(p.x + 1) / 2 * E.W, (1 - p.y) / 2 * E.H]; }
 // etiqueta em pílula branca com bolinha colorida (como "PINO DE FERRO" na referência); seta opcional até alvo [x,y]
 export function pilula(g, txt, x, y, t, o = {}) {
+  if (E.cfg.capa) return;
   const { cor = '#ff4a3d', t0 = 0, t1 = 1e9, size = 40, alvo = null } = o; if (t < t0 || t > t1) return;
   const k = ease.outBack(prog(t, t0, t0 + 0.22)), out = prog(t, t1 - 0.15, t1), a = 1 - out;
   g.save(); g.globalAlpha = a; g.font = `900 ${size}px "Nunito"`; const w = g.measureText(txt).width + size * 2.1, h = size * 1.7;
@@ -245,7 +247,7 @@ export function pilula(g, txt, x, y, t, o = {}) {
   g.beginPath(); g.arc(-w / 2 + size * 0.85, 0, size * 0.3, 0, TAU); g.fillStyle = cor; g.fill(); g.lineWidth = 3.5; g.stroke();
   g.fillStyle = '#18141e'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(txt, size * 0.35, 2); g.restore();
 }
-export function selo(g, txt, x, y, t, o = {}) { const { t0 = 0, t1 = 1e9, size = 62, cor = '#e8242e' } = o; if (t < t0 || t > t1) return; const k = ease.outBack(prog(t, t0, t0 + 0.25)), a = 1 - prog(t, t1 - 0.15, t1);
+export function selo(g, txt, x, y, t, o = {}) { if (E.cfg.capa) return; const { t0 = 0, t1 = 1e9, size = 62, cor = '#e8242e' } = o; if (t < t0 || t > t1) return; const k = ease.outBack(prog(t, t0, t0 + 0.25)), a = 1 - prog(t, t1 - 0.15, t1);
   g.save(); g.globalAlpha = a; g.translate(x, y); g.rotate(-0.05); g.scale(k, k); g.font = `700 ${size}px "Fredoka"`; const w = g.measureText(txt).width + size * 1.1, h = size * 1.55;
   g.shadowColor = 'rgba(0,0,0,.4)'; g.shadowBlur = 14; g.shadowOffsetY = 6; rr(g, -w / 2, -h / 2, w, h, 22); g.fillStyle = cor; g.fill(); g.shadowColor = 'transparent'; g.lineWidth = 7; g.strokeStyle = '#ffffff'; g.stroke();
   g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(txt, 0, 4); g.restore(); }

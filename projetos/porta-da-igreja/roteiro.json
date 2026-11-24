@@ -1,0 +1,289 @@
+{
+ "titulo": "A Porta da Igreja",
+ "parte": "PARTE 1",
+ "vozes": {
+  "eu": {
+   "voz": "Puck",
+   "cor": "#FFFFFF",
+   "estilo": "homem jovem de uns 25 anos, voz baixa, quase sussurrando, tenso e desconfiado, natural, português do Brasil"
+  },
+  "est": {
+   "voz": "Algenib",
+   "cor": "#FFA53B",
+   "estilo": "homem mais velho, uns 60 anos, voz rouca e calma, gentil mas misteriosa, um pouco arrastada, português do Brasil"
+  },
+  "pastor": {
+   "voz": "Orus",
+   "cor": "#5CD3FF",
+   "estilo": "homem de uns 50 anos, voz grave e firme, preocupado, falando rápido ao telefone, português do Brasil",
+   "telefone": true
+  }
+ },
+ "planos": [
+  {
+   "tipo": "porta",
+   "est": "fora",
+   "hora": "23:01",
+   "sfx": [
+    "chuva"
+   ],
+   "falas": [
+    [
+     "eu",
+     "Onze da noite. Ninguém aparece nessa igreja a essa hora."
+    ]
+   ]
+  },
+  {
+   "tipo": "porta",
+   "est": "longe",
+   "pose": "bate",
+   "hora": "23:01",
+   "sfx": [
+    "batida"
+   ],
+   "pausa_ini": 0.9,
+   "falas": [
+    [
+     "est",
+     "Boa noite! A igreja ainda tá aberta?"
+    ]
+   ]
+  },
+  {
+   "tipo": "porta",
+   "est": "perto",
+   "hora": "23:01",
+   "falas": [
+    [
+     "eu",
+     "Já fechou, senhor. Culto só no domingo."
+    ]
+   ]
+  },
+  {
+   "tipo": "porta",
+   "est": "perto",
+   "cara": "triste",
+   "hora": "23:01",
+   "falas": [
+    [
+     "est",
+     "Eu só queria orar um pouquinho. Faz vinte anos que não entro numa igreja."
+    ]
+   ]
+  },
+  {
+   "tipo": "porta",
+   "est": "longe",
+   "hora": "23:01",
+   "zoom_out": true,
+   "falas": [
+    [
+     "eu",
+     "Peraí, vou ver no grupo."
+    ]
+   ]
+  },
+  {
+   "tipo": "celular",
+   "hora": "23:02",
+   "dur": 5.2,
+   "sfx": [
+    "whoosh",
+    "pop@1.0",
+    "pop@2.6"
+   ],
+   "falas": []
+  },
+  {
+   "tipo": "porta",
+   "est": "perto",
+   "hora": "23:02",
+   "sfx": [
+    "whoosh"
+   ],
+   "falas": [
+    [
+     "est",
+     "Moço, é rapidinho. Tá frio aqui fora."
+    ]
+   ]
+  },
+  {
+   "tipo": "telefone",
+   "hora": "23:02",
+   "sfx": [
+    "bip@f1-2.4",
+    "chamando@f1-2.2"
+   ],
+   "pausa_ini": 0.3,
+   "falas": [
+    [
+     "eu",
+     "Vou ligar pro pastor."
+    ],
+    [
+     "pastor",
+     "Alô? Filho, tem alguém aí na porta? Não abre. Me escuta, não abre!"
+    ]
+   ],
+   "gap": 2.4
+  },
+  {
+   "tipo": "porta",
+   "est": "perto",
+   "cara": "serio",
+   "hora": "23:02",
+   "falas": [
+    [
+     "est",
+     "Ele falou pra não abrir, né? Tudo bem. Eu já esperava."
+    ],
+    [
+     "eu",
+     "Calma. Deixa eu ver a câmera."
+    ]
+   ]
+  },
+  {
+   "tipo": "cam_entrada",
+   "hora": "23:02",
+   "sfx": [
+    "estatica"
+   ],
+   "falas": [
+    [
+     "eu",
+     "Na câmera... não tem ninguém na porta. Só chuva."
+    ]
+   ]
+  },
+  {
+   "tipo": "close",
+   "cara": "serio",
+   "hora": "23:03",
+   "sfx": [
+    "impacto"
+   ],
+   "falas": [
+    [
+     "est",
+     "Você não precisa de câmera pra me ver, moço."
+    ]
+   ]
+  },
+  {
+   "tipo": "cartao",
+   "hora": "23:03",
+   "sfx": [
+    "papel"
+   ],
+   "falas": [
+    [
+     "est",
+     "Alguns acolheram anjos... sem saber."
+    ]
+   ]
+  },
+  {
+   "tipo": "porta",
+   "est": "perto",
+   "hora": "23:03",
+   "falas": [
+    [
+     "eu",
+     "Quem é o senhor?"
+    ],
+    [
+     "est",
+     "Agora há pouco eu bati na casa do seu pastor. Ele também não abriu."
+    ]
+   ]
+  },
+  {
+   "tipo": "telefone",
+   "hora": "23:03",
+   "sfx": [
+    "toque@0",
+    "bip@1.1"
+   ],
+   "pausa_ini": 1.5,
+   "falas": [
+    [
+     "pastor",
+     "Filho... tinha um homem de capa na minha porta. Ele sumiu na minha frente."
+    ]
+   ]
+  },
+  {
+   "tipo": "cam_altar",
+   "hora": "23:03",
+   "sfx": [
+    "estatica",
+    "vela@0.50",
+    "vela@0.95",
+    "vela@1.40",
+    "vela@1.85",
+    "vela@2.30"
+   ],
+   "pausa_fim": 0.6,
+   "falas": [
+    [
+     "eu",
+     "As velas do altar... acenderam sozinhas."
+    ]
+   ],
+   "pausa_ini": 0.4
+  },
+  {
+   "tipo": "close",
+   "cara": "sorriso",
+   "hora": "23:03",
+   "falas": [
+    [
+     "est",
+     "Moço, decide logo. A chuva não vai parar."
+    ]
+   ]
+  },
+  {
+   "tipo": "porta",
+   "est": "longe",
+   "pose": "bate",
+   "hora": "23:03",
+   "tremor": true,
+   "sfx": [
+    "batida"
+   ],
+   "pausa_fim": 0.6,
+   "falas": [
+    [
+     "eu",
+     "Abro a porta... ou obedeço o pastor?"
+    ]
+   ]
+  },
+  {
+   "tipo": "escolha",
+   "dur": 6.5,
+   "sfx": [
+    "tique"
+   ],
+   "opcoes": [
+    {
+     "titulo": "ABRIR",
+     "sub": "e deixa o estranho entrar",
+     "cor": "#E3262B",
+     "icone": "chave"
+    },
+    {
+     "titulo": "TRANCAR",
+     "sub": "e obedece o pastor",
+     "cor": "#2563EB",
+     "icone": "cadeado"
+    }
+   ]
+  }
+ ]
+}

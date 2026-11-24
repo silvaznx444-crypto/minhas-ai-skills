@@ -142,3 +142,7 @@ Quando o usuário disser algo como "gera X e posta às 19h":
 4. Confirme ao usuário: horário (fuso de Brasília por padrão), legenda e custo estimado.
 - Sempre `America/Sao_Paulo` se o usuário não disser o fuso.
 - Token de usuário do sistema não expira; só o de apps antigos (60 dias) precisa de `instagram.py renovar`.
+
+## Postar no YouTube Shorts
+`python3 .claude/skills/gestor-canal/scripts/youtube.py postar --video projetos/<nome>/final.mp4 --titulo "... #shorts" --descricao-arquivo projetos/<nome>/legenda.txt [--agendar 2026-11-25T19:00:00-03:00]`
+— o YouTube agenda sozinho (`publishAt`). Configuração das credenciais no SKILL.md do `gestor-canal`.

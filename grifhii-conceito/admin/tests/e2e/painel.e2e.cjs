@@ -31,7 +31,7 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
 
   try {
     await step('sem sessão: abre a tela de login (painel protegido)', async () => {
-      await page.goto(BASE + '/'); await page.getByText('Entrar no painel').waitFor(); await noHScroll(); await shot('01-login');
+      await page.goto(BASE + '/'); await page.getByText('Entrar no painel').waitFor(); await page.getByRole('link', { name: 'Primeiro acesso' }).waitFor(); await noHScroll(); await shot('01-login');
     });
     await step('configuração inicial: cria a passkey real e mostra 10 códigos de recuperação', async () => {
       await page.goto(BASE + '/#/configurar');
@@ -172,6 +172,14 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
       await page.getByText('Pronto. Só este aparelho tem acesso agora.').waitFor({ timeout: 20000 });
       if ((await page.locator('.codes span').count()) !== 10) throw new Error('esperava 10 códigos novos');
       await noHScroll(); await shot('13c-remover-acessos');
+    });
+    await step('depois do cadastro do dono, "Primeiro acesso" some da tela de entrada e a página fica fechada', async () => {
+      const d = await browser.newContext({ ...devices['iPhone 13'] }); const p2 = await d.newPage();
+      await p2.goto(BASE + '/'); await p2.getByText('Entrar no painel').waitFor(); await p2.waitForTimeout(800);
+      if (await p2.getByRole('link', { name: 'Primeiro acesso' }).count()) throw new Error('"Primeiro acesso" ainda aparece');
+      await p2.goto(BASE + '/#/configurar'); await p2.getByText('O painel já tem proprietário.').waitFor();
+      if (await p2.getByLabel('Código de configuração').count()) throw new Error('campo do código ainda aparece');
+      await p2.goto(BASE + '/#/entrar'); await p2.screenshot({ path: path.join(OUT, 'painel-13d-sem-primeiro-acesso.png') }); await d.close();
     });
     await step('sair e entrar de novo com a passkey (login real)', async () => {
       await page.getByRole('button', { name: 'Sair do painel' }).click();

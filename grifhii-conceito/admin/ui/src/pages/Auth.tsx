@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { api, passkeyLogin, passkeyRegister, setCsrf } from '../lib.ts';
 import { Button, ErrorNotice } from '../ui.tsx';
 
@@ -13,6 +13,9 @@ const passkeyHint = <p className="muted" style={{ fontSize: 13, textAlign: 'cent
 
 export function Login({ onDone }: { onDone: () => void }) {
   const [error, setError] = useState<unknown>(null);
+  // "Primeiro acesso" só aparece antes de existir o proprietário (depois, o cadastro inicial está fechado).
+  const [setupOpen, setSetupOpen] = useState(false);
+  useEffect(() => { api<{ setupOpen: boolean }>('auth/setup/status').then(r => setSetupOpen(!!r.setupOpen)).catch(() => setSetupOpen(false)); }, []);
   return <Shell title="Entrar no painel">
     {passkeyHint}
     <ErrorNotice error={error} />
@@ -22,7 +25,7 @@ export function Login({ onDone }: { onDone: () => void }) {
       catch (e) { setError((e as Error).name === 'NotAllowedError' ? { message: 'Confirmação cancelada. Tente novamente.' } : e); }
     }}>Entrar com Face ID / chave de acesso</Button>
     <div className="row between" style={{ fontSize: 13 }}>
-      <a href="#/recuperar">Perdi meu aparelho</a><a href="#/configurar">Primeiro acesso</a>
+      <a href="#/recuperar">Perdi meu aparelho</a>{setupOpen && <a href="#/configurar">Primeiro acesso</a>}
     </div>
   </Shell>;
 }
@@ -40,7 +43,14 @@ function RecoveryCodes({ codes, onDone }: { codes: string[]; onDone: () => void 
 export function Setup({ onDone }: { onDone: () => void }) {
   const [token, setToken] = useState(''); const [name, setName] = useState('');
   const [error, setError] = useState<unknown>(null); const [codes, setCodes] = useState<string[] | null>(null);
+  const [open, setOpen] = useState<boolean | null>(null);
+  useEffect(() => { api<{ setupOpen: boolean }>('auth/setup/status').then(r => setOpen(!!r.setupOpen)).catch(() => setOpen(false)); }, []);
   if (codes) return <RecoveryCodes codes={codes} onDone={onDone} />;
+  if (open === false) return <Shell title="Configuração inicial">
+    <div className="notice">O painel já tem proprietário. Para entrar com outro aparelho, use “Cadastrar outro aparelho” em um aparelho que já entra, ou “Perdi meu aparelho” com um código de recuperação.</div>
+    <a className="btn block" href="#/entrar">Voltar para entrar</a>
+  </Shell>;
+  if (open === null) return <Shell title="Configuração inicial"><p className="muted">Carregando…</p></Shell>;
   return <Shell title="Configuração inicial">
     <p className="muted" style={{ fontSize: 14 }}>Cadastro único do proprietário. Use o código de configuração definido na implantação.</p>
     <label className="field">Seu nome<input className="input" value={name} onChange={e => setName(e.target.value)} autoComplete="name" maxLength={80} /></label>

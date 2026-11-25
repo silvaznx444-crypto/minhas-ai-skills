@@ -155,3 +155,12 @@ test('corpo JSON excessivo é recusado', async () => {
   assert.equal(r.status, 413);
 });
 test(`origem configurada é exata (${ORIGIN})`, () => assert.ok(ORIGIN.startsWith('https://')));
+
+test('"Primeiro acesso" some depois que o proprietário existe (status público só diz aberto/fechado)', async () => {
+  const env = makeEnv();
+  const r1 = await call(env, req('auth/setup/status'));
+  assert.equal(r1.status, 200); assert.deepEqual(await r1.json(), { setupOpen: true });
+  await makeUser(env, 'OWNER');
+  const r2 = await call(env, req('auth/setup/status'));
+  assert.deepEqual(await r2.json(), { setupOpen: false });
+});

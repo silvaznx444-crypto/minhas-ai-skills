@@ -45,6 +45,11 @@ const sessionJson = (s: { csrf: string }, user: { id: string; role: string; disp
 export async function handleAuth(req: Request, env: Env, path: string): Promise<Response | null> {
   const m = req.method;
 
+  // A tela de entrada só mostra "Primeiro acesso" enquanto não existe proprietário.
+  if (path === 'auth/setup/status' && m === 'GET') {
+    const owner = await env.DB.prepare("SELECT 1 AS x FROM users WHERE role = 'OWNER'").first();
+    return json({ setupOpen: !owner });
+  }
   // ---------- Cadastro do PRIMEIRO proprietário (uso único, exige ADMIN_SETUP_TOKEN) ----------
   if (path === 'auth/setup/options' && m === 'POST') {
     sameOrigin(env, req);

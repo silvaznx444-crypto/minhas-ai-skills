@@ -6,7 +6,7 @@ import { Button, ErrorNotice, Loading, StatusBadge, useLoad, useSession, useToas
 const OPS: Record<string, string> = { 'product.create': 'Novo produto', 'product.add_color': 'Nova cor', 'media.attach': 'Fotos/3D', 'product.update_price': 'Preço', 'product.publish': 'Publicar', 'product.unpublish': 'Ocultar' };
 const ACTIONS: Record<string, string> = { 'auth.login': 'Entrou no painel', 'auth.logout': 'Saiu', 'auth.reauth': 'Confirmou identidade', 'auth.setup': 'Configuração inicial',
   'product.create': 'Produto criado', 'product.add_color': 'Cor adicionada', 'media.attach': 'Fotos/3D atualizados', 'product.update_price': 'Preço alterado', 'product.publish': 'Produto publicado', 'product.unpublish': 'Produto ocultado',
-  'inventory.set': 'Estoque alterado', 'media.upload': 'Imagem enviada', 'settings.update': 'Configurações alteradas', 'users.invite': 'Convite criado', 'users.update': 'Usuário alterado', 'users.rename_self': 'Nome da conta alterado',
+  'inventory.set': 'Estoque alterado', 'media.upload': 'Imagem enviada', 'settings.update': 'Configurações alteradas', 'users.invite': 'Convite criado', 'users.update': 'Usuário alterado', 'users.rename_self': 'Nome da conta alterado', 'auth.access_reset': 'Todos os outros acessos removidos',
   'sync.reconcile': 'Reconciliação', 'operation.retry': 'Nova tentativa', 'categories.create': 'Categoria criada' };
 
 /** Atalho na tela inicial: visitas do site nos últimos 7 dias. */
@@ -161,9 +161,35 @@ export function Settings() {
       <h2>Segurança</h2>
       <MyName />
       <Devices />
+      <ResetAccess onDone={() => users.reload()} />
       <Button kind="ghost" busyText="Gerando…" onClick={async () => { if (!confirm('Gerar novos códigos invalida os anteriores. Continuar?')) return; try { const r = await withStepUp(() => api('auth/recovery-codes', { method: 'POST', body: {} })); setCodes(r.recoveryCodes); } catch (e) { setError(e); } }}>Gerar novos códigos de recuperação</Button>
       {codes && <><div className="notice warn">Anote agora: estes códigos não serão mostrados de novo.</div><div className="codes">{codes.map(c => <span key={c}>{c}</span>)}</div></>}
     </section>
+  </div>;
+}
+
+/** Remove todos os outros acessos: fica só ESTE aparelho (o que acabou de confirmar com Face ID). */
+function ResetAccess({ onDone }: { onDone: () => void }) {
+  const [typed, setTyped] = useState(''); const [error, setError] = useState<unknown>(null);
+  const [result, setResult] = useState<{ summary: Record<string, number>; recoveryCodes: string[] } | null>(null);
+  const toast = useToast();
+  if (result) return <div className="stack">
+    <div className="notice ok">Pronto. Só este aparelho tem acesso agora.<br />
+      Chaves de outros aparelhos removidas: {result.summary.ownerKeysRemoved} · Sessões encerradas: {result.summary.ownerSessionsEnded} · Usuários desativados: {result.summary.usersDisabled} · Convites cancelados: {result.summary.invitesCancelled}</div>
+    <div className="notice warn">Novos códigos de recuperação — anote em papel AGORA (os antigos não valem mais; não aparecem de novo):</div>
+    <div className="codes">{result.recoveryCodes.map(c => <span key={c}>{c}</span>)}</div>
+  </div>;
+  return <div className="stack" style={{ borderTop: '1px solid rgba(0,0,0,.08)', paddingTop: 16 }}>
+    <h3 style={{ margin: 0 }}>Remover todos os outros acessos</h3>
+    <p className="muted" style={{ fontSize: 14, margin: 0 }}>Use no aparelho que vai CONTINUAR com acesso (o celular do proprietário). Fica só este aparelho; todos os outros aparelhos, sessões abertas, funcionários, gerentes, convites e links de cadastro deixam de funcionar. Os códigos de recuperação antigos são trocados por novos.</p>
+    <label className="field">Para confirmar, digite REMOVER<input className="input" value={typed} autoCapitalize="characters" autoCorrect="off" spellCheck={false} onChange={e => setTyped(e.target.value)} /></label>
+    <ErrorNotice error={error} />
+    <Button kind="danger" disabled={typed.trim() !== 'REMOVER'} busyText="Removendo…" onClick={async () => {
+      if (!confirm('Remover TODOS os outros acessos? Só este aparelho continuará entrando no painel.')) return;
+      setError(null);
+      try { const r = await withStepUp(() => api('auth/security/reset', { method: 'POST', body: { confirm: 'REMOVER' } })); setResult(r); toast('Acessos removidos.'); onDone(); }
+      catch (e) { setError(e); }
+    }}>Remover todos os outros acessos (pede Face ID)</Button>
   </div>;
 }
 

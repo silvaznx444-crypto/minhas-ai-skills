@@ -218,7 +218,7 @@ export async function handleAuth(req: Request, env: Env, path: string): Promise<
 
   // ---------- Daqui em diante: exige sessão ----------
   if (!path.startsWith('auth/session') && !path.startsWith('auth/logout') && !path.startsWith('auth/reauth') && !path.startsWith('auth/users')
-    && !path.startsWith('auth/passkeys') && !path.startsWith('auth/invites') && path !== 'auth/recovery-codes' && path !== 'auth/device-links' && path !== 'auth/me') return null;
+    && !path.startsWith('auth/passkeys') && !path.startsWith('auth/invites') && path !== 'auth/recovery-codes' && path !== 'auth/device-links' && path !== 'auth/me' && path !== 'auth/security/reset') return null;
   const p = await loadPrincipal(env, req);
   verifyCsrf(env, req, p);
 
@@ -323,6 +323,37 @@ export async function handleAuth(req: Request, env: Env, path: string): Promise<
     if (!r.meta.changes) throw errors.notFound();
     await audit(env.DB, { userId: p.userId, action: 'auth.passkey_removed', result: 'success' });
     return json({ ok: true });
+  }
+  // "Remover todos os outros acessos": fica só o aparelho que o proprietário acabou de confirmar com Face ID.
+  if (path === 'auth/security/reset' && m === 'POST') {
+    requirePermission(p, 'users:manage');
+    requireRecentAuth(p);
+    parse(z.object({ confirm: z.literal('REMOVER') }).strict(), await readJson(req));
+    const now = Date.now();
+    // A chave usada na reconfirmação (Face ID) é a de uso mais recente — é a que fica.
+    const keep = await env.DB.prepare('SELECT credential_id, last_used_at FROM passkeys WHERE user_id = ? ORDER BY last_used_at DESC LIMIT 1')
+      .bind(p.userId).first<{ credential_id: string; last_used_at: number | null }>();
+    if (!keep || !keep.last_used_at || now - keep.last_used_at > 6 * 60 * 1000) throw errors.stepUp();
+    const count = async (sql: string, ...args: unknown[]) => (await env.DB.prepare(sql).bind(...args).first<{ n: number }>())?.n ?? 0;
+    const summary = {
+      ownerKeysRemoved: await count('SELECT COUNT(*) AS n FROM passkeys WHERE user_id = ? AND credential_id <> ?', p.userId, keep.credential_id),
+      ownerSessionsEnded: await count('SELECT COUNT(*) AS n FROM sessions WHERE user_id = ? AND id <> ? AND revoked_at IS NULL', p.userId, p.sessionId),
+      usersDisabled: await count("SELECT COUNT(*) AS n FROM users WHERE id <> ? AND status = 'active'", p.userId),
+      invitesCancelled: await count('SELECT COUNT(*) AS n FROM invites WHERE used_at IS NULL AND expires_at > ?', now),
+      deviceLinksCancelled: await count('SELECT COUNT(*) AS n FROM device_links WHERE used_at IS NULL AND expires_at > ?', now),
+    };
+    await env.DB.batch([
+      env.DB.prepare('DELETE FROM passkeys WHERE user_id = ? AND credential_id <> ?').bind(p.userId, keep.credential_id),
+      env.DB.prepare('UPDATE sessions SET revoked_at = ? WHERE user_id = ? AND id <> ? AND revoked_at IS NULL').bind(now, p.userId, p.sessionId),
+      env.DB.prepare("UPDATE users SET status = 'disabled', updated_at = ? WHERE id <> ? AND status = 'active'").bind(now, p.userId),
+      env.DB.prepare('UPDATE sessions SET revoked_at = ? WHERE user_id <> ? AND revoked_at IS NULL').bind(now, p.userId),
+      env.DB.prepare('DELETE FROM passkeys WHERE user_id <> ?').bind(p.userId),
+      env.DB.prepare('UPDATE invites SET used_at = ? WHERE used_at IS NULL').bind(now),
+      env.DB.prepare('UPDATE device_links SET used_at = ? WHERE used_at IS NULL').bind(now),
+    ]);
+    const recoveryCodes = await issueRecoveryCodes(env, p.userId);
+    await audit(env.DB, { userId: p.userId, action: 'auth.access_reset', result: 'success', details: summary });
+    return json({ ok: true, summary, recoveryCodes });
   }
   if (path === 'auth/recovery-codes' && m === 'POST') {
     requireRecentAuth(p);

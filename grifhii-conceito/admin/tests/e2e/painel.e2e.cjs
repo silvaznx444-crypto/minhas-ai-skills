@@ -22,7 +22,7 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
   const page = await ctx.newPage();
   const errors = []; page.on('pageerror', e => errors.push(e.message));
   page.on('dialog', d => d.accept());
-  page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource: the server responded with a status of (401|409)/.test(m.text())) errors.push(m.text()); });
+  page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource: the server responded with a status of (401|403|409)/.test(m.text())) errors.push(m.text()); });
   const cdp = await ctx.newCDPSession(page);
   await cdp.send('WebAuthn.enable');
   const { authenticatorId } = await cdp.send('WebAuthn.addVirtualAuthenticator', { options: { protocol: 'ctap2', transport: 'internal', hasResidentKey: true, hasUserVerification: true, isUserVerified: true, automaticPresenceSimulation: true } });
@@ -161,6 +161,17 @@ const step = async (name, fn) => { try { await fn(); results.push(['ok', name]);
       await page.getByText('Camiseta diesel masculina').first().waitFor();
       await page.getByText('Banner Black Friday').waitFor();
       await noHScroll(); await shot('13b-visitas');
+    });
+    await step('remover todos os outros acessos: pede REMOVER + Face ID, mostra novos códigos e o aparelho continua entrando', async () => {
+      await page.goto(BASE + '/#/configuracoes');
+      await page.getByRole('heading', { name: 'Remover todos os outros acessos' }).waitFor();
+      const btn = page.getByRole('button', { name: /Remover todos os outros acessos/ });
+      if (!(await btn.isDisabled())) throw new Error('botão deveria ficar bloqueado sem digitar REMOVER');
+      await page.getByLabel('Para confirmar, digite REMOVER').fill('REMOVER');
+      await btn.click();
+      await page.getByText('Pronto. Só este aparelho tem acesso agora.').waitFor({ timeout: 20000 });
+      if ((await page.locator('.codes span').count()) !== 10) throw new Error('esperava 10 códigos novos');
+      await noHScroll(); await shot('13c-remover-acessos');
     });
     await step('sair e entrar de novo com a passkey (login real)', async () => {
       await page.getByRole('button', { name: 'Sair do painel' }).click();

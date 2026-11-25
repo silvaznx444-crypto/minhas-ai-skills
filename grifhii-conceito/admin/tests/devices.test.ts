@@ -85,3 +85,40 @@ test('trocar o próprio nome (passar a conta ao proprietário): exige reconfirma
   const a = await env.DB.prepare("SELECT COUNT(*) AS n FROM audit_logs WHERE action = 'users.rename_self'").first<any>();
   assert.equal(a.n, 1);
 });
+
+test('remover todos os outros acessos: fica só a chave do Face ID que acabou de confirmar; o resto para de funcionar', async () => {
+  const env = makeEnv();
+  const owner = await makeUser(env, 'OWNER');
+  const otherSession = await makeUser(env, 'MANAGER'); // apenas para ter outra conta ativa
+  await addKey(env, owner.id, 'chave-pc-antiga-0123456789'); await addKey(env, owner.id, 'chave-iphone-dono-0123456789');
+  await addKey(env, otherSession.id, 'chave-gerente-0123456789');
+  // segunda sessão do dono (ex.: o computador antigo)
+  const t = Date.now();
+  await env.DB.prepare(`INSERT INTO sessions (id,token_hash,user_id,csrf_token,created_at,last_seen_at,authenticated_at,expires_at) VALUES ('sessao-pc',?,?, 'x',?,?,?,?)`).bind('hash-pc', owner.id, t, t, t, t + 3600_000).run();
+  await env.DB.prepare(`INSERT INTO invites (id,token_hash,role,permissions,display_name,created_by,expires_at,created_at) VALUES ('conv1','h1','EMPLOYEE','[]','X',?,?,?)`).bind(owner.id, t + 3600_000, t).run();
+  const oldCodes = await (await call(env, req('auth/recovery-codes', { method: 'POST', user: owner, body: {} }))).json() as any;
+
+  // sem digitar REMOVER → recusado
+  assert.equal((await call(env, req('auth/security/reset', { method: 'POST', user: owner, body: {} }))).status, 422);
+  // gerente não pode
+  assert.equal((await call(env, req('auth/security/reset', { method: 'POST', user: otherSession, body: { confirm: 'REMOVER' } }))).status, 403);
+  // nenhuma chave confirmada agora (Face ID) → pede reconfirmação
+  assert.equal((await call(env, req('auth/security/reset', { method: 'POST', user: owner, body: { confirm: 'REMOVER' } }))).status, 403);
+
+  await env.DB.prepare('UPDATE passkeys SET last_used_at = ? WHERE credential_id = ?').bind(Date.now(), 'chave-iphone-dono-0123456789').run();
+  const r = await call(env, req('auth/security/reset', { method: 'POST', user: owner, body: { confirm: 'REMOVER' } }));
+  assert.equal(r.status, 200);
+  const b = await r.json() as any;
+  assert.equal(b.summary.ownerKeysRemoved, 1); assert.equal(b.summary.ownerSessionsEnded, 1); assert.equal(b.summary.usersDisabled, 1); assert.equal(b.summary.invitesCancelled, 1);
+  assert.equal(b.recoveryCodes.length, 10);
+  const keys = (await env.DB.prepare('SELECT credential_id FROM passkeys').all<any>()).results.map((k: any) => k.credential_id);
+  assert.deepEqual(keys, ['chave-iphone-dono-0123456789'], 'só a chave do iPhone do dono');
+  assert.equal((await call(env, req('auth/session', { user: owner }))).status, 200, 'a sessão atual continua');
+  assert.ok((await env.DB.prepare("SELECT revoked_at FROM sessions WHERE id = 'sessao-pc'").first<any>()).revoked_at, 'sessão do PC encerrada');
+  assert.equal((await call(env, req('auth/session', { user: otherSession }))).status, 401, 'gerente fora');
+  assert.equal((await env.DB.prepare('SELECT status FROM users WHERE id = ?').bind(otherSession.id).first<any>()).status, 'disabled');
+  assert.ok((await env.DB.prepare("SELECT used_at FROM invites WHERE id = 'conv1'").first<any>()).used_at, 'convite cancelado');
+  const old = await call(env, req('auth/recovery/options', { method: 'POST', body: { code: oldCodes.recoveryCodes[0] } }));
+  assert.equal(old.status, 401, 'código de recuperação antigo não vale mais');
+  assert.equal((await env.DB.prepare("SELECT COUNT(*) AS n FROM audit_logs WHERE action = 'auth.access_reset'").first<any>()).n, 1);
+});

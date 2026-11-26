@@ -1,0 +1,577 @@
+{
+ "title": "Os 3 estilos de apego",
+ "duration": 71.83,
+ "shots": [
+  {
+   "id": "S01",
+   "start": 0,
+   "end": 2.57,
+   "line": "",
+   "scene": "S01",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "shimmer",
+     "gain": -16
+    },
+    {
+     "at": 0.5,
+     "name": "pop",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -34
+   }
+  },
+  {
+   "id": "S02",
+   "start": 2.57,
+   "end": 5.1,
+   "line": "",
+   "scene": "S02",
+   "bars": "none",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "blip",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -32
+   }
+  },
+  {
+   "id": "S03",
+   "start": 5.1,
+   "end": 9.45,
+   "line": "",
+   "scene": "S03",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "swish",
+     "gain": -20
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -32
+   }
+  },
+  {
+   "id": "S04",
+   "start": 9.45,
+   "end": 13.39,
+   "line": "",
+   "scene": "S04",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "ding",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -32
+   }
+  },
+  {
+   "id": "S05",
+   "start": 13.39,
+   "end": 23.03,
+   "line": "",
+   "scene": "S05",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 5.35,
+     "name": "shimmer",
+     "gain": -12
+    },
+    {
+     "at": 6.85,
+     "name": "pop",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -32
+   }
+  },
+  {
+   "id": "S06",
+   "start": 23.03,
+   "end": 26.1,
+   "line": "",
+   "scene": "S06",
+   "bars": "none",
+   "in": {
+    "type": "fade",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "stinger",
+     "gain": -18
+    },
+    {
+     "at": 1.0,
+     "name": "pop",
+     "gain": -16
+    },
+    {
+     "at": 1.3,
+     "name": "pop",
+     "gain": -16
+    },
+    {
+     "at": 1.6,
+     "name": "pop",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -36
+   }
+  },
+  {
+   "id": "S07",
+   "start": 26.1,
+   "end": 28.19,
+   "line": "",
+   "scene": "S07",
+   "bars": "none",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "ding",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S08",
+   "start": 28.19,
+   "end": 30.48,
+   "line": "",
+   "scene": "S08",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "thunder",
+     "gain": -22
+    },
+    {
+     "at": 0.6,
+     "name": "heartbeat",
+     "gain": -18
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S09",
+   "start": 30.48,
+   "end": 33.27,
+   "line": "",
+   "scene": "S09",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.25,
+     "name": "blip",
+     "gain": -12
+    },
+    {
+     "at": 1.44,
+     "name": "blip",
+     "gain": -12
+    },
+    {
+     "at": 2.26,
+     "name": "blip",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S10",
+   "start": 33.27,
+   "end": 36.71,
+   "line": "",
+   "scene": "S10",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "clock",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S11",
+   "start": 36.71,
+   "end": 38.85,
+   "line": "",
+   "scene": "S11",
+   "bars": "none",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "ding",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -34
+   }
+  },
+  {
+   "id": "S12",
+   "start": 38.85,
+   "end": 42.85,
+   "line": "",
+   "scene": "S12",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.35,
+     "name": "pop",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -34
+   }
+  },
+  {
+   "id": "S13",
+   "start": 42.85,
+   "end": 47.14,
+   "line": "",
+   "scene": "S13",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "powerup",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -34
+   }
+  },
+  {
+   "id": "S14",
+   "start": 47.14,
+   "end": 49.36,
+   "line": "",
+   "scene": "S14",
+   "bars": "none",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "ding",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -34
+   }
+  },
+  {
+   "id": "S15",
+   "start": 49.36,
+   "end": 51.92,
+   "line": "",
+   "scene": "S15",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.7,
+     "name": "pop",
+     "gain": -16
+    },
+    {
+     "at": 0.9,
+     "name": "shimmer",
+     "gain": -18
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -34
+   }
+  },
+  {
+   "id": "S16",
+   "start": 51.92,
+   "end": 54.09,
+   "line": "",
+   "scene": "S16",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "swish",
+     "gain": -18
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -34
+   }
+  },
+  {
+   "id": "S17",
+   "start": 54.09,
+   "end": 56.56,
+   "line": "",
+   "scene": "S17",
+   "bars": "none",
+   "in": {
+    "type": "fade",
+    "dur": 0.35
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -34
+   }
+  },
+  {
+   "id": "S18",
+   "start": 56.56,
+   "end": 59.27,
+   "line": "",
+   "scene": "S18",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 1.62,
+     "name": "pop",
+     "gain": -8
+    },
+    {
+     "at": 1.67,
+     "name": "hit",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -34
+   }
+  },
+  {
+   "id": "S19",
+   "start": 59.27,
+   "end": 62.1,
+   "line": "",
+   "scene": "S19",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 1.8,
+     "name": "cheer",
+     "gain": -20
+    }
+   ],
+   "amb": {
+    "name": "wind",
+    "gain": -34
+   }
+  },
+  {
+   "id": "S20",
+   "start": 62.1,
+   "end": 63.61,
+   "line": "",
+   "scene": "S20",
+   "bars": "none",
+   "in": {
+    "type": "whip",
+    "dur": 0.3
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "phonebuzz",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -30
+   }
+  },
+  {
+   "id": "S21",
+   "start": 63.61,
+   "end": 66.31,
+   "line": "",
+   "scene": "S21",
+   "bars": "none",
+   "in": {
+    "type": "fade",
+    "dur": 0.35
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "pop",
+     "gain": -16
+    },
+    {
+     "at": 0.65,
+     "name": "pop",
+     "gain": -16
+    },
+    {
+     "at": 0.9,
+     "name": "pop",
+     "gain": -16
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -36
+   }
+  },
+  {
+   "id": "S22",
+   "start": 66.31,
+   "end": 71.83,
+   "line": "",
+   "scene": "S22",
+   "bars": "none",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "cheer",
+     "gain": -16
+    },
+    {
+     "at": 0.4,
+     "name": "ding",
+     "gain": -12
+    }
+   ],
+   "amb": {
+    "name": "roomtone",
+    "gain": -36
+   }
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 54.09,
+   "mood": "calm",
+   "intensity": 0.42
+  },
+  {
+   "start": 54.09,
+   "end": 71.83,
+   "mood": "hopeful",
+   "intensity": 0.5
+  }
+ ]
+}

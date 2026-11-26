@@ -1,11 +1,11 @@
 {
  "title": "Os 3 estilos de apego",
- "duration": 71.83,
+ "duration": 60.27,
  "shots": [
   {
    "id": "S01",
    "start": 0,
-   "end": 2.57,
+   "end": 1.7,
    "line": "",
    "scene": "S01",
    "bars": "none",
@@ -31,8 +31,8 @@
   },
   {
    "id": "S02",
-   "start": 2.57,
-   "end": 5.1,
+   "start": 1.7,
+   "end": 3.82,
    "line": "",
    "scene": "S02",
    "bars": "none",
@@ -54,8 +54,8 @@
   },
   {
    "id": "S03",
-   "start": 5.1,
-   "end": 9.45,
+   "start": 3.82,
+   "end": 7.5,
    "line": "",
    "scene": "S03",
    "bars": "none",
@@ -76,8 +76,8 @@
   },
   {
    "id": "S04",
-   "start": 9.45,
-   "end": 13.39,
+   "start": 7.5,
+   "end": 10.97,
    "line": "",
    "scene": "S04",
    "bars": "none",
@@ -98,8 +98,8 @@
   },
   {
    "id": "S05",
-   "start": 13.39,
-   "end": 23.03,
+   "start": 10.97,
+   "end": 18.84,
    "line": "",
    "scene": "S05",
    "bars": "none",
@@ -108,12 +108,12 @@
    },
    "sfx": [
     {
-     "at": 5.35,
+     "at": 4.31,
      "name": "shimmer",
      "gain": -12
     },
     {
-     "at": 6.85,
+     "at": 5.81,
      "name": "pop",
      "gain": -16
     }
@@ -125,8 +125,8 @@
   },
   {
    "id": "S06",
-   "start": 23.03,
-   "end": 26.1,
+   "start": 18.84,
+   "end": 21.59,
    "line": "",
    "scene": "S06",
    "bars": "none",
@@ -163,8 +163,8 @@
   },
   {
    "id": "S07",
-   "start": 26.1,
-   "end": 28.19,
+   "start": 21.59,
+   "end": 23.38,
    "line": "",
    "scene": "S07",
    "bars": "none",
@@ -186,8 +186,8 @@
   },
   {
    "id": "S08",
-   "start": 28.19,
-   "end": 30.48,
+   "start": 23.38,
+   "end": 24.95,
    "line": "",
    "scene": "S08",
    "bars": "none",
@@ -213,8 +213,8 @@
   },
   {
    "id": "S09",
-   "start": 30.48,
-   "end": 33.27,
+   "start": 24.95,
+   "end": 27.12,
    "line": "",
    "scene": "S09",
    "bars": "none",
@@ -228,12 +228,12 @@
      "gain": -12
     },
     {
-     "at": 1.44,
+     "at": 1.16,
      "name": "blip",
      "gain": -12
     },
     {
-     "at": 2.26,
+     "at": 1.91,
      "name": "blip",
      "gain": -12
     }
@@ -245,8 +245,8 @@
   },
   {
    "id": "S10",
-   "start": 33.27,
-   "end": 36.71,
+   "start": 27.12,
+   "end": 30.57,
    "line": "",
    "scene": "S10",
    "bars": "none",
@@ -267,8 +267,8 @@
   },
   {
    "id": "S11",
-   "start": 36.71,
-   "end": 38.85,
+   "start": 30.57,
+   "end": 32.67,
    "line": "",
    "scene": "S11",
    "bars": "none",
@@ -290,8 +290,8 @@
   },
   {
    "id": "S12",
-   "start": 38.85,
-   "end": 42.85,
+   "start": 32.67,
+   "end": 35.51,
    "line": "",
    "scene": "S12",
    "bars": "none",
@@ -312,8 +312,8 @@
   },
   {
    "id": "S13",
-   "start": 42.85,
-   "end": 47.14,
+   "start": 35.51,
+   "end": 39.33,
    "line": "",
    "scene": "S13",
    "bars": "none",
@@ -334,8 +334,8 @@
   },
   {
    "id": "S14",
-   "start": 47.14,
-   "end": 49.36,
+   "start": 39.33,
+   "end": 41.34,
    "line": "",
    "scene": "S14",
    "bars": "none",
@@ -357,8 +357,8 @@
   },
   {
    "id": "S15",
-   "start": 49.36,
-   "end": 51.92,
+   "start": 41.34,
+   "end": 43.59,
    "line": "",
    "scene": "S15",
    "bars": "none",
@@ -384,8 +384,8 @@
   },
   {
    "id": "S16",
-   "start": 51.92,
-   "end": 54.09,
+   "start": 43.59,
+   "end": 45.9,
    "line": "",
    "scene": "S16",
    "bars": "none",
@@ -406,8 +406,8 @@
   },
   {
    "id": "S17",
-   "start": 54.09,
-   "end": 56.56,
+   "start": 45.9,
+   "end": 47.66,
    "line": "",
    "scene": "S17",
    "bars": "none",
@@ -429,8 +429,8 @@
   },
   {
    "id": "S18",
-   "start": 56.56,
-   "end": 59.27,
+   "start": 47.66,
+   "end": 49.81,
    "line": "",
    "scene": "S18",
    "bars": "none",
@@ -439,12 +439,12 @@
    },
    "sfx": [
     {
-     "at": 1.62,
+     "at": 1.29,
      "name": "pop",
      "gain": -8
     },
     {
-     "at": 1.67,
+     "at": 1.34,
      "name": "hit",
      "gain": -16
     }
@@ -456,8 +456,8 @@
   },
   {
    "id": "S19",
-   "start": 59.27,
-   "end": 62.1,
+   "start": 49.81,
+   "end": 52.07,
    "line": "",
    "scene": "S19",
    "bars": "none",
@@ -478,8 +478,8 @@
   },
   {
    "id": "S20",
-   "start": 62.1,
-   "end": 63.61,
+   "start": 52.07,
+   "end": 53.57,
    "line": "",
    "scene": "S20",
    "bars": "none",
@@ -501,8 +501,8 @@
   },
   {
    "id": "S21",
-   "start": 63.61,
-   "end": 66.31,
+   "start": 53.57,
+   "end": 55.71,
    "line": "",
    "scene": "S21",
    "bars": "none",
@@ -534,8 +534,8 @@
   },
   {
    "id": "S22",
-   "start": 66.31,
-   "end": 71.83,
+   "start": 55.71,
+   "end": 60.27,
    "line": "",
    "scene": "S22",
    "bars": "none",
@@ -563,13 +563,13 @@
  "music": [
   {
    "start": 0,
-   "end": 54.09,
+   "end": 45.9,
    "mood": "calm",
    "intensity": 0.42
   },
   {
-   "start": 54.09,
-   "end": 71.83,
+   "start": 45.9,
+   "end": 60.27,
    "mood": "hopeful",
    "intensity": 0.5
   }

@@ -1,0 +1,28 @@
+{
+ "title": "4 sinais que destroem um relacionamento",
+ "aspect": "9:16",
+ "resolution": "1080p",
+ "fps": 30,
+ "style": "mosaico",
+ "voiceover": "input/voiceover.wav",
+ "script": "input/script.txt",
+ "duration": 61.0,
+ "captions": false,
+ "bars": "none",
+ "fadeIn": 0.5,
+ "fadeOut": 0.8,
+ "music": {
+  "enabled": true,
+  "gainDb": -19
+ },
+ "sfx": {
+  "enabled": true,
+  "gainDb": -6
+ },
+ "loudness": -14,
+ "captionStyle": {
+  "y": 1267.2,
+  "size": 96,
+  "max": 3
+ }
+}

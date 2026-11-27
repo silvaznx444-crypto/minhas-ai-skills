@@ -1,0 +1,397 @@
+{
+ "source": "vozes separadas",
+ "words": [
+  {
+   "word": "Mais",
+   "start": 0.6,
+   "end": 1.073,
+   "who": "leo",
+   "line": 1
+  },
+  {
+   "word": "uma",
+   "start": 1.114,
+   "end": 1.507,
+   "who": "leo",
+   "line": 1
+  },
+  {
+   "word": "e",
+   "start": 1.542,
+   "end": 1.778,
+   "who": "leo",
+   "line": 1
+  },
+  {
+   "word": "eu",
+   "start": 1.798,
+   "end": 2.113,
+   "who": "leo",
+   "line": 1
+  },
+  {
+   "word": "paro.",
+   "start": 2.141,
+   "end": 2.692,
+   "who": "leo",
+   "line": 1
+  },
+  {
+   "word": "Amanhã",
+   "start": 3.53,
+   "end": 3.919,
+   "who": "leo",
+   "line": 1
+  },
+  {
+   "word": "eu",
+   "start": 3.953,
+   "end": 4.147,
+   "who": "leo",
+   "line": 1
+  },
+  {
+   "word": "paro...",
+   "start": 4.164,
+   "end": 4.602,
+   "who": "leo",
+   "line": 1
+  },
+  {
+   "word": "eu",
+   "start": 5.53,
+   "end": 5.715,
+   "who": "leo",
+   "line": 1
+  },
+  {
+   "word": "sempre",
+   "start": 5.732,
+   "end": 6.103,
+   "who": "leo",
+   "line": 1
+  },
+  {
+   "word": "falo",
+   "start": 6.135,
+   "end": 6.413,
+   "who": "leo",
+   "line": 1
+  },
+  {
+   "word": "isso.",
+   "start": 6.437,
+   "end": 6.762,
+   "who": "leo",
+   "line": 1
+  },
+  {
+   "word": "Que",
+   "start": 10.6,
+   "end": 10.879,
+   "who": "leo",
+   "line": 2
+  },
+  {
+   "word": "isso...",
+   "start": 10.904,
+   "end": 11.406,
+   "who": "leo",
+   "line": 2
+  },
+  {
+   "word": "eu",
+   "start": 12.15,
+   "end": 12.391,
+   "who": "leo",
+   "line": 2
+  },
+  {
+   "word": "tô",
+   "start": 12.412,
+   "end": 12.653,
+   "who": "leo",
+   "line": 2
+  },
+  {
+   "word": "viajando",
+   "start": 12.674,
+   "end": 13.277,
+   "who": "leo",
+   "line": 2
+  },
+  {
+   "word": "de",
+   "start": 13.329,
+   "end": 13.57,
+   "who": "leo",
+   "line": 2
+  },
+  {
+   "word": "novo?",
+   "start": 13.591,
+   "end": 14.013,
+   "who": "leo",
+   "line": 2
+  },
+  {
+   "word": "Onde",
+   "start": 21.4,
+   "end": 22.055,
+   "who": "leo",
+   "line": 3
+  },
+  {
+   "word": "eu",
+   "start": 22.112,
+   "end": 22.549,
+   "who": "leo",
+   "line": 3
+  },
+  {
+   "word": "tô?",
+   "start": 22.587,
+   "end": 23.132,
+   "who": "leo",
+   "line": 3
+  },
+  {
+   "word": "Sem",
+   "start": 23.18,
+   "end": 23.726,
+   "who": "leo",
+   "line": 3
+  },
+  {
+   "word": "sinal...",
+   "start": 23.773,
+   "end": 24.865,
+   "who": "leo",
+   "line": 3
+  },
+  {
+   "word": "Que",
+   "start": 24.96,
+   "end": 25.505,
+   "who": "leo",
+   "line": 3
+  },
+  {
+   "word": "lugar",
+   "start": 25.553,
+   "end": 26.317,
+   "who": "leo",
+   "line": 3
+  },
+  {
+   "word": "é",
+   "start": 26.383,
+   "end": 26.711,
+   "who": "leo",
+   "line": 3
+  },
+  {
+   "word": "esse?",
+   "start": 26.739,
+   "end": 27.504,
+   "who": "leo",
+   "line": 3
+  },
+  {
+   "word": "Ei,",
+   "start": 31.4,
+   "end": 31.621,
+   "who": "pedro",
+   "line": 4
+  },
+  {
+   "word": "estrangeiro!",
+   "start": 32.17,
+   "end": 32.75,
+   "who": "pedro",
+   "line": 4
+  },
+  {
+   "word": "Que",
+   "start": 33.38,
+   "end": 33.545,
+   "who": "pedro",
+   "line": 4
+  },
+  {
+   "word": "roupa",
+   "start": 33.56,
+   "end": 33.791,
+   "who": "pedro",
+   "line": 4
+  },
+  {
+   "word": "é",
+   "start": 33.811,
+   "end": 33.91,
+   "who": "pedro",
+   "line": 4
+  },
+  {
+   "word": "essa?",
+   "start": 33.919,
+   "end": 34.15,
+   "who": "pedro",
+   "line": 4
+  },
+  {
+   "word": "Tá",
+   "start": 34.81,
+   "end": 34.968,
+   "who": "pedro",
+   "line": 4
+  },
+  {
+   "word": "perdido?",
+   "start": 34.981,
+   "end": 35.376,
+   "who": "pedro",
+   "line": 4
+  },
+  {
+   "word": "Mais",
+   "start": 35.7,
+   "end": 36.077,
+   "who": "leo",
+   "line": 5
+  },
+  {
+   "word": "do",
+   "start": 36.11,
+   "end": 36.362,
+   "who": "leo",
+   "line": 5
+  },
+  {
+   "word": "que",
+   "start": 36.384,
+   "end": 36.698,
+   "who": "leo",
+   "line": 5
+  },
+  {
+   "word": "você",
+   "start": 36.726,
+   "end": 37.103,
+   "who": "leo",
+   "line": 5
+  },
+  {
+   "word": "imagina.",
+   "start": 37.136,
+   "end": 37.765,
+   "who": "leo",
+   "line": 5
+  },
+  {
+   "word": "Léo.",
+   "start": 40.6,
+   "end": 41.024,
+   "who": "jesus",
+   "line": 6
+  },
+  {
+   "word": "Eu",
+   "start": 41.061,
+   "end": 41.344,
+   "who": "jesus",
+   "line": 6
+  },
+  {
+   "word": "sei",
+   "start": 41.368,
+   "end": 41.722,
+   "who": "jesus",
+   "line": 6
+  },
+  {
+   "word": "de",
+   "start": 41.753,
+   "end": 42.035,
+   "who": "jesus",
+   "line": 6
+  },
+  {
+   "word": "onde",
+   "start": 42.06,
+   "end": 42.484,
+   "who": "jesus",
+   "line": 6
+  },
+  {
+   "word": "você",
+   "start": 42.521,
+   "end": 42.945,
+   "who": "jesus",
+   "line": 6
+  },
+  {
+   "word": "veio.",
+   "start": 42.982,
+   "end": 43.477,
+   "who": "jesus",
+   "line": 6
+  },
+  {
+   "word": "Vem",
+   "start": 43.52,
+   "end": 43.873,
+   "who": "jesus",
+   "line": 6
+  },
+  {
+   "word": "e",
+   "start": 43.904,
+   "end": 44.116,
+   "who": "jesus",
+   "line": 6
+  },
+  {
+   "word": "segue-me.",
+   "start": 44.135,
+   "end": 44.912,
+   "who": "jesus",
+   "line": 6
+  },
+  {
+   "word": "Como",
+   "start": 47.4,
+   "end": 47.803,
+   "who": "leo",
+   "line": 7
+  },
+  {
+   "word": "você",
+   "start": 47.838,
+   "end": 48.241,
+   "who": "leo",
+   "line": 7
+  },
+  {
+   "word": "sabe",
+   "start": 48.276,
+   "end": 48.679,
+   "who": "leo",
+   "line": 7
+  },
+  {
+   "word": "meu",
+   "start": 48.714,
+   "end": 49.05,
+   "who": "leo",
+   "line": 7
+  },
+  {
+   "word": "nome?",
+   "start": 49.079,
+   "end": 49.549,
+   "who": "leo",
+   "line": 7
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "title": "Sem dormir, seu cérebro fica 60% mais reativo",
+ "aspect": "16:9",
+ "resolution": "1080p",
+ "fps": 24,
+ "style": "mosaico",
+ "voiceover": "input/voiceover.wav",
+ "script": "input/script.txt",
+ "duration": 179.28,
+ "captions": false,
+ "bars": null,
+ "fadeIn": 0.5,
+ "fadeOut": 0.8,
+ "music": {
+  "enabled": true,
+  "gainDb": -18
+ },
+ "sfx": {
+  "enabled": true,
+  "gainDb": -6
+ },
+ "loudness": -14,
+ "ink": 0.0058
+}

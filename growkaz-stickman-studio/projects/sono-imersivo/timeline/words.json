@@ -1,0 +1,2450 @@
+{
+ "source": "pause-aligned script",
+ "words": [
+  {
+   "word": "Você",
+   "start": 0.29,
+   "end": 0.514
+  },
+  {
+   "word": "dormiu",
+   "start": 0.533,
+   "end": 0.831
+  },
+  {
+   "word": "mal.",
+   "start": 0.857,
+   "end": 1.081
+  },
+  {
+   "word": "Alguém",
+   "start": 1.69,
+   "end": 2.033
+  },
+  {
+   "word": "faz",
+   "start": 2.062,
+   "end": 2.277
+  },
+  {
+   "word": "uma",
+   "start": 2.295,
+   "end": 2.51
+  },
+  {
+   "word": "piada",
+   "start": 2.528,
+   "end": 2.828
+  },
+  {
+   "word": "boba,",
+   "start": 2.854,
+   "end": 3.154
+  },
+  {
+   "word": "e",
+   "start": 3.57,
+   "end": 3.714
+  },
+  {
+   "word": "você",
+   "start": 3.726,
+   "end": 4.014
+  },
+  {
+   "word": "explode.",
+   "start": 4.039,
+   "end": 4.518
+  },
+  {
+   "word": "Mais",
+   "start": 5.42,
+   "end": 5.658
+  },
+  {
+   "word": "tarde,",
+   "start": 5.679,
+   "end": 5.996
+  },
+  {
+   "word": "você",
+   "start": 6.024,
+   "end": 6.262
+  },
+  {
+   "word": "se",
+   "start": 6.283,
+   "end": 6.442
+  },
+  {
+   "word": "pergunta:",
+   "start": 6.455,
+   "end": 6.892
+  },
+  {
+   "word": "por",
+   "start": 7.22,
+   "end": 7.475
+  },
+  {
+   "word": "que",
+   "start": 7.498,
+   "end": 7.753
+  },
+  {
+   "word": "eu",
+   "start": 7.775,
+   "end": 7.979
+  },
+  {
+   "word": "reagi",
+   "start": 7.997,
+   "end": 8.355
+  },
+  {
+   "word": "assim?",
+   "start": 8.386,
+   "end": 8.794
+  },
+  {
+   "word": "A",
+   "start": 9.64,
+   "end": 9.763
+  },
+  {
+   "word": "resposta",
+   "start": 9.774,
+   "end": 10.184
+  },
+  {
+   "word": "pode",
+   "start": 10.22,
+   "end": 10.467
+  },
+  {
+   "word": "estar",
+   "start": 10.488,
+   "end": 10.775
+  },
+  {
+   "word": "em",
+   "start": 10.8,
+   "end": 10.965
+  },
+  {
+   "word": "uma",
+   "start": 10.979,
+   "end": 11.184
+  },
+  {
+   "word": "noite",
+   "start": 11.202,
+   "end": 11.489
+  },
+  {
+   "word": "sem",
+   "start": 11.514,
+   "end": 11.72
+  },
+  {
+   "word": "sono.",
+   "start": 11.738,
+   "end": 12.025
+  },
+  {
+   "word": "E",
+   "start": 12.52,
+   "end": 12.65
+  },
+  {
+   "word": "a",
+   "start": 12.662,
+   "end": 12.792
+  },
+  {
+   "word": "ciência",
+   "start": 12.803,
+   "end": 13.195
+  },
+  {
+   "word": "conseguiu",
+   "start": 13.229,
+   "end": 13.707
+  },
+  {
+   "word": "medir",
+   "start": 13.748,
+   "end": 14.053
+  },
+  {
+   "word": "isso.",
+   "start": 14.079,
+   "end": 14.384
+  },
+  {
+   "word": "Todo",
+   "start": 15.15,
+   "end": 15.342
+  },
+  {
+   "word": "mundo",
+   "start": 15.358,
+   "end": 15.582
+  },
+  {
+   "word": "já",
+   "start": 15.602,
+   "end": 15.73
+  },
+  {
+   "word": "teve",
+   "start": 15.741,
+   "end": 15.933
+  },
+  {
+   "word": "um",
+   "start": 15.949,
+   "end": 16.077
+  },
+  {
+   "word": "dia",
+   "start": 16.088,
+   "end": 16.248
+  },
+  {
+   "word": "assim.",
+   "start": 16.262,
+   "end": 16.518
+  },
+  {
+   "word": "Paciência",
+   "start": 16.96,
+   "end": 17.615
+  },
+  {
+   "word": "curta,",
+   "start": 17.672,
+   "end": 18.149
+  },
+  {
+   "word": "tudo",
+   "start": 18.41,
+   "end": 18.681
+  },
+  {
+   "word": "parece",
+   "start": 18.704,
+   "end": 19.065
+  },
+  {
+   "word": "pior,",
+   "start": 19.097,
+   "end": 19.413
+  },
+  {
+   "word": "qualquer",
+   "start": 19.65,
+   "end": 20.072
+  },
+  {
+   "word": "problema",
+   "start": 20.109,
+   "end": 20.531
+  },
+  {
+   "word": "vira",
+   "start": 20.568,
+   "end": 20.822
+  },
+  {
+   "word": "uma",
+   "start": 20.844,
+   "end": 21.055
+  },
+  {
+   "word": "tempestade.",
+   "start": 21.073,
+   "end": 21.622
+  },
+  {
+   "word": "A",
+   "start": 22.49,
+   "end": 22.605
+  },
+  {
+   "word": "gente",
+   "start": 22.615,
+   "end": 22.883
+  },
+  {
+   "word": "costuma",
+   "start": 22.906,
+   "end": 23.25
+  },
+  {
+   "word": "culpar",
+   "start": 23.28,
+   "end": 23.586
+  },
+  {
+   "word": "o",
+   "start": 23.613,
+   "end": 23.727
+  },
+  {
+   "word": "humor,",
+   "start": 23.737,
+   "end": 24.043
+  },
+  {
+   "word": "o",
+   "start": 24.31,
+   "end": 24.472
+  },
+  {
+   "word": "dia",
+   "start": 24.486,
+   "end": 24.756
+  },
+  {
+   "word": "ruim,",
+   "start": 24.779,
+   "end": 25.157
+  },
+  {
+   "word": "as",
+   "start": 25.19,
+   "end": 25.406
+  },
+  {
+   "word": "outras",
+   "start": 25.424,
+   "end": 25.856
+  },
+  {
+   "word": "pessoas.",
+   "start": 25.894,
+   "end": 26.433
+  },
+  {
+   "word": "Mas",
+   "start": 27.01,
+   "end": 27.197
+  },
+  {
+   "word": "e",
+   "start": 27.213,
+   "end": 27.326
+  },
+  {
+   "word": "se",
+   "start": 27.335,
+   "end": 27.485
+  },
+  {
+   "word": "o",
+   "start": 27.498,
+   "end": 27.61
+  },
+  {
+   "word": "problema",
+   "start": 27.62,
+   "end": 27.994
+  },
+  {
+   "word": "estiver",
+   "start": 28.026,
+   "end": 28.363
+  },
+  {
+   "word": "numa",
+   "start": 28.392,
+   "end": 28.617
+  },
+  {
+   "word": "pequena",
+   "start": 28.636,
+   "end": 28.973
+  },
+  {
+   "word": "região",
+   "start": 29.002,
+   "end": 29.301
+  },
+  {
+   "word": "do",
+   "start": 29.328,
+   "end": 29.477
+  },
+  {
+   "word": "seu",
+   "start": 29.49,
+   "end": 29.677
+  },
+  {
+   "word": "cérebro,",
+   "start": 29.693,
+   "end": 30.067
+  },
+  {
+   "word": "que",
+   "start": 30.39,
+   "end": 30.562
+  },
+  {
+   "word": "perde",
+   "start": 30.578,
+   "end": 30.819
+  },
+  {
+   "word": "o",
+   "start": 30.84,
+   "end": 30.944
+  },
+  {
+   "word": "controle",
+   "start": 30.953,
+   "end": 31.297
+  },
+  {
+   "word": "quando",
+   "start": 31.328,
+   "end": 31.604
+  },
+  {
+   "word": "você",
+   "start": 31.628,
+   "end": 31.835
+  },
+  {
+   "word": "não",
+   "start": 31.853,
+   "end": 32.025
+  },
+  {
+   "word": "dorme?",
+   "start": 32.04,
+   "end": 32.316
+  },
+  {
+   "word": "Em",
+   "start": 33.23,
+   "end": 33.41
+  },
+  {
+   "word": "2007,",
+   "start": 33.426,
+   "end": 33.742
+  },
+  {
+   "word": "o",
+   "start": 33.769,
+   "end": 33.904
+  },
+  {
+   "word": "neurocientista",
+   "start": 33.916,
+   "end": 34.637
+  },
+  {
+   "word": "Matthew",
+   "start": 34.7,
+   "end": 35.106
+  },
+  {
+   "word": "Walker",
+   "start": 35.141,
+   "end": 35.502
+  },
+  {
+   "word": "e",
+   "start": 35.533,
+   "end": 35.668
+  },
+  {
+   "word": "seus",
+   "start": 35.68,
+   "end": 35.95
+  },
+  {
+   "word": "colegas,",
+   "start": 35.974,
+   "end": 36.425
+  },
+  {
+   "word": "nas",
+   "start": 36.464,
+   "end": 36.689
+  },
+  {
+   "word": "universidades",
+   "start": 36.709,
+   "end": 37.385
+  },
+  {
+   "word": "de",
+   "start": 37.444,
+   "end": 37.624
+  },
+  {
+   "word": "Harvard",
+   "start": 37.64,
+   "end": 38.046
+  },
+  {
+   "word": "e",
+   "start": 38.081,
+   "end": 38.216
+  },
+  {
+   "word": "da",
+   "start": 38.228,
+   "end": 38.408
+  },
+  {
+   "word": "Califórnia,",
+   "start": 38.424,
+   "end": 39.01
+  },
+  {
+   "word": "em",
+   "start": 39.061,
+   "end": 39.241
+  },
+  {
+   "word": "Berkeley,",
+   "start": 39.257,
+   "end": 39.753
+  },
+  {
+   "word": "fizeram",
+   "start": 39.796,
+   "end": 40.202
+  },
+  {
+   "word": "um",
+   "start": 40.237,
+   "end": 40.417
+  },
+  {
+   "word": "experimento",
+   "start": 40.433,
+   "end": 41.019
+  },
+  {
+   "word": "simples.",
+   "start": 41.07,
+   "end": 41.521
+  },
+  {
+   "word": "Um",
+   "start": 42.09,
+   "end": 42.236
+  },
+  {
+   "word": "grupo",
+   "start": 42.249,
+   "end": 42.506
+  },
+  {
+   "word": "de",
+   "start": 42.528,
+   "end": 42.674
+  },
+  {
+   "word": "voluntários",
+   "start": 42.687,
+   "end": 43.163
+  },
+  {
+   "word": "dormiu",
+   "start": 43.204,
+   "end": 43.497
+  },
+  {
+   "word": "normalmente.",
+   "start": 43.523,
+   "end": 44.035
+  },
+  {
+   "word": "O",
+   "start": 44.53,
+   "end": 44.657
+  },
+  {
+   "word": "outro",
+   "start": 44.668,
+   "end": 44.966
+  },
+  {
+   "word": "passou",
+   "start": 44.992,
+   "end": 45.331
+  },
+  {
+   "word": "a",
+   "start": 45.361,
+   "end": 45.488
+  },
+  {
+   "word": "noite",
+   "start": 45.499,
+   "end": 45.797
+  },
+  {
+   "word": "inteira",
+   "start": 45.823,
+   "end": 46.205
+  },
+  {
+   "word": "acordado,",
+   "start": 46.238,
+   "end": 46.705
+  },
+  {
+   "word": "mais",
+   "start": 46.746,
+   "end": 47.001
+  },
+  {
+   "word": "o",
+   "start": 47.023,
+   "end": 47.15
+  },
+  {
+   "word": "dia",
+   "start": 47.161,
+   "end": 47.374
+  },
+  {
+   "word": "seguinte,",
+   "start": 47.392,
+   "end": 47.859
+  },
+  {
+   "word": "cerca",
+   "start": 48.12,
+   "end": 48.379
+  },
+  {
+   "word": "de",
+   "start": 48.401,
+   "end": 48.549
+  },
+  {
+   "word": "trinta",
+   "start": 48.562,
+   "end": 48.858
+  },
+  {
+   "word": "e",
+   "start": 48.884,
+   "end": 48.995
+  },
+  {
+   "word": "cinco",
+   "start": 49.004,
+   "end": 49.263
+  },
+  {
+   "word": "horas",
+   "start": 49.286,
+   "end": 49.545
+  },
+  {
+   "word": "sem",
+   "start": 49.567,
+   "end": 49.752
+  },
+  {
+   "word": "dormir.",
+   "start": 49.768,
+   "end": 50.101
+  },
+  {
+   "word": "Depois,",
+   "start": 50.88,
+   "end": 51.287
+  },
+  {
+   "word": "todos",
+   "start": 51.322,
+   "end": 51.639
+  },
+  {
+   "word": "entraram",
+   "start": 51.666,
+   "end": 52.118
+  },
+  {
+   "word": "em",
+   "start": 52.158,
+   "end": 52.338
+  },
+  {
+   "word": "um",
+   "start": 52.354,
+   "end": 52.535
+  },
+  {
+   "word": "aparelho",
+   "start": 52.551,
+   "end": 53.003
+  },
+  {
+   "word": "de",
+   "start": 53.042,
+   "end": 53.223
+  },
+  {
+   "word": "ressonância",
+   "start": 53.239,
+   "end": 53.826
+  },
+  {
+   "word": "magnética",
+   "start": 53.878,
+   "end": 54.375
+  },
+  {
+   "word": "e",
+   "start": 54.418,
+   "end": 54.554
+  },
+  {
+   "word": "viram",
+   "start": 54.566,
+   "end": 54.882
+  },
+  {
+   "word": "imagens",
+   "start": 54.91,
+   "end": 55.316
+  },
+  {
+   "word": "neutras",
+   "start": 55.352,
+   "end": 55.759
+  },
+  {
+   "word": "e",
+   "start": 55.794,
+   "end": 55.93
+  },
+  {
+   "word": "imagens",
+   "start": 55.941,
+   "end": 56.348
+  },
+  {
+   "word": "perturbadoras.",
+   "start": 56.384,
+   "end": 57.107
+  },
+  {
+   "word": "Os",
+   "start": 57.85,
+   "end": 58.039
+  },
+  {
+   "word": "pesquisadores",
+   "start": 58.056,
+   "end": 58.765
+  },
+  {
+   "word": "observavam",
+   "start": 58.827,
+   "end": 59.394
+  },
+  {
+   "word": "uma",
+   "start": 59.444,
+   "end": 59.68
+  },
+  {
+   "word": "região",
+   "start": 59.701,
+   "end": 60.079
+  },
+  {
+   "word": "específica:",
+   "start": 60.112,
+   "end": 60.727
+  },
+  {
+   "word": "a",
+   "start": 61.12,
+   "end": 61.293
+  },
+  {
+   "word": "amígdala.",
+   "start": 61.309,
+   "end": 61.945
+  },
+  {
+   "word": "A",
+   "start": 62.72,
+   "end": 62.851
+  },
+  {
+   "word": "amígdala",
+   "start": 62.862,
+   "end": 63.298
+  },
+  {
+   "word": "é",
+   "start": 63.336,
+   "end": 63.467
+  },
+  {
+   "word": "o",
+   "start": 63.478,
+   "end": 63.609
+  },
+  {
+   "word": "alarme",
+   "start": 63.62,
+   "end": 63.969
+  },
+  {
+   "word": "do",
+   "start": 64.0,
+   "end": 64.174
+  },
+  {
+   "word": "seu",
+   "start": 64.189,
+   "end": 64.407
+  },
+  {
+   "word": "cérebro.",
+   "start": 64.426,
+   "end": 64.862
+  },
+  {
+   "word": "Ela",
+   "start": 65.39,
+   "end": 65.587
+  },
+  {
+   "word": "tem",
+   "start": 65.604,
+   "end": 65.8
+  },
+  {
+   "word": "o",
+   "start": 65.817,
+   "end": 65.935
+  },
+  {
+   "word": "tamanho",
+   "start": 65.946,
+   "end": 66.3
+  },
+  {
+   "word": "de",
+   "start": 66.33,
+   "end": 66.488
+  },
+  {
+   "word": "uma",
+   "start": 66.501,
+   "end": 66.698
+  },
+  {
+   "word": "amêndoa",
+   "start": 66.715,
+   "end": 67.069
+  },
+  {
+   "word": "e",
+   "start": 67.1,
+   "end": 67.218
+  },
+  {
+   "word": "reage",
+   "start": 67.228,
+   "end": 67.503
+  },
+  {
+   "word": "rápido",
+   "start": 67.527,
+   "end": 67.842
+  },
+  {
+   "word": "a",
+   "start": 67.869,
+   "end": 67.987
+  },
+  {
+   "word": "qualquer",
+   "start": 67.998,
+   "end": 68.391
+  },
+  {
+   "word": "sinal",
+   "start": 68.425,
+   "end": 68.7
+  },
+  {
+   "word": "de",
+   "start": 68.724,
+   "end": 68.882
+  },
+  {
+   "word": "perigo.",
+   "start": 68.895,
+   "end": 69.249
+  },
+  {
+   "word": "Quando",
+   "start": 69.5,
+   "end": 69.909
+  },
+  {
+   "word": "algo",
+   "start": 69.945,
+   "end": 70.252
+  },
+  {
+   "word": "parece",
+   "start": 70.278,
+   "end": 70.687
+  },
+  {
+   "word": "ameaçador,",
+   "start": 70.723,
+   "end": 71.337
+  },
+  {
+   "word": "é",
+   "start": 71.6,
+   "end": 71.72
+  },
+  {
+   "word": "ela",
+   "start": 71.73,
+   "end": 71.93
+  },
+  {
+   "word": "que",
+   "start": 71.947,
+   "end": 72.147
+  },
+  {
+   "word": "acelera",
+   "start": 72.164,
+   "end": 72.523
+  },
+  {
+   "word": "o",
+   "start": 72.554,
+   "end": 72.674
+  },
+  {
+   "word": "coração",
+   "start": 72.685,
+   "end": 73.044
+  },
+  {
+   "word": "e",
+   "start": 73.075,
+   "end": 73.195
+  },
+  {
+   "word": "prepara",
+   "start": 73.205,
+   "end": 73.564
+  },
+  {
+   "word": "o",
+   "start": 73.595,
+   "end": 73.715
+  },
+  {
+   "word": "corpo",
+   "start": 73.726,
+   "end": 74.005
+  },
+  {
+   "word": "para",
+   "start": 74.029,
+   "end": 74.269
+  },
+  {
+   "word": "reagir.",
+   "start": 74.29,
+   "end": 74.649
+  },
+  {
+   "word": "No",
+   "start": 75.5,
+   "end": 75.631
+  },
+  {
+   "word": "grupo",
+   "start": 75.643,
+   "end": 75.872
+  },
+  {
+   "word": "que",
+   "start": 75.892,
+   "end": 76.056
+  },
+  {
+   "word": "não",
+   "start": 76.071,
+   "end": 76.235
+  },
+  {
+   "word": "dormiu,",
+   "start": 76.249,
+   "end": 76.544
+  },
+  {
+   "word": "diante",
+   "start": 76.91,
+   "end": 77.285
+  },
+  {
+   "word": "das",
+   "start": 77.318,
+   "end": 77.552
+  },
+  {
+   "word": "imagens",
+   "start": 77.572,
+   "end": 77.994
+  },
+  {
+   "word": "negativas,",
+   "start": 78.031,
+   "end": 78.593
+  },
+  {
+   "word": "a",
+   "start": 78.642,
+   "end": 78.783
+  },
+  {
+   "word": "amígdala",
+   "start": 78.795,
+   "end": 79.264
+  },
+  {
+   "word": "reagiu",
+   "start": 79.305,
+   "end": 79.679
+  },
+  {
+   "word": "cerca",
+   "start": 79.712,
+   "end": 80.04
+  },
+  {
+   "word": "de",
+   "start": 80.069,
+   "end": 80.256
+  },
+  {
+   "word": "sessenta",
+   "start": 80.273,
+   "end": 80.741
+  },
+  {
+   "word": "por",
+   "start": 80.782,
+   "end": 81.016
+  },
+  {
+   "word": "cento",
+   "start": 81.037,
+   "end": 81.365
+  },
+  {
+   "word": "mais.",
+   "start": 81.393,
+   "end": 81.721
+  },
+  {
+   "word": "Sessenta",
+   "start": 82.15,
+   "end": 82.658
+  },
+  {
+   "word": "por",
+   "start": 82.702,
+   "end": 82.956
+  },
+  {
+   "word": "cento.",
+   "start": 82.978,
+   "end": 83.385
+  },
+  {
+   "word": "O",
+   "start": 84.01,
+   "end": 84.131
+  },
+  {
+   "word": "alarme",
+   "start": 84.141,
+   "end": 84.463
+  },
+  {
+   "word": "não",
+   "start": 84.491,
+   "end": 84.692
+  },
+  {
+   "word": "apenas",
+   "start": 84.71,
+   "end": 85.032
+  },
+  {
+   "word": "tocou.",
+   "start": 85.06,
+   "end": 85.382
+  },
+  {
+   "word": "Ele",
+   "start": 85.66,
+   "end": 85.921
+  },
+  {
+   "word": "tocou",
+   "start": 85.943,
+   "end": 86.308
+  },
+  {
+   "word": "alto",
+   "start": 86.34,
+   "end": 86.653
+  },
+  {
+   "word": "demais.",
+   "start": 86.68,
+   "end": 87.149
+  },
+  {
+   "word": "Mas",
+   "start": 87.9,
+   "end": 88.105
+  },
+  {
+   "word": "o",
+   "start": 88.123,
+   "end": 88.246
+  },
+  {
+   "word": "resultado",
+   "start": 88.256,
+   "end": 88.707
+  },
+  {
+   "word": "mais",
+   "start": 88.746,
+   "end": 88.992
+  },
+  {
+   "word": "revelador",
+   "start": 89.013,
+   "end": 89.464
+  },
+  {
+   "word": "não",
+   "start": 89.503,
+   "end": 89.708
+  },
+  {
+   "word": "foi",
+   "start": 89.726,
+   "end": 89.93
+  },
+  {
+   "word": "esse.",
+   "start": 89.948,
+   "end": 90.235
+  },
+  {
+   "word": "Normalmente,",
+   "start": 90.88,
+   "end": 91.26
+  },
+  {
+   "word": "a",
+   "start": 91.293,
+   "end": 91.375
+  },
+  {
+   "word": "amígdala",
+   "start": 91.382,
+   "end": 91.653
+  },
+  {
+   "word": "conversa",
+   "start": 91.677,
+   "end": 91.948
+  },
+  {
+   "word": "com",
+   "start": 91.972,
+   "end": 92.108
+  },
+  {
+   "word": "o",
+   "start": 92.12,
+   "end": 92.201
+  },
+  {
+   "word": "córtex",
+   "start": 92.208,
+   "end": 92.425
+  },
+  {
+   "word": "pré-frontal,",
+   "start": 92.444,
+   "end": 92.824
+  },
+  {
+   "word": "a",
+   "start": 92.857,
+   "end": 92.939
+  },
+  {
+   "word": "parte",
+   "start": 92.946,
+   "end": 93.136
+  },
+  {
+   "word": "da",
+   "start": 93.153,
+   "end": 93.261
+  },
+  {
+   "word": "frente",
+   "start": 93.271,
+   "end": 93.488
+  },
+  {
+   "word": "do",
+   "start": 93.507,
+   "end": 93.615
+  },
+  {
+   "word": "cérebro,",
+   "start": 93.625,
+   "end": 93.896
+  },
+  {
+   "word": "logo",
+   "start": 94.24,
+   "end": 94.788
+  },
+  {
+   "word": "atrás",
+   "start": 94.835,
+   "end": 95.474
+  },
+  {
+   "word": "da",
+   "start": 95.53,
+   "end": 95.895
+  },
+  {
+   "word": "testa.",
+   "start": 95.926,
+   "end": 96.657
+  },
+  {
+   "word": "É",
+   "start": 97.32,
+   "end": 97.475
+  },
+  {
+   "word": "ele",
+   "start": 97.489,
+   "end": 97.748
+  },
+  {
+   "word": "que",
+   "start": 97.77,
+   "end": 98.029
+  },
+  {
+   "word": "avalia",
+   "start": 98.052,
+   "end": 98.466
+  },
+  {
+   "word": "a",
+   "start": 98.502,
+   "end": 98.657
+  },
+  {
+   "word": "situação",
+   "start": 98.671,
+   "end": 99.188
+  },
+  {
+   "word": "e",
+   "start": 99.233,
+   "end": 99.389
+  },
+  {
+   "word": "diz:",
+   "start": 99.402,
+   "end": 99.713
+  },
+  {
+   "word": "calma,",
+   "start": 99.96,
+   "end": 100.191
+  },
+  {
+   "word": "não",
+   "start": 100.211,
+   "end": 100.355
+  },
+  {
+   "word": "é",
+   "start": 100.368,
+   "end": 100.455
+  },
+  {
+   "word": "tão",
+   "start": 100.462,
+   "end": 100.606
+  },
+  {
+   "word": "grave.",
+   "start": 100.619,
+   "end": 100.85
+  },
+  {
+   "word": "Sem",
+   "start": 101.63,
+   "end": 101.846
+  },
+  {
+   "word": "sono,",
+   "start": 101.865,
+   "end": 102.167
+  },
+  {
+   "word": "essa",
+   "start": 102.193,
+   "end": 102.452
+  },
+  {
+   "word": "conversa",
+   "start": 102.475,
+   "end": 102.907
+  },
+  {
+   "word": "ficou",
+   "start": 102.944,
+   "end": 103.247
+  },
+  {
+   "word": "mais",
+   "start": 103.273,
+   "end": 103.532
+  },
+  {
+   "word": "fraca.",
+   "start": 103.554,
+   "end": 103.9
+  },
+  {
+   "word": "Ao",
+   "start": 104.58,
+   "end": 104.74
+  },
+  {
+   "word": "mesmo",
+   "start": 104.754,
+   "end": 105.035
+  },
+  {
+   "word": "tempo,",
+   "start": 105.059,
+   "end": 105.38
+  },
+  {
+   "word": "a",
+   "start": 105.408,
+   "end": 105.528
+  },
+  {
+   "word": "amígdala",
+   "start": 105.539,
+   "end": 105.939
+  },
+  {
+   "word": "ficou",
+   "start": 105.974,
+   "end": 106.255
+  },
+  {
+   "word": "mais",
+   "start": 106.279,
+   "end": 106.52
+  },
+  {
+   "word": "conectada",
+   "start": 106.541,
+   "end": 106.982
+  },
+  {
+   "word": "a",
+   "start": 107.02,
+   "end": 107.14
+  },
+  {
+   "word": "uma",
+   "start": 107.151,
+   "end": 107.351
+  },
+  {
+   "word": "região",
+   "start": 107.369,
+   "end": 107.689
+  },
+  {
+   "word": "do",
+   "start": 107.717,
+   "end": 107.877
+  },
+  {
+   "word": "tronco",
+   "start": 107.891,
+   "end": 108.212
+  },
+  {
+   "word": "cerebral",
+   "start": 108.24,
+   "end": 108.641
+  },
+  {
+   "word": "ligada",
+   "start": 108.676,
+   "end": 108.996
+  },
+  {
+   "word": "à",
+   "start": 109.024,
+   "end": 109.145
+  },
+  {
+   "word": "reação",
+   "start": 109.155,
+   "end": 109.476
+  },
+  {
+   "word": "de",
+   "start": 109.504,
+   "end": 109.664
+  },
+  {
+   "word": "alerta.",
+   "start": 109.678,
+   "end": 110.039
+  },
+  {
+   "word": "Em",
+   "start": 110.6,
+   "end": 110.736
+  },
+  {
+   "word": "outras",
+   "start": 110.748,
+   "end": 111.02
+  },
+  {
+   "word": "palavras:",
+   "start": 111.043,
+   "end": 111.417
+  },
+  {
+   "word": "o",
+   "start": 111.68,
+   "end": 111.794
+  },
+  {
+   "word": "alarme",
+   "start": 111.804,
+   "end": 112.108
+  },
+  {
+   "word": "ficou",
+   "start": 112.134,
+   "end": 112.4
+  },
+  {
+   "word": "mais",
+   "start": 112.423,
+   "end": 112.651
+  },
+  {
+   "word": "alto,",
+   "start": 112.671,
+   "end": 112.937
+  },
+  {
+   "word": "e",
+   "start": 113.24,
+   "end": 113.365
+  },
+  {
+   "word": "o",
+   "start": 113.376,
+   "end": 113.501
+  },
+  {
+   "word": "freio",
+   "start": 113.512,
+   "end": 113.803
+  },
+  {
+   "word": "ficou",
+   "start": 113.829,
+   "end": 114.121
+  },
+  {
+   "word": "mais",
+   "start": 114.146,
+   "end": 114.396
+  },
+  {
+   "word": "fraco.",
+   "start": 114.418,
+   "end": 114.751
+  },
+  {
+   "word": "Isso",
+   "start": 115.52,
+   "end": 115.728
+  },
+  {
+   "word": "ajuda",
+   "start": 115.746,
+   "end": 115.988
+  },
+  {
+   "word": "a",
+   "start": 116.009,
+   "end": 116.113
+  },
+  {
+   "word": "explicar",
+   "start": 116.122,
+   "end": 116.468
+  },
+  {
+   "word": "aquela",
+   "start": 116.498,
+   "end": 116.774
+  },
+  {
+   "word": "explosão",
+   "start": 116.798,
+   "end": 117.144
+  },
+  {
+   "word": "depois",
+   "start": 117.174,
+   "end": 117.451
+  },
+  {
+   "word": "de",
+   "start": 117.475,
+   "end": 117.614
+  },
+  {
+   "word": "uma",
+   "start": 117.626,
+   "end": 117.799
+  },
+  {
+   "word": "noite",
+   "start": 117.814,
+   "end": 118.056
+  },
+  {
+   "word": "ruim.",
+   "start": 118.077,
+   "end": 118.319
+  },
+  {
+   "word": "Não",
+   "start": 118.89,
+   "end": 119.047
+  },
+  {
+   "word": "é",
+   "start": 119.06,
+   "end": 119.154
+  },
+  {
+   "word": "que",
+   "start": 119.162,
+   "end": 119.319
+  },
+  {
+   "word": "você",
+   "start": 119.333,
+   "end": 119.521
+  },
+  {
+   "word": "virou",
+   "start": 119.537,
+   "end": 119.756
+  },
+  {
+   "word": "outra",
+   "start": 119.775,
+   "end": 119.995
+  },
+  {
+   "word": "pessoa.",
+   "start": 120.014,
+   "end": 120.295
+  },
+  {
+   "word": "É",
+   "start": 120.76,
+   "end": 120.891
+  },
+  {
+   "word": "que",
+   "start": 120.902,
+   "end": 121.121
+  },
+  {
+   "word": "o",
+   "start": 121.14,
+   "end": 121.271
+  },
+  {
+   "word": "seu",
+   "start": 121.282,
+   "end": 121.501
+  },
+  {
+   "word": "cérebro",
+   "start": 121.52,
+   "end": 121.913
+  },
+  {
+   "word": "perdeu,",
+   "start": 121.947,
+   "end": 122.34
+  },
+  {
+   "word": "temporariamente,",
+   "start": 122.374,
+   "end": 123.16
+  },
+  {
+   "word": "a",
+   "start": 123.229,
+   "end": 123.36
+  },
+  {
+   "word": "capacidade",
+   "start": 123.371,
+   "end": 123.895
+  },
+  {
+   "word": "de",
+   "start": 123.941,
+   "end": 124.116
+  },
+  {
+   "word": "colocar",
+   "start": 124.131,
+   "end": 124.524
+  },
+  {
+   "word": "as",
+   "start": 124.558,
+   "end": 124.733
+  },
+  {
+   "word": "emoções",
+   "start": 124.748,
+   "end": 125.141
+  },
+  {
+   "word": "em",
+   "start": 125.175,
+   "end": 125.35
+  },
+  {
+   "word": "perspectiva.",
+   "start": 125.365,
+   "end": 125.977
+  },
+  {
+   "word": "E",
+   "start": 126.55,
+   "end": 126.681
+  },
+  {
+   "word": "aqui",
+   "start": 126.692,
+   "end": 126.954
+  },
+  {
+   "word": "está",
+   "start": 126.977,
+   "end": 127.239
+  },
+  {
+   "word": "a",
+   "start": 127.262,
+   "end": 127.393
+  },
+  {
+   "word": "parte",
+   "start": 127.404,
+   "end": 127.709
+  },
+  {
+   "word": "que",
+   "start": 127.736,
+   "end": 127.954
+  },
+  {
+   "word": "muda",
+   "start": 127.973,
+   "end": 128.235
+  },
+  {
+   "word": "tudo.",
+   "start": 128.258,
+   "end": 128.563
+  },
+  {
+   "word": "Pesquisas",
+   "start": 128.84,
+   "end": 129.404
+  },
+  {
+   "word": "posteriores",
+   "start": 129.453,
+   "end": 130.12
+  },
+  {
+   "word": "do",
+   "start": 130.178,
+   "end": 130.383
+  },
+  {
+   "word": "mesmo",
+   "start": 130.401,
+   "end": 130.76
+  },
+  {
+   "word": "grupo",
+   "start": 130.791,
+   "end": 131.15
+  },
+  {
+   "word": "sugerem",
+   "start": 131.182,
+   "end": 131.643
+  },
+  {
+   "word": "que",
+   "start": 131.683,
+   "end": 131.94
+  },
+  {
+   "word": "o",
+   "start": 131.962,
+   "end": 132.116
+  },
+  {
+   "word": "sono,",
+   "start": 132.129,
+   "end": 132.488
+  },
+  {
+   "word": "principalmente",
+   "start": 132.52,
+   "end": 133.34
+  },
+  {
+   "word": "a",
+   "start": 133.412,
+   "end": 133.565
+  },
+  {
+   "word": "fase",
+   "start": 133.579,
+   "end": 133.886
+  },
+  {
+   "word": "REM,",
+   "start": 133.913,
+   "end": 134.221
+  },
+  {
+   "word": "a",
+   "start": 134.248,
+   "end": 134.402
+  },
+  {
+   "word": "fase",
+   "start": 134.415,
+   "end": 134.723
+  },
+  {
+   "word": "dos",
+   "start": 134.749,
+   "end": 135.006
+  },
+  {
+   "word": "sonhos,",
+   "start": 135.028,
+   "end": 135.49
+  },
+  {
+   "word": "funciona",
+   "start": 135.73,
+   "end": 136.148
+  },
+  {
+   "word": "como",
+   "start": 136.185,
+   "end": 136.436
+  },
+  {
+   "word": "uma",
+   "start": 136.458,
+   "end": 136.667
+  },
+  {
+   "word": "espécie",
+   "start": 136.685,
+   "end": 137.061
+  },
+  {
+   "word": "de",
+   "start": 137.094,
+   "end": 137.261
+  },
+  {
+   "word": "terapia",
+   "start": 137.276,
+   "end": 137.653
+  },
+  {
+   "word": "noturna.",
+   "start": 137.685,
+   "end": 138.104
+  },
+  {
+   "word": "Durante",
+   "start": 138.7,
+   "end": 139.086
+  },
+  {
+   "word": "a",
+   "start": 139.119,
+   "end": 139.248
+  },
+  {
+   "word": "noite,",
+   "start": 139.259,
+   "end": 139.602
+  },
+  {
+   "word": "o",
+   "start": 139.632,
+   "end": 139.76
+  },
+  {
+   "word": "cérebro",
+   "start": 139.771,
+   "end": 140.157
+  },
+  {
+   "word": "revisita",
+   "start": 140.191,
+   "end": 140.619
+  },
+  {
+   "word": "as",
+   "start": 140.657,
+   "end": 140.828
+  },
+  {
+   "word": "experiências",
+   "start": 140.843,
+   "end": 141.443
+  },
+  {
+   "word": "do",
+   "start": 141.495,
+   "end": 141.666
+  },
+  {
+   "word": "dia",
+   "start": 141.681,
+   "end": 141.896
+  },
+  {
+   "word": "e",
+   "start": 141.914,
+   "end": 142.043
+  },
+  {
+   "word": "ajuda",
+   "start": 142.054,
+   "end": 142.354
+  },
+  {
+   "word": "a",
+   "start": 142.38,
+   "end": 142.509
+  },
+  {
+   "word": "reduzir",
+   "start": 142.52,
+   "end": 142.906
+  },
+  {
+   "word": "a",
+   "start": 142.939,
+   "end": 143.068
+  },
+  {
+   "word": "carga",
+   "start": 143.079,
+   "end": 143.379
+  },
+  {
+   "word": "emocional",
+   "start": 143.405,
+   "end": 143.876
+  },
+  {
+   "word": "delas.",
+   "start": 143.917,
+   "end": 144.26
+  },
+  {
+   "word": "Ou",
+   "start": 144.7,
+   "end": 144.844
+  },
+  {
+   "word": "seja:",
+   "start": 144.856,
+   "end": 145.108
+  },
+  {
+   "word": "dormir",
+   "start": 145.37,
+   "end": 145.798
+  },
+  {
+   "word": "não",
+   "start": 145.835,
+   "end": 146.102
+  },
+  {
+   "word": "é",
+   "start": 146.126,
+   "end": 146.286
+  },
+  {
+   "word": "só",
+   "start": 146.3,
+   "end": 146.514
+  },
+  {
+   "word": "descansar.",
+   "start": 146.532,
+   "end": 147.174
+  },
+  {
+   "word": "É",
+   "start": 147.57,
+   "end": 147.696
+  },
+  {
+   "word": "também",
+   "start": 147.707,
+   "end": 148.044
+  },
+  {
+   "word": "processar",
+   "start": 148.074,
+   "end": 148.537
+  },
+  {
+   "word": "o",
+   "start": 148.577,
+   "end": 148.703
+  },
+  {
+   "word": "que",
+   "start": 148.714,
+   "end": 148.925
+  },
+  {
+   "word": "você",
+   "start": 148.943,
+   "end": 149.196
+  },
+  {
+   "word": "sentiu.",
+   "start": 149.218,
+   "end": 149.597
+  },
+  {
+   "word": "O",
+   "start": 150.28,
+   "end": 150.395
+  },
+  {
+   "word": "estudo",
+   "start": 150.405,
+   "end": 150.713
+  },
+  {
+   "word": "foi",
+   "start": 150.739,
+   "end": 150.931
+  },
+  {
+   "word": "feito",
+   "start": 150.948,
+   "end": 151.217
+  },
+  {
+   "word": "com",
+   "start": 151.24,
+   "end": 151.433
+  },
+  {
+   "word": "um",
+   "start": 151.449,
+   "end": 151.603
+  },
+  {
+   "word": "grupo",
+   "start": 151.616,
+   "end": 151.885
+  },
+  {
+   "word": "pequeno",
+   "start": 151.909,
+   "end": 152.254
+  },
+  {
+   "word": "de",
+   "start": 152.284,
+   "end": 152.438
+  },
+  {
+   "word": "voluntários,",
+   "start": 152.452,
+   "end": 152.989
+  },
+  {
+   "word": "e",
+   "start": 153.036,
+   "end": 153.151
+  },
+  {
+   "word": "a",
+   "start": 153.161,
+   "end": 153.277
+  },
+  {
+   "word": "ciência",
+   "start": 153.287,
+   "end": 153.632
+  },
+  {
+   "word": "do",
+   "start": 153.663,
+   "end": 153.816
+  },
+  {
+   "word": "sono",
+   "start": 153.83,
+   "end": 154.06
+  },
+  {
+   "word": "ainda",
+   "start": 154.08,
+   "end": 154.349
+  },
+  {
+   "word": "tem",
+   "start": 154.372,
+   "end": 154.565
+  },
+  {
+   "word": "muito",
+   "start": 154.581,
+   "end": 154.85
+  },
+  {
+   "word": "a",
+   "start": 154.874,
+   "end": 154.989
+  },
+  {
+   "word": "descobrir.",
+   "start": 154.999,
+   "end": 155.46
+  },
+  {
+   "word": "Mas",
+   "start": 156.04,
+   "end": 156.262
+  },
+  {
+   "word": "a",
+   "start": 156.281,
+   "end": 156.415
+  },
+  {
+   "word": "mensagem",
+   "start": 156.426,
+   "end": 156.87
+  },
+  {
+   "word": "é",
+   "start": 156.909,
+   "end": 157.042
+  },
+  {
+   "word": "clara:",
+   "start": 157.054,
+   "end": 157.409
+  },
+  {
+   "word": "para",
+   "start": 157.76,
+   "end": 158.019
+  },
+  {
+   "word": "a",
+   "start": 158.042,
+   "end": 158.172
+  },
+  {
+   "word": "maioria",
+   "start": 158.183,
+   "end": 158.572
+  },
+  {
+   "word": "dos",
+   "start": 158.606,
+   "end": 158.822
+  },
+  {
+   "word": "adultos,",
+   "start": 158.841,
+   "end": 159.273
+  },
+  {
+   "word": "os",
+   "start": 159.311,
+   "end": 159.484
+  },
+  {
+   "word": "especialistas",
+   "start": 159.499,
+   "end": 160.148
+  },
+  {
+   "word": "recomendam",
+   "start": 160.204,
+   "end": 160.723
+  },
+  {
+   "word": "sete",
+   "start": 160.768,
+   "end": 161.027
+  },
+  {
+   "word": "horas",
+   "start": 161.05,
+   "end": 161.353
+  },
+  {
+   "word": "ou",
+   "start": 161.379,
+   "end": 161.552
+  },
+  {
+   "word": "mais",
+   "start": 161.567,
+   "end": 161.826
+  },
+  {
+   "word": "de",
+   "start": 161.849,
+   "end": 162.022
+  },
+  {
+   "word": "sono",
+   "start": 162.037,
+   "end": 162.296
+  },
+  {
+   "word": "por",
+   "start": 162.319,
+   "end": 162.535
+  },
+  {
+   "word": "noite.",
+   "start": 162.554,
+   "end": 162.9
+  },
+  {
+   "word": "Então,",
+   "start": 163.55,
+   "end": 163.852
+  },
+  {
+   "word": "da",
+   "start": 163.878,
+   "end": 164.029
+  },
+  {
+   "word": "próxima",
+   "start": 164.042,
+   "end": 164.381
+  },
+  {
+   "word": "vez",
+   "start": 164.411,
+   "end": 164.599
+  },
+  {
+   "word": "que",
+   "start": 164.616,
+   "end": 164.804
+  },
+  {
+   "word": "tudo",
+   "start": 164.821,
+   "end": 165.047
+  },
+  {
+   "word": "parecer",
+   "start": 165.067,
+   "end": 165.406
+  },
+  {
+   "word": "insuportável",
+   "start": 165.436,
+   "end": 165.964
+  },
+  {
+   "word": "depois",
+   "start": 166.009,
+   "end": 166.311
+  },
+  {
+   "word": "de",
+   "start": 166.337,
+   "end": 166.488
+  },
+  {
+   "word": "uma",
+   "start": 166.501,
+   "end": 166.69
+  },
+  {
+   "word": "noite",
+   "start": 166.706,
+   "end": 166.97
+  },
+  {
+   "word": "mal",
+   "start": 166.993,
+   "end": 167.182
+  },
+  {
+   "word": "dormida,",
+   "start": 167.198,
+   "end": 167.575
+  },
+  {
+   "word": "lembre-se:",
+   "start": 167.608,
+   "end": 168.061
+  },
+  {
+   "word": "talvez",
+   "start": 168.46,
+   "end": 168.886
+  },
+  {
+   "word": "o",
+   "start": 168.923,
+   "end": 169.083
+  },
+  {
+   "word": "problema",
+   "start": 169.097,
+   "end": 169.63
+  },
+  {
+   "word": "não",
+   "start": 169.676,
+   "end": 169.942
+  },
+  {
+   "word": "seja",
+   "start": 169.966,
+   "end": 170.285
+  },
+  {
+   "word": "o",
+   "start": 170.313,
+   "end": 170.473
+  },
+  {
+   "word": "mundo.",
+   "start": 170.487,
+   "end": 170.913
+  },
+  {
+   "word": "Talvez",
+   "start": 171.31,
+   "end": 171.663
+  },
+  {
+   "word": "seja",
+   "start": 171.694,
+   "end": 171.959
+  },
+  {
+   "word": "só",
+   "start": 171.982,
+   "end": 172.159
+  },
+  {
+   "word": "o",
+   "start": 172.174,
+   "end": 172.306
+  },
+  {
+   "word": "seu",
+   "start": 172.318,
+   "end": 172.539
+  },
+  {
+   "word": "alarme,",
+   "start": 172.558,
+   "end": 172.955
+  },
+  {
+   "word": "pedindo",
+   "start": 172.99,
+   "end": 173.387
+  },
+  {
+   "word": "descanso.",
+   "start": 173.422,
+   "end": 173.908
+  },
+  {
+   "word": "E",
+   "start": 174.51,
+   "end": 174.622
+  },
+  {
+   "word": "você,",
+   "start": 174.632,
+   "end": 174.894
+  },
+  {
+   "word": "como",
+   "start": 174.917,
+   "end": 175.141
+  },
+  {
+   "word": "fica",
+   "start": 175.161,
+   "end": 175.385
+  },
+  {
+   "word": "o",
+   "start": 175.405,
+   "end": 175.517
+  },
+  {
+   "word": "seu",
+   "start": 175.527,
+   "end": 175.714
+  },
+  {
+   "word": "humor",
+   "start": 175.73,
+   "end": 175.992
+  },
+  {
+   "word": "depois",
+   "start": 176.015,
+   "end": 176.314
+  },
+  {
+   "word": "de",
+   "start": 176.34,
+   "end": 176.49
+  },
+  {
+   "word": "uma",
+   "start": 176.503,
+   "end": 176.69
+  },
+  {
+   "word": "noite",
+   "start": 176.706,
+   "end": 176.968
+  },
+  {
+   "word": "sem",
+   "start": 176.991,
+   "end": 177.178
+  },
+  {
+   "word": "dormir?",
+   "start": 177.194,
+   "end": 177.531
+  },
+  {
+   "word": "Conta",
+   "start": 177.89,
+   "end": 178.121
+  },
+  {
+   "word": "aqui",
+   "start": 178.142,
+   "end": 178.34
+  },
+  {
+   "word": "nos",
+   "start": 178.357,
+   "end": 178.523
+  },
+  {
+   "word": "comentários.",
+   "start": 178.537,
+   "end": 179.0
+  }
+ ]
+}

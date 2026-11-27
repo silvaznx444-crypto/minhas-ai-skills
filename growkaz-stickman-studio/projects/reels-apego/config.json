@@ -1,0 +1,24 @@
+{
+ "title": "Os 3 estilos de apego",
+ "aspect": "9:16",
+ "resolution": "1080p",
+ "fps": 30,
+ "style": "mosaico",
+ "voiceover": "input/voiceover.wav",
+ "script": "input/script.txt",
+ "duration": 60.27,
+ "captions": false,
+ "bars": "none",
+ "fadeIn": 0.5,
+ "fadeOut": 0.8,
+ "music": {
+  "enabled": true,
+  "gainDb": -16
+ },
+ "sfx": {
+  "enabled": true,
+  "gainDb": -6
+ },
+ "loudness": -14,
+ "ink": 0.0042
+}

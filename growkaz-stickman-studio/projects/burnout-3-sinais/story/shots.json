@@ -1,0 +1,1118 @@
+{
+ "title": "Burnout: os 3 sinais que a OMS reconhece",
+ "duration": 177.7,
+ "shots": [
+  {
+   "id": "s001",
+   "start": 0,
+   "end": 2.1,
+   "line": "Você acorda cansado.",
+   "scene": "quarto amanhecer: herói senta na cama exausto, bateria baixa",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "clock",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s002",
+   "start": 2.1,
+   "end": 3.99,
+   "line": "Mesmo depois de dormir.",
+   "scene": "bigFace sonolento com olheiras, luz dourada",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [],
+   "notes": ""
+  },
+  {
+   "id": "s003",
+   "start": 3.99,
+   "end": 5.89,
+   "line": "Abre o computador e sente um peso no peito.",
+   "scene": "escritório: abre o notebook, pedra pesada no peito",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.9,
+     "name": "impact",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s004",
+   "start": 5.89,
+   "end": 8.97,
+   "line": "As pessoas dizem que é preguiça.",
+   "scene": "colegas apontam: PREGUIÇA?",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s005",
+   "start": 8.97,
+   "end": 11.34,
+   "line": "Que falta força de vontade.",
+   "scene": "colega musculoso: FORÇA DE VONTADE!",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s006",
+   "start": 11.34,
+   "end": 14.07,
+   "line": "Mas e se não for nada disso?",
+   "scene": "bigFace herói pensativo ao entardecer",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "riser",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s007",
+   "start": 14.07,
+   "end": 17.23,
+   "line": "Em 2019, a Organização Mundial da Saúde incluiu o burnout na sua",
+   "scene": "3D: sede internacional à noite, OMS 2019",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s008",
+   "start": 17.23,
+   "end": 21.28,
+   "line": "Classificação Internacional de Doenças, a CID-11, que entrou em vigor em 2022.",
+   "scene": "livro CID-11 se abre, linha 2019 → 2022",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s009",
+   "start": 21.28,
+   "end": 24.73,
+   "line": "Mas atenção: a OMS não chama o burnout de doença.",
+   "scene": "carimbo DOENÇA riscado",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "impact",
+     "gain": -8
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s010",
+   "start": 24.73,
+   "end": 27.64,
+   "line": "Ela o descreve como um fenômeno ligado ao trabalho.",
+   "scene": "carimbo FENÔMENO LIGADO AO TRABALHO",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "ding",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s011",
+   "start": 27.64,
+   "end": 32.29,
+   "line": "E define assim: uma síndrome causada por estresse crônico no trabalho,",
+   "scene": "manômetro de estresse subindo com dias passando",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "counter",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s012",
+   "start": 32.29,
+   "end": 35.25,
+   "line": "que não foi gerenciado com sucesso.",
+   "scene": "válvula quebrada, vapor: NÃO GERENCIADO",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "glitch",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s013",
+   "start": 35.25,
+   "end": 40.59,
+   "line": "Segundo a OMS, ela aparece em três sinais. E talvez você reconheça algum deles.",
+   "scene": "três cartas coloridas viradas na mesa",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s014",
+   "start": 40.59,
+   "end": 42.53,
+   "line": "O primeiro sinal é a exaustão.",
+   "scene": "carta 1 vira: EXAUSTÃO (laranja)",
+   "bars": null,
+   "in": {
+    "type": "flash",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s015",
+   "start": 42.53,
+   "end": 47.09,
+   "line": "Não é o cansaço de um dia puxado, que passa com uma boa noite de sono.",
+   "scene": "fim de tarde: herói volta para casa cansado",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "footstep",
+     "gain": -16
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s016",
+   "start": 47.09,
+   "end": 49.75,
+   "line": "É um esgotamento de energia que não vai embora.",
+   "scene": "bateria drenando, carregador não carrega",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "powerup",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s017",
+   "start": 49.75,
+   "end": 52.92,
+   "line": "Você descansa no fim de semana, e",
+   "scene": "fim de semana: herói descansa na rede, parque dourado",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "shimmer",
+     "gain": -16
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s018",
+   "start": 52.92,
+   "end": 55.36,
+   "line": "na segunda-feira parece que nunca descansou.",
+   "scene": "segunda-feira: calendário vira, bateria ainda vermelha",
+   "bars": null,
+   "in": {
+    "type": "whip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "swish",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s019",
+   "start": 55.36,
+   "end": 58.99,
+   "line": "O corpo está no trabalho. Mas o tanque está vazio.",
+   "scene": "no trabalho: medidor de combustível no VAZIO",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "blip",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s020",
+   "start": 58.99,
+   "end": 60.75,
+   "line": "E nenhum café parece ser suficiente.",
+   "scene": "xícaras de café se empilhando",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 0.6,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 1.0,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s021",
+   "start": 60.75,
+   "end": 63.72,
+   "line": "O segundo sinal é a distância.",
+   "scene": "carta 2 vira: DISTÂNCIA (azul)",
+   "bars": null,
+   "in": {
+    "type": "flash",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s022",
+   "start": 63.72,
+   "end": 67.47,
+   "line": "A OMS fala em um afastamento mental do trabalho,",
+   "scene": "3D: mesa do herói se afasta no escuro",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s023",
+   "start": 67.47,
+   "end": 72.19,
+   "line": "com sentimentos negativos ou cínicos em relação a ele.",
+   "scene": "bigFace cínico, olhos revirando",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [],
+   "notes": ""
+  },
+  {
+   "id": "s024",
+   "start": 72.19,
+   "end": 73.77,
+   "line": "Aquilo que antes importava agora tanto faz.",
+   "scene": "foto e troféu na mesa perdem a cor",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "glitch",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s025",
+   "start": 73.77,
+   "end": 77.7,
+   "line": "Você começa a tratar tarefas, colegas e clientes no piloto automático.",
+   "scene": "piloto automático: colegas falam, herói robótico",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "blip",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s026",
+   "start": 77.7,
+   "end": 81.71,
+   "line": "É como se uma parede invisível surgisse entre você e o que você faz.",
+   "scene": "parede de vidro sobe entre o herói e os colegas",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s027",
+   "start": 81.71,
+   "end": 84.55,
+   "line": "O terceiro sinal é a queda na eficácia.",
+   "scene": "carta 3 vira: EFICÁCIA ↓ (roxo)",
+   "bars": null,
+   "in": {
+    "type": "flash",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "stinger",
+     "gain": -8
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s028",
+   "start": 84.55,
+   "end": 87.4,
+   "line": "Você sente que produz menos.",
+   "scene": "gráfico de produtividade caindo",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "counter",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s029",
+   "start": 87.4,
+   "end": 89.16,
+   "line": "Que nada do que faz é bom o bastante.",
+   "scene": "herói amassa folha e joga fora, noite",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.6,
+     "name": "swish",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s030",
+   "start": 89.16,
+   "end": 91.53,
+   "line": "Tarefas simples parecem montanhas.",
+   "scene": "folha vira montanha gigante, tempestade",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "thunder",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "wind",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s031",
+   "start": 91.53,
+   "end": 96.95,
+   "line": "E isso alimenta um ciclo: quanto menos você rende, mais se cobra, e mais se esgota.",
+   "scene": "diagrama: ciclo rende menos → se cobra → se esgota",
+   "bars": null,
+   "in": {
+    "type": "zoom",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "blip",
+     "gain": -12
+    },
+    {
+     "at": 2.0,
+     "name": "blip",
+     "gain": -12
+    },
+    {
+     "at": 3.5,
+     "name": "blip",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s032",
+   "start": 96.95,
+   "end": 103.29,
+   "line": "Esses três sinais não foram inventados de uma hora para outra.",
+   "scene": "três cartas reveladas lado a lado + ampulheta",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s033",
+   "start": 103.29,
+   "end": 105.59,
+   "line": "A palavra burnout ganhou força em 1974,",
+   "scene": "3D: Nova York à noite, 1974",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s034",
+   "start": 105.59,
+   "end": 107.85,
+   "line": "quando o psicólogo Herbert Freudenberger",
+   "scene": "Freudenberger escrevendo anotações",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s035",
+   "start": 107.85,
+   "end": 112.76,
+   "line": "descreveu o esgotamento de voluntários de uma clínica gratuita em Nova York.",
+   "scene": "clínica gratuita: voluntários atendendo",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [],
+   "notes": "",
+   "amb": {
+    "name": "murmur",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s036",
+   "start": 112.76,
+   "end": 116.47,
+   "line": "Pessoas dedicadas, que aos poucos se apagavam.",
+   "scene": "voluntários como velas que se apagam",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 1.5,
+     "name": "wind",
+     "gain": -18
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s037",
+   "start": 116.47,
+   "end": 119.36,
+   "line": "Depois disso, os sinais foram estudados por décadas,",
+   "scene": "linha do tempo: 1974 → décadas de pesquisa",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "counter",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s038",
+   "start": 119.36,
+   "end": 125.33,
+   "line": "principalmente pela psicóloga Christina Maslach, que desde os anos setenta estuda o esgotamento profissional e",
+   "scene": "Christina Maslach no escritório com gráficos",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s039",
+   "start": 125.33,
+   "end": 128.92,
+   "line": "criou um dos questionários mais usados para medi-lo.",
+   "scene": "questionário sendo preenchido",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "tick",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s040",
+   "start": 128.92,
+   "end": 131.46,
+   "line": "E aqui está o ponto mais importante.",
+   "scene": "bigFace maravilhado",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "ding",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s041",
+   "start": 131.46,
+   "end": 135.3,
+   "line": "A OMS diz que o burnout se refere especificamente ao contexto do trabalho.",
+   "scene": "moldura TRABALHO destacando o prédio do escritório",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s042",
+   "start": 135.3,
+   "end": 137.78,
+   "line": "Ou seja: ele não nasce de uma fraqueza pessoal.",
+   "scene": "rótulo FRAQUEZA PESSOAL riscado",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "impact",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s043",
+   "start": 137.78,
+   "end": 144.36,
+   "line": "Maslach e seus colegas apontam fatores como sobrecarga, falta de controle, pouco reconhecimento e falta de apoio entre as pessoas.",
+   "scene": "escritório: 4 fatores surgem",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 2.3,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 3.6,
+     "name": "pop",
+     "gain": -12
+    },
+    {
+     "at": 5.0,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s044",
+   "start": 144.36,
+   "end": 149.17,
+   "line": "Muitas vezes, o problema não é você. É o ambiente em que você está.",
+   "scene": "3D: escritório escuro, câmera revela o ambiente",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s045",
+   "start": 149.17,
+   "end": 154.92,
+   "line": "Isso não significa que você não pode fazer nada. Mas significa que descansar mais nem sempre resolve sozinho.",
+   "scene": "herói descansa na rede, bateria não enche",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "shimmer",
+     "gain": -16
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s046",
+   "start": 154.92,
+   "end": 160.65,
+   "line": "E como os sinais podem se parecer com os de outras condições, como depressão e ansiedade,",
+   "scene": "diagrama: sinais em comum",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s047",
+   "start": 160.65,
+   "end": 165.29,
+   "line": "o caminho mais seguro é conversar com um profissional de saúde.",
+   "scene": "conversa com profissional de saúde, bateria recarrega",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "powerup",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s048",
+   "start": 165.29,
+   "end": 168.63,
+   "line": "Então, se você se reconheceu em algum desses sinais, lembre-se:",
+   "scene": "amanhecer: herói caminha mais leve",
+   "bars": null,
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s049",
+   "start": 168.63,
+   "end": 172.15,
+   "line": "esgotamento não é preguiça. É um alerta.",
+   "scene": "NÃO É PREGUIÇA. É UM ALERTA.",
+   "bars": "scope",
+   "in": {
+    "type": "flash",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "stinger",
+     "gain": -6
+    }
+   ],
+   "notes": "",
+   "captions": false
+  },
+  {
+   "id": "s050",
+   "start": 172.15,
+   "end": 177.7,
+   "line": "E você já sentiu algum desses três sinais? Conta aqui nos comentários.",
+   "scene": "tela final",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "captions": false
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 14.07,
+   "mood": "sad",
+   "intensity": 0.4
+  },
+  {
+   "start": 14.07,
+   "end": 40.59,
+   "mood": "mystery",
+   "intensity": 0.45
+  },
+  {
+   "start": 40.59,
+   "end": 103.29,
+   "mood": "tension",
+   "intensity": 0.5
+  },
+  {
+   "start": 103.29,
+   "end": 128.92,
+   "mood": "mystery",
+   "intensity": 0.4
+  },
+  {
+   "start": 128.92,
+   "end": 165.29,
+   "mood": "wonder",
+   "intensity": 0.5
+  },
+  {
+   "start": 165.29,
+   "end": 177.7,
+   "mood": "hopeful",
+   "intensity": 0.6
+  }
+ ]
+}

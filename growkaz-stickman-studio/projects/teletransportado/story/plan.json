@@ -1,0 +1,151 @@
+{
+ "lines": [
+  {
+   "n": 1,
+   "who": "leo",
+   "start": 0.6,
+   "dur": 6.19,
+   "text": "Mais uma e eu paro. Amanhã eu paro... eu sempre falo isso.",
+   "audio": true
+  },
+  {
+   "n": 2,
+   "who": "leo",
+   "start": 10.6,
+   "dur": 3.45,
+   "text": "Que isso... eu tô viajando de novo?",
+   "audio": true
+  },
+  {
+   "n": 3,
+   "who": "leo",
+   "start": 21.4,
+   "dur": 6.17,
+   "text": "Onde eu tô? Sem sinal... Que lugar é esse?",
+   "audio": true
+  },
+  {
+   "n": 4,
+   "who": "pedro",
+   "start": 31.4,
+   "dur": 4.01,
+   "text": "Ei, estrangeiro! Que roupa é essa? Tá perdido?",
+   "audio": true
+  },
+  {
+   "n": 5,
+   "who": "leo",
+   "start": 35.7,
+   "dur": 2.12,
+   "text": "Mais do que você imagina.",
+   "audio": true
+  },
+  {
+   "n": 6,
+   "who": "jesus",
+   "start": 40.6,
+   "dur": 4.38,
+   "text": "Léo. Eu sei de onde você veio. Vem e segue-me.",
+   "audio": true
+  },
+  {
+   "n": 7,
+   "who": "leo",
+   "start": 47.4,
+   "dur": 2.19,
+   "text": "Como você sabe meu nome?",
+   "audio": true
+  },
+  {
+   "n": 8,
+   "who": "pedro",
+   "start": 50.3,
+   "dur": 2.6,
+   "text": "Ele chamou a gente do mesmo jeito.",
+   "audio": false
+  }
+ ],
+ "shots": [
+  [
+   "A1",
+   0
+  ],
+  [
+   "A2",
+   3.4
+  ],
+  [
+   "A3",
+   5.6
+  ],
+  [
+   "B1",
+   8.2
+  ],
+  [
+   "B2",
+   10.0
+  ],
+  [
+   "B3",
+   13.6
+  ],
+  [
+   "C1",
+   16.4
+  ],
+  [
+   "C2",
+   19.4
+  ],
+  [
+   "C3",
+   21.2
+  ],
+  [
+   "C4",
+   24.6
+  ],
+  [
+   "C5",
+   27.8
+  ],
+  [
+   "D1",
+   29.6
+  ],
+  [
+   "D2",
+   31.0
+  ],
+  [
+   "D3",
+   35.4
+  ],
+  [
+   "E1",
+   38.0
+  ],
+  [
+   "E2",
+   40.4
+  ],
+  [
+   "E3",
+   45.5
+  ],
+  [
+   "F1",
+   47.0
+  ],
+  [
+   "F2",
+   50.0
+  ],
+  [
+   "F3",
+   53.4
+  ]
+ ],
+ "duration": 56.5
+}

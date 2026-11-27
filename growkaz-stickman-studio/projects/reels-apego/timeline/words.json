@@ -1,0 +1,820 @@
+{
+ "source": "pause-aligned script",
+ "words": [
+  {
+   "word": "Seu",
+   "start": 0.0,
+   "end": 0.204
+  },
+  {
+   "word": "jeito",
+   "start": 0.221,
+   "end": 0.506
+  },
+  {
+   "word": "de",
+   "start": 0.531,
+   "end": 0.694
+  },
+  {
+   "word": "amar",
+   "start": 0.708,
+   "end": 0.952
+  },
+  {
+   "word": "pode",
+   "start": 0.974,
+   "end": 1.218
+  },
+  {
+   "word": "ter",
+   "start": 1.239,
+   "end": 1.443
+  },
+  {
+   "word": "começado",
+   "start": 1.46,
+   "end": 1.867
+  },
+  {
+   "word": "quando",
+   "start": 1.903,
+   "end": 2.228
+  },
+  {
+   "word": "você",
+   "start": 2.257,
+   "end": 2.501
+  },
+  {
+   "word": "ainda",
+   "start": 2.522,
+   "end": 2.807
+  },
+  {
+   "word": "era",
+   "start": 2.832,
+   "end": 3.036
+  },
+  {
+   "word": "um",
+   "start": 3.053,
+   "end": 3.216
+  },
+  {
+   "word": "bebê.",
+   "start": 3.23,
+   "end": 3.515
+  },
+  {
+   "word": "Nos",
+   "start": 4.02,
+   "end": 4.246
+  },
+  {
+   "word": "anos",
+   "start": 4.265,
+   "end": 4.536
+  },
+  {
+   "word": "setenta,",
+   "start": 4.56,
+   "end": 5.011
+  },
+  {
+   "word": "a",
+   "start": 5.05,
+   "end": 5.185
+  },
+  {
+   "word": "psicóloga",
+   "start": 5.197,
+   "end": 5.694
+  },
+  {
+   "word": "Mary",
+   "start": 5.737,
+   "end": 6.008
+  },
+  {
+   "word": "Ainsworth",
+   "start": 6.031,
+   "end": 6.527
+  },
+  {
+   "word": "observou",
+   "start": 6.571,
+   "end": 7.022
+  },
+  {
+   "word": "como",
+   "start": 7.061,
+   "end": 7.332
+  },
+  {
+   "word": "bebês",
+   "start": 7.355,
+   "end": 7.671
+  },
+  {
+   "word": "reagiam",
+   "start": 7.699,
+   "end": 8.105
+  },
+  {
+   "word": "quando",
+   "start": 8.14,
+   "end": 8.501
+  },
+  {
+   "word": "a",
+   "start": 8.533,
+   "end": 8.668
+  },
+  {
+   "word": "mãe",
+   "start": 8.68,
+   "end": 8.905
+  },
+  {
+   "word": "saía",
+   "start": 8.925,
+   "end": 9.196
+  },
+  {
+   "word": "da",
+   "start": 9.219,
+   "end": 9.4
+  },
+  {
+   "word": "sala",
+   "start": 9.416,
+   "end": 9.686
+  },
+  {
+   "word": "e",
+   "start": 9.71,
+   "end": 9.845
+  },
+  {
+   "word": "depois",
+   "start": 9.857,
+   "end": 10.218
+  },
+  {
+   "word": "voltava.",
+   "start": 10.249,
+   "end": 10.701
+  },
+  {
+   "word": "Em",
+   "start": 11.17,
+   "end": 11.343
+  },
+  {
+   "word": "mil",
+   "start": 11.358,
+   "end": 11.574
+  },
+  {
+   "word": "novecentos",
+   "start": 11.593,
+   "end": 12.111
+  },
+  {
+   "word": "e",
+   "start": 12.156,
+   "end": 12.286
+  },
+  {
+   "word": "oitenta",
+   "start": 12.297,
+   "end": 12.686
+  },
+  {
+   "word": "e",
+   "start": 12.72,
+   "end": 12.85
+  },
+  {
+   "word": "sete,",
+   "start": 12.861,
+   "end": 13.164
+  },
+  {
+   "word": "os",
+   "start": 13.19,
+   "end": 13.363
+  },
+  {
+   "word": "pesquisadores",
+   "start": 13.378,
+   "end": 14.026
+  },
+  {
+   "word": "Cindy",
+   "start": 14.082,
+   "end": 14.385
+  },
+  {
+   "word": "Hazan",
+   "start": 14.411,
+   "end": 14.714
+  },
+  {
+   "word": "e",
+   "start": 14.74,
+   "end": 14.87
+  },
+  {
+   "word": "Phillip",
+   "start": 14.881,
+   "end": 15.27
+  },
+  {
+   "word": "Shaver",
+   "start": 15.304,
+   "end": 15.65
+  },
+  {
+   "word": "perceberam",
+   "start": 15.68,
+   "end": 16.198
+  },
+  {
+   "word": "que",
+   "start": 16.243,
+   "end": 16.459
+  },
+  {
+   "word": "adultos",
+   "start": 16.478,
+   "end": 16.867
+  },
+  {
+   "word": "repetem",
+   "start": 16.901,
+   "end": 17.29
+  },
+  {
+   "word": "padrões",
+   "start": 17.324,
+   "end": 17.713
+  },
+  {
+   "word": "parecidos",
+   "start": 17.747,
+   "end": 18.222
+  },
+  {
+   "word": "no",
+   "start": 18.263,
+   "end": 18.436
+  },
+  {
+   "word": "amor.",
+   "start": 18.451,
+   "end": 18.754
+  },
+  {
+   "word": "Eles",
+   "start": 19.04,
+   "end": 19.294
+  },
+  {
+   "word": "chamaram",
+   "start": 19.316,
+   "end": 19.739
+  },
+  {
+   "word": "isso",
+   "start": 19.775,
+   "end": 20.029
+  },
+  {
+   "word": "de",
+   "start": 20.051,
+   "end": 20.22
+  },
+  {
+   "word": "estilos",
+   "start": 20.235,
+   "end": 20.615
+  },
+  {
+   "word": "de",
+   "start": 20.649,
+   "end": 20.818
+  },
+  {
+   "word": "apego.",
+   "start": 20.832,
+   "end": 21.171
+  },
+  {
+   "word": "O",
+   "start": 21.79,
+   "end": 21.939
+  },
+  {
+   "word": "primeiro",
+   "start": 21.952,
+   "end": 22.45
+  },
+  {
+   "word": "é",
+   "start": 22.494,
+   "end": 22.643
+  },
+  {
+   "word": "o",
+   "start": 22.656,
+   "end": 22.806
+  },
+  {
+   "word": "ansioso.",
+   "start": 22.819,
+   "end": 23.317
+  },
+  {
+   "word": "Tem",
+   "start": 23.58,
+   "end": 23.771
+  },
+  {
+   "word": "medo",
+   "start": 23.788,
+   "end": 24.017
+  },
+  {
+   "word": "de",
+   "start": 24.037,
+   "end": 24.189
+  },
+  {
+   "word": "ser",
+   "start": 24.203,
+   "end": 24.394
+  },
+  {
+   "word": "abandonado.",
+   "start": 24.41,
+   "end": 24.907
+  },
+  {
+   "word": "Manda",
+   "start": 25.15,
+   "end": 25.475
+  },
+  {
+   "word": "mensagem,",
+   "start": 25.503,
+   "end": 26.013
+  },
+  {
+   "word": "espera",
+   "start": 26.057,
+   "end": 26.428
+  },
+  {
+   "word": "a",
+   "start": 26.461,
+   "end": 26.6
+  },
+  {
+   "word": "resposta,",
+   "start": 26.612,
+   "end": 27.122
+  },
+  {
+   "word": "e",
+   "start": 27.166,
+   "end": 27.306
+  },
+  {
+   "word": "cada",
+   "start": 27.318,
+   "end": 27.596
+  },
+  {
+   "word": "minuto",
+   "start": 27.62,
+   "end": 27.991
+  },
+  {
+   "word": "de",
+   "start": 28.024,
+   "end": 28.209
+  },
+  {
+   "word": "silêncio",
+   "start": 28.225,
+   "end": 28.689
+  },
+  {
+   "word": "parece",
+   "start": 28.729,
+   "end": 29.1
+  },
+  {
+   "word": "uma",
+   "start": 29.133,
+   "end": 29.364
+  },
+  {
+   "word": "eternidade.",
+   "start": 29.385,
+   "end": 29.988
+  },
+  {
+   "word": "O",
+   "start": 30.77,
+   "end": 30.935
+  },
+  {
+   "word": "segundo",
+   "start": 30.949,
+   "end": 31.443
+  },
+  {
+   "word": "é",
+   "start": 31.486,
+   "end": 31.651
+  },
+  {
+   "word": "o",
+   "start": 31.665,
+   "end": 31.83
+  },
+  {
+   "word": "evitativo.",
+   "start": 31.844,
+   "end": 32.503
+  },
+  {
+   "word": "Quando",
+   "start": 32.87,
+   "end": 33.218
+  },
+  {
+   "word": "a",
+   "start": 33.248,
+   "end": 33.379
+  },
+  {
+   "word": "relação",
+   "start": 33.39,
+   "end": 33.782
+  },
+  {
+   "word": "fica",
+   "start": 33.816,
+   "end": 34.077
+  },
+  {
+   "word": "séria",
+   "start": 34.099,
+   "end": 34.404
+  },
+  {
+   "word": "demais,",
+   "start": 34.43,
+   "end": 34.822
+  },
+  {
+   "word": "ele",
+   "start": 34.856,
+   "end": 35.074
+  },
+  {
+   "word": "se",
+   "start": 35.092,
+   "end": 35.266
+  },
+  {
+   "word": "afasta.",
+   "start": 35.282,
+   "end": 35.673
+  },
+  {
+   "word": "Precisa",
+   "start": 35.707,
+   "end": 36.099
+  },
+  {
+   "word": "de",
+   "start": 36.133,
+   "end": 36.307
+  },
+  {
+   "word": "espaço",
+   "start": 36.322,
+   "end": 36.67
+  },
+  {
+   "word": "e",
+   "start": 36.7,
+   "end": 36.831
+  },
+  {
+   "word": "tem",
+   "start": 36.842,
+   "end": 37.06
+  },
+  {
+   "word": "dificuldade",
+   "start": 37.079,
+   "end": 37.644
+  },
+  {
+   "word": "de",
+   "start": 37.693,
+   "end": 37.867
+  },
+  {
+   "word": "depender",
+   "start": 37.882,
+   "end": 38.317
+  },
+  {
+   "word": "de",
+   "start": 38.355,
+   "end": 38.529
+  },
+  {
+   "word": "alguém.",
+   "start": 38.544,
+   "end": 38.936
+  },
+  {
+   "word": "E",
+   "start": 39.53,
+   "end": 39.676
+  },
+  {
+   "word": "o",
+   "start": 39.689,
+   "end": 39.835
+  },
+  {
+   "word": "terceiro",
+   "start": 39.847,
+   "end": 40.334
+  },
+  {
+   "word": "é",
+   "start": 40.376,
+   "end": 40.522
+  },
+  {
+   "word": "o",
+   "start": 40.535,
+   "end": 40.681
+  },
+  {
+   "word": "seguro.",
+   "start": 40.694,
+   "end": 41.132
+  },
+  {
+   "word": "Ele",
+   "start": 41.54,
+   "end": 41.787
+  },
+  {
+   "word": "confia,",
+   "start": 41.808,
+   "end": 42.253
+  },
+  {
+   "word": "se",
+   "start": 42.292,
+   "end": 42.489
+  },
+  {
+   "word": "aproxima",
+   "start": 42.507,
+   "end": 43.001
+  },
+  {
+   "word": "sem",
+   "start": 43.044,
+   "end": 43.291
+  },
+  {
+   "word": "medo",
+   "start": 43.312,
+   "end": 43.608
+  },
+  {
+   "word": "e",
+   "start": 43.634,
+   "end": 43.782
+  },
+  {
+   "word": "também",
+   "start": 43.795,
+   "end": 44.191
+  },
+  {
+   "word": "sabe",
+   "start": 44.225,
+   "end": 44.521
+  },
+  {
+   "word": "ficar",
+   "start": 44.547,
+   "end": 44.893
+  },
+  {
+   "word": "sozinho.",
+   "start": 44.923,
+   "end": 45.417
+  },
+  {
+   "word": "Mas",
+   "start": 46.1,
+   "end": 46.289
+  },
+  {
+   "word": "aqui",
+   "start": 46.306,
+   "end": 46.532
+  },
+  {
+   "word": "está",
+   "start": 46.552,
+   "end": 46.779
+  },
+  {
+   "word": "a",
+   "start": 46.799,
+   "end": 46.912
+  },
+  {
+   "word": "melhor",
+   "start": 46.922,
+   "end": 47.225
+  },
+  {
+   "word": "parte.",
+   "start": 47.251,
+   "end": 47.554
+  },
+  {
+   "word": "O",
+   "start": 47.86,
+   "end": 47.988
+  },
+  {
+   "word": "seu",
+   "start": 47.999,
+   "end": 48.212
+  },
+  {
+   "word": "estilo",
+   "start": 48.23,
+   "end": 48.57
+  },
+  {
+   "word": "não",
+   "start": 48.6,
+   "end": 48.813
+  },
+  {
+   "word": "é",
+   "start": 48.831,
+   "end": 48.959
+  },
+  {
+   "word": "uma",
+   "start": 48.97,
+   "end": 49.183
+  },
+  {
+   "word": "sentença.",
+   "start": 49.201,
+   "end": 49.669
+  },
+  {
+   "word": "Com",
+   "start": 50.01,
+   "end": 50.227
+  },
+  {
+   "word": "relações",
+   "start": 50.246,
+   "end": 50.68
+  },
+  {
+   "word": "saudáveis",
+   "start": 50.717,
+   "end": 51.195
+  },
+  {
+   "word": "e",
+   "start": 51.236,
+   "end": 51.366
+  },
+  {
+   "word": "autoconhecimento,",
+   "start": 51.378,
+   "end": 52.202
+  },
+  {
+   "word": "ele",
+   "start": 52.274,
+   "end": 52.491
+  },
+  {
+   "word": "pode",
+   "start": 52.51,
+   "end": 52.77
+  },
+  {
+   "word": "mudar.",
+   "start": 52.793,
+   "end": 53.14
+  },
+  {
+   "word": "E",
+   "start": 53.77,
+   "end": 53.867
+  },
+  {
+   "word": "você,",
+   "start": 53.875,
+   "end": 54.1
+  },
+  {
+   "word": "qual",
+   "start": 54.47,
+   "end": 54.721
+  },
+  {
+   "word": "desses",
+   "start": 54.742,
+   "end": 55.076
+  },
+  {
+   "word": "é",
+   "start": 55.105,
+   "end": 55.231
+  },
+  {
+   "word": "o",
+   "start": 55.242,
+   "end": 55.367
+  },
+  {
+   "word": "seu?",
+   "start": 55.378,
+   "end": 55.628
+  },
+  {
+   "word": "Comenta",
+   "start": 55.91,
+   "end": 56.22
+  },
+  {
+   "word": "aqui.",
+   "start": 56.247,
+   "end": 56.489
+  },
+  {
+   "word": "E",
+   "start": 57.13,
+   "end": 57.224
+  },
+  {
+   "word": "manda",
+   "start": 57.232,
+   "end": 57.451
+  },
+  {
+   "word": "pra",
+   "start": 57.47,
+   "end": 57.626
+  },
+  {
+   "word": "alguém",
+   "start": 57.64,
+   "end": 57.89
+  },
+  {
+   "word": "que",
+   "start": 57.912,
+   "end": 58.068
+  },
+  {
+   "word": "você",
+   "start": 58.082,
+   "end": 58.27
+  },
+  {
+   "word": "ama.",
+   "start": 58.286,
+   "end": 58.474
+  }
+ ]
+}

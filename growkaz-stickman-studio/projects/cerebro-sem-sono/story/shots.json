@@ -1,0 +1,1182 @@
+{
+ "title": "Sem dormir, seu cérebro fica 60% mais reativo",
+ "duration": 180.78,
+ "shots": [
+  {
+   "id": "s001",
+   "start": 0,
+   "end": 1.57,
+   "line": "Você dormiu mal.",
+   "scene": "noite: herói acordado na cama, relógio 3h",
+   "set": "bedroom",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "clock",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s002",
+   "start": 1.57,
+   "end": 3.92,
+   "line": "Alguém faz uma piada boba, e você",
+   "scene": "manhã: colega de boné amarelo faz piada, HAHA",
+   "set": "office",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.4,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s003",
+   "start": 3.92,
+   "end": 5.3,
+   "line": "explode.",
+   "scene": "bigFace herói explode de raiva, flash vermelho",
+   "set": "office",
+   "bars": "scope",
+   "in": {
+    "type": "flash",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "impact",
+     "gain": -6
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s004",
+   "start": 5.3,
+   "end": 9.52,
+   "line": "Mais tarde, você se pergunta: por que eu reagi assim?",
+   "scene": "mais tarde: herói sozinho na mesa, pensativo",
+   "set": "office",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "clock",
+     "gain": -18
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s005",
+   "start": 9.52,
+   "end": 12.4,
+   "line": "A resposta pode estar em uma noite sem sono.",
+   "scene": "3D: prédio à noite, uma única janela acesa",
+   "set": "3d-city",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s006",
+   "start": 12.4,
+   "end": 15.03,
+   "line": "E a ciência conseguiu medir isso.",
+   "scene": "TÍTULO: O CÉREBRO SEM SONO",
+   "set": "title",
+   "bars": "scope",
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.05,
+     "name": "stinger",
+     "gain": -6
+    }
+   ],
+   "notes": "",
+   "captions": false
+  },
+  {
+   "id": "s007",
+   "start": 15.03,
+   "end": 16.84,
+   "line": "Todo mundo já teve um dia assim.",
+   "scene": "manhã: herói caminha cansado com café",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "footstep",
+     "gain": -16
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s008",
+   "start": 16.84,
+   "end": 19.53,
+   "line": "Paciência curta, tudo parece pior,",
+   "scene": "ponto de ônibus: herói impaciente, batendo o pé",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "tick",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s009",
+   "start": 19.53,
+   "end": 22.37,
+   "line": "qualquer problema vira uma tempestade.",
+   "scene": "nuvem de tempestade sobre a cabeça do herói",
+   "set": "street",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "thunder",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "rain",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s010",
+   "start": 22.37,
+   "end": 26.89,
+   "line": "A gente costuma culpar o humor, o dia ruim, as outras pessoas.",
+   "scene": "herói culpa os outros apontando, colegas dão de ombros",
+   "set": "office",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "swish",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s011",
+   "start": 26.89,
+   "end": 33.11,
+   "line": "Mas e se o problema estiver numa pequena região do seu cérebro, que perde o controle quando você não dorme?",
+   "scene": "zoom na cabeça: pequena região vermelha brilha",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "zoom",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "blip",
+     "gain": -12
+    },
+    {
+     "at": 2.5,
+     "name": "riser",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s012",
+   "start": 33.11,
+   "end": 39.68,
+   "line": "Em 2007, o neurocientista Matthew Walker e seus colegas, nas universidades de Harvard e da Califórnia, em Berkeley,",
+   "scene": "3D: universidades à noite, 2007 · HARVARD · BERKELEY",
+   "set": "3d-campus",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "whoosh",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s013",
+   "start": 39.68,
+   "end": 41.97,
+   "line": "fizeram um experimento simples.",
+   "scene": "laboratório: Walker com prancheta, voluntários",
+   "set": "dept",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -20
+   }
+  },
+  {
+   "id": "s014",
+   "start": 41.97,
+   "end": 44.41,
+   "line": "Um grupo de voluntários dormiu normalmente.",
+   "scene": "voluntário dormindo tranquilo",
+   "set": "bedroom",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "shimmer",
+     "gain": -16
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -28
+   }
+  },
+  {
+   "id": "s015",
+   "start": 44.41,
+   "end": 48.0,
+   "line": "O outro passou a noite inteira acordado, mais o dia seguinte,",
+   "scene": "voluntários acordados à noite, bocejando, relógio girando",
+   "set": "dept",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "clock",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s016",
+   "start": 48.0,
+   "end": 50.76,
+   "line": "cerca de trinta e cinco horas sem dormir.",
+   "scene": "contador 0 → 35 HORAS",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "counter",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s017",
+   "start": 50.76,
+   "end": 54.45,
+   "line": "Depois, todos entraram em um aparelho de ressonância magnética e",
+   "scene": "3D: voluntário deslizando para dentro do aparelho de ressonância",
+   "set": "3d-mri",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "hum",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -20
+   }
+  },
+  {
+   "id": "s018",
+   "start": 54.45,
+   "end": 57.73,
+   "line": "viram imagens neutras e imagens perturbadoras.",
+   "scene": "insert: tela com imagem neutra, depois perturbadora",
+   "set": "mri",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "blip",
+     "gain": -12
+    },
+    {
+     "at": 2.0,
+     "name": "stinger",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s019",
+   "start": 57.73,
+   "end": 61.0,
+   "line": "Os pesquisadores observavam uma região específica:",
+   "scene": "sala de controle: pesquisadores observam monitores",
+   "set": "office",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "blip",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s020",
+   "start": 61.0,
+   "end": 62.6,
+   "line": "a amígdala.",
+   "scene": "cérebro: AMÍGDALA acende",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "ding",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s021",
+   "start": 62.6,
+   "end": 65.27,
+   "line": "A amígdala é o alarme do seu cérebro.",
+   "scene": "3D: cérebro translúcido com alarme vermelho pulsando",
+   "set": "3d-brain",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "heartbeat",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s022",
+   "start": 65.27,
+   "end": 67.11,
+   "line": "Ela tem o tamanho de uma amêndoa",
+   "scene": "amêndoa x amígdala",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s023",
+   "start": 67.11,
+   "end": 69.38,
+   "line": "e reage rápido a qualquer sinal de perigo.",
+   "scene": "susto: herói pula com buzina, alarme toca",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "carpass",
+     "gain": -10
+    },
+    {
+     "at": 0.5,
+     "name": "hit",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s024",
+   "start": 69.38,
+   "end": 75.38,
+   "line": "Quando algo parece ameaçador, é ela que acelera o coração e prepara o corpo para reagir.",
+   "scene": "coração acelera, linha de batimento",
+   "set": "void",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "heartbeat",
+     "gain": -8
+    },
+    {
+     "at": 1.0,
+     "name": "heartbeat",
+     "gain": -8
+    },
+    {
+     "at": 1.6,
+     "name": "heartbeat",
+     "gain": -8
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s025",
+   "start": 75.38,
+   "end": 79.19,
+   "line": "No grupo que não dormiu, diante das imagens negativas, a amígdala",
+   "scene": "dois cérebros: DORMIU x NÃO DORMIU",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s026",
+   "start": 79.19,
+   "end": 82.03,
+   "line": "reagiu cerca de sessenta por cento mais.",
+   "scene": "barra +60%",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "counter",
+     "gain": -14
+    },
+    {
+     "at": 1.6,
+     "name": "impact",
+     "gain": -8
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s027",
+   "start": 82.03,
+   "end": 83.89,
+   "line": "Sessenta por cento.",
+   "scene": "+60% gigante",
+   "set": "void",
+   "bars": "scope",
+   "in": {
+    "type": "flash",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "stinger",
+     "gain": -6
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s028",
+   "start": 83.89,
+   "end": 87.78,
+   "line": "O alarme não apenas tocou. Ele tocou alto demais.",
+   "scene": "sino de alarme gigante sobre a cabeça do herói",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "buzz",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s029",
+   "start": 87.78,
+   "end": 90.76,
+   "line": "Mas o resultado mais revelador não foi esse.",
+   "scene": "bigFace herói curioso",
+   "set": "street",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "riser",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s030",
+   "start": 90.76,
+   "end": 97.2,
+   "line": "Normalmente, a amígdala conversa com o córtex pré-frontal, a parte da frente do cérebro, logo atrás da testa.",
+   "scene": "córtex pré-frontal conversa com amígdala",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "zoom",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "blip",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s031",
+   "start": 97.2,
+   "end": 101.51,
+   "line": "É ele que avalia a situação e diz: calma, não é tão grave.",
+   "scene": "pré-frontal: CALMA, amígdala diminui",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s032",
+   "start": 101.51,
+   "end": 104.46,
+   "line": "Sem sono, essa conversa ficou mais fraca.",
+   "scene": "conexão fica fraca e pontilhada",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "glitch",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s033",
+   "start": 104.46,
+   "end": 110.48,
+   "line": "Ao mesmo tempo, a amígdala ficou mais conectada a uma região do tronco cerebral ligada à reação de alerta.",
+   "scene": "conexão com tronco cerebral engrossa, vermelha",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "powerup",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s034",
+   "start": 110.48,
+   "end": 115.4,
+   "line": "Em outras palavras: o alarme ficou mais alto, e o freio ficou mais fraco.",
+   "scene": "ALARME ↑  FREIO ↓",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -10
+    },
+    {
+     "at": 2.3,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s035",
+   "start": 115.4,
+   "end": 118.77,
+   "line": "Isso ajuda a explicar aquela explosão depois de uma noite ruim.",
+   "scene": "replay da explosão em câmera lenta, alarme visível",
+   "set": "office",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "slowmo",
+     "gain": -8
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s036",
+   "start": 118.77,
+   "end": 120.64,
+   "line": "Não é que você virou outra pessoa.",
+   "scene": "herói diante do espelho, reflexo igual",
+   "set": "bedroom",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s037",
+   "start": 120.64,
+   "end": 126.43,
+   "line": "É que o seu cérebro perdeu, temporariamente, a capacidade de colocar as emoções em perspectiva.",
+   "scene": "nuvem enorme que, ao afastar, é pequena: perspectiva",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "whoosh",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "wind",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s038",
+   "start": 126.43,
+   "end": 128.72,
+   "line": "E aqui está a parte que muda tudo.",
+   "scene": "bigFace herói maravilhado",
+   "set": "street",
+   "bars": "scope",
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "ding",
+     "gain": -10
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s039",
+   "start": 128.72,
+   "end": 132.4,
+   "line": "Pesquisas posteriores do mesmo grupo sugerem que o sono,",
+   "scene": "3D: quarto à noite, herói dorme, bolhas de sonho",
+   "set": "3d-bed",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "shimmer",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s040",
+   "start": 132.4,
+   "end": 135.61,
+   "line": "principalmente a fase REM, a fase dos sonhos,",
+   "scene": "hipnograma: fases REM destacadas",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "blip",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s041",
+   "start": 135.61,
+   "end": 138.58,
+   "line": "funciona como uma espécie de terapia noturna.",
+   "scene": "herói dormindo com brilho azul: TERAPIA NOTURNA",
+   "set": "bedroom",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.1,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s042",
+   "start": 138.58,
+   "end": 144.58,
+   "line": "Durante a noite, o cérebro revisita as experiências do dia e ajuda a reduzir a carga emocional delas.",
+   "scene": "bolhas de sonho: cenas do dia passam de vermelho a azul",
+   "set": "bedroom",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.5,
+     "name": "pop",
+     "gain": -14
+    },
+    {
+     "at": 2.5,
+     "name": "shimmer",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "hum",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s043",
+   "start": 144.58,
+   "end": 150.16,
+   "line": "Ou seja: dormir não é só descansar. É também processar o que você sentiu.",
+   "scene": "cérebro processa emoções: vermelho entra, azul sai",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "blip",
+     "gain": -12
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s044",
+   "start": 150.16,
+   "end": 155.92,
+   "line": "O estudo foi feito com um grupo pequeno de voluntários, e a ciência do sono ainda tem muito a descobrir.",
+   "scene": "Walker com pequeno grupo de voluntários, interrogações",
+   "set": "dept",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "pop",
+     "gain": -12
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s045",
+   "start": 155.92,
+   "end": 163.43,
+   "line": "Mas a mensagem é clara: para a maioria dos adultos, os especialistas recomendam sete horas ou mais de sono por noite.",
+   "scene": "relógio enche 7 horas: 7+ HORAS",
+   "set": "blueprint",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.3,
+     "name": "counter",
+     "gain": -14
+    }
+   ],
+   "notes": ""
+  },
+  {
+   "id": "s046",
+   "start": 163.43,
+   "end": 167.49,
+   "line": "Então, da próxima vez que tudo parecer insuportável depois de uma noite mal dormida,",
+   "scene": "herói cansado no escritório, papelada",
+   "set": "office",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "clock",
+     "gain": -16
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "roomtone",
+    "gain": -22
+   }
+  },
+  {
+   "id": "s047",
+   "start": 167.49,
+   "end": 171.19,
+   "line": "lembre-se: talvez o problema não seja o mundo.",
+   "scene": "rua tranquila: o mundo segue normal",
+   "set": "street",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "whoosh",
+     "gain": -14
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "city",
+    "gain": -24
+   }
+  },
+  {
+   "id": "s048",
+   "start": 171.19,
+   "end": 174.39,
+   "line": "Talvez seja só o seu alarme, pedindo descanso.",
+   "scene": "3D: alarme se apaga, herói dorme, amanhecer",
+   "set": "3d-bed",
+   "bars": null,
+   "in": {
+    "type": "fade",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0,
+     "name": "shimmer",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "amb": {
+    "name": "wind",
+    "gain": -26
+   }
+  },
+  {
+   "id": "s049",
+   "start": 174.39,
+   "end": 180.78,
+   "line": "E você, como fica o seu humor depois de uma noite sem dormir? Conta aqui nos comentários.",
+   "scene": "tela final: pergunta + comentários + inscreva-se",
+   "set": "end",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.4
+   },
+   "sfx": [
+    {
+     "at": 0.2,
+     "name": "pop",
+     "gain": -10
+    }
+   ],
+   "notes": "",
+   "captions": false
+  }
+ ],
+ "music": [
+  {
+   "start": 0,
+   "end": 12.4,
+   "mood": "tension",
+   "intensity": 0.45
+  },
+  {
+   "start": 12.4,
+   "end": 33.11,
+   "mood": "dark",
+   "intensity": 0.4
+  },
+  {
+   "start": 33.11,
+   "end": 75.38,
+   "mood": "mystery",
+   "intensity": 0.45
+  },
+  {
+   "start": 75.38,
+   "end": 126.43,
+   "mood": "tension",
+   "intensity": 0.55
+  },
+  {
+   "start": 126.43,
+   "end": 155.92,
+   "mood": "wonder",
+   "intensity": 0.5
+  },
+  {
+   "start": 155.92,
+   "end": 180.78,
+   "mood": "hopeful",
+   "intensity": 0.55
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "title": "Teste",
+ "duration": 15,
+ "shots": [
+  {
+   "id": "t1",
+   "start": 0.0,
+   "end": 2.5,
+   "line": "",
+   "scene": "rua dia: dois feijões conversando",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": []
+  },
+  {
+   "id": "t2",
+   "start": 2.5,
+   "end": 5.0,
+   "line": "",
+   "scene": "multidão apaixonada",
+   "bars": null,
+   "in": {
+    "type": "whip",
+    "dur": 0.35
+   },
+   "sfx": []
+  },
+  {
+   "id": "t3",
+   "start": 5.0,
+   "end": 7.5,
+   "line": "",
+   "scene": "celular: chat",
+   "bars": null,
+   "in": {
+    "type": "zoom",
+    "dur": 0.35
+   },
+   "sfx": []
+  },
+  {
+   "id": "t4",
+   "start": 7.5,
+   "end": 10.0,
+   "line": "",
+   "scene": "jornal",
+   "bars": null,
+   "in": {
+    "type": "cut"
+   },
+   "sfx": []
+  },
+  {
+   "id": "t5",
+   "start": 10.0,
+   "end": 12.5,
+   "line": "",
+   "scene": "rua noite: estrelas",
+   "bars": null,
+   "in": {
+    "type": "dip",
+    "dur": 0.35
+   },
+   "sfx": []
+  },
+  {
+   "id": "t6",
+   "start": 12.5,
+   "end": 15.0,
+   "line": "",
+   "scene": "quarto: acordando",
+   "bars": null,
+   "in": {
+    "type": "fade",
+    "dur": 0.35
+   },
+   "sfx": []
+  }
+ ]
+}

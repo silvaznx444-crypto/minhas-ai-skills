@@ -59,3 +59,12 @@ Apps antigos com login do Instagram: só `IG_ACCESS_TOKEN` (60 dias) e host `gra
 
 **Analisar o perfil e responder comentários** — `$E/instagram_canal.py`, com as mesmas variáveis e as permissões
 extras `instagram_manage_insights` e `instagram_manage_comments` no token. Teste: `python3 $E/instagram_canal.py analisar --posts 3`.
+
+## Estúdio 3D (vídeos construídos por código)
+Não usa chave de API. Precisa de Node 18+, ffmpeg, Chromium e Python com `numpy`, `scipy` e `faster-whisper`.
+Passo a passo e teste: [video-3d.md](video-3d.md#preparar-o-ambiente-uma-vez-por-máquina).
+- No ambiente de nuvem `minhas-ai-skills` já estão salvos:
+  - o script de preparação (`npm install` do estúdio e os pacotes Python);
+  - as variáveis `CHROMIUM_PATH=/opt/pw-browsers/chromium` e `HF_HUB_DISABLE_XET=1`;
+  - os hosts `huggingface.co` e `us.aws.cdn.hf.co`, usados uma vez para baixar o modelo do Whisper.
+- Teste: `cd growkaz-stickman-studio && python3 tools/doctor.py && python3 tools/verify_kit.py`.

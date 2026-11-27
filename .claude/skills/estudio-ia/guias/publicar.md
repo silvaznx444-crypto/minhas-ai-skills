@@ -23,7 +23,7 @@ O título e a miniatura decidem se alguém clica. Leia `canal/aprendizados.md` e
 ## 2. Postar
 ```bash
 # YouTube: vídeo longo ou Shorts (o YouTube agenda sozinho com --agendar, não precisa de agendamento do lado de cá)
-python3 $E/youtube.py postar --video projetos/x/final.mp4 --titulo "Título" \
+python3 $E/youtube.py postar --video "growkaz-stickman-studio/projects/<slug>/out/<título>.mp4" --titulo "Título" \
   --descricao-arquivo projetos/x/legenda.txt --tags "tag1,tag2" [--agendar 2026-11-25T18:45:00-03:00] \
   [--miniatura canal/.../thumb.jpg] [--categoria 27]
 # Instagram Reels (na hora)
@@ -33,7 +33,8 @@ python3 $E/instagram.py postar --video projetos/x/final.mp4 --legenda-arquivo pr
 - `youtube.py postar` marca o vídeo como **conteúdo sintético/alterado** (exigência do YouTube para IA realista).
   Só use `--sem-aviso-ia` em animação claramente não realista, e avise o usuário.
 - Legenda do Instagram é outra: gancho em ≤ 125 caracteres, chamada para comentar e 3–6 hashtags.
-- Mostre o custo do Veo e peça ok antes de gerar, a não ser que o usuário tenha liberado um orçamento.
+- `youtube.py postar` já marca o vídeo como sintético. No 3D construído (animação claramente não realista),
+  `--sem-aviso-ia` é aceitável: avise o usuário.
 - Depois de postar, anote em `canal/jornada.md` o link e a data, e agende a checagem de 48 h
   (etapa 9 do passo a passo do [SKILL.md](../SKILL.md)).
 

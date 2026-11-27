@@ -1,4 +1,8 @@
-# Produção de vídeo (Gemini + Veo + ffmpeg)
+# Alternativa: vídeo gerado por IA (Gemini + Veo + ffmpeg)
+
+> **O padrão do canal é o vídeo 3D construído por código: veja [video-3d.md](video-3d.md).** Use este pipeline
+> só quando o usuário pedir explicitamente um vídeo gerado por IA (Veo), por exemplo uma cena realista com fala e
+> lip-sync que o 3D não faz. Ele custa ~US$ 3,20 por clipe de 8 s.
 
 Pipeline em `scripts/videoia.py`. Cada etapa grava em `projetos/<nome>/` e pula o que já existe,
 então dá para corrigir uma cena e rodar de novo sem pagar tudo outra vez.

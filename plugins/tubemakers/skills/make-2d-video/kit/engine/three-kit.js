@@ -6,6 +6,17 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { Pass } from 'three/addons/postprocessing/Pass.js';
+import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js';
+// Contorno de tinta com espessura constante na tela (casca invertida no vertex shader). Liga com stage({ ink }) ou config "ink".
+// Esconde as cascas antigas (MeshBasic BackSide escalado) e não contorna luzes, vidros, telas e partículas.
+class InkPass extends Pass {
+  constructor(scene, camera, thickness) { super(); this.scene = scene; this.camera = camera; this.t = thickness; this.needsSwap = false; this.fx = null; }
+  prep() { const t = this.t; this.scene.traverse((o) => { if (!o.isMesh || !o.material) return; for (const m of [].concat(o.material)) { if (m.isMeshBasicMaterial && m.side === THREE.BackSide) { o.visible = false; continue; } if (m.userData.outlineParameters) continue;
+    const skip = m.transparent || m.isMeshBasicMaterial || m.isShaderMaterial || m.userData.ink === false; m.userData.outlineParameters = skip ? { visible: false } : { thickness: t * (m.userData.inkScale || 1), color: [0.03, 0.026, 0.04], alpha: 1, keepAlive: true }; } }); }
+  render(renderer, writeBuffer, readBuffer) { if (!this.fx) this.fx = new OutlineEffect(renderer, { defaultThickness: this.t, defaultColor: [0.03, 0.026, 0.04], defaultKeepAlive: true }); this.prep();
+    renderer.setRenderTarget(this.renderToScreen ? null : readBuffer); renderer.clear(); this.fx.autoClear = true; this.fx.render(this.scene, this.camera); }
+}
 import { E, S, mood, shade, rng, key, ease, clamp, lerp } from './core.js';
 import { POSES } from './rig2d.js';
 export { THREE };
@@ -37,7 +48,7 @@ export function stage(o = {}) {
   scene.add(sun, sun.target);
   const w = Math.round(E.W * E.PX), h = Math.round(E.H * E.PX);
   const composer = new EffectComposer(R, new THREE.WebGLRenderTarget(w, h, { samples: 4, type: THREE.HalfFloatType }));
-  composer.addPass(new RenderPass(scene, camera));
+  const ink = o.ink ?? E.cfg?.ink; composer.addPass(ink ? new InkPass(scene, camera, typeof ink === 'number' ? ink : 0.0042) : new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(new THREE.Vector2(w, h), o.bloom ?? (st.grade.bloom ?? 0.55) * 0.7, 0.5, o.bloomThreshold ?? 0.88); composer.addPass(bloom); composer.addPass(new OutputPass());
   const api = {
     scene, camera, composer, sun, hemi, M, bloom,

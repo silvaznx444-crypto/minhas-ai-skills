@@ -18,6 +18,20 @@ export const BASE_MOODS = {
 const UI = { card: 'rgba(18,28,48,.94)', cardLine: 'rgba(150,180,230,.25)', text: '#9fb6d8', sub: '#6f84a6', accent: '#ff6f61', gold: '#ffd47e', cream: '#fff1dc', blueprint: '#8fb8e8', bpBg: '#0b1324', good: '#5fd39a' };
 
 export const STYLES = {
+  vivo: {
+    name: 'Vivo', desc: 'Bright cheerful low-poly game look: clean colours, almost no vignette, no grain.',
+    ink: '#0c0a12', inkFar: '#2e2838', feature: '#fff8f0', rimWidth: 4,
+    ui: { ...UI, accent: '#ff4a3d', gold: '#ffd23a', good: '#5fd39a' },
+    grade: { contrast: 1.04, sat: 1.12, lift: [0, 0, 0], gamma: [1, 1, 1], gain: [1.02, 1.0, 0.98], vignette: 0.16, grain: 0, bloom: 0.35 },
+    moods: {},
+  },
+  mosaico: {
+    name: 'Mosaico', desc: 'Neutral grade that lets each mood keep its own colour: warm golds, dusk purples, night blues, storm violets.',
+    ink: '#0c0a12', inkFar: '#2e2838', feature: '#fff8f0', rimWidth: 4.5,
+    ui: { ...UI, accent: '#ff6f61', gold: '#ffc94a', blueprint: '#9ab8ff', bpBg: '#0e1430', good: '#5fd39a' },
+    grade: { contrast: 1.08, sat: 1.12, lift: [0.01, 0.01, 0.02], gamma: [1.0, 1.0, 1.0], gain: [1.04, 1.0, 0.97], vignette: 0.55, grain: 0.04, bloom: 0.75 },
+    moods: {},
+  },
   emerald: {
     name: 'GrowKaz Emerald', desc: 'GrowKaz signature look: deep forest-green shadows, warm gold key light, electric lime rim light, rich bloom.',
     ink: '#06110c', inkFar: '#1c3328', feature: '#f2ffe8', rimWidth: 4.5,

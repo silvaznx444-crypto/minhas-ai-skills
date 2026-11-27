@@ -35,6 +35,8 @@ try:
     chrom = bool(out) and os.path.exists(out)
 except Exception:
     pass
+if not chrom and os.environ.get("CHROMIUM_PATH") and os.path.exists(os.environ["CHROMIUM_PATH"]):
+    chrom = True  # render.mjs usa CHROMIUM_PATH (ex.: /opt/pw-browsers/chromium nos ambientes de nuvem do Claude)
 ok("Chromium for Playwright", chrom, "", f"cd \"{ROOT}\" && npx playwright install chromium")
 for mod, pipname in [("numpy", "numpy"), ("scipy", "scipy"), ("faster_whisper", "faster-whisper")]:
     ok(f"python: {pipname}", importlib.util.find_spec(mod) is not None, "", f"\"{PY}\" -m pip install {pipname}" + (" --break-system-packages" if OS == "Linux" else ""))

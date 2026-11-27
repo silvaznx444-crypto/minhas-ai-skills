@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-"""Gera miniatura (thumbnail) 1280x720 para YouTube com a IA de imagem (Gemini) (Vertex ou Gemini API).
+"""Miniatura (thumbnail) 1280x720 para YouTube: a partir de um quadro do vídeo 3D (padrão) ou gerada pela IA.
 
+  # quadro renderizado do 3D (node render.mjs ... --stills 12.5) + título por cima
+  python3 miniatura.py --imagem growkaz-stickman-studio/projects/x/build/stills/S05_12.50.png \
+      --texto "CÉREBRO SEM SONO" --lado right --saida canal/youtube/2026-11-24/thumb_abc123.jpg
+  # gerada pela IA de imagem (Gemini, Vertex ou Gemini API)
   python3 miniatura.py --prompt "rosto surpreso de policial 3D cartoon, fundo vermelho" \
       --texto "ELE NÃO NEGOCIA" --saida canal/youtube/2026-11-24/thumb_abc123.jpg [--ref quadro.png ...]
 
@@ -52,19 +56,27 @@ def texto_filtro(texto: str, lado: str) -> str:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--prompt", required=True)
+    ap.add_argument("--imagem", help="imagem pronta (ex.: quadro do vídeo 3D); dispensa a IA")
+    ap.add_argument("--prompt", help="descrição para a IA de imagem (quando não houver --imagem)")
     ap.add_argument("--texto", default="", help="até ~4 palavras, em maiúsculas")
     ap.add_argument("--lado", default="left", choices=["left", "right"])
     ap.add_argument("--ref", action="append", default=[], help="imagens de referência (quadros do vídeo, preset)")
     ap.add_argument("--saida", required=True)
     a = ap.parse_args()
-    g = vertex.Vertex() if vertex.configurado() else Gemini()
+    if not (a.imagem or a.prompt):
+        sys.exit("Informe --imagem (quadro do 3D) ou --prompt (IA de imagem)")
     with tempfile.TemporaryDirectory() as tmp:
         bruta = Path(tmp) / "bruta.png"
-        try:
-            g.image(BASE.format(lado=a.lado) + a.prompt, bruta, g.pick("image"), [Path(r) for r in a.ref], "16:9")
-        except GeminiError as e:
-            sys.exit(f"ERRO ao gerar imagem: {e}")
+        if a.imagem:
+            bruta = Path(a.imagem)
+            if not bruta.exists():
+                sys.exit(f"Imagem não encontrada: {bruta}")
+        else:
+            g = vertex.Vertex() if vertex.configurado() else Gemini()
+            try:
+                g.image(BASE.format(lado=a.lado) + a.prompt, bruta, g.pick("image"), [Path(r) for r in a.ref], "16:9")
+            except GeminiError as e:
+                sys.exit(f"ERRO ao gerar imagem: {e}")
         vf = "scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720"
         if a.texto:
             vf += texto_filtro(a.texto.upper(), a.lado)

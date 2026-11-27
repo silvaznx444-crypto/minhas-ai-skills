@@ -30,7 +30,7 @@ const server = http.createServer((req, res) => {
 }).listen(0);
 const PORT = server.address().port;
 const gl = args.gl || (process.platform === 'linux' ? 'swiftshader' : 'auto');
-const LAUNCH = { args: ['--ignore-gpu-blocklist', '--enable-unsafe-swiftshader', '--disable-dev-shm-usage', ...(gl === 'swiftshader' ? ['--use-angle=swiftshader'] : []), ...(gl === 'gpu' ? ['--enable-gpu', '--use-angle=default'] : [])] };
+const LAUNCH = { ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}), args: ['--ignore-gpu-blocklist', '--enable-unsafe-swiftshader', '--disable-dev-shm-usage', ...(gl === 'swiftshader' ? ['--use-angle=swiftshader'] : []), ...(gl === 'gpu' ? ['--enable-gpu', '--use-angle=default'] : [])] };
 const FORMAT = args.format === 'jpeg' ? 'jpeg' : 'png';
 const CFG = JSON.parse(fs.readFileSync(path.join(PROJECT, 'config.json'), 'utf8'));
 const FPS = CFG.fps || 24;

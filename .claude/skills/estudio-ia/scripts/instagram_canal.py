@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Analisa a conta do Instagram e cuida dos comentários (API oficial). A postagem fica no
-video-ia/scripts/instagram.py, que este script reaproveita (mesmas variáveis IG_ACCESS_TOKEN / IG_USER_ID).
+instagram.py (mesma pasta), que este script reaproveita (mesmas variáveis IG_ACCESS_TOKEN / IG_USER_ID).
 
 Permissões extras do app: instagram_manage_insights (métricas) e instagram_manage_comments (comentários).
 
@@ -21,7 +21,7 @@ import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "video-ia" / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from instagram import GRAPH, IGError, Instagram  # noqa: E402
 
 CAMPOS_POST = "id,caption,media_type,media_product_type,timestamp,like_count,comments_count,permalink"

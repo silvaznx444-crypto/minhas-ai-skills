@@ -2,4 +2,4 @@ projetos/*/
 !projetos/*/storyboard.json
 __pycache__/
 *.pyc
-canal/*/*/dados.json
+canal/**/dados*.json

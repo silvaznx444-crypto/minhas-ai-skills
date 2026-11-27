@@ -73,11 +73,12 @@ def blocos(texto: str, n: int) -> list[str]:
 
 
 def escrever_ass(eventos: list[tuple[float, float, str, str]], out: Path, palavras: int = 3,
-                 tamanho: int = 78, margem: int = 620, contorno: int = 6, pop: bool = True) -> None:
+                 tamanho: int = 78, margem: int = 620, contorno: int = 6, pop: bool = True,
+                 largura: int = 1080, altura: int = 1920) -> None:
     cab = f"""[Script Info]
 ScriptType: v4.00+
-PlayResX: 1080
-PlayResY: 1920
+PlayResX: {largura}
+PlayResY: {altura}
 WrapStyle: 0
 ScaledBorderAndShadow: yes
 

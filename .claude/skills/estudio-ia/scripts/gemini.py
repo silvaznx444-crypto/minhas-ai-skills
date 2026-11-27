@@ -97,10 +97,14 @@ class Gemini:
         return sorted(c, key=key)[-1]
 
     # ----------------------------------------------------------------- texto
-    def text(self, prompt: str, model: str, parts: list | None = None, json_out: bool = False):
+    def text(self, prompt: str, model: str, parts: list | None = None, json_out: bool = False,
+             config: dict | None = None):
         body = {"contents": [{"role": "user", "parts": (parts or []) + [{"text": prompt}]}]}
+        cfg = dict(config or {})
         if json_out:
-            body["generationConfig"] = {"responseMimeType": "application/json"}
+            cfg["responseMimeType"] = "application/json"
+        if cfg:
+            body["generationConfig"] = cfg
         d = self._req("POST", self._url(model, "generateContent"), json=body)
         txt = "".join(p.get("text", "") for c in d.get("candidates", [])[:1]
                       for p in c.get("content", {}).get("parts", []))

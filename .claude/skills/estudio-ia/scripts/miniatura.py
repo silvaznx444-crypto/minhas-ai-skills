@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gera miniatura (thumbnail) 1280x720 para YouTube com a IA de imagem do video-ia (Vertex ou Gemini API).
+"""Gera miniatura (thumbnail) 1280x720 para YouTube com a IA de imagem (Gemini) (Vertex ou Gemini API).
 
   python3 miniatura.py --prompt "rosto surpreso de policial 3D cartoon, fundo vermelho" \
       --texto "ELE NÃO NEGOCIA" --saida canal/youtube/2026-11-24/thumb_abc123.jpg [--ref quadro.png ...]
@@ -14,7 +14,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "video-ia" / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 import vertex  # noqa: E402
 from gemini import Gemini, GeminiError  # noqa: E402
 
@@ -24,7 +24,30 @@ BASE = ("YouTube thumbnail, 16:9, one clear focal subject large in frame, strong
 
 
 def esc(t: str) -> str:
-    return t.replace("\\", "\\\\").replace(":", "\\:").replace("'", "’").replace("%", "\\%")
+    return t.replace("\\", "\\\\").replace(":", "\\:").replace("'", "’")
+
+
+FONTE = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+
+
+def quebrar(texto: str) -> list[str]:
+    """1 linha se for curto; senão 2 linhas com tamanhos parecidos."""
+    w = texto.split()
+    if len(w) <= 1 or len(texto) <= 10:
+        return [texto]
+    melhor = min(range(1, len(w)), key=lambda i: abs(len(" ".join(w[:i])) - len(" ".join(w[i:]))))
+    return [" ".join(w[:melhor]), " ".join(w[melhor:])]
+
+
+def texto_filtro(texto: str, lado: str) -> str:
+    """Texto no terço livre (≈ 45% da largura), com a letra do maior tamanho que cabe."""
+    ls = quebrar(texto)
+    fs = int(min(150, max(60, 0.45 * 1280 / (0.72 * max(len(x) for x in ls)))))
+    alt = int(fs * 1.12)
+    topo = (720 - alt * len(ls)) // 2
+    x = "60" if lado == "left" else "w-tw-60"
+    return "".join(f",drawtext=text='{esc(l)}':fontsize={fs}:fontcolor=white:borderw={max(6, fs // 12)}:"
+                   f"bordercolor=black:x={x}:y={topo + i * alt}:expansion=none:fontfile={FONTE}" for i, l in enumerate(ls))
 
 
 def main() -> None:
@@ -44,9 +67,7 @@ def main() -> None:
             sys.exit(f"ERRO ao gerar imagem: {e}")
         vf = "scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720"
         if a.texto:
-            x = "60" if a.lado == "left" else "w-tw-60"
-            vf += (f",drawtext=text='{esc(a.texto.upper())}':fontsize=110:fontcolor=white:borderw=10:"
-                   f"bordercolor=black:x={x}:y=(h-th)/2:fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
+            vf += texto_filtro(a.texto.upper(), a.lado)
         out = Path(a.saida)
         out.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(bruta), "-vf", vf, "-q:v", "3", str(out)],

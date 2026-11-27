@@ -54,7 +54,7 @@ def log(m: str) -> None:
 def _env(nome: str) -> str:
     v = os.environ.get(nome, "").strip()
     if not v:
-        sys.exit(f"Falta a variável {nome}. Veja o SKILL.md do gestor-canal (seção YouTube).")
+        sys.exit(f"Falta a variável {nome}. Veja .claude/skills/estudio-ia/guias/configuracao.md.")
     return v
 
 
@@ -151,6 +151,21 @@ def checar_texto(titulo: str | None, descricao: str | None, tags: list[str] | No
     return erros
 
 
+def proporcao(v: dict) -> str | None:
+    """'vertical' / 'horizontal' pelo arquivo enviado (fileDetails só vem para o dono do canal)."""
+    st = (v.get("fileDetails", {}).get("videoStreams") or [{}])[0]
+    w, h = st.get("widthPixels"), st.get("heightPixels")
+    if not (w and h):
+        return None
+    return "vertical" if h >= w else "horizontal"
+
+
+def eh_short(v: dict) -> bool:
+    dur = segundos(v.get("contentDetails", {}).get("duration"))
+    prop = proporcao(v)
+    return dur <= 180 and prop != "horizontal" if prop else dur <= 60
+
+
 def diagnostico_video(v: dict, a: dict | None) -> list[str]:
     sn, st = v["snippet"], v.get("statistics", {})
     t, desc, tags = sn.get("title", ""), sn.get("description", ""), sn.get("tags", [])
@@ -166,7 +181,7 @@ def diagnostico_video(v: dict, a: dict | None) -> list[str]:
         f.append("sem_tags")
     if "#" not in desc and "#" not in t:
         f.append("sem_hashtags")
-    if dur <= 180 and "#shorts" not in (t + desc).lower():
+    if eh_short(v) and "#shorts" not in (t + desc).lower():
         f.append("short_sem_#shorts")
     if not sn.get("defaultLanguage") and not sn.get("defaultAudioLanguage"):
         f.append("sem_idioma_definido")
@@ -174,7 +189,7 @@ def diagnostico_video(v: dict, a: dict | None) -> list[str]:
     if views and int(st.get("likeCount", 0) or 0) / views < 0.02:
         f.append("poucas_curtidas_por_view")
     if a:
-        if a.get("averageViewPercentage", 100) < (60 if dur <= 180 else 35):
+        if a.get("averageViewPercentage", 100) < (60 if eh_short(v) else 35):
             f.append("retencao_baixa")
     return f
 
@@ -208,7 +223,8 @@ def conta(yt: YouTube, _a) -> None:
 def analisar(yt: YouTube, a) -> None:
     c = yt.canal()
     uploads = c["contentDetails"]["relatedPlaylists"]["uploads"]
-    vids = yt.videos(yt.ids_recentes(uploads, a.videos))
+    vids = yt.videos(yt.ids_recentes(uploads, a.videos),
+                     part="snippet,statistics,contentDetails,status,fileDetails")
     fim = date.today().isoformat()
     ini = (date.today() - timedelta(days=a.dias)).isoformat()
 
@@ -240,6 +256,7 @@ def analisar(yt: YouTube, a) -> None:
             "tags": sn.get("tags", []), "categoria": sn.get("categoryId"), "publicado": pub,
             "dia_semana": datetime.fromisoformat(pub.replace("Z", "+00:00")).strftime("%a %H:%MZ"),
             "duracao_s": segundos(v["contentDetails"].get("duration")),
+            "formato": proporcao(v), "short": eh_short(v),
             "privacidade": v.get("status", {}).get("privacyStatus"),
             "views": int(st.get("viewCount", 0) or 0), "likes": int(st.get("likeCount", 0) or 0),
             "comentarios": int(st.get("commentCount", 0) or 0),

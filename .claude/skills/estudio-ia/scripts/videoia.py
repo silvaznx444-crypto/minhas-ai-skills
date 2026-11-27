@@ -7,11 +7,12 @@ Etapas (cada uma pula o que já existe, então dá para retomar de onde parou):
   quadros     refs -> quadros/cena_XX.png (primeiro quadro de cada cena)
   clipes      quadros -> clipes/cena_XX.mp4 (Veo, com fala e som)
   legendas    clipes -> legendas.ass (tempo de cada fala, cor por personagem)
-  montar      tudo -> final.mp4 (1080x1920, legendas, música, loudness p/ redes)
+  montar      tudo -> final.mp4 (1080x1920 ou 1920x1080, legendas, música, loudness p/ redes)
   tudo        todas as etapas em sequência
 
 Exemplo:
   python3 videoia.py tudo --projeto projetos/rocha --ideia "Policial durão recebe ameaça pelo rádio" --cenas 3 --sim
+  python3 videoia.py tudo --projeto projetos/sono --ideia "..." --formato 16:9 --sim   # horizontal (YouTube)
 """
 from __future__ import annotations
 
@@ -35,6 +36,8 @@ NEGATIVO = ("subtitles, captions, on-screen text, watermark, logo, blurry, low q
             "distorted face, extra fingers, deformed hands, flicker")
 PRECO_SEG = {"fast": 0.15, "std": 0.40}  # US$/s (referência; confira a tabela atual do Google)
 CORES = ["#FFFFFF", "#FF3B3B", "#FFD60A", "#3BD1FF", "#7CFF6B"]
+FORMATOS = {"9:16": (1080, 1920, "vertical 9:16"), "16:9": (1920, 1080, "horizontal 16:9 widescreen")}
+FORMATO_CLI: str | None = None  # --formato da linha de comando (vence o do storyboard)
 
 
 def log(m: str) -> None:
@@ -46,6 +49,9 @@ def carregar(proj: Path) -> dict:
     if not f.exists():
         sys.exit(f"Não achei {f}. Rode 'planejar' antes ou escreva o storyboard à mão.")
     sb = json.loads(f.read_text())
+    sb["formato"] = FORMATO_CLI or sb.get("formato") or "9:16"
+    if sb["formato"] not in FORMATOS:
+        sys.exit(f"formato '{sb['formato']}' inválido; use 9:16 ou 16:9")
     preset = sb.get("estilo_preset")
     if preset and (ESTILOS / preset / "estilo.txt").exists() and not sb.get("estilo_personalizado"):
         sb["estilo"] = (ESTILOS / preset / "estilo.txt").read_text().strip()
@@ -105,7 +111,8 @@ def aplicar_preset(sb: dict, preset: str | None) -> None:
 
 
 # ------------------------------------------------------------------ planejar
-PROMPT_PLANO = """Você é roteirista de vídeos curtos virais (Reels/TikTok/Shorts), vertical 9:16.
+PROMPT_PLANO = """Você é roteirista de vídeos virais com IA ({formato_txt}).
+Vídeo vertical = Reels/TikTok/Shorts; horizontal = vídeo do YouTube.
 Escreva um storyboard em JSON para a ideia abaixo.
 
 IDEIA: {ideia}
@@ -147,8 +154,11 @@ def planejar(g: Gemini, a) -> None:
         sys.exit("Informe --ideia \"...\"")
     modelo = g.pick("texto", a.modelo_texto)
     log(f"[planejar] escrevendo roteiro com {modelo}...")
-    sb = g.text(PROMPT_PLANO.format(ideia=a.ideia, cenas=a.cenas, estilo=a.estilo), modelo, json_out=True)
+    fmt = a.formato or "9:16"
+    sb = g.text(PROMPT_PLANO.format(ideia=a.ideia, cenas=a.cenas, estilo=a.estilo,
+                                    formato_txt=FORMATOS[fmt][2]), modelo, json_out=True)
     sb.setdefault("estilo", a.estilo)
+    sb["formato"] = fmt
     aplicar_preset(sb, a.preset)
     for i, p in enumerate(sb["personagens"]):
         p.setdefault("cor_legenda", CORES[i % len(CORES)])
@@ -178,8 +188,9 @@ def referencias(g: Gemini, a) -> None:
             continue
         log(f"[referencias] cenário {c['id']}")
         g.image(com_estilo(f"Empty environment seen at EYE LEVEL from a standing person's point of view (not aerial, "
-                           f"not top-down), wide-angle lens, no people, vertical 9:16. {c['descricao']}. "
-                           f"Style: {sb['estilo']}.", len(est), 0), out, modelo, refs=est, aspect="9:16")
+                           f"not top-down), wide-angle lens, no people, {FORMATOS[sb['formato']][2]}. "
+                           f"{c['descricao']}. Style: {sb['estilo']}.", len(est), 0),
+                out, modelo, refs=est, aspect=sb["formato"])
 
 
 # -------------------------------------------------------------------- quadros
@@ -200,17 +211,17 @@ def quadros(g: Gemini, a) -> None:
                           for pid in cena.get("personagens", []))
         log(f"[quadros] cena {i}")
         g.image(com_estilo(
-            "Create the FIRST FRAME of a vertical 9:16 video shot. Keep the characters and the place "
+            f"Create the FIRST FRAME of a {FORMATOS[sb['formato']][2]} video shot. Keep the characters and the place "
             "exactly like the reference images (same face, clothes, colors, props). "
             f"Setting: {cenario(sb, cena['cenario'])['descricao']}. Characters: {chars}. "
             f"Camera: {cena.get('camera', '')}. Moment: start of this action: {cena.get('acao', '')}. "
             f"Style: {sb['estilo']}. No text, no captions, no watermark.",
-            len(est), len(refs)), out, modelo, refs=est + refs, aspect="9:16")
+            len(est), len(refs)), out, modelo, refs=est + refs, aspect=sb["formato"])
 
 
 # --------------------------------------------------------------------- clipes
 def prompt_veo(sb: dict, cena: dict) -> str:
-    linhas = [f"{sb['estilo'].rstrip('. ')}. Vertical 9:16 video.",
+    linhas = [f"{sb['estilo'].rstrip('. ')}. {FORMATOS[sb.get('formato', '9:16')][2].capitalize()} video.",
               f"Setting: {cenario(sb, cena['cenario'])['descricao']}."]
     for pid in cena.get("personagens", []):
         p = personagem(sb, pid)
@@ -257,7 +268,7 @@ def clipes(g: Gemini, a) -> None:
         (a.projeto / "prompts" / f"cena_{i:02d}.txt").write_text(prompt)
         log(f"[clipes] cena {i} -> {out.name}")
         g.veo(prompt, out, modelo, image=quadro if quadro.exists() and not a.sem_quadro else None,
-              resolution=a.resolucao or None, negative=NEGATIVO)
+              aspect=sb["formato"], resolution=a.resolucao or None, negative=NEGATIVO)
 
 
 # ------------------------------------------------------------------- legendas
@@ -286,7 +297,10 @@ def legendas(g: Gemini, a) -> None:
             cor = personagem(sb, f["personagem"]).get("cor_legenda", "#FFFFFF")
             eventos.append((offset + t0 - ini, offset + t1 - ini, f["texto"], cor))
         offset += fim - ini
-    opc = {"palavras": a.palavras}
+    W, H, _ = FORMATOS[sb["formato"]]
+    opc = {"palavras": a.palavras, "largura": W, "altura": H}
+    if W > H:  # horizontal: letra menor e mais perto da borda de baixo
+        opc.update({"tamanho": 64, "margem": 70, "contorno": 5})
     if sb.get("estilo_preset") and (ESTILOS / sb["estilo_preset"] / "legenda.json").exists():
         opc.update(json.loads((ESTILOS / sb["estilo_preset"] / "legenda.json").read_text()))
     opc.update(sb.get("legenda", {}))
@@ -308,7 +322,8 @@ def montar(a) -> None:
     for c in clips:
         if not c.exists():
             sys.exit(f"Falta {c}")
-    W, H, FPS = 1080, 1920, a.fps
+    W, H, _ = FORMATOS[sb["formato"]]
+    FPS = a.fps
     cmd = ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-stats"]
     for c in clips:
         cmd += ["-i", str(c)]
@@ -363,6 +378,8 @@ def main() -> None:
     ap.add_argument("--cenas", type=int, default=3)
     ap.add_argument("--estilo", default=ESTILO_PADRAO)
     ap.add_argument("--preset", help="estilo pronto da pasta estilos/ (ex: policial-pov)")
+    ap.add_argument("--formato", choices=list(FORMATOS),
+                    help="9:16 vertical (Reels/Shorts, padrão) ou 16:9 horizontal (YouTube); vence o do storyboard")
     ap.add_argument("--cena", type=int, help="só esta cena (1, 2, ...)")
     ap.add_argument("--refazer", action="store_true", help="regera mesmo se o arquivo já existe")
     ap.add_argument("--sim", action="store_true", help="confirma o custo do Veo sem perguntar")
@@ -382,6 +399,8 @@ def main() -> None:
     ap.add_argument("--provedor", choices=["auto", "vertex", "gemini"], default="auto",
                     help="vertex = Google Cloud (créditos grátis); gemini = chave do AI Studio")
     a = ap.parse_args()
+    global FORMATO_CLI
+    FORMATO_CLI = a.formato
 
     if not shutil.which("ffmpeg"):
         sys.exit("ffmpeg não encontrado")

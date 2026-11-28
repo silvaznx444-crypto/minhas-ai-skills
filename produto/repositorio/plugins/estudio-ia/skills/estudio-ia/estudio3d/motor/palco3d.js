@@ -61,7 +61,7 @@ export function palco(o = {}) {
 // ---------------------------------------------------------------- câmera
 export function apontar(camera, pos, alvo, fov) {
   camera.position.set(...pos); camera.lookAt(...alvo);
-  if (fov && camera.fov !== fov) { camera.fov = fov; camera.updateProjectionMatrix(); }
+  if (fov) { camera.userData.fovBase = fov; if (camera.fov !== fov) { camera.fov = fov; camera.updateProjectionMatrix(); } }
   camera.updateMatrixWorld(true);
 }
 /**
@@ -74,6 +74,12 @@ export function moverCamera(camera, t, ks, extra = {}) {
   if (extra.tremor) { const d = tremor(extra.T ?? t, extra.tremor); pos[0] += d[0]; pos[1] += d[1]; }
   apontar(camera, pos, alvo, fov);
   if (extra.giro) { camera.rotateZ(extra.giro); camera.updateMatrixWorld(true); }
+}
+/** "Soco" de câmera (zoom rápido que volta) no tempo `em`: chame depois de moverCamera. forca 0.15 = 15% mais perto. */
+export function soco(camera, t, em, forca = 0.15, dur = 0.45) {
+  const base = (camera.userData.fovBase ??= camera.fov), u = (t - em) / dur;
+  const k = u < 0 || u > 1 ? 0 : forca * Math.sin(Math.PI * Math.min(1, u * 1.6)) * (1 - u);
+  camera.fov = base / (1 + k); camera.updateProjectionMatrix();
 }
 /** Tremor suave de câmera na mão: devolve [dx, dy, dz]. */
 export const tremor = (T, amp = 0.02, semente = 3) => [ruido(T * 1.3, semente) * amp, ruido(T * 1.1, semente + 9) * amp * 0.7, 0];

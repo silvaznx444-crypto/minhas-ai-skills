@@ -12,6 +12,14 @@ A referência técnica (API das cenas, kit, formatos) está em `estudio3d/LEIA-M
 
 Dá para misturar os dois, mas mantenha sempre o mesmo protagonista.
 
+**Rosto e efeitos.**
+- Os cabeções têm rosto expressivo (`rosto()`): piscam, sorriem, gargalham, falam acompanhando a narração, ficam bravos,
+  tristes ou surpresos, coram, choram e suam.
+- O `motor/efeitos2d.js` traz confete, brilhos, linhas de velocidade, impacto, destaque, seta, contador, barra, gráfico de
+  rosca, texto digitando, balão de pensamento e figurinhas. Há também o tremor de tela, o "soco" de câmera e as
+  transições zoom, íris e deslizar.
+- Use um efeito por ideia, sincronizado com a palavra (`quando`). Efeito demais cansa.
+
 ## 0. Instalar (uma vez por pasta de canal)
 ```bash
 python3 "$E/estudio3d.py" instalar          # copia o estúdio para ./estudio3d, instala tudo e confere

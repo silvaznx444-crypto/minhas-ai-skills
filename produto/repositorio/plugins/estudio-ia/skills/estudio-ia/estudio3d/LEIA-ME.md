@@ -39,7 +39,8 @@ Todo `.js` em `cenas/` é carregado sozinho, menos os que começam com `_`, que 
 ```
 - `ancora`: as palavras em que a tomada começa. O `tomadas.py sincronizar` calcula `ini` e `fim` a partir delas.
   **Nunca escreva tempo à mão; mude a âncora.**
-- `transicao.tipo`: `corte` (padrão), `fade`, `chicote` (deslize rápido) ou `branco` (clarão).
+- `transicao.tipo`: `corte` (padrão), `fade`, `chicote` (deslize rápido com rastro), `deslizar`, `zoom`, `iris`
+  (círculo que abre) ou `branco` (clarão). `tremor`: [[s, duração, força]] sacode a tela.
 - Efeitos: pop, estalo, swoosh, ding, plim, blip, batida, grave, brilho, coracao, relogio, trovao, vibrar, torcida,
   digitar, erro e sucesso. Ambientes: sala, vento, chuva, cidade, natureza e noite. Músicas: calmo, curioso, misterio,
   tenso, alegre, emocionante, triste e epico.
@@ -97,6 +98,24 @@ amarelo na folha de contato.
   `material.userData.contorno = false` tira o contorno de um material; `userData.espessura = 1.5` engrossa.
 - `moverCamera(camera, t, [[t, pos, alvo, fov?], ...], {tremor, T, giro})`, `apontar(camera, pos, alvo, fov)` e `tremor(T, amp)`.
 - `naTela(camera, [x,y,z])` devolve `{x, y, visivel}`, para pôr etiquetas 2D presas a objetos 3D.
+- `soco(camera, t, em, forca)` faz um zoom rápido que volta, bom para momentos de impacto. Chame depois de `moverCamera`.
+
+## motor/efeitos2d.js (elementos animados por cima do vídeo)
+- `confete(g, T, em, {origem: 'cima'|'centro'})`.
+- `brilhos(g, T, x, y, {raio, a})`.
+- `linhasVelocidade(g, T, intensidade, {x, y, livre})`: linhas de foco, estilo anime.
+- `impacto(g, T, em, x, y)`: onda de choque.
+- `destaque(g, T, x, y, r, a)`: círculo de caneta em volta de algo.
+- `seta(g, x0, y0, x1, y1, a, {curva})`.
+- `contador(g, T, ini, fim, de, ate, x, y, {prefixo, sufixo, casas})`: número subindo.
+- `barra(g, k, x, y, w, h, {rotulo, cor})`.
+- `pizza(g, k, x, y, r, [[valor, cor, rótulo], ...], {centro})`.
+- `digitando(g, T, ini, 'texto', x, y)`.
+- `pensamento(g, x, y, 'texto', a)`: balão de pensamento.
+- `figurinha(g, 'coracao'|'estrela'|'raio'|'check'|'x'|'fogo'|'joinha'|'cifrao'|'alerta', x, y, tam, a)`.
+- `bordaPulsante(g, T, cor, a)`: tensão, alerta ou romance.
+
+**Tremor de tela:** em `tomadas.json`, ponha `"tremor": [[segundos_depois_do_inicio, duracao, forca_px]]` na tomada.
 
 ## kits/cartoon3d
 - **bonecos.js:** `makePuppet(spec)` devolve `{root, setPose(pose), setFace(rosto)}`. A frente é +z e a altura fica perto de 1,75 m.
@@ -130,7 +149,15 @@ amarelo na folha de contato.
   levantar, apanhar, cair, desviar, defender, soco, chute e magia. Os nomes originais em inglês também valem.
   Ícones de emoção: `emocao('coracao'|'pergunta'|'exclamacao'|'zzz'|'estrelas'|'nuvem'|'gota'|'raiva'|'lampada'|'nota')`,
   animados com `mostrarEmocao(icone, personagem, t, em, sai)`.
-  O rosto desses personagens é fixo: mostre a emoção pela animação, pelo ícone, pelo balão e pela câmera.
+  **Rosto expressivo:** `const r = rosto(p)` e, a cada quadro,
+  `r.definir({t, piscar: piscar(T, semente), palpebras, sobrancelhas, boca, fala, corado, lagrimas, suor})`.
+  - `sobrancelhas`: neutra, brava, triste, surpresa, preocupada ou desconfiada.
+  - `boca`: neutra (a pintada), sorriso, risada, aberta, o, triste ou reta.
+  - `fala` vai de 0 a 1 e abre e fecha a boca. Use `falando(T)` do núcleo para acompanhar a narração.
+  - `corado`, `lagrimas` e `suor` vão de 0 a 1.
+
+  A cor da pálpebra vem da própria textura de cada personagem.
+  Combine sempre o rosto com a animação do corpo, os ícones e a câmera.
 - **mundos.js (cenários coloridos do estilo cabeção):**
   - `parque({clima: 'dia'|'entardecer'})`: grama, caminho, árvores de algodão-doce, lago, bancos e postes;
   - `praca()`: ladrilhos, prédios, café com guarda-sol e fonte;

@@ -1,6 +1,6 @@
 // motor/player.js — monta cada quadro do vídeo no navegador: tomada atual (3D e/ou 2D), transição, cor, legenda e fades.
 // O renderizar.mjs abre player.html?escala=0.5 e chama window.estudio.quadro(T) para cada quadro.
-import { E, registro, lim, prog, curva, acaso } from './nucleo.js';
+import { E, registro, lim, prog, curva, acaso, ruido } from './nucleo.js';
 import { legenda, vinheta, texto } from './desenho.js';
 import { criarRenderizador, descartar } from './palco3d.js';
 
@@ -91,6 +91,13 @@ async function quadro(T) {
   await pintar(atual, T, camadaA);
   g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.filter = `contrast(${estilo.contraste}) saturate(${estilo.saturacao}) brightness(${estilo.brilho})`;
   const emTransicao = tr && tr.tipo && tr.tipo !== 'corte' && i > 0 && T < atual.ini + durTr;
+  // tremor de tela: "tremor": [[segundos_depois_do_inicio, duracao, forca_px], ...] na tomada
+  let dx = 0, dy = 0, folga = 0;
+  for (const [em, d = 0.4, f = 22] of atual.tremor || []) {
+    const u = (T - atual.ini - em) / d;
+    if (u >= 0 && u <= 1) { const a = f * (1 - u) * E.escala; dx += ruido(T * 38, 1) * a; dy += ruido(T * 41, 2) * a; folga = Math.max(folga, (f * E.escala * 2.2) / tela.width); }
+  }
+  if (folga) g.setTransform(1 + folga, 0, 0, 1 + folga, dx - (folga * tela.width) / 2, dy - (folga * tela.height) / 2);
   if (emTransicao) {
     await pintar(L[i - 1], T, camadaB);
     const k = curva.entraSai(prog(T, atual.ini, atual.ini + durTr)), w = tela.width;
@@ -99,6 +106,13 @@ async function quadro(T) {
       g.globalAlpha = 0.35 * Math.sin(k * Math.PI); g.drawImage(camadaA, (1 - k) * w - w * 0.04, 0); g.globalAlpha = 1;
     } else if (tr.tipo === 'branco') {
       g.drawImage(k < 0.5 ? camadaB : camadaA, 0, 0); g.filter = 'none'; g.fillStyle = `rgba(255,255,255,${Math.sin(k * Math.PI)})`; g.fillRect(0, 0, w, tela.height);
+    } else if (tr.tipo === 'zoom') {
+      g.drawImage(camadaB, 0, 0); const s = 1 + 0.25 * (1 - k), h = tela.height;
+      g.globalAlpha = k; g.drawImage(camadaA, (w - w * s) / 2, (h - h * s) / 2, w * s, h * s); g.globalAlpha = 1;
+    } else if (tr.tipo === 'iris') {
+      g.drawImage(camadaB, 0, 0); g.save(); g.beginPath(); g.arc(w / 2, tela.height / 2, Math.hypot(w, tela.height) * 0.52 * k, 0, Math.PI * 2); g.clip(); g.drawImage(camadaA, 0, 0); g.restore();
+    } else if (tr.tipo === 'deslizar') {
+      g.drawImage(camadaB, -k * w, 0); g.drawImage(camadaA, (1 - k) * w, 0);
     } else { g.drawImage(camadaB, 0, 0); g.globalAlpha = k; g.drawImage(camadaA, 0, 0); g.globalAlpha = 1; } // 'fade' (dissolve)
   } else g.drawImage(camadaA, 0, 0);
   g.filter = 'none';

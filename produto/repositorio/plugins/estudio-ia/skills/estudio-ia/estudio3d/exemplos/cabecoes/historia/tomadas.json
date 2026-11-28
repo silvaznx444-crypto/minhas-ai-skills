@@ -50,8 +50,8 @@
    "ancora": "o seu",
    "cena": "Palco colorido com 2 pedestais: os dois fazem o mesmo gesto ao mesmo tempo, como um espelho.",
    "transicao": {
-    "tipo": "branco",
-    "dur": 0.3
+    "tipo": "iris",
+    "dur": 0.4
    },
    "efeitos": [
     [
@@ -96,6 +96,11 @@
    "efeitos": [
     [
      1.5,
+     "batida",
+     -10
+    ],
+    [
+     1.6,
      "pop",
      -10
     ],
@@ -110,15 +115,22 @@
     -32
    ],
    "ini": 9.86,
-   "fim": 14.04
+   "fim": 14.04,
+   "tremor": [
+    [
+     1.5,
+     0.35,
+     18
+    ]
+   ]
   },
   {
    "id": "S06",
    "ancora": "Marca alguém",
    "cena": "Palco com 3 pedestais: os três comemoram; carimbo MARCA ALGUÉM.",
    "transicao": {
-    "tipo": "branco",
-    "dur": 0.3
+    "tipo": "zoom",
+    "dur": 0.35
    },
    "efeitos": [
     [

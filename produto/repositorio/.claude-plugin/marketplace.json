@@ -1,0 +1,12 @@
+{
+  "name": "estudio-ia",
+  "description": "Estúdio IA: canal do YouTube e Instagram com IA",
+  "owner": { "name": "Estúdio IA" },
+  "plugins": [
+    {
+      "name": "estudio-ia",
+      "source": "./plugins/estudio-ia",
+      "description": "Identidade, estratégia, roteiro, vídeo, capa e publicação, com o agente do YouTube passo a passo."
+    }
+  ]
+}

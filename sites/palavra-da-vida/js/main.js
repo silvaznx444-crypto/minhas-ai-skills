@@ -33,7 +33,8 @@
   if (pc) {
     var slides = pc.querySelectorAll('.pc-slide');
     var thumbs = pc.querySelectorAll('.pc-thumb');
-    var index = 0, timer = null, userTook = false;
+    var current = document.querySelector('[data-pc-current]');
+    var index = 0;
 
     function go(i, fromUser) {
       index = (i + slides.length) % slides.length;
@@ -47,15 +48,13 @@
         t.classList.toggle('is-active', n === index);
         t.setAttribute('aria-selected', n === index ? 'true' : 'false');
       });
-      if (fromUser) { userTook = true; stop(); }
+      if (current) current.textContent = String(index + 1).padStart(2, '0');
     }
     function next(u) { go(index + 1, u); }
     function prev(u) { go(index - 1, u); }
-    function start() { if (!reduceMotion && !userTook && !timer) timer = setInterval(next, 7000); }
-    function stop() { clearInterval(timer); timer = null; }
 
-    pc.querySelector('[data-pc-next]').addEventListener('click', function () { next(true); });
-    pc.querySelector('[data-pc-prev]').addEventListener('click', function () { prev(true); });
+    document.querySelector('[data-pc-next]').addEventListener('click', function () { next(true); });
+    document.querySelector('[data-pc-prev]').addEventListener('click', function () { prev(true); });
     thumbs.forEach(function (t) {
       t.addEventListener('click', function () { go(+t.getAttribute('data-pc-go'), true); });
     });
@@ -74,12 +73,6 @@
       x0 = null;
     });
 
-    pc.addEventListener('mouseenter', stop);
-    pc.addEventListener('mouseleave', start);
-    pc.addEventListener('focusin', stop);
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) { entries[0].isIntersecting ? start() : stop(); }, { threshold: 0.4 }).observe(pc);
-    }
     go(0);
   }
 

@@ -241,70 +241,92 @@ em { font-style: italic; }
 }
 
 /* =========================================================
-   Pastores
+   Pastores (sóbrio: sem adesivos, foto reta, moldura fina)
    ========================================================= */
-.pastores { background: var(--ink); color: var(--paper-3); padding: clamp(72px, 9vw, 112px) 0; position: relative; overflow: hidden; }
-.pastores__head { position: relative; text-align: center; padding: 28px 0 44px; }
-.pastores__head h2 { font-size: clamp(2.4rem, 5.4vw, 4.2rem); line-height: 1.04; letter-spacing: -.02em; }
+.pastores { background: var(--ink); color: var(--paper-3); padding: clamp(80px, 10vw, 128px) 0; }
+.pastores__head {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+  padding-bottom: clamp(36px, 5vw, 56px); margin-bottom: clamp(40px, 6vw, 72px);
+  border-bottom: 1px solid rgba(250, 246, 238, .14);
+}
+.kicker--gold { color: var(--gold-soft); margin-bottom: 14px; }
+.pastores__head h2 { font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.02; letter-spacing: -.02em; }
 .pastores__head h2 em { color: var(--gold-soft); }
-.sticker--l { position: absolute; left: 4%; top: 0; transform: rotate(-6deg); }
-.sticker--r { position: absolute; right: 5%; top: -6px; transform: rotate(5deg); }
-
-.marquee { overflow: hidden; white-space: nowrap; }
-.marquee--gold { background: var(--gold); color: var(--ink); padding: 12px 0; margin-bottom: clamp(48px, 7vw, 80px); transform: rotate(-1deg); width: 104%; margin-left: -2%; }
-.marquee__track { display: inline-flex; gap: 28px; align-items: center; animation: marquee 60s linear infinite; padding-left: 28px; }
-.marquee__track span { font-family: var(--display); font-style: italic; font-size: 1.15rem; }
-.marquee__track b { font-family: var(--body); font-style: normal; font-weight: 700; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; margin-left: 8px; }
-.marquee__track .star { font-style: normal; color: var(--plum); }
-@keyframes marquee { to { transform: translateX(-50%); } }
+.pastores__lead { margin-top: 14px; max-width: 46ch; color: rgba(250, 246, 238, .7); }
 
 .pc { outline: none; }
 .pc-track { display: grid; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
 .pc-track img { -webkit-user-drag: none; pointer-events: none; }
 .pc-slide {
   grid-area: 1 / 1;
-  display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 88px); align-items: center;
-  opacity: 0; visibility: hidden; transition: opacity .6s ease, visibility .6s;
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(36px, 7vw, 104px); align-items: center;
+  opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility .5s;
 }
 .pc-slide.is-active { opacity: 1; visibility: visible; }
-.pc-photo {
-  background: var(--paper-3); padding: 12px 12px 44px; border-radius: 6px;
-  transform: rotate(-2deg); box-shadow: 0 24px 40px -24px rgba(0, 0, 0, .6);
-  max-width: 500px; justify-self: center; width: 100%;
+.pc-photo { position: relative; max-width: 460px; width: 100%; }
+.pc-photo::before {
+  content: ""; position: absolute; inset: 16px -16px -16px 16px;
+  border: 1px solid rgba(241, 201, 124, .55); border-radius: 14px;
 }
-.pc-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; border-radius: 2px; }
-.pc-text h3 { font-size: clamp(2.6rem, 5.2vw, 4.4rem); line-height: 1; letter-spacing: -.02em; margin-top: 18px; }
-.pc-text p { margin: 20px 0 24px; color: rgba(250, 246, 238, .78); font-size: 1.06rem; line-height: 1.75; max-width: 46ch; }
+.pc-photo img { position: relative; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; border-radius: 14px; }
+.pc-role { font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-soft); }
+.pc-text h3 { font-size: clamp(2.4rem, 4.6vw, 3.8rem); line-height: 1.02; letter-spacing: -.02em; margin-top: 10px; }
+.pc-bio { margin: 22px 0 26px; color: rgba(250, 246, 238, .78); font-size: 1.06rem; line-height: 1.8; max-width: 46ch; }
+.pc-link { font-size: 14px; color: rgba(250, 246, 238, .75); border-bottom: 1px solid rgba(241, 201, 124, .6); padding-bottom: 2px; }
+.pc-link:hover { color: #fff; border-color: var(--gold); }
 
-.pc-nav { margin-top: clamp(40px, 5vw, 64px); display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid rgba(250, 246, 238, .16); padding-top: 24px; }
-.pc-thumbs { display: flex; gap: clamp(8px, 2vw, 28px); flex-wrap: wrap; }
+.pc-arrows { display: flex; align-items: center; gap: 10px; }
+.pc-count { margin-right: 10px; font-size: 14px; color: rgba(250, 246, 238, .55); font-variant-numeric: tabular-nums; }
+.pc-count b { color: var(--paper-3); font-weight: 500; }
+.round {
+  width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+  border: 1px solid rgba(250, 246, 238, .3); background: none; color: var(--paper-3); transition: background-color .2s, color .2s, border-color .2s;
+}
+.round:hover { background: var(--paper-3); border-color: var(--paper-3); color: var(--ink); }
+.round svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+.pc-thumbs {
+  margin-top: clamp(56px, 7vw, 88px);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  border-top: 1px solid rgba(250, 246, 238, .14);
+}
 .pc-thumb {
-  display: flex; align-items: center; gap: 10px; border: 0; background: none; cursor: pointer;
-  color: var(--paper-3); opacity: .5; transition: opacity .25s; padding: 4px;
+  position: relative; display: flex; align-items: center; gap: 12px; padding: 20px 0 0; text-align: left;
+  border: 0; background: none; cursor: pointer; color: var(--paper-3); opacity: .5; transition: opacity .25s;
+}
+.pc-thumb::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--gold);
+  transform: scaleX(0); transform-origin: left; transition: transform .4s ease;
 }
 .pc-thumb:hover { opacity: .85; }
 .pc-thumb.is-active { opacity: 1; }
-.pc-thumb img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; object-position: 50% 15%; border: 2px solid transparent; transition: border-color .25s; }
-.pc-thumb.is-active img { border-color: var(--gold); }
-.pc-thumb span { font-size: 14px; font-weight: 500; }
-.pc-arrows { display: flex; gap: 10px; }
-.round {
-  width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
-  border: 1.5px solid rgba(250, 246, 238, .35); background: none; color: var(--paper-3); transition: background-color .2s, color .2s, border-color .2s;
-}
-.round:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
-.round svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.pc-thumb.is-active::before { transform: scaleX(1); }
+.pc-thumb img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; object-position: 50% 15%; flex: none; }
+.pc-thumb span { display: grid; line-height: 1.3; min-width: 0; }
+.pc-thumb b { font-size: 15px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pc-thumb small { font-size: 12.5px; color: rgba(250, 246, 238, .6); }
 
 @media (max-width: 860px) {
-  .pc-slide { grid-template-columns: 1fr; gap: 36px; align-items: start; }
-  .pc-photo { max-width: 360px; }
+  .pastores__head { align-items: flex-start; }
+  .pc-slide { grid-template-columns: 1fr; gap: 40px; align-items: start; }
+  .pc-photo { max-width: none; width: calc(100% - 16px); }
+  .pc-photo img { aspect-ratio: 1 / 1; object-position: 50% 18%; }
+  .pc-thumbs { gap: 6px; margin-top: 48px; }
+  .pc-thumb { flex-direction: column; align-items: center; text-align: center; gap: 8px; padding-top: 16px; }
   .pc-thumb span { display: none; }
-  .pc-thumbs { flex-wrap: nowrap; gap: 4px; }
-  .pc-thumb img { width: 40px; height: 40px; }
-  .round { width: 46px; height: 46px; }
-  .sticker--l { left: 0; top: -18px; }
-  .sticker--r { right: 0; top: auto; bottom: 4px; }
 }
+@media (max-width: 560px) {
+  .pc-count { display: none; }
+  .round { width: 46px; height: 46px; }
+}
+
+/* ---------- Faixa de versículos (entre pastores e ministérios) ---------- */
+.marquee { overflow: hidden; white-space: nowrap; background: var(--gold); color: var(--ink); padding: 14px 0; }
+.marquee__track { display: inline-flex; gap: 28px; align-items: center; animation: marquee 70s linear infinite; padding-left: 28px; }
+.marquee__track span { font-family: var(--display); font-style: italic; font-size: 1.1rem; }
+.marquee__track b { font-family: var(--body); font-style: normal; font-weight: 700; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; margin-left: 8px; }
+.marquee__track .star { font-style: normal; color: var(--plum); }
+@keyframes marquee { to { transform: translateX(-50%); } }
 
 /* =========================================================
    Ministérios

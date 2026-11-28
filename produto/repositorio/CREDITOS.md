@@ -13,6 +13,9 @@ O Estúdio IA usa os componentes abaixo. Eles não são vendidos: continuam sob 
 | [faster-whisper](https://github.com/SYSTRAN/faster-whisper) | transcrever a narração | MIT |
 | [NumPy](https://numpy.org) | síntese de música e efeitos | BSD-3 |
 | Fontes Nunito, Fredoka e Playfair Display ([Fontsource](https://fontsource.org)) | textos do vídeo | SIL Open Font License |
-| Modelos 3D [KayKit](https://kaylousberg.com) (City Builder Bits, Furniture Bits, Adventurers) | cenários e personagens | CC0 (crédito opcional a Kay Lousberg) |
+| Modelos 3D [KayKit](https://kaylousberg.com) (Adventurers, Skeletons, City Builder Bits, Furniture Bits) | personagens e cenários | CC0 (crédito opcional a Kay Lousberg) |
+| Modelos 3D [Kenney](https://kenney.nl) (Mini Characters, Blocky Characters, Cube Pets, Furniture Kit, City Kit Suburban, Food Kit, Holiday Kit, Nature Kit, Mini Shop) | gente, bichos e objetos | CC0 (crédito opcional a Kenney, www.kenney.nl) |
+
+Os textos originais das licenças estão em `plugins/estudio-ia/skills/estudio-ia/estudio3d/kits/cartoon3d/licencas/`.
 
 O motor do estúdio (pastas `motor/`, `som/`, `ferramentas/` e `renderizar.mjs`) e o kit `cartoon3d` são originais do Estúdio IA.

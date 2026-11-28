@@ -11,8 +11,8 @@ import * as SkeletonUtils from 'three/addons/utils/SkeletonUtils.js';
 import { lim, curva } from '/motor/nucleo.js';
 
 const BASE = '/kits/cartoon3d/personagens/';
-/** Modelos disponíveis: cavaleiro, bárbaro, mago, ladino e ladino de capuz. */
-export const TIPOS = ['Knight', 'Barbarian', 'Mage', 'Rogue', 'Rogue_Hooded'];
+/** Modelos: cavaleiro, bárbaro, maga, ladino, ladino de capuz e 4 esqueletos (KayKit Skeletons). */
+export const TIPOS = ['Knight', 'Barbarian', 'Mage', 'Rogue', 'Rogue_Hooded', 'Skeleton_Minion', 'Skeleton_Warrior', 'Skeleton_Rogue', 'Skeleton_Mage'];
 /** Nomes em português para as animações mais usadas (o nome original em inglês também funciona). */
 export const ANIM = {
   parado: 'Idle', paradoSemArma: 'Unarmed_Idle', andar: 'Walking_A', andarCalmo: 'Walking_B', andarApressado: 'Walking_C',
@@ -23,46 +23,44 @@ export const ANIM = {
   deitar: 'Lie_Down', deitado: 'Lie_Idle', levantar: 'Lie_StandUp', apanhar: 'Hit_A', apanharB: 'Hit_B', cair: 'Death_A',
   desviar: 'Dodge_Backward', defender: 'Blocking', soco: 'Unarmed_Melee_Attack_Punch_A', chute: 'Unarmed_Melee_Attack_Kick',
   magia: 'Spellcasting', lancarMagia: 'Spellcast_Shoot',
+  // só nos esqueletos
+  provocar: 'Taunt', acordarDoChao: 'Skeletons_Awaken_Floor', acordarEmPe: 'Skeletons_Awaken_Standing', surgir: 'Spawn_Ground_Skeletons',
+  desmontar: 'Death_C_Skeletons', remontar: 'Death_C_Skeletons_Resurrect', andarZumbi: 'Walking_D_Skeletons', invocar: 'Spellcast_Summon',
 };
-const UMA_VEZ = /Down$|StandUp$|Death_[AB]$|Jump_Full|Jump_Start|Jump_Land|Hit_[AB]$|PickUp|Throw|Use_Item|Interact|Dodge|Spellcast_(Shoot|Raise)|Attack|Punch|Kick/;
-const ACESSORIOS = /Helmet|Cape|Shield|Sword|Axe|Staff|Wand|Spellbook|Knife|Crossbow|Throwable|Hat|Mug|Quiver|Arrow|Bow/;
+const UMA_VEZ = /Down$|StandUp$|Death_[ABC]|Jump_Full|Jump_Start|Jump_Land|Hit_[AB]$|PickUp|Throw|Use_Item|Interact|Dodge|Spellcast_(Shoot|Raise|Summon)|Attack|Punch|Kick|Awaken|Spawn|Resurrect/;
+const ACESSORIOS = /Helmet|Cape|Shield|Sword|Axe|Staff|Wand|Spellbook|Knife|Crossbow|Throwable|Hat|Mug|Quiver|Arrow|Bow|Blade/;
 
 const arquivos = new Map();
-function carregar(tipo) {
-  if (!arquivos.has(tipo)) {
-    arquivos.set(tipo, new Promise((ok, erro) => new GLTFLoader().load(`${BASE}${tipo}.glb`, ok, undefined,
-      (e) => erro(new Error(`não consegui carregar ${tipo}.glb (${e?.message || e}). Tipos: ${TIPOS.join(', ')}`)))));
+/** Carrega um .glb uma vez só (as cópias vêm de SkeletonUtils.clone). */
+export function carregarGLB(url) {
+  if (!arquivos.has(url)) {
+    arquivos.set(url, new Promise((ok, erro) => new GLTFLoader().load(url, ok, undefined,
+      (e) => erro(new Error(`não consegui carregar ${url} (${e?.message || e})`)))));
   }
-  return arquivos.get(tipo);
+  return arquivos.get(url);
 }
 
 /**
- * Cria um personagem. Opções:
- *  altura (m, padrão 1.5) · cor (multiplica as cores da textura, ex. '#ffd0d0' para avermelhar)
- *  acessorios: true mostra capacete, capa, armas etc. (padrão: escondidos) · manter: /Hat/ mostra só os que casarem
+ * Dá vida a um modelo animado (base de todos os personagens do kit): escala pela altura, toca trilhas de animação
+ * com transição suave, anda por pontos, olha para um ponto, segura objetos e dá o topo da cabeça.
+ * o = { altura, apelidos: {nomePt: 'clip'}, umaVez: /regex de clipes que não repetem/, parado: 'nome do clipe parado' }
  */
-export async function cabecao(tipo = 'Knight', o = {}) {
-  const arq = await carregar(tipo);
-  const modelo = SkeletonUtils.clone(arq.scene), raiz = new THREE.Group();
-  raiz.add(modelo); raiz.name = `cabecao_${tipo}`;
-  modelo.traverse((m) => {
-    if (!m.isMesh) return;
-    const extra = ACESSORIOS.test(m.name);
-    m.visible = o.acessorios === true || !extra || !!(o.manter && o.manter.test(m.name));
-    m.castShadow = true; m.receiveShadow = true; m.frustumCulled = false;
-    if (o.cor) { m.material = m.material.clone(); m.material.color.multiply(new THREE.Color(o.cor)); }
-  });
+export function animar(modelo, animacoes, o = {}) {
+  const raiz = new THREE.Group(); raiz.add(modelo);
+  const apelidos = o.apelidos || {}, umaVez = o.umaVez || UMA_VEZ;
   const mixer = new THREE.AnimationMixer(modelo);
-  const clipes = Object.fromEntries(arq.animations.map((a) => [a.name, a])), acoes = {};
-  const nomeReal = (n) => (clipes[ANIM[n] || n] ? ANIM[n] || n : 'Idle');
+  const clipes = Object.fromEntries(animacoes.map((a) => [a.name, a])), acoes = {};
+  const parado = clipes[o.parado] ? o.parado : (clipes[apelidos.parado] ? apelidos.parado : animacoes[0]?.name);
+  const nomeReal = (n) => (clipes[apelidos[n] || n] ? apelidos[n] || n : parado);
   const acao = (n) => {
     const real = nomeReal(n);
+    if (!real) return [null, null];
     if (!acoes[real]) { const a = mixer.clipAction(clipes[real]); a.play(); a.setEffectiveWeight(0); acoes[real] = a; }
     return [real, acoes[real]];
   };
-
-  // escala pela altura real na pose parada (os ossos mudam o tamanho em relação à pose do arquivo)
-  const [, a0] = acao('parado'); a0.setEffectiveWeight(1); a0.time = 0; mixer.update(0); modelo.updateMatrixWorld(true);
+  // altura real na pose parada (os ossos mudam o tamanho em relação à pose do arquivo)
+  const [, a0] = acao('parado'); if (a0) { a0.setEffectiveWeight(1); a0.time = 0; mixer.update(0); }
+  modelo.updateMatrixWorld(true);
   const caixa = new THREE.Box3(), b = new THREE.Box3();
   modelo.traverse((m) => {
     if (!m.isMesh || !m.visible) return;
@@ -70,16 +68,17 @@ export async function cabecao(tipo = 'Knight', o = {}) {
     caixa.union(b.applyMatrix4(m.matrixWorld));
   });
   const altura = o.altura ?? 1.5, k = altura / Math.max(0.01, caixa.max.y - caixa.min.y);
-  modelo.scale.setScalar(k); modelo.position.y = -caixa.min.y * k; a0.setEffectiveWeight(0);
+  modelo.scale.multiplyScalar(k); modelo.position.y = -caixa.min.y * k; if (a0) a0.setEffectiveWeight(0);
 
   const p = {
-    raiz, modelo, tipo, altura, mixer, clipes: Object.keys(clipes),
+    raiz, modelo, altura, mixer, clipes: Object.keys(clipes),
     /** Toca uma trilha [[inicio, 'animacao', {laco, velocidade, desde, mistura}], ...] no tempo t (com transição suave). */
     tocar(trilha, t) {
       let i = 0; for (let j = 0; j < trilha.length; j++) if (t >= trilha[j][0]) i = j;
       for (const a of Object.values(acoes)) a.setEffectiveWeight(0);
       const por = ([ini, nome, op = {}], peso) => {
-        const [real, a] = acao(nome), d = clipes[real].duration, laco = op.laco ?? !UMA_VEZ.test(real);
+        const [real, a] = acao(nome); if (!a) return;
+        const d = clipes[real].duration, laco = op.laco ?? !umaVez.test(real);
         const tt = Math.max(0, t - ini) * (op.velocidade ?? 1) + (op.desde ?? 0);
         a.time = laco ? tt % d : Math.min(tt, d - 1e-3); a.setEffectiveWeight(peso);
       };
@@ -109,7 +108,7 @@ export async function cabecao(tipo = 'Knight', o = {}) {
     /** Vira para olhar o ponto (x, z) do chão. */
     olharPara(x, z) { raiz.rotation.y = Math.atan2(x - raiz.position.x, z - raiz.position.z); },
     osso: (nome) => modelo.getObjectByName(nome) || modelo.getObjectByName(THREE.PropertyBinding.sanitizeNodeName(nome)),
-    /** Prende um objeto num osso (ex.: 'handslot.r', 'handslot.l', 'head', 'chest'); compensa a escala do modelo. */
+    /** Prende um objeto num osso ou peça (ex.: 'handslot.r', 'head', 'chest', 'arm-right'); compensa a escala do modelo. */
     segurar(nome, obj, pos = [0, 0, 0], rot = [0, 0, 0]) {
       const osso = p.osso(nome) || modelo; modelo.updateMatrixWorld(true);
       const s = new THREE.Vector3(); osso.getWorldScale(s);
@@ -119,6 +118,27 @@ export async function cabecao(tipo = 'Knight', o = {}) {
     /** Posição (mundo) logo acima da cabeça. */
     topo(folga = 0.25) { raiz.updateMatrixWorld(true); return new THREE.Vector3(0, altura + folga, 0).applyMatrix4(raiz.matrixWorld); },
   };
+  return p;
+}
+
+/**
+ * Cria um cabeção. Opções:
+ *  altura (m, padrão 1.5) · cor (multiplica as cores da textura, ex. '#ffd0d0' para avermelhar)
+ *  acessorios: true mostra capacete, capa, armas etc. (padrão: escondidos) · manter: /Hat/ mostra só os que casarem
+ */
+export async function cabecao(tipo = 'Knight', o = {}) {
+  if (!TIPOS.includes(tipo)) throw new Error(`cabeção desconhecido: ${tipo}. Tipos: ${TIPOS.join(', ')}`);
+  const arq = await carregarGLB(`${BASE}${tipo}.glb`);
+  const modelo = SkeletonUtils.clone(arq.scene);
+  modelo.traverse((m) => {
+    if (!m.isMesh) return;
+    const extra = ACESSORIOS.test(m.name);
+    m.visible = o.acessorios === true || !extra || !!(o.manter && o.manter.test(m.name));
+    m.castShadow = true; m.receiveShadow = true; m.frustumCulled = false;
+    if (o.cor) { m.material = m.material.clone(); m.material.color.multiply(new THREE.Color(o.cor)); }
+  });
+  const p = animar(modelo, arq.animations, { altura: o.altura, apelidos: ANIM, parado: 'Idle' });
+  p.tipo = tipo; p.raiz.name = `cabecao_${tipo}`; p.esqueleto = tipo.startsWith('Skeleton');
   return p;
 }
 

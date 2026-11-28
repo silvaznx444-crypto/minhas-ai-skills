@@ -1,0 +1,24 @@
+{
+ "titulo": "Bichinhos diminuem o estresse",
+ "formato": "16:9",
+ "resolucao": "720p",
+ "fps": 24,
+ "estilo": "vivo",
+ "legenda": true,
+ "voz": "entrada/voz_provisoria.wav",
+ "roteiro": "entrada/roteiro.txt",
+ "duracao": 14.29,
+ "contorno": 0.0045,
+ "fadeEntrada": 0.4,
+ "fadeSaida": 0.8,
+ "musica": {
+  "ativa": true,
+  "ganho_db": -17
+ },
+ "efeitos": {
+  "ativos": true,
+  "ganho_db": 0
+ },
+ "loudness": -14,
+ "provisoria": true
+}

@@ -1,0 +1,185 @@
+{
+ "palavras": [
+  {
+   "texto": "Sabia",
+   "ini": 0.4,
+   "fim": 0.723
+  },
+  {
+   "texto": "que",
+   "ini": 0.751,
+   "fim": 1.01
+  },
+  {
+   "texto": "ter",
+   "ini": 1.032,
+   "fim": 1.292
+  },
+  {
+   "texto": "um",
+   "ini": 1.314,
+   "fim": 1.542
+  },
+  {
+   "texto": "bichinho",
+   "ini": 1.562,
+   "fim": 1.979
+  },
+  {
+   "texto": "pode",
+   "ini": 2.016,
+   "fim": 2.307
+  },
+  {
+   "texto": "diminuir",
+   "ini": 2.332,
+   "fim": 2.749
+  },
+  {
+   "texto": "o",
+   "ini": 2.786,
+   "fim": 2.982
+  },
+  {
+   "texto": "estresse?",
+   "ini": 2.999,
+   "fim": 3.448
+  },
+  {
+   "texto": "Passear",
+   "ini": 3.779,
+   "fim": 4.165
+  },
+  {
+   "texto": "com",
+   "ini": 4.199,
+   "fim": 4.458
+  },
+  {
+   "texto": "o",
+   "ini": 4.481,
+   "fim": 4.677
+  },
+  {
+   "texto": "cachorro",
+   "ini": 4.694,
+   "fim": 5.111
+  },
+  {
+   "texto": "faz",
+   "ini": 5.147,
+   "fim": 5.407
+  },
+  {
+   "texto": "você",
+   "ini": 5.429,
+   "fim": 5.72
+  },
+  {
+   "texto": "se",
+   "ini": 5.745,
+   "fim": 5.973
+  },
+  {
+   "texto": "mexer",
+   "ini": 5.993,
+   "fim": 6.316
+  },
+  {
+   "texto": "e",
+   "ini": 6.344,
+   "fim": 6.54
+  },
+  {
+   "texto": "conversar",
+   "ini": 6.557,
+   "fim": 7.006
+  },
+  {
+   "texto": "com",
+   "ini": 7.045,
+   "fim": 7.304
+  },
+  {
+   "texto": "os",
+   "ini": 7.327,
+   "fim": 7.554
+  },
+  {
+   "texto": "vizinhos.",
+   "ini": 7.574,
+   "fim": 8.023
+  },
+  {
+   "texto": "Em",
+   "ini": 8.355,
+   "fim": 8.582
+  },
+  {
+   "texto": "casa,",
+   "ini": 8.602,
+   "fim": 8.925
+  },
+  {
+   "texto": "um",
+   "ini": 9.066,
+   "fim": 9.294
+  },
+  {
+   "texto": "carinho",
+   "ini": 9.314,
+   "fim": 9.7
+  },
+  {
+   "texto": "no",
+   "ini": 9.733,
+   "fim": 9.961
+  },
+  {
+   "texto": "gato",
+   "ini": 9.981,
+   "fim": 10.272
+  },
+  {
+   "texto": "já",
+   "ini": 10.297,
+   "fim": 10.525
+  },
+  {
+   "texto": "acalma.",
+   "ini": 10.544,
+   "fim": 10.93
+  },
+  {
+   "texto": "E",
+   "ini": 11.256,
+   "fim": 11.452
+  },
+  {
+   "texto": "aí,",
+   "ini": 11.469,
+   "fim": 11.729
+  },
+  {
+   "texto": "você",
+   "ini": 11.865,
+   "fim": 12.156
+  },
+  {
+   "texto": "tem",
+   "ini": 12.181,
+   "fim": 12.44
+  },
+  {
+   "texto": "um",
+   "ini": 12.463,
+   "fim": 12.691
+  },
+  {
+   "texto": "bichinho?",
+   "ini": 12.71,
+   "fim": 13.159
+  }
+ ],
+ "fonte": "provisoria"
+}

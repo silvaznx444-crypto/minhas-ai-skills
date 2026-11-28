@@ -1,0 +1,40 @@
+{
+ "frases": [
+  {
+   "texto": "Sabia que ter um bichinho pode diminuir o estresse?",
+   "ini": 0.4,
+   "fim": 3.448,
+   "palavras": [
+    0,
+    8
+   ]
+  },
+  {
+   "texto": "Passear com o cachorro faz você se mexer e conversar com os vizinhos.",
+   "ini": 3.779,
+   "fim": 8.023,
+   "palavras": [
+    9,
+    21
+   ]
+  },
+  {
+   "texto": "Em casa, um carinho no gato já acalma.",
+   "ini": 8.355,
+   "fim": 10.93,
+   "palavras": [
+    22,
+    29
+   ]
+  },
+  {
+   "texto": "E aí, você tem um bichinho?",
+   "ini": 11.256,
+   "fim": 13.159,
+   "palavras": [
+    30,
+    35
+   ]
+  }
+ ]
+}

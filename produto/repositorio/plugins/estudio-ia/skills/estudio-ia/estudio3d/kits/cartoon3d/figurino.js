@@ -94,7 +94,21 @@ const ACESSORIOS = {
     return grupo(M(new THREE.ConeGeometry(0.12, 0.22, 4), cor, 0.36, 0.9, 0.1, 0, 0, Math.PI / 2), M(new THREE.ConeGeometry(0.12, 0.22, 4), cor, 0.6, 0.9, 0.1, 0, 0, -Math.PI / 2), M(new THREE.SphereGeometry(0.06, 10, 8), cor, 0.48, 0.9, 0.1)); } },
   fones: { osso: 'head', criar: (o) => { const cor = o.cor || '#2a2a34';
     return grupo(M(new THREE.TorusGeometry(0.6, 0.045, 8, 32, Math.PI), cor, 0, 0.32, 0), M(new THREE.CylinderGeometry(0.16, 0.16, 0.12, 20), o.cor2 || '#ff5a7a', -0.6, 0.3, 0, 0, 0, Math.PI / 2), M(new THREE.CylinderGeometry(0.16, 0.16, 0.12, 20), o.cor2 || '#ff5a7a', 0.6, 0.3, 0, 0, 0, Math.PI / 2)); } },
-  bigode: { osso: 'head', criar: (o) => { const cor = o.cor || '#3a2414';
+  // cabelos e barba (cor padrão = cor do cabelo do personagem)
+  cabeloLongo: { osso: 'head', cabelo: true, criar: (o) => grupo(M(new RoundedBoxGeometry(1.02, 1.15, 0.4, 4, 0.19), o.cor, 0, 0.32, -0.38),
+    M(new THREE.CapsuleGeometry(0.13, 0.55, 6, 12), o.cor, -0.53, 0.22, -0.08, 0, 0, 0.06), M(new THREE.CapsuleGeometry(0.13, 0.55, 6, 12), o.cor, 0.53, 0.22, -0.08, 0, 0, -0.06)) },
+  rabo: { osso: 'head', cabelo: true, criar: (o) => grupo(M(new THREE.SphereGeometry(0.1, 12, 10), o.laco || '#ff5a8a', 0, 0.7, -0.6),
+    M(new THREE.CapsuleGeometry(0.13, 0.45, 6, 12), o.cor, 0, 0.42, -0.72, -0.35)) },
+  coque: { osso: 'head', cabelo: true, criar: (o) => grupo(M(new THREE.SphereGeometry(0.24, 18, 14), o.cor, 0, 1.0, -0.3), M(new THREE.TorusGeometry(0.16, 0.035, 8, 20), o.laco || '#ffffff', 0, 0.9, -0.24, -1.0)) },
+  marias: { osso: 'head', cabelo: true, criar: (o) => grupo(M(new THREE.CapsuleGeometry(0.11, 0.32, 6, 12), o.cor, -0.6, 0.45, -0.15, 0, 0, -0.5), M(new THREE.CapsuleGeometry(0.11, 0.32, 6, 12), o.cor, 0.6, 0.45, -0.15, 0, 0, 0.5)) },
+  barba: { osso: 'head', cabelo: true, criar: (o) => { const m = M(new THREE.SphereGeometry(0.44, 24, 16, 0, Math.PI * 2, Math.PI * 0.56, Math.PI * 0.44), o.cor, 0, 0.13, 0.06); m.scale.set(1.12, 1.25, 1.06); return grupo(m); } },
+  // roupas por cima (na bacia): saia e vestido
+  saia: { osso: 'hips', criar: (o) => M(new THREE.CylinderGeometry(0.46, 0.6, 0.26, 28, 1, true), toon(o.cor || '#ff6a9a', { side: THREE.DoubleSide }), 0, 0.06, 0) },
+  vestido: { osso: 'hips', criar: (o) => grupo(M(new THREE.CylinderGeometry(0.46, 0.64, 0.4, 28, 1, true), toon(o.cor || '#7a5ad0', { side: THREE.DoubleSide }), 0, -0.02, 0),
+    M(new THREE.TorusGeometry(0.46, 0.03, 8, 32), o.faixa || '#ffffff', 0, 0.18, 0, Math.PI / 2)) },
+  avental: { osso: 'chest', criar: (o) => grupo(M(new RoundedBoxGeometry(0.5, 0.62, 0.03, 2, 0.012), o.cor || '#ffffff', 0, -0.32, 0.43),
+    M(new THREE.TorusGeometry(0.3, 0.018, 6, 24, Math.PI), o.cor || '#ffffff', 0, -0.02, 0.32, -0.25)) },
+  bigode: { osso: 'head', cabelo: true, criar: (o) => { const cor = o.cor || '#3a2414';
     return grupo(M(new THREE.CapsuleGeometry(0.035, 0.12, 4, 8), cor, -0.08, 0.2, 0.56, 0, 0, 1.2), M(new THREE.CapsuleGeometry(0.035, 0.12, 4, 8), cor, 0.08, 0.2, 0.56, 0, 0, -1.2)); } },
   gravata: { osso: 'chest', criar: (o) => { const cor = o.cor || '#c0303a';
     return grupo(M(new THREE.BoxGeometry(0.1, 0.08, 0.04), cor, 0, 0.27, 0.41), M(new THREE.ConeGeometry(0.1, 0.42, 4), cor, 0, 0.02, 0.41, Math.PI, Math.PI / 4)); } },
@@ -117,6 +131,7 @@ export const LISTA_ACESSORIOS = Object.keys(ACESSORIOS);
 /** Põe um acessório: vestir(p, 'oculos') ou vestir(p, 'bone', { cor: '#ff0' }). Devolve o objeto 3D. */
 export function vestir(p, nome, o = {}) {
   const a = ACESSORIOS[nome]; if (!a) { console.error(`[figurino] acessório desconhecido: ${nome}. Use: ${LISTA_ACESSORIOS.join(', ')}`); return null; }
+  if (a.cabelo && !o.cor) o = { ...o, cor: p.corCabelo || '#3a2414' };
   const obj = a.criar(o); obj.traverse((m) => { if (m.isMesh) m.castShadow = true; });
   const osso = p.osso(a.osso); if (!osso) return null;
   if (a.osso.startsWith('handslot')) return p.segurar(a.osso, obj); // compensa a escala do modelo
@@ -140,6 +155,12 @@ export const ELENCO = {
   musico:      { tipo: 'Rogue_Hooded', cores: { roupa: '#7a4ad0', detalhes: '#ffd84a', calca: '#222230', pele: PELE.parda }, acessorios: [['fones', { cor2: '#ffd84a' }], ['microfone']] },
   influencer:  { tipo: 'Mage', cores: { roupa: '#ff6aa8', detalhes: '#ffffff', cabelo: CABELO.loiro, pele: PELE.clara }, acessorios: [['oculosSol'], ['celular']] },
   policial:    { tipo: 'Knight', cores: { roupa: '#24345a', armadura: '#3a4c7a', cabelo: CABELO.castanho, pele: PELE.morena }, acessorios: [['bone', { cor: '#24345a' }]] },
+  mae:         { tipo: 'Mage', cores: { roupa: '#7a5ad0', detalhes: '#ffffff', cabelo: CABELO.castanho, pele: PELE.parda }, acessorios: [['cabeloLongo'], ['vestido', { cor: '#7a5ad0' }]] },
+  pai:         { tipo: 'Rogue', cores: { roupa: '#3f8a6a', detalhes: '#e8e8e8', calca: '#3a3a4a', cabelo: CABELO.preto, pele: PELE.morena }, acessorios: [['barba']] },
+  adolescente: { tipo: 'Rogue', altura: 1.3, cores: { roupa: '#2a2a34', detalhes: '#ff5a7a', calca: '#3f5a9a', cabelo: CABELO.rosa, pele: PELE.clara }, acessorios: [['rabo'], ['fones'], ['celular']] },
+  enfermeira:  { tipo: 'Mage', cores: { roupa: '#7ac8e8', detalhes: '#ffffff', calca: '#7ac8e8', cabelo: CABELO.preto, pele: PELE.escura }, acessorios: [['coque']] },
+  bailarina:   { tipo: 'Mage', altura: 1.2, cores: { roupa: '#ffb0d0', detalhes: '#ffffff', cabelo: CABELO.loiro, pele: PELE.clara }, acessorios: [['coque'], ['saia', { cor: '#ffc8e0' }]] },
+  barista:     { tipo: 'Barbarian', cores: { roupa: '#5a3a2a', detalhes: '#5a3a2a', cabelo: CABELO.preto, pele: PELE.media }, acessorios: [['avental', { cor: '#2a5a4a' }], ['xicara']] },
   rei:         { tipo: 'Knight', cores: { roupa: '#8a2a6a', armadura: '#d8b048', pele: PELE.media }, acessorios: [['coroa'], ['capa', { cor: '#a01a3a' }]] },
 };
 /**
@@ -151,6 +172,7 @@ export async function personagem(receita, extra = {}) {
   if (!r.tipo) throw new Error(`personagem desconhecido: ${receita}. Elenco: ${Object.keys(ELENCO).join(', ')}`);
   const p = await cabecao(r.tipo, { altura: r.altura ?? 1.5, acessorios: r.armas === true });
   if (r.cores) pintar(p, r.cores);
+  p.corCabelo = r.cores?.cabelo;
   p.acessorios = (r.acessorios || []).map(([nome, o]) => vestir(p, nome, o || {}));
   p.rosto = rosto(p, { pelo: r.cores?.cabelo });
   p.receita = typeof receita === 'string' ? receita : 'montado';

@@ -1,0 +1,13 @@
+{
+ "titulo": "Catálogo de personagens",
+ "formato": "16:9",
+ "resolucao": "1080p",
+ "fps": 24,
+ "estilo": "vivo",
+ "legenda": false,
+ "contorno": 0.0045,
+ "fadeEntrada": 0,
+ "fadeSaida": 0,
+ "musica": {"ativa": false},
+ "efeitos": {"ativos": false}
+}

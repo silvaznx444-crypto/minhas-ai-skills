@@ -14,6 +14,7 @@ estudio3d/
   ferramentas/ novo_projeto.py · provisoria.py · transcrever.py · tomadas.py
   exemplos/demo/       referência no estilo bonecos (16:9, 6 tomadas)
   exemplos/cabecoes/   referência no estilo cabeção (9:16, 6 tomadas)
+  exemplos/catalogo/   catálogo visual de todos os personagens, bichos e acessórios
   projetos/<nome>/
      config.json   entrada/ (voz, roteiro)   linha/ (palavras, frases)   historia/tomadas.json   cenas/*.js
      construcao/ (folha, quadros, prévia, vídeo sem som, mix)   saida/<título>.mp4
@@ -159,15 +160,44 @@ amarelo na folha de contato.
   A cor da pálpebra vem da própria textura de cada personagem.
   Combine sempre o rosto com a animação do corpo, os ícones e a câmera.
 - **figurino.js (personagens do dia a dia a partir dos cabeções):** `await personagem('medica')` usa o elenco pronto,
-  que já vem com rosto expressivo em `p.rosto`. São 16 receitas em `ELENCO`: estudante, estudante2, professora, medica,
-  cientista, executivo, vovo, vovo2, crianca, crianca2, chef, atleta, musico, influencer, policial e rei.
+  que já vem com rosto expressivo em `p.rosto`. São 22 receitas em `ELENCO`: estudante, estudante2, professora, medica,
+  cientista, executivo, vovo, vovo2, crianca, crianca2, chef, atleta, musico, influencer, policial, mae, pai, adolescente,
+  enfermeira, bailarina, barista e rei.
   Para montar o seu: `await personagem({ tipo: 'Rogue', cores: {...}, acessorios: [['bone', {cor}], ['mochila']], altura: 1.2 })`.
   - **Cores:** `pele` (use `PELE.clara|media|morena|parda|escura|retinta`), `cabelo` (`CABELO.*`), `roupa`, `detalhes`,
     `calca`, `botas`, `couro` e `armadura` (só no Knight). A cor nova mantém o sombreado da textura.
-  - **Acessórios:** oculos, oculosSol, bone, gorro, cartola, chapeuChef, coroa, laco, fones, bigode, gravata, cachecol,
-    estetoscopio, mochila, capa. Na mão: celular, livro, xicara, maleta, microfone, balaoFesta.
+  - **Acessórios:** oculos, oculosSol, bone, gorro, cartola, chapeuChef, coroa, laco, fones, gravata, cachecol,
+    estetoscopio, mochila, capa, avental, saia e vestido.
+  - **Cabelo e barba** (vêm na cor de `cores.cabelo`): cabeloLongo, rabo (rabo de cavalo), coque, marias
+    (maria-chiquinha), barba e bigode.
+  - **Na mão:** celular, livro, xicara, maleta, microfone e balaoFesta.
   - Também funcionam separados: `pintar(p, cores)` e `vestir(p, 'oculos', {cor})`.
   - Crianças: use `altura` de 1.0 a 1.1. Idosos: de 1.35 a 1.4, com cabelo branco ou grisalho.
+- **Esqueletos (KayKit Skeletons):** `cabecao('Skeleton_Minion' | 'Skeleton_Warrior' | 'Skeleton_Rogue' | 'Skeleton_Mage')`.
+  Têm 95 animações, entre elas as próprias: provocar, acordarDoChao, acordarEmPe, surgir, desmontar, remontar, andarZumbi e invocar.
+  São ótimos para temas de medo, Halloween e "o que acontece depois que...". Não use `rosto()` neles.
+- **kenney.js (pacotes da Kenney, CC0), com o mesmo controle dos cabeções:**
+  - `await gente(nome)`: 20 pessoas comuns (female-a…f, male-a…g, worker, soldier, raider, knight, alien, robot, zombie).
+    Animações: parado, andar, correr, pular, cair, agachar, sentado, dirigir, desmaiar, pegar, sim, nao, segurar,
+    segurarDuas, interagir, soco, chute e cadeiraDeRodas/cadeiraFrente/cadeiraTras (cadeira de rodas: objeto `gente/wheelchair`).
+  - `await blocos(letra)`: 18 personagens de blocos (a…r), com as mesmas animações.
+  - `await bicho(nome)`: 24 bichos com nome em português. São eles: cachorro, gato, coelho, porco, vaca, javali, leao, tigre,
+    panda, ursoPolar, coala, macaco, raposa, cervo, girafa, elefante, castor, pinguim, papagaio, pintinho, abelha,
+    lagarta, caranguejo e peixe. Animações: parado, andar, correr, comer, dancar, sim e nao.
+  - `objeto(pasta, nome, {altura|largura, x, y, z, giro, cor})`: mais de 900 objetos. Pré-carregue no `criar()` com
+    `await carregarObjetos([[pasta, nome], ...])` ou use `await objetoAsync(...)`. As pastas são:
+    - moveis (140: sofá, cama, cozinha, banheiro, escritório);
+    - bairro (40: casas, cerca, caminhos, árvores);
+    - comida (200);
+    - festa (99: presentes, luzes, enfeites);
+    - natureza (329: árvores, pedras, flores, cogumelos);
+    - loja (30: caixa, prateleiras, carrinho);
+    - gente (acessórios: cadeira de rodas, bengala, muleta, mala).
+
+    Os nomes de cada pasta estão em `kits/cartoon3d/kenney/indice.json` (ou `await listar('moveis')`).
+  - Os personagens da Kenney não têm `rosto()`. Use os ícones de emoção (`emocao`), o balão e a câmera.
+- **Catálogo:** `node renderizar.mjs --projeto exemplos/catalogo --folha` gera a folha com todos os personagens, bichos e
+  acessórios, com o nome embaixo de cada um. Mostre ao usuário na hora de escolher o elenco.
 - **mundos.js (cenários coloridos do estilo cabeção):**
   - `parque({clima: 'dia'|'entardecer'})`: grama, caminho, árvores de algodão-doce, lago, bancos e postes;
   - `praca()`: ladrilhos, prédios, café com guarda-sol e fonte;

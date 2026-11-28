@@ -1,0 +1,9 @@
+{"duracao": 7, "tomadas": [
+ {"id": "C1", "ini": 0, "fim": 1, "cena": "Elenco pronto do figurino (cabeções do dia a dia), parte 1"},
+ {"id": "C2", "ini": 1, "fim": 2, "cena": "Elenco pronto do figurino, parte 2"},
+ {"id": "C3", "ini": 2, "fim": 3, "cena": "Cabeções originais e esqueletos"},
+ {"id": "C4", "ini": 3, "fim": 4, "cena": "Gente comum (Kenney)"},
+ {"id": "C5", "ini": 4, "fim": 5, "cena": "Personagens de blocos (Kenney)"},
+ {"id": "C6", "ini": 5, "fim": 6, "cena": "Bichos (Kenney)"},
+ {"id": "C7", "ini": 6, "fim": 7, "cena": "Acessórios do figurino"}
+]}

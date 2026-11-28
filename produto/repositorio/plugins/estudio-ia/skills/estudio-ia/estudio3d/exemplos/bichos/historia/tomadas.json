@@ -1,0 +1,102 @@
+{
+ "tomadas": [
+  {
+   "id": "S01",
+   "ancora": "Sabia que",
+   "cena": "Bairro de casinhas: a dona passeia com o cachorro pela calçada.",
+   "efeitos": [
+    [
+     0.3,
+     "swoosh",
+     -18
+    ]
+   ],
+   "ambiente": [
+    "natureza",
+    -30
+   ],
+   "ini": 0.0,
+   "fim": 3.63
+  },
+  {
+   "id": "S02",
+   "ancora": "Passear com",
+   "cena": "O vizinho acena (sim) e o cachorro dança; coração em cima do cachorro.",
+   "transicao": {
+    "tipo": "deslizar",
+    "dur": 0.35
+   },
+   "efeitos": [
+    [
+     0.6,
+     "plim",
+     -14
+    ]
+   ],
+   "ambiente": [
+    "natureza",
+    -32
+   ],
+   "ini": 3.63,
+   "fim": 8.21
+  },
+  {
+   "id": "S03",
+   "ancora": "Em casa,",
+   "cena": "Sala mobiliada: o gato come e depois dança no tapete; a dona senta no sofá.",
+   "transicao": {
+    "tipo": "iris",
+    "dur": 0.4
+   },
+   "efeitos": [
+    [
+     0.5,
+     "brilho",
+     -16
+    ]
+   ],
+   "ambiente": [
+    "sala",
+    -32
+   ],
+   "ini": 8.21,
+   "fim": 11.11
+  },
+  {
+   "id": "S04",
+   "ancora": "E aí,",
+   "cena": "Festa com bolo e presentes: todos os bichos dançam; carimbo VOCÊ TEM UM BICHINHO?",
+   "transicao": {
+    "tipo": "zoom",
+    "dur": 0.35
+   },
+   "efeitos": [
+    [
+     0.3,
+     "pop",
+     -10
+    ],
+    [
+     0.5,
+     "torcida",
+     -18
+    ]
+   ],
+   "ini": 11.11,
+   "fim": 14.36
+  }
+ ],
+ "musica": [
+  {
+   "de": 0,
+   "ate": "S04",
+   "clima": "calmo"
+  },
+  {
+   "de": "S04",
+   "ate": 14.36,
+   "clima": "alegre"
+  }
+ ],
+ "duracao": 14.36
+}

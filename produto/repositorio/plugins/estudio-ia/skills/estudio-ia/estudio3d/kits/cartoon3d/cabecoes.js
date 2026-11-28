@@ -193,12 +193,21 @@ function corDaPele(p) {
   const img = cab?.material?.map?.image; const osso = p.osso('head');
   if (!img || !osso) return new THREE.Color('#e2a985');
   p.modelo.updateMatrixWorld(true);
-  const inv = osso.matrixWorld.clone().invert(), alvo = new THREE.Vector3(0.3, 0.12, 0.48), v = new THREE.Vector3();
-  const pos = cab.geometry.attributes.position, uv = cab.geometry.attributes.uv; let melhor = 0, dist = Infinity;
-  for (let i = 0; i < pos.count; i++) { cab.getVertexPosition(i, v); v.applyMatrix4(cab.matrixWorld).applyMatrix4(inv); const d = v.distanceToSquared(alvo); if (d < dist) { dist = d; melhor = i; } }
+  // a pele da textura é um degradê: lê a cor logo abaixo do olho (acima fica a sobrancelha pintada)
+  const inv = osso.matrixWorld.clone().invert(), alvo = new THREE.Vector3(FACE.olhoX + 0.02, FACE.olhoY - FACE.olhoA * 0.85, 0.5), v = new THREE.Vector3();
+  // só vale um ponto cuja UV caia na casa da pele da paleta (8x4: coluna 0, linha 0); assim nunca pega olho ou cabelo
+  const pos = cab.geometry.attributes.position, uv = cab.geometry.attributes.uv; let melhor = -1, dist = Infinity, qualquer = 0, distQ = Infinity;
+  for (let i = 0; i < pos.count; i++) {
+    cab.getVertexPosition(i, v); v.applyMatrix4(cab.matrixWorld).applyMatrix4(inv); const d = v.distanceToSquared(alvo);
+    if (d < distQ) { distQ = d; qualquer = i; }
+    if (uv.getX(i) < 0.125 && uv.getY(i) < 0.25 && d < dist) { dist = d; melhor = i; }
+  }
+  if (melhor < 0) melhor = qualquer;
   const c = document.createElement('canvas'); c.width = img.width; c.height = img.height; const g = c.getContext('2d'); g.drawImage(img, 0, 0);
-  const d = g.getImageData(Math.floor(uv.getX(melhor) * (img.width - 1)), Math.floor(uv.getY(melhor) * (img.height - 1)), 1, 1).data;
-  return new THREE.Color(`rgb(${d[0]},${d[1]},${d[2]})`).multiply(cab.material.color);
+  const x = Math.floor(uv.getX(melhor) * (img.width - 1)), y = Math.floor(uv.getY(melhor) * (img.height - 1));
+  const d = g.getImageData(Math.max(0, x - 2), Math.max(0, y - 2), 5, 5).data; let r = 0, gg = 0, b = 0;
+  for (let k = 0; k < d.length; k += 4) { r += d[k]; gg += d[k + 1]; b += d[k + 2]; }
+  const n = d.length / 4; return new THREE.Color(`rgb(${Math.round(r / n)},${Math.round(gg / n)},${Math.round(b / n)})`).multiply(cab.material.color);
 }
 const semTinta = (m) => { m.userData.contorno = false; return m; };
 const fosco = (cor, extra = {}) => semTinta(new THREE.MeshStandardMaterial({ color: new THREE.Color(cor), roughness: 0.85, metalness: 0, ...extra }));
@@ -219,9 +228,11 @@ export function rosto(p, o = {}) {
   // pálpebras: um "véu" da cor da pele que desce do topo do olho, com a linha dos cílios na borda
   const palp = [-1, 1].map((lado) => {
     const sup = new THREE.Group(); sup.position.set(lado * F.olhoX, F.olhoY + F.olhoA / 2, z + 0.012); g.add(sup);
-    const geo = new THREE.PlaneGeometry(F.olhoL * 1.25, F.olhoA * 1.12); geo.translate(0, -F.olhoA * 0.56, 0);
+    // pálpebra oval (desce do topo do olho) e cílio curvo na borda de baixo
+    const geo = new THREE.CircleGeometry(0.5, 28); geo.scale(F.olhoL * 1.32, F.olhoA * 1.2, 1); geo.translate(0, -F.olhoA * 0.6, 0);
     const veu = new THREE.Mesh(geo, fosco(pele)); sup.add(veu);
-    const cilio = new THREE.Mesh(new THREE.BoxGeometry(F.olhoL * 1.15, 0.018, 0.01), fosco('#1a1216')); sup.add(cilio);
+    const cilio = new THREE.Mesh(new THREE.TorusGeometry(F.olhoL * 0.55, 0.011, 6, 20, Math.PI), fosco('#1a1216'));
+    cilio.rotation.z = Math.PI; cilio.scale.y = 0.45; sup.add(cilio);
     return { sup, veu, cilio };
   });
   // sobrancelhas
@@ -257,7 +268,7 @@ export function rosto(p, o = {}) {
     definir(e = {}) {
       const t = e.t ?? 0;
       const fechar = e.piscar ? 1 : lim(e.palpebras ?? 0);
-      palp.forEach(({ sup, veu, cilio }) => { veu.visible = fechar > 0.02; veu.scale.y = Math.max(0.001, fechar); cilio.visible = fechar > 0.08; cilio.position.y = -F.olhoA * 1.12 * fechar; });
+      palp.forEach(({ veu, cilio }) => { veu.visible = fechar > 0.02; veu.scale.y = Math.max(0.001, fechar); cilio.visible = fechar > 0.08; cilio.position.y = -F.olhoA * 1.2 * fechar + 0.004; });
       const tipo = e.sobrancelhas ?? 'neutra';
       const giro = { neutra: 0, brava: -0.42, triste: 0.38, surpresa: 0.05, preocupada: 0.3, desconfiada: 0 }[tipo] ?? 0;
       const alto = { neutra: 0, brava: -0.03, triste: 0.0, surpresa: 0.07, preocupada: 0.03, desconfiada: 0 }[tipo] ?? 0;

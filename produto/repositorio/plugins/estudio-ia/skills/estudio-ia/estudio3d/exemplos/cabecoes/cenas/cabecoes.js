@@ -141,8 +141,8 @@ registrarTomada('S06', {
   },
   sobre(g, { T, ini, fim, t }) {
     carimbo(g, T, ini + 0.2, 'MARCA ALGUÉM!', { y: E.H * 0.16, tamanho: 92, sub: 'que sempre te faz sorrir' });
-    figurinha(g, 'coracao', E.W * 0.18, E.H * 0.33, 120, prog(t, 0.6, 0.9));
-    figurinha(g, 'estrela', E.W * 0.84, E.H * 0.36, 110, prog(t, 0.8, 1.1), { giro: 0.12 });
+    figurinha(g, 'coracao', E.W * 0.14, E.H * 0.29, 110, prog(t, 0.6, 0.9));
+    figurinha(g, 'estrela', E.W * 0.86, E.H * 0.29, 100, prog(t, 0.8, 1.1), { giro: 0.12 });
     confete(g, T, ini + 0.3);
     if (T > fim - 1.4) etiqueta(g, 'segue para mais', E.W / 2, E.H * 0.82, curva.sai(prog(T, fim - 1.4, fim - 1.0)), { fundo: '#d0303a', tamanho: 40 });
   },

@@ -12,7 +12,7 @@ import { cabecao, rosto } from './cabecoes.js';
 /** Tons de pele prontos (use em cores.pele). */
 export const PELE = { clara: '#f6c7a5', media: '#e0a57e', morena: '#c68a5e', parda: '#a96f45', escura: '#7e4e2e', retinta: '#5c3920' };
 /** Cores de cabelo prontas. */
-export const CABELO = { preto: '#1c1a1c', castanho: '#5a3220', ruivo: '#b4502a', loiro: '#e0b870', grisalho: '#a8a8a8', branco: '#eeeeee', rosa: '#ff8ac0', azul: '#4a7aff' };
+export const CABELO = { preto: '#2c2626', castanho: '#5a3220', ruivo: '#b4502a', loiro: '#e0b870', grisalho: '#a8a8a8', branco: '#eeeeee', rosa: '#ff8ac0', azul: '#4a7aff' };
 
 // Regiões da textura (paleta 8x4 de 128x256 px). Cada personagem tem a sua textura, mas a lógica das casas é a mesma.
 const REGIOES = {
@@ -76,10 +76,10 @@ export function pintar(p, cores = {}) {
 const M = (geo, cor, x = 0, y = 0, z = 0, rx = 0, ry = 0, rz = 0) => { const m = new THREE.Mesh(geo, typeof cor === 'string' ? toon(cor) : cor); m.position.set(x, y, z); m.rotation.set(rx, ry, rz); m.castShadow = true; return m; };
 const grupo = (...ms) => { const g = new THREE.Group(); ms.forEach((m) => g.add(m)); return g; };
 const ACESSORIOS = {
-  oculos: { osso: 'head', criar: (o) => { const cor = o.cor || '#1a1a22', aro = (x) => M(new THREE.TorusGeometry(0.1, 0.018, 8, 24), cor, x, 0.33, 0.55);
-    return grupo(aro(-0.18), aro(0.18), M(new THREE.BoxGeometry(0.14, 0.02, 0.02), cor, 0, 0.36, 0.56), M(new THREE.BoxGeometry(0.02, 0.02, 0.42), cor, -0.29, 0.34, 0.36), M(new THREE.BoxGeometry(0.02, 0.02, 0.42), cor, 0.29, 0.34, 0.36)); } },
+  oculos: { osso: 'head', criar: (o) => { const cor = o.cor || '#1a1a22', aro = (x) => M(new THREE.TorusGeometry(0.095, 0.017, 8, 24), cor, x, 0.33, 0.53, 0, x * 0.9);
+    return grupo(aro(-0.175), aro(0.175), M(new THREE.BoxGeometry(0.12, 0.02, 0.02), cor, 0, 0.36, 0.545), M(new THREE.BoxGeometry(0.02, 0.02, 0.4), cor, -0.27, 0.34, 0.33), M(new THREE.BoxGeometry(0.02, 0.02, 0.4), cor, 0.27, 0.34, 0.33)); } },
   oculosSol: { osso: 'head', criar: (o) => { const g = ACESSORIOS.oculos.criar({ cor: o.cor || '#101014' });
-    for (const x of [-0.18, 0.18]) g.add(M(new THREE.CircleGeometry(0.095, 24), new THREE.MeshBasicMaterial({ color: '#0c0c14' }), x, 0.33, 0.556)); return g; } },
+    for (const x of [-0.175, 0.175]) g.add(M(new THREE.CircleGeometry(0.09, 24), new THREE.MeshBasicMaterial({ color: '#0c0c14' }), x, 0.33, 0.535, 0, x * 0.9)); return g; } },
   bone: { osso: 'head', criar: (o) => { const cor = o.cor || '#d0303a';
     return grupo(M(new THREE.SphereGeometry(0.58, 28, 14, 0, Math.PI * 2, 0, Math.PI / 2.2), cor, 0, 0.66, -0.02),
       M(new RoundedBoxGeometry(0.66, 0.06, 0.46, 2, 0.025), o.aba || cor, 0, 0.7, 0.62, 0.32), M(new THREE.SphereGeometry(0.06, 10, 8), o.aba || cor, 0, 1.2, -0.02)); } },

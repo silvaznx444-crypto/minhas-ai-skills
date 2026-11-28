@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import { registrarTomada, E } from '/motor/nucleo.js';
 import { palco, apontar, naTela } from '/motor/palco3d.js';
-import { texto } from '/motor/desenho.js';
+import { texto, etiqueta } from '/motor/desenho.js';
 import { cabecao, TIPOS } from '/kits/cartoon3d/cabecoes.js';
 import { personagem, ELENCO, LISTA_ACESSORIOS } from '/kits/cartoon3d/figurino.js';
 import { gente, blocos, bicho, GENTE, NOME_BICHO } from '/kits/cartoon3d/kenney.js';
@@ -30,7 +30,7 @@ function grade(titulo, itens, criar, o = {}) {
     },
     sobre(g, info, e) {
       texto(g, titulo, E.W / 2, 60, { tamanho: 52, peso: 900, cor: '#2a2440' });
-      for (const c of e.ps) { const s = naTela(e.camera, c.raiz.position.clone()); if (s.visivel) texto(g, c.nome, s.x, s.y + 26, { tamanho: o.letra ?? 24, peso: 900, cor: '#2a2440' }); }
+      for (const c of e.ps) { const s = naTela(e.camera, c.raiz.position.clone()); if (s.visivel) etiqueta(g, String(c.nome), s.x, s.y + 22, 1, { tamanho: o.letra ?? 22, fundo: 'rgba(42,36,64,.82)' }); }
     },
   };
 }

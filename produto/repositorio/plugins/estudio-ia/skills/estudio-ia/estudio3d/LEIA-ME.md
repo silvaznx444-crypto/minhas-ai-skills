@@ -184,7 +184,7 @@ amarelo na folha de contato.
   - `await bicho(nome)`: 24 bichos com nome em português. São eles: cachorro, gato, coelho, porco, vaca, javali, leao, tigre,
     panda, ursoPolar, coala, macaco, raposa, cervo, girafa, elefante, castor, pinguim, papagaio, pintinho, abelha,
     lagarta, caranguejo e peixe. Animações: parado, andar, correr, comer, dancar, sim e nao.
-  - `objeto(pasta, nome, {altura|largura, x, y, z, giro, cor})`: mais de 900 objetos. Pré-carregue no `criar()` com
+  - `objeto(pasta, nome, {altura|largura, x, y, z, giro, cor})`: mais de 850 objetos. Pré-carregue no `criar()` com
     `await carregarObjetos([[pasta, nome], ...])` ou use `await objetoAsync(...)`. As pastas são:
     - moveis (140: sofá, cama, cozinha, banheiro, escritório);
     - bairro (40: casas, cerca, caminhos, árvores);

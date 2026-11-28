@@ -31,10 +31,8 @@ python3 $E/instagram.py postar --video projetos/x/final.mp4 --legenda-arquivo pr
 ```
 - Categoria: 27 = Educação, 24 = Entretenimento, 1 = Animação, 22 = Pessoas e blogs.
 - `youtube.py postar` marca o vídeo como **conteúdo sintético/alterado** (exigência do YouTube para IA realista).
-  Só use `--sem-aviso-ia` em animação claramente não realista, e avise o usuário.
+  No 3D construído (animação claramente não realista), `--sem-aviso-ia` é aceitável: avise o usuário.
 - Legenda do Instagram é outra: gancho em ≤ 125 caracteres, chamada para comentar e 3–6 hashtags.
-- `youtube.py postar` já marca o vídeo como sintético. No 3D construído (animação claramente não realista),
-  `--sem-aviso-ia` é aceitável: avise o usuário.
 - Depois de postar, anote em `canal/jornada.md` o link e a data, e agende a checagem de 48 h
   (etapa 9 do passo a passo do [SKILL.md](../SKILL.md)).
 

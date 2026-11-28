@@ -15,11 +15,11 @@ Dá para misturar os dois, mas mantenha sempre o mesmo protagonista.
 **Elenco disponível.**
 - **Cabeções:** 9 tipos e 22 personagens prontos do figurino, que dá para mudar.
 - **Esqueletos:** 4.
-- **Kenney:** 20 pessoas comuns, 18 personagens de blocos e 24 bichos, mais de 900 objetos de cenário e os bonecos com contorno.
+- **Kenney:** 20 pessoas comuns, 18 personagens de blocos e 24 bichos, mais de 850 objetos de cenário e os bonecos com contorno.
 
 Antes de escolher o elenco com a pessoa, renderize o catálogo (`exemplos/catalogo`, `--folha`) e mostre a imagem.
 
-**Personagens do dia a dia.** No estilo cabeção, use o `figurino.js`. Ele traz 16 personagens prontos (estudante,
+**Personagens do dia a dia.** No estilo cabeção, use o `figurino.js`. Ele traz 22 personagens prontos (estudante,
 professora, médica, executivo, vovó, criança, chef, atleta...) e permite montar novos trocando a pele (6 tons), o cabelo
 e as cores da roupa e pondo acessórios (óculos, boné, gravata, mochila, estetoscópio, fones, celular...). Guarde a receita
 do protagonista no `canal/padrao.md`, para ele ser igual em todos os vídeos.

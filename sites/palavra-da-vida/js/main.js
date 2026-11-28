@@ -2,15 +2,18 @@
   var root = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Cabeçalho: transparente no topo, sólido ao rolar ---------- */
+  /* ---------- Aviso do topo ---------- */
+  var topbar = document.querySelector('[data-topbar]');
+  var closeTop = document.querySelector('[data-topbar-close]');
+  if (topbar && closeTop) closeTop.addEventListener('click', function () { topbar.hidden = true; });
+
+  /* ---------- Sombra no cabeçalho ao rolar ---------- */
   var header = document.querySelector('[data-header]');
-  function onScroll() {
-    if (header) header.classList.toggle('is-solid', window.scrollY > 60);
-  }
+  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 40); }
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* ---------- Menu mobile ---------- */
+  /* ---------- Menu do celular ---------- */
   var burger = document.querySelector('[data-burger]');
   function setMenu(open) {
     root.classList.toggle('menu-open', open);
@@ -19,7 +22,7 @@
   }
   if (burger) {
     burger.addEventListener('click', function () { setMenu(!root.classList.contains('menu-open')); });
-    document.querySelectorAll('#menu a').forEach(function (a) {
+    document.querySelectorAll('.mobile-menu a').forEach(function (a) {
       a.addEventListener('click', function () { setMenu(false); });
     });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
@@ -30,7 +33,6 @@
   if (pc) {
     var slides = pc.querySelectorAll('.pc-slide');
     var thumbs = pc.querySelectorAll('.pc-thumb');
-    var current = document.querySelector('[data-pc-current]');
     var index = 0, timer = null, userTook = false;
 
     function go(i, fromUser) {
@@ -45,7 +47,6 @@
         t.classList.toggle('is-active', n === index);
         t.setAttribute('aria-selected', n === index ? 'true' : 'false');
       });
-      if (current) current.textContent = String(index + 1).padStart(2, '0');
       if (fromUser) { userTook = true; stop(); }
     }
     function next(u) { go(index + 1, u); }
@@ -53,8 +54,8 @@
     function start() { if (!reduceMotion && !userTook && !timer) timer = setInterval(next, 7000); }
     function stop() { clearInterval(timer); timer = null; }
 
-    document.querySelector('[data-pc-next]').addEventListener('click', function () { next(true); });
-    document.querySelector('[data-pc-prev]').addEventListener('click', function () { prev(true); });
+    pc.querySelector('[data-pc-next]').addEventListener('click', function () { next(true); });
+    pc.querySelector('[data-pc-prev]').addEventListener('click', function () { prev(true); });
     thumbs.forEach(function (t) {
       t.addEventListener('click', function () { go(+t.getAttribute('data-pc-go'), true); });
     });
@@ -63,7 +64,6 @@
       if (e.key === 'ArrowLeft') { prev(true); e.preventDefault(); }
     });
 
-    // Arrastar no celular
     var track = pc.querySelector('.pc-track'), x0 = null, y0 = null;
     track.addEventListener('pointerdown', function (e) { x0 = e.clientX; y0 = e.clientY; });
     track.addEventListener('pointercancel', function () { x0 = null; });
@@ -77,26 +77,10 @@
     pc.addEventListener('mouseenter', stop);
     pc.addEventListener('mouseleave', start);
     pc.addEventListener('focusin', stop);
-
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        entries[0].isIntersecting ? start() : stop();
-      }, { threshold: 0.4 }).observe(pc);
+      new IntersectionObserver(function (entries) { entries[0].isIntersecting ? start() : stop(); }, { threshold: 0.4 }).observe(pc);
     }
     go(0);
-  }
-
-  /* ---------- Animação de entrada ---------- */
-  var items = document.querySelectorAll('[data-reveal]');
-  if ('IntersectionObserver' in window && !reduceMotion) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-      });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
-    items.forEach(function (el) { io.observe(el); });
-  } else {
-    items.forEach(function (el) { el.classList.add('is-in'); });
   }
 
   /* ---------- Ano ---------- */
@@ -111,13 +95,13 @@
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       if (!form.checkValidity()) {
-        status.textContent = 'Preencha nome, contato e mensagem.';
+        status.textContent = 'Preencha seu nome, um contato e a mensagem.';
         var first = form.querySelector(':invalid'); if (first) first.focus();
         return;
       }
       var endpoint = form.getAttribute('data-endpoint');
       if (!endpoint) {
-        status.innerHTML = 'O envio por aqui ainda está sendo configurado. Fale com a gente pelo ' +
+        status.innerHTML = 'O envio por aqui ainda está sendo configurado. Chame a gente no ' +
           '<a href="https://ig.me/m/palavradavidaonline" target="_blank" rel="noopener">Direct do Instagram</a>.';
         return;
       }
@@ -126,9 +110,9 @@
       fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
         .then(function (r) {
           if (!r.ok) throw new Error(r.status);
-          form.reset(); status.textContent = 'Mensagem enviada! Em breve falaremos com você.';
+          form.reset(); status.textContent = 'Mensagem enviada. Logo a gente responde!';
         })
-        .catch(function () { status.textContent = 'Não foi possível enviar agora. Tente novamente em instantes.'; })
+        .catch(function () { status.textContent = 'Não foi possível enviar agora. Tente de novo em instantes.'; })
         .finally(function () { btn.disabled = false; });
     });
   }

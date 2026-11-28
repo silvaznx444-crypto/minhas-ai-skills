@@ -4,229 +4,346 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Palavra da Vida — Uma família para pertencer</title>
-  <meta name="description" content="Ministério Palavra da Vida em Santa Helena de Goiás. Uma família para pertencer. Cultos aos domingos às 19h30.">
-  <meta name="theme-color" content="#0a1733">
+  <meta name="description" content="Ministério Palavra da Vida, em Santa Helena de Goiás. Uma família para pertencer. Cultos aos domingos às 19h30.">
+  <meta name="theme-color" content="#0a1630">
   <meta property="og:title" content="Palavra da Vida — Uma família para pertencer">
   <meta property="og:description" content="Cultos aos domingos às 19h30 · R. 6 – Brasil, Santa Helena de Goiás – GO">
-  <meta property="og:image" content="img/fachada.jpg">
+  <meta property="og:image" content="img/hero.jpg">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
-<!-- ============ NAVEGAÇÃO ============ -->
-<header class="nav" id="topo">
-  <div class="nav__inner">
-    <a href="#inicio" class="nav__brand" aria-label="Palavra da Vida — início">
-      <span class="badge"><img src="img/logo-branco.png" alt=""></span>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<!-- ================= CABEÇALHO ================= -->
+<header class="header" data-header>
+  <div class="container header__bar">
+    <a href="#inicio" class="brand" aria-label="Palavra da Vida — início">
+      <span class="brand__mark">
+        <img class="brand__logo brand__logo--light" src="img/logo-branco.png" alt="">
+        <img class="brand__logo brand__logo--dark" src="img/logo-azul.png" alt="">
+      </span>
+      <span class="brand__text">
+        <strong>Palavra da Vida</strong>
+        <small>Uma família para pertencer</small>
+      </span>
     </a>
-    <button class="nav__toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="nav__menu" id="menu" aria-label="Principal">
-      <a href="#inicio">Início</a>
+
+    <nav class="menu" id="menu" aria-label="Principal">
       <a href="#pastores">Pastores</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#mensagem">Mensagens</a>
-      <a href="#endereco">Visite</a>
-      <a href="#instagram">Redes</a>
+      <a href="#sobre">Quem somos</a>
+      <a href="#ministerios">Ministérios</a>
+      <a href="#cultos">Cultos</a>
+      <a href="#momentos">Momentos</a>
       <a href="#contato">Contato</a>
+      <a href="#visite" class="btn btn--primary menu__cta">Planeje sua visita</a>
     </nav>
+
+    <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu" data-burger>
+      <span></span><span></span>
+    </button>
   </div>
 </header>
 
-<main>
+<main id="conteudo">
 
-  <!-- ============ HERO ============ -->
+  <!-- ================= HERO ================= -->
   <section class="hero" id="inicio">
-    <img class="hero__bg" src="img/hero-ceia.jpg" alt="Elementos da Santa Ceia com o símbolo da Palavra da Vida">
-    <div class="hero__content">
-      <h1>uma família<br>para pertencer</h1>
-      <a href="#contato" class="btn btn--ghost">Primeira vez aqui?</a>
+    <img class="hero__img" src="img/hero.jpg" alt="Adoração durante o culto de domingo na Palavra da Vida">
+    <div class="container hero__content">
+      <p class="eyebrow eyebrow--light">Ministério Palavra da Vida<span class="hide-sm">&nbsp;· Santa Helena de Goiás</span></p>
+      <h1>Uma família<br>para <em>pertencer.</em></h1>
+      <p class="hero__lead">Seja bem-vindo à nossa casa. Aqui você encontra a Palavra, a presença de Deus e um lugar à mesa — do jeito que você é.</p>
+      <div class="actions">
+        <a href="#visite" class="btn btn--light">Planeje sua visita</a>
+        <a href="#pastores" class="btn btn--ghost-light">Conheça nossos pastores <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="hero__info">
+      <div class="container hero__info-grid">
+        <div><span>Culto de domingo</span><strong>Todo domingo · 19h30</strong></div>
+        <div><span>Endereço</span><strong>R. 6 – Brasil, Santa Helena de Goiás</strong></div>
+        <div><span>Instagram</span><strong><a href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener">@palavradavidaonline</a></strong></div>
+      </div>
     </div>
   </section>
 
-  <!-- ============ PASTORES ============ -->
+  <!-- ================= PASTORES (carrossel) ================= -->
   <section class="section pastores" id="pastores">
-    <div class="wrap">
-      <header class="section__head" data-reveal>
-        <h2 class="title">Nossos pastores:</h2>
-        <p class="lead">Chamados para cuidar, ensinar a Palavra e caminhar junto com você.</p>
-      </header>
+    <div class="container">
+      <div class="section-head section-head--split" data-reveal>
+        <div>
+          <p class="eyebrow">Liderança</p>
+          <h2 class="h2">Nossos <em>pastores</em></h2>
+        </div>
+        <div class="pc-controls">
+          <span class="pc-count" aria-hidden="true"><b data-pc-current>01</b> / 04</span>
+          <button class="round-btn" type="button" data-pc-prev aria-label="Pastor anterior">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+          <button class="round-btn" type="button" data-pc-next aria-label="Próximo pastor">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
 
-      <ul class="pastores__grid">
-        <li class="pastor" data-reveal>
-          <figure class="arch"><img src="img/pastor-rodrigo.jpg" alt="Pastor Rodrigo" loading="lazy"></figure>
-          <h3>Pr. Rodrigo</h3>
-          <p class="pastor__role pastor__role--lead">Pastor Principal</p>
+      <div class="pc" data-pc aria-roledescription="carrossel" aria-label="Pastores da igreja" tabindex="0">
+        <div class="pc-track">
+
+          <article class="pc-slide is-active" aria-roledescription="slide" aria-label="1 de 4">
+            <figure class="pc-photo"><img src="img/pastor-rodrigo.jpg" alt="Pastor Rodrigo"></figure>
+            <div class="pc-text">
+              <p class="eyebrow">Pastor Principal</p>
+              <h3>Pr. Rodrigo</h3>
+              <p>À frente do Ministério Palavra da Vida, o Pr. Rodrigo conduz a igreja com a visão de ser uma família para pertencer: uma casa onde a Palavra é ensinada com clareza, a presença de Deus é buscada e cada pessoa encontra o seu lugar.</p>
+              <a class="link" href="https://www.instagram.com/rodrigogoveia_/" target="_blank" rel="noopener">@rodrigogoveia_ <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="pc-slide" aria-roledescription="slide" aria-label="2 de 4">
+            <figure class="pc-photo"><img src="img/pastora-luciana.jpg" alt="Pastora Luciana" loading="lazy"></figure>
+            <div class="pc-text">
+              <p class="eyebrow">Pastora</p>
+              <h3>Pra. Luciana</h3>
+              <p>A Pra. Luciana serve a igreja com cuidado e sensibilidade, caminhando de perto com as pessoas e encorajando cada uma a viver o propósito de Deus com alegria e fé.</p>
+              <a class="link" href="https://www.instagram.com/pra.lucianagoveia/" target="_blank" rel="noopener">@pra.lucianagoveia <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="pc-slide" aria-roledescription="slide" aria-label="3 de 4">
+            <figure class="pc-photo"><img src="img/pastor-carlos.jpg" alt="Pastor Carlos" loading="lazy"></figure>
+            <div class="pc-text">
+              <p class="eyebrow">Pastor Auxiliar</p>
+              <h3>Pr. Carlos</h3>
+              <p>O Pr. Carlos serve no ensino da Palavra e no cuidado pastoral, ajudando a igreja a crescer firmada nas Escrituras, em oração e em comunhão.</p>
+            </div>
+          </article>
+
+          <article class="pc-slide" aria-roledescription="slide" aria-label="4 de 4">
+            <figure class="pc-photo"><img src="img/pastor-sebastiao.jpg" alt="Pastor Sebastião Neto" loading="lazy"></figure>
+            <div class="pc-text">
+              <p class="eyebrow">Pastor Auxiliar</p>
+              <h3>Pr. Sebastião Neto</h3>
+              <p>O Pr. Sebastião Neto serve na pregação e no pastoreio, levando uma palavra de fé e encorajamento a cada pessoa que chega à nossa casa.</p>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="pc-thumbs" role="tablist" aria-label="Escolha um pastor">
+          <button role="tab" class="pc-thumb is-active" aria-selected="true" data-pc-go="0">
+            <img src="img/pastor-rodrigo.jpg" alt=""><span><b>Pr. Rodrigo</b><small>Pastor Principal</small></span>
+          </button>
+          <button role="tab" class="pc-thumb" aria-selected="false" data-pc-go="1">
+            <img src="img/pastora-luciana.jpg" alt=""><span><b>Pra. Luciana</b><small>Pastora</small></span>
+          </button>
+          <button role="tab" class="pc-thumb" aria-selected="false" data-pc-go="2">
+            <img src="img/pastor-carlos.jpg" alt=""><span><b>Pr. Carlos</b><small>Pastor Auxiliar</small></span>
+          </button>
+          <button role="tab" class="pc-thumb" aria-selected="false" data-pc-go="3">
+            <img src="img/pastor-sebastiao.jpg" alt=""><span><b>Pr. Sebastião Neto</b><small>Pastor Auxiliar</small></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUEM SOMOS ================= -->
+  <section class="section sobre" id="sobre">
+    <div class="container sobre__grid">
+      <div class="sobre__intro" data-reveal>
+        <p class="eyebrow">Quem somos</p>
+        <h2 class="h2">Uma casa firmada na Palavra e cheia da <em>Vida</em> de Deus.</h2>
+        <p class="body-lg">Somos o Ministério Palavra da Vida, em Santa Helena de Goiás. Cremos que a igreja é família: um lugar para ser acolhido, crescer na fé e servir com alegria.</p>
+        <a href="#visite" class="btn btn--primary">Planeje sua visita</a>
+      </div>
+      <ol class="pilares" data-reveal>
+        <li><span class="pilares__n">01</span><div><h3>A Palavra</h3><p>A Bíblia aberta no centro de tudo — ensino claro, para a vida real.</p></div></li>
+        <li><span class="pilares__n">02</span><div><h3>A Cruz</h3><p>Cristo é a nossa mensagem e o fundamento da nossa fé.</p></div></li>
+        <li><span class="pilares__n">03</span><div><h3>O Espírito</h3><p>Buscamos a presença de Deus em cada culto, em cada encontro.</p></div></li>
+        <li><span class="pilares__n">04</span><div><h3>A Mesa</h3><p>Como o trigo do nosso símbolo: pão partilhado, comunhão e cuidado.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= MINISTÉRIOS ================= -->
+  <section class="section ministerios" id="ministerios">
+    <div class="container">
+      <div class="section-head section-head--split" data-reveal>
+        <div>
+          <p class="eyebrow">Ministérios</p>
+          <h2 class="h2">Um lugar para você <em>servir</em> e crescer</h2>
+        </div>
+        <p class="section-head__aside">Cada ministério é uma forma de cuidar de pessoas e expressar a nossa fé. Venha encontrar o seu lugar.</p>
+      </div>
+
+      <ul class="min-grid">
+        <li class="min-card" data-reveal>
+          <img src="img/min-louvor.jpg" alt="Ministério de Louvor" loading="lazy">
+          <div class="min-card__body"><h3>Louvor</h3><p>Músicos e cantores que conduzem a igreja em adoração.</p></div>
         </li>
-        <li class="pastor" data-reveal>
-          <figure class="arch"><img src="img/pastora-luciana.jpg" alt="Pastora Luciana" loading="lazy"></figure>
-          <h3>Pra. Luciana</h3>
-          <p class="pastor__role">Pastora</p>
+        <li class="min-card" data-reveal>
+          <img src="img/min-danca.jpg" alt="Ministério de Dança" loading="lazy">
+          <div class="min-card__body"><h3>Dança</h3><p>Adoração em movimento, com expressão e reverência.</p></div>
         </li>
-        <li class="pastor" data-reveal>
-          <figure class="arch"><img src="img/pastor-carlos.jpg" alt="Pastor Carlos" loading="lazy"></figure>
-          <h3>Pr. Carlos</h3>
-          <p class="pastor__role">Pastor Auxiliar</p>
+        <li class="min-card" data-reveal>
+          <img src="img/min-intercessao.jpg" alt="Ministério de Intercessão" loading="lazy">
+          <div class="min-card__body"><h3>Intercessão</h3><p>Oração pela igreja, pelas famílias e pela nossa cidade.</p></div>
         </li>
-        <li class="pastor" data-reveal>
-          <figure class="arch"><img src="img/pastor-sebastiao.jpg" alt="Pastor Sebastião Neto" loading="lazy"></figure>
-          <h3>Pr. Sebastião Neto</h3>
-          <p class="pastor__role">Pastor Auxiliar</p>
+        <li class="min-card" data-reveal>
+          <img src="img/min-elas.jpg" alt="Ministério Elas" loading="lazy">
+          <div class="min-card__body"><h3>Elas</h3><p>Mulheres que se fortalecem juntas na fé e na amizade.</p></div>
+        </li>
+        <li class="min-card" data-reveal>
+          <img src="img/min-jovens.jpg" alt="Ministério de Jovens" loading="lazy">
+          <div class="min-card__body"><h3>Jovens</h3><p>Uma geração apaixonada por Jesus, vivendo a fé com verdade.</p></div>
+        </li>
+        <li class="min-card" data-reveal>
+          <img src="img/min-kids.jpg" alt="Ministério Kids" loading="lazy">
+          <div class="min-card__body"><h3>Kids</h3><p>Ensino bíblico com cuidado e alegria para as crianças.</p></div>
         </li>
       </ul>
     </div>
   </section>
 
-  <!-- ============ O CORAÇÃO DA CASA ============ -->
-  <section class="section sobre" id="sobre">
-    <div class="wrap sobre__inner">
-      <div class="sobre__text" data-reveal>
-        <h2 class="title">O coração<br>da casa:</h2>
-        <p class="quote">“Nossa missão é ser uma família para pertencer, firmada na Palavra e cheia da Vida de Deus.”</p>
-        <a href="#instagram" class="btn btn--solid">Saiba mais</a>
-      </div>
-      <figure class="arch arch--tall" data-reveal>
-        <img src="img/pregacao.jpg" alt="Pregação no culto de domingo" loading="lazy">
+  <!-- ================= CULTOS ================= -->
+  <section class="section cultos" id="cultos">
+    <div class="container cultos__grid">
+      <figure class="cultos__photo" data-reveal>
+        <img src="img/culto.jpg" alt="Pastor Rodrigo pregando no culto de domingo" loading="lazy">
       </figure>
-    </div>
-  </section>
-
-  <!-- ============ MENSAGEM DA SEMANA ============ -->
-  <section class="section mensagem" id="mensagem">
-    <div class="wrap">
-      <h2 class="title title--center" data-reveal>Mensagem da semana:</h2>
-
-      <!-- Para usar um player real, troque este cartão por um <iframe> do YouTube ou Spotify. -->
-      <a class="player" href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener" data-reveal>
-        <span class="player__cover"><img src="img/logo-branco.png" alt=""></span>
-        <span class="player__body">
-          <span class="player__title">Domingo com Vida | Salmos 3.4</span>
-          <span class="player__meta">Culto de domingo · Ministério Palavra da Vida</span>
-          <span class="player__follow">Assistir</span>
-          <span class="player__bar">
-            <span class="player__track"><span></span></span>
-            <span class="player__dots" aria-hidden="true">•••</span>
-            <span class="player__play" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
-            </span>
-          </span>
-        </span>
-        <svg class="player__brand" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2zM17 6a1.1 1.1 0 1 1 0 2.2A1.1 1.1 0 0 1 17 6zM12 3.6c2.3 0 2.6 0 3.5.1 2.3.1 3.4 1.2 3.5 3.5.1.9.1 1.2.1 3.5v.6c0 2.3 0 2.6-.1 3.5-.1 2.3-1.2 3.4-3.5 3.5-.9.1-1.2.1-3.5.1s-2.6 0-3.5-.1c-2.3-.1-3.4-1.2-3.5-3.5C4.9 13.9 4.9 13.6 4.9 11.3v-.6c0-2.3 0-2.6.1-3.5.1-2.3 1.2-3.4 3.5-3.5.9-.1 1.2-.1 3.5-.1zM12 2c-2.4 0-2.7 0-3.6.1C5.2 2.2 3.4 4 3.2 7.2 3.1 8.1 3.1 8.4 3.1 10.8v.4c0 2.4 0 2.7.1 3.6.2 3.2 2 5 5.2 5.2.9.1 1.2.1 3.6.1s2.7 0 3.6-.1c3.2-.2 5-2 5.2-5.2.1-.9.1-1.2.1-3.6v-.4c0-2.4 0-2.7-.1-3.6-.2-3.2-2-5-5.2-5.2C14.7 2 14.4 2 12 2z"/></svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- ============ ENDEREÇO ============ -->
-  <a class="faixa" id="endereco" href="https://www.google.com/maps/search/?api=1&amp;query=Minist%C3%A9rio+Palavra+da+Vida+Santa+Helena+de+Goi%C3%A1s" target="_blank" rel="noopener">
-    <span><b>R. 6 – Brasil,</b> <b>Santa Helena de Goiás</b></span>
-  </a>
-
-  <!-- ============ INSTAGRAM ============ -->
-  <section class="section insta" id="instagram">
-    <div class="insta__wrap" data-reveal>
-      <div class="insta__head">
-        <span class="badge badge--sm"><img src="img/logo-branco.png" alt=""></span>
-        <div class="insta__id">
-          <strong>palavradavidaonline</strong>
-          <span>Ministério Palavra da Vida</span>
-        </div>
-        <a class="btn btn--line" href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></svg>
-          Seguir
-        </a>
-      </div>
-      <p class="insta__bio">
-        Uma família para pertencer.<br>
-        Cultos aos domingos às 19h30.<br>
-        Santa Helena de Goiás – GO<br>
-        <a href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener">instagram.com/palavradavidaonline</a>
-      </p>
-
-      <div class="insta__grid">
-        <a href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener" class="tile">
-          <img src="img/ig-culto.jpg" alt="Pastor Sebastião Neto pregando" loading="lazy">
-          <svg class="tile__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="13" height="13" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>
-        </a>
-        <a href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener" class="tile tile--mesh">
-          <span class="tile__text tile__text--big">domingo<br>com vida</span>
-          <svg class="tile__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="13" height="13" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>
-        </a>
-        <a href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener" class="tile">
-          <img src="img/ig-ceia.jpg" alt="Santa Ceia" loading="lazy">
-        </a>
-        <a href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener" class="tile tile--paper">
-          <span class="tile__verse">“Ao Senhor clamo em alta voz, e do seu santo monte ele me responde.”<small>Salmos 3:4</small></span>
-        </a>
-        <a href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener" class="tile tile--navy">
-          <span class="tile__text">Domingo é dia de casa cheia, coração aberto e presença de Deus.</span>
-          <img class="tile__logo" src="img/logo-branco.png" alt="">
-        </a>
-        <a href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener" class="tile">
-          <img src="img/ig-rodrigo.jpg" alt="Pastor Rodrigo" loading="lazy">
-          <svg class="tile__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="13" height="13" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>
-        </a>
-      </div>
-
-      <div class="insta__more">
-        <a class="btn btn--line" href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener">Ver mais</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CONTATO ============ -->
-  <section class="contato" id="contato">
-    <figure class="contato__foto">
-      <img src="img/fachada.jpg" alt="Fachada da igreja Palavra da Vida em Santa Helena de Goiás" loading="lazy">
-    </figure>
-    <div class="contato__painel">
-      <div class="contato__box" data-reveal>
-        <h2 class="title title--light">Fale conosco:</h2>
-
-        <!-- Para receber as mensagens por e-mail, cole aqui o endereço de um serviço como Formspree:
-             data-endpoint="https://formspree.io/f/SEU_ID" -->
-        <form class="form" data-endpoint="" novalidate>
-          <div class="form__row">
-            <label><span class="sr">Nome</span><input name="nome" type="text" placeholder="Nome" required autocomplete="name"></label>
-            <label><span class="sr">E-mail</span><input name="email" type="email" placeholder="E-mail" required autocomplete="email"></label>
-          </div>
-          <label><span class="sr">Assunto</span><input name="assunto" type="text" placeholder="Assunto"></label>
-          <label><span class="sr">Mensagem</span><textarea name="mensagem" rows="5" placeholder="Escreva sua mensagem aqui…" required></textarea></label>
-          <button type="submit" class="btn btn--dark">Enviar</button>
-          <p class="form__status" role="status" aria-live="polite"></p>
-        </form>
-
-        <p class="contato__info">Domingos às 19h30<br><span class="nw">R. 6 – Brasil,</span> <span class="nw">Santa Helena de Goiás – GO</span></p>
-        <p class="contato__info contato__info--soft">Uma família para pertencer</p>
-
-        <div class="social">
-          <a href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></svg>
-          </a>
-          <!-- Coloque aqui o link da página do Facebook -->
-          <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" class="fill"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21z"/></svg>
-          </a>
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Minist%C3%A9rio+Palavra+da+Vida+Santa+Helena+de+Goi%C3%A1s" target="_blank" rel="noopener" aria-label="Como chegar">
-            <svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
-          </a>
+      <div class="cultos__text" data-reveal>
+        <p class="eyebrow eyebrow--light">Domingo com Vida</p>
+        <h2 class="h2">Todo domingo,<br><em>às 19h30.</em></h2>
+        <p class="body-lg">Um culto com louvor, Palavra e comunhão. Venha como você está — tem lugar para você e para a sua família.</p>
+        <ul class="cultos__list">
+          <li><b>Louvor</b><span>Adoração com a igreja reunida</span></li>
+          <li><b>Palavra</b><span>Uma mensagem bíblica para a semana</span></li>
+          <li><b>Comunhão</b><span>Gente acolhedora esperando você</span></li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn--light" href="https://www.google.com/maps/search/?api=1&amp;query=Minist%C3%A9rio+Palavra+da+Vida+Santa+Helena+de+Goi%C3%A1s" target="_blank" rel="noopener">Como chegar</a>
+          <a class="btn btn--ghost-light" href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener">Assistir no Instagram</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ================= MOMENTOS ================= -->
+  <section class="section momentos" id="momentos">
+    <div class="container">
+      <div class="section-head section-head--split" data-reveal>
+        <div>
+          <p class="eyebrow">@palavradavidaonline</p>
+          <h2 class="h2">Momentos da nossa <em>casa</em></h2>
+        </div>
+        <a class="btn btn--outline" href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".7"/></svg>
+          Seguir no Instagram
+        </a>
+      </div>
+
+      <div class="mom-grid" data-reveal>
+        <a class="mom mom--tall" href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener"><img src="img/mom-adoracao.jpg" alt="Adoração no culto" loading="lazy"></a>
+        <a class="mom" href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener"><img src="img/mom-oracao.jpg" alt="Momento de oração" loading="lazy"></a>
+        <a class="mom" href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener"><img src="img/mom-pregacao.jpg" alt="Pregação da Palavra" loading="lazy"></a>
+        <a class="mom mom--tall" href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener"><img src="img/mom-congregacao.jpg" alt="Igreja reunida em adoração" loading="lazy"></a>
+        <a class="mom" href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener"><img src="img/mom-guitarra.jpg" alt="Ministério de louvor" loading="lazy"></a>
+        <a class="mom" href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener"><img src="img/mom-danca.jpg" alt="Ministério de dança" loading="lazy"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VISITE ================= -->
+  <section class="section visite" id="visite">
+    <div class="container visite__grid">
+      <figure class="visite__photo" data-reveal>
+        <img src="img/fachada.jpg" alt="Fachada da igreja Palavra da Vida" loading="lazy">
+      </figure>
+      <div class="visite__text" data-reveal>
+        <p class="eyebrow">Visite-nos</p>
+        <h2 class="h2">Esperamos por <em>você</em></h2>
+        <p class="body-lg">Primeira vez? Chegue alguns minutos antes e fique à vontade. Vai ser uma alegria receber você.</p>
+        <dl class="info-list">
+          <div><dt>Horário</dt><dd>Domingos às 19h30</dd></div>
+          <div><dt>Endereço</dt><dd>R. 6 – Brasil, Santa Helena de Goiás – GO, 75920-000</dd></div>
+          <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener">@palavradavidaonline</a></dd></div>
+        </dl>
+        <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Minist%C3%A9rio+Palavra+da+Vida+Santa+Helena+de+Goi%C3%A1s" target="_blank" rel="noopener">Abrir no Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTATO ================= -->
+  <section class="section contato" id="contato">
+    <div class="container contato__grid">
+      <div class="contato__text" data-reveal>
+        <p class="eyebrow">Contato</p>
+        <h2 class="h2">Fale com a <em>gente</em></h2>
+        <p class="body-lg">Quer conversar, pedir oração ou saber como servir? Mande uma mensagem — vamos responder com carinho.</p>
+        <a class="link" href="https://ig.me/m/palavradavidaonline" target="_blank" rel="noopener">Ou chame no Direct do Instagram <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <!-- Para receber as mensagens por e-mail, crie um formulário grátis no Formspree
+           e cole o endereço em data-endpoint (ex.: https://formspree.io/f/SEU_ID). -->
+      <form class="form" data-endpoint="" novalidate data-reveal>
+        <div class="form__row">
+          <label class="field"><span>Nome</span><input name="nome" type="text" required autocomplete="name"></label>
+          <label class="field"><span>E-mail ou WhatsApp</span><input name="contato" type="text" required autocomplete="email"></label>
+        </div>
+        <label class="field"><span>Assunto</span>
+          <select name="assunto">
+            <option>Quero visitar a igreja</option>
+            <option>Pedido de oração</option>
+            <option>Quero servir em um ministério</option>
+            <option>Outro assunto</option>
+          </select>
+        </label>
+        <label class="field"><span>Mensagem</span><textarea name="mensagem" rows="4" required></textarea></label>
+        <button type="submit" class="btn btn--primary btn--block">Enviar mensagem</button>
+        <p class="form__status" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </section>
 
 </main>
 
-<footer class="rodape">
-  <img src="img/logo-branco.png" alt="" class="rodape__logo">
-  <p><strong>Palavra da Vida</strong> · Uma família para pertencer</p>
-  <p class="rodape__small"><span class="nw">© <span data-ano>2026</span> Ministério Palavra da Vida</span> · <span class="nw">Santa Helena de Goiás – GO</span></p>
+<!-- ================= RODAPÉ ================= -->
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <img src="img/logo-branco.png" alt="" width="44">
+      <p><strong>Palavra da Vida</strong><br>Uma família para pertencer.</p>
+    </div>
+    <div>
+      <h4>Navegue</h4>
+      <a href="#pastores">Pastores</a>
+      <a href="#ministerios">Ministérios</a>
+      <a href="#cultos">Cultos</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <div>
+      <h4>Visite</h4>
+      <p>Domingos às 19h30</p>
+      <p>R. 6 – Brasil<br>Santa Helena de Goiás – GO</p>
+    </div>
+    <div>
+      <h4>Siga</h4>
+      <a href="https://www.instagram.com/palavradavidaonline/" target="_blank" rel="noopener">Instagram</a>
+      <!-- Troque pelo link da página da igreja no Facebook -->
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <span>© <span data-ano>2026</span> Ministério Palavra da Vida</span>
+    <span>Santa Helena de Goiás – GO</span>
+  </div>
 </footer>
 
 <script src="js/main.js"></script>

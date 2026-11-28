@@ -57,4 +57,4 @@ Conteúdo educativo. Não substitui acompanhamento psicológico.
 Lá no começo: você escolheu A, B ou C? 👀 E já concordou com o grupo só pra não ficar de fora?
 
 ## Postagem
-Sábado (28/11) às 11h30. Se a narração atrasar: segunda (30/11) às 18h45.
+Agendado: sábado (28/11) às 11h30 → https://youtu.be/l6GviTjPUGo (categoria Educação, marcado como conteúdo sintético por causa da voz de IA). Fixar o comentário quando entrar no ar. Análise de 48 h: segunda (30/11) às 11h30.

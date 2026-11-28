@@ -4,20 +4,20 @@ Site de página única da igreja Palavra da Vida (Santa Helena de Goiás – GO)
 HTML, CSS e JS puros: abra `index.html` no navegador ou publique a pasta em qualquer
 hospedagem estática (GitHub Pages, Netlify, Vercel, Hostinger…).
 
-## Visual (v3, orgânico)
-- Papel creme com grão leve, azul-noite, e o **dourado e o roxo do logo** como acentos.
+## Visual (v4)
+- **Fundo preto**, como as paredes da igreja, texto creme, e o **dourado e o roxo do logo** como acentos.
 - Logo colorido original no cabeçalho e no rodapé (`img/logo-cor.png`).
 - Fontes: Fraunces (títulos, com itálico), DM Sans (texto) e Poppins só no nome da igreja,
   igual ao logo.
-- Detalhes: aviso roxo no topo, adesivos, sublinhado feito à mão, faixa de versículos
-  rolando, fotos dos pastores em "foto impressa", colagem em preto e branco.
+- Detalhes: aviso roxo no topo, sublinhado feito à mão, faixa de versículos rolando,
+  colagem em preto e branco com cartão creme.
 
 ## Seções
 1. Aviso + cabeçalho (menu à esquerda, logo no centro, redes e botão à direita)
 2. Hero em preto e branco: "Uma família para pertencer"
 3. Nós cremos que… (Palavra, Presença, Família)
 4. Pastores — carrossel com foto grande e texto (setas, miniaturas, teclado, arrastar)
-5. Ministérios — Ágape, MPV Worship, Colossenses, Aviva, Elas, H3, Teens, Intense
+5. Ministérios — uma foto grande para cada um: Ágape, MPV Worship, Colossenses, Aviva, Elas, H3, Teens, Intense
 6. Venha como você está — horário, endereço e Google Maps
 7. Instagram — faixa de fotos do culto
 8. Contato + rodapé

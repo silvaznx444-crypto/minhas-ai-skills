@@ -140,7 +140,7 @@ def amb_chuva(d, s=0):
 def amb_cidade(d, s=0):
     n, rng = int(d * SR), np.random.default_rng(s); x = filtro(ruido(n, s), 30, 400)
     for _ in range(max(1, int(d / 5))):
-        c = int(rng.uniform(2.5, 4) * SR); i = rng.integers(0, max(1, n - c)); carro = filtro(ruido(c, int(i)), 80, 1500) * np.sin(np.linspace(0, np.pi, c)) ** 2
+        c = min(n, int(rng.uniform(2.5, 4) * SR)); i = rng.integers(0, max(1, n - c + 1)); carro = filtro(ruido(c, int(i)), 80, 1500) * np.sin(np.linspace(0, np.pi, c)) ** 2
         x[i: i + c] += carro * 1.5
     return normal(x, 0.5)
 

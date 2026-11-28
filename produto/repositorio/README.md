@@ -8,7 +8,8 @@ Um agente que trabalha com você em cada etapa do canal, dentro do **Claude Code
 4. **Engenharia reversa:** a IA assiste a um vídeo viral e devolve o gancho, a estrutura e uma receita para adaptar.
 5. **Estratégia:** pilares de conteúdo, frequência, horários e 10 ideias ranqueadas.
 6. **Roteiro** com estrutura de retenção e **vídeo 3D animado a partir da sua narração**: bonecos 3D, cenários, câmera
-   em movimento, legenda palavra por palavra, música e efeitos. Funciona em 16:9 (YouTube) e 9:16 (Reels e Shorts).
+   em movimento, legenda palavra por palavra, música e efeitos. Funciona em 16:9 (YouTube) e 9:16 (Reels e Shorts),
+   em dois estilos: **cabeção** (cartoon de jogo, personagens fofos em mundos coloridos) e **bonecos com contorno**.
    Os personagens ficam sempre iguais e não há custo por vídeo.
 7. **Títulos e capa**.
 8. **Publicação** agendada no YouTube e no Instagram.

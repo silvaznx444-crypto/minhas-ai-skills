@@ -31,8 +31,10 @@ Português do Brasil, falando com "você", frases curtas, no tom acima.
 - Regras aprendidas com a retenção do canal: `canal/aprendizados.md` (vencem este arquivo se houver conflito).
 
 ## Visual
-- **Estilo:** {{ESTILO_VISUAL}} (ex.: 3D cartoon com contorno, cenários detalhados, luz de cinema)
-- **Protagonista recorrente:** {{PROTAGONISTA}} (aparência fixa: roupa, cor, cabelo). Os outros personagens variam.
+- **Estilo:** {{ESTILO_VISUAL}}. No estúdio 3D, escolha entre **cabeção** (cartoon de jogo, personagens KayKit em mundos
+  coloridos) e **bonecos com contorno** (bonecos 3D de rosto expressivo, luz de cinema).
+- **Protagonista recorrente:** {{PROTAGONISTA}} (aparência fixa: no estilo cabeção, o tipo e a cor, ex. "Knight sem tinta";
+  nos bonecos, roupa, cor e cabelo). Os outros personagens variam.
 - **Paleta / clima:** {{PALETA}}
 - **Ritmo:** cena nova a cada 3–5 s; nada parado. Cada vídeo com cenas próprias (não parecer conteúdo em série).
 - **Na tela:** legenda palavra por palavra ({{COR_LEGENDA}}), etiquetas com dados e nomes de fontes.

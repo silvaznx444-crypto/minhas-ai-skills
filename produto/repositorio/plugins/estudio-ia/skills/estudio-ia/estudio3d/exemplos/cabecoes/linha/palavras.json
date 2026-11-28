@@ -1,0 +1,230 @@
+{
+ "palavras": [
+  {
+   "texto": "Sabia",
+   "ini": 0.4,
+   "fim": 0.712
+  },
+  {
+   "texto": "que",
+   "ini": 0.739,
+   "fim": 0.992
+  },
+  {
+   "texto": "sorriso",
+   "ini": 1.014,
+   "fim": 1.384
+  },
+  {
+   "texto": "é",
+   "ini": 1.416,
+   "fim": 1.61
+  },
+  {
+   "texto": "contagioso?",
+   "ini": 1.627,
+   "fim": 2.115
+  },
+  {
+   "texto": "Quando",
+   "ini": 2.451,
+   "fim": 2.792
+  },
+  {
+   "texto": "alguém",
+   "ini": 2.821,
+   "fim": 3.162
+  },
+  {
+   "texto": "sorri",
+   "ini": 3.192,
+   "fim": 3.504
+  },
+  {
+   "texto": "pra",
+   "ini": 3.531,
+   "fim": 3.784
+  },
+  {
+   "texto": "você,",
+   "ini": 3.806,
+   "fim": 4.117
+  },
+  {
+   "texto": "o",
+   "ini": 4.258,
+   "fim": 4.453
+  },
+  {
+   "texto": "seu",
+   "ini": 4.47,
+   "fim": 4.723
+  },
+  {
+   "texto": "rosto",
+   "ini": 4.745,
+   "fim": 5.056
+  },
+  {
+   "texto": "tende",
+   "ini": 5.083,
+   "fim": 5.395
+  },
+  {
+   "texto": "a",
+   "ini": 5.422,
+   "fim": 5.616
+  },
+  {
+   "texto": "imitar",
+   "ini": 5.633,
+   "fim": 5.974
+  },
+  {
+   "texto": "sem",
+   "ini": 6.004,
+   "fim": 6.257
+  },
+  {
+   "texto": "você",
+   "ini": 6.279,
+   "fim": 6.561
+  },
+  {
+   "texto": "perceber.",
+   "ini": 6.586,
+   "fim": 7.015
+  },
+  {
+   "texto": "A",
+   "ini": 7.345,
+   "fim": 7.54
+  },
+  {
+   "texto": "ciência",
+   "ini": 7.556,
+   "fim": 7.927
+  },
+  {
+   "texto": "chama",
+   "ini": 7.959,
+   "fim": 8.271
+  },
+  {
+   "texto": "isso",
+   "ini": 8.298,
+   "fim": 8.58
+  },
+  {
+   "texto": "de",
+   "ini": 8.604,
+   "fim": 8.828
+  },
+  {
+   "texto": "mimetismo",
+   "ini": 8.848,
+   "fim": 9.277
+  },
+  {
+   "texto": "facial.",
+   "ini": 9.314,
+   "fim": 9.684
+  },
+  {
+   "texto": "Então",
+   "ini": 10.01,
+   "fim": 10.321
+  },
+  {
+   "texto": "faz",
+   "ini": 10.348,
+   "fim": 10.601
+  },
+  {
+   "texto": "o",
+   "ini": 10.623,
+   "fim": 10.818
+  },
+  {
+   "texto": "teste",
+   "ini": 10.835,
+   "fim": 11.146
+  },
+  {
+   "texto": "hoje:",
+   "ini": 11.173,
+   "fim": 11.485
+  },
+  {
+   "texto": "sorria",
+   "ini": 11.626,
+   "fim": 11.967
+  },
+  {
+   "texto": "primeiro",
+   "ini": 11.997,
+   "fim": 12.396
+  },
+  {
+   "texto": "e",
+   "ini": 12.431,
+   "fim": 12.625
+  },
+  {
+   "texto": "veja",
+   "ini": 12.642,
+   "fim": 12.925
+  },
+  {
+   "texto": "o",
+   "ini": 12.949,
+   "fim": 13.143
+  },
+  {
+   "texto": "que",
+   "ini": 13.16,
+   "fim": 13.413
+  },
+  {
+   "texto": "acontece.",
+   "ini": 13.435,
+   "fim": 13.864
+  },
+  {
+   "texto": "Marca",
+   "ini": 14.195,
+   "fim": 14.506
+  },
+  {
+   "texto": "alguém",
+   "ini": 14.534,
+   "fim": 14.875
+  },
+  {
+   "texto": "que",
+   "ini": 14.904,
+   "fim": 15.157
+  },
+  {
+   "texto": "sempre",
+   "ini": 15.179,
+   "fim": 15.52
+  },
+  {
+   "texto": "te",
+   "ini": 15.55,
+   "fim": 15.773
+  },
+  {
+   "texto": "faz",
+   "ini": 15.793,
+   "fim": 16.046
+  },
+  {
+   "texto": "sorrir!",
+   "ini": 16.068,
+   "fim": 16.438
+  }
+ ],
+ "fonte": "provisoria"
+}

@@ -132,6 +132,19 @@ export function carimbo(g, T, em, str, o = {}) {
   if (o.sub) texto(g, o.sub, 0, (o.tamanho ?? V(110, 96)) * 0.9, { tamanho: (o.tamanho ?? V(110, 96)) * 0.5, fonte: FONTES.titulo, peso: 700, cor: o.corSub ?? '#ffd84a', contorno: 12, corContorno: '#14101e' });
   g.restore();
 }
+/** Balão de fala com a ponta em (x, y), que surge com um "pop" (a = 0..1). */
+export function balao(g, x, y, str, a = 1, o = {}) {
+  if (a <= 0) return; const tam = o.tamanho ?? 40;
+  g.save(); g.font = `900 ${tam}px "${FONTES.ui}", sans-serif`;
+  const w = Math.min(g.measureText(str).width + tam * 1.4, o.largura ?? E.W * 0.8), h = tam * 2;
+  const s = 0.6 + 0.4 * lim(a); g.translate(x, y); g.scale(s, s); g.globalAlpha = lim(a * 1.5);
+  const bx = -w / 2 + (o.desvio ?? 0), by = -h - tam * 0.6;
+  retangulo(g, bx, by, w, h, h * 0.45); g.fillStyle = o.fundo ?? '#ffffff'; g.fill();
+  g.beginPath(); g.moveTo(-tam * 0.35, by + h - 2); g.lineTo(0, 0); g.lineTo(tam * 0.35, by + h - 2); g.closePath(); g.fill();
+  g.lineWidth = 5; g.strokeStyle = o.borda ?? '#14101e'; retangulo(g, bx, by, w, h, h * 0.45); g.stroke();
+  texto(g, str, bx + w / 2, by + h / 2 + 2, { tamanho: tam, cor: o.cor ?? '#14101e', peso: 900, largura: w - tam });
+  g.restore();
+}
 export function vinheta(g, forca = 0.5, cor = '0,0,0') {
   const gr = g.createRadialGradient(E.W / 2, E.H / 2, Math.min(E.W, E.H) * 0.35, E.W / 2, E.H / 2, Math.hypot(E.W, E.H) * 0.55);
   gr.addColorStop(0, `rgba(${cor},0)`); gr.addColorStop(1, `rgba(${cor},${forca})`); g.fillStyle = gr; g.fillRect(0, 0, E.W, E.H);

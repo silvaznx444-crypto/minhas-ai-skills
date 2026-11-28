@@ -2,8 +2,15 @@
 
 O vídeo nasce da **narração**: cada cena ilustra a frase falada enquanto está na tela. Não há IA gerando imagem, então os
 personagens ficam iguais em todos os vídeos, o texto sai nítido e não há custo de API, só tempo de render.
-A referência técnica (API das cenas, kit, formatos) está em `estudio3d/LEIA-ME.md`. Leia uma vez antes de escrever cenas,
-e leia também o projeto `estudio3d/exemplos/demo/`.
+A referência técnica (API das cenas, kit, formatos) está em `estudio3d/LEIA-ME.md`. Leia uma vez antes de escrever cenas.
+
+**Dois estilos de personagem.** Use o que estiver em `canal/padrao.md`; se não houver nada definido, pergunte:
+- **Cabeção (cartoon de jogo):** personagens KayKit de cabeça grande com 76 animações, em mundos coloridos (parque, praça,
+  sala, palco pastel). É o mais fofo e chamativo, ótimo para Reels e Shorts. Referência: `exemplos/cabecoes/`.
+- **Bonecos com contorno:** bonecos 3D procedurais com rosto expressivo (piscar, sorrir, falar, chorar) e poses, em
+  rua e quarto. É melhor para histórias e emoções no rosto. Referência: `exemplos/demo/`.
+
+Dá para misturar os dois, mas mantenha sempre o mesmo protagonista.
 
 ## 0. Instalar (uma vez por pasta de canal)
 ```bash

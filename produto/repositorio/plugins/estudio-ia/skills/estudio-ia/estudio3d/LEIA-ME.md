@@ -12,7 +12,8 @@ estudio3d/
   kits/cartoon3d/  bonecos.js · cenarios.js · objetos.js · maos.js · interface.js · feijao.js · modelos/ · personagens/
   som/         sintese.py · efeitos.py · musica.py · mixar.py
   ferramentas/ novo_projeto.py · provisoria.py · transcrever.py · tomadas.py
-  exemplos/demo/   projeto completo de referência (6 tomadas)
+  exemplos/demo/       referência no estilo bonecos (16:9, 6 tomadas)
+  exemplos/cabecoes/   referência no estilo cabeção (9:16, 6 tomadas)
   projetos/<nome>/
      config.json   entrada/ (voz, roteiro)   linha/ (palavras, frases)   historia/tomadas.json   cenas/*.js
      construcao/ (folha, quadros, prévia, vídeo sem som, mix)   saida/<título>.mp4
@@ -83,6 +84,7 @@ amarelo na folha de contato.
 - `retangulo` (caminho arredondado), `circulo`, `anel`, `linha`, `poligono`, `brilho`, `alfa(cor, a)`, `tom(cor, k)` e `gradiente`.
 - Peças prontas:
   - `legenda(g, T)` (automática com `config.legenda`);
+  - `balao(g, x, y, 'texto', a, {tamanho, desvio})`: balão de fala com a ponta em (x, y);
   - `etiqueta(g, str, x, y, opacidade, {fundo, borda, tamanho})`;
   - `cartela(g, T, ini, fim, nome, descricao)` (nome de pesquisador ou fonte);
   - `carimbo(g, T, em, 'TÍTULO', {sub, y, cor, sai})`;
@@ -113,8 +115,33 @@ amarelo na folha de contato.
 - **maos.js:** `makePovArm(lado, spec)`, mãos em primeira pessoa (POV).
 - **interface.js:** `wordCaption`, `slamTitle`, `phone` (chat, perfil, notificação), `newspaper`, `tvFrame`, `heartsRain` e `textSpam`.
 - **feijao.js:** `drawBean` (personagem 2D) e `beanSprite` (o mesmo personagem como placa dentro do 3D).
-- **personagens/** (`Knight`, `Barbarian`, `Mage`, `Rogue`, `Rogue_Hooded`): personagens KayKit com animações. Carregue com
-  `GLTFLoader` e toque as animações com `THREE.AnimationMixer`, avançando com `mixer.setTime(t)`, que é determinístico.
+- **cabecoes.js (estilo cabeção, cartoon de jogo):** `await cabecao(tipo, {altura, cor, acessorios})`. Tipos: Knight
+  (cavaleiro), Barbarian (bárbaro), Mage (maga), Rogue (ladino) e Rogue_Hooded (ladino de capuz); `cor` tinge o personagem.
+  Devolve:
+  - `raiz`;
+  - `tocar([[t, 'animacao', {laco, velocidade, mistura}], ...], t)`: 76 animações com transição suave;
+  - `caminhar([[t, x, z], ...], t, {olharParado})`;
+  - `olharPara(x, z)`;
+  - `segurar('handslot.r', objeto)`;
+  - `topo()`: posição acima da cabeça.
+
+  Nomes em português das animações (`ANIM`): parado, andar, andarCalmo, andarApressado, correr, comemorar, interagir,
+  pegar, usar, jogar, pular, sentarChao, sentadoChao, levantarDoChao, sentarCadeira, sentadoCadeira, deitar, deitado,
+  levantar, apanhar, cair, desviar, defender, soco, chute e magia. Os nomes originais em inglês também valem.
+  Ícones de emoção: `emocao('coracao'|'pergunta'|'exclamacao'|'zzz'|'estrelas'|'nuvem'|'gota'|'raiva'|'lampada'|'nota')`,
+  animados com `mostrarEmocao(icone, personagem, t, em, sai)`.
+  O rosto desses personagens é fixo: mostre a emoção pela animação, pelo ícone, pelo balão e pela câmera.
+- **mundos.js (cenários coloridos do estilo cabeção):**
+  - `parque({clima: 'dia'|'entardecer'})`: grama, caminho, árvores de algodão-doce, lago, bancos e postes;
+  - `praca()`: ladrilhos, prédios, café com guarda-sol e fonte;
+  - `sala({parede, piso: [c1, c2], noite})`: piso xadrez, janela, sofá e estante;
+  - `palcoCor({fundo, pedestais: [...cores], espaco})`: palco pastel com pedestais, bom para listas ("os 3 tipos de...");
+    devolve `lugares` e `altura`;
+  - `arvore(cor)`.
+
+  Todos devolvem `pontos` (lugares úteis [x, z]).
+- **Enquadramento no 9:16:** a imagem é estreita. Use `fov` de 44 a 48 e afaste a câmera: 5 a 6 m para 2 personagens
+  e 7 a 9 m para 3. Confira sempre na folha de contato se ninguém ficou cortado.
 
 ## Comandos
 ```bash

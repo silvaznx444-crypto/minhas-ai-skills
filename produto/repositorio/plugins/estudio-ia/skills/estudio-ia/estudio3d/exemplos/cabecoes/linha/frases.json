@@ -1,0 +1,49 @@
+{
+ "frases": [
+  {
+   "texto": "Sabia que sorriso é contagioso?",
+   "ini": 0.4,
+   "fim": 2.115,
+   "palavras": [
+    0,
+    4
+   ]
+  },
+  {
+   "texto": "Quando alguém sorri pra você, o seu rosto tende a imitar sem você perceber.",
+   "ini": 2.451,
+   "fim": 7.015,
+   "palavras": [
+    5,
+    18
+   ]
+  },
+  {
+   "texto": "A ciência chama isso de mimetismo facial.",
+   "ini": 7.345,
+   "fim": 9.684,
+   "palavras": [
+    19,
+    25
+   ]
+  },
+  {
+   "texto": "Então faz o teste hoje: sorria primeiro e veja o que acontece.",
+   "ini": 10.01,
+   "fim": 13.864,
+   "palavras": [
+    26,
+    37
+   ]
+  },
+  {
+   "texto": "Marca alguém que sempre te faz sorrir!",
+   "ini": 14.195,
+   "fim": 16.438,
+   "palavras": [
+    38,
+    44
+   ]
+  }
+ ]
+}

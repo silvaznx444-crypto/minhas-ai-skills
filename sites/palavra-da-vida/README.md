@@ -11,6 +11,10 @@ hospedagem estática (GitHub Pages, Netlify, Vercel, Hostinger…).
   igual ao logo.
 - Detalhes: aviso roxo no topo, sublinhado feito à mão, faixa de versículos rolando,
   colagem em preto e branco com cartão creme.
+- Movimento: o cabeçalho some enquanto a página rola e volta quando para (ou ao encostar o
+  mouse no topo); seções sobem suavemente ao aparecer; fotos dos ministérios e do topo com
+  leve parallax; troca dos pastores com foto e texto deslizando. Tudo respeita a opção
+  "reduzir movimento" do celular, e navegadores antigos mostram o site parado.
 
 ## Seções
 1. Aviso + cabeçalho (menu à esquerda, logo no centro, redes e botão à direita)

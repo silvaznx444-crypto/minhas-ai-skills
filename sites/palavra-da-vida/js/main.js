@@ -7,11 +7,25 @@
   var closeTop = document.querySelector('[data-topbar-close]');
   if (topbar && closeTop) closeTop.addEventListener('click', function () { topbar.hidden = true; });
 
-  /* ---------- Sombra no cabeçalho ao rolar ---------- */
+  /* ---------- Cabeçalho: some enquanto rola, volta quando a rolagem para ---------- */
   var header = document.querySelector('[data-header]');
-  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 40); }
+  var idle = null, lastY = window.scrollY;
+  function showHeader() { if (header) header.classList.remove('is-hidden'); }
+  function onScroll() {
+    if (!header) return;
+    var y = window.scrollY;
+    header.classList.toggle('is-scrolled', y > 40);
+    if (root.classList.contains('menu-open')) return;
+    if (y < 140) { showHeader(); }
+    else if (Math.abs(y - lastY) > 3) { header.classList.add('is-hidden'); }
+    lastY = y;
+    clearTimeout(idle);
+    idle = setTimeout(showHeader, 280);
+  }
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
+  // no computador, encostar o mouse no topo também traz o cabeçalho
+  window.addEventListener('mousemove', function (e) { if (e.clientY < 80) showHeader(); }, { passive: true });
 
   /* ---------- Menu do celular ---------- */
   var burger = document.querySelector('[data-burger]');

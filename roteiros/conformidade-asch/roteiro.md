@@ -29,18 +29,17 @@ Prompt (inglês):
 Wide 16:9 YouTube thumbnail WITH TEXT. Minimalist cinematic stick-figure style (black stick figures with round heads and simple white dot eyes, soft rim light), dark navy background with a purple glow. LEFT: close-up of a nervous stick figure wearing a red-orange hoodie, big worried eyes, a drop of sweat, lit by a warm spotlight. RIGHT: a white card with three vertical lines labeled A, B and C, and behind it a row of black stick-figure silhouettes all pointing confidently at the wrong line, their shadows towering. On top, bold clean white sans-serif uppercase text in two lines: "VOCÊ SEGUIRIA" / "O GRUPO?", with only the word "GRUPO" in bright yellow. In the bottom right corner, a red rounded badge with white text "75% CEDERAM". Keep the Portuguese accents exactly (Ê). High contrast, sharp text, no other text, no watermark.
 Texto para o Canva: VOCÊ SEGUIRIA / O GRUPO? (GRUPO em amarelo) · selo vermelho: 75% CEDERAM
 
-## Descrição (capítulos confirmados depois da narração real)
+## Descrição (capítulos conferidos com a narração final de 28/11)
 Qual linha tem o mesmo tamanho? Parece fácil... até sete pessoas responderem errado antes de você.
 
 Em 1951, o psicólogo Solomon Asch mostrou que três em cada quatro pessoas seguiram o grupo pelo menos uma vez, mesmo vendo a resposta certa. Mais de 50 anos depois, a neurociência encontrou algo ainda mais estranho dentro do cérebro. E um detalhe simples muda tudo.
 
 0:00 O teste das linhas
-0:26 Por que a gente vai junto
-0:37 O experimento de Asch (1951)
-1:20 O que acontece no cérebro (2005)
-2:01 O detalhe que quebra o efeito
-2:34 Os limites do estudo
-2:42 A lição
+0:25 Por que a gente vai junto
+0:36 O experimento de Asch (1951)
+1:17 O que acontece no cérebro (2005)
+1:57 O detalhe que quebra o efeito
+2:30 Os limites do estudo e a lição
 
 E você, já concordou com todo mundo só pra não ficar de fora? Conta nos comentários.
 Se inscreve no Psique para entender por que a gente age como age.

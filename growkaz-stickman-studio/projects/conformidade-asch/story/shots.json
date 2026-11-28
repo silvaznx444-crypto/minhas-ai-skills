@@ -1,11 +1,11 @@
 {
  "title": "Por que você concorda com o grupo mesmo sabendo que ele está errado",
- "duration": 196.17,
+ "duration": 188.7,
  "shots": [
   {
    "id": "A01",
    "start": 0,
-   "end": 5.48,
+   "end": 4.95,
    "line": "",
    "scene": "A01",
    "bars": "none",
@@ -26,8 +26,8 @@
   },
   {
    "id": "A02",
-   "start": 5.48,
-   "end": 6.83,
+   "start": 4.95,
+   "end": 6.89,
    "line": "",
    "scene": "A02",
    "bars": "none",
@@ -41,12 +41,12 @@
      "gain": -12
     },
     {
-     "at": 0.53,
+     "at": 0.59,
      "name": "blip",
      "gain": -12
     },
     {
-     "at": 0.9,
+     "at": 1.29,
      "name": "blip",
      "gain": -12
     }
@@ -58,8 +58,8 @@
   },
   {
    "id": "A03",
-   "start": 6.83,
-   "end": 8.57,
+   "start": 6.89,
+   "end": 8.67,
    "line": "",
    "scene": "A03",
    "bars": null,
@@ -80,8 +80,8 @@
   },
   {
    "id": "A04",
-   "start": 8.57,
-   "end": 13.47,
+   "start": 8.67,
+   "end": 13.75,
    "line": "",
    "scene": "A04",
    "bars": null,
@@ -90,17 +90,17 @@
    },
    "sfx": [
     {
-     "at": 2.15,
+     "at": 2.71,
      "name": "pop",
      "gain": -14
     },
     {
-     "at": 3.0,
+     "at": 3.51,
      "name": "pop",
      "gain": -14
     },
     {
-     "at": 4.21,
+     "at": 4.53,
      "name": "pop",
      "gain": -12
     }
@@ -112,8 +112,8 @@
   },
   {
    "id": "A05",
-   "start": 13.47,
-   "end": 15.07,
+   "start": 13.75,
+   "end": 15.77,
    "line": "",
    "scene": "A05",
    "bars": null,
@@ -134,8 +134,8 @@
   },
   {
    "id": "A06",
-   "start": 15.07,
-   "end": 16.69,
+   "start": 15.77,
+   "end": 17.45,
    "line": "",
    "scene": "A06",
    "bars": null,
@@ -156,8 +156,8 @@
   },
   {
    "id": "A07",
-   "start": 16.69,
-   "end": 18.19,
+   "start": 17.45,
+   "end": 19.07,
    "line": "",
    "scene": "A07",
    "bars": "scope",
@@ -180,8 +180,8 @@
   },
   {
    "id": "A08",
-   "start": 18.19,
-   "end": 23.7,
+   "start": 19.07,
+   "end": 23.19,
    "line": "",
    "scene": "A08",
    "bars": "scope",
@@ -203,8 +203,8 @@
   },
   {
    "id": "A09",
-   "start": 23.7,
-   "end": 26.32,
+   "start": 23.19,
+   "end": 25.53,
    "line": "",
    "scene": "A09",
    "bars": "scope",
@@ -226,8 +226,8 @@
   },
   {
    "id": "B01",
-   "start": 26.32,
-   "end": 28.09,
+   "start": 25.53,
+   "end": 27.33,
    "line": "",
    "scene": "B01",
    "bars": null,
@@ -249,8 +249,8 @@
   },
   {
    "id": "B02",
-   "start": 28.09,
-   "end": 30.2,
+   "start": 27.33,
+   "end": 29.27,
    "line": "",
    "scene": "B02",
    "bars": null,
@@ -265,8 +265,8 @@
   },
   {
    "id": "B03",
-   "start": 30.2,
-   "end": 32.89,
+   "start": 29.27,
+   "end": 31.29,
    "line": "",
    "scene": "B03",
    "bars": null,
@@ -288,8 +288,8 @@
   },
   {
    "id": "B04",
-   "start": 32.89,
-   "end": 34.23,
+   "start": 31.29,
+   "end": 32.49,
    "line": "",
    "scene": "B04",
    "bars": null,
@@ -304,8 +304,8 @@
   },
   {
    "id": "B05",
-   "start": 34.23,
-   "end": 35.87,
+   "start": 32.49,
+   "end": 34.05,
    "line": "",
    "scene": "B05",
    "bars": null,
@@ -314,7 +314,7 @@
    },
    "sfx": [
     {
-     "at": 0.86,
+     "at": 1.03,
      "name": "impact",
      "gain": -8
     }
@@ -322,8 +322,8 @@
   },
   {
    "id": "B06",
-   "start": 35.87,
-   "end": 37.95,
+   "start": 34.05,
+   "end": 36.51,
    "line": "",
    "scene": "B06",
    "bars": "none",
@@ -340,8 +340,8 @@
   },
   {
    "id": "C01",
-   "start": 37.95,
-   "end": 39.38,
+   "start": 36.51,
+   "end": 38.53,
    "line": "",
    "scene": "C01",
    "bars": null,
@@ -363,8 +363,8 @@
   },
   {
    "id": "C02",
-   "start": 39.38,
-   "end": 43.09,
+   "start": 38.53,
+   "end": 41.77,
    "line": "",
    "scene": "C02",
    "bars": null,
@@ -385,8 +385,8 @@
   },
   {
    "id": "C03",
-   "start": 43.09,
-   "end": 47.53,
+   "start": 41.77,
+   "end": 46.03,
    "line": "",
    "scene": "C03",
    "bars": null,
@@ -407,8 +407,8 @@
   },
   {
    "id": "C04",
-   "start": 47.53,
-   "end": 50.82,
+   "start": 46.03,
+   "end": 48.57,
    "line": "",
    "scene": "C04",
    "bars": null,
@@ -429,8 +429,8 @@
   },
   {
    "id": "C05",
-   "start": 50.82,
-   "end": 54.73,
+   "start": 48.57,
+   "end": 52.49,
    "line": "",
    "scene": "C05",
    "bars": null,
@@ -461,8 +461,8 @@
   },
   {
    "id": "C06",
-   "start": 54.73,
-   "end": 57.75,
+   "start": 52.49,
+   "end": 55.49,
    "line": "",
    "scene": "C06",
    "bars": null,
@@ -483,8 +483,8 @@
   },
   {
    "id": "C07",
-   "start": 57.75,
-   "end": 61.26,
+   "start": 55.49,
+   "end": 58.31,
    "line": "",
    "scene": "C07",
    "bars": null,
@@ -506,8 +506,8 @@
   },
   {
    "id": "C08",
-   "start": 61.26,
-   "end": 62.93,
+   "start": 58.31,
+   "end": 60.99,
    "line": "",
    "scene": "C08",
    "bars": "scope",
@@ -524,8 +524,8 @@
   },
   {
    "id": "C09",
-   "start": 62.93,
-   "end": 68.08,
+   "start": 60.99,
+   "end": 65.15,
    "line": "",
    "scene": "C09",
    "bars": "none",
@@ -534,7 +534,7 @@
    },
    "sfx": [
     {
-     "at": 3.5,
+     "at": 3.37,
      "name": "counter",
      "gain": -12
     }
@@ -546,8 +546,8 @@
   },
   {
    "id": "C10",
-   "start": 68.08,
-   "end": 72.69,
+   "start": 65.15,
+   "end": 70.33,
    "line": "",
    "scene": "C10",
    "bars": "none",
@@ -556,7 +556,7 @@
    },
    "sfx": [
     {
-     "at": 2.34,
+     "at": 2.79,
      "name": "pop",
      "gain": -12
     }
@@ -564,8 +564,8 @@
   },
   {
    "id": "C11",
-   "start": 72.69,
-   "end": 76.53,
+   "start": 70.33,
+   "end": 74.23,
    "line": "",
    "scene": "C11",
    "bars": "none",
@@ -574,7 +574,7 @@
    },
    "sfx": [
     {
-     "at": 0.32,
+     "at": 0.25,
      "name": "blip",
      "gain": -12
     }
@@ -582,8 +582,8 @@
   },
   {
    "id": "C12",
-   "start": 76.53,
-   "end": 79.92,
+   "start": 74.23,
+   "end": 77.79,
    "line": "",
    "scene": "C12",
    "bars": "none",
@@ -592,7 +592,7 @@
    },
    "sfx": [
     {
-     "at": 2.93,
+     "at": 2.71,
      "name": "ding",
      "gain": -8
     }
@@ -600,8 +600,8 @@
   },
   {
    "id": "D01",
-   "start": 79.92,
-   "end": 83.38,
+   "start": 77.79,
+   "end": 80.85,
    "line": "",
    "scene": "D01",
    "bars": null,
@@ -623,8 +623,8 @@
   },
   {
    "id": "D02",
-   "start": 83.38,
-   "end": 87.32,
+   "start": 80.85,
+   "end": 84.73,
    "line": "",
    "scene": "D02",
    "bars": "none",
@@ -639,7 +639,7 @@
      "gain": -10
     },
     {
-     "at": 2.81,
+     "at": 2.59,
      "name": "riser",
      "gain": -12
     }
@@ -647,8 +647,8 @@
   },
   {
    "id": "E01",
-   "start": 87.32,
-   "end": 88.97,
+   "start": 84.73,
+   "end": 86.69,
    "line": "",
    "scene": "E01",
    "bars": null,
@@ -670,8 +670,8 @@
   },
   {
    "id": "E02",
-   "start": 88.97,
-   "end": 91.43,
+   "start": 86.69,
+   "end": 88.75,
    "line": "",
    "scene": "E02",
    "bars": null,
@@ -692,8 +692,8 @@
   },
   {
    "id": "E03",
-   "start": 91.43,
-   "end": 95.28,
+   "start": 88.75,
+   "end": 91.97,
    "line": "",
    "scene": "E03",
    "bars": null,
@@ -714,8 +714,8 @@
   },
   {
    "id": "E04",
-   "start": 95.28,
-   "end": 100.7,
+   "start": 91.97,
+   "end": 97.11,
    "line": "",
    "scene": "E04",
    "bars": "none",
@@ -725,7 +725,7 @@
    },
    "sfx": [
     {
-     "at": 4.6,
+     "at": 3.93,
      "name": "shimmer",
      "gain": -12
     }
@@ -733,8 +733,8 @@
   },
   {
    "id": "E05",
-   "start": 100.7,
-   "end": 104.46,
+   "start": 97.11,
+   "end": 100.21,
    "line": "",
    "scene": "E05",
    "bars": null,
@@ -755,8 +755,8 @@
   },
   {
    "id": "E06",
-   "start": 104.46,
-   "end": 106.52,
+   "start": 100.21,
+   "end": 102.33,
    "line": "",
    "scene": "E06",
    "bars": "scope",
@@ -773,8 +773,8 @@
   },
   {
    "id": "E07",
-   "start": 106.52,
-   "end": 109.93,
+   "start": 102.33,
+   "end": 105.67,
    "line": "",
    "scene": "E07",
    "bars": "none",
@@ -783,7 +783,7 @@
    },
    "sfx": [
     {
-     "at": 1.96,
+     "at": 1.97,
      "name": "buzz",
      "gain": -12
     }
@@ -791,8 +791,8 @@
   },
   {
    "id": "E08",
-   "start": 109.93,
-   "end": 113.23,
+   "start": 105.67,
+   "end": 109.23,
    "line": "",
    "scene": "E08",
    "bars": "scope",
@@ -813,8 +813,8 @@
   },
   {
    "id": "E09",
-   "start": 113.23,
-   "end": 115.84,
+   "start": 109.23,
+   "end": 112.47,
    "line": "",
    "scene": "E09",
    "bars": "none",
@@ -831,8 +831,8 @@
   },
   {
    "id": "F01",
-   "start": 115.84,
-   "end": 120.91,
+   "start": 112.47,
+   "end": 116.01,
    "line": "",
    "scene": "F01",
    "bars": null,
@@ -847,12 +847,12 @@
      "gain": -14
     },
     {
-     "at": 3.74,
+     "at": 2.75,
      "name": "pop",
      "gain": -8
     },
     {
-     "at": 4.63,
+     "at": 3.37,
      "name": "ding",
      "gain": -10
     }
@@ -860,8 +860,8 @@
   },
   {
    "id": "F02",
-   "start": 120.91,
-   "end": 122.26,
+   "start": 116.01,
+   "end": 117.59,
    "line": "",
    "scene": "F02",
    "bars": null,
@@ -878,8 +878,8 @@
   },
   {
    "id": "G01",
-   "start": 122.26,
-   "end": 125.21,
+   "start": 117.59,
+   "end": 119.59,
    "line": "",
    "scene": "G01",
    "bars": "scope",
@@ -901,8 +901,8 @@
   },
   {
    "id": "G02",
-   "start": 125.21,
-   "end": 128.49,
+   "start": 119.59,
+   "end": 123.39,
    "line": "",
    "scene": "G02",
    "bars": null,
@@ -911,7 +911,7 @@
    },
    "sfx": [
     {
-     "at": 1.09,
+     "at": 1.57,
      "name": "blip",
      "gain": -14
     }
@@ -923,8 +923,8 @@
   },
   {
    "id": "G03",
-   "start": 128.49,
-   "end": 130.96,
+   "start": 123.39,
+   "end": 125.67,
    "line": "",
    "scene": "G03",
    "bars": null,
@@ -945,8 +945,8 @@
   },
   {
    "id": "G04",
-   "start": 130.96,
-   "end": 131.87,
+   "start": 125.67,
+   "end": 126.81,
    "line": "",
    "scene": "G04",
    "bars": "scope",
@@ -963,8 +963,8 @@
   },
   {
    "id": "G05",
-   "start": 131.87,
-   "end": 133.97,
+   "start": 126.81,
+   "end": 129.35,
    "line": "",
    "scene": "G05",
    "bars": null,
@@ -982,8 +982,8 @@
   },
   {
    "id": "G06",
-   "start": 133.97,
-   "end": 136.81,
+   "start": 129.35,
+   "end": 132.29,
    "line": "",
    "scene": "G06",
    "bars": "none",
@@ -992,7 +992,7 @@
    },
    "sfx": [
     {
-     "at": 2.16,
+     "at": 2.27,
      "name": "pop",
      "gain": -10
     }
@@ -1000,8 +1000,8 @@
   },
   {
    "id": "H01",
-   "start": 136.81,
-   "end": 138.83,
+   "start": 132.29,
+   "end": 134.15,
    "line": "",
    "scene": "H01",
    "bars": null,
@@ -1023,8 +1023,8 @@
   },
   {
    "id": "H02",
-   "start": 138.83,
-   "end": 141.66,
+   "start": 134.15,
+   "end": 137.19,
    "line": "",
    "scene": "H02",
    "bars": null,
@@ -1050,8 +1050,8 @@
   },
   {
    "id": "H03",
-   "start": 141.66,
-   "end": 144.08,
+   "start": 137.19,
+   "end": 139.53,
    "line": "",
    "scene": "H03",
    "bars": null,
@@ -1072,8 +1072,8 @@
   },
   {
    "id": "H04",
-   "start": 144.08,
-   "end": 145.29,
+   "start": 139.53,
+   "end": 140.85,
    "line": "",
    "scene": "H04",
    "bars": null,
@@ -1094,8 +1094,8 @@
   },
   {
    "id": "I01",
-   "start": 145.29,
-   "end": 148.44,
+   "start": 140.85,
+   "end": 143.99,
    "line": "",
    "scene": "I01",
    "bars": null,
@@ -1117,8 +1117,8 @@
   },
   {
    "id": "I02",
-   "start": 148.44,
-   "end": 150.36,
+   "start": 143.99,
+   "end": 146.27,
    "line": "",
    "scene": "I02",
    "bars": "none",
@@ -1135,8 +1135,8 @@
   },
   {
    "id": "I03",
-   "start": 150.36,
-   "end": 152.56,
+   "start": 146.27,
+   "end": 148.17,
    "line": "",
    "scene": "I03",
    "bars": null,
@@ -1153,8 +1153,8 @@
   },
   {
    "id": "I04",
-   "start": 152.56,
-   "end": 154.71,
+   "start": 148.17,
+   "end": 150.35,
    "line": "",
    "scene": "I04",
    "bars": "scope",
@@ -1175,8 +1175,8 @@
   },
   {
    "id": "J01",
-   "start": 154.71,
-   "end": 161.1,
+   "start": 150.35,
+   "end": 156.25,
    "line": "",
    "scene": "J01",
    "bars": null,
@@ -1194,8 +1194,8 @@
   },
   {
    "id": "J02",
-   "start": 161.1,
-   "end": 162.65,
+   "start": 156.25,
+   "end": 157.87,
    "line": "",
    "scene": "J02",
    "bars": "none",
@@ -1212,8 +1212,8 @@
   },
   {
    "id": "K01",
-   "start": 162.65,
-   "end": 168.09,
+   "start": 157.87,
+   "end": 163.27,
    "line": "",
    "scene": "K01",
    "bars": null,
@@ -1223,7 +1223,7 @@
    },
    "sfx": [
     {
-     "at": 3.51,
+     "at": 3.59,
      "name": "shimmer",
      "gain": -12
     }
@@ -1235,8 +1235,8 @@
   },
   {
    "id": "K02",
-   "start": 168.09,
-   "end": 169.78,
+   "start": 163.27,
+   "end": 165.17,
    "line": "",
    "scene": "K02",
    "bars": null,
@@ -1257,8 +1257,8 @@
   },
   {
    "id": "K03",
-   "start": 169.78,
-   "end": 172.44,
+   "start": 165.17,
+   "end": 167.01,
    "line": "",
    "scene": "K03",
    "bars": null,
@@ -1279,8 +1279,8 @@
   },
   {
    "id": "K04",
-   "start": 172.44,
-   "end": 173.88,
+   "start": 167.01,
+   "end": 168.91,
    "line": "",
    "scene": "K04",
    "bars": "scope",
@@ -1301,8 +1301,8 @@
   },
   {
    "id": "L01",
-   "start": 173.88,
-   "end": 178.21,
+   "start": 168.91,
+   "end": 172.27,
    "line": "",
    "scene": "L01",
    "bars": "none",
@@ -1320,8 +1320,8 @@
   },
   {
    "id": "L02",
-   "start": 178.21,
-   "end": 179.83,
+   "start": 172.27,
+   "end": 173.49,
    "line": "",
    "scene": "L02",
    "bars": "none",
@@ -1338,8 +1338,8 @@
   },
   {
    "id": "L03",
-   "start": 179.83,
-   "end": 186.32,
+   "start": 173.49,
+   "end": 179.07,
    "line": "",
    "scene": "L03",
    "bars": "none",
@@ -1357,8 +1357,8 @@
   },
   {
    "id": "L04",
-   "start": 186.32,
-   "end": 196.17,
+   "start": 179.07,
+   "end": 188.7,
    "line": "",
    "scene": "L04",
    "bars": "none",
@@ -1377,49 +1377,49 @@
  "music": [
   {
    "start": 0,
-   "end": 23.7,
+   "end": 23.19,
    "mood": "tension",
    "intensity": 0.45
   },
   {
-   "start": 23.7,
-   "end": 37.95,
+   "start": 23.19,
+   "end": 36.51,
    "mood": "playful",
    "intensity": 0.32
   },
   {
-   "start": 37.95,
-   "end": 79.92,
+   "start": 36.51,
+   "end": 77.79,
    "mood": "mystery",
    "intensity": 0.42
   },
   {
-   "start": 79.92,
-   "end": 115.84,
+   "start": 77.79,
+   "end": 112.47,
    "mood": "dark",
    "intensity": 0.5
   },
   {
-   "start": 115.84,
-   "end": 122.26,
+   "start": 112.47,
+   "end": 117.59,
    "mood": "calm",
    "intensity": 0.3
   },
   {
-   "start": 122.26,
-   "end": 154.71,
+   "start": 117.59,
+   "end": 150.35,
    "mood": "hopeful",
    "intensity": 0.55
   },
   {
-   "start": 154.71,
-   "end": 173.88,
+   "start": 150.35,
+   "end": 168.91,
    "mood": "wonder",
    "intensity": 0.45
   },
   {
-   "start": 173.88,
-   "end": 196.17,
+   "start": 168.91,
+   "end": 188.7,
    "mood": "hopeful",
    "intensity": 0.4
   }

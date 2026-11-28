@@ -4,9 +4,9 @@
 novas em `canal/aprendizados.md`.
 
 ## Semana 1: base
-- [ ] Instalação e contas (módulos 1 e 2)
-- [ ] Padrão do canal e protagonista (módulo 3)
-- [ ] Pesquisa de nicho, concorrentes e estratégia com 10 ideias (módulo 4)
+- [ ] Missão 1: tudo instalado
+- [ ] Missão 2: padrão do canal e protagonista
+- [ ] Missão 3: pesquisa de nicho e estratégia com 10 ideias
 - [ ] Perfil do YouTube e do Instagram completos
 
 ## Semana 2: primeiro vídeo

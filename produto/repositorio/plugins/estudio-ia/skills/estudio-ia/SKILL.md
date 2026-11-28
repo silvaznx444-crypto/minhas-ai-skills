@@ -1,6 +1,6 @@
 ---
 name: estudio-ia
-description: Estúdio de canal com IA para YouTube e Instagram. Define a identidade do canal, faz análise estratégica (nicho, concorrentes, outliers, engenharia reversa de vídeos virais com a Gemini, curva de retenção explicada), escreve roteiros com estrutura de retenção, produz vídeos 3D construídos por código a partir da narração (estilo cabeção cartoon de jogo ou bonecos com contorno, cenários coloridos, câmera, legenda palavra por palavra, música e efeitos; 16:9 ou 9:16), cria títulos e capas, otimiza o canal (com prévia e backup) e publica ou agenda no YouTube e no Instagram. Inclui o agente do YouTube passo a passo, do diagnóstico ao pós-publicação. Use quando a pessoa quiser começar ou crescer um canal; pesquisar nicho ou concorrentes; analisar um vídeo; ter ideias; escrever roteiro; fazer um vídeo, Reels ou Shorts; melhorar a retenção; criar títulos e capas; ou postar e agendar.
+description: Estúdio de canal com IA para YouTube e Instagram. Define a identidade do canal, faz análise estratégica (nicho, concorrentes, outliers, engenharia reversa de vídeos virais com a Gemini, curva de retenção explicada), escreve roteiros com estrutura de retenção, produz vídeos 3D construídos por código a partir da narração (estilo cabeção cartoon de jogo ou bonecos com contorno, cenários coloridos, câmera, legenda palavra por palavra, música e efeitos; 16:9 ou 9:16), cria títulos e capas, otimiza o canal (com prévia e backup) e publica ou agenda no YouTube e no Instagram. Inclui o agente do YouTube passo a passo, do diagnóstico ao pós-publicação, e o modo guiado, que ensina quem está começando numa trilha de 7 missões. Use quando a pessoa quiser começar ou crescer um canal, pedir para aprender do zero ("me ensina", "primeira vez", /estudio-ia:comecar); pesquisar nicho ou concorrentes; analisar um vídeo; ter ideias; escrever roteiro; fazer um vídeo, Reels ou Shorts; melhorar a retenção; criar títulos e capas; ou postar e agendar.
 ---
 
 # Estúdio IA: estratégia, criação e canal
@@ -16,6 +16,7 @@ pessoa está trabalhando. Os vídeos ficam em `projetos/`.
 
 | Quero... | Script | Guia |
 |---|---|---|
+| **Aprender do zero, passo a passo** ("me ensina", primeira vez, `/estudio-ia:comecar`) | todos, na ordem das missões | [guias/modo-guiado.md](guias/modo-guiado.md) |
 | Instalar e configurar (primeira vez) | `verificar.py` | [guias/configuracao.md](guias/configuracao.md) |
 | Definir a identidade do canal | — | [guias/identidade.md](guias/identidade.md) |
 | Pesquisar nicho e concorrentes, dissecar um vídeo, entender a retenção | `estrategia.py` | [guias/estrategia.md](guias/estrategia.md) |

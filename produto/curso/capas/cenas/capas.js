@@ -49,21 +49,24 @@ const rostoFeliz = (p, t, o = {}) => p.rosto?.definir({ t, piscar: 0, boca: 'ris
 // câmera para N personagens lado a lado (alvo na altura do peito)
 const camPara = (n) => [[0, 1.68, [5.4, 6.9, 8.5][n - 1]], [0, 1.25, 0]];
 
-function capa(i, montar) {
-  const M = MODULOS[i];
-  registrarTomada(`M${String(i).padStart(2, '0')}`, {
+// cada desenho fica guardado pelo número antigo; as capas usadas estão em CAPAS, no fim do arquivo
+const DESENHOS = {};
+function capa(i, montar) { DESENHOS[i] = montar; }
+function registrar(k, c) {
+  const montar = DESENHOS[c.desenho], fundo = MODULOS[c.desenho].fundo;
+  registrarTomada(`M${String(k).padStart(2, '0')}`, {
     async criar() {
-      const m = palcoCor({ fundo: M.fundo, fov: 46, ...(montar.palco || {}) });
+      const m = palcoCor({ fundo, fov: 46, ...(montar.palco || {}) });
       const extra = await montar.criar(m);
       return { ...m, ...extra };
     },
     quadro(e, info) { montar.quadro?.(e, info); const [pos, alvo] = e.cam || camPara(e.n || 1); apontar(e.camera, pos, alvo); },
     sobre(g, info, e) {
       montar.sobre?.(g, info, e);
-      etiqueta(g, `MÓDULO ${String(i).padStart(2, '0')}`, E.W / 2, 212, 1, { fundo: TINTA, tamanho: 38 });
-      M.titulo.forEach((l, k) => texto(g, l, E.W / 2, 322 + k * 110, { tamanho: l.length > 13 ? 88 : 106, peso: 700, fonte: FONTES.titulo,
+      etiqueta(g, c.rotulo, E.W / 2, 212, 1, { fundo: c.rotulo === 'BÔNUS' ? '#d8306b' : TINTA, tamanho: 38 });
+      c.titulo.forEach((l, j) => texto(g, l, E.W / 2, 322 + j * 110, { tamanho: l.length > 13 ? 88 : 106, peso: 700, fonte: FONTES.titulo,
         cor: '#ffffff', contorno: 18, corContorno: TINTA, largura: E.W - 140 }));
-      texto(g, `${M.aulas} aulas`, E.W / 2, 1655, { tamanho: 44, peso: 800, cor: TINTA });
+      texto(g, c.rodape, E.W / 2, 1655, { tamanho: 44, peso: 800, cor: TINTA });
       texto(g, 'ESTÚDIO IA', E.W / 2, 1722, { tamanho: 38, peso: 900, cor: '#7c5cff', espaco: 8 });
     },
   });
@@ -231,3 +234,16 @@ capa(13, {
   quadro(e, { t }) { e.p.tocar([[0, 'parado']], t); e.c.tocar([[0, 'dancar']], t + 0.3); rostoFeliz(e.p, t, { boca: 'sorriso' }); },
   sobre(g, { T }, e) { const s = naTela(e.camera, e.c.topo(0.35)); figurinha(g, 'cifrao', s.x, s.y, 110, 1); brilhos(g, T, s.x, s.y, { raio: 90 }); },
 });
+
+// ---------------------------------------------------------------- capas da trilha (quadro k.5 = capa k)
+const CAPAS = [
+  { rotulo: 'MISSÃO 1', titulo: ['Tudo', 'instalado'], rodape: '4 aulas', desenho: 1 },
+  { rotulo: 'MISSÃO 2', titulo: ['Seu canal', 'tem cara'], rodape: '3 aulas', desenho: 3 },
+  { rotulo: 'MISSÃO 3', titulo: ['O que funciona', 'no seu nicho'], rodape: '3 aulas', desenho: 4 },
+  { rotulo: 'MISSÃO 4', titulo: ['Seu primeiro', 'vídeo'], rodape: '4 aulas', desenho: 7 },
+  { rotulo: 'MISSÃO 5', titulo: ['Capa e título', 'que dão clique'], rodape: '2 aulas', desenho: 10 },
+  { rotulo: 'MISSÃO 6', titulo: ['Seu vídeo', 'no ar'], rodape: '2 aulas', desenho: 11 },
+  { rotulo: 'MISSÃO 7', titulo: ['Crescer', 'toda semana'], rodape: '3 aulas', desenho: 12 },
+  { rotulo: 'BÔNUS', titulo: ['Checklists', 'e materiais'], rodape: 'para baixar', desenho: 5 },
+];
+CAPAS.forEach((c, k) => registrar(k, c));

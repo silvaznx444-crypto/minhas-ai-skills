@@ -4,7 +4,10 @@ Copie, troque o que está entre [colchetes] e mande no Claude Code, dentro da pa
 Você pode escrever do seu jeito: estes pedidos são só um ponto de partida.
 
 ## Começo
-- Use o agente do YouTube do estudio-ia para começar meu canal.
+- `/estudio-ia:comecar` (a trilha guiada; digite de novo para continuar de onde parou)
+- `/estudio-ia:comecar 4` (pula direto para a missão 4)
+- `/estudio-ia:travei` (algo deu errado)
+- Use o agente do YouTube do estudio-ia para começar meu canal. (depois da trilha)
 - Continua de onde paramos.
 - Roda o verificador e me diz o que falta configurar.
 - Instala o estúdio 3D.

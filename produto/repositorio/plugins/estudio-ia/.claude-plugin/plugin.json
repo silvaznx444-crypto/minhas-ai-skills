@@ -1,7 +1,7 @@
 {
   "name": "estudio-ia",
-  "version": "0.2.0",
-  "description": "Estúdio de canal com IA: identidade, estratégia (nicho, concorrentes, retenção), roteiro, vídeo 3D construído a partir da narração, capa e publicação no YouTube e Instagram, com um agente que guia passo a passo.",
+  "version": "0.3.0",
+  "description": "Estúdio de canal com IA que ensina enquanto faz: trilha guiada de 7 missões, estratégia (nicho, concorrentes, retenção), roteiro, vídeo 3D a partir da narração, capa e publicação no YouTube e Instagram.",
   "author": {
     "name": "Estúdio IA"
   },

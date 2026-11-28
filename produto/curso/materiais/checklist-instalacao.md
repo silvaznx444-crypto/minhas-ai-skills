@@ -1,8 +1,8 @@
 # Checklist de instalação
 
-Marque cada item. Se travar, mande ao agente: **"Travei no item X do checklist; o erro é este: ..."** (sem chave nem token).
+Marque cada item. Se travar, digite **`/estudio-ia:travei`** e conte em qual item parou (sem colar chave nem token).
 
-## Parte 1: o computador (módulo 1)
+## Parte 1: o computador (missão 1)
 - [ ] Plano pago do Claude com o Claude Code
 - [ ] App do Claude para computador instalado (ou o Claude Code no terminal)
 - [ ] Python 3.9 ou mais novo (no Windows: "Add python.exe to PATH" marcado)
@@ -12,11 +12,11 @@ Marque cada item. Se travar, mande ao agente: **"Travei no item X do checklist; 
 - [ ] ZIP do Estúdio IA descompactado em `Documentos/estudio-ia`
 - [ ] `/plugin marketplace add <pasta>` e `/plugin install estudio-ia@estudio-ia` feitos
 - [ ] Pasta do canal criada (`Documentos/meu-canal`) e Claude Code aberto nela
-- [ ] "Use o agente do YouTube do estudio-ia para começar meu canal" → verificador rodou
-- [ ] "Instala o estúdio 3D" → instalado e conferido
+- [ ] `/estudio-ia:comecar` → o agente conferiu o que está instalado
+- [ ] Estúdio 3D instalado e conferido
 - [ ] Exemplo renderizado: há um MP4 em `estudio3d/exemplos/.../saida/`
 
-## Parte 2: as contas (módulo 2)
+## Parte 2: as contas (missão 3; o Instagram fica para a missão 6)
 - [ ] Conta e projeto no Google Cloud (com o crédito de conta nova ativo)
 - [ ] API Vertex AI ativada
 - [ ] Conta de serviço `video-ia` com o papel Vertex AI User e a chave JSON guardada em `VERTEX_SA_JSON`

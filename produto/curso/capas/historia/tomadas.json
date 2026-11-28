@@ -1,89 +1,53 @@
 {
- "duracao": 14,
+ "duracao": 8,
  "tomadas": [
   {
    "id": "M00",
    "ini": 0,
    "fim": 1,
-   "cena": "capa do módulo 0"
+   "cena": "capa 0"
   },
   {
    "id": "M01",
    "ini": 1,
    "fim": 2,
-   "cena": "capa do módulo 1"
+   "cena": "capa 1"
   },
   {
    "id": "M02",
    "ini": 2,
    "fim": 3,
-   "cena": "capa do módulo 2"
+   "cena": "capa 2"
   },
   {
    "id": "M03",
    "ini": 3,
    "fim": 4,
-   "cena": "capa do módulo 3"
+   "cena": "capa 3"
   },
   {
    "id": "M04",
    "ini": 4,
    "fim": 5,
-   "cena": "capa do módulo 4"
+   "cena": "capa 4"
   },
   {
    "id": "M05",
    "ini": 5,
    "fim": 6,
-   "cena": "capa do módulo 5"
+   "cena": "capa 5"
   },
   {
    "id": "M06",
    "ini": 6,
    "fim": 7,
-   "cena": "capa do módulo 6"
+   "cena": "capa 6"
   },
   {
    "id": "M07",
    "ini": 7,
    "fim": 8,
-   "cena": "capa do módulo 7"
-  },
-  {
-   "id": "M08",
-   "ini": 8,
-   "fim": 9,
-   "cena": "capa do módulo 8"
-  },
-  {
-   "id": "M09",
-   "ini": 9,
-   "fim": 10,
-   "cena": "capa do módulo 9"
-  },
-  {
-   "id": "M10",
-   "ini": 10,
-   "fim": 11,
-   "cena": "capa do módulo 10"
-  },
-  {
-   "id": "M11",
-   "ini": 11,
-   "fim": 12,
-   "cena": "capa do módulo 11"
-  },
-  {
-   "id": "M12",
-   "ini": 12,
-   "fim": 13,
-   "cena": "capa do módulo 12"
-  },
-  {
-   "id": "M13",
-   "ini": 13,
-   "fim": 14,
-   "cena": "capa do módulo 13"
+   "cena": "capa 7"
   }
  ]
 }

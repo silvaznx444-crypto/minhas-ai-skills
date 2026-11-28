@@ -29,6 +29,9 @@
     --sol: #ffd84a;
     --violeta: #7c5cff;     /* moletom da protagonista */
     --menta: #5fd39a;
+    --noite-2: #3b3354;     /* balão do agente na conversa */
+    --lilas: #a99ee0;
+    --texto-claro: #f6f2ff;
     --f-titulo: "Fredoka", "Nunito", system-ui, sans-serif;
     --f-texto: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
     --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -139,13 +142,25 @@
   .numeros span { font-size: 14px; color: var(--tinta-2); }
   .elenco { border: 3px solid var(--tinta); border-radius: var(--raio); overflow: hidden; background: #111; }
 
-  /* agente */
-  .agente { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; counter-reset: etapa -1; }
-  .agente li { counter-increment: etapa; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; padding: 16px 0; border-bottom: 2px dashed var(--linha); }
-  .agente li::before { content: counter(etapa); font-family: var(--f-mono); font-weight: 700; font-size: 15px; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
-    background: var(--tinta); color: #fff; }
-  .agente b { font-family: var(--f-titulo); font-weight: 600; font-size: 19px; display: block; }
-  .agente p { font-size: 15.5px; color: var(--tinta-2); }
+  /* trilha: conversa de exemplo + as 7 missões */
+  .trilha { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); align-items: start; }
+  .conversa { background: var(--tinta); color: var(--texto-claro); border: 3px solid var(--tinta); border-radius: var(--raio); padding: 18px;
+    display: grid; gap: 12px; font-size: 15.5px; box-shadow: 0 10px 0 var(--violeta); min-width: 0; }
+  .conversa .barra { font-family: var(--f-mono); font-size: 12px; color: var(--lilas); display: flex; justify-content: space-between; gap: 10px; }
+  .conversa .eu { justify-self: end; background: var(--violeta); color: #fff; padding: 8px 14px; border-radius: 16px 16px 4px 16px; font-family: var(--f-mono); font-size: 14px; max-width: 88%; }
+  .conversa .ia { background: var(--noite-2); padding: 12px 14px; border-radius: 16px 16px 16px 4px; max-width: 94%; display: grid; gap: 8px; }
+  .conversa .progresso { font-family: var(--f-mono); font-size: 13px; color: var(--sol); }
+  .conversa .opcoes { display: flex; flex-wrap: wrap; gap: 8px; }
+  .conversa .opcoes span { border: 2px solid var(--lilas); border-radius: 999px; padding: 3px 11px; font-size: 13px; font-weight: 800; }
+  .conversa .opcoes span:first-child { background: var(--sol); color: var(--tinta); border-color: var(--sol); }
+  .missoes { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: m; }
+  .missoes li { counter-increment: m; display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; align-items: center;
+    background: var(--papel); border: 2px solid var(--linha); border-radius: 16px; padding: 11px 14px; }
+  .missoes li::before { content: counter(m); width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--sol);
+    border: 2px solid var(--tinta); font-family: var(--f-titulo); font-weight: 700; font-size: 20px; }
+  .missoes b { font-family: var(--f-titulo); font-weight: 600; font-size: 18px; display: block; line-height: 1.2; }
+  .missoes p { font-size: 14.5px; color: var(--tinta-2); line-height: 1.4; }
+  .missoes small { font-family: var(--f-mono); font-size: 12px; font-weight: 700; color: var(--violeta); white-space: nowrap; }
 
   /* curso */
   .capas { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(150px, 19vw, 200px); gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px 4px 18px; }
@@ -221,8 +236,7 @@
     .numeros { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
   @media (max-width: 860px) {
-    .heroi .grade, .folha, .duas, .oferta, .autor { grid-template-columns: minmax(0, 1fr); }
-    .agente { grid-template-columns: minmax(0, 1fr); }
+    .heroi .grade, .folha, .duas, .oferta, .autor, .trilha { grid-template-columns: minmax(0, 1fr); }
     .preco { position: static; }
     .selo-real { left: -8px; }
     .autor .foto { max-width: 220px; }
@@ -235,6 +249,8 @@
     .modulos summary { grid-template-columns: 44px minmax(0, 1fr); }
     .modulos summary .q { grid-column: 2; }
     .modulos ol { padding-left: 74px; }
+    .missoes li { grid-template-columns: 44px minmax(0, 1fr); }
+    .missoes small { grid-column: 2; }
     .topo .botao { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -252,14 +268,14 @@
     <div class="texto">
       <span class="sobretitulo">Curso + plugin para o Claude Code</span>
       <h1>Vídeos 3D animados feitos a partir da <em>sua voz</em></h1>
-      <p class="sub">Você grava a narração no celular. Um agente de IA monta as cenas com personagens 3D, legenda, música e
-        efeitos, e ainda pesquisa o seu nicho, escreve o roteiro e explica onde as pessoas param de assistir. Você não precisa
-        saber animar nem paga nada por vídeo.</p>
+      <p class="sub">Você grava a narração no celular. Um agente de IA te ensina passo a passo, numa trilha de 7 missões, e faz
+        junto com você: monta as cenas com personagens 3D, legenda, música e efeitos, pesquisa o seu nicho e explica onde as
+        pessoas param de assistir. Você não precisa saber animar nem paga nada por vídeo.</p>
       <div class="acoes">
         <a class="botao cheio" href="#oferta">Quero o Estúdio IA</a>
         <a class="botao vazio" href="#como">Ver como funciona</a>
       </div>
-      <div class="miudo"><span>YouTube (16:9) e Reels/Shorts (9:16)</span><span>Personagens iguais em todo vídeo</span><span>7 dias de garantia</span></div>
+      <div class="miudo"><span>Trilha guiada de 7 missões</span><span>YouTube e Reels/Shorts</span><span>7 dias de garantia</span></div>
     </div>
     <div class="celular">
       <video id="video-heroi" src="midia/cabecoes.mp4" poster="midia/cabecoes.jpg" autoplay muted loop playsinline aria-label="Vídeo de exemplo feito pelo estúdio: Sorriso é contagioso"></video>
@@ -348,26 +364,38 @@
   </div>
 </section>
 
-<section class="faixa-alt">
+<section id="trilha" class="faixa-alt">
   <div class="miolo">
     <div class="cabeca">
-      <span class="sobretitulo">O agente do YouTube</span>
-      <h2>Do nicho à análise, uma etapa por vez</h2>
-      <p>O vídeo é só uma parte. O agente conduz o canal inteiro, guarda o progresso e para para pedir o seu ok nas decisões
-        importantes.</p>
+      <span class="sobretitulo">Como você aprende</span>
+      <h2>O agente te ensina enquanto faz</h2>
+      <p>Você digita um comando e o agente te leva por 7 missões, no seu próprio canal. Ele explica cada passo em português
+        simples, mostra o quanto falta, espera o seu ok e, se algo der errado, descobre o que foi. Ninguém fica perdido.</p>
     </div>
-    <ol class="agente">
-      <li><div><b>Identidade</b><p>Nicho, promessa, público, tom, formatos e o padrão visual do canal.</p></div></li>
-      <li><div><b>Diagnóstico</b><p>Os números do canal e o gargalo principal: clique, retenção, tema ou frequência.</p></div></li>
-      <li><div><b>Pesquisa de nicho</b><p>Os vídeos que bombaram muito acima da média do próprio canal (os outliers).</p></div></li>
-      <li><div><b>Concorrentes</b><p>O que bomba e o que flopa em cada um, e a engenharia reversa dos virais com a Gemini.</p></div></li>
-      <li><div><b>Estratégia</b><p>3 pilares com demanda provada e 10 ideias ranqueadas, cada uma com a sua evidência.</p></div></li>
-      <li><div><b>Roteiro</b><p>Gancho nos primeiros 5 s, loops de suspense, virada e um final que gera comentário.</p></div></li>
-      <li><div><b>Vídeo 3D</b><p>Da sua narração ao MP4 com legenda, música e efeitos.</p></div></li>
-      <li><div><b>Embalagem</b><p>3 títulos, a capa com 2 opções, a descrição com capítulos e as tags.</p></div></li>
-      <li><div><b>Publicação</b><p>Agenda no YouTube e posta no Instagram pelas APIs oficiais.</p></div></li>
-      <li><div><b>Pós-publicação</b><p>A IA assiste ao seu vídeo, explica cada queda de retenção e cria regras para o próximo.</p></div></li>
-    </ol>
+    <div class="trilha">
+      <div class="conversa" aria-label="Exemplo de conversa com o agente no modo guiado">
+        <div class="barra"><span>Claude Code · meu-canal</span><span>exemplo</span></div>
+        <div class="eu">/estudio-ia:comecar</div>
+        <div class="ia"><span class="progresso">Missão 4 de 7 · passo 3 de 6 · ▰▰▰▱▱▱</span>
+          <p>Sua voz chegou e eu já marquei o tempo de cada palavra. Agora vou dividir o vídeo em cenas de 3 a 5 segundos, cada
+            uma começando na palavra certa. Depois te mostro uma imagem de cada cena, para você aprovar antes do render (quando o
+            computador desenha o vídeo).</p></div>
+        <div class="ia"><p>Pronto: são 14 cenas. Na 4, a professora aparece na sala. Quer mudar alguma coisa?</p>
+          <div class="opcoes"><span>Aprovar e renderizar</span><span>Mudar uma cena</span></div></div>
+        <div class="eu">muda a cena 4: coloca ela no parque</div>
+        <div class="ia"><span class="progresso">Missão 4 de 7 · passo 4 de 6 · ▰▰▰▰▱▱</span><p>Feito ✓. A cena 4 agora é no parque.
+          Renderizando: faltam uns 12 minutos. Enquanto isso, vamos escolher o título?</p></div>
+      </div>
+      <ol class="missoes">
+        <li><div><b>Tudo instalado</b><p>E um vídeo de exemplo pronto no seu computador.</p></div><small>~30 min</small></li>
+        <li><div><b>Seu canal tem cara</b><p>Nicho, padrão do canal e o seu protagonista.</p></div><small>~20 min</small></li>
+        <li><div><b>O que funciona no seu nicho</b><p>Os vídeos que bombaram e 10 ideias com dados.</p></div><small>~40 min</small></li>
+        <li><div><b>Seu primeiro vídeo</b><p>Roteiro, a sua voz e o vídeo 3D pronto.</p></div><small>1 a 2 h</small></li>
+        <li><div><b>A capa e o título que dão clique</b><p>Título, capa, descrição e tags.</p></div><small>~15 min</small></li>
+        <li><div><b>No ar</b><p>Agendado no YouTube e, se quiser, no Instagram.</p></div><small>~10 min</small></li>
+        <li><div><b>Crescer toda semana</b><p>A IA explica onde as pessoas saíram e monta a sua rotina.</p></div><small>~20 min</small></li>
+      </ol>
+    </div>
   </div>
 </section>
 
@@ -375,41 +403,29 @@
   <div class="miolo">
     <div class="cabeca">
       <span class="sobretitulo">O curso</span>
-      <h2>14 módulos, 57 aulas curtas</h2>
-      <p>Umas 8 horas de aula, gravadas com um canal real começando do zero. Cada aula mostra a conversa com o agente na tela e
-        termina com uma tarefa.</p>
+      <h2>21 aulas curtas, uma missão por vez</h2>
+      <p>Cerca de 1h40 de aula, gravadas com um canal real começando do zero. Cada aula mostra primeiro o resultado e depois o
+        que o agente vai fazer com você. Você assiste e faz junto.</p>
     </div>
-    <div class="capas" aria-label="Capas dos módulos">
-      <img src="midia/capas/modulo-00.jpg" alt="Módulo 0: Comece aqui" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-01.jpg" alt="Módulo 1: Instalação sem medo" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-02.jpg" alt="Módulo 2: Google, YouTube e Instagram" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-03.jpg" alt="Módulo 3: Identidade do canal" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-04.jpg" alt="Módulo 4: Estratégia com dados" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-05.jpg" alt="Módulo 5: Roteiro que prende" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-06.jpg" alt="Módulo 6: Sua voz" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-07.jpg" alt="Módulo 7: Seu primeiro vídeo 3D" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-08.jpg" alt="Módulo 8: Personagens e efeitos" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-09.jpg" alt="Módulo 9: Shorts e Reels" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-10.jpg" alt="Módulo 10: Título, capa e descrição" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-11.jpg" alt="Módulo 11: Publicar e agendar" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-12.jpg" alt="Módulo 12: Medir e crescer" loading="lazy" width="360" height="540">
-      <img src="midia/capas/modulo-13.jpg" alt="Módulo 13: Monetização e próximos passos" loading="lazy" width="360" height="540">
+    <div class="capas" aria-label="Capas das missões">
+      <img src="midia/capas/missao-1.jpg" alt="Missão 1: Tudo instalado" loading="lazy" width="360" height="540">
+      <img src="midia/capas/missao-2.jpg" alt="Missão 2: Seu canal tem cara" loading="lazy" width="360" height="540">
+      <img src="midia/capas/missao-3.jpg" alt="Missão 3: O que funciona no seu nicho" loading="lazy" width="360" height="540">
+      <img src="midia/capas/missao-4.jpg" alt="Missão 4: Seu primeiro vídeo" loading="lazy" width="360" height="540">
+      <img src="midia/capas/missao-5.jpg" alt="Missão 5: Capa e título que dão clique" loading="lazy" width="360" height="540">
+      <img src="midia/capas/missao-6.jpg" alt="Missão 6: Seu vídeo no ar" loading="lazy" width="360" height="540">
+      <img src="midia/capas/missao-7.jpg" alt="Missão 7: Crescer toda semana" loading="lazy" width="360" height="540">
+      <img src="midia/capas/bonus.jpg" alt="Bônus: checklists e materiais" loading="lazy" width="360" height="540">
     </div>
     <div class="modulos">
-      <details><summary><span class="n">M00</span><span class="t">Comece aqui</span><span class="q">3 aulas · 21 min</span></summary><ol><li>O que você vai construir</li><li>O que você precisa e quanto custa</li><li>Combinados: o que dá certo e o que derruba canal de IA</li></ol></details>
-      <details><summary><span class="n">M01</span><span class="t">Instalação sem medo</span><span class="q">5 aulas · 38 min</span></summary><ol><li>Claude Code: o que é e onde usar</li><li>Python, Node.js e ffmpeg</li><li>Instalando o Estúdio IA e criando a pasta do canal</li><li>Primeira conversa com o agente</li><li>Instalando o estúdio 3D e renderizando o primeiro exemplo</li></ol></details>
-      <details><summary><span class="n">M02</span><span class="t">Conectando Google, YouTube e Instagram</span><span class="q">4 aulas · 39 min</span></summary><ol><li>Google Cloud e Gemini</li><li>Ligando o YouTube</li><li>Instagram</li><li>Suas chaves em segurança</li></ol></details>
-      <details><summary><span class="n">M03</span><span class="t">Identidade do canal</span><span class="q">4 aulas · 40 min</span></summary><ol><li>Escolhendo o nicho</li><li>O padrão do canal</li><li>Estilo visual e protagonista</li><li>Nome, foto, banner e descrição do canal</li></ol></details>
-      <details><summary><span class="n">M04</span><span class="t">Estratégia com dados</span><span class="q">5 aulas · 54 min</span></summary><ol><li>Diagnóstico do seu canal</li><li>Pesquisa de nicho e outliers</li><li>Concorrentes: o que bomba e o que flopa</li><li>Engenharia reversa de vídeos virais</li><li>A estratégia e as 10 ideias ranqueadas</li></ol></details>
-      <details><summary><span class="n">M05</span><span class="t">Roteiro que prende</span><span class="q">4 aulas · 38 min</span></summary><ol><li>A estrutura de retenção</li><li>Escrevendo com o agente</li><li>Roteiro de Shorts e Reels</li><li>Fatos, fontes e cuidados do nicho</li></ol></details>
-      <details><summary><span class="n">M06</span><span class="t">Sua voz</span><span class="q">3 aulas · 26 min</span></summary><ol><li>Gravando com o celular</li><li>Ritmo e entonação</li><li>Do áudio ao agente</li></ol></details>
-      <details><summary><span class="n">M07</span><span class="t">Seu primeiro vídeo 3D</span><span class="q">6 aulas · 51 min</span></summary><ol><li>Como o estúdio pensa</li><li>Projeto e linha do tempo</li><li>Tomadas: uma ideia por tomada</li><li>Cenas: o agente escreve, você dirige</li><li>Folha de contato: revisar antes de renderizar</li><li>Render, som e entrega</li></ol></details>
-      <details><summary><span class="n">M08</span><span class="t">Personagens, cenários e efeitos</span><span class="q">5 aulas · 42 min</span></summary><ol><li>O elenco</li><li>Montando personagens</li><li>Rosto e emoção</li><li>Cenários e objetos</li><li>Efeitos e transições</li></ol></details>
-      <details><summary><span class="n">M09</span><span class="t">Shorts e Reels</span><span class="q">3 aulas · 22 min</span></summary><ol><li>O formato 9:16</li><li>Os 2 primeiros segundos e o final em loop</li><li>Reels próprios, não cortes</li></ol></details>
-      <details><summary><span class="n">M10</span><span class="t">Embalagem: título, capa e descrição</span><span class="q">4 aulas · 32 min</span></summary><ol><li>Títulos</li><li>A capa</li><li>Descrição, capítulos, tags e comentário fixado</li><li>Aviso de IA e direitos autorais</li></ol></details>
-      <details><summary><span class="n">M11</span><span class="t">Publicar e agendar</span><span class="q">3 aulas · 22 min</span></summary><ol><li>YouTube: postar e agendar</li><li>Instagram: Reels</li><li>Frequência e horários</li></ol></details>
-      <details><summary><span class="n">M12</span><span class="t">Medir e crescer</span><span class="q">5 aulas · 40 min</span></summary><ol><li>O YouTube Studio sem se perder</li><li>A retenção explicada pela IA</li><li>O arquivo de aprendizados</li><li>Otimizando vídeos antigos</li><li>A rotina semanal e o modo automático</li></ol></details>
-      <details><summary><span class="n">M13</span><span class="t">Monetização e próximos passos</span><span class="q">3 aulas · 22 min</span></summary><ol><li>O Programa de Parcerias do YouTube</li><li>Outras rendas do canal</li><li>Seu plano de 30 dias</li></ol></details>
+      <details><summary><span class="n">M1</span><span class="t">Tudo instalado</span><span class="q">4 aulas · 18 min</span></summary><ol><li>Bem-vindo</li><li>Os programas</li><li>O Estúdio IA e o comando mágico</li><li>Seu primeiro render</li></ol></details>
+      <details><summary><span class="n">M2</span><span class="t">Seu canal tem cara</span><span class="q">3 aulas · 13 min</span></summary><ol><li>O nicho em 5 minutos</li><li>O padrão do canal</li><li>Seu protagonista</li></ol></details>
+      <details><summary><span class="n">M3</span><span class="t">O que funciona no seu nicho</span><span class="q">3 aulas · 17 min</span></summary><ol><li>Ligando o Google e o YouTube</li><li>Outliers, os vídeos que furaram a bolha</li><li>As 10 ideias e o primeiro vídeo</li></ol></details>
+      <details><summary><span class="n">M4</span><span class="t">Seu primeiro vídeo</span><span class="q">4 aulas · 20 min</span></summary><ol><li>O roteiro que prende</li><li>A voz no celular</li><li>Do áudio às cenas</li><li>Render, som e o vídeo pronto</li></ol></details>
+      <details><summary><span class="n">M5</span><span class="t">A capa e o título que dão clique</span><span class="q">2 aulas · 9 min</span></summary><ol><li>Três títulos e a escolha</li><li>A capa no padrão do canal</li></ol></details>
+      <details><summary><span class="n">M6</span><span class="t">No ar</span><span class="q">2 aulas · 9 min</span></summary><ol><li>Agendando no YouTube</li><li>Reels no Instagram</li></ol></details>
+      <details><summary><span class="n">M7</span><span class="t">Crescer toda semana</span><span class="q">3 aulas · 14 min</span></summary><ol><li>A IA explica por que as pessoas saíram</li><li>O arquivo de aprendizados</li><li>Sua rotina de 1 hora por semana</li></ol></details>
+      <details><summary><span class="n">+</span><span class="t">Bônus: checklists e materiais</span><span class="q">para baixar</span></summary><ol><li>Checklist de instalação</li><li>Pedidos prontos para o agente</li><li>Guia da voz</li><li>Checklist do vídeo antes de publicar</li><li>Rotina semanal</li><li>Plano de 30 dias</li><li>Glossário</li></ol></details>
     </div>
   </div>
 </section>
@@ -448,7 +464,7 @@
         computador, então não há custo por vídeo. Estes são os gastos de verdade:</p>
     </div>
     <dl class="custos">
-      <div><dt>Claude</dt><dd>Um plano pago com o Claude Code. Quem produz muito pode precisar de um plano maior.</dd></div>
+      <div><dt>Claude</dt><dd>Um plano pago com o Claude Code, cobrado à parte todo mês (custa mais que o curso). Quem produz muito pode precisar de um plano maior.</dd></div>
       <div><dt>Computador</dt><dd>Windows, Mac ou Linux, com uns 2 GB livres. 1 minuto de vídeo leva de 10 a 25 min para renderizar.</dd></div>
       <div><dt>Google Cloud</dt><dd>As análises com a Gemini custam centavos cada, e a conta nova ganha crédito grátis.</dd></div>
       <div><dt>YouTube e Instagram</dt><dd>Grátis, pelas APIs oficiais.</dd></div>
@@ -465,16 +481,15 @@
     </div>
     <div class="oferta">
       <ul class="pilha">
-        <li><b>Curso Estúdio IA</b><span>14 módulos e 57 aulas, da instalação ao canal medindo e melhorando.</span></li>
-        <li><span class="bonus">Bônus</span><b>Plugin Estúdio IA para o Claude Code</b><span>O agente do YouTube passo a passo e o estúdio 3D completo, com o elenco, os cenários, os efeitos e a música.</span></li>
-        <li><span class="bonus">Bônus</span><b>Pedidos prontos</b><span>O que escrever para o agente em cada etapa.</span></li>
-        <li><span class="bonus">Bônus</span><b>Kit de checklists</b><span>Instalação, vídeo antes de publicar, guia da voz, rotina semanal e plano de 30 dias.</span></li>
+        <li><b>A trilha das 7 missões</b><span>21 aulas curtas, do zero ao primeiro vídeo no ar e à análise da retenção.</span></li>
+        <li><b>Plugin Estúdio IA para o Claude Code</b><span>O modo guiado, que te ensina enquanto faz, o agente do YouTube e o estúdio 3D completo, com o elenco, os cenários, os efeitos e a música.</span></li>
+        <li><span class="bonus">Bônus</span><b>Kit de materiais</b><span>Checklists, pedidos prontos para o agente, guia da voz, rotina semanal e plano de 30 dias.</span></li>
         <li><b>Atualizações do plugin por 12 meses</b><span>Correções e novidades entregues na área de membros.</span></li>
       </ul>
       <div class="preco">
         <span class="sobretitulo">Acesso imediato</span>
-        <!-- PREÇO: confira com oferta.md (fundadores R$ 197 · lançamento R$ 297 · cheio R$ 497) -->
-        <div class="valor"><small>R$</small>297</div>
+        <!-- PREÇO: R$ 79,90 (veja oferta.md) -->
+        <div class="valor"><small>R$</small>79<small>,90</small></div>
         <p style="color:var(--tinta-2)">à vista no Pix ou parcelado no cartão</p>
         <!-- TROCAR: href pelo link do checkout (Hotmart, Kiwify...) -->
         <a class="botao cheio comprar" href="#oferta">Quero o Estúdio IA</a>
@@ -505,6 +520,7 @@
   <div class="miolo">
     <div class="cabeca"><span class="sobretitulo">Dúvidas</span><h2>Perguntas frequentes</h2></div>
     <div class="faq">
+      <details><summary>Nunca usei nada disso. Vou conseguir?</summary><p>Vai. O agente te leva pela mão numa trilha de 7 missões: explica cada passo em português simples, espera o seu ok e mostra o quanto falta. Se algo der errado, você digita <code>/estudio-ia:travei</code> e ele descobre o que foi.</p></details>
       <details><summary>Preciso saber programar?</summary><p>Não. Você conversa com o agente em português e aprova o que ele mostra. O código das cenas é escrito pelo agente.</p></details>
       <details><summary>Meu computador é simples. Funciona?</summary><p>Funciona em computador comum, só leva mais tempo para renderizar. Você pode usar o computador enquanto isso.</p></details>
       <details><summary>Vou ter gastos todo mês?</summary><p>O plano do Claude, sim. O vídeo 3D não tem custo por vídeo. As análises com a Gemini custam centavos, e a conta nova do Google ganha crédito grátis.</p></details>
@@ -533,7 +549,7 @@
   </div>
 </footer>
 
-<div class="barra-compra"><b>R$ 297</b><a class="botao cheio" href="#oferta">Quero entrar</a></div>
+<div class="barra-compra"><b>R$ 79,90</b><a class="botao cheio" href="#oferta">Quero entrar</a></div>
 
 <script>
   // Linha do tempo real do vídeo de exemplo (linha/palavras.json e historia/tomadas.json do projeto "cabecoes").

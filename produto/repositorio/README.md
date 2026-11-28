@@ -44,15 +44,24 @@ Crie uma pasta só para o canal, por exemplo `Documentos/meu-canal`, e abra o Cl
 do canal, os relatórios, os roteiros e os vídeos.
 
 ### Passo 4: comece
-Escreva no Claude Code:
-> **Use o agente do YouTube do estudio-ia para começar meu canal.**
+Digite no Claude Code:
+```
+/estudio-ia:comecar
+```
+O agente te leva por **7 missões**, ensinando enquanto faz:
 
-Na primeira vez, o agente faz três coisas:
-- confere o que está instalado (`verificar.py`);
-- guia você, um passo por vez, para conectar o Google (Gemini) e o YouTube;
-- faz algumas perguntas para montar o **padrão do seu canal**.
+1. Tudo instalado (e um vídeo de exemplo pronto no seu computador)
+2. Seu canal tem cara
+3. O que funciona no seu nicho
+4. Seu primeiro vídeo
+5. A capa e o título que dão clique
+6. No ar
+7. Crescer toda semana
 
-Depois ele segue o passo a passo sozinho e para para pedir o seu ok nas decisões importantes.
+Cada missão mostra o progresso, explica cada passo em português simples e espera o seu ok. Para parar e continuar
+outro dia, é só digitar `/estudio-ia:comecar` de novo. Travou em alguma coisa? Digite `/estudio-ia:travei`.
+
+Depois da trilha, o agente do YouTube segue o ciclo com você: escreva "Use o agente do YouTube do estudio-ia".
 
 ### Usando no navegador (claude.ai/code)
 As sessões na nuvem não carregam plugins instalados no computador. Para usar no navegador:

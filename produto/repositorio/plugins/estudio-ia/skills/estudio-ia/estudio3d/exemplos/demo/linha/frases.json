@@ -1,0 +1,49 @@
+{
+ "frases": [
+  {
+   "texto": "Você já reparou que uma boa história prende a sua atenção?",
+   "ini": 0.4,
+   "fim": 3.749,
+   "palavras": [
+    0,
+    10
+   ]
+  },
+  {
+   "texto": "Em 2010, pesquisadores da Universidade de Princeton escanearam o cérebro de quem contava uma história e de quem ouvia.",
+   "ini": 4.078,
+   "fim": 10.501,
+   "palavras": [
+    11,
+    29
+   ]
+  },
+  {
+   "texto": "E descobriram algo incrível: os dois cérebros entraram em sincronia.",
+   "ini": 10.825,
+   "fim": 14.423,
+   "palavras": [
+    30,
+    39
+   ]
+  },
+  {
+   "texto": "Quanto mais sincronia, mais a pessoa entendia.",
+   "ini": 14.756,
+   "fim": 17.262,
+   "palavras": [
+    40,
+    46
+   ]
+  },
+  {
+   "texto": "E você, qual história nunca saiu da sua cabeça?",
+   "ini": 17.594,
+   "fim": 20.437,
+   "palavras": [
+    47,
+    55
+   ]
+  }
+ ]
+}

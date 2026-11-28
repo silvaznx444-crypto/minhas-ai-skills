@@ -1,0 +1,285 @@
+{
+ "palavras": [
+  {
+   "texto": "Você",
+   "ini": 0.4,
+   "fim": 0.673
+  },
+  {
+   "texto": "já",
+   "ini": 0.697,
+   "fim": 0.917
+  },
+  {
+   "texto": "reparou",
+   "ini": 0.936,
+   "fim": 1.289
+  },
+  {
+   "texto": "que",
+   "ini": 1.32,
+   "fim": 1.566
+  },
+  {
+   "texto": "uma",
+   "ini": 1.588,
+   "fim": 1.834
+  },
+  {
+   "texto": "boa",
+   "ini": 1.855,
+   "fim": 2.102
+  },
+  {
+   "texto": "história",
+   "ini": 2.123,
+   "fim": 2.503
+  },
+  {
+   "texto": "prende",
+   "ini": 2.536,
+   "fim": 2.863
+  },
+  {
+   "texto": "a",
+   "ini": 2.891,
+   "fim": 3.084
+  },
+  {
+   "texto": "sua",
+   "ini": 3.101,
+   "fim": 3.347
+  },
+  {
+   "texto": "atenção?",
+   "ini": 3.369,
+   "fim": 3.749
+  },
+  {
+   "texto": "Em",
+   "ini": 4.078,
+   "fim": 4.298
+  },
+  {
+   "texto": "2010,",
+   "ini": 4.317,
+   "fim": 4.616
+  },
+  {
+   "texto": "pesquisadores",
+   "ini": 4.758,
+   "fim": 5.271
+  },
+  {
+   "texto": "da",
+   "ini": 5.315,
+   "fim": 5.535
+  },
+  {
+   "texto": "Universidade",
+   "ini": 5.554,
+   "fim": 6.041
+  },
+  {
+   "texto": "de",
+   "ini": 6.083,
+   "fim": 6.303
+  },
+  {
+   "texto": "Princeton",
+   "ini": 6.322,
+   "fim": 6.729
+  },
+  {
+   "texto": "escanearam",
+   "ini": 6.764,
+   "fim": 7.197
+  },
+  {
+   "texto": "o",
+   "ini": 7.235,
+   "fim": 7.428
+  },
+  {
+   "texto": "cérebro",
+   "ini": 7.445,
+   "fim": 7.798
+  },
+  {
+   "texto": "de",
+   "ini": 7.828,
+   "fim": 8.048
+  },
+  {
+   "texto": "quem",
+   "ini": 8.067,
+   "fim": 8.34
+  },
+  {
+   "texto": "contava",
+   "ini": 8.364,
+   "fim": 8.717
+  },
+  {
+   "texto": "uma",
+   "ini": 8.748,
+   "fim": 8.995
+  },
+  {
+   "texto": "história",
+   "ini": 9.016,
+   "fim": 9.396
+  },
+  {
+   "texto": "e",
+   "ini": 9.429,
+   "fim": 9.622
+  },
+  {
+   "texto": "de",
+   "ini": 9.639,
+   "fim": 9.859
+  },
+  {
+   "texto": "quem",
+   "ini": 9.878,
+   "fim": 10.151
+  },
+  {
+   "texto": "ouvia.",
+   "ini": 10.175,
+   "fim": 10.501
+  },
+  {
+   "texto": "E",
+   "ini": 10.825,
+   "fim": 11.019
+  },
+  {
+   "texto": "descobriram",
+   "ini": 11.035,
+   "fim": 11.495
+  },
+  {
+   "texto": "algo",
+   "ini": 11.535,
+   "fim": 11.808
+  },
+  {
+   "texto": "incrível:",
+   "ini": 11.832,
+   "fim": 12.239
+  },
+  {
+   "texto": "os",
+   "ini": 12.389,
+   "fim": 12.609
+  },
+  {
+   "texto": "dois",
+   "ini": 12.628,
+   "fim": 12.901
+  },
+  {
+   "texto": "cérebros",
+   "ini": 12.925,
+   "fim": 13.305
+  },
+  {
+   "texto": "entraram",
+   "ini": 13.338,
+   "fim": 13.717
+  },
+  {
+   "texto": "em",
+   "ini": 13.75,
+   "fim": 13.97
+  },
+  {
+   "texto": "sincronia.",
+   "ini": 13.989,
+   "fim": 14.423
+  },
+  {
+   "texto": "Quanto",
+   "ini": 14.756,
+   "fim": 15.083
+  },
+  {
+   "texto": "mais",
+   "ini": 15.111,
+   "fim": 15.384
+  },
+  {
+   "texto": "sincronia,",
+   "ini": 15.408,
+   "fim": 15.841
+  },
+  {
+   "texto": "mais",
+   "ini": 15.994,
+   "fim": 16.267
+  },
+  {
+   "texto": "a",
+   "ini": 16.291,
+   "fim": 16.484
+  },
+  {
+   "texto": "pessoa",
+   "ini": 16.501,
+   "fim": 16.827
+  },
+  {
+   "texto": "entendia.",
+   "ini": 16.856,
+   "fim": 17.262
+  },
+  {
+   "texto": "E",
+   "ini": 17.594,
+   "fim": 17.787
+  },
+  {
+   "texto": "você,",
+   "ini": 17.803,
+   "fim": 18.103
+  },
+  {
+   "texto": "qual",
+   "ini": 18.244,
+   "fim": 18.518
+  },
+  {
+   "texto": "história",
+   "ini": 18.541,
+   "fim": 18.921
+  },
+  {
+   "texto": "nunca",
+   "ini": 18.954,
+   "fim": 19.254
+  },
+  {
+   "texto": "saiu",
+   "ini": 19.28,
+   "fim": 19.553
+  },
+  {
+   "texto": "da",
+   "ini": 19.577,
+   "fim": 19.797
+  },
+  {
+   "texto": "sua",
+   "ini": 19.816,
+   "fim": 20.062
+  },
+  {
+   "texto": "cabeça?",
+   "ini": 20.084,
+   "fim": 20.437
+  }
+ ],
+ "fonte": "provisoria"
+}

@@ -1,8 +1,22 @@
 {
   "name": "estudio-ia",
-  "version": "0.1.0",
-  "description": "Estúdio de canal com IA: identidade, estratégia (nicho, concorrentes, retenção), roteiro, vídeo, capa e publicação no YouTube e Instagram, com um agente que guia passo a passo.",
-  "author": { "name": "Estúdio IA" },
+  "version": "0.2.0",
+  "description": "Estúdio de canal com IA: identidade, estratégia (nicho, concorrentes, retenção), roteiro, vídeo 3D construído a partir da narração, capa e publicação no YouTube e Instagram, com um agente que guia passo a passo.",
+  "author": {
+    "name": "Estúdio IA"
+  },
   "license": "Proprietária: veja LICENCA.md",
-  "keywords": ["youtube", "instagram", "reels", "shorts", "estrategia", "roteiro", "video", "canal", "ia"]
+  "keywords": [
+    "youtube",
+    "instagram",
+    "reels",
+    "shorts",
+    "estrategia",
+    "roteiro",
+    "video",
+    "canal",
+    "ia",
+    "3d",
+    "animacao"
+  ]
 }

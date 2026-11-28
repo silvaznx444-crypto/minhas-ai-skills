@@ -109,6 +109,9 @@ def estudio3d() -> None:
             pass
     ok = bool(versao) and int(versao.lstrip("v").split(".")[0] or 0) >= 18
     marca("OK" if ok else "FALTA", "Node.js 18+ (vídeo 3D)", versao, "Instale o Node.js LTS em nodejs.org")
+    pronto = (Path.cwd() / "estudio3d" / "node_modules" / "three").exists()
+    marca("OK" if pronto else "OPCIONAL", "Estúdio 3D nesta pasta", "instalado" if pronto else "ainda não instalado",
+          f"python3 {AQUI / 'estudio3d.py'} instalar")
 
 
 def main() -> None:

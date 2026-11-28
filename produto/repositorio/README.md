@@ -7,9 +7,12 @@ Um agente que trabalha com você em cada etapa do canal, dentro do **Claude Code
 3. **Nicho e concorrentes:** acha os vídeos que bombaram muito acima do normal ("outliers") e o que eles têm em comum.
 4. **Engenharia reversa:** a IA assiste a um vídeo viral e devolve o gancho, a estrutura e uma receita para adaptar.
 5. **Estratégia:** pilares de conteúdo, frequência, horários e 10 ideias ranqueadas.
-6. **Roteiro** com estrutura de retenção, **vídeo**, **títulos e capa**.
-7. **Publicação** agendada no YouTube e no Instagram.
-8. **Pós-publicação:** mede, aprende e melhora o próximo vídeo.
+6. **Roteiro** com estrutura de retenção e **vídeo 3D animado a partir da sua narração**: bonecos 3D, cenários, câmera
+   em movimento, legenda palavra por palavra, música e efeitos. Funciona em 16:9 (YouTube) e 9:16 (Reels e Shorts).
+   Os personagens ficam sempre iguais e não há custo por vídeo.
+7. **Títulos e capa**.
+8. **Publicação** agendada no YouTube e no Instagram.
+9. **Pós-publicação:** mede, aprende e melhora o próximo vídeo.
 
 ---
 
@@ -17,7 +20,9 @@ Um agente que trabalha com você em cada etapa do canal, dentro do **Claude Code
 
 ### O que você precisa
 - **Claude Code** num plano pago do Claude. Pode ser o app para computador ou o terminal.
-- **Python 3.9+** ([python.org/downloads](https://www.python.org/downloads/)) e **ffmpeg**. O verificador do passo 4 diz se falta algum.
+- **Python 3.9+** ([python.org/downloads](https://www.python.org/downloads/)), **Node.js 18+** ([nodejs.org](https://nodejs.org)) e
+  **ffmpeg**. O verificador do passo 4 diz se falta algum. O estúdio 3D é instalado pelo agente na primeira vez
+  (uns 500 MB, contando o modelo que transcreve a sua voz).
 - Uma conta Google com o seu canal do YouTube.
 
 ### Passo 1: descompacte
@@ -70,13 +75,15 @@ As sessões na nuvem não carregam plugins instalados no computador. Para usar n
 - "Analisa este vídeo e me diz como adaptar para o meu canal: <link>"
 - "Por que as pessoas saem do meu último vídeo?"
 - "Escreve o roteiro da ideia 3 da estratégia."
+- "Faz o vídeo 3D com esta narração." (mande o áudio)
 - "Faz 3 títulos e a capa e agenda para quarta às 18h45."
 
 ## Custos
 - **Claude Code:** o seu plano do Claude. Produzir vídeos e analisar o canal consome bastante do limite.
 - **Google (Gemini, para análises, imagens e vídeos):** conta nova do Google Cloud ganha crédito grátis.
-  Uma análise custa centavos e um vídeo gerado com o Veo custa cerca de US$ 3 por trecho de 8 segundos. O agente sempre
-  mostra o custo antes.
+  Uma análise custa centavos. O vídeo 3D não tem custo de API, só tempo do seu computador: cerca de 10 a 25 minutos
+  para 1 minuto de vídeo. O vídeo gerado com o Veo, que é opcional, custa cerca de US$ 3 por trecho de 8 segundos. O agente
+  sempre mostra o custo antes.
 - **YouTube e Instagram:** grátis pelas APIs oficiais.
 
 ## Segurança

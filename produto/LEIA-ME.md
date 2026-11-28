@@ -15,13 +15,13 @@ Pasta de trabalho do infoproduto. **Nada aqui usa o código da GrowKaz nem arqui
 | Fase | Situação |
 |---|---|
 | 1. Plugin limpo e genérico (estratégia, canal, publicação, vídeo com Veo, identidade do canal, verificador) | **pronta**: valida com `claude plugin validate` e instala com `/plugin marketplace add` + `/plugin install` |
-| 2. Motor 3D próprio, sem código da GrowKaz, com o kit Psique adaptado e os modelos KayKit (CC0) | a fazer |
+| 2. Motor 3D próprio (render, palco, desenho, som, transcrição, tomadas sincronizadas pela fala), kit cartoon3d, modelos KayKit (CC0), instalador e exemplo | **pronta**: exemplo renderiza e mixa; transcrição e re-sincronização testadas com voz real |
 | 3. Estrutura do curso, materiais, preço e página de vendas | a fazer |
 | 4. Teste do zero como comprador (pasta limpa, conta nova) | a fazer |
 
 ## Gerar o ZIP de entrega
 ```bash
-cd produto && zip -r estudio-ia-v0.1.0.zip repositorio -x '*/__pycache__/*' && unzip -l estudio-ia-v0.1.0.zip | tail -3
+cd produto && zip -qr estudio-ia-v0.2.0.zip repositorio -x '*/__pycache__/*' '*/node_modules/*' '*/construcao/*' '*/saida/*' && unzip -l estudio-ia-v0.2.0.zip | tail -1
 ```
 
 ## Antes de vender (checklist)

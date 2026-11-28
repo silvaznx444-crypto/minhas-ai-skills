@@ -1,0 +1,154 @@
+{
+ "tomadas": [
+  {
+   "id": "S01",
+   "ancora": "Você já",
+   "cena": "Rua de dia. O protagonista anda em direção à câmera, distraído com um livro; a câmera recua devagar.",
+   "efeitos": [
+    [
+     0.3,
+     "swoosh",
+     -18
+    ]
+   ],
+   "ambiente": [
+    "cidade",
+    -30
+   ],
+   "ini": 0.0,
+   "fim": 3.93
+  },
+  {
+   "id": "S02",
+   "ancora": "Em 2010,",
+   "cena": "Laboratório aconchegante (quarto-estúdio). Dois pesquisadores conversam; cartela 'Universidade de Princeton · 2010'.",
+   "transicao": {
+    "tipo": "chicote",
+    "dur": 0.3
+   },
+   "efeitos": [
+    [
+     0.1,
+     "ding",
+     -14
+    ]
+   ],
+   "ambiente": [
+    "sala",
+    -32
+   ],
+   "ini": 3.93,
+   "fim": 6.61
+  },
+  {
+   "id": "S03",
+   "ancora": "escanearam o",
+   "cena": "Palco escuro: quem conta (gesticula) e quem ouve, frente a frente; um cérebro brilhante acima de cada um, com etiquetas.",
+   "transicao": {
+    "tipo": "fade",
+    "dur": 0.35
+   },
+   "efeitos": [
+    [
+     0.4,
+     "brilho",
+     -14
+    ]
+   ],
+   "ini": 6.61,
+   "fim": 10.67
+  },
+  {
+   "id": "S04",
+   "ancora": "E descobriram",
+   "cena": "Mesmo palco, mais perto: ondas de luz saem de um cérebro e chegam ao outro; os dois pulsam juntos. Carimbo 'SINCRONIA'.",
+   "efeitos": [
+    [
+     0.2,
+     "swoosh",
+     -16
+    ]
+   ],
+   "ini": 10.67,
+   "fim": 14.61
+  },
+  {
+   "id": "S05",
+   "ancora": "Quanto mais",
+   "cena": "Gráfico 3D: barras de sincronia crescendo junto com uma linha de compreensão; etiqueta com o resultado.",
+   "transicao": {
+    "tipo": "branco",
+    "dur": 0.3
+   },
+   "efeitos": [
+    [
+     0.3,
+     "pop",
+     -12
+    ],
+    [
+     0.6,
+     "pop",
+     -12
+    ],
+    [
+     0.9,
+     "pop",
+     -12
+    ],
+    [
+     1.2,
+     "sucesso",
+     -12
+    ]
+   ],
+   "ini": 14.61,
+   "fim": 17.44
+  },
+  {
+   "id": "S06",
+   "ancora": "E você,",
+   "cena": "Rua de dia: o protagonista acena para a câmera; carimbo 'QUAL É A SUA?' e chamada para comentar.",
+   "transicao": {
+    "tipo": "chicote",
+    "dur": 0.3
+   },
+   "efeitos": [
+    [
+     0.5,
+     "pop",
+     -10
+    ],
+    [
+     0.7,
+     "plim",
+     -14
+    ]
+   ],
+   "ambiente": [
+    "cidade",
+    -32
+   ],
+   "ini": 17.44,
+   "fim": 21.64
+  }
+ ],
+ "musica": [
+  {
+   "de": 0,
+   "ate": "S03",
+   "clima": "curioso"
+  },
+  {
+   "de": "S03",
+   "ate": "S06",
+   "clima": "misterio"
+  },
+  {
+   "de": "S06",
+   "ate": 21.64,
+   "clima": "alegre"
+  }
+ ],
+ "duracao": 21.64
+}

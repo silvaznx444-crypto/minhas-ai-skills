@@ -1,0 +1,6 @@
+node_modules/
+projetos/*/construcao/
+projetos/*/saida/
+exemplos/*/construcao/
+exemplos/*/saida/
+__pycache__/

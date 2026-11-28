@@ -1,0 +1,14 @@
+{
+  "name": "estudio3d",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Estúdio 3D: vídeos 3D construídos por código a partir de uma narração, renderizados quadro a quadro.",
+  "dependencies": {
+    "@fontsource/fredoka": "5.1.0",
+    "@fontsource/nunito": "5.1.0",
+    "@fontsource/playfair-display": "5.1.0",
+    "playwright": "1.56.0",
+    "three": "0.169.0"
+  }
+}

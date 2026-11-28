@@ -1,6 +1,6 @@
 ---
 name: estudio-ia
-description: Estúdio de canal com IA para YouTube e Instagram. Define a identidade do canal, faz análise estratégica (nicho, concorrentes, outliers, engenharia reversa de vídeos virais com a Gemini, curva de retenção explicada), escreve roteiros com estrutura de retenção, produz vídeos, cria títulos e capas, otimiza o canal (com prévia e backup) e publica ou agenda no YouTube e no Instagram. Inclui o agente do YouTube passo a passo, do diagnóstico ao pós-publicação. Use quando a pessoa quiser começar ou crescer um canal; pesquisar nicho ou concorrentes; analisar um vídeo; ter ideias; escrever roteiro; fazer um vídeo, Reels ou Shorts; melhorar a retenção; criar títulos e capas; ou postar e agendar.
+description: Estúdio de canal com IA para YouTube e Instagram. Define a identidade do canal, faz análise estratégica (nicho, concorrentes, outliers, engenharia reversa de vídeos virais com a Gemini, curva de retenção explicada), escreve roteiros com estrutura de retenção, produz vídeos 3D construídos por código a partir da narração (bonecos 3D, cenários, câmera, legenda palavra por palavra, música e efeitos; 16:9 ou 9:16), cria títulos e capas, otimiza o canal (com prévia e backup) e publica ou agenda no YouTube e no Instagram. Inclui o agente do YouTube passo a passo, do diagnóstico ao pós-publicação. Use quando a pessoa quiser começar ou crescer um canal; pesquisar nicho ou concorrentes; analisar um vídeo; ter ideias; escrever roteiro; fazer um vídeo, Reels ou Shorts; melhorar a retenção; criar títulos e capas; ou postar e agendar.
 ---
 
 # Estúdio IA: estratégia, criação e canal
@@ -19,7 +19,8 @@ pessoa está trabalhando. Os vídeos ficam em `projetos/`.
 | Instalar e configurar (primeira vez) | `verificar.py` | [guias/configuracao.md](guias/configuracao.md) |
 | Definir a identidade do canal | — | [guias/identidade.md](guias/identidade.md) |
 | Pesquisar nicho e concorrentes, dissecar um vídeo, entender a retenção | `estrategia.py` | [guias/estrategia.md](guias/estrategia.md) |
-| Criar um vídeo com IA (9:16 ou 16:9) | `videoia.py` | [guias/video-veo.md](guias/video-veo.md) |
+| **Criar um vídeo 3D a partir da narração** (padrão: 16:9 YouTube ou 9:16 Reels/Shorts) | `estudio3d.py` + `./estudio3d/` | [guias/video-3d.md](guias/video-3d.md) |
+| Criar um vídeo gerado por IA (Veo), só se a pessoa pedir | `videoia.py` | [guias/video-veo.md](guias/video-veo.md) |
 | Analisar e otimizar o canal, gerar capas, responder comentários | `youtube.py`, `miniatura.py`, `instagram_canal.py` | [guias/canal.md](guias/canal.md) |
 | Títulos, descrição, publicar e agendar | `youtube.py postar`, `instagram.py` | [guias/publicar.md](guias/publicar.md) |
 
@@ -40,8 +41,8 @@ A pessoa pode pular etapas ou pedir só uma.
 | 3 | **Concorrentes e referências** | `estrategia.py concorrente` em 2 ou 3 canais; `analisar-video` nos 2 ou 3 maiores outliers | o que bomba e o que flopa em cada um; receitas replicáveis |
 | 4 | **Estratégia** | você escreve | `canal/estrategia/<data>/estrategia.md`: posicionamento, 3 pilares, formato, frequência, **10 ideias ranqueadas** e o que medir ([estrategia §5](guias/estrategia.md)) |
 | 5 | **Roteiro** | você escreve, seguindo `canal/padrao.md` e `canal/aprendizados.md` | roteiro (gancho de 0 a 5 s, identificação, conteúdo, loops, virada, CTA), texto do narrador e indicações de voz |
-| 6 | **Produção** | [video-veo](guias/video-veo.md) (confira os quadros, mostre o custo, peça ok) + `analisar-video --arquivo` | vídeo final revisado |
-| 7 | **Embalagem** | `miniatura.py` (2 opções) | 3 títulos, capa, descrição com capítulos, tags e comentário fixado ([publicar §1](guias/publicar.md)) |
+| 6 | **Produção 3D** | [video-3d](guias/video-3d.md): projeto → linha do tempo → tomadas → cenas → **folha de contato (mostre)** → render → som | `saida/<título>.mp4` revisado |
+| 7 | **Embalagem** | tomada de capa + `miniatura.py --imagem` (2 opções) | 3 títulos, capa, descrição com capítulos, tags e comentário fixado ([publicar §1](guias/publicar.md)) |
 | 8 | **Publicação** | `youtube.py postar --agendar`, `instagram.py` | link e horário; registro em `canal/jornada.md` |
 | 9 | **Pós-publicação** (48 h e 7 dias) | `estrategia.py retencao --explicar` + `youtube.py analisar` | o que funcionou, regras novas em `canal/aprendizados.md`, ajustes de título e capa via plano ([canal](guias/canal.md)); volta para a etapa 5 |
 
@@ -49,8 +50,9 @@ Na etapa 8, se a ferramenta de lembrete agendado estiver disponível, agende a e
 à pessoa quando voltar. Para o ciclo semanal automático, veja [publicar §4](guias/publicar.md).
 
 ## Regras de sempre
-- **Custo:** mostre o custo antes de gastar. O Veo custa ~US$ 0,40/s (US$ 0,15/s no modo rápido): peça ok antes
-  de `clipes --sim`, a não ser que a pessoa tenha liberado um orçamento. Análises e dados custam centavos.
+- **Vídeo:** o padrão é o 3D construído, que não tem custo de API, só tempo de render: diga a previsão e renderize em
+  segundo plano. Use o Veo só se a pessoa pedir: ele custa ~US$ 0,40/s, então mostre o custo e peça ok antes de gerar.
+  Análises e dados custam centavos.
 - **Narração:** se a pessoa gravou a própria voz, nunca reescreva, corte ou reordene a fala. As cenas seguem a voz.
 - **Canal ao vivo:** mudanças em vídeos publicados só com prévia, ok e backup (`youtube.py aplicar`). Não troque
   o título nem a capa de um vídeo que está bombando. Não apague vídeos e não mude a privacidade deles.

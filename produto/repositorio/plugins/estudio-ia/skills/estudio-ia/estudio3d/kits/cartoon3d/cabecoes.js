@@ -108,10 +108,10 @@ export async function cabecao(tipo = 'Knight', o = {}) {
     },
     /** Vira para olhar o ponto (x, z) do chão. */
     olharPara(x, z) { raiz.rotation.y = Math.atan2(x - raiz.position.x, z - raiz.position.z); },
-    osso: (nome) => modelo.getObjectByName(nome),
+    osso: (nome) => modelo.getObjectByName(nome) || modelo.getObjectByName(THREE.PropertyBinding.sanitizeNodeName(nome)),
     /** Prende um objeto num osso (ex.: 'handslot.r', 'handslot.l', 'head', 'chest'); compensa a escala do modelo. */
     segurar(nome, obj, pos = [0, 0, 0], rot = [0, 0, 0]) {
-      const osso = modelo.getObjectByName(nome) || modelo; modelo.updateMatrixWorld(true);
+      const osso = p.osso(nome) || modelo; modelo.updateMatrixWorld(true);
       const s = new THREE.Vector3(); osso.getWorldScale(s);
       const suporte = new THREE.Group(); suporte.scale.setScalar(1 / (s.x || 1)); suporte.add(obj);
       obj.position.set(...pos); obj.rotation.set(...rot); osso.add(suporte); return suporte;

@@ -158,6 +158,16 @@ amarelo na folha de contato.
 
   A cor da pálpebra vem da própria textura de cada personagem.
   Combine sempre o rosto com a animação do corpo, os ícones e a câmera.
+- **figurino.js (personagens do dia a dia a partir dos cabeções):** `await personagem('medica')` usa o elenco pronto,
+  que já vem com rosto expressivo em `p.rosto`. São 16 receitas em `ELENCO`: estudante, estudante2, professora, medica,
+  cientista, executivo, vovo, vovo2, crianca, crianca2, chef, atleta, musico, influencer, policial e rei.
+  Para montar o seu: `await personagem({ tipo: 'Rogue', cores: {...}, acessorios: [['bone', {cor}], ['mochila']], altura: 1.2 })`.
+  - **Cores:** `pele` (use `PELE.clara|media|morena|parda|escura|retinta`), `cabelo` (`CABELO.*`), `roupa`, `detalhes`,
+    `calca`, `botas`, `couro` e `armadura` (só no Knight). A cor nova mantém o sombreado da textura.
+  - **Acessórios:** oculos, oculosSol, bone, gorro, cartola, chapeuChef, coroa, laco, fones, bigode, gravata, cachecol,
+    estetoscopio, mochila, capa. Na mão: celular, livro, xicara, maleta, microfone, balaoFesta.
+  - Também funcionam separados: `pintar(p, cores)` e `vestir(p, 'oculos', {cor})`.
+  - Crianças: use `altura` de 1.0 a 1.1. Idosos: de 1.35 a 1.4, com cabelo branco ou grisalho.
 - **mundos.js (cenários coloridos do estilo cabeção):**
   - `parque({clima: 'dia'|'entardecer'})`: grama, caminho, árvores de algodão-doce, lago, bancos e postes;
   - `praca()`: ladrilhos, prédios, café com guarda-sol e fonte;

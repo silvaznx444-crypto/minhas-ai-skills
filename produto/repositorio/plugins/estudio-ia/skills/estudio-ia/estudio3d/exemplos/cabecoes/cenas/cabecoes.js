@@ -4,21 +4,16 @@ import { registrarTomada, E, quando, curva, prog } from '/motor/nucleo.js';
 import { moverCamera, naTela, soco } from '/motor/palco3d.js';
 import { carimbo, etiqueta, balao } from '/motor/desenho.js';
 import { confete, brilhos, impacto, pensamento, figurinha, seta } from '/motor/efeitos2d.js';
-import { cabecao, emocao, mostrarEmocao, rosto, piscar } from '/kits/cartoon3d/cabecoes.js';
+import { emocao, mostrarEmocao, piscar } from '/kits/cartoon3d/cabecoes.js';
+import { personagem } from '/kits/cartoon3d/figurino.js';
 import { parque, praca, sala, palcoCor } from '/kits/cartoon3d/mundos.js';
 import { heartsRain } from '/kits/cartoon3d/interface.js';
 
-// elenco fixo: o mesmo tipo e a mesma cor em todas as cenas
-const ELENCO = {
-  heroi: ['Knight', {}],
-  maga: ['Mage', { cor: '#ffd8e8' }],
-  ladino: ['Rogue', {}],
-  amiga: ['Rogue_Hooded', { cor: '#d8ffe0' }],
-  grandao: ['Barbarian', {}],
-};
+// elenco fixo (personagens prontos do figurino): a mesma aparência em todas as cenas
+const ELENCO = { heroi: 'estudante', maga: 'professora', ladino: 'executivo', amiga: 'atleta', grandao: 'chef' };
 async function ator(cena, nome, x, z, giro = 0) {
-  const [tipo, op] = ELENCO[nome]; const p = await cabecao(tipo, { altura: 1.5, ...op });
-  p.raiz.position.set(x, 0, z); p.raiz.rotation.y = giro; cena.add(p.raiz); p.rosto = rosto(p); return p;
+  const p = await personagem(ELENCO[nome]); // já vem pintado, com acessórios e rosto expressivo (p.rosto)
+  p.raiz.position.set(x, 0, z); p.raiz.rotation.y = giro; cena.add(p.raiz); return p;
 }
 const fala = (t, a, b) => (t > a && t < b ? 0.35 + 0.6 * Math.abs(Math.sin(t * 14)) : 0);
 

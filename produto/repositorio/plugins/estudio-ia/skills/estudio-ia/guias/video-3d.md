@@ -12,6 +12,11 @@ A referência técnica (API das cenas, kit, formatos) está em `estudio3d/LEIA-M
 
 Dá para misturar os dois, mas mantenha sempre o mesmo protagonista.
 
+**Personagens do dia a dia.** No estilo cabeção, use o `figurino.js`. Ele traz 16 personagens prontos (estudante,
+professora, médica, executivo, vovó, criança, chef, atleta...) e permite montar novos trocando a pele (6 tons), o cabelo
+e as cores da roupa e pondo acessórios (óculos, boné, gravata, mochila, estetoscópio, fones, celular...). Guarde a receita
+do protagonista no `canal/padrao.md`, para ele ser igual em todos os vídeos.
+
 **Rosto e efeitos.**
 - Os cabeções têm rosto expressivo (`rosto()`): piscam, sorriem, gargalham, falam acompanhando a narração, ficam bravos,
   tristes ou surpresos, coram, choram e suam.

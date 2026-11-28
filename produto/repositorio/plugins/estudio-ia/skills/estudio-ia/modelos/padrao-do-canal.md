@@ -33,7 +33,8 @@ Português do Brasil, falando com "você", frases curtas, no tom acima.
 ## Visual
 - **Estilo:** {{ESTILO_VISUAL}}. No estúdio 3D, escolha entre **cabeção** (cartoon de jogo, personagens KayKit em mundos
   coloridos) e **bonecos com contorno** (bonecos 3D de rosto expressivo, luz de cinema).
-- **Protagonista recorrente:** {{PROTAGONISTA}} (aparência fixa: no estilo cabeção, o tipo e a cor, ex. "Knight sem tinta";
+- **Protagonista recorrente:** {{PROTAGONISTA}} (aparência fixa: no estilo cabeção, a receita do figurino, ex.
+  `personagem({ tipo: 'Rogue', cores: { pele: PELE.morena, roupa: '#3f7fbf' }, acessorios: [['oculos']] })`;
   nos bonecos, roupa, cor e cabelo). Os outros personagens variam.
 - **Paleta / clima:** {{PALETA}}
 - **Ritmo:** cena nova a cada 3–5 s; nada parado. Cada vídeo com cenas próprias (não parecer conteúdo em série).

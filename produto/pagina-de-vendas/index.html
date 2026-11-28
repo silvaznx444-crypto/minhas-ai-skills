@@ -1,0 +1,578 @@
+<title>Estúdio IA</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Curso + plugin para o Claude Code: vídeos 3D animados a partir da sua voz, com um agente que pesquisa o nicho, escreve o roteiro e explica a retenção.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;800;900&family=JetBrains+Mono:wght@500;700&display=swap">
+<!--
+  PÁGINA DE VENDAS: ESTÚDIO IA
+  Antes de publicar:
+  1. Troque o href dos botões de compra (class="comprar") pelo link do checkout.
+  2. Preencha os blocos marcados com class="preencher" (quem ensina) e confira o preço.
+  3. Depoimentos: só reais, com autorização (veja oferta.md). A seção está comentada lá embaixo.
+  Todas as imagens e vídeos da pasta midia/ foram feitos pelo próprio estúdio 3D.
+-->
+<style>
+  /* Layout: a página é a "ilha de edição" do produto. Herói com o vídeo real num celular, a linha do tempo das
+     palavras daquele vídeo, a folha de contato, o elenco, o agente, as capas dos módulos e a oferta. Mundo pastel
+     dos cabeções, num tema claro só (escolha de identidade). */
+  :root {
+    color-scheme: light;
+    --chao: #fbf4ff;        /* fundo lilás-claro do palco */
+    --chao-2: #f2e9ff;      /* faixas alternadas */
+    --papel: #ffffff;
+    --tinta: #2a2440;       /* tinta dos contornos dos personagens */
+    --tinta-2: #5d5575;
+    --linha: #e4d8f3;
+    --rosa: #ff4f8b;        /* fones da protagonista */
+    --rosa-escuro: #d8306b;
+    --sol: #ffd84a;
+    --violeta: #7c5cff;     /* moletom da protagonista */
+    --menta: #5fd39a;
+    --f-titulo: "Fredoka", "Nunito", system-ui, sans-serif;
+    --f-texto: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --raio: 22px;
+    --s: 96px;              /* pixels por segundo na linha do tempo */
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--chao); color: var(--tinta); font-family: var(--f-texto); font-size: 17px; line-height: 1.6; margin: 0; }
+  img, video { max-width: 100%; height: auto; display: block; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--f-titulo); font-weight: 700; line-height: 1.08; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+  h2 { font-size: clamp(30px, 4.6vw, 48px); }
+  h3 { font-size: 22px; font-weight: 600; }
+  p { margin: 0; }
+  .miolo { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  section { padding-block: clamp(56px, 9vw, 104px); }
+  .faixa-alt { background: var(--chao-2); }
+  .sobretitulo { font-family: var(--f-mono); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--violeta); }
+  .cabeca { display: grid; gap: 14px; max-width: 720px; margin-bottom: clamp(28px, 5vw, 48px); }
+  .cabeca p { color: var(--tinta-2); font-size: 18px; max-width: 62ch; }
+  :focus-visible { outline: 3px solid var(--violeta); outline-offset: 3px; border-radius: 8px; }
+
+  /* botões */
+  .botao { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: var(--f-titulo); font-weight: 600; font-size: 19px;
+    text-decoration: none; padding: 15px 26px; border-radius: 999px; border: 3px solid var(--tinta); transition: transform .15s ease, box-shadow .15s ease; }
+  .botao.cheio { background: var(--rosa); color: #fff; box-shadow: 0 5px 0 var(--tinta); }
+  .botao.cheio:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--tinta); }
+  .botao.cheio:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--tinta); }
+  .botao.vazio { background: var(--papel); color: var(--tinta); }
+
+  /* topo */
+  .topo { padding-block: 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .marca { font-family: var(--f-titulo); font-weight: 700; font-size: 24px; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .marca i { width: 30px; height: 30px; border-radius: 9px; background: var(--violeta); border: 3px solid var(--tinta); position: relative; }
+  .marca i::after { content: ""; position: absolute; left: 9px; top: 6px; border-left: 10px solid #fff; border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+  .topo .botao { padding: 10px 18px; font-size: 16px; box-shadow: 0 3px 0 var(--tinta); }
+
+  /* herói */
+  .heroi { padding-block: clamp(20px, 5vw, 56px) clamp(56px, 8vw, 96px); }
+  .heroi .grade { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .heroi h1 { font-size: clamp(40px, 6.4vw, 74px); }
+  .heroi h1 em { font-style: normal; color: var(--rosa); white-space: nowrap; }
+  .heroi .texto { display: grid; gap: 22px; min-width: 0; }
+  .heroi .sub { font-size: clamp(18px, 2vw, 21px); color: var(--tinta-2); max-width: 54ch; }
+  .acoes { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .miudo { font-size: 14px; color: var(--tinta-2); display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  .miudo span::before { content: "✓ "; color: var(--menta); font-weight: 900; }
+  .celular { justify-self: center; width: min(320px, 78vw); aspect-ratio: 9 / 16; border: 4px solid var(--tinta); border-radius: 38px; padding: 10px; background: var(--tinta);
+    box-shadow: 0 10px 0 var(--violeta), 0 30px 60px rgba(42, 36, 64, .22); position: relative; max-width: 100%; }
+  .celular video { width: 100%; height: 100%; object-fit: cover; border-radius: 28px; background: #f3e8ff; }
+  .selo-real { position: absolute; left: -22px; bottom: 54px; background: var(--sol); border: 3px solid var(--tinta); border-radius: 14px; padding: 8px 12px;
+    font-family: var(--f-titulo); font-weight: 600; font-size: 15px; line-height: 1.2; transform: rotate(-5deg); max-width: 170px; }
+
+  /* linha do tempo */
+  .ilha { background: var(--papel); border: 3px solid var(--tinta); border-radius: var(--raio); overflow: hidden; box-shadow: 0 8px 0 var(--linha); }
+  .ilha-barra { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: space-between; padding: 12px 18px; border-bottom: 3px solid var(--tinta);
+    font-family: var(--f-mono); font-size: 13px; background: var(--chao-2); }
+  .ilha-barra b { font-weight: 700; }
+  .ilha-barra button { font: inherit; font-weight: 700; border: 2px solid var(--tinta); border-radius: 999px; background: var(--papel); padding: 4px 12px; cursor: pointer; color: var(--tinta); }
+  .rolagem { overflow-x: auto; padding: 16px 18px 20px; }
+  .faixa-tempo { position: relative; height: 300px; }
+  .regua { position: absolute; inset: 0 0 auto 0; height: 22px; border-bottom: 2px solid var(--linha); }
+  .regua span { position: absolute; top: 0; font-family: var(--f-mono); font-size: 11px; color: var(--tinta-2); transform: translateX(-50%); }
+  .regua span::after { content: ""; position: absolute; left: 50%; top: 16px; width: 2px; height: 6px; background: var(--linha); }
+  .tomada { position: absolute; top: 34px; height: 120px; border: 2px solid var(--tinta); border-radius: 12px; overflow: hidden; background: var(--chao-2); transition: box-shadow .2s; }
+  .tomada img { width: 100%; height: 100%; object-fit: cover; }
+  .tomada b { position: absolute; left: 6px; top: 6px; font-family: var(--f-mono); font-size: 11px; background: var(--tinta); color: #fff; padding: 2px 6px; border-radius: 6px; }
+  .tomada small { position: absolute; left: 6px; bottom: 6px; right: 6px; font-family: var(--f-mono); font-size: 10.5px; background: rgba(255, 255, 255, .92); color: var(--tinta);
+    padding: 2px 6px; border-radius: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tomada.ativa { box-shadow: 0 0 0 4px var(--sol); }
+  .palavra { position: absolute; font-weight: 800; font-size: 14px; padding: 3px 9px; border-radius: 999px; background: var(--chao); border: 2px solid var(--linha); white-space: nowrap; transition: background .12s, border-color .12s, color .12s; }
+  .palavra.ancora { border-color: var(--violeta); }
+  .palavra.ativa { background: var(--rosa); border-color: var(--tinta); color: #fff; }
+  .agulha { position: absolute; top: 22px; bottom: 0; width: 3px; margin-left: -1.5px; background: var(--rosa); border-radius: 2px; }
+  .agulha::before { content: ""; position: absolute; top: -8px; left: -6px; border-left: 7.5px solid transparent; border-right: 7.5px solid transparent; border-top: 10px solid var(--rosa); }
+  .legenda-ilha { display: flex; flex-wrap: wrap; gap: 8px 22px; padding: 0 18px 16px; font-size: 14px; color: var(--tinta-2); }
+  .legenda-ilha span { display: inline-flex; align-items: center; gap: 8px; }
+  .legenda-ilha i { width: 18px; height: 12px; border-radius: 6px; border: 2px solid var(--violeta); background: var(--chao); display: inline-block; }
+
+  /* passos */
+  .passos { list-style: none; padding: 0; margin: clamp(32px, 5vw, 48px) 0 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; counter-reset: passo; }
+  .passos li { counter-increment: passo; background: var(--papel); border: 2px solid var(--linha); border-radius: 18px; padding: 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+  .passos li::before { content: counter(passo); font-family: var(--f-titulo); font-weight: 700; font-size: 20px; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--sol); border: 2px solid var(--tinta); }
+  .passos h3 { font-size: 18px; }
+  .passos p { font-size: 15px; color: var(--tinta-2); }
+  .passos q { display: block; font-family: var(--f-mono); font-size: 12.5px; color: var(--violeta); quotes: "“" "”"; }
+
+  /* folha de contato e estilos */
+  .duas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 3vw, 28px); }
+  .quadro { background: var(--papel); border: 3px solid var(--tinta); border-radius: var(--raio); overflow: hidden; display: grid; min-width: 0; }
+  .quadro > img, .quadro > video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--chao-2); }
+  .quadro { align-content: start; }
+  .quadro .info { padding: 18px 20px 22px; display: grid; gap: 8px; }
+  .quadro .info p { color: var(--tinta-2); font-size: 16px; }
+  .folha { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); align-items: center; }
+  .folha figure { margin: 0; background: #111; border: 3px solid var(--tinta); border-radius: var(--raio); overflow: hidden; }
+  .folha figure img, .elenco img { width: 100%; }
+  .lista-check { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .lista-check li { padding-left: 32px; position: relative; }
+  .lista-check li::before { content: ""; position: absolute; left: 0; top: 4px; width: 20px; height: 20px; border-radius: 6px; background: var(--menta); border: 2px solid var(--tinta); }
+  .lista-check li::after { content: ""; position: absolute; left: 6px; top: 8px; width: 6px; height: 10px; border: solid var(--tinta); border-width: 0 3px 3px 0; transform: rotate(45deg); }
+
+  /* elenco */
+  .numeros { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .numeros div { background: var(--papel); border: 2px solid var(--linha); border-radius: 16px; padding: 14px 16px; min-width: 0; }
+  .numeros b { display: block; font-family: var(--f-titulo); font-size: clamp(26px, 3.4vw, 38px); line-height: 1.1; color: var(--violeta); font-variant-numeric: tabular-nums; }
+  .numeros span { font-size: 14px; color: var(--tinta-2); }
+  .elenco { border: 3px solid var(--tinta); border-radius: var(--raio); overflow: hidden; background: #111; }
+
+  /* agente */
+  .agente { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; counter-reset: etapa -1; }
+  .agente li { counter-increment: etapa; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; padding: 16px 0; border-bottom: 2px dashed var(--linha); }
+  .agente li::before { content: counter(etapa); font-family: var(--f-mono); font-weight: 700; font-size: 15px; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+    background: var(--tinta); color: #fff; }
+  .agente b { font-family: var(--f-titulo); font-weight: 600; font-size: 19px; display: block; }
+  .agente p { font-size: 15.5px; color: var(--tinta-2); }
+
+  /* curso */
+  .capas { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(150px, 19vw, 200px); gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px 4px 18px; }
+  .capas img { border-radius: 16px; border: 3px solid var(--tinta); scroll-snap-align: start; aspect-ratio: 2 / 3; object-fit: cover; width: 100%; background: var(--chao-2); }
+  .modulos { display: grid; gap: 10px; margin-top: 22px; }
+  .modulos details { background: var(--papel); border: 2px solid var(--linha); border-radius: 16px; }
+  .modulos summary { cursor: pointer; padding: 14px 18px; display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 12px; align-items: center; list-style: none; }
+  .modulos summary::-webkit-details-marker { display: none; }
+  .modulos summary .n { font-family: var(--f-mono); font-weight: 700; font-size: 13px; color: var(--violeta); }
+  .modulos summary .t { font-family: var(--f-titulo); font-weight: 600; font-size: 18px; }
+  .modulos summary .q { font-size: 14px; color: var(--tinta-2); white-space: nowrap; }
+  .modulos summary .q::after { content: " +"; font-weight: 900; color: var(--tinta); }
+  .modulos details[open] summary .q::after { content: " −"; }
+  .modulos ol { margin: 0; padding: 0 18px 16px 84px; display: grid; gap: 4px; font-size: 15.5px; color: var(--tinta-2); }
+
+  /* para quem / custos */
+  .lado { display: grid; gap: 14px; align-content: start; }
+  .lista-x { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .lista-x li { padding-left: 32px; position: relative; color: var(--tinta-2); }
+  .lista-x li::before { content: "×"; position: absolute; left: 0; top: -1px; width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; font-weight: 900; background: var(--chao-2); border: 2px solid var(--tinta-2); line-height: 1; }
+  .custos { border: 3px solid var(--tinta); border-radius: var(--raio); background: var(--papel); overflow: hidden; }
+  .custos div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 16px; padding: 14px 20px; border-bottom: 2px solid var(--linha); }
+  .custos div:last-child { border-bottom: 0; }
+  .custos dt { font-weight: 800; }
+  .custos dd { margin: 0; color: var(--tinta-2); }
+
+  /* oferta */
+  .oferta { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(24px, 4vw, 48px); align-items: start; }
+  .pilha { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .pilha li { background: var(--papel); border: 2px solid var(--linha); border-radius: 16px; padding: 14px 18px; display: grid; gap: 2px; }
+  .pilha b { font-family: var(--f-titulo); font-weight: 600; font-size: 18px; }
+  .pilha span { font-size: 15px; color: var(--tinta-2); }
+  .pilha .bonus { font-family: var(--f-mono); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--rosa-escuro); }
+  .preco { background: var(--papel); border: 3px solid var(--tinta); border-radius: 26px; padding: clamp(22px, 3vw, 32px); display: grid; gap: 14px; text-align: center; box-shadow: 0 10px 0 var(--violeta); position: sticky; top: 20px; }
+  .preco .valor { font-family: var(--f-titulo); font-weight: 700; font-size: clamp(52px, 7vw, 72px); line-height: 1; font-variant-numeric: tabular-nums; }
+  .preco .valor small { font-size: .4em; vertical-align: .9em; margin-right: 4px; }
+  .preco .botao { width: 100%; font-size: 21px; }
+  .garantia { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px; align-items: center; text-align: left; background: var(--chao-2); border-radius: 16px; padding: 14px; }
+  .garantia i { width: 64px; height: 64px; border-radius: 50%; background: var(--sol); border: 3px solid var(--tinta); display: grid; place-items: center; font-style: normal;
+    font-family: var(--f-titulo); font-weight: 700; font-size: 26px; line-height: 1; }
+  .garantia p { font-size: 14.5px; color: var(--tinta-2); }
+
+  /* quem ensina */
+  .autor { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 28px; align-items: center; }
+  .preencher { border: 3px dashed var(--rosa); border-radius: 18px; padding: 16px; background: #fff4f8; color: var(--rosa-escuro); font-weight: 700; }
+  .autor .foto { aspect-ratio: 1; display: grid; place-items: center; text-align: center; }
+
+  /* faq */
+  .faq { display: grid; gap: 10px; max-width: 820px; }
+  .faq details { background: var(--papel); border: 2px solid var(--linha); border-radius: 16px; padding: 4px 18px; }
+  .faq summary { cursor: pointer; font-family: var(--f-titulo); font-weight: 600; font-size: 19px; padding: 12px 0; }
+  .faq details p { padding-bottom: 16px; color: var(--tinta-2); }
+
+  /* final */
+  .final { text-align: center; display: grid; gap: 20px; justify-items: center; }
+  .final h2 { max-width: 18ch; }
+  footer { padding-block: 36px calc(36px + env(safe-area-inset-bottom, 0px)); font-size: 13.5px; color: var(--tinta-2); border-top: 2px solid var(--linha); }
+  footer .miolo { display: grid; gap: 8px; }
+
+  /* barra de compra no celular */
+  .barra-compra { display: none; }
+  @media (max-width: 760px) {
+    .barra-compra { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+      background: var(--papel); border-top: 3px solid var(--tinta); }
+    .barra-compra b { font-family: var(--f-titulo); font-size: 22px; }
+    .barra-compra .botao { padding: 10px 18px; font-size: 16px; box-shadow: 0 3px 0 var(--tinta); }
+    footer { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  }
+
+  @media (max-width: 980px) {
+    .passos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .numeros { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 860px) {
+    .heroi .grade, .folha, .duas, .oferta, .autor { grid-template-columns: minmax(0, 1fr); }
+    .agente { grid-template-columns: minmax(0, 1fr); }
+    .preco { position: static; }
+    .selo-real { left: -8px; }
+    .autor .foto { max-width: 220px; }
+  }
+  @media (max-width: 520px) {
+    body { font-size: 16px; }
+    .passos { grid-template-columns: minmax(0, 1fr); }
+    .numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .custos div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+    .modulos summary { grid-template-columns: 44px minmax(0, 1fr); }
+    .modulos summary .q { grid-column: 2; }
+    .modulos ol { padding-left: 74px; }
+    .topo .botao { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .botao, .palavra, .tomada { transition: none; }
+  }
+</style>
+
+<div class="miolo topo">
+  <a class="marca" href="#"><i></i>Estúdio IA</a>
+  <a class="botao cheio" href="#oferta">Quero entrar</a>
+</div>
+
+<header class="heroi">
+  <div class="miolo grade">
+    <div class="texto">
+      <span class="sobretitulo">Curso + plugin para o Claude Code</span>
+      <h1>Vídeos 3D animados feitos a partir da <em>sua voz</em></h1>
+      <p class="sub">Você grava a narração no celular. Um agente de IA monta as cenas com personagens 3D, legenda, música e
+        efeitos, e ainda pesquisa o seu nicho, escreve o roteiro e explica onde as pessoas param de assistir. Você não precisa
+        saber animar nem paga nada por vídeo.</p>
+      <div class="acoes">
+        <a class="botao cheio" href="#oferta">Quero o Estúdio IA</a>
+        <a class="botao vazio" href="#como">Ver como funciona</a>
+      </div>
+      <div class="miudo"><span>YouTube (16:9) e Reels/Shorts (9:16)</span><span>Personagens iguais em todo vídeo</span><span>7 dias de garantia</span></div>
+    </div>
+    <div class="celular">
+      <video id="video-heroi" src="midia/cabecoes.mp4" poster="midia/cabecoes.jpg" autoplay muted loop playsinline aria-label="Vídeo de exemplo feito pelo estúdio: Sorriso é contagioso"></video>
+      <div class="selo-real">Feito pelo estúdio, quadro a quadro</div>
+    </div>
+  </div>
+</header>
+
+<section id="como" class="faixa-alt">
+  <div class="miolo">
+    <div class="cabeca">
+      <span class="sobretitulo">Como funciona</span>
+      <h2>A imagem segue a sua voz</h2>
+      <p>O estúdio sabe o tempo exato de cada palavra da narração. Cada cena começa na palavra certa, e os textos e efeitos
+        entram junto com a fala. Abaixo está a linha do tempo real do vídeo ao lado, sincronizada com ele.</p>
+    </div>
+    <div class="ilha">
+      <div class="ilha-barra"><span><b>sorriso-contagioso</b> · 6 tomadas · 45 palavras · 17,6 s</span><span><b id="relogio">0:00.0</b> <button id="tocar" type="button">pausar</button></span></div>
+      <div class="rolagem" id="rolagem"><div class="faixa-tempo" id="faixa"></div></div>
+      <div class="legenda-ilha"><span><i></i>palavra-âncora: onde a tomada começa</span><span>Se você regravar a voz, as tomadas acompanham as âncoras sozinhas.</span></div>
+    </div>
+    <ol class="passos">
+      <li><h3>Você grava a voz</h3><p>No celular, com o seu roteiro.</p><q>Escreve o roteiro da ideia 1.</q></li>
+      <li><h3>O estúdio ouve cada palavra</h3><p>A transcrição marca o início e o fim de cada palavra.</p><q>Cria o projeto com esta narração.</q></li>
+      <li><h3>O agente escreve as cenas</h3><p>Uma ideia por tomada, uma metáfora visual por ideia.</p><q>Na tomada 4, põe ela no parque.</q></li>
+      <li><h3>Você aprova a folha</h3><p>Um quadro por tomada, antes do render.</p><q>Me mostra a folha de contato.</q></li>
+      <li><h3>Vídeo pronto</h3><p>Com legenda, música própria, efeitos e volume no padrão do YouTube.</p><q>Renderiza e mixa o som.</q></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="miolo folha">
+    <figure><img src="midia/folha.jpg" alt="Folha de contato com um quadro de cada uma das 6 tomadas do vídeo de exemplo" loading="lazy" width="1842" height="546"></figure>
+    <div class="lado">
+      <span class="sobretitulo">Folha de contato</span>
+      <h2>Você revisa antes de esperar o render</h2>
+      <p style="color:var(--tinta-2)">O agente mostra um quadro de cada tomada. Você pede os ajustes em português e só depois o vídeo é renderizado.</p>
+      <ul class="lista-check">
+        <li>Ninguém cortado nem de costas</li>
+        <li>Nenhum texto em cima do rosto</li>
+        <li>Nenhuma cena repetida, uma cena nova a cada 3 a 5 s</li>
+        <li>O protagonista igual ao do padrão do canal</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="faixa-alt">
+  <div class="miolo">
+    <div class="cabeca">
+      <span class="sobretitulo">Dois estilos</span>
+      <h2>Escolha a cara do seu canal</h2>
+      <p>Os dois estilos usam o mesmo estúdio. Os personagens são modelos 3D, por isso ficam iguais em todos os vídeos e o
+        texto sai sempre nítido.</p>
+    </div>
+    <div class="duas">
+      <article class="quadro">
+        <img src="midia/estilo-cabecao.jpg" alt="Três personagens cabeções comemorando num palco colorido" loading="lazy" width="1280" height="720">
+        <div class="info"><h3>Cabeção</h3><p>Cartoon de jogo, fofo e chamativo, com rosto expressivo e 76 animações. É ótimo para Reels e Shorts.</p></div>
+      </article>
+      <article class="quadro">
+        <video src="midia/bonecos.mp4" poster="midia/bonecos.jpg" autoplay muted loop playsinline aria-label="Vídeo de exemplo no estilo bonecos com contorno"></video>
+        <div class="info"><h3>Bonecos com contorno</h3><p>Rosto que pisca, sorri, fala e chora, com luz de cinema. É melhor para histórias e emoções.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="miolo">
+    <div class="cabeca">
+      <span class="sobretitulo">Elenco</span>
+      <h2>Um elenco inteiro, pronto para atuar</h2>
+      <p>Profissões, famílias, crianças, idosos, bichos e esqueletos. Troque a pele, o cabelo e a roupa, e ponha óculos, boné,
+        fones ou um celular na mão. A receita do seu protagonista fica guardada, e ele sai igual em todos os vídeos.</p>
+    </div>
+    <div class="numeros">
+      <div><b>90+</b><span>personagens</span></div>
+      <div><b>850+</b><span>objetos de cenário</span></div>
+      <div><b>13</b><span>efeitos animados</span></div>
+      <div><b>17</b><span>efeitos sonoros</span></div>
+      <div><b>8</b><span>climas de música própria</span></div>
+    </div>
+    <div class="elenco"><img src="midia/elenco.jpg" alt="Catálogo de personagens: elenco pronto, bichos e acessórios" loading="lazy" width="1600" height="902"></div>
+  </div>
+</section>
+
+<section class="faixa-alt">
+  <div class="miolo">
+    <div class="cabeca">
+      <span class="sobretitulo">O agente do YouTube</span>
+      <h2>Do nicho à análise, uma etapa por vez</h2>
+      <p>O vídeo é só uma parte. O agente conduz o canal inteiro, guarda o progresso e para para pedir o seu ok nas decisões
+        importantes.</p>
+    </div>
+    <ol class="agente">
+      <li><div><b>Identidade</b><p>Nicho, promessa, público, tom, formatos e o padrão visual do canal.</p></div></li>
+      <li><div><b>Diagnóstico</b><p>Os números do canal e o gargalo principal: clique, retenção, tema ou frequência.</p></div></li>
+      <li><div><b>Pesquisa de nicho</b><p>Os vídeos que bombaram muito acima da média do próprio canal (os outliers).</p></div></li>
+      <li><div><b>Concorrentes</b><p>O que bomba e o que flopa em cada um, e a engenharia reversa dos virais com a Gemini.</p></div></li>
+      <li><div><b>Estratégia</b><p>3 pilares com demanda provada e 10 ideias ranqueadas, cada uma com a sua evidência.</p></div></li>
+      <li><div><b>Roteiro</b><p>Gancho nos primeiros 5 s, loops de suspense, virada e um final que gera comentário.</p></div></li>
+      <li><div><b>Vídeo 3D</b><p>Da sua narração ao MP4 com legenda, música e efeitos.</p></div></li>
+      <li><div><b>Embalagem</b><p>3 títulos, a capa com 2 opções, a descrição com capítulos e as tags.</p></div></li>
+      <li><div><b>Publicação</b><p>Agenda no YouTube e posta no Instagram pelas APIs oficiais.</p></div></li>
+      <li><div><b>Pós-publicação</b><p>A IA assiste ao seu vídeo, explica cada queda de retenção e cria regras para o próximo.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="curso">
+  <div class="miolo">
+    <div class="cabeca">
+      <span class="sobretitulo">O curso</span>
+      <h2>14 módulos, 57 aulas curtas</h2>
+      <p>Umas 8 horas de aula, gravadas com um canal real começando do zero. Cada aula mostra a conversa com o agente na tela e
+        termina com uma tarefa.</p>
+    </div>
+    <div class="capas" aria-label="Capas dos módulos">
+      <img src="midia/capas/modulo-00.jpg" alt="Módulo 0: Comece aqui" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-01.jpg" alt="Módulo 1: Instalação sem medo" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-02.jpg" alt="Módulo 2: Google, YouTube e Instagram" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-03.jpg" alt="Módulo 3: Identidade do canal" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-04.jpg" alt="Módulo 4: Estratégia com dados" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-05.jpg" alt="Módulo 5: Roteiro que prende" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-06.jpg" alt="Módulo 6: Sua voz" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-07.jpg" alt="Módulo 7: Seu primeiro vídeo 3D" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-08.jpg" alt="Módulo 8: Personagens e efeitos" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-09.jpg" alt="Módulo 9: Shorts e Reels" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-10.jpg" alt="Módulo 10: Título, capa e descrição" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-11.jpg" alt="Módulo 11: Publicar e agendar" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-12.jpg" alt="Módulo 12: Medir e crescer" loading="lazy" width="360" height="540">
+      <img src="midia/capas/modulo-13.jpg" alt="Módulo 13: Monetização e próximos passos" loading="lazy" width="360" height="540">
+    </div>
+    <div class="modulos">
+      <details><summary><span class="n">M00</span><span class="t">Comece aqui</span><span class="q">3 aulas · 21 min</span></summary><ol><li>O que você vai construir</li><li>O que você precisa e quanto custa</li><li>Combinados: o que dá certo e o que derruba canal de IA</li></ol></details>
+      <details><summary><span class="n">M01</span><span class="t">Instalação sem medo</span><span class="q">5 aulas · 38 min</span></summary><ol><li>Claude Code: o que é e onde usar</li><li>Python, Node.js e ffmpeg</li><li>Instalando o Estúdio IA e criando a pasta do canal</li><li>Primeira conversa com o agente</li><li>Instalando o estúdio 3D e renderizando o primeiro exemplo</li></ol></details>
+      <details><summary><span class="n">M02</span><span class="t">Conectando Google, YouTube e Instagram</span><span class="q">4 aulas · 39 min</span></summary><ol><li>Google Cloud e Gemini</li><li>Ligando o YouTube</li><li>Instagram</li><li>Suas chaves em segurança</li></ol></details>
+      <details><summary><span class="n">M03</span><span class="t">Identidade do canal</span><span class="q">4 aulas · 40 min</span></summary><ol><li>Escolhendo o nicho</li><li>O padrão do canal</li><li>Estilo visual e protagonista</li><li>Nome, foto, banner e descrição do canal</li></ol></details>
+      <details><summary><span class="n">M04</span><span class="t">Estratégia com dados</span><span class="q">5 aulas · 54 min</span></summary><ol><li>Diagnóstico do seu canal</li><li>Pesquisa de nicho e outliers</li><li>Concorrentes: o que bomba e o que flopa</li><li>Engenharia reversa de vídeos virais</li><li>A estratégia e as 10 ideias ranqueadas</li></ol></details>
+      <details><summary><span class="n">M05</span><span class="t">Roteiro que prende</span><span class="q">4 aulas · 38 min</span></summary><ol><li>A estrutura de retenção</li><li>Escrevendo com o agente</li><li>Roteiro de Shorts e Reels</li><li>Fatos, fontes e cuidados do nicho</li></ol></details>
+      <details><summary><span class="n">M06</span><span class="t">Sua voz</span><span class="q">3 aulas · 26 min</span></summary><ol><li>Gravando com o celular</li><li>Ritmo e entonação</li><li>Do áudio ao agente</li></ol></details>
+      <details><summary><span class="n">M07</span><span class="t">Seu primeiro vídeo 3D</span><span class="q">6 aulas · 51 min</span></summary><ol><li>Como o estúdio pensa</li><li>Projeto e linha do tempo</li><li>Tomadas: uma ideia por tomada</li><li>Cenas: o agente escreve, você dirige</li><li>Folha de contato: revisar antes de renderizar</li><li>Render, som e entrega</li></ol></details>
+      <details><summary><span class="n">M08</span><span class="t">Personagens, cenários e efeitos</span><span class="q">5 aulas · 42 min</span></summary><ol><li>O elenco</li><li>Montando personagens</li><li>Rosto e emoção</li><li>Cenários e objetos</li><li>Efeitos e transições</li></ol></details>
+      <details><summary><span class="n">M09</span><span class="t">Shorts e Reels</span><span class="q">3 aulas · 22 min</span></summary><ol><li>O formato 9:16</li><li>Os 2 primeiros segundos e o final em loop</li><li>Reels próprios, não cortes</li></ol></details>
+      <details><summary><span class="n">M10</span><span class="t">Embalagem: título, capa e descrição</span><span class="q">4 aulas · 32 min</span></summary><ol><li>Títulos</li><li>A capa</li><li>Descrição, capítulos, tags e comentário fixado</li><li>Aviso de IA e direitos autorais</li></ol></details>
+      <details><summary><span class="n">M11</span><span class="t">Publicar e agendar</span><span class="q">3 aulas · 22 min</span></summary><ol><li>YouTube: postar e agendar</li><li>Instagram: Reels</li><li>Frequência e horários</li></ol></details>
+      <details><summary><span class="n">M12</span><span class="t">Medir e crescer</span><span class="q">5 aulas · 40 min</span></summary><ol><li>O YouTube Studio sem se perder</li><li>A retenção explicada pela IA</li><li>O arquivo de aprendizados</li><li>Otimizando vídeos antigos</li><li>A rotina semanal e o modo automático</li></ol></details>
+      <details><summary><span class="n">M13</span><span class="t">Monetização e próximos passos</span><span class="q">3 aulas · 22 min</span></summary><ol><li>O Programa de Parcerias do YouTube</li><li>Outras rendas do canal</li><li>Seu plano de 30 dias</li></ol></details>
+    </div>
+  </div>
+</section>
+
+<section class="faixa-alt">
+  <div class="miolo duas">
+    <div class="lado">
+      <span class="sobretitulo">Para quem é</span>
+      <h2>É para você se...</h2>
+      <ul class="lista-check">
+        <li>quer um canal no YouTube ou no Instagram sem aparecer;</li>
+        <li>gasta horas editando e quer que a IA faça a parte pesada;</li>
+        <li>já tentou gerar vídeo por IA e o personagem mudava de uma cena para outra;</li>
+        <li>já tem canal e quer decidir com dados, não no achismo.</li>
+      </ul>
+    </div>
+    <div class="lado">
+      <span class="sobretitulo">Para quem não é</span>
+      <h2>Não é para você se...</h2>
+      <ul class="lista-x">
+        <li>procura dinheiro rápido sem constância: canal cresce em meses;</li>
+        <li>quer publicar dezenas de vídeos iguais por dia;</li>
+        <li>não quer gravar a própria voz nem escrever com a sua cara;</li>
+        <li>não tem um computador (o vídeo é feito no computador).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="miolo duas">
+    <div class="lado">
+      <span class="sobretitulo">Sem surpresa</span>
+      <h2>O que você precisa ter</h2>
+      <p style="color:var(--tinta-2)">Ferramentas que geram vídeo por IA cobram por segundo. Aqui, o vídeo 3D é desenhado no seu
+        computador, então não há custo por vídeo. Estes são os gastos de verdade:</p>
+    </div>
+    <dl class="custos">
+      <div><dt>Claude</dt><dd>Um plano pago com o Claude Code. Quem produz muito pode precisar de um plano maior.</dd></div>
+      <div><dt>Computador</dt><dd>Windows, Mac ou Linux, com uns 2 GB livres. 1 minuto de vídeo leva de 10 a 25 min para renderizar.</dd></div>
+      <div><dt>Google Cloud</dt><dd>As análises com a Gemini custam centavos cada, e a conta nova ganha crédito grátis.</dd></div>
+      <div><dt>YouTube e Instagram</dt><dd>Grátis, pelas APIs oficiais.</dd></div>
+      <div><dt>Celular</dt><dd>Para gravar a voz. Um microfone de lapela ajuda, mas não é obrigatório.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="oferta" class="faixa-alt">
+  <div class="miolo">
+    <div class="cabeca">
+      <span class="sobretitulo">O que você recebe</span>
+      <h2>Tudo para o seu primeiro vídeo e para os próximos 100</h2>
+    </div>
+    <div class="oferta">
+      <ul class="pilha">
+        <li><b>Curso Estúdio IA</b><span>14 módulos e 57 aulas, da instalação ao canal medindo e melhorando.</span></li>
+        <li><span class="bonus">Bônus</span><b>Plugin Estúdio IA para o Claude Code</b><span>O agente do YouTube passo a passo e o estúdio 3D completo, com o elenco, os cenários, os efeitos e a música.</span></li>
+        <li><span class="bonus">Bônus</span><b>Pedidos prontos</b><span>O que escrever para o agente em cada etapa.</span></li>
+        <li><span class="bonus">Bônus</span><b>Kit de checklists</b><span>Instalação, vídeo antes de publicar, guia da voz, rotina semanal e plano de 30 dias.</span></li>
+        <li><b>Atualizações do plugin por 12 meses</b><span>Correções e novidades entregues na área de membros.</span></li>
+      </ul>
+      <div class="preco">
+        <span class="sobretitulo">Acesso imediato</span>
+        <!-- PREÇO: confira com oferta.md (fundadores R$ 197 · lançamento R$ 297 · cheio R$ 497) -->
+        <div class="valor"><small>R$</small>297</div>
+        <p style="color:var(--tinta-2)">à vista no Pix ou parcelado no cartão</p>
+        <!-- TROCAR: href pelo link do checkout (Hotmart, Kiwify...) -->
+        <a class="botao cheio comprar" href="#oferta">Quero o Estúdio IA</a>
+        <div class="garantia"><i>7</i><p><b style="color:var(--tinta)">7 dias de garantia.</b> Se não for para você, peça o reembolso dentro do prazo e recebe o valor de volta.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="miolo autor">
+    <div class="preencher foto">[sua foto ou o seu protagonista]</div>
+    <div class="lado">
+      <span class="sobretitulo">Quem ensina</span>
+      <h2 class="preencher">[Seu nome]</h2>
+      <p class="preencher">[Em 3 frases: quem você é, o seu canal e o que você já fez com o estúdio. Use só números reais.]</p>
+    </div>
+  </div>
+</section>
+
+<!--
+<section class="faixa-alt">
+  DEPOIMENTOS: coloque aqui só depoimentos reais, com autorização por escrito, nome e canal. Sem editar números.
+</section>
+-->
+
+<section class="faixa-alt">
+  <div class="miolo">
+    <div class="cabeca"><span class="sobretitulo">Dúvidas</span><h2>Perguntas frequentes</h2></div>
+    <div class="faq">
+      <details><summary>Preciso saber programar?</summary><p>Não. Você conversa com o agente em português e aprova o que ele mostra. O código das cenas é escrito pelo agente.</p></details>
+      <details><summary>Meu computador é simples. Funciona?</summary><p>Funciona em computador comum, só leva mais tempo para renderizar. Você pode usar o computador enquanto isso.</p></details>
+      <details><summary>Vou ter gastos todo mês?</summary><p>O plano do Claude, sim. O vídeo 3D não tem custo por vídeo. As análises com a Gemini custam centavos, e a conta nova do Google ganha crédito grátis.</p></details>
+      <details><summary>O YouTube monetiza canal feito com IA?</summary><p>O YouTube não monetiza conteúdo repetitivo e produzido em massa. No método do curso, a voz e o roteiro são seus e cada vídeo tem cenas próprias. Os requisitos e as regras são do YouTube e podem mudar, e o curso mostra onde conferir.</p></details>
+      <details><summary>Preciso aparecer?</summary><p>Não. Só a sua voz aparece nos vídeos.</p></details>
+      <details><summary>Dá para fazer tudo pelo celular?</summary><p>O vídeo é feito no computador. O celular serve para gravar a voz e para postar.</p></details>
+      <details><summary>Posso usar para fazer vídeos para clientes?</summary><p>Pode. A licença permite usar o estúdio nos seus canais e nos canais de clientes para quem você presta serviço. O que não pode é repassar o plugin.</p></details>
+      <details><summary>E se eu não gostar?</summary><p>Você tem 7 dias de garantia a partir da compra.</p></details>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="miolo final">
+    <h2>O próximo vídeo do seu canal pode sair da sua voz ainda esta semana</h2>
+    <a class="botao cheio comprar" href="#oferta">Quero o Estúdio IA</a>
+    <div class="miudo"><span>Acesso imediato</span><span>7 dias de garantia</span><span>Atualizações por 12 meses</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="miolo">
+    <p>Este produto não é afiliado nem endossado pela Anthropic, pelo Google ou pela Meta. Claude, YouTube, Instagram e Gemini são marcas dos seus donos.</p>
+    <p>Resultados de canal dependem do nicho, da constância e de cada pessoa. Não prometemos views, inscritos nem ganhos.</p>
+    <p>Personagens e objetos: KayKit (Kay Lousberg) e Kenney, licença CC0. Todas as imagens e vídeos desta página foram feitos pelo próprio estúdio.</p>
+  </div>
+</footer>
+
+<div class="barra-compra"><b>R$ 297</b><a class="botao cheio" href="#oferta">Quero entrar</a></div>
+
+<script>
+  // Linha do tempo real do vídeo de exemplo (linha/palavras.json e historia/tomadas.json do projeto "cabecoes").
+  const PALAVRAS = [["Sabia",0.4],["que",0.74],["sorriso",1.01],["é",1.42],["contagioso?",1.63],["Quando",2.45],["alguém",2.82],["sorri",3.19],["pra",3.53],["você,",3.81],["o",4.26],["seu",4.47],["rosto",4.75],["tende",5.08],["a",5.42],["imitar",5.63],["sem",6.0],["você",6.28],["perceber.",6.59],["A",7.34],["ciência",7.56],["chama",7.96],["isso",8.3],["de",8.6],["mimetismo",8.85],["facial.",9.31],["Então",10.01],["faz",10.35],["o",10.62],["teste",10.84],["hoje:",11.17],["sorria",11.63],["primeiro",12.0],["e",12.43],["veja",12.64],["o",12.95],["que",13.16],["acontece.",13.44],["Marca",14.2],["alguém",14.53],["que",14.9],["sempre",15.18],["te",15.55],["faz",15.79],["sorrir!",16.07]];
+  const TOMADAS = [["S01",0,2.3,"parque · a dúvida"],["S02",2.3,4.11,"praça · o sorriso"],["S03",4.11,7.19,"palco · o espelho"],["S04",7.19,9.86,"sala · a ideia"],["S05",9.86,14.04,"parque · o teste"],["S06",14.04,17.64,"palco · marca alguém"]];
+  const DUR = 17.64;
+  const faixa = document.getElementById('faixa'), rolagem = document.getElementById('rolagem');
+  const S = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--s')) || 96;
+  faixa.style.width = (DUR * S + 40) + 'px';
+  const regua = document.createElement('div'); regua.className = 'regua'; faixa.appendChild(regua);
+  for (let s = 0; s <= Math.floor(DUR); s++) { const m = document.createElement('span'); m.style.left = (s * S) + 'px'; m.textContent = '0:' + String(s).padStart(2, '0'); regua.appendChild(m); }
+  const ancoras = new Set(TOMADAS.map(([, ini]) => PALAVRAS.findIndex(([, t]) => t >= ini)));
+  const elTom = TOMADAS.map(([id, ini, fim, rot]) => {
+    const d = document.createElement('div'); d.className = 'tomada'; d.style.left = (ini * S) + 'px'; d.style.width = ((fim - ini) * S - 6) + 'px';
+    d.innerHTML = `<img src="midia/tomadas/${id}.jpg" alt="" loading="lazy"><b>${id}</b><small>${rot}</small>`; faixa.appendChild(d); return d;
+  });
+  const elPal = PALAVRAS.map(([txt, t], i) => {
+    const d = document.createElement('span'); d.className = 'palavra' + (ancoras.has(i) ? ' ancora' : ''); d.textContent = txt;
+    d.style.left = (t * S) + 'px'; d.style.top = (172 + (i % 4) * 30) + 'px'; faixa.appendChild(d); return d;
+  });
+  const agulha = document.createElement('div'); agulha.className = 'agulha'; faixa.appendChild(agulha);
+  const video = document.getElementById('video-heroi'), relogio = document.getElementById('relogio'), botao = document.getElementById('tocar');
+  let ultimaPal = -1, ultimaTom = -1, seguir = true;
+  rolagem.addEventListener('pointerdown', () => { seguir = false; });
+  function mostrar(t) {
+    agulha.style.left = (t * S) + 'px';
+    relogio.textContent = `0:${String(Math.floor(t)).padStart(2, '0')}.${Math.floor((t % 1) * 10)}`;
+    let p = -1; for (let i = 0; i < PALAVRAS.length; i++) if (PALAVRAS[i][1] <= t) p = i;
+    if (p !== ultimaPal) { elPal[ultimaPal]?.classList.remove('ativa'); elPal[p]?.classList.add('ativa'); ultimaPal = p; }
+    const k = TOMADAS.findIndex(([, a, b]) => t >= a && t < b);
+    if (k !== ultimaTom) { elTom[ultimaTom]?.classList.remove('ativa'); elTom[k]?.classList.add('ativa'); ultimaTom = k; }
+    if (seguir && rolagem.scrollWidth > rolagem.clientWidth) { const alvo = t * S - rolagem.clientWidth * 0.35; if (Math.abs(rolagem.scrollLeft - alvo) > 4) rolagem.scrollLeft = alvo; }
+  }
+  function laco() { mostrar(video.currentTime || 0); requestAnimationFrame(laco); }
+  const calmo = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (calmo) { document.querySelectorAll('video').forEach((v) => { v.removeAttribute('autoplay'); v.pause(); v.controls = true; }); seguir = false; }
+  botao.addEventListener('click', () => { if (video.paused) { video.play().catch(() => {}); seguir = true; } else video.pause(); });
+  video.addEventListener('play', () => { botao.textContent = 'pausar'; });
+  video.addEventListener('pause', () => { botao.textContent = 'tocar'; });
+  if (video.paused) botao.textContent = 'tocar';
+  mostrar(0); requestAnimationFrame(laco);
+</script>

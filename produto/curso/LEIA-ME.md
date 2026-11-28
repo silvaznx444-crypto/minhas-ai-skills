@@ -6,7 +6,7 @@ e sem pagar por vídeo, guiado por um agente de IA que cuida da pesquisa de nich
 **Para quem é:** quem quer um canal sem aparecer, ou quer parar de gastar horas editando. Também serve para quem já
 tem canal e quer usar dados para crescer. Não precisa saber programar nem animar.
 
-**Formato:** 14 módulos e 57 aulas curtas (3 a 12 min, umas 6 h e meia no total). Junto vêm o plugin **Estúdio IA**
+**Formato:** 14 módulos e 57 aulas curtas (de 5 a 12 min, umas 8 horas no total). Junto vêm o plugin **Estúdio IA**
 (bônus) e os materiais da pasta `materiais/`.
 
 ## Grade
@@ -70,11 +70,12 @@ servem para a aula gratuita do lançamento e para a página de vendas. Depois gr
 instalação precisam mostrar exatamente o que o aluno vai ver.
 
 ## Capas dos módulos
-As capas são feitas no próprio estúdio 3D (projeto em `capas/`):
+As 14 capas prontas estão em `capas/saida/modulo-00.jpg` a `modulo-13.jpg`, em 1080×1620 (2:3, o formato "pôster" da
+maioria das áreas de membros). Elas são feitas no próprio estúdio 3D, com a mesma protagonista em todas. Para refazer
+uma capa (mudar um título, por exemplo), edite `capas/cenas/capas.js` e rode:
 ```bash
 cd ../repositorio/plugins/estudio-ia/skills/estudio-ia/estudio3d
-node renderizar.mjs --projeto ../../../../../../curso/capas --folha --escala 0.5        # conferir
-node renderizar.mjs --projeto ../../../../../../curso/capas --quadros 0.5,1.5,...      # uma imagem por módulo
+node renderizar.mjs --projeto ../../../../../../curso/capas --quadros 7.5        # módulo 7 (quadro 7.5)
+ffmpeg -y -i ../../../../../../curso/capas/construcao/quadros/001_7.50s.png -vf "crop=1080:1620:0:150" -q:v 3 ../../../../../../curso/capas/saida/modulo-07.jpg
 ```
-Elas saem em 1080×1920 (9:16), com o conteúdo centralizado para que possam ser cortadas em 2:3 ou 3:4, caso a área
-de membros peça outra proporção.
+O quadro original é 9:16 (1080×1920). Se a área de membros pedir capa vertical inteira, use o PNG sem o corte.

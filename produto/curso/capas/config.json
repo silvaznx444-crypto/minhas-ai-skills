@@ -1,0 +1,12 @@
+{
+ "titulo": "Capas dos módulos",
+ "formato": "9:16",
+ "resolucao": "1080p",
+ "fps": 24,
+ "estilo": "vivo",
+ "legenda": false,
+ "fadeEntrada": 0,
+ "fadeSaida": 0,
+ "musica": {"ativa": false},
+ "efeitos": {"ativos": false}
+}

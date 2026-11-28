@@ -3,7 +3,7 @@
   {
    "id": "S01",
    "ancora": "Sabia que",
-   "cena": "Parque colorido: o cavaleiro passeia pelo caminho e para, com um '?' em cima da cabeça.",
+   "cena": "Parque colorido: o estudante passeia pelo caminho e para, com um '?' em cima da cabeça.",
    "efeitos": [
     [
      0.4,
@@ -26,7 +26,7 @@
   {
    "id": "S02",
    "ancora": "Quando alguém",
-   "cena": "Praça com café: a maga sorri e acena para o ladino; um coração aparece em cima dela.",
+   "cena": "Praça com café: a professora sorri e acena para o executivo; um coração aparece em cima dela.",
    "transicao": {
     "tipo": "chicote",
     "dur": 0.3
@@ -66,7 +66,7 @@
   {
    "id": "S04",
    "ancora": "A ciência",
-   "cena": "Sala colorida: a maga sentada no tapete tem uma ideia (lâmpada); carimbo MIMETISMO FACIAL.",
+   "cena": "Sala colorida: a professora sentada no tapete tem uma ideia (lâmpada); carimbo MIMETISMO FACIAL.",
    "transicao": {
     "tipo": "fade",
     "dur": 0.3
@@ -88,7 +88,7 @@
   {
    "id": "S05",
    "ancora": "Então faz",
-   "cena": "Parque: o cavaleiro chega até dois amigos, sorri primeiro (comemora) e os dois respondem; corações.",
+   "cena": "Parque: o estudante chega até a atleta e o chef, sorri primeiro (comemora) e os dois respondem; corações.",
    "transicao": {
     "tipo": "chicote",
     "dur": 0.3

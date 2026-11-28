@@ -35,7 +35,14 @@ Você é o produtor do canal **Psique** (YouTube) e do perfil **@umminutodepsiqu
 
 ### 3. CAPA
 - YouTube (16:9): personagem com emoção forte à ESQUERDA, símbolo do tema à DIREITA, fundo azul-marinho com brilho roxo, pergunta curta em branco com UMA palavra em amarelo e selo vermelho com o dado. Entregue o prompt em inglês e o texto para o Canva.
+  - Visto nas capas que já estão no ar: é sempre o MESMO protagonista, ilustrado em cartoon com contorno grosso (rapaz de cabelo
+    castanho bagunçado e suéter azul), mesmo quando o vídeo é de bonecos de palito. Título em UMA linha no topo, letra arredondada
+    bem grossa (tipo Fredoka Bold) com contorno escuro; selo vermelho arredondado no canto superior direito, em 1 ou 2 linhas.
+    Para manter o personagem igual, gere a imagem usando as capas anteriores como referência.
 - Reels (9:16): mesma identidade, título e elementos principais no centro (o perfil corta em 3:4).
+  - Visto nos Reels: 3D estilo Pixar, câmera de cima, personagem central num foco de luz quente e entorno azul-escuro; título
+    branco em 2 linhas no topo e subtítulo fino em dourado. Não use quadro do vídeo com legenda como capa (fugiu do padrão no
+    Reels dos 4 truques).
 
 ### 4. TEXTOS
 - TÍTULO: tom de pergunta, até 60 caracteres, completando a capa sem repetir o texto dela. Dê 1 recomendado e 2 alternativas.
